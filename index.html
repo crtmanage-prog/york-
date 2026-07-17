@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Level Check — Find Your CEFR Level</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --paper: #EDEEE6;
+  --paper-deep: #E2E4D6;
+  --line: #C9CCBC;
+  --ink: #1B2430;
+  --ink-soft: #4A5262;
+  --petrol: #1F5F5B;
+  --petrol-deep: #16403D;
+  --mustard: #D9A441;
+  --stamp-red: #B23A2E;
+  --success: #3E7C59;
+  --radius: 4px;
+}
+
+*{ box-sizing: border-box; }
+
+html,body{
+  margin:0;
+  padding:0;
+  background: var(--petrol-deep);
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+body{
+  min-height: 100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 24px 14px;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+}
+
+.passport{
+  width:100%;
+  max-width: 460px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35), 0 2px 0 rgba(255,255,255,0.4) inset;
+  overflow:hidden;
+  position:relative;
+}
+
+.passport::before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  pointer-events:none;
+}
+
+/* Header / cover */
+.cover{
+  background: linear-gradient(160deg, var(--petrol), var(--petrol-deep));
+  color: var(--paper);
+  padding: 28px 26px 22px;
+  position:relative;
+  border-bottom: 2px solid var(--ink);
+}
+
+.eyebrow{
+  font-family:'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform:uppercase;
+  color: var(--mustard);
+  margin:0 0 8px;
+}
+
+.cover h1{
+  font-family:'Space Grotesk', sans-serif;
+  font-size: 26px;
+  line-height:1.15;
+  margin:0 0 6px;
+  font-weight:700;
+}
+
+.cover p{
+  margin:0;
+  font-size: 13.5px;
+  color: rgba(237,238,230,0.8);
+  line-height:1.5;
+}
+
+.crest{
+  position:absolute;
+  top:22px;
+  right:24px;
+  width:44px;
+  height:44px;
+  border:1.5px solid var(--mustard);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Space Mono', monospace;
+  font-size:10px;
+  color: var(--mustard);
+  letter-spacing:0.05em;
+  transform: rotate(-8deg);
+}
+
+/* Body area */
+.page{
+  padding: 24px 26px 26px;
+  min-height: 300px;
+  display:flex;
+  flex-direction:column;
+}
+
+/* Intro screen */
+.intro-list{
+  list-style:none;
+  margin: 4px 0 22px;
+  padding:0;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+.intro-list li{
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+}
+.intro-list li:last-child{ border-bottom:none; }
+.intro-list .tag{
+  font-family:'Space Mono', monospace;
+  font-size: 10.5px;
+  color: var(--petrol);
+  font-weight:700;
+  flex-shrink:0;
+  width: 56px;
+}
+
+/* Progress stamps */
+.progress{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+.dot{
+  width: 16px;
+  height: 16px;
+  border-radius:50%;
+  border: 1.5px solid var(--ink-soft);
+  opacity: 0.45;
+  transition: all 0.25s ease;
+}
+.dot.done{
+  background: var(--petrol);
+  border-color: var(--petrol);
+  opacity:1;
+}
+.dot.current{
+  border-color: var(--stamp-red);
+  opacity:1;
+  transform: scale(1.2);
+}
+
+.level-badge{
+  display:inline-block;
+  font-family:'Space Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing:0.08em;
+  color: var(--stamp-red);
+  border: 1px solid var(--stamp-red);
+  border-radius: 3px;
+  padding: 2px 7px;
+  margin-bottom: 12px;
+  align-self:flex-start;
+}
+
+.q-count{
+  font-family:'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.question{
+  font-family:'Space Grotesk', sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  line-height:1.4;
+  margin: 4px 0 18px;
+}
+
+.options{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom: 6px;
+}
+
+.option{
+  text-align:left;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-family:'IBM Plex Sans', sans-serif;
+  font-size: 14.5px;
+  color: var(--ink);
+  cursor:pointer;
+  transition: transform 0.12s ease, background 0.15s ease, box-shadow 0.15s ease;
+  position:relative;
+}
+.option:hover{ background: var(--paper-deep); }
+.option:active{ transform: scale(0.98); }
+.option:focus-visible{
+  outline: 2px solid var(--petrol);
+  outline-offset:2px;
+}
+.option.selected-correct{
+  background: var(--success);
+  color: var(--paper);
+  border-color: var(--success);
+}
+.option.selected-wrong{
+  background: var(--stamp-red);
+  color: var(--paper);
+  border-color: var(--stamp-red);
+}
+.option.reveal-correct{
+  border-color: var(--success);
+  box-shadow: inset 0 0 0 1.5px var(--success);
+}
+.option[disabled]{ cursor:default; }
+
+.spacer{ flex:1; }
+
+.nextbar{
+  display:flex;
+  justify-content:flex-end;
+  margin-top: 14px;
+}
+
+button.primary{
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:600;
+  font-size: 14.5px;
+  background: var(--ink);
+  color: var(--paper);
+  border:none;
+  border-radius: var(--radius);
+  padding: 12px 22px;
+  cursor:pointer;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+button.primary:hover{ background: var(--petrol-deep); }
+button.primary:active{ transform: scale(0.97); }
+button.primary:disabled{
+  opacity:0.35;
+  cursor:not-allowed;
+}
+button.primary:focus-visible{
+  outline: 2px solid var(--mustard);
+  outline-offset:2px;
+}
+button.primary.full{ width:100%; }
+
+/* Result screen */
+.result-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding-top: 6px;
+}
+
+.stamp{
+  width: 148px;
+  height: 148px;
+  border-radius:50%;
+  border: 3px solid var(--stamp-red);
+  color: var(--stamp-red);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transform: rotate(-7deg);
+  margin: 6px 0 18px;
+  position:relative;
+  animation: thump 0.4s ease;
+}
+.stamp::before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border: 1px solid var(--stamp-red);
+  border-radius:50%;
+}
+.stamp .lvl{
+  font-family:'Space Grotesk', sans-serif;
+  font-size: 40px;
+  font-weight:700;
+  line-height:1;
+}
+.stamp .sub{
+  font-family:'Space Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing:0.14em;
+  margin-top:6px;
+}
+
+@keyframes thump{
+  0%{ transform: rotate(-7deg) scale(1.4); opacity:0; }
+  60%{ transform: rotate(-7deg) scale(0.94); opacity:1; }
+  100%{ transform: rotate(-7deg) scale(1); }
+}
+
+.result-title{
+  font-family:'Space Grotesk', sans-serif;
+  font-size: 21px;
+  font-weight:700;
+  margin: 0 0 8px;
+}
+
+.result-desc{
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height:1.55;
+  max-width: 340px;
+  margin: 0 0 18px;
+}
+
+.score-line{
+  font-family:'Space Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--line);
+  width:100%;
+}
+
+.cta{
+  width:100%;
+  background: var(--petrol);
+  border-radius: var(--radius);
+  padding: 18px;
+  color: var(--paper);
+  text-align:center;
+}
+.cta p{
+  margin:0 0 12px;
+  font-size:13.5px;
+  line-height:1.5;
+}
+.cta a.primary-link{
+  display:inline-block;
+  background: var(--mustard);
+  color: var(--ink);
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:700;
+  font-size: 14px;
+  text-decoration:none;
+  padding: 11px 20px;
+  border-radius: var(--radius);
+  transition: transform 0.12s ease;
+}
+.cta a.primary-link:hover{ transform: scale(1.03); }
+
+.retake{
+  margin-top:16px;
+  background:none;
+  border:none;
+  font-family:'IBM Plex Sans', sans-serif;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  text-decoration:underline;
+  cursor:pointer;
+}
+
+.hidden{ display:none !important; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+footer.brand{
+  text-align:center;
+  padding: 14px 10px 0;
+  font-family:'Space Mono', monospace;
+  font-size: 10px;
+  color: rgba(237,238,230,0.5);
+  letter-spacing:0.08em;
+}
+</style>
+</head>
+<body>
+
+<div style="display:flex; flex-direction:column; align-items:center; width:100%;">
+<div class="passport" id="passport">
+
+  <div class="cover">
+    <div class="crest">CEFR</div>
+    <p class="eyebrow">Language Passport &middot; Placement Test</p>
+    <h1>English Level Check</h1>
+    <p>15 quick questions. Find out your CEFR level (A1&ndash;C2) in about 5 minutes.</p>
+  </div>
+
+  <!-- INTRO -->
+  <div class="page" id="screen-intro">
+    <ul class="intro-list">
+      <li><span class="tag">01</span> No sign-up &mdash; answer honestly, see your result instantly.</li>
+      <li><span class="tag">02</span> Questions get harder as you go &mdash; that's normal.</li>
+      <li><span class="tag">03</span> If you're unsure, pick your best guess and keep moving.</li>
+    </ul>
+    <div class="spacer"></div>
+    <button class="primary full" id="start-btn">Start the test</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="page hidden" id="screen-quiz">
+    <div class="progress" id="progress"></div>
+    <div class="q-count" id="q-count"></div>
+    <div class="question" id="q-text"></div>
+    <div class="options" id="q-options"></div>
+    <div class="spacer"></div>
+    <div class="nextbar">
+      <button class="primary" id="next-btn" disabled>Next</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="page hidden" id="screen-result">
+    <div class="result-wrap">
+      <div class="level-badge" id="result-badge">RESULT</div>
+      <div class="stamp">
+        <div class="lvl" id="stamp-level">B1</div>
+        <div class="sub">CERTIFIED</div>
+      </div>
+      <div class="result-title" id="result-title"></div>
+      <p class="result-desc" id="result-desc"></p>
+      <div class="score-line" id="score-line"></div>
+      <div class="cta">
+        <p>Want a study plan built around your level?</p>
+        <a class="primary-link" id="cta-link" href="#">Talk to the school</a>
+      </div>
+      <button class="retake" id="retake-btn">Retake the test</button>
+    </div>
+  </div>
+
+</div>
+<footer class="brand">YOUR SCHOOL NAME &middot; ENGLISH LEVEL CHECK</footer>
+</div>
+
+<script>
+// ---- CUSTOMIZE THESE TWO LINES FOR YOUR SCHOOL ----
+const CTA_TEXT = "Talk to the school";
+const CTA_LINK = "https://your-school-website.com/contact"; // e.g. WhatsApp, booking page, or Instagram DM link
+// ----------------------------------------------------
+
+document.getElementById('cta-link').textContent = CTA_TEXT;
+document.getElementById('cta-link').href = CTA_LINK;
+
+const questions = [
+  // A1
+  { level:"A1", q:"She ___ a teacher.", options:["is","are","am","be"], correct:0 },
+  { level:"A1", q:"There ___ two cats in the garden.", options:["is","are","was","be"], correct:1 },
+  { level:"A1", q:"I ___ coffee every morning.", options:["drink","drinks","drinking","drank"], correct:0 },
+  // A2
+  { level:"A2", q:"Yesterday, we ___ to the cinema.", options:["go","goes","went","gone"], correct:2 },
+  { level:"A2", q:"He is the ___ student in the class.", options:["tall","taller","tallest","most tall"], correct:2 },
+  { level:"A2", q:"I'm interested ___ learning new languages.", options:["in","on","at","for"], correct:0 },
+  // B1
+  { level:"B1", q:"If it rains tomorrow, we ___ the picnic.", options:["cancel","will cancel","would cancel","canceled"], correct:1 },
+  { level:"B1", q:"By the time she arrived, the meeting ___.", options:["already started","had already started","has already started","already starts"], correct:1 },
+  { level:"B1", q:"Which word is closest in meaning to 'reluctant'?", options:["eager","unwilling","certain","curious"], correct:1 },
+  // B2
+  { level:"B2", q:"I wish I ___ more time to prepare for the exam.", options:["have","had","would have","having"], correct:1 },
+  { level:"B2", q:"The report, ___ was submitted late, contained several errors.", options:["that","which","who","what"], correct:1 },
+  // C1
+  { level:"C1", q:"No sooner ___ the building than the fire alarm went off.", options:["he had entered","had he entered","he entered","did he enter"], correct:1 },
+  { level:"C1", q:"Which is closest in meaning to: 'The negotiations reached an impasse'?", options:["progressed smoothly","came to a standstill","were postponed","were successful"], correct:1 },
+  // C2
+  { level:"C2", q:"Had I known about the delay, I ___ earlier.", options:["would leave","would have left","left","will leave"], correct:1 },
+  { level:"C2", q:"Her argument, while superficially persuasive, ___ under closer scrutiny.", options:["falls apart","is falling apart","fell apart","will fall apart"], correct:0 }
+];
+
+const levelInfo = {
+  A1: { title:"A1 — Beginner", desc:"You can understand and use very basic phrases and everyday expressions. A great starting point — structured lessons will move you forward fast." },
+  A2: { title:"A2 — Elementary", desc:"You can handle simple, routine exchanges about familiar topics. Time to build vocabulary and get comfortable with more tenses." },
+  B1: { title:"B1 — Intermediate", desc:"You can manage most everyday situations and express opinions on familiar topics. The next step is fluency and range." },
+  B2: { title:"B2 — Upper-Intermediate", desc:"You can interact fluently with native speakers and discuss a wide range of topics. Focus now shifts to nuance and precision." },
+  C1: { title:"C1 — Advanced", desc:"You can use English flexibly and effectively for social, academic and professional purposes. Refinement is the name of the game." },
+  C2: { title:"C2 — Proficient", desc:"You have near-native command of English. Lessons at this level are about polish, idiom and specialized fluency." }
+};
+
+let current = 0;
+let answers = new Array(questions.length).fill(null);
+let selectedThisQuestion = false;
+
+const screenIntro = document.getElementById('screen-intro');
+const screenQuiz = document.getElementById('screen-quiz');
+const screenResult = document.getElementById('screen-result');
+const progressEl = document.getElementById('progress');
+const qCountEl = document.getElementById('q-count');
+const qTextEl = document.getElementById('q-text');
+const qOptionsEl = document.getElementById('q-options');
+const nextBtn = document.getElementById('next-btn');
+
+function buildProgress(){
+  progressEl.innerHTML = '';
+  questions.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    progressEl.appendChild(d);
+  });
+}
+
+function updateProgress(){
+  const dots = progressEl.querySelectorAll('.dot');
+  dots.forEach((d, i) => {
+    d.classList.toggle('done', i < current);
+    d.classList.toggle('current', i === current);
+  });
+}
+
+function renderQuestion(){
+  selectedThisQuestion = false;
+  nextBtn.disabled = true;
+  nextBtn.textContent = current === questions.length - 1 ? 'See my result' : 'Next';
+  updateProgress();
+  const item = questions[current];
+  qCountEl.textContent = `QUESTION ${current + 1} OF ${questions.length}`;
+  qTextEl.textContent = item.q;
+  qOptionsEl.innerHTML = '';
+  item.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.type = 'button';
+    btn.textContent = opt;
+    btn.addEventListener('click', () => selectOption(idx, btn));
+    qOptionsEl.appendChild(btn);
+  });
+}
+
+function selectOption(idx, btnEl){
+  if (selectedThisQuestion) return;
+  selectedThisQuestion = true;
+  answers[current] = idx;
+  const item = questions[current];
+  const allBtns = qOptionsEl.querySelectorAll('.option');
+  allBtns.forEach((b, i) => {
+    b.disabled = true;
+    if (i === item.correct) b.classList.add('reveal-correct');
+    if (i === idx && i === item.correct) b.classList.add('selected-correct');
+    if (i === idx && i !== item.correct) b.classList.add('selected-wrong');
+  });
+  nextBtn.disabled = false;
+}
+
+nextBtn.addEventListener('click', () => {
+  if (current < questions.length - 1){
+    current++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+});
+
+document.getElementById('start-btn').addEventListener('click', () => {
+  screenIntro.classList.add('hidden');
+  screenQuiz.classList.remove('hidden');
+  buildProgress();
+  renderQuestion();
+});
+
+document.getElementById('retake-btn').addEventListener('click', () => {
+  current = 0;
+  answers = new Array(questions.length).fill(null);
+  screenResult.classList.add('hidden');
+  screenIntro.classList.remove('hidden');
+});
+
+function computeLevel(score){
+  if (score <= 2) return "A1";
+  if (score <= 5) return "A2";
+  if (score <= 8) return "B1";
+  if (score <= 10) return "B2";
+  if (score <= 12) return "C1";
+  return "C2";
+}
+
+function showResult(){
+  let score = 0;
+  answers.forEach((a, i) => { if (a === questions[i].correct) score++; });
+  const level = computeLevel(score);
+  const info = levelInfo[level];
+
+  document.getElementById('result-badge').textContent = `YOUR RESULT`;
+  document.getElementById('stamp-level').textContent = level;
+  document.getElementById('result-title').textContent = info.title;
+  document.getElementById('result-desc').textContent = info.desc;
+  document.getElementById('score-line').textContent = `${score} / ${questions.length} correct`;
+
+  screenQuiz.classList.add('hidden');
+  screenResult.classList.remove('hidden');
+}
+</script>
+
+</body>
+</html>
