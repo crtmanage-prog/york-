@@ -3,122 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Личный кабинет — YORK!</title>
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Вариант 1 — чипсы</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#FFFFFF;
-    --accent:#D2E739;
-    --ink:#1C1C1C;
-    --ink-soft:rgba(28,28,28,0.6);
-    --line:rgba(28,28,28,0.12);
-    --panel:#F7F8EF;
+    --bg:#FFFFFF; --accent:#D2E739; --ink:#1C1C1C;
+    --ink-soft:rgba(28,28,28,0.6); --line:rgba(28,28,28,0.12); --panel:#F7F8EF;
   }
   *{box-sizing:border-box;}
   html,body{margin:0; padding:0;}
   body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-    -webkit-font-smoothing:antialiased;
+    background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif;
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    padding:24px 14px; -webkit-font-smoothing:antialiased;
   }
-  .wrap{width:100%; max-width:400px; text-align:center;}
-
-  .logo{
-    font-family:'Unbounded',sans-serif;
-    font-weight:900;
-    font-size:26px;
-    margin-bottom:6px;
-  }
+  .wrap{width:100%; max-width:540px; text-align:center;}
+  .logo{font-family:'Unbounded',sans-serif; font-weight:900; font-size:26px; margin-bottom:6px;}
   .logo span{background:var(--accent); padding:0 5px; border-radius:7px;}
-  .sub{color:var(--ink-soft); font-size:14.5px; margin:0 0 36px;}
+  .sub{color:var(--ink-soft); font-size:14.5px; margin:0 0 24px;}
+
+  .chips{
+    display:flex; flex-wrap:nowrap; justify-content:center; gap:8px;
+    margin-bottom:28px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .chips::-webkit-scrollbar{display:none;}
+  @media (max-width:539px){
+    .chips{justify-content:flex-start;}
+  }
+  .chip{
+    display:flex; align-items:center; gap:6px;
+    background:var(--panel); border-radius:100px;
+    padding:10px 16px; font-size:14px; font-weight:600; color:var(--ink);
+    white-space:nowrap; flex-shrink:0;
+  }
+  .chip .ic{font-size:15px;}
 
   a.role-main{
-    display:block;
-    font-family:'Unbounded',sans-serif;
-    font-weight:700;
-    font-size:17px;
-    color:var(--ink);
-    background:var(--accent);
-    text-decoration:none;
-    border-radius:100px;
-    padding:19px 24px;
-    margin-bottom:18px;
+    display:block; font-family:'Unbounded',sans-serif; font-weight:700; font-size:17px;
+    color:var(--ink); background:var(--accent); text-decoration:none;
+    border-radius:100px; padding:19px 24px; margin-bottom:18px;
     transition:transform .15s ease;
   }
   a.role-main:hover{transform:translateY(-2px);}
-  a.role-main small{
-    display:block;
-    font-family:'Inter',sans-serif;
-    font-weight:500;
-    font-size:12.5px;
-    margin-top:3px;
-    opacity:0.7;
-  }
 
-  .role-minor-row{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:14px;
-    margin-bottom:34px;
-  }
-  a.role-minor{
-    font-family:'Inter',sans-serif;
-    font-weight:600;
-    font-size:12.5px;
-    color:var(--ink-soft);
-    text-decoration:none;
-    padding:6px 4px;
-  }
+  .role-minor-row{display:flex; justify-content:center; align-items:center; gap:14px; margin-bottom:34px;}
+  a.role-minor{font-family:'Inter',sans-serif; font-weight:600; font-size:12.5px; color:var(--ink-soft); text-decoration:none; padding:6px 4px;}
   a.role-minor:hover{color:var(--ink); text-decoration:underline;}
   .role-minor-sep{color:var(--line); font-size:12px;}
 
-  .divider{
-    border:none;
-    border-top:1px solid var(--line);
-    margin:0 0 26px;
-  }
+  .divider{border:none; border-top:1px solid var(--line); margin:0 0 26px;}
 
-  .cta-box{
-    background:var(--panel);
-    border-radius:18px;
-    padding:22px 20px;
-  }
-  .cta-box p{
-    margin:0 0 14px;
-    font-size:14px;
-    color:var(--ink-soft);
-    line-height:1.5;
-  }
+  .cta-box{background:var(--panel); border-radius:18px; padding:22px 20px;}
+  .cta-box p{margin:0 0 14px; font-size:14px; color:var(--ink-soft); line-height:1.5;}
   .cta-box a.btn-trial{
-    display:inline-block;
-    font-family:'Unbounded',sans-serif;
-    font-weight:700;
-    font-size:14px;
-    color:#fff;
-    background:var(--ink);
-    text-decoration:none;
-    border-radius:100px;
-    padding:13px 22px;
+    display:inline-block; font-family:'Unbounded',sans-serif; font-weight:700; font-size:14px;
+    color:#fff; background:var(--ink); text-decoration:none; border-radius:100px; padding:13px 22px;
     transition:transform .15s ease;
   }
   .cta-box a.btn-trial:hover{transform:translateY(-2px);}
-
-  @media (prefers-reduced-motion: reduce){
-    a.role-main, .cta-box a.btn-trial{transition:none;}
-  }
+  @media (prefers-reduced-motion: reduce){ a.role-main, .cta-box a.btn-trial{transition:none;} }
 </style>
 </head>
 <body>
@@ -127,10 +75,14 @@
   <div class="logo">YORK<span>!</span></div>
   <p class="sub">Личный кабинет</p>
 
-  <a class="role-main" href="cabinet.html">
-    Я ученик
-    <small>Расписание, домашка, оплата, прогресс</small>
-  </a>
+  <div class="chips">
+    <span class="chip"><span class="ic">📅</span> Расписание</span>
+    <span class="chip"><span class="ic">📝</span> Домашка</span>
+    <span class="chip"><span class="ic">💳</span> Оплата</span>
+    <span class="chip"><span class="ic">📈</span> Прогресс</span>
+  </div>
+
+  <a class="role-main" href="cabinet.html">Я ученик</a>
 
   <div class="role-minor-row">
     <a class="role-minor" href="teacher.html">Я учитель</a>
