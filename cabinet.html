@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Личный кабинет — YORK!</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -264,6 +268,36 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     min-height:100vh; display:flex; align-items:center; justify-content:center;
     text-align:center; padding:24px; color:var(--ink-soft); font-size:14px;
   }
+  .contact-list{display:flex; flex-direction:column; gap:8px;}
+  .contact-row{
+    display:flex; align-items:center; gap:12px;
+    border:1.5px solid var(--line); border-radius:14px; padding:14px 16px;
+    text-decoration:none; color:var(--ink);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .contact-row:hover{border-color:var(--ink); background:var(--panel);}
+  .contact-ic{font-size:18px; flex-shrink:0;}
+  .contact-text{flex:1; display:flex; flex-direction:column; gap:2px;}
+  .contact-title{font-weight:600; font-size:14px;}
+  .contact-sub{font-size:12.5px; color:var(--ink-soft);}
+  .contact-arrow{font-size:15px; color:var(--ink-soft); flex-shrink:0;}
+  .game-score{font-family:'Unbounded',sans-serif; font-weight:700; font-size:13px; color:var(--ink-soft); margin-bottom:18px;}
+  .game-score span{color:var(--ink);}
+  .game-scrambled{
+    font-family:'Unbounded',sans-serif; font-weight:900; font-size:32px;
+    letter-spacing:0.08em; margin-bottom:8px; word-break:break-all;
+  }
+  .game-hint{font-size:13px; color:var(--ink-soft); margin-bottom:18px; min-height:18px;}
+  .game-input{
+    width:100%; text-align:center; font-family:'Inter',sans-serif; font-size:16px;
+    padding:13px 14px; border-radius:12px; border:1.5px solid var(--line);
+    margin-bottom:10px; text-transform:lowercase;
+  }
+  .game-input:focus{border-color:var(--ink); outline:none;}
+  .game-feedback{font-size:13.5px; font-weight:600; min-height:20px; margin:0 0 14px;}
+  .game-feedback.ok{color:#3B7A1E;}
+  .game-feedback.err{color:var(--red);}
+  .game-btn-row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
 </style>
 </head>
 <body>
@@ -317,6 +351,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <button class="tab-btn" data-tab="homework">Домашка</button>
     <button class="tab-btn" data-tab="progress">Прогресс</button>
     <button class="tab-btn" data-tab="payment">Оплата</button>
+    <button class="tab-btn" data-tab="game">Игра</button>
+    <button class="tab-btn" data-tab="loyalty">Бонусы</button>
   </nav>
 
   <main>
@@ -340,6 +376,34 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <div class="stat-label">Абонемент</div>
           <div class="stat-value" id="ov-subscription">—</div>
         </div>
+      </div>
+
+      <h2 class="panel-title" style="margin-top:24px;">Мы на связи</h2>
+      <div class="contact-list">
+        <a class="contact-row" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">
+          <span class="contact-ic">🎓</span>
+          <span class="contact-text">
+            <span class="contact-title">Учебные вопросы</span>
+            <span class="contact-sub">Расписание, домашка, программа</span>
+          </span>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a class="contact-row" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">
+          <span class="contact-ic">💳</span>
+          <span class="contact-text">
+            <span class="contact-title">Оплата и абонементы</span>
+            <span class="contact-sub">Счета, продление, вопросы по оплате</span>
+          </span>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a class="contact-row" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">
+          <span class="contact-ic">🛠</span>
+          <span class="contact-text">
+            <span class="contact-title">Техподдержка</span>
+            <span class="contact-sub">Не работает кабинет или сайт</span>
+          </span>
+          <span class="contact-arrow">→</span>
+        </a>
       </div>
     </section>
 
@@ -381,6 +445,37 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <h2 class="panel-title">Оплата и абонемент</h2>
       <div id="paymentList"></div>
       <a class="btn btn-accent" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Продлить абонемент</a>
+    </section>
+
+    <section class="panel" id="panel-game">
+      <h2 class="panel-title">Собери слово</h2>
+      <p class="section-sub" style="margin-bottom:18px;">Пока ждёшь урок — разомнись. Буквы перемешаны, нужно угадать слово.</p>
+      <div class="card" style="text-align:center;">
+        <div class="game-score">Счёт: <span id="gameScore">0</span></div>
+        <div class="game-scrambled" id="gameScrambled">—</div>
+        <div class="game-hint" id="gameHint"></div>
+        <input type="text" id="gameInput" class="game-input" placeholder="Впиши слово" autocomplete="off" autocapitalize="off">
+        <p id="gameFeedback" class="game-feedback"></p>
+        <div class="game-btn-row">
+          <button class="btn btn-accent" id="gameCheckBtn">Проверить</button>
+          <button class="btn btn-ghost" id="gameSkipBtn">Другое слово</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-loyalty">
+      <h2 class="panel-title">York Club — бонусы за друзей</h2>
+      <div class="card" style="margin-bottom:16px;">
+        <p style="margin:0 0 14px; font-size:14.5px; line-height:1.6;">
+          Приведи друга в YORK! — и вы оба выигрываете. За каждого друга, который начнёт заниматься,
+          ты получаешь <b>скидку 20%</b> на следующий месяц обучения. Учиться вместе не только веселее, но и выгоднее.
+        </p>
+        <button class="btn btn-dark" id="loyaltyShareBtn">Скопировать приглашение другу</button>
+        <p id="loyaltyCopied" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0;"></p>
+      </div>
+      <div class="note-box">
+        📌 Скидка применяется после того, как приведённый друг оплатит первый месяц. Уточнить детали или сразу получить скидку — просто напиши менеджеру.
+      </div>
     </section>
 
   </main>
@@ -496,6 +591,7 @@ async function enterApp(user){
   document.getElementById('appScreen').classList.remove('hidden');
 
   setupTabs();
+  pickGameWord();
   await Promise.all([loadSchedule(), loadHomework(), loadProgress(), loadPayments()]);
 }
 
@@ -776,7 +872,7 @@ async function loadProgress(){
 /* ---------- PAYMENTS ---------- */
 async function loadPayments(){
   const { data: payments } = await supabase.from('payments').select('*')
-    .eq('student_id', currentUser.id).order('paid_at', { ascending:false });
+    .eq('student_id', currentUser.id).order('created_at', { ascending:false });
 
   const list = payments || [];
   const container = document.getElementById('paymentList');
@@ -786,10 +882,15 @@ async function loadPayments(){
     container.innerHTML = list.map(p => `
       <div class="row-card" style="margin-bottom:10px;">
         <div class="row-main">
-          <div class="row-title">${p.lessons_included || '—'} занятий · ${p.lessons_used || 0} использовано</div>
-          <div class="row-sub">Оплачено ${fmtDate(p.paid_at)} · действует до ${fmtDate(p.valid_until)}</div>
+          <div class="row-title">${p.lessons_included || '—'} занятий${p.amount ? ` · ${p.amount} ₽` : ''}</div>
+          <div class="row-sub">${p.status === 'pending'
+            ? 'Ожидает оплаты'
+            : `Оплачено ${fmtDate(p.paid_at)} · действует до ${fmtDate(p.valid_until)}`}</div>
         </div>
-        <span class="badge badge-${p.status}">${STATUS_LABEL[p.status] || p.status}</span>
+        <div style="display:flex; align-items:center; gap:10px;">
+          ${p.status === 'pending' && p.payment_url ? `<a class="btn btn-accent btn-sm" href="${p.payment_url}" target="_blank" rel="noopener">Оплатить</a>` : ''}
+          <span class="badge badge-${p.status}">${STATUS_LABEL[p.status] || p.status}</span>
+        </div>
       </div>
     `).join('');
   }
@@ -799,6 +900,76 @@ async function loadPayments(){
     ? `${(active.lessons_included||0) - (active.lessons_used||0)} ост.`
     : 'Нет';
 }
+
+/* ---------- GAME: word scramble ---------- */
+const WORD_BANK = {
+  A1: ['cat','book','house','water','friend','table','happy','music','green','apple'],
+  A2: ['weather','journey','morning','kitchen','holiday','picture','answer','simple','forget','garden'],
+  B1: ['decision','opinion','environment','experience','confident','discover','probably','appointment','several','purpose'],
+  B2: ['achievement','consequence','opportunity','significant','considerable','circumstance','estimate','tendency','strategy','awareness'],
+  C1: ['ambiguous','coherent','discrepancy','implication','meticulous','plausible','subsequent','underlying','versatile','arbitrary'],
+  C2: ['ubiquitous','ephemeral','esoteric','idiosyncrasy','juxtaposition','paradigm','quintessential','serendipity','vindicate','zeitgeist']
+};
+
+let gameWord = '';
+let gameScoreVal = 0;
+
+function scrambleWord(word){
+  const letters = word.split('');
+  let scrambled;
+  do {
+    for (let i = letters.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [letters[i], letters[j]] = [letters[j], letters[i]];
+    }
+    scrambled = letters.join('');
+  } while (scrambled === word && word.length > 1);
+  return scrambled;
+}
+
+function pickGameWord(){
+  const level = (currentProfile && currentProfile.level) || 'A1';
+  const pool = WORD_BANK[level] || WORD_BANK.A1;
+  gameWord = pool[Math.floor(Math.random() * pool.length)];
+  document.getElementById('gameScrambled').textContent = scrambleWord(gameWord).toUpperCase();
+  document.getElementById('gameHint').textContent = `${gameWord.length} букв · уровень ${level}`;
+  document.getElementById('gameInput').value = '';
+  document.getElementById('gameFeedback').textContent = '';
+  document.getElementById('gameFeedback').className = 'game-feedback';
+}
+
+function checkGameWord(){
+  const input = document.getElementById('gameInput').value.trim().toLowerCase();
+  const feedback = document.getElementById('gameFeedback');
+  if (!input) return;
+  if (input === gameWord){
+    gameScoreVal++;
+    document.getElementById('gameScore').textContent = gameScoreVal;
+    feedback.textContent = 'Точно! 🎉';
+    feedback.className = 'game-feedback ok';
+    setTimeout(pickGameWord, 900);
+  } else {
+    feedback.textContent = 'Не совсем — попробуй ещё раз.';
+    feedback.className = 'game-feedback err';
+  }
+}
+
+document.getElementById('gameCheckBtn').addEventListener('click', checkGameWord);
+document.getElementById('gameSkipBtn').addEventListener('click', pickGameWord);
+document.getElementById('gameInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkGameWord(); });
+
+/* ---------- LOYALTY ---------- */
+document.getElementById('loyaltyShareBtn').addEventListener('click', async () => {
+  const name = (currentProfile && currentProfile.full_name) || 'друга';
+  const message = `Привет! Я учусь английскому в YORK! — очень советую 🙂 Если решишь попробовать, скажи, что от ${name} — обоим будет бонус. Вот их Telegram: https://t.me/thearbeiter01`;
+  const okEl = document.getElementById('loyaltyCopied');
+  try {
+    await navigator.clipboard.writeText(message);
+    okEl.textContent = 'Скопировано — вставь в чат другу!';
+  } catch (e){
+    okEl.textContent = message;
+  }
+});
 </script>
 
 </body>
