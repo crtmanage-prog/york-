@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Админка — YORK!</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -258,6 +262,49 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .pill-role.teacher{background:var(--ink); color:var(--accent);}
   .pill-role.student{background:var(--panel); color:var(--ink-soft);}
   .pill-role.admin{background:var(--accent); color:var(--ink);}
+/* calendar */
+  .cal-wrap{border:1.5px solid var(--line); border-radius:var(--radius); padding:18px; margin-bottom:8px;}
+  .cal-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .cal-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px; text-transform:capitalize;}
+  .cal-nav{
+    width:32px; height:32px; border-radius:50%; border:1.5px solid var(--line); background:#fff;
+    font-size:16px; line-height:1; cursor:pointer; color:var(--ink);
+  }
+  .cal-nav:hover{background:var(--panel);}
+  .cal-weekdays{
+    display:grid; grid-template-columns:repeat(7,1fr); gap:4px;
+    font-size:11px; font-weight:700; text-transform:uppercase; color:var(--ink-soft);
+    text-align:center; margin-bottom:6px;
+  }
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:4px;}
+  .cal-day{
+    position:relative; aspect-ratio:1/1; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; cursor:pointer; background:none; border:none; color:var(--ink);
+    font-family:'Inter',sans-serif;
+  }
+  .cal-day.empty{cursor:default;}
+  .cal-day:not(.empty):hover{background:var(--panel);}
+  .cal-day.today{font-weight:700; box-shadow:inset 0 0 0 1.5px var(--ink);}
+  .cal-day.selected{background:var(--ink); color:#fff;}
+  .cal-day.selected.today{box-shadow:none;}
+  .cal-day .dot{
+    position:absolute; bottom:5px; left:50%; transform:translateX(-50%);
+    width:5px; height:5px; border-radius:50%; background:var(--accent);
+  }
+  .cal-day.selected .dot{background:var(--accent);}
+  .cal-day-title{
+    font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px;
+    margin:18px 0 10px;
+  }
+  .divider-line{border:none; border-top:1px solid var(--line); margin:6px 0 16px;}
+  .weekday-picker{display:flex; flex-wrap:wrap; gap:8px;}
+  .weekday-picker label{
+    display:flex; align-items:center; gap:5px;
+    background:var(--panel); border-radius:100px; padding:7px 12px;
+    font-size:13px; font-weight:600; cursor:pointer;
+  }
+  .field label input[type=checkbox]{margin-right:6px;}
 </style>
 </head>
 <body>
@@ -311,6 +358,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <button class="tab-btn active" data-tab="overview">Обзор</button>
     <button class="tab-btn" data-tab="allstudents">Ученики</button>
     <button class="tab-btn" data-tab="allteachers">Учителя</button>
+    <button class="tab-btn" data-tab="alllessons">Уроки</button>
+    <button class="tab-btn" data-tab="payments">Оплата</button>
     <button class="tab-btn" data-tab="link">Привязать логин</button>
   </nav>
 
@@ -396,6 +445,121 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       </div>
     </section>
 
+    <section class="panel" id="panel-alllessons">
+      <h2 class="panel-title">Все уроки</h2>
+
+      <div class="cal-wrap">
+        <div class="cal-header">
+          <button class="cal-nav" id="calPrev" aria-label="Предыдущий месяц">‹</button>
+          <div class="cal-title" id="calMonthLabel">—</div>
+          <button class="cal-nav" id="calNext" aria-label="Следующий месяц">›</button>
+        </div>
+        <div class="cal-weekdays">
+          <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+
+      <h3 class="cal-day-title" id="calDayTitle">Сегодня</h3>
+      <div id="lessonsList"></div>
+    </section>
+
+    <section class="panel" id="panel-payments">
+      <h2 class="panel-title">Оплата</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Прикрепи абонемент ученику — если укажешь дни недели и время, уроки на весь абонемент создадутся сами.</p>
+
+      <div class="card">
+        <div class="field">
+          <label for="payStudent">Ученик</label>
+          <select id="payStudent"></select>
+        </div>
+        <div class="field">
+          <label for="payAmount">Сумма, ₽</label>
+          <input id="payAmount" type="number" min="0" placeholder="4080">
+        </div>
+        <div class="field">
+          <label for="payLessonsIncluded">Занятий в абонементе</label>
+          <input id="payLessonsIncluded" type="number" min="1" placeholder="6">
+        </div>
+        <div class="field">
+          <label for="payLessonsUsed">Уже использовано</label>
+          <input id="payLessonsUsed" type="number" min="0" value="0">
+        </div>
+        <div class="field">
+          <label for="payUrl">Ссылка на оплату — ЮKassa (необязательно)</label>
+          <input id="payUrl" type="text" placeholder="https://yookassa.ru/...">
+        </div>
+        <div class="field">
+          <label for="payStatus">Статус</label>
+          <select id="payStatus">
+            <option value="pending">Ожидает оплаты — отправляю ссылку</option>
+            <option value="active">Уже оплачено (деньги получены)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="payPaidAt">Дата оплаты (если уже оплачено)</label>
+          <input id="payPaidAt" type="date">
+        </div>
+        <div class="field">
+          <label for="payValidUntil">Действует до</label>
+          <input id="payValidUntil" type="date">
+        </div>
+
+        <hr class="divider-line">
+
+        <div class="field">
+          <label><input type="checkbox" id="autoScheduleCheck"> Сразу создать уроки на весь абонемент</label>
+        </div>
+        <div id="autoScheduleFields" class="hidden">
+          <div class="field">
+            <label>Дни недели</label>
+            <div class="weekday-picker">
+              <label><input type="checkbox" value="1"> Пн</label>
+              <label><input type="checkbox" value="2"> Вт</label>
+              <label><input type="checkbox" value="3"> Ср</label>
+              <label><input type="checkbox" value="4"> Чт</label>
+              <label><input type="checkbox" value="5"> Пт</label>
+              <label><input type="checkbox" value="6"> Сб</label>
+              <label><input type="checkbox" value="0"> Вс</label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="autoTime">Время урока</label>
+            <input id="autoTime" type="time" value="18:00">
+          </div>
+          <div class="field">
+            <label for="autoStartDate">Начиная с</label>
+            <input id="autoStartDate" type="date">
+          </div>
+          <div class="field">
+            <label for="autoDuration">Длительность, мин</label>
+            <input id="autoDuration" type="number" min="15" step="5" value="60">
+          </div>
+          <div class="field">
+            <label for="autoTopic">Тема (одна на все, можно поменять потом)</label>
+            <input id="autoTopic" type="text" placeholder="Регулярное занятие">
+          </div>
+        </div>
+
+        <p id="payError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
+        <p id="paySuccess" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
+        <button class="btn btn-dark" id="payAddBtn">+ Прикрепить абонемент</button>
+      </div>
+
+      <h2 class="panel-title" style="margin-top:20px;">Ожидают оплаты</h2>
+      <div id="pendingPaymentsList"></div>
+
+      <h2 class="panel-title" style="margin-top:20px;">Все абонементы</h2>
+      <div class="table-wrap">
+        <table class="admin-table" id="paymentsTable">
+          <thead>
+            <tr><th>Ученик</th><th>Занятий</th><th>Сумма</th><th>Статус</th></tr>
+          </thead>
+          <tbody id="paymentsTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
     <section class="panel" id="panel-link">
       <h2 class="panel-title">Привязать существующий логин</h2>
       <p class="section-sub" style="margin-bottom:16px;">
@@ -450,6 +614,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 <script>
 let supabase, currentUser, currentProfile;
 let allStudents = [], allTeachers = [];
+
+function fmtDateTime(d){
+  if (!d) return '—';
+  const date = new Date(d);
+  return date.toLocaleDateString('ru-RU', { day:'numeric', month:'long' }) + ', ' +
+         date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit' });
+}
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
@@ -559,17 +730,113 @@ async function loadAll(){
   allStudents = students || [];
   allTeachers = teachers || [];
 
-  const { data: lessons } = await supabase.from('lessons').select('id', { count: 'exact' }).eq('status', 'upcoming');
+  const { data: lessons } = await supabase.from('lessons')
+    .select('*, student:profiles!lessons_student_id_fkey(full_name), teacher:profiles!lessons_teacher_id_fkey(full_name)')
+    .eq('status', 'upcoming').order('lesson_date', { ascending:true });
   const { data: hw } = await supabase.from('homework').select('id', { count: 'exact' }).eq('status', 'submitted');
+
+  window.__lessonsList = lessons || [];
 
   document.getElementById('ov-students').textContent = allStudents.length;
   document.getElementById('ov-teachers').textContent = allTeachers.length;
-  document.getElementById('ov-lessons').textContent = (lessons || []).length;
+  document.getElementById('ov-lessons').textContent = window.__lessonsList.length;
   document.getElementById('ov-tocheck').textContent = (hw || []).length;
 
   renderStudentsTable();
   renderTeachersTable();
   fillTeacherDropdowns();
+
+  const today = new Date();
+  if (!window.__calState){
+    window.__calState = { month: today.getMonth(), year: today.getFullYear() };
+    window.__selectedDate = fmtDateKey(today);
+  }
+  renderCalendar();
+  renderLessonsList();
+
+  await loadPayments();
+}
+
+function fmtDateKey(d){
+  const dt = new Date(d);
+  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+}
+
+const MONTH_NAMES = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+
+document.getElementById('calPrev').addEventListener('click', () => shiftMonth(-1));
+document.getElementById('calNext').addEventListener('click', () => shiftMonth(1));
+
+function shiftMonth(delta){
+  const s = window.__calState;
+  s.month += delta;
+  if (s.month < 0){ s.month = 11; s.year -= 1; }
+  if (s.month > 11){ s.month = 0; s.year += 1; }
+  renderCalendar();
+}
+
+function renderCalendar(){
+  const s = window.__calState;
+  const list = window.__lessonsList || [];
+  document.getElementById('calMonthLabel').textContent = `${MONTH_NAMES[s.month]} ${s.year}`;
+
+  const lessonDaysSet = new Set(list.map(l => fmtDateKey(l.lesson_date)));
+
+  const firstOfMonth = new Date(s.year, s.month, 1);
+  const leadBlanks = (firstOfMonth.getDay() + 6) % 7;
+  const daysInMonth = new Date(s.year, s.month + 1, 0).getDate();
+
+  const todayKey = fmtDateKey(new Date());
+  const cells = [];
+  for (let i = 0; i < leadBlanks; i++) cells.push('<div class="cal-day empty"></div>');
+  for (let d = 1; d <= daysInMonth; d++){
+    const dateObj = new Date(s.year, s.month, d);
+    const key = fmtDateKey(dateObj);
+    const classes = ['cal-day'];
+    if (key === todayKey) classes.push('today');
+    if (key === window.__selectedDate) classes.push('selected');
+    const dot = lessonDaysSet.has(key) ? '<span class="dot"></span>' : '';
+    cells.push(`<button type="button" class="${classes.join(' ')}" data-date="${key}">${d}${dot}</button>`);
+  }
+  document.getElementById('calGrid').innerHTML = cells.join('');
+
+  document.querySelectorAll('.cal-day:not(.empty)').forEach(btn => {
+    btn.addEventListener('click', () => {
+      window.__selectedDate = btn.dataset.date;
+      renderCalendar();
+      renderLessonsList();
+    });
+  });
+}
+
+function renderLessonsList(){
+  const all = window.__lessonsList || [];
+  const selected = window.__selectedDate;
+  const list = selected ? all.filter(l => fmtDateKey(l.lesson_date) === selected) : all;
+
+  const todayKey = fmtDateKey(new Date());
+  const titleEl = document.getElementById('calDayTitle');
+  if (titleEl && selected){
+    const d = new Date(selected + 'T00:00:00');
+    titleEl.textContent = selected === todayKey
+      ? 'Сегодня'
+      : d.toLocaleDateString('ru-RU', { day:'numeric', month:'long' });
+  }
+
+  const container = document.getElementById('lessonsList');
+  if (!list.length){
+    container.innerHTML = '<div class="empty-state">В этот день уроков нет.</div>';
+    return;
+  }
+  container.innerHTML = list.map(l => `
+    <div class="row-card" style="margin-bottom:10px;">
+      <div class="row-main">
+        <div class="row-title">${(l.student && l.student.full_name) || 'Ученик'} — ${l.topic || 'Занятие'}</div>
+        <div class="row-sub">${fmtDateTime(l.lesson_date)} · учитель: ${(l.teacher && l.teacher.full_name) || '—'}</div>
+      </div>
+      <span class="badge badge-upcoming">Предстоит</span>
+    </div>
+  `).join('');
 }
 
 function teacherName(teacherId){
@@ -617,6 +884,7 @@ function fillTeacherDropdowns(){
   document.getElementById('editTeacher').innerHTML = opts;
   document.getElementById('linkTeacher').innerHTML = opts;
   document.getElementById('editStudent').innerHTML = allStudents.map(s => `<option value="${s.id}">${s.full_name}</option>`).join('');
+  document.getElementById('payStudent').innerHTML = allStudents.map(s => `<option value="${s.id}">${s.full_name}</option>`).join('');
 }
 
 /* ---------- EDIT STUDENT ---------- */
@@ -689,6 +957,181 @@ function updateLinkFormVisibility(){
 updateLinkFormVisibility();
 
 document.getElementById('linkSaveBtn').addEventListener('click', linkNewProfile);
+
+/* ---------- PAYMENTS ---------- */
+document.getElementById('autoScheduleCheck').addEventListener('change', (e) => {
+  document.getElementById('autoScheduleFields').classList.toggle('hidden', !e.target.checked);
+});
+
+document.getElementById('payAddBtn').addEventListener('click', attachSubscription);
+
+function nextWeekdayDates(startDate, weekdays, count){
+  // weekdays: array of ints 0=Sun..6=Sat. Returns `count` Date objects.
+  const dates = [];
+  let cursor = new Date(startDate);
+  cursor.setHours(0,0,0,0);
+  let guard = 0;
+  while (dates.length < count && guard < 3650){
+    if (weekdays.includes(cursor.getDay())){
+      dates.push(new Date(cursor));
+    }
+    cursor.setDate(cursor.getDate() + 1);
+    guard++;
+  }
+  return dates;
+}
+
+async function attachSubscription(){
+  const studentId = document.getElementById('payStudent').value;
+  const amount = document.getElementById('payAmount').value;
+  const lessonsIncluded = document.getElementById('payLessonsIncluded').value;
+  const lessonsUsed = document.getElementById('payLessonsUsed').value || 0;
+  const paymentUrl = document.getElementById('payUrl').value.trim();
+  const status = document.getElementById('payStatus').value;
+  const paidAt = document.getElementById('payPaidAt').value;
+  const validUntil = document.getElementById('payValidUntil').value;
+  const errEl = document.getElementById('payError');
+  const okEl = document.getElementById('paySuccess');
+  errEl.textContent = ''; okEl.textContent = '';
+
+  if (!studentId || !lessonsIncluded){
+    errEl.textContent = 'Выбери ученика и укажи количество занятий.';
+    return;
+  }
+
+  const student = allStudents.find(s => s.id === studentId);
+  const autoSchedule = document.getElementById('autoScheduleCheck').checked;
+  let weekdays = [];
+  let time, startDate, duration, topic;
+
+  if (autoSchedule){
+    weekdays = Array.from(document.querySelectorAll('.weekday-picker input:checked')).map(el => Number(el.value));
+    time = document.getElementById('autoTime').value;
+    startDate = document.getElementById('autoStartDate').value;
+    duration = Number(document.getElementById('autoDuration').value) || 60;
+    topic = document.getElementById('autoTopic').value.trim() || 'Регулярное занятие';
+
+    if (!weekdays.length || !time || !startDate){
+      errEl.textContent = 'Для автосоздания уроков укажи дни недели, время и дату начала.';
+      return;
+    }
+    if (!student || !student.teacher_id){
+      errEl.textContent = 'У этого ученика не указан учитель — уроки создать некому.';
+      return;
+    }
+  }
+
+  const btn = document.getElementById('payAddBtn');
+  btn.disabled = true; btn.textContent = 'Сохраняем…';
+
+  const { data: newPayment, error } = await supabase.from('payments').insert({
+    student_id: studentId,
+    amount: amount ? Number(amount) : null,
+    lessons_included: Number(lessonsIncluded),
+    lessons_used: Number(lessonsUsed),
+    payment_url: paymentUrl || null,
+    paid_at: paidAt || null,
+    valid_until: validUntil || null,
+    status: status
+  }).select().single();
+
+  if (error){
+    btn.disabled = false; btn.textContent = '+ Прикрепить абонемент';
+    errEl.textContent = 'Не получилось сохранить абонемент. Попробуй ещё раз.';
+    return;
+  }
+
+  if (autoSchedule){
+    const remaining = Number(lessonsIncluded) - Number(lessonsUsed);
+    const dates = nextWeekdayDates(startDate, weekdays, Math.max(remaining, 0));
+    const [hh, mm] = time.split(':').map(Number);
+    const rows = dates.map(d => {
+      const dt = new Date(d);
+      dt.setHours(hh, mm, 0, 0);
+      return {
+        student_id: studentId,
+        teacher_id: student.teacher_id,
+        lesson_date: dt.toISOString(),
+        topic: topic,
+        duration_minutes: duration,
+        status: 'upcoming'
+      };
+    });
+    if (rows.length){
+      const { error: lessonsError } = await supabase.from('lessons').insert(rows);
+      if (lessonsError){
+        errEl.textContent = 'Абонемент сохранён, но уроки создать не получилось.';
+      }
+    }
+  }
+
+  btn.disabled = false; btn.textContent = '+ Прикрепить абонемент';
+  okEl.textContent = autoSchedule ? 'Готово! Абонемент и уроки созданы.' : 'Готово! Абонемент сохранён.';
+
+  document.getElementById('payAmount').value = '';
+  document.getElementById('payLessonsIncluded').value = '';
+  document.getElementById('payLessonsUsed').value = '0';
+  document.getElementById('payUrl').value = '';
+  document.getElementById('payStatus').value = 'pending';
+  document.getElementById('payPaidAt').value = '';
+  document.getElementById('payValidUntil').value = '';
+  document.getElementById('autoScheduleCheck').checked = false;
+  document.getElementById('autoScheduleFields').classList.add('hidden');
+
+  await loadPayments();
+  await loadAll();
+}
+
+async function loadPayments(){
+  const { data: all } = await supabase.from('payments')
+    .select('*, profiles!payments_student_id_fkey(full_name)')
+    .order('created_at', { ascending:false });
+
+  const list = all || [];
+
+  const pending = list.filter(p => p.status === 'pending');
+  const pendingContainer = document.getElementById('pendingPaymentsList');
+  if (!pending.length){
+    pendingContainer.innerHTML = '<div class="empty-state">Нет ожидающих оплаты.</div>';
+  } else {
+    pendingContainer.innerHTML = pending.map(p => `
+      <div class="row-card" style="margin-bottom:10px;">
+        <div class="row-main">
+          <div class="row-title">${(p.profiles && p.profiles.full_name) || 'Ученик'} — ${p.lessons_included || '—'} занятий${p.amount ? `, ${p.amount} ₽` : ''}</div>
+          <div class="row-sub">${p.payment_url ? `<a href="${p.payment_url}" target="_blank" rel="noopener" style="font-weight:600; text-decoration:underline;">Ссылка на оплату</a>` : 'Ссылка не указана'}</div>
+        </div>
+        <button class="btn btn-dark btn-sm" onclick="confirmPayment('${p.id}')">Отметить оплаченным</button>
+      </div>
+    `).join('');
+  }
+
+  const tableBody = document.getElementById('paymentsTableBody');
+  if (!list.length){
+    tableBody.innerHTML = '<tr><td colspan="4" class="empty-state">Пока нет абонементов.</td></tr>';
+  } else {
+    tableBody.innerHTML = list.map(p => `
+      <tr>
+        <td>${(p.profiles && p.profiles.full_name) || '—'}</td>
+        <td>${(p.lessons_used||0)}/${p.lessons_included || '—'}</td>
+        <td>${p.amount ? p.amount + ' ₽' : '—'}</td>
+        <td><span class="badge badge-${p.status}">${p.status === 'pending' ? 'Ожидает' : p.status === 'active' ? 'Активен' : 'Истёк'}</span></td>
+      </tr>
+    `).join('');
+  }
+}
+
+async function confirmPayment(paymentId){
+  const { error } = await supabase.from('payments').update({
+    status: 'active',
+    paid_at: new Date().toISOString().slice(0,10)
+  }).eq('id', paymentId);
+
+  if (error){
+    alert('Не получилось обновить. Попробуй ещё раз.');
+    return;
+  }
+  await loadPayments();
+}
 
 async function linkNewProfile(){
   const uid = document.getElementById('linkUid').value.trim();
