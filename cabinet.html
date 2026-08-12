@@ -224,6 +224,42 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   /* reschedule note */
   .note-box{background:var(--panel); border-radius:14px; padding:16px 18px; font-size:13.5px; line-height:1.6; color:var(--ink-soft);}
 
+  /* calendar */
+  .cal-wrap{border:1.5px solid var(--line); border-radius:var(--radius); padding:18px; margin-bottom:8px;}
+  .cal-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .cal-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px; text-transform:capitalize;}
+  .cal-nav{
+    width:32px; height:32px; border-radius:50%; border:1.5px solid var(--line); background:#fff;
+    font-size:16px; line-height:1; cursor:pointer; color:var(--ink);
+  }
+  .cal-nav:hover{background:var(--panel);}
+  .cal-weekdays{
+    display:grid; grid-template-columns:repeat(7,1fr); gap:4px;
+    font-size:11px; font-weight:700; text-transform:uppercase; color:var(--ink-soft);
+    text-align:center; margin-bottom:6px;
+  }
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:4px;}
+  .cal-day{
+    position:relative; aspect-ratio:1/1; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; cursor:pointer; background:none; border:none; color:var(--ink);
+    font-family:'Inter',sans-serif;
+  }
+  .cal-day.empty{cursor:default;}
+  .cal-day:not(.empty):hover{background:var(--panel);}
+  .cal-day.today{font-weight:700; box-shadow:inset 0 0 0 1.5px var(--ink);}
+  .cal-day.selected{background:var(--ink); color:#fff;}
+  .cal-day.selected.today{box-shadow:none;}
+  .cal-day .dot{
+    position:absolute; bottom:5px; left:50%; transform:translateX(-50%);
+    width:5px; height:5px; border-radius:50%; background:var(--accent);
+  }
+  .cal-day.selected .dot{background:var(--accent);}
+  .cal-day-title{
+    font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px;
+    margin:18px 0 10px;
+  }
+
   #loadingState, #errorState{
     min-height:100vh; display:flex; align-items:center; justify-content:center;
     text-align:center; padding:24px; color:var(--ink-soft); font-size:14px;
@@ -309,6 +345,20 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
     <section class="panel" id="panel-schedule">
       <h2 class="panel-title">Расписание и материалы</h2>
+
+      <div class="cal-wrap">
+        <div class="cal-header">
+          <button class="cal-nav" id="calPrev" aria-label="Предыдущий месяц">‹</button>
+          <div class="cal-title" id="calMonthLabel">—</div>
+          <button class="cal-nav" id="calNext" aria-label="Следующий месяц">›</button>
+        </div>
+        <div class="cal-weekdays">
+          <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+
+      <h3 class="cal-day-title" id="calDayTitle">Сегодня</h3>
       <div id="scheduleList"></div>
       <div class="note-box" id="rescheduleNote"></div>
     </section>
@@ -499,6 +549,13 @@ async function loadSchedule(){
 
   const list = lessons || [];
   window.__scheduleList = list;
+
+  const today = new Date();
+  if (!window.__calState){
+    window.__calState = { month: today.getMonth(), year: today.getFullYear() };
+    window.__selectedDate = fmtDateKey(today);
+  }
+  renderCalendar();
   renderScheduleList();
 
   document.getElementById('rescheduleNote').textContent =
@@ -515,11 +572,76 @@ async function loadSchedule(){
   }
 }
 
-function renderScheduleList(){
+function fmtDateKey(d){
+  const dt = new Date(d);
+  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+}
+
+const MONTH_NAMES = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+
+document.getElementById('calPrev').addEventListener('click', () => shiftMonth(-1));
+document.getElementById('calNext').addEventListener('click', () => shiftMonth(1));
+
+function shiftMonth(delta){
+  const s = window.__calState;
+  s.month += delta;
+  if (s.month < 0){ s.month = 11; s.year -= 1; }
+  if (s.month > 11){ s.month = 0; s.year += 1; }
+  renderCalendar();
+}
+
+function renderCalendar(){
+  const s = window.__calState;
   const list = window.__scheduleList || [];
+  document.getElementById('calMonthLabel').textContent = `${MONTH_NAMES[s.month]} ${s.year}`;
+
+  const lessonDaysSet = new Set(list.map(l => fmtDateKey(l.lesson_date)));
+
+  const firstOfMonth = new Date(s.year, s.month, 1);
+  // понедельник = 0 ... воскресенье = 6
+  const leadBlanks = (firstOfMonth.getDay() + 6) % 7;
+  const daysInMonth = new Date(s.year, s.month + 1, 0).getDate();
+
+  const todayKey = fmtDateKey(new Date());
+  const cells = [];
+  for (let i = 0; i < leadBlanks; i++) cells.push('<div class="cal-day empty"></div>');
+  for (let d = 1; d <= daysInMonth; d++){
+    const dateObj = new Date(s.year, s.month, d);
+    const key = fmtDateKey(dateObj);
+    const classes = ['cal-day'];
+    if (key === todayKey) classes.push('today');
+    if (key === window.__selectedDate) classes.push('selected');
+    const dot = lessonDaysSet.has(key) ? '<span class="dot"></span>' : '';
+    cells.push(`<button type="button" class="${classes.join(' ')}" data-date="${key}">${d}${dot}</button>`);
+  }
+  document.getElementById('calGrid').innerHTML = cells.join('');
+
+  document.querySelectorAll('.cal-day:not(.empty)').forEach(btn => {
+    btn.addEventListener('click', () => {
+      window.__selectedDate = btn.dataset.date;
+      renderCalendar();
+      renderScheduleList();
+    });
+  });
+}
+
+function renderScheduleList(){
+  const all = window.__scheduleList || [];
+  const selected = window.__selectedDate;
+  const list = selected ? all.filter(l => fmtDateKey(l.lesson_date) === selected) : all;
+
+  const todayKey = fmtDateKey(new Date());
+  const titleEl = document.getElementById('calDayTitle');
+  if (titleEl && selected){
+    const d = new Date(selected + 'T00:00:00');
+    titleEl.textContent = selected === todayKey
+      ? 'Сегодня'
+      : d.toLocaleDateString('ru-RU', { day:'numeric', month:'long' });
+  }
+
   const container = document.getElementById('scheduleList');
   if (!list.length){
-    container.innerHTML = '<div class="empty-state">Пока нет запланированных уроков.</div>';
+    container.innerHTML = '<div class="empty-state">В этот день уроков нет.</div>';
     return;
   }
   container.innerHTML = list.map(l => `
