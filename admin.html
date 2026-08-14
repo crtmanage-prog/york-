@@ -304,6 +304,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   .divider-line{border:none; border-top:1px solid var(--line); margin:6px 0 16px;}
   .weekday-picker{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip-group{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip-group label{
+    display:flex; align-items:center; gap:6px;
+    background:var(--panel); border-radius:100px; padding:9px 14px;
+    font-size:13.5px; font-weight:600; cursor:pointer;
+  }
+  .chip-group input{width:auto;}
+  .chip-group label:has(input:checked){background:var(--accent);}
   .weekday-picker label{
     display:flex; align-items:center; gap:5px;
     background:var(--panel); border-radius:100px; padding:7px 12px;
@@ -767,8 +775,36 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
     <section class="panel" id="panel-requests">
       <h2 class="panel-title">Заявки на пробный урок</h2>
-      <p class="section-sub" style="margin-bottom:16px;">Приходят с публичной анкеты. Выбери заявку — увидишь, кто из учителей уже занят в удобное для человека время.</p>
-      <div id="requestsList"></div>
+
+      <div class="chip-group" style="margin-bottom:18px;">
+        <label><input type="radio" name="requestsView" value="list" checked onchange="switchRequestsView()"><span>Список</span></label>
+        <label><input type="radio" name="requestsView" value="calendar" onchange="switchRequestsView()"><span>Календарь</span></label>
+        <label><input type="radio" name="requestsView" value="teachers" onchange="switchRequestsView()"><span>Расписание учителей</span></label>
+      </div>
+
+      <div id="requestsViewList">
+        <div id="requestsList"></div>
+      </div>
+
+      <div id="requestsViewCalendar" class="hidden">
+        <div class="cal-wrap">
+          <div class="cal-header">
+            <button class="cal-nav" id="reqCalPrev" aria-label="Предыдущий месяц">‹</button>
+            <div class="cal-title" id="reqCalMonthLabel">—</div>
+            <button class="cal-nav" id="reqCalNext" aria-label="Следующий месяц">›</button>
+          </div>
+          <div class="cal-weekdays">
+            <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+          </div>
+          <div class="cal-grid" id="reqCalGrid"></div>
+        </div>
+        <h3 class="cal-day-title" id="reqCalDayTitle">Сегодня</h3>
+        <div id="reqCalDayList"></div>
+      </div>
+
+      <div id="requestsViewTeachers" class="hidden">
+        <div id="teachersScheduleView"></div>
+      </div>
     </section>
 
     <section class="panel" id="panel-stats">
@@ -2275,10 +2311,12 @@ function referrerDisplay(r){
 
 async function loadTrialRequests(){
   const { data } = await supabase.from('trial_requests').select('*')
-    .eq('status', 'new').order('created_at', { ascending:false });
+    .order('created_at', { ascending:false });
 
   window.__trialRequests = data || [];
   renderTrialRequests();
+  renderReqCalendar();
+  renderTeachersScheduleView();
 }
 
 function teacherAvailabilityHtml(){
@@ -2290,7 +2328,7 @@ function teacherAvailabilityHtml(){
       .sort((a,b) => new Date(a.lesson_date) - new Date(b.lesson_date))
       .slice(0, 5);
     const busyList = upcoming.length
-      ? upcoming.map(l => `<div>· ${fmtDateTime(l.lesson_date)}</div>`).join('')
+      ? upcoming.map(l => `<div>· ${fmtDateTime(l.lesson_date)}${l.is_trial ? ' (пробный)' : ''}</div>`).join('')
       : '<div style="color:#3B7A1E; font-weight:600;">Свободных записей не видно — можно смело предлагать</div>';
     return `
       <div style="margin-bottom:12px;">
@@ -2301,14 +2339,32 @@ function teacherAvailabilityHtml(){
   }).join('');
 }
 
-function renderTrialRequests(){
-  const list = window.__trialRequests || [];
-  const container = document.getElementById('requestsList');
-  if (!list.length){
-    container.innerHTML = '<div class="empty-state">Новых заявок нет 🎉</div>';
-    return;
-  }
-  container.innerHTML = list.map(r => `
+/* ---------- ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМОВ ---------- */
+function switchRequestsView(){
+  const view = document.querySelector('input[name="requestsView"]:checked').value;
+  document.getElementById('requestsViewList').classList.toggle('hidden', view !== 'list');
+  document.getElementById('requestsViewCalendar').classList.toggle('hidden', view !== 'calendar');
+  document.getElementById('requestsViewTeachers').classList.toggle('hidden', view !== 'teachers');
+}
+
+/* ---------- СПИСОК ПО ГРУППАМ СТАТУСОВ ---------- */
+function linkedLessonFor(r){
+  if (!r.converted_lesson_id) return null;
+  return (window.__lessonsList || []).find(l => l.id === r.converted_lesson_id) || null;
+}
+
+function requestContactButtons(r){
+  const c = (r.contact || '').trim();
+  if (!c) return '';
+  const btns = [];
+  if (c.startsWith('@')) btns.push(`<a class="btn btn-ghost btn-sm" href="https://t.me/${c.slice(1)}" target="_blank" rel="noopener">Telegram</a>`);
+  else if (c.startsWith('+') || /^\d/.test(c)) btns.push(`<a class="btn btn-ghost btn-sm" href="tel:${c.replace(/[^\d+]/g,'')}" target="_blank" rel="noopener">Позвонить</a>`);
+  return btns.join(' ');
+}
+
+function requestCardHtml(r, mode){
+  const lesson = linkedLessonFor(r);
+  return `
     <div class="card" style="margin-bottom:14px;">
       <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px;">
         <div>
@@ -2319,18 +2375,64 @@ function renderTrialRequests(){
       </div>
       <div style="font-size:13.5px; margin-bottom:10px;">
         ${r.source ? `<div>📌 Узнали: ${r.source}${referrerDisplay(r)}</div>` : ''}
-        ${r.preferred_days ? `<div>📅 Дни: ${r.preferred_days}</div>` : ''}
-        ${r.preferred_time ? `<div>🕐 Время: ${r.preferred_time}${r.preferred_timezone ? ' · ' + r.preferred_timezone : ''}</div>` : ''}
+        ${mode === 'new' ? `
+          ${r.preferred_days ? `<div>📅 Дни: ${r.preferred_days}</div>` : ''}
+          ${r.preferred_time ? `<div>🕐 Время: ${r.preferred_time}${r.preferred_timezone ? ' · ' + r.preferred_timezone : ''}</div>` : ''}
+        ` : ''}
+        ${lesson ? `<div>🎓 Назначено: ${fmtDateTime(lesson.lesson_date)} · учитель ${(lesson.teacher && lesson.teacher.full_name) || teacherName(r.assigned_teacher_id)}</div>` : ''}
         ${r.comment ? `<div style="margin-top:6px; color:var(--ink-soft);">💬 ${r.comment}</div>` : ''}
+        ${mode === 'done' && r.outcome_result ? `<div style="margin-top:6px;"><b>Итог:</b> ${r.attended === false ? '❌ Не пришёл' : '✅ Пришёл'} · ${r.outcome_result}${r.outcome_comment ? ' — ' + r.outcome_comment : ''}</div>` : ''}
       </div>
       <div class="card-actions" style="margin-bottom:10px;">
-        <button class="btn btn-accent btn-sm" onclick="convertRequestToTrial('${r.id}')">Назначить пробный</button>
-        <button class="btn btn-ghost btn-sm" onclick="toggleTeacherAvailability('${r.id}')">Занятость учителей</button>
-        <button class="btn btn-ghost btn-sm" onclick="declineRequest('${r.id}')">Отклонить</button>
+        ${(mode === 'new' || mode === 'needsOutcome') ? requestContactButtons(r) : ''}
+        ${mode === 'new' ? `
+          <button class="btn btn-accent btn-sm" onclick="convertRequestToTrial('${r.id}')">Назначить пробный</button>
+          <button class="btn btn-ghost btn-sm" onclick="toggleTeacherAvailability('${r.id}')">Занятость учителей</button>
+          <button class="btn btn-ghost btn-sm" onclick="declineRequest('${r.id}')">Отклонить</button>
+        ` : ''}
+        ${mode === 'needsOutcome' ? `
+          <button class="btn btn-accent btn-sm" onclick="toggleOutcomeForm('${r.id}')">Завершить пробный</button>
+        ` : ''}
       </div>
       <div id="avail-${r.id}" class="hidden note-box"></div>
+      <div id="outcome-${r.id}" class="hidden"></div>
     </div>
-  `).join('');
+  `;
+}
+
+function renderTrialRequests(){
+  const all = window.__trialRequests || [];
+  const container = document.getElementById('requestsList');
+  const now = Date.now();
+
+  const news = all.filter(r => r.status === 'new');
+  const scheduled = all.filter(r => r.status === 'scheduled');
+  const needsOutcome = scheduled.filter(r => {
+    const l = linkedLessonFor(r);
+    return l && new Date(l.lesson_date).getTime() < now;
+  });
+  const stillUpcoming = scheduled.filter(r => !needsOutcome.includes(r));
+  const done = all.filter(r => r.status === 'completed');
+  const declined = all.filter(r => r.status === 'declined');
+
+  let html = '';
+  if (news.length){
+    html += `<h2 class="panel-title">🆕 Новые (${news.length})</h2>` + news.map(r => requestCardHtml(r, 'new')).join('');
+  }
+  if (needsOutcome.length){
+    html += `<h2 class="panel-title" style="color:#96650B;">⏳ Нужен итог (${needsOutcome.length})</h2>` + needsOutcome.map(r => requestCardHtml(r, 'needsOutcome')).join('');
+  }
+  if (stillUpcoming.length){
+    html += `<h2 class="panel-title">📅 Запланированные (${stillUpcoming.length})</h2>` + stillUpcoming.map(r => requestCardHtml(r, 'scheduled')).join('');
+  }
+  if (done.length){
+    html += `<h2 class="panel-title">✅ Завершённые (${done.length})</h2>` + done.slice(0, 20).map(r => requestCardHtml(r, 'done')).join('');
+  }
+  if (declined.length){
+    html += `<h2 class="panel-title" style="color:var(--ink-soft);">Отклонённые (${declined.length})</h2>` + declined.slice(0, 10).map(r => requestCardHtml(r, 'declined')).join('');
+  }
+
+  container.innerHTML = html || '<div class="empty-state">Заявок пока нет.</div>';
 }
 
 function toggleTeacherAvailability(requestId){
@@ -2341,6 +2443,58 @@ function toggleTeacherAvailability(requestId){
   }
   el.innerHTML = teacherAvailabilityHtml();
   el.classList.remove('hidden');
+}
+
+function toggleOutcomeForm(requestId){
+  const el = document.getElementById('outcome-' + requestId);
+  const isHidden = el.classList.contains('hidden');
+  if (!isHidden){
+    el.classList.add('hidden');
+    return;
+  }
+  el.innerHTML = `
+    <div class="day-note-card">
+      <div class="field">
+        <label>Пришёл на пробный?</label>
+        <div class="chip-group">
+          <label><input type="radio" name="attended-${requestId}" value="yes" checked><span>✅ Пришёл</span></label>
+          <label><input type="radio" name="attended-${requestId}" value="no"><span>❌ Не пришёл</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Результат</label>
+        <select id="outcomeResult-${requestId}">
+          <option value="Купил абонемент">Купил абонемент</option>
+          <option value="Думает">Думает</option>
+          <option value="Не подошло">Не подошло</option>
+          <option value="Не пришёл без предупреждения">Не пришёл без предупреждения</option>
+          <option value="Другое">Другое</option>
+        </select>
+      </div>
+      <textarea id="outcomeComment-${requestId}" placeholder="Комментарий (необязательно)"></textarea>
+      <button class="btn btn-dark btn-sm" style="margin-top:8px;" onclick="submitOutcome('${requestId}')">Сохранить итог</button>
+    </div>
+  `;
+  el.classList.remove('hidden');
+}
+
+async function submitOutcome(requestId){
+  const attended = document.querySelector(`input[name="attended-${requestId}"]:checked`).value === 'yes';
+  const result = document.getElementById('outcomeResult-' + requestId).value;
+  const comment = document.getElementById('outcomeComment-' + requestId).value.trim();
+
+  const { error } = await supabase.from('trial_requests').update({
+    status: 'completed',
+    attended,
+    outcome_result: result,
+    outcome_comment: comment || null
+  }).eq('id', requestId);
+
+  if (error){
+    alert('Не получилось сохранить. Попробуй ещё раз.');
+    return;
+  }
+  await loadTrialRequests();
 }
 
 function convertRequestToTrial(requestId){
@@ -2366,6 +2520,81 @@ async function declineRequest(requestId){
     return;
   }
   await loadTrialRequests();
+}
+
+/* ---------- КАЛЕНДАРЬ ЗАЯВОК (только пробные) ---------- */
+window.__reqCalState = null;
+
+function renderReqCalendar(){
+  const today = new Date();
+  if (!window.__reqCalState){
+    window.__reqCalState = { month: today.getMonth(), year: today.getFullYear() };
+    window.__reqSelectedDate = fmtDateKey(today);
+  }
+  const s = window.__reqCalState;
+  document.getElementById('reqCalMonthLabel').textContent = `${MONTH_NAMES[s.month]} ${s.year}`;
+
+  const trialLessons = (window.__lessonsList || []).filter(l => l.is_trial);
+  const daysSet = new Set(trialLessons.map(l => fmtDateKey(l.lesson_date)));
+
+  const firstOfMonth = new Date(s.year, s.month, 1);
+  const leadBlanks = (firstOfMonth.getDay() + 6) % 7;
+  const daysInMonth = new Date(s.year, s.month + 1, 0).getDate();
+  const todayKey = fmtDateKey(new Date());
+  const cells = [];
+  for (let i = 0; i < leadBlanks; i++) cells.push('<div class="cal-day empty"></div>');
+  for (let d = 1; d <= daysInMonth; d++){
+    const dateObj = new Date(s.year, s.month, d);
+    const key = fmtDateKey(dateObj);
+    const classes = ['cal-day'];
+    if (daysSet.has(key)) classes.push('has-trial');
+    if (key === todayKey) classes.push('today');
+    if (key === window.__reqSelectedDate) classes.push('selected');
+    cells.push(`<button type="button" class="${classes.join(' ')}" data-date="${key}">${d}</button>`);
+  }
+  document.getElementById('reqCalGrid').innerHTML = cells.join('');
+  document.querySelectorAll('#reqCalGrid .cal-day:not(.empty)').forEach(btn => {
+    btn.addEventListener('click', () => {
+      window.__reqSelectedDate = btn.dataset.date;
+      renderReqCalendar();
+    });
+  });
+
+  const dayList = trialLessons.filter(l => fmtDateKey(l.lesson_date) === window.__reqSelectedDate)
+    .sort((a,b) => new Date(a.lesson_date) - new Date(b.lesson_date));
+  const titleEl = document.getElementById('reqCalDayTitle');
+  const d = new Date(window.__reqSelectedDate + 'T00:00:00');
+  titleEl.textContent = window.__reqSelectedDate === todayKey ? 'Сегодня' : d.toLocaleDateString('ru-RU', { day:'numeric', month:'long' });
+
+  document.getElementById('reqCalDayList').innerHTML = dayList.length
+    ? dayList.map(l => `
+        <div class="row-card row-trial" style="margin-bottom:10px;">
+          <div class="row-main">
+            <div class="row-title">🎓 ${l.guest_name || 'Пробный'}</div>
+            <div class="row-sub">${fmtDateTime(l.lesson_date)} · учитель: ${(l.teacher && l.teacher.full_name) || '—'}${l.guest_contact ? ' · ' + l.guest_contact : ''}</div>
+          </div>
+          ${lessonBadge(l)}
+        </div>
+      `).join('')
+    : '<div class="empty-state">В этот день пробных нет.</div>';
+}
+
+document.getElementById('reqCalPrev').addEventListener('click', () => {
+  window.__reqCalState.month--;
+  if (window.__reqCalState.month < 0){ window.__reqCalState.month = 11; window.__reqCalState.year--; }
+  renderReqCalendar();
+});
+document.getElementById('reqCalNext').addEventListener('click', () => {
+  window.__reqCalState.month++;
+  if (window.__reqCalState.month > 11){ window.__reqCalState.month = 0; window.__reqCalState.year++; }
+  renderReqCalendar();
+});
+
+/* ---------- РАСПИСАНИЕ УЧИТЕЛЕЙ (полный вид) ---------- */
+function renderTeachersScheduleView(){
+  const el = document.getElementById('teachersScheduleView');
+  if (!el) return;
+  el.innerHTML = teacherAvailabilityHtml();
 }
 
 async function loadPayments(){
@@ -2521,7 +2750,7 @@ async function assignTrialLesson(){
 
   if (!editingTrialId && window.__convertingRequestId){
     await supabase.from('trial_requests').update({
-      status: 'converted',
+      status: 'scheduled',
       converted_lesson_id: newLesson.id,
       assigned_teacher_id: teacherId
     }).eq('id', window.__convertingRequestId);
