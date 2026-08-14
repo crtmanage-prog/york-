@@ -566,6 +566,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <section class="panel" id="panel-alllessons">
       <h2 class="panel-title">Все уроки</h2>
 
+      <div id="rescheduleRequestsSection"></div>
+
       <div class="cal-wrap">
         <div class="cal-header">
           <button class="cal-nav" id="calPrev" aria-label="Предыдущий месяц">‹</button>
@@ -1213,7 +1215,98 @@ function lessonBadge(l){
   return `<span class="badge badge-upcoming">Предстоит</span>`;
 }
 
+function renderRescheduleRequests(){
+  const section = document.getElementById('rescheduleRequestsSection');
+  if (!section) return;
+  const list = (window.__lessonsList || []).filter(l => l.needs_reschedule);
+  if (!list.length){
+    section.innerHTML = '';
+    return;
+  }
+  section.innerHTML = `
+    <h2 class="panel-title" style="color:#96650B;">⏳ Требуют переноса (${list.length})</h2>
+    <div style="margin-bottom:20px;">
+      ${list.map(l => `
+        <div class="card" style="margin-bottom:10px; border-color:#F0D9A0;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px;">
+            <div>
+              <div style="font-weight:700; font-size:14.5px;">${l.is_trial ? `🎓 ${l.guest_name || 'Пробный'}` : ((l.student && l.student.full_name) || 'Ученик')} — ${l.topic || 'Занятие'}</div>
+              <div style="font-size:13px; color:var(--ink-soft);">Было: ${fmtDateTime(l.lesson_date)} · учитель: ${(l.teacher && l.teacher.full_name) || '—'}</div>
+              <div style="font-size:13px; color:#96650B; font-weight:600; margin-top:4px;">Причина: ${l.reschedule_reason || '—'}</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-accent btn-sm" onclick="toggleAdminReschedule('${l.id}')">✎ Перенести</button>
+            <button class="btn btn-ghost btn-sm" onclick="markRescheduleResolved('${l.id}')">Отметить решённым</button>
+          </div>
+          <div id="adminReschedule-${l.id}" class="hidden" style="margin-top:10px;"></div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function toggleAdminReschedule(lessonId){
+  const el = document.getElementById('adminReschedule-' + lessonId);
+  const isHidden = el.classList.contains('hidden');
+  if (!isHidden){
+    el.classList.add('hidden');
+    return;
+  }
+  el.classList.remove('hidden');
+  el.innerHTML = `
+    <div class="day-note-card">
+      <div class="field">
+        <label>Новая дата и время</label>
+        <input type="datetime-local" id="adminRescheduleDate-${lessonId}">
+      </div>
+      <div class="field">
+        <label>Часовой пояс</label>
+        <select id="adminRescheduleTz-${lessonId}">${timezoneOptionsHtml(SCHOOL_TZ)}</select>
+      </div>
+      <button class="btn btn-dark btn-sm" onclick="submitAdminReschedule('${lessonId}')">Сохранить новое время</button>
+    </div>
+  `;
+}
+
+async function submitAdminReschedule(lessonId){
+  const dateVal = document.getElementById('adminRescheduleDate-' + lessonId).value;
+  const timezone = document.getElementById('adminRescheduleTz-' + lessonId).value || SCHOOL_TZ;
+  if (!dateVal){
+    alert('Укажи новую дату и время.');
+    return;
+  }
+  const [datePart, timePart] = dateVal.split('T');
+  const utcDate = zonedTimeToUtc(datePart, timePart, timezone);
+
+  const { error } = await supabase.from('lessons').update({
+    lesson_date: utcDate.toISOString(),
+    needs_reschedule: false,
+    reschedule_reason: null
+  }).eq('id', lessonId);
+
+  if (error){
+    alert('Не получилось перенести урок. Попробуй ещё раз.');
+    return;
+  }
+  await loadAll();
+}
+
+async function markRescheduleResolved(lessonId){
+  const { error } = await supabase.from('lessons').update({
+    needs_reschedule: false,
+    reschedule_reason: null
+  }).eq('id', lessonId);
+
+  if (error){
+    alert('Не получилось сохранить. Попробуй ещё раз.');
+    return;
+  }
+  await loadAll();
+}
+
 function renderLessonsList(){
+  renderRescheduleRequests();
   const all = window.__lessonsList || [];
   const selected = window.__selectedDate;
   const list = selected ? all.filter(l => fmtDateKey(l.lesson_date) === selected) : all;
