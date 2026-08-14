@@ -887,6 +887,20 @@ function qrMatrixToSVG(text, pixelSize){
       <div class="note-box">
         📌 Скидка применяется после того, как приведённый друг оплатит первый месяц. Уточнить детали или сразу получить скидку — просто напиши менеджеру.
       </div>
+
+      <h2 class="panel-title" style="margin-top:24px;">Скоро в YORK!</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Новые форматы обучения уже готовятся.</p>
+      <div class="card">
+        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px;">
+          <div>🗣 Разговорный клуб</div>
+          <div>✈️ English for Travel</div>
+          <div>💼 English for Career</div>
+          <div>📚 Базовый английский</div>
+          <div>🎯 Тематические мини-курсы</div>
+        </div>
+        <button class="btn btn-dark btn-sm" id="notifyMeBtn">Узнать первым</button>
+        <p id="notifyMeMsg" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0;"></p>
+      </div>
     </section>
 
     <section class="panel" id="panel-documents">
@@ -1510,6 +1524,22 @@ function togglePaymentQR(paymentId, url){
   el.innerHTML = qrMatrixToSVG(url, 160);
   el.classList.remove('hidden');
 }
+
+document.getElementById('notifyMeBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('notifyMeBtn');
+  const msgEl = document.getElementById('notifyMeMsg');
+  btn.disabled = true;
+
+  const { error } = await supabase.from('product_interest').insert({ student_id: currentUser.id });
+
+  if (error && error.code !== '23505'){ // 23505 = уже отмечался, это не ошибка для пользователя
+    msgEl.textContent = 'Не получилось. Попробуй ещё раз.';
+    btn.disabled = false;
+    return;
+  }
+  msgEl.textContent = 'Готово — сообщим первым! 🎉';
+  btn.textContent = 'Уже в списке ✓';
+});
 
 async function loadMyDocuments(){
   const { data } = await supabase.from('documents').select('*')
