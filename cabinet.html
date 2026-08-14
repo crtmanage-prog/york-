@@ -345,6 +345,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   <nav class="tabs">
     <button class="tab-btn active" data-tab="overview">Обзор</button>
     <button class="tab-btn" data-tab="schedule">Расписание</button>
+    <button class="tab-btn" data-tab="history">История</button>
     <button class="tab-btn" data-tab="homework">Домашка</button>
     <button class="tab-btn" data-tab="progress">Прогресс</button>
     <button class="tab-btn" data-tab="payment">Оплата</button>
@@ -357,6 +358,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <section class="panel active" id="panel-overview">
       <h2 class="panel-title" id="greetingTitle" style="font-size:24px;">Привет! 👋</h2>
       <p class="section-sub" id="greetingSub" style="margin-top:-8px;">Вот что у тебя сегодня.</p>
+
+      <div id="lowLessonsReminder" class="hidden" style="background:#FFF4DE; border:1.5px solid #E8C888; border-radius:14px; padding:14px 16px; margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <div style="font-size:13.5px; font-weight:600; color:#7A4E00;" id="lowLessonsText"></div>
+        <a class="btn btn-dark btn-sm" href="#" onclick="document.querySelector('.tab-btn[data-tab=&quot;payment&quot;]').click(); return false;">Продлить</a>
+      </div>
       <div class="overview-grid">
         <div class="stat-card">
           <div class="stat-label">Следующий урок</div>
@@ -425,6 +431,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <div class="note-box" id="rescheduleNote"></div>
     </section>
 
+    <section class="panel" id="panel-history">
+      <h2 class="panel-title">История занятий</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Все прошедшие уроки — в одном месте.</p>
+      <div id="historyList"></div>
+    </section>
+
     <section class="panel" id="panel-homework">
       <h2 class="panel-title">Домашние задания</h2>
       <div id="homeworkList"></div>
@@ -442,7 +454,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <section class="panel" id="panel-payment">
       <h2 class="panel-title">Оплата и абонемент</h2>
       <div id="paymentList"></div>
-      <a class="btn btn-accent" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Продлить абонемент</a>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn btn-accent" href="https://www.tinkoff.ru/rm/r_omizDKAlyA.rrEPbjdlvM/R2oRo67357" target="_blank" rel="noopener">Оплатить абонемент</a>
+        <a class="btn btn-ghost" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
+      </div>
     </section>
 
     <section class="panel" id="panel-game">
@@ -468,6 +483,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           Приведи друга в YORK! — и вы оба выигрываете. За каждого друга, который начнёт заниматься,
           ты получаешь <b>скидку 20%</b> на следующий месяц обучения. Учиться вместе не только веселее, но и выгоднее.
         </p>
+        <div style="background:var(--panel); border-radius:12px; padding:14px 16px; margin-bottom:14px;">
+          <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); margin-bottom:4px;">Твой код приглашения</div>
+          <div style="font-family:'Unbounded',sans-serif; font-weight:900; font-size:20px;" id="referralCodeDisplay">—</div>
+        </div>
         <button class="btn btn-dark" id="loyaltyShareBtn">Скопировать приглашение другу</button>
         <p id="loyaltyCopied" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0;"></p>
       </div>
@@ -627,7 +646,9 @@ async function enterApp(user){
 
   setupTabs();
   pickGameWord();
-  await Promise.allSettled([loadSchedule(), loadHomework(), loadProgress(), loadPayments()]);
+  ensureReferralCode();
+  await loadSchedule();
+  await Promise.allSettled([loadHomework(), loadProgress(), loadPayments()]);
 }
 
 function setupTabs(){
@@ -688,6 +709,7 @@ async function loadSchedule(){
   }
   renderCalendar();
   renderScheduleList();
+  renderHistoryList();
 
   document.getElementById('rescheduleNote').textContent =
     '📌 Правила переноса: ' + (currentProfile.reschedule_rules || 'уточните у менеджера.');
@@ -765,6 +787,16 @@ function isLessonPast(lesson){
   return end < Date.now();
 }
 
+function computeRemaining(payment, allLessons){
+  if (!payment) return null;
+  const linked = (allLessons || []).filter(l => l.payment_id === payment.id);
+  if (linked.length > 0){
+    const usedCount = linked.filter(l => isLessonPast(l)).length;
+    return (payment.lessons_included || 0) - usedCount;
+  }
+  return (payment.lessons_included || 0) - (payment.lessons_used || 0);
+}
+
 function renderScheduleList(){
   const all = window.__scheduleList || [];
   const selected = window.__selectedDate;
@@ -803,6 +835,29 @@ function renderScheduleList(){
     </div>
   `;
   }).join('');
+}
+
+function renderHistoryList(){
+  const all = window.__scheduleList || [];
+  const past = all.filter(l => isLessonPast(l)).sort((a,b) => new Date(b.lesson_date) - new Date(a.lesson_date));
+  const container = document.getElementById('historyList');
+  if (!container) return;
+  if (!past.length){
+    container.innerHTML = '<div class="empty-state">Пока не было ни одного урока.</div>';
+    return;
+  }
+  container.innerHTML = past.map(l => `
+    <div class="row-card" style="margin-bottom:10px;">
+      <div class="row-main">
+        <div class="row-title">${l.topic || 'Занятие'}</div>
+        <div class="row-sub">${fmtDateTime(l.lesson_date)}</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        ${l.materials_url ? `<a class="btn btn-ghost btn-sm" href="${l.materials_url}" target="_blank" rel="noopener">Материалы</a>` : ''}
+        <span class="badge badge-completed">Прошёл</span>
+      </div>
+    </div>
+  `).join('');
 }
 
 /* ---------- HOMEWORK ---------- */
@@ -929,10 +984,12 @@ async function loadPayments(){
   if (!list.length){
     container.innerHTML = '<div class="empty-state">Данных об оплате пока нет.</div>';
   } else {
-    container.innerHTML = list.map(p => `
+    container.innerHTML = list.map(p => {
+      const remaining = p.status === 'active' ? computeRemaining(p, window.__scheduleList || []) : null;
+      return `
       <div class="row-card" style="margin-bottom:10px;">
         <div class="row-main">
-          <div class="row-title">${p.lessons_included || '—'} занятий${p.amount ? ` · ${p.amount} ₽` : ''}</div>
+          <div class="row-title">${p.lessons_included || '—'} занятий${p.amount ? ` · ${p.amount} ₽` : ''}${remaining !== null ? ` · ${remaining} ост.` : ''}</div>
           <div class="row-sub">${p.status === 'pending'
             ? 'Ожидает оплаты'
             : `Оплачено ${fmtDate(p.paid_at)} · действует до ${fmtDate(p.valid_until)}`}</div>
@@ -942,13 +999,25 @@ async function loadPayments(){
           <span class="badge badge-${p.status}">${STATUS_LABEL[p.status] || p.status}</span>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
   }
 
   const active = list.find(p => p.status === 'active');
-  document.getElementById('ov-subscription').textContent = active
-    ? `${(active.lessons_included||0) - (active.lessons_used||0)} ост.`
-    : 'Нет';
+  const remainingActive = active ? computeRemaining(active, window.__scheduleList || []) : null;
+  document.getElementById('ov-subscription').textContent = remainingActive !== null ? `${remainingActive} ост.` : 'Нет';
+
+  const reminderEl = document.getElementById('lowLessonsReminder');
+  if (reminderEl){
+    if (remainingActive !== null && remainingActive <= 2){
+      reminderEl.classList.remove('hidden');
+      document.getElementById('lowLessonsText').textContent = remainingActive <= 0
+        ? 'Занятия в абонементе закончились — пора продлить.'
+        : `Осталось всего ${remainingActive} ${remainingActive === 1 ? 'занятие' : 'занятия'} — самое время продлить абонемент.`;
+    } else {
+      reminderEl.classList.add('hidden');
+    }
+  }
 }
 
 /* ---------- GAME: word scramble ---------- */
@@ -1009,9 +1078,32 @@ document.getElementById('gameSkipBtn').addEventListener('click', pickGameWord);
 document.getElementById('gameInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkGameWord(); });
 
 /* ---------- LOYALTY ---------- */
+async function ensureReferralCode(){
+  if (currentProfile.referral_code){
+    document.getElementById('referralCodeDisplay').textContent = currentProfile.referral_code;
+    return currentProfile.referral_code;
+  }
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let code = '';
+  for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+
+  const { error } = await supabase.from('profiles').update({ referral_code: code }).eq('id', currentUser.id);
+  if (!error){
+    currentProfile.referral_code = code;
+    document.getElementById('referralCodeDisplay').textContent = code;
+    return code;
+  }
+  document.getElementById('referralCodeDisplay').textContent = '—';
+  return null;
+}
+
 document.getElementById('loyaltyShareBtn').addEventListener('click', async () => {
   const name = (currentProfile && currentProfile.full_name) || 'друга';
-  const message = `Привет! Я учусь английскому в YORK! — очень советую 🙂 Если решишь попробовать, скажи, что от ${name} — обоим будет бонус. Вот их Telegram: https://t.me/thearbeiter01`;
+  const code = await ensureReferralCode();
+  const link = code
+    ? `https://weyork.online/trial-form.html?ref=${code}`
+    : 'https://weyork.online/trial-form.html';
+  const message = `Привет! Я учусь английскому в YORK! — очень советую 🙂 Записывайся на бесплатный пробный урок по моей ссылке, обоим будет бонус: ${link}`;
   const okEl = document.getElementById('loyaltyCopied');
   try {
     await navigator.clipboard.writeText(message);
