@@ -478,6 +478,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <label for="editTeacherMeetingUrl">Ссылка на созвон (Телемост)</label>
           <input id="editTeacherMeetingUrl" type="text" placeholder="https://telemost.yandex.ru/j/...">
         </div>
+        <div class="field">
+          <label for="editTeacherRateSolo">Ставка SOLO, ₽/час</label>
+          <input id="editTeacherRateSolo" type="number" min="0" placeholder="Например: 500">
+        </div>
+        <div class="field">
+          <label for="editTeacherRateCrew">Ставка CREW, ₽/час</label>
+          <input id="editTeacherRateCrew" type="number" min="0" placeholder="Например: 600">
+        </div>
         <p id="editTeacherError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
         <p id="editTeacherSuccess" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
         <button class="btn btn-dark" id="editTeacherSaveBtn">Сохранить</button>
@@ -524,6 +532,34 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         <p id="groupMemberError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
         <p id="groupMemberSuccess" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
         <button class="btn btn-dark btn-sm" id="groupMemberSaveBtn">Сохранить</button>
+      </div>
+
+      <h2 class="panel-title" style="margin-top:20px;">Назначить урок всей группе</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Создаст урок сразу каждому ученику группы на одно и то же время.</p>
+      <div class="card">
+        <div class="field">
+          <label for="groupLessonGroup">Группа</label>
+          <select id="groupLessonGroup"></select>
+        </div>
+        <div class="field">
+          <label for="groupLessonTopic">Тема</label>
+          <input id="groupLessonTopic" type="text" placeholder="Present Perfect vs Past Simple">
+        </div>
+        <div class="field">
+          <label for="groupLessonDate">Дата и время</label>
+          <input id="groupLessonDate" type="datetime-local">
+        </div>
+        <div class="field">
+          <label for="groupLessonTimezone">Часовой пояс</label>
+          <select id="groupLessonTimezone"></select>
+        </div>
+        <div class="field">
+          <label for="groupLessonDuration">Длительность, мин</label>
+          <input id="groupLessonDuration" type="number" min="15" step="5" value="60">
+        </div>
+        <p id="groupLessonError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
+        <p id="groupLessonSuccess" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
+        <button class="btn btn-dark btn-sm" id="groupLessonAddBtn">+ Назначить всей группе</button>
       </div>
     </section>
 
@@ -591,7 +627,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <input id="linkSoloFull" type="text" placeholder="https://www.tinkoff.ru/rm/...">
         </div>
         <div class="field">
-          <label for="linkSoloDiscount">SOLO — со скидкой 20%</label>
+          <label for="linkSoloDiscount">SOLO — со скидкой 15%</label>
           <input id="linkSoloDiscount" type="text" placeholder="https://www.tinkoff.ru/rm/...">
         </div>
         <div class="field">
@@ -599,7 +635,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <input id="linkCrewFull" type="text" placeholder="https://www.tinkoff.ru/rm/...">
         </div>
         <div class="field">
-          <label for="linkCrewDiscount">CREW — со скидкой 20%</label>
+          <label for="linkCrewDiscount">CREW — со скидкой 15%</label>
           <input id="linkCrewDiscount" type="text" placeholder="https://www.tinkoff.ru/rm/...">
         </div>
         <p id="linkSettingsError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
@@ -629,8 +665,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <input id="payUrl" type="text" placeholder="https://www.tinkoff.ru/rm/... или другая">
           <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
             <button type="button" class="btn btn-ghost btn-sm" onclick="fillPayUrl(false)">Подставить обычную ссылку</button>
-            <button type="button" class="btn btn-accent btn-sm" onclick="fillPayUrl(true)">Подставить со скидкой 20%</button>
+            <button type="button" class="btn btn-accent btn-sm" onclick="fillPayUrl(true)">Подставить со скидкой 15%</button>
           </div>
+          <p id="payDiscountNote" style="color:#3B7A1E; font-size:12.5px; font-weight:600; margin-top:8px;"></p>
         </div>
         <div class="field">
           <label for="payStatus">Статус</label>
@@ -769,8 +806,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         </div>
       </div>
 
-      <h2 class="panel-title" style="margin-top:20px;">Ставка учителю за час</h2>
-      <p class="section-sub" style="margin-bottom:16px;">Считается по всем проведённым (прошедшим) урокам, не пробным. Формат SOLO/CREW берётся из профиля ученика.</p>
+      <h2 class="panel-title" style="margin-top:20px;">Ставка по умолчанию</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Используется, если у учителя не задана своя ставка (во вкладке «Учителя» → «Редактировать учителя»). Считается по всем проведённым (прошедшим) урокам, не пробным.</p>
       <div class="card">
         <div class="field">
           <label for="rateSolo">SOLO, ₽/час</label>
@@ -1365,6 +1402,8 @@ function fillTeacherEditForm(teacherId){
   if (!t) return;
   document.getElementById('editTeacherName').value = t.full_name || '';
   document.getElementById('editTeacherMeetingUrl').value = t.meeting_url || '';
+  document.getElementById('editTeacherRateSolo').value = t.rate_solo || '';
+  document.getElementById('editTeacherRateCrew').value = t.rate_crew || '';
   document.getElementById('editTeacherError').textContent = '';
   document.getElementById('editTeacherSuccess').textContent = '';
 }
@@ -1375,6 +1414,8 @@ async function saveTeacher(){
   const teacherId = document.getElementById('editTeacherSelect').value;
   const fullName = document.getElementById('editTeacherName').value.trim();
   const meetingUrl = document.getElementById('editTeacherMeetingUrl').value.trim();
+  const rateSolo = document.getElementById('editTeacherRateSolo').value;
+  const rateCrew = document.getElementById('editTeacherRateCrew').value;
   const errEl = document.getElementById('editTeacherError');
   const okEl = document.getElementById('editTeacherSuccess');
   errEl.textContent = ''; okEl.textContent = '';
@@ -1389,7 +1430,9 @@ async function saveTeacher(){
 
   const { error } = await supabase.from('profiles').update({
     full_name: fullName,
-    meeting_url: meetingUrl || null
+    meeting_url: meetingUrl || null,
+    rate_solo: rateSolo ? Number(rateSolo) : null,
+    rate_crew: rateCrew ? Number(rateCrew) : null
   }).eq('id', teacherId);
 
   btn.disabled = false; btn.textContent = 'Сохранить';
@@ -1614,6 +1657,11 @@ async function attachSubscription(){
     status: status
   };
 
+  if (!editingPaymentId && window.__pendingDiscountPercent){
+    paymentPayload.discount_percent = window.__pendingDiscountPercent;
+    paymentPayload.discount_reason = 'Реферальная программа';
+  }
+
   const btn = document.getElementById('payAddBtn');
   btn.disabled = true; btn.textContent = 'Сохраняем…';
 
@@ -1713,6 +1761,8 @@ async function attachSubscription(){
   document.getElementById('payValidUntil').value = '';
   document.getElementById('autoScheduleCheck').checked = false;
   document.getElementById('autoScheduleFields').classList.add('hidden');
+  window.__pendingDiscountPercent = null;
+  document.getElementById('payDiscountNote').textContent = '';
 
   await loadPayments();
   await loadAll();
@@ -1796,7 +1846,9 @@ function renderStats(){
   const rows = teacherIds.map(teacherId => {
     const t = allTeachers.find(t => t.id === teacherId);
     const { soloHours, crewHours } = byTeacher[teacherId];
-    const payout = soloHours * rateSolo + crewHours * rateCrew;
+    const soloRate = (t && t.rate_solo) ? Number(t.rate_solo) : rateSolo;
+    const crewRate = (t && t.rate_crew) ? Number(t.rate_crew) : rateCrew;
+    const payout = soloHours * soloRate + crewHours * crewRate;
     totalPayout += payout;
     return `
       <tr>
@@ -1871,6 +1923,11 @@ function fillPayUrl(discount){
     return;
   }
   document.getElementById('payUrl').value = url;
+  window.__pendingDiscountPercent = discount ? 15 : null;
+  const noteEl = document.getElementById('payDiscountNote');
+  if (noteEl){
+    noteEl.textContent = discount ? '✅ К абонементу будет привязана скидка 15% (реферальная программа) — ученик увидит это в своём кабинете.' : '';
+  }
 }
 
 async function loadGroups(){
@@ -1906,8 +1963,13 @@ function fillGroupDropdowns(){
   const opts = groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
   const groupMemberGroupEl = document.getElementById('groupMemberGroup');
   if (groupMemberGroupEl) groupMemberGroupEl.innerHTML = opts;
+  const groupLessonGroupEl = document.getElementById('groupLessonGroup');
+  if (groupLessonGroupEl) groupLessonGroupEl.innerHTML = opts;
   const groupMemberStudentEl = document.getElementById('groupMemberStudent');
   if (groupMemberStudentEl) groupMemberStudentEl.innerHTML = allStudents.map(s => `<option value="${s.id}">${s.full_name}</option>`).join('');
+  if (!document.getElementById('groupLessonTimezone').options.length){
+    document.getElementById('groupLessonTimezone').innerHTML = timezoneOptionsHtml(SCHOOL_TZ);
+  }
 }
 
 document.getElementById('groupAddBtn').addEventListener('click', async () => {
@@ -1962,6 +2024,62 @@ document.getElementById('groupMemberSaveBtn').addEventListener('click', async ()
     return;
   }
   okEl.textContent = 'Готово! Формат ученика тоже переключён на CREW.';
+  await loadAll();
+});
+
+document.getElementById('groupLessonAddBtn').addEventListener('click', async () => {
+  const groupId = document.getElementById('groupLessonGroup').value;
+  const topic = document.getElementById('groupLessonTopic').value.trim();
+  const dateVal = document.getElementById('groupLessonDate').value;
+  const timezone = document.getElementById('groupLessonTimezone').value || SCHOOL_TZ;
+  const duration = document.getElementById('groupLessonDuration').value;
+  const errEl = document.getElementById('groupLessonError');
+  const okEl = document.getElementById('groupLessonSuccess');
+  errEl.textContent = ''; okEl.textContent = '';
+
+  if (!groupId || !dateVal){
+    errEl.textContent = 'Выбери группу и укажи дату урока.';
+    return;
+  }
+
+  const group = (window.__groupsList || []).find(g => g.id === groupId);
+  const members = allStudents.filter(s => s.group_id === groupId);
+  if (!members.length){
+    errEl.textContent = 'В этой группе пока нет учеников.';
+    return;
+  }
+  if (!group || !group.teacher_id){
+    errEl.textContent = 'У этой группы не назначен учитель.';
+    return;
+  }
+
+  const [datePart, timePart] = dateVal.split('T');
+  const utcDate = zonedTimeToUtc(datePart, timePart, timezone);
+
+  const btn = document.getElementById('groupLessonAddBtn');
+  btn.disabled = true; btn.textContent = 'Назначаем…';
+
+  const rows = members.map(s => ({
+    student_id: s.id,
+    teacher_id: group.teacher_id,
+    lesson_date: utcDate.toISOString(),
+    topic: topic || null,
+    duration_minutes: duration ? Number(duration) : 60,
+    status: 'upcoming'
+  }));
+
+  const { error } = await supabase.from('lessons').insert(rows);
+
+  btn.disabled = false; btn.textContent = '+ Назначить всей группе';
+
+  if (error){
+    errEl.textContent = 'Не получилось назначить уроки. Попробуй ещё раз.';
+    return;
+  }
+
+  okEl.textContent = `Готово! Урок назначен ${members.length} ученикам группы.`;
+  document.getElementById('groupLessonTopic').value = '';
+  document.getElementById('groupLessonDate').value = '';
   await loadAll();
 });
 
@@ -2251,6 +2369,16 @@ async function assignTrialLesson(){
   await loadAll();
 }
 
+function confirmDestructive(message){
+  if (!confirm(`⚠️ ${message}\n\nЭто действие НЕЛЬЗЯ отменить.`)) return false;
+  const typed = prompt('Чтобы окончательно подтвердить, напиши слово УДАЛИТЬ заглавными буквами:');
+  if (typed !== 'УДАЛИТЬ'){
+    alert('Не совпало — действие отменено, ничего не удалено.');
+    return false;
+  }
+  return true;
+}
+
 async function deletePayment(paymentId){
   const { data: linkedLessons } = await supabase.from('lessons').select('id').eq('payment_id', paymentId);
   const count = (linkedLessons || []).length;
@@ -2258,7 +2386,7 @@ async function deletePayment(paymentId){
   const msg = count > 0
     ? `Удалить абонемент? Вместе с ним будет удалено ${count} привязанных к нему уроков.`
     : 'Удалить абонемент?';
-  if (!confirm(msg)) return;
+  if (!confirmDestructive(msg)) return;
 
   if (count > 0){
     const { error: lessonsErr } = await supabase.from('lessons').delete().eq('payment_id', paymentId);
@@ -2286,27 +2414,26 @@ document.getElementById('linkGenPassBtn').addEventListener('click', () => {
 });
 
 async function deletePerson(userId, name, studentCount){
-  if (studentCount && studentCount > 0){
-    if (!confirm(`У ${name} сейчас ${studentCount} ученик(ов). Если удалить учителя, у них пропадёт привязка к преподавателю (уроки и данные учеников не удалятся). Продолжить?`)) return;
-  } else {
-    if (!confirm(`Удалить ${name}? Логин и все данные этого человека будут удалены безвозвратно.`)) return;
-  }
+  const msg = studentCount && studentCount > 0
+    ? `У ${name} сейчас ${studentCount} ученик(ов). Если удалить учителя, у них пропадёт привязка к преподавателю (уроки и данные учеников не удалятся). Удалить ${name}?`
+    : `Удалить ${name}? Логин и все данные этого человека будут удалены безвозвратно.`;
+  if (!confirmDestructive(msg)) return;
 
   const { data, error } = await supabase.functions.invoke('smart-endpoint', {
     body: { action: 'delete', user_id: userId }
   });
 
   if (error || (data && data.error)){
-    let msg = (data && data.error) || null;
-    if (!msg && error){
+    let msg2 = (data && data.error) || null;
+    if (!msg2 && error){
       try {
         if (error.context && typeof error.context.json === 'function'){
           const body = await error.context.json();
-          if (body && body.error) msg = body.error;
+          if (body && body.error) msg2 = body.error;
         }
       } catch(e){}
     }
-    alert(msg || 'Не получилось удалить. Попробуй ещё раз.');
+    alert(msg2 || 'Не получилось удалить. Попробуй ещё раз.');
     return;
   }
 
