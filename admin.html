@@ -409,13 +409,28 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <label for="editStudent">Ученик</label>
           <select id="editStudent"></select>
         </div>
+
+        <div id="studentSummaryCard" class="hidden" style="background:var(--panel); border-radius:14px; padding:16px; margin-bottom:16px;"></div>
+
         <div class="field">
           <label for="editName">Имя</label>
           <input id="editName" type="text">
         </div>
         <div class="field">
-          <label for="editContact">Телефон или Telegram</label>
-          <input id="editContact" type="text" placeholder="+7... или @username">
+          <label for="editContactTelegram">Telegram</label>
+          <input id="editContactTelegram" type="text" placeholder="@username">
+        </div>
+        <div class="field">
+          <label for="editContactPhone">Телефон</label>
+          <input id="editContactPhone" type="text" placeholder="+7...">
+        </div>
+        <div class="field">
+          <label for="editContactEmail">Email</label>
+          <input id="editContactEmail" type="text" placeholder="mail@example.com">
+        </div>
+        <div class="field">
+          <label for="editContactAvito">Avito (ссылка на диалог)</label>
+          <input id="editContactAvito" type="text" placeholder="https://www.avito.ru/...">
         </div>
         <div class="field">
           <label for="editFormat">Формат</label>
@@ -866,8 +881,20 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <select id="linkTeacher"></select>
         </div>
         <div class="field" id="linkContactField">
-          <label for="linkContact">Телефон или Telegram (если это ученик)</label>
-          <input id="linkContact" type="text" placeholder="+7... или @username">
+          <label for="linkContactTelegram">Telegram</label>
+          <input id="linkContactTelegram" type="text" placeholder="@username">
+        </div>
+        <div class="field" id="linkContactPhoneField">
+          <label for="linkContactPhone">Телефон</label>
+          <input id="linkContactPhone" type="text" placeholder="+7...">
+        </div>
+        <div class="field" id="linkContactEmailField">
+          <label for="linkContactEmail">Email</label>
+          <input id="linkContactEmail" type="text" placeholder="mail@example.com">
+        </div>
+        <div class="field" id="linkContactAvitoField">
+          <label for="linkContactAvito">Avito (ссылка на диалог)</label>
+          <input id="linkContactAvito" type="text" placeholder="https://www.avito.ru/...">
         </div>
         <div class="field" id="linkFormatField">
           <label for="linkFormat">Формат</label>
@@ -967,6 +994,11 @@ function googleCalendarUrl(title, startDate, durationMinutes, details){
     details: details || ''
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+function fmtDate(d){
+  if (!d) return '—';
+  return new Date(d).toLocaleDateString('ru-RU', { day:'numeric', month:'long', year:'numeric', timeZone:SCHOOL_TZ });
 }
 
 function fmtDateTime(d){
@@ -1396,12 +1428,12 @@ function remainingPill(studentId){
   return `<span class="badge ${cls}">${remaining} ост.</span>`;
 }
 
-function contactLink(contact){
-  if (!contact) return null;
-  const trimmed = contact.trim();
-  if (trimmed.startsWith('@')) return 'https://t.me/' + trimmed.slice(1);
-  if (trimmed.startsWith('+') || /^\d/.test(trimmed)) return 'tel:' + trimmed.replace(/[^\d+]/g, '');
-  return null;
+function contactButtons(s){
+  const btns = [];
+  if (s.contact_telegram) btns.push(`<a class="btn btn-accent btn-sm" href="https://t.me/${s.contact_telegram.replace('@','')}" target="_blank" rel="noopener">TG</a>`);
+  if (s.contact_phone) btns.push(`<a class="btn btn-ghost btn-sm" href="tel:${s.contact_phone.replace(/[^\d+]/g,'')}" target="_blank" rel="noopener">Тел</a>`);
+  if (s.contact_avito) btns.push(`<a class="btn btn-ghost btn-sm" href="${s.contact_avito}" target="_blank" rel="noopener">Avito</a>`);
+  return btns.length ? btns.join(' ') : '<span style="color:var(--ink-soft); font-size:12.5px;">нет контакта</span>';
 }
 
 function renderStudentsTable(){
@@ -1411,7 +1443,6 @@ function renderStudentsTable(){
     return;
   }
   body.innerHTML = allStudents.map(s => {
-    const link = contactLink(s.contact);
     return `
     <tr>
       <td>${s.full_name || '—'}</td>
@@ -1419,7 +1450,7 @@ function renderStudentsTable(){
       <td>${s.format === 'CREW' ? 'Группа' : 'Индивидуально'}</td>
       <td>${teacherName(s.teacher_id)}</td>
       <td>${remainingPill(s.id)}</td>
-      <td>${link ? `<a class="btn btn-accent btn-sm" href="${link}" target="_blank" rel="noopener">Написать</a>` : '<span style="color:var(--ink-soft); font-size:12.5px;">нет контакта</span>'}</td>
+      <td style="white-space:nowrap;">${contactButtons(s)}</td>
       <td><button class="btn btn-ghost btn-sm" onclick="pickStudentForEdit('${s.id}')">Изменить</button></td>
       <td><button class="btn btn-ghost btn-sm" onclick="deletePerson('${s.id}', '${(s.full_name || '').replace(/'/g, "\\'")}')">Удалить</button></td>
     </tr>
@@ -1543,7 +1574,10 @@ function fillEditForm(studentId){
   const s = allStudents.find(s => s.id === studentId);
   if (!s) return;
   document.getElementById('editName').value = s.full_name || '';
-  document.getElementById('editContact').value = s.contact || '';
+  document.getElementById('editContactTelegram').value = s.contact_telegram || '';
+  document.getElementById('editContactPhone').value = s.contact_phone || '';
+  document.getElementById('editContactEmail').value = s.contact_email || '';
+  document.getElementById('editContactAvito').value = s.contact_avito || '';
   document.getElementById('editFormat').value = s.format || 'SOLO';
   document.getElementById('editLevel').value = s.level || 'A1';
   document.getElementById('editTimezone').value = s.timezone || SCHOOL_TZ;
@@ -1551,6 +1585,39 @@ function fillEditForm(studentId){
   document.getElementById('editError').textContent = '';
   document.getElementById('editSuccess').textContent = '';
   loadNotesForStudent(studentId);
+  renderStudentSummaryCard(s);
+}
+
+function renderStudentSummaryCard(s){
+  const el = document.getElementById('studentSummaryCard');
+  if (!el) return;
+
+  const activePayment = (window.__paymentsList || [])
+    .filter(p => p.student_id === s.id && p.status === 'active')[0];
+  const remaining = activePayment ? computeRemaining(activePayment, window.__lessonsList || []) : null;
+
+  const contactChips = [];
+  if (s.contact_telegram) contactChips.push(`<a class="btn btn-ghost btn-sm" href="https://t.me/${s.contact_telegram.replace('@','')}" target="_blank" rel="noopener">Telegram</a>`);
+  if (s.contact_phone) contactChips.push(`<a class="btn btn-ghost btn-sm" href="tel:${s.contact_phone.replace(/[^\d+]/g,'')}" target="_blank" rel="noopener">Позвонить</a>`);
+  if (s.contact_email) contactChips.push(`<a class="btn btn-ghost btn-sm" href="mailto:${s.contact_email}">Email</a>`);
+  if (s.contact_avito) contactChips.push(`<a class="btn btn-ghost btn-sm" href="${s.contact_avito}" target="_blank" rel="noopener">Avito</a>`);
+
+  el.innerHTML = `
+    <div style="font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px; margin-bottom:10px;">${s.full_name}</div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+      ${contactChips.length ? contactChips.join('') : '<span style="color:var(--ink-soft); font-size:13px;">Контакты не указаны</span>'}
+    </div>
+    <div style="font-size:13.5px; line-height:1.8;">
+      <div><b>Тариф:</b> ${s.format === 'CREW' ? 'Группа (CREW)' : 'Индивидуально (SOLO)'} · уровень ${s.level || '—'}</div>
+      <div><b>Учитель:</b> ${teacherName(s.teacher_id)}</div>
+      ${activePayment ? `
+        <div><b>Абонемент:</b> ${activePayment.lessons_included} занятий, ${remaining !== null ? remaining : '—'} осталось</div>
+        <div><b>Действует до:</b> ${fmtDate(activePayment.valid_until)}</div>
+        ${activePayment.discount_percent ? `<div style="color:#3B7A1E; font-weight:600;">🎉 Скидка ${activePayment.discount_percent}%${activePayment.discount_reason ? ' · ' + activePayment.discount_reason : ''}</div>` : ''}
+      ` : `<div style="color:var(--ink-soft);">Активного абонемента нет</div>`}
+    </div>
+  `;
+  el.classList.remove('hidden');
 }
 
 async function loadNotesForStudent(studentId){
@@ -1604,7 +1671,10 @@ document.getElementById('editSaveBtn').addEventListener('click', saveStudent);
 async function saveStudent(){
   const studentId = document.getElementById('editStudent').value;
   const fullName = document.getElementById('editName').value.trim();
-  const contact = document.getElementById('editContact').value.trim();
+  const contactTelegram = document.getElementById('editContactTelegram').value.trim();
+  const contactPhone = document.getElementById('editContactPhone').value.trim();
+  const contactEmail = document.getElementById('editContactEmail').value.trim();
+  const contactAvito = document.getElementById('editContactAvito').value.trim();
   const format = document.getElementById('editFormat').value;
   const level = document.getElementById('editLevel').value;
   const timezone = document.getElementById('editTimezone').value;
@@ -1622,7 +1692,12 @@ async function saveStudent(){
   btn.disabled = true; btn.textContent = 'Сохраняем…';
 
   const { error } = await supabase.from('profiles').update({
-    full_name: fullName, contact: contact || null, format, level, timezone, teacher_id: teacherId || null
+    full_name: fullName,
+    contact_telegram: contactTelegram || null,
+    contact_phone: contactPhone || null,
+    contact_email: contactEmail || null,
+    contact_avito: contactAvito || null,
+    format, level, timezone, teacher_id: teacherId || null
   }).eq('id', studentId);
 
   btn.disabled = false; btn.textContent = 'Сохранить';
@@ -1642,6 +1717,9 @@ function updateLinkFormVisibility(){
   const isStudent = document.getElementById('linkRole').value === 'student';
   document.getElementById('linkTeacherField').style.display = isStudent ? '' : 'none';
   document.getElementById('linkContactField').style.display = isStudent ? '' : 'none';
+  document.getElementById('linkContactPhoneField').style.display = isStudent ? '' : 'none';
+  document.getElementById('linkContactEmailField').style.display = isStudent ? '' : 'none';
+  document.getElementById('linkContactAvitoField').style.display = isStudent ? '' : 'none';
   document.getElementById('linkFormatField').style.display = isStudent ? '' : 'none';
   document.getElementById('linkLevelField').style.display = isStudent ? '' : 'none';
   document.getElementById('linkTimezoneField').style.display = isStudent ? '' : 'none';
@@ -2539,7 +2617,10 @@ async function linkNewProfile(){
   const fullName = document.getElementById('linkName').value.trim();
   const role = document.getElementById('linkRole').value;
   const teacherId = document.getElementById('linkTeacher').value;
-  const contact = document.getElementById('linkContact').value.trim();
+  const contactTelegram = document.getElementById('linkContactTelegram').value.trim();
+  const contactPhone = document.getElementById('linkContactPhone').value.trim();
+  const contactEmail = document.getElementById('linkContactEmail').value.trim();
+  const contactAvito = document.getElementById('linkContactAvito').value.trim();
   const format = document.getElementById('linkFormat').value;
   const level = document.getElementById('linkLevel').value;
   const timezone = document.getElementById('linkTimezone').value;
@@ -2563,7 +2644,10 @@ async function linkNewProfile(){
   const payload = { email, password, full_name: fullName, role };
   if (role === 'student'){
     payload.teacher_id = teacherId || null;
-    payload.contact = contact || null;
+    payload.contact_telegram = contactTelegram || null;
+    payload.contact_phone = contactPhone || null;
+    payload.contact_email = contactEmail || null;
+    payload.contact_avito = contactAvito || null;
     payload.format = format;
     payload.level = level;
     payload.timezone = timezone || null;
