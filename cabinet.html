@@ -481,7 +481,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <div class="card" style="margin-bottom:16px;">
         <p style="margin:0 0 14px; font-size:14.5px; line-height:1.6;">
           Приведи друга в YORK! — и вы оба выигрываете. За каждого друга, который начнёт заниматься,
-          ты получаешь <b>скидку 20%</b> на следующий месяц обучения. Учиться вместе не только веселее, но и выгоднее.
+          ты получаешь <b>скидку 15%</b> на следующий месяц обучения. Учиться вместе не только веселее, но и выгоднее.
         </p>
         <div style="background:var(--panel); border-radius:12px; padding:14px 16px; margin-bottom:14px;">
           <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); margin-bottom:4px;">Твой код приглашения</div>
@@ -986,6 +986,9 @@ async function loadPayments(){
   } else {
     container.innerHTML = list.map(p => {
       const remaining = p.status === 'active' ? computeRemaining(p, window.__scheduleList || []) : null;
+      const discountLine = p.discount_percent
+        ? `<div style="color:#3B7A1E; font-weight:600; margin-top:4px;">🎉 Скидка ${p.discount_percent}%${p.discount_reason ? ' · ' + p.discount_reason : ''}${p.valid_until ? ' · действует до ' + fmtDate(p.valid_until) : ''}</div>`
+        : '';
       return `
       <div class="row-card" style="margin-bottom:10px;">
         <div class="row-main">
@@ -993,6 +996,7 @@ async function loadPayments(){
           <div class="row-sub">${p.status === 'pending'
             ? 'Ожидает оплаты'
             : `Оплачено ${fmtDate(p.paid_at)} · действует до ${fmtDate(p.valid_until)}`}</div>
+          ${discountLine}
         </div>
         <div style="display:flex; align-items:center; gap:10px;">
           ${p.status === 'pending' && p.payment_url ? `<a class="btn btn-accent btn-sm" href="${p.payment_url}" target="_blank" rel="noopener">Оплатить</a>` : ''}
