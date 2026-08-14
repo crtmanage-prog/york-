@@ -523,6 +523,35 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         <button class="btn btn-dark btn-sm" id="noteSaveBtn">Добавить заметку</button>
         <div id="notesHistory" style="margin-top:16px;"></div>
       </div>
+
+      <h2 class="panel-title" style="margin-top:20px;">📁 Документы ученика</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Файлы хранятся в Google Drive — сюда вставляешь только ссылку на уже загруженный файл.</p>
+      <div class="card">
+        <div class="field">
+          <label for="docType">Тип документа</label>
+          <select id="docType">
+            <option value="Договор">Договор</option>
+            <option value="Чек">Чек</option>
+            <option value="Доп. соглашение">Доп. соглашение</option>
+            <option value="Другое">Другое</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="docName">Название</label>
+          <input id="docName" type="text" placeholder="Например: Договор от 14.08.2026">
+        </div>
+        <div class="field">
+          <label for="docUrl">Ссылка на файл (Google Drive)</label>
+          <input id="docUrl" type="text" placeholder="https://drive.google.com/...">
+        </div>
+        <div class="field">
+          <label for="docComment">Комментарий (необязательно)</label>
+          <input id="docComment" type="text">
+        </div>
+        <p id="docError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
+        <button class="btn btn-dark btn-sm" id="docAddBtn">+ Добавить документ</button>
+      </div>
+      <div id="documentsList" style="margin-top:14px;"></div>
     </section>
 
     <section class="panel" id="panel-allteachers">
@@ -1525,9 +1554,11 @@ function renderLessonsList(){
           ? `<button class="btn btn-ghost btn-sm" onclick="toggleStudentNotesInline('${l.student_id}', 'daynotes-${l.id}')" title="Заметка об ученике">📌</button>`
           : ''}
         ${l.is_trial ? `<button class="btn btn-ghost btn-sm" onclick="pickTrialForEdit('${l.id}')">✎</button>` : ''}
+        ${!l.is_trial ? `<button class="btn btn-ghost btn-sm" onclick="toggleRegularLessonEdit('${l.id}')">✎ Перенести</button>` : ''}
         ${lessonBadge(l)}
       </div>
       <div id="daynotes-${l.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
+      <div id="lessonedit-${l.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
     </div>
   `).join('');
 }
@@ -1737,6 +1768,7 @@ function fillEditForm(studentId){
   document.getElementById('editError').textContent = '';
   document.getElementById('editSuccess').textContent = '';
   loadNotesForStudent(studentId);
+  loadDocumentsForStudent(studentId);
   renderStudentSummaryCard(s);
 }
 
@@ -1816,6 +1848,97 @@ async function addInternalNote(){
   }
   document.getElementById('noteText').value = '';
   await loadNotesForStudent(studentId);
+}
+
+/* ---------- ДОКУМЕНТЫ ---------- */
+async function loadDocumentsForStudent(studentId){
+  const { data } = await supabase.from('documents').select('*')
+    .eq('student_id', studentId).order('created_at', { ascending:false });
+  window.__currentStudentDocuments = data || [];
+  renderDocumentsList();
+}
+
+function renderDocumentsList(){
+  const container = document.getElementById('documentsList');
+  if (!container) return;
+  const list = window.__currentStudentDocuments || [];
+  if (!list.length){
+    container.innerHTML = '<div class="empty-state">Документов пока нет.</div>';
+    return;
+  }
+  const groups = {};
+  list.forEach(d => {
+    const type = d.document_type || 'Другое';
+    if (!groups[type]) groups[type] = [];
+    groups[type].push(d);
+  });
+  container.innerHTML = Object.keys(groups).map(type => `
+    <div style="margin-bottom:14px;">
+      <div style="font-weight:700; font-size:13px; margin-bottom:6px;">${type}</div>
+      ${groups[type].map(d => `
+        <div class="row-card" style="margin-bottom:8px;">
+          <div class="row-main">
+            <div class="row-title"><a href="${d.file_url}" target="_blank" rel="noopener" style="text-decoration:underline;">${d.file_name}</a></div>
+            <div class="row-sub">${fmtDate(d.created_at)}${d.comment ? ' · ' + d.comment : ''}</div>
+          </div>
+          <button class="btn btn-ghost btn-sm" onclick="deleteDocument('${d.id}')">Удалить</button>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+document.getElementById('docAddBtn').addEventListener('click', async () => {
+  const studentId = document.getElementById('editStudent').value;
+  const type = document.getElementById('docType').value;
+  const name = document.getElementById('docName').value.trim();
+  const url = document.getElementById('docUrl').value.trim();
+  const comment = document.getElementById('docComment').value.trim();
+  const errEl = document.getElementById('docError');
+  errEl.textContent = '';
+
+  if (!studentId){
+    errEl.textContent = 'Сначала выбери ученика в разделе выше.';
+    return;
+  }
+  if (!name || !url){
+    errEl.textContent = 'Укажи название и ссылку на файл.';
+    return;
+  }
+
+  const btn = document.getElementById('docAddBtn');
+  btn.disabled = true; btn.textContent = 'Добавляем…';
+
+  const { error } = await supabase.from('documents').insert({
+    student_id: studentId,
+    document_type: type,
+    file_name: name,
+    file_url: url,
+    comment: comment || null,
+    uploaded_by: currentUser.id
+  });
+
+  btn.disabled = false; btn.textContent = '+ Добавить документ';
+
+  if (error){
+    errEl.textContent = 'Не получилось сохранить. Попробуй ещё раз.';
+    return;
+  }
+  document.getElementById('docName').value = '';
+  document.getElementById('docUrl').value = '';
+  document.getElementById('docComment').value = '';
+  await loadDocumentsForStudent(studentId);
+});
+
+async function deleteDocument(id){
+  if (!confirmDestructive('Удалить этот документ из списка? Сам файл в Google Drive не удалится.')) return;
+  const { error } = await supabase.from('documents').delete().eq('id', id);
+  if (error){
+    alert('Не получилось удалить.');
+    return;
+  }
+  const studentId = document.getElementById('editStudent').value;
+  await loadDocumentsForStudent(studentId);
 }
 
 document.getElementById('editSaveBtn').addEventListener('click', saveStudent);
@@ -3074,6 +3197,68 @@ async function confirmPayment(paymentId){
 document.getElementById('trialAddBtn').addEventListener('click', assignTrialLesson);
 
 let editingTrialId = null;
+
+function toggleRegularLessonEdit(lessonId){
+  const el = document.getElementById('lessonedit-' + lessonId);
+  const isHidden = el.classList.contains('hidden');
+  if (!isHidden){
+    el.classList.add('hidden');
+    return;
+  }
+  const lesson = (window.__lessonsList || []).find(l => l.id === lessonId);
+  if (!lesson) return;
+  el.innerHTML = `
+    <div class="day-note-card">
+      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); margin-bottom:8px;">
+        Перенести этот урок — абонемент и остальные занятия не меняются
+      </div>
+      <div class="field">
+        <label>Тема</label>
+        <input type="text" id="lessonEditTopic-${lessonId}" value="${(lesson.topic || '').replace(/"/g,'&quot;')}">
+      </div>
+      <div class="field">
+        <label>Дата и время</label>
+        <input type="datetime-local" id="lessonEditDate-${lessonId}" value="${toDatetimeLocalInTz(new Date(lesson.lesson_date), SCHOOL_TZ)}">
+      </div>
+      <div class="field">
+        <label>Часовой пояс</label>
+        <select id="lessonEditTz-${lessonId}">${timezoneOptionsHtml(SCHOOL_TZ)}</select>
+      </div>
+      <div class="field">
+        <label>Длительность, мин</label>
+        <input type="number" min="15" step="5" id="lessonEditDuration-${lessonId}" value="${lesson.duration_minutes || 60}">
+      </div>
+      <button class="btn btn-dark btn-sm" onclick="submitRegularLessonEdit('${lessonId}')">Сохранить</button>
+    </div>
+  `;
+  el.classList.remove('hidden');
+}
+
+async function submitRegularLessonEdit(lessonId){
+  const topic = document.getElementById('lessonEditTopic-' + lessonId).value.trim();
+  const dateVal = document.getElementById('lessonEditDate-' + lessonId).value;
+  const timezone = document.getElementById('lessonEditTz-' + lessonId).value || SCHOOL_TZ;
+  const duration = document.getElementById('lessonEditDuration-' + lessonId).value;
+
+  if (!dateVal){
+    alert('Укажи дату и время.');
+    return;
+  }
+  const [datePart, timePart] = dateVal.split('T');
+  const utcDate = zonedTimeToUtc(datePart, timePart, timezone);
+
+  const { error } = await supabase.from('lessons').update({
+    topic: topic || null,
+    lesson_date: utcDate.toISOString(),
+    duration_minutes: duration ? Number(duration) : 60
+  }).eq('id', lessonId);
+
+  if (error){
+    alert('Не получилось сохранить. Попробуй ещё раз.');
+    return;
+  }
+  await loadAll();
+}
 
 function pickTrialForEdit(lessonId){
   const lesson = (window.__lessonsList || []).find(l => l.id === lessonId);
