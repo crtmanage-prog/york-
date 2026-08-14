@@ -447,6 +447,27 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         </div>
       </div>
       <div id="dashChart"></div>
+
+      <h2 class="panel-title" style="margin-top:24px;">Воронка продаж</h2>
+      <p class="section-sub" style="margin-bottom:16px;">За всё время.</p>
+      <div id="dashFunnel"></div>
+
+      <h2 class="panel-title" style="margin-top:24px;">Риск ухода</h2>
+      <div class="overview-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="stat-card" style="background:#FDEDEC;">
+          <div class="stat-label">🔴 Абонемент почти закончился</div>
+          <div class="stat-value" id="churn-red">—</div>
+        </div>
+        <div class="stat-card" style="background:#FFF4DE;">
+          <div class="stat-label">🟡 Стоит напомнить о продлении</div>
+          <div class="stat-value" id="churn-yellow">—</div>
+        </div>
+        <div class="stat-card" style="background:#EAF7E4;">
+          <div class="stat-label">🟢 Всё спокойно</div>
+          <div class="stat-value" id="churn-green">—</div>
+        </div>
+      </div>
+      <div id="churnList" style="margin-top:14px;"></div>
     </section>
 
     <section class="panel" id="panel-allstudents">
@@ -511,6 +532,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         <div class="field">
           <label for="editTeacher">Учитель</label>
           <select id="editTeacher"></select>
+        </div>
+        <div class="field">
+          <label for="editStudentStatus">Статус</label>
+          <select id="editStudentStatus">
+            <option value="active">🟢 Активный</option>
+            <option value="paused">⏸ Приостановлен</option>
+            <option value="completed">✅ Завершил обучение</option>
+          </select>
         </div>
         <p id="editError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
         <p id="editSuccess" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
@@ -1337,6 +1366,8 @@ async function loadAll(){
   await loadPaymentLinkSettings();
   renderDashboardKPIs();
   renderDashboardChart();
+  renderFunnel();
+  renderChurnRisk();
 }
 
 function fmtDateKey(d){
@@ -1765,6 +1796,7 @@ function fillEditForm(studentId){
   document.getElementById('editLevel').value = s.level || 'A1';
   document.getElementById('editTimezone').value = s.timezone || SCHOOL_TZ;
   document.getElementById('editTeacher').value = s.teacher_id || '';
+  document.getElementById('editStudentStatus').value = s.student_status || 'active';
   document.getElementById('editError').textContent = '';
   document.getElementById('editSuccess').textContent = '';
   loadNotesForStudent(studentId);
@@ -1786,8 +1818,13 @@ function renderStudentSummaryCard(s){
   if (s.contact_email) contactChips.push(`<a class="btn btn-ghost btn-sm" href="mailto:${s.contact_email}">Email</a>`);
   if (s.contact_avito) contactChips.push(`<a class="btn btn-ghost btn-sm" href="${s.contact_avito}" target="_blank" rel="noopener">Avito</a>`);
 
+  const statusLabels = { active: '🟢 Активный', paused: '⏸ Приостановлен', completed: '✅ Завершил обучение' };
+
   el.innerHTML = `
-    <div style="font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px; margin-bottom:10px;">${s.full_name}</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <div style="font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px;">${s.full_name}</div>
+      <span style="font-size:12.5px; font-weight:600;">${statusLabels[s.student_status] || statusLabels.active}</span>
+    </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
       ${contactChips.length ? contactChips.join('') : '<span style="color:var(--ink-soft); font-size:13px;">Контакты не указаны</span>'}
     </div>
@@ -1954,6 +1991,7 @@ async function saveStudent(){
   const level = document.getElementById('editLevel').value;
   const timezone = document.getElementById('editTimezone').value;
   const teacherId = document.getElementById('editTeacher').value;
+  const studentStatus = document.getElementById('editStudentStatus').value;
   const errEl = document.getElementById('editError');
   const okEl = document.getElementById('editSuccess');
   errEl.textContent = ''; okEl.textContent = '';
@@ -1972,7 +2010,8 @@ async function saveStudent(){
     contact_phone: contactPhone || null,
     contact_email: contactEmail || null,
     contact_avito: contactAvito || null,
-    format, level, timezone, teacher_id: teacherId || null
+    format, level, timezone, teacher_id: teacherId || null,
+    student_status: studentStatus
   }).eq('id', studentId);
 
   btn.disabled = false; btn.textContent = 'Сохранить';
@@ -2441,6 +2480,85 @@ function computeNetIncomeInRange(start, end){
   const payout = computeTeacherPayoutInRange(start, end);
   const expenses = computeExpensesInRange(start, end);
   return revenue - payout - expenses;
+}
+
+function renderFunnel(){
+  const el = document.getElementById('dashFunnel');
+  if (!el) return;
+  const requests = window.__trialRequests || [];
+
+  const total = requests.length;
+  const scheduledOrMore = requests.filter(r => r.status !== 'new').length;
+  const completed = requests.filter(r => r.status === 'completed').length;
+  const bought = requests.filter(r => r.status === 'completed' && r.outcome_result === 'Купил абонемент').length;
+
+  const stages = [
+    { label: 'Заявок', value: total },
+    { label: 'Записались на пробный', value: scheduledOrMore },
+    { label: 'Пришли на пробный', value: completed },
+    { label: 'Купили абонемент', value: bought },
+  ];
+
+  el.innerHTML = stages.map((s, i) => {
+    const pct = total ? Math.round((s.value / total) * 100) : 0;
+    const widthPct = total ? Math.max((s.value / total) * 100, s.value ? 4 : 0) : 0;
+    return `
+      <div style="margin-bottom:10px;">
+        <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px;">
+          <span>${s.label}</span>
+          <span><b>${s.value}</b>${i > 0 ? ` · ${pct}%` : ''}</span>
+        </div>
+        <div style="background:var(--panel); border-radius:8px; height:14px; overflow:hidden;">
+          <div style="background:var(--accent); height:100%; width:${widthPct}%; border-radius:8px;"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderChurnRisk(){
+  const redEl = document.getElementById('churn-red');
+  if (!redEl) return;
+
+  const now = new Date();
+  const in3Days = new Date(now.getTime() + 3 * 86400000);
+
+  const activePayments = (window.__paymentsList || []).filter(p => p.status === 'active');
+  const buckets = { red: [], yellow: [], green: [] };
+
+  activePayments.forEach(p => {
+    const student = allStudents.find(s => s.id === p.student_id);
+    if (!student) return;
+    const remaining = computeRemaining(p, window.__lessonsList || []);
+    const validUntil = p.valid_until ? new Date(p.valid_until) : null;
+    const expiringSoon = validUntil && validUntil <= in3Days;
+
+    if (remaining <= 0 || expiringSoon){
+      buckets.red.push({ student, remaining, validUntil });
+    } else if (remaining <= 2){
+      buckets.yellow.push({ student, remaining, validUntil });
+    } else {
+      buckets.green.push({ student, remaining, validUntil });
+    }
+  });
+
+  document.getElementById('churn-red').textContent = buckets.red.length;
+  document.getElementById('churn-yellow').textContent = buckets.yellow.length;
+  document.getElementById('churn-green').textContent = buckets.green.length;
+
+  const listEl = document.getElementById('churnList');
+  const urgent = [...buckets.red, ...buckets.yellow];
+  listEl.innerHTML = urgent.length
+    ? urgent.map(u => `
+        <div class="row-card" style="margin-bottom:8px;">
+          <div class="row-main">
+            <div class="row-title">${u.remaining <= 0 ? '🔴' : (u.validUntil && u.validUntil <= in3Days ? '🔴' : '🟡')} ${u.student.full_name}</div>
+            <div class="row-sub">${u.remaining} занятий осталось${u.validUntil ? ' · до ' + fmtDate(u.validUntil) : ''}</div>
+          </div>
+          <button class="btn btn-ghost btn-sm" onclick="pickStudentForEdit('${u.student.id}')">Открыть</button>
+        </div>
+      `).join('')
+    : '<div class="empty-state">Никто не требует внимания прямо сейчас 🎉</div>';
 }
 
 function renderDashboardKPIs(){
