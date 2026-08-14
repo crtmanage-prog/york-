@@ -249,6 +249,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .student-card .row-title{font-weight:600; font-size:14.5px; margin-bottom:4px;}
   .student-card .row-sub{font-size:13px; color:var(--ink-soft);}
   .card-actions{display:flex; gap:8px; flex-wrap:wrap;}
+  .chip-group{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip-group label{
+    display:flex; align-items:center; gap:6px;
+    background:var(--panel); border-radius:100px; padding:9px 14px;
+    font-size:13.5px; font-weight:600; cursor:pointer;
+  }
+  .chip-group input{width:auto;}
+  .chip-group label:has(input:checked){background:var(--accent);}
   #accessDenied{
     min-height:100vh; display:flex; align-items:center; justify-content:center;
     text-align:center; padding:24px; color:var(--ink-soft); font-size:14px;
@@ -289,6 +297,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   .cal-day.has-lesson .note-dot{background:var(--ink);}
   .cal-day.selected .note-dot{background:#fff;}
+  .cal-day .student-note-dot{
+    position:absolute; bottom:3px; left:5px;
+    font-size:8px; line-height:1;
+  }
   .day-note-card{
     border:1.5px dashed var(--line); border-radius:14px; padding:14px 16px; margin-top:12px;
   }
@@ -368,6 +380,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <button class="tab-btn active" data-tab="overview">Обзор</button>
     <button class="tab-btn" data-tab="students">Мои ученики</button>
     <button class="tab-btn" data-tab="lessons">Уроки</button>
+    <button class="tab-btn" data-tab="history">История</button>
+    <button class="tab-btn" data-tab="salary">Зарплата</button>
     <button class="tab-btn" data-tab="check">Проверка</button>
   </nav>
 
@@ -438,8 +452,19 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <h2 class="panel-title" style="margin-top:20px;">Задать домашку</h2>
       <div class="card">
         <div class="field">
+          <label>Кому</label>
+          <div class="chip-group">
+            <label><input type="radio" name="hwTarget" value="student" checked> <span>Одному ученику</span></label>
+            <label><input type="radio" name="hwTarget" value="group"> <span>Всей группе</span></label>
+          </div>
+        </div>
+        <div class="field" id="hwStudentField">
           <label for="hwStudent">Ученик</label>
           <select id="hwStudent"></select>
+        </div>
+        <div class="field hidden" id="hwGroupField">
+          <label for="hwGroup">Группа</label>
+          <select id="hwGroup"></select>
         </div>
         <div class="field">
           <label for="hwTitle">Название</label>
@@ -457,35 +482,38 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         <button class="btn btn-dark" id="hwAssignBtn">+ Задать домашку</button>
       </div>
 
-      <h2 class="panel-title" style="margin-top:20px;">Добавить урок</h2>
-      <div class="card">
-        <div class="field">
-          <label for="lsStudent">Ученик</label>
-          <select id="lsStudent"></select>
+      <div id="lessonEditSection" class="hidden">
+        <h2 class="panel-title" style="margin-top:20px;">Редактировать урок</h2>
+        <p class="section-sub" style="margin-bottom:12px;">Новые уроки добавляет админ — отсюда можно только поправить уже назначенный урок (нажми ✎ на уроке во вкладке «Уроки»).</p>
+        <div class="card">
+          <div class="field">
+            <label for="lsStudent">Ученик</label>
+            <select id="lsStudent"></select>
+          </div>
+          <div class="field">
+            <label for="lsDate">Дата и время</label>
+            <input id="lsDate" type="datetime-local">
+          </div>
+          <div class="field">
+            <label for="lsTimezone">Часовой пояс (в котором указано время)</label>
+            <select id="lsTimezone"></select>
+          </div>
+          <div class="field">
+            <label for="lsTopic">Тема</label>
+            <input id="lsTopic" type="text" placeholder="Present Perfect vs Past Simple">
+          </div>
+          <div class="field">
+            <label for="lsMaterials">Ссылка на материалы (необязательно)</label>
+            <input id="lsMaterials" type="text" placeholder="https://...">
+          </div>
+          <div class="field">
+            <label for="lsDuration">Длительность урока, мин</label>
+            <input id="lsDuration" type="number" min="15" step="5" value="60">
+          </div>
+          <p id="lsError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
+          <button class="btn btn-dark" id="lsAddBtn">Сохранить изменения</button>
+          <button class="btn btn-ghost" id="lsCancelEditBtn" onclick="cancelLessonEdit()">Отменить редактирование</button>
         </div>
-        <div class="field">
-          <label for="lsDate">Дата и время</label>
-          <input id="lsDate" type="datetime-local">
-        </div>
-        <div class="field">
-          <label for="lsTimezone">Часовой пояс (в котором указано время)</label>
-          <select id="lsTimezone"></select>
-        </div>
-        <div class="field">
-          <label for="lsTopic">Тема</label>
-          <input id="lsTopic" type="text" placeholder="Present Perfect vs Past Simple">
-        </div>
-        <div class="field">
-          <label for="lsMaterials">Ссылка на материалы (необязательно)</label>
-          <input id="lsMaterials" type="text" placeholder="https://...">
-        </div>
-        <div class="field">
-          <label for="lsDuration">Длительность урока, мин</label>
-          <input id="lsDuration" type="number" min="15" step="5" value="60">
-        </div>
-        <p id="lsError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
-        <button class="btn btn-dark" id="lsAddBtn">+ Добавить урок</button>
-        <button class="btn btn-ghost hidden" id="lsCancelEditBtn" onclick="cancelLessonEdit()">Отменить редактирование</button>
       </div>
 
       <h2 class="panel-title" style="margin-top:20px;">Редактировать профиль ученика</h2>
@@ -536,6 +564,44 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <h3 class="cal-day-title" id="calDayTitle">Сегодня</h3>
       <div id="lessonsList"></div>
       <div id="dayNoteEditor"></div>
+    </section>
+
+    <section class="panel" id="panel-history">
+      <h2 class="panel-title">История уроков</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Все прошедшие занятия, включая пробные.</p>
+      <div id="teacherHistoryList"></div>
+    </section>
+
+    <section class="panel" id="panel-salary">
+      <h2 class="panel-title">Зарплата</h2>
+
+      <div class="field" style="max-width:280px;">
+        <label for="salaryPeriod">Период</label>
+        <select id="salaryPeriod" onchange="renderSalary()">
+          <option value="month" selected>Этот месяц</option>
+          <option value="lastmonth">Прошлый месяц</option>
+          <option value="year">Этот год</option>
+          <option value="all">За всё время</option>
+        </select>
+      </div>
+
+      <div class="overview-grid" style="grid-template-columns:repeat(3,1fr); margin:16px 0 24px;">
+        <div class="stat-card">
+          <div class="stat-label">Часов проведено</div>
+          <div class="stat-value" id="salary-hours">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Моя ставка</div>
+          <div class="stat-value" id="salary-rate" style="font-size:15px;">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Итого к выплате</div>
+          <div class="stat-value" id="salary-total">—</div>
+        </div>
+      </div>
+
+      <h2 class="panel-title">По урокам</h2>
+      <div id="salaryLessonsList"></div>
     </section>
 
     <section class="panel" id="panel-check">
@@ -714,7 +780,8 @@ async function enterApp(user){
 
   setupTabs();
   document.getElementById('lsTimezone').innerHTML = timezoneOptionsHtml(SCHOOL_TZ);
-  await Promise.allSettled([loadStudents(), loadLessons(), loadToCheck()]);
+  await loadLessons();
+  await Promise.allSettled([loadStudents(), loadToCheck(), loadMyGroups()]);
 }
 
 document.getElementById('saveMeetingUrlBtn').addEventListener('click', saveMeetingUrl);
@@ -760,25 +827,41 @@ async function loadStudents(){
   myStudents = students || [];
   document.getElementById('ov-students').textContent = myStudents.length;
 
+  const studentIds = myStudents.map(s => s.id);
+  window.__teacherRemainingByStudent = {};
+  if (studentIds.length){
+    const { data: pays } = await supabase.from('payments').select('*')
+      .in('student_id', studentIds).eq('status', 'active');
+    (pays || []).forEach(p => {
+      if (window.__teacherRemainingByStudent[p.student_id] === undefined){
+        window.__teacherRemainingByStudent[p.student_id] = computeRemaining(p, window.__lessonsList || []);
+      }
+    });
+  }
+
   const list = document.getElementById('studentsList');
   if (!myStudents.length){
     list.innerHTML = '<div class="empty-state">Пока нет привязанных учеников. Добавь ученика через Supabase → Table Editor → profiles → teacher_id.</div>';
   } else {
-    list.innerHTML = myStudents.map(s => `
+    list.innerHTML = myStudents.map(s => {
+      const remaining = window.__teacherRemainingByStudent[s.id];
+      const pillClass = remaining === undefined ? '' : (remaining <= 2 ? 'badge-expired' : remaining === 3 ? 'badge-pending' : 'badge-active');
+      const pillHtml = remaining === undefined ? '' : `<span class="badge ${pillClass}" style="margin-left:8px;">${remaining} ост.</span>`;
+      return `
       <div class="student-card">
         <div class="row-main">
-          <div class="row-title">${s.full_name || '—'}</div>
+          <div class="row-title">${s.full_name || '—'}${pillHtml}</div>
           <div class="row-sub">${s.level || '—'} · ${s.format === 'CREW' ? 'Группа' : 'Индивидуально'}</div>
         </div>
         <div class="card-actions">
-          <button class="btn btn-accent btn-sm" onclick="pickStudentForLesson('${s.id}')">+ Урок</button>
           <button class="btn btn-ghost btn-sm" onclick="pickStudentForHomework('${s.id}')">Домашка</button>
           <button class="btn btn-ghost btn-sm" onclick="pickStudentForEdit('${s.id}')">Профиль</button>
           <button class="btn btn-ghost btn-sm" onclick="toggleStudentNotes('${s.id}')">📌 Заметки</button>
         </div>
         <div id="notes-${s.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
       </div>
-    `).join('');
+    `;
+    }).join('');
   }
 
   const select = document.getElementById('hwStudent');
@@ -800,30 +883,72 @@ function pickStudentForHomework(studentId){
 
 document.getElementById('hwAssignBtn').addEventListener('click', assignHomework);
 
+document.querySelectorAll('input[name="hwTarget"]').forEach(el => {
+  el.addEventListener('change', () => {
+    const isGroup = document.querySelector('input[name="hwTarget"]:checked').value === 'group';
+    document.getElementById('hwStudentField').classList.toggle('hidden', isGroup);
+    document.getElementById('hwGroupField').classList.toggle('hidden', !isGroup);
+  });
+});
+
+async function loadMyGroups(){
+  const { data } = await supabase.from('groups').select('*').eq('teacher_id', currentUser.id).order('name');
+  window.__myGroups = data || [];
+  const el = document.getElementById('hwGroup');
+  if (el){
+    el.innerHTML = window.__myGroups.length
+      ? window.__myGroups.map(g => `<option value="${g.id}">${g.name}</option>`).join('')
+      : '<option value="">Пока нет групп</option>';
+  }
+}
+
 async function assignHomework(){
-  const studentId = document.getElementById('hwStudent').value;
+  const target = document.querySelector('input[name="hwTarget"]:checked').value;
   const title = document.getElementById('hwTitle').value.trim();
   const description = document.getElementById('hwDesc').value.trim();
   const dueDate = document.getElementById('hwDue').value;
   const errEl = document.getElementById('hwAssignError');
   errEl.textContent = '';
 
-  if (!studentId || !title){
-    errEl.textContent = 'Выбери ученика и укажи название задания.';
+  if (!title){
+    errEl.textContent = 'Укажи название задания.';
     return;
+  }
+
+  let studentIds = [];
+  if (target === 'group'){
+    const groupId = document.getElementById('hwGroup').value;
+    if (!groupId){
+      errEl.textContent = 'Выбери группу.';
+      return;
+    }
+    studentIds = myStudents.filter(s => s.group_id === groupId).map(s => s.id);
+    if (!studentIds.length){
+      errEl.textContent = 'В этой группе пока нет учеников.';
+      return;
+    }
+  } else {
+    const studentId = document.getElementById('hwStudent').value;
+    if (!studentId){
+      errEl.textContent = 'Выбери ученика.';
+      return;
+    }
+    studentIds = [studentId];
   }
 
   const btn = document.getElementById('hwAssignBtn');
   btn.disabled = true; btn.textContent = 'Задаём…';
 
-  const { error } = await supabase.from('homework').insert({
+  const rows = studentIds.map(studentId => ({
     student_id: studentId,
     teacher_id: currentUser.id,
     title,
     description: description || null,
     due_date: dueDate || null,
     status: 'assigned'
-  });
+  }));
+
+  const { error } = await supabase.from('homework').insert(rows);
 
   btn.disabled = false; btn.textContent = '+ Задать домашку';
 
@@ -849,8 +974,8 @@ function pickStudentForLesson(studentId){
   document.getElementById('lsDate').focus();
 }
 
-async function toggleStudentNotes(studentId){
-  const container = document.getElementById('notes-' + studentId);
+async function toggleStudentNotes(studentId, containerId){
+  const container = document.getElementById(containerId || ('notes-' + studentId));
   const isHidden = container.classList.contains('hidden');
 
   if (!isHidden){
@@ -896,6 +1021,48 @@ function toDatetimeLocalInTz(dateObj, timeZone){
   return `${get('year')}-${get('month')}-${get('day')}T${get('hour')}:${get('minute')}`;
 }
 
+function toggleRescheduleForm(lessonId){
+  const el = document.getElementById('reschedule-' + lessonId);
+  const isHidden = el.classList.contains('hidden');
+  if (!isHidden){
+    el.classList.add('hidden');
+    return;
+  }
+  el.classList.remove('hidden');
+  el.innerHTML = `
+    <div class="day-note-card">
+      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); margin-bottom:8px;">Почему не сможешь провести?</div>
+      <select id="rescheduleReasonSelect-${lessonId}" style="width:100%; font-family:'Inter',sans-serif; font-size:14px; padding:11px 12px; border-radius:10px; border:1.5px solid var(--line); margin-bottom:8px;">
+        <option value="Заболел(а)">Заболел(а)</option>
+        <option value="Форс-мажор">Форс-мажор</option>
+        <option value="Другое">Другое</option>
+      </select>
+      <textarea id="rescheduleComment-${lessonId}" placeholder="Комментарий (необязательно)"></textarea>
+      <div style="margin-top:8px; display:flex; gap:8px;">
+        <button class="btn btn-dark btn-sm" onclick="submitRescheduleRequest('${lessonId}')">Отправить админу</button>
+        <button class="btn btn-ghost btn-sm" onclick="toggleRescheduleForm('${lessonId}')">Отмена</button>
+      </div>
+    </div>
+  `;
+}
+
+async function submitRescheduleRequest(lessonId){
+  const reason = document.getElementById('rescheduleReasonSelect-' + lessonId).value;
+  const comment = document.getElementById('rescheduleComment-' + lessonId).value.trim();
+  const fullReason = comment ? `${reason} — ${comment}` : reason;
+
+  const { error } = await supabase.from('lessons').update({
+    needs_reschedule: true,
+    reschedule_reason: fullReason
+  }).eq('id', lessonId);
+
+  if (error){
+    alert('Не получилось отправить. Попробуй ещё раз.');
+    return;
+  }
+  await loadLessons();
+}
+
 function pickLessonForEdit(lessonId){
   const lesson = (window.__lessonsList || []).find(l => l.id === lessonId);
   if (!lesson) return;
@@ -903,6 +1070,7 @@ function pickLessonForEdit(lessonId){
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelector('.tab-btn[data-tab="students"]').classList.add('active');
   document.getElementById('panel-students').classList.add('active');
+  document.getElementById('lessonEditSection').classList.remove('hidden');
 
   document.getElementById('lsStudent').value = lesson.student_id || '';
   document.getElementById('lsDate').value = toDatetimeLocalInTz(new Date(lesson.lesson_date), SCHOOL_TZ);
@@ -912,15 +1080,12 @@ function pickLessonForEdit(lessonId){
   document.getElementById('lsDuration').value = lesson.duration_minutes || 60;
 
   editingLessonId = lessonId;
-  document.getElementById('lsAddBtn').textContent = 'Сохранить изменения';
-  document.getElementById('lsCancelEditBtn').classList.remove('hidden');
-  document.getElementById('lsDate').scrollIntoView({ behavior:'smooth', block:'center' });
+  document.getElementById('lessonEditSection').scrollIntoView({ behavior:'smooth', block:'center' });
 }
 
 function cancelLessonEdit(){
   editingLessonId = null;
-  document.getElementById('lsAddBtn').textContent = '+ Добавить урок';
-  document.getElementById('lsCancelEditBtn').classList.add('hidden');
+  document.getElementById('lessonEditSection').classList.add('hidden');
   document.getElementById('lsStudent').value = '';
   document.getElementById('lsDate').value = '';
   document.getElementById('lsTopic').value = '';
@@ -948,7 +1113,7 @@ async function addLesson(){
   const utcDate = zonedTimeToUtc(datePart, timePart, timezone);
 
   const btn = document.getElementById('lsAddBtn');
-  btn.disabled = true; btn.textContent = editingLessonId ? 'Сохраняем…' : 'Добавляем…';
+  btn.disabled = true; btn.textContent = 'Сохраняем…';
 
   const payload = {
     student_id: studentId,
@@ -964,10 +1129,10 @@ async function addLesson(){
     ? await supabase.from('lessons').update(payload).eq('id', editingLessonId)
     : await supabase.from('lessons').insert(payload);
 
-  btn.disabled = false; btn.textContent = editingLessonId ? 'Сохранить изменения' : '+ Добавить урок';
+  btn.disabled = false; btn.textContent = 'Сохранить изменения';
 
   if (error){
-    errEl.textContent = editingLessonId ? 'Не получилось сохранить изменения. Попробуй ещё раз.' : 'Не получилось добавить урок. Попробуй ещё раз.';
+    errEl.textContent = 'Не получилось сохранить изменения. Попробуй ещё раз.';
     return;
   }
 
@@ -977,8 +1142,7 @@ async function addLesson(){
   document.getElementById('lsDuration').value = '60';
   document.getElementById('lsStudent').value = '';
   editingLessonId = null;
-  document.getElementById('lsAddBtn').textContent = '+ Добавить урок';
-  document.getElementById('lsCancelEditBtn').classList.add('hidden');
+  document.getElementById('lessonEditSection').classList.add('hidden');
   await loadLessons();
 }
 
@@ -1047,6 +1211,11 @@ async function loadLessons(){
   window.__lessonsList = list;
   document.getElementById('ov-lessons').textContent = list.length;
 
+  if (!window.__notedStudentIds){
+    const { data: notes } = await supabase.from('internal_notes').select('student_id').eq('teacher_id', currentUser.id);
+    window.__notedStudentIds = new Set((notes || []).map(n => n.student_id));
+  }
+
   const todayKeyNow = fmtDateKey(new Date());
   const todaysLessons = list.filter(l => fmtDateKey(l.lesson_date) === todayKeyNow && !isLessonPast(l));
   document.getElementById('ov-today-left').textContent = todaysLessons.filter(l => !l.is_trial).length;
@@ -1108,6 +1277,10 @@ function renderCalendar(){
 
   const lessonDaysSet = new Set(list.map(l => fmtDateKey(l.lesson_date)));
   const trialDaysSet = new Set(list.filter(l => l.is_trial).map(l => fmtDateKey(l.lesson_date)));
+  const noteStudentDaysSet = new Set(
+    list.filter(l => l.student_id && window.__notedStudentIds && window.__notedStudentIds.has(l.student_id))
+        .map(l => fmtDateKey(l.lesson_date))
+  );
 
   const firstOfMonth = new Date(s.year, s.month, 1);
   const leadBlanks = (firstOfMonth.getDay() + 6) % 7;
@@ -1125,7 +1298,8 @@ function renderCalendar(){
     if (key === todayKey) classes.push('today');
     if (key === window.__selectedDate) classes.push('selected');
     const noteDot = (window.__notesMap && window.__notesMap[key]) ? '<span class="note-dot"></span>' : '';
-    cells.push(`<button type="button" class="${classes.join(' ')}" data-date="${key}">${d}${noteDot}</button>`);
+    const studentNoteDot = noteStudentDaysSet.has(key) ? '<span class="student-note-dot" title="Есть заметка об ученике">📌</span>' : '';
+    cells.push(`<button type="button" class="${classes.join(' ')}" data-date="${key}">${d}${noteDot}${studentNoteDot}</button>`);
   }
   document.getElementById('calGrid').innerHTML = cells.join('');
 
@@ -1141,6 +1315,16 @@ function renderCalendar(){
 function isLessonPast(lesson){
   const end = new Date(lesson.lesson_date).getTime() + (lesson.duration_minutes || 60) * 60000;
   return end < Date.now();
+}
+
+function computeRemaining(payment, allLessons){
+  if (!payment) return null;
+  const linked = (allLessons || []).filter(l => l.payment_id === payment.id);
+  if (linked.length > 0){
+    const usedCount = linked.filter(l => isLessonPast(l)).length;
+    return (payment.lessons_included || 0) - usedCount;
+  }
+  return (payment.lessons_included || 0) - (payment.lessons_used || 0);
 }
 
 function lessonBadge(l){
@@ -1186,14 +1370,94 @@ function renderLessonsList(){
             (l.is_trial ? `Пробный: ${l.guest_name || ''}` : (l.profiles && l.profiles.full_name) || 'Урок') + (l.topic ? ' — ' + l.topic : ''),
             l.lesson_date, l.duration_minutes, l.is_trial && l.guest_contact ? 'Контакт: ' + l.guest_contact : ''
           )}" target="_blank" rel="noopener" title="Добавить в Google Calendar">📅</a>
+          ${!l.is_trial && l.student_id && window.__notedStudentIds && window.__notedStudentIds.has(l.student_id)
+            ? `<button class="btn btn-ghost btn-sm" onclick="toggleStudentNotes('${l.student_id}', 'daynotes-${l.id}')" title="Заметка об ученике">📌</button>`
+            : ''}
           ${!l.is_trial ? `<button class="btn btn-ghost btn-sm" onclick="pickLessonForEdit('${l.id}')">✎</button>` : ''}
+          ${!isLessonPast(l) && !l.needs_reschedule ? `<button class="btn btn-ghost btn-sm" onclick="toggleRescheduleForm('${l.id}')">Не смогу провести</button>` : ''}
+          ${l.needs_reschedule ? `<span class="badge badge-pending">⏳ Ждёт переноса</span>` : ''}
           ${lessonBadge(l)}
         </div>
+        <div id="daynotes-${l.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
+        <div id="reschedule-${l.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
       </div>
     `).join('');
   }
 
   renderDayNoteEditor();
+  renderTeacherHistoryList();
+  renderSalary();
+}
+
+function getSalaryPeriodRange(sel){
+  const now = new Date();
+  let start = null, end = null;
+  if (sel === 'month'){ start = new Date(now.getFullYear(), now.getMonth(), 1); end = new Date(now.getFullYear(), now.getMonth()+1, 1); }
+  else if (sel === 'lastmonth'){ start = new Date(now.getFullYear(), now.getMonth()-1, 1); end = new Date(now.getFullYear(), now.getMonth(), 1); }
+  else if (sel === 'year'){ start = new Date(now.getFullYear(), 0, 1); end = new Date(now.getFullYear()+1, 0, 1); }
+  return { start, end };
+}
+
+function renderSalary(){
+  const sel = document.getElementById('salaryPeriod').value;
+  const { start, end } = getSalaryPeriodRange(sel);
+  const noFilter = !start && !end;
+
+  const rateSolo = (currentProfile && currentProfile.rate_solo) ? Number(currentProfile.rate_solo) : 500;
+  const rateCrew = (currentProfile && currentProfile.rate_crew) ? Number(currentProfile.rate_crew) : 600;
+  document.getElementById('salary-rate').textContent = `${rateSolo}₽ SOLO / ${rateCrew}₽ CREW`;
+
+  const lessons = (window.__lessonsList || []).filter(l => !l.is_trial && l.student_id && isLessonPast(l));
+  const inRange = lessons.filter(l => {
+    if (noFilter) return true;
+    const d = new Date(l.lesson_date);
+    if (start && d < start) return false;
+    if (end && d >= end) return false;
+    return true;
+  }).sort((a,b) => new Date(b.lesson_date) - new Date(a.lesson_date));
+
+  let totalHours = 0, total = 0;
+  const rows = inRange.map(l => {
+    const student = myStudents.find(s => s.id === l.student_id);
+    const format = student ? student.format : 'SOLO';
+    const hours = (l.duration_minutes || 60) / 60;
+    const rate = format === 'CREW' ? rateCrew : rateSolo;
+    const pay = hours * rate;
+    totalHours += hours; total += pay;
+    return `
+      <div class="row-card" style="margin-bottom:10px;">
+        <div class="row-main">
+          <div class="row-title">${(l.profiles && l.profiles.full_name) || (student && student.full_name) || 'Ученик'} — ${l.topic || 'Занятие'}</div>
+          <div class="row-sub">${fmtDateTime(l.lesson_date)} · ${format === 'CREW' ? 'Группа' : 'Индивидуально'} · ${hours.toFixed(1)} ч</div>
+        </div>
+        <span class="badge badge-active">${pay.toLocaleString('ru-RU')} ₽</span>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('salary-hours').textContent = totalHours.toFixed(1);
+  document.getElementById('salary-total').textContent = total.toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('salaryLessonsList').innerHTML = rows || '<div class="empty-state">Нет уроков за этот период.</div>';
+}
+
+function renderTeacherHistoryList(){
+  const all = window.__lessonsList || [];
+  const past = all.filter(l => isLessonPast(l)).sort((a,b) => new Date(b.lesson_date) - new Date(a.lesson_date));
+  const container = document.getElementById('teacherHistoryList');
+  if (!container) return;
+  if (!past.length){
+    container.innerHTML = '<div class="empty-state">Пока не было ни одного урока.</div>';
+    return;
+  }
+  container.innerHTML = past.map(l => `
+    <div class="row-card ${l.is_trial ? 'row-trial' : ''}" style="margin-bottom:10px;">
+      <div class="row-main">
+        <div class="row-title">${l.is_trial ? `🎓 ${l.guest_name || 'Пробный'}` : ((l.profiles && l.profiles.full_name) || 'Ученик')} — ${l.topic || 'Занятие'}</div>
+        <div class="row-sub">${fmtDateTime(l.lesson_date)}</div>
+      </div>
+      <span class="badge badge-completed">${l.is_trial ? 'Пробный прошёл' : 'Прошёл'}</span>
+    </div>
+  `).join('');
 }
 
 function renderDayNoteEditor(){
