@@ -888,7 +888,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       </div>
       <button class="btn btn-ghost btn-sm" style="margin-bottom:20px;" onclick="renderStats()">Применить</button>
 
-      <div class="overview-grid" style="grid-template-columns:repeat(4,1fr); margin-bottom:24px;">
+      <div class="overview-grid" style="grid-template-columns:repeat(5,1fr); margin-bottom:24px;">
         <div class="stat-card">
           <div class="stat-label">Пробных проведено</div>
           <div class="stat-value" id="stat-trials">—</div>
@@ -898,12 +898,16 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <div class="stat-value" id="stat-lessons">—</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Заработано за абонементы</div>
+          <div class="stat-label">Выручка</div>
           <div class="stat-value" id="stat-revenue">—</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Расчётные выплаты учителям</div>
+          <div class="stat-label">Выплаты учителям</div>
           <div class="stat-value" id="stat-payout">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Чистый доход</div>
+          <div class="stat-value" id="stat-net">—</div>
         </div>
       </div>
 
@@ -929,6 +933,62 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           </thead>
           <tbody id="payoutTableBody"></tbody>
         </table>
+      </div>
+
+      <h2 class="panel-title" style="margin-top:20px;">Прочие расходы</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Реклама, сервисы, комиссии и всё остальное, что не зарплата учителям.</p>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="field">
+          <label for="expCategory">Категория</label>
+          <select id="expCategory">
+            <option value="Реклама">Реклама</option>
+            <option value="Сервисы">Сервисы</option>
+            <option value="Комиссии">Комиссии</option>
+            <option value="Прочее">Прочее</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="expAmount">Сумма, ₽</label>
+          <input id="expAmount" type="number" min="0">
+        </div>
+        <div class="field">
+          <label for="expDate">Дата</label>
+          <input id="expDate" type="date">
+        </div>
+        <div class="field">
+          <label for="expDesc">Комментарий (необязательно)</label>
+          <input id="expDesc" type="text" placeholder="Например: таргет во ВКонтакте">
+        </div>
+        <p id="expError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
+        <button class="btn btn-dark btn-sm" id="expAddBtn">+ Добавить расход</button>
+      </div>
+      <div class="table-wrap">
+        <table class="admin-table" id="expensesTable">
+          <thead>
+            <tr><th>Дата</th><th>Категория</th><th>Сумма</th><th>Комментарий</th><th></th></tr>
+          </thead>
+          <tbody id="expensesTableBody"></tbody>
+        </table>
+      </div>
+
+      <h2 class="panel-title" style="margin-top:20px;" id="monthlyReportTitle">Отчёт за месяц</h2>
+      <div class="card" id="monthlyReportCard" style="font-size:14px; line-height:2;"></div>
+
+      <h2 class="panel-title" style="margin-top:20px;">Прогноз следующего месяца</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Оценка, не гарантия — построена на текущих абонементах, вероятности продления (70%) и вероятной конверсии новых заявок (35%).</p>
+      <div class="overview-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="stat-card">
+          <div class="stat-label">Минимальный</div>
+          <div class="stat-value" id="forecast-min" style="font-size:17px;">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ожидаемый</div>
+          <div class="stat-value" id="forecast-expected" style="font-size:17px;">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Оптимистичный</div>
+          <div class="stat-value" id="forecast-optimistic" style="font-size:17px;">—</div>
+        </div>
       </div>
     </section>
 
@@ -1238,6 +1298,10 @@ async function loadAll(){
 
   await loadPayments();
   await loadTrialRequests();
+  await loadExpenses();
+  if (document.getElementById('expDate') && !document.getElementById('expDate').value){
+    document.getElementById('expDate').value = new Date().toISOString().slice(0,10);
+  }
   renderStats();
   await loadGroups();
   await loadPaymentLinkSettings();
@@ -2027,6 +2091,152 @@ async function attachSubscription(){
 
 /* ---------- ЗАЯВКИ НА ПРОБНЫЙ ---------- */
 /* ---------- СТАТИСТИКА ---------- */
+/* ---------- РАСХОДЫ ---------- */
+async function loadExpenses(){
+  const { data } = await supabase.from('expenses').select('*').order('expense_date', { ascending:false });
+  window.__expensesList = data || [];
+  renderExpensesTable();
+}
+
+function renderExpensesTable(){
+  const body = document.getElementById('expensesTableBody');
+  if (!body) return;
+  const list = window.__expensesList || [];
+  if (!list.length){
+    body.innerHTML = '<tr><td colspan="5" class="empty-state">Расходов пока нет.</td></tr>';
+    return;
+  }
+  body.innerHTML = list.map(e => `
+    <tr>
+      <td>${fmtDate(e.expense_date)}</td>
+      <td>${e.category || '—'}</td>
+      <td>${Number(e.amount).toLocaleString('ru-RU')} ₽</td>
+      <td>${e.description || '—'}</td>
+      <td><button class="btn btn-ghost btn-sm" onclick="deleteExpense('${e.id}')">Удалить</button></td>
+    </tr>
+  `).join('');
+}
+
+document.getElementById('expAddBtn').addEventListener('click', async () => {
+  const category = document.getElementById('expCategory').value;
+  const amount = document.getElementById('expAmount').value;
+  const date = document.getElementById('expDate').value || new Date().toISOString().slice(0,10);
+  const description = document.getElementById('expDesc').value.trim();
+  const errEl = document.getElementById('expError');
+  errEl.textContent = '';
+
+  if (!amount || Number(amount) <= 0){
+    errEl.textContent = 'Укажи сумму расхода.';
+    return;
+  }
+
+  const btn = document.getElementById('expAddBtn');
+  btn.disabled = true; btn.textContent = 'Добавляем…';
+
+  const { error } = await supabase.from('expenses').insert({
+    category, amount: Number(amount), expense_date: date, description: description || null
+  });
+
+  btn.disabled = false; btn.textContent = '+ Добавить расход';
+
+  if (error){
+    errEl.textContent = 'Не получилось сохранить. Попробуй ещё раз.';
+    return;
+  }
+  document.getElementById('expAmount').value = '';
+  document.getElementById('expDesc').value = '';
+  await loadExpenses();
+  renderStats();
+});
+
+async function deleteExpense(id){
+  if (!confirmDestructive('Удалить этот расход?')) return;
+  const { error } = await supabase.from('expenses').delete().eq('id', id);
+  if (error){
+    alert('Не получилось удалить.');
+    return;
+  }
+  await loadExpenses();
+  renderStats();
+}
+
+/* ---------- МЕСЯЧНЫЙ ОТЧЁТ ---------- */
+function renderMonthlyReport(){
+  const card = document.getElementById('monthlyReportCard');
+  if (!card) return;
+
+  const now = new Date();
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  document.getElementById('monthlyReportTitle').textContent = `Отчёт: ${MONTH_NAMES[now.getMonth()]} ${now.getFullYear()}`;
+
+  const revenue = computeRevenueInRange(monthStart, monthEnd);
+  const payout = computeTeacherPayoutInRange(monthStart, monthEnd);
+  const expenses = computeExpensesInRange(monthStart, monthEnd);
+  const net = revenue - payout - expenses;
+
+  const totalStudents = allStudents.length;
+  const newStudents = allStudents.filter(s => s.created_at && inStatsRange(s.created_at, monthStart, monthEnd)).length;
+
+  const lessonsCount = (window.__lessonsList || []).filter(l =>
+    !l.is_trial && l.student_id && isLessonPast(l) && inStatsRange(l.lesson_date, monthStart, monthEnd)).length;
+  const trialsCount = (window.__lessonsList || []).filter(l =>
+    l.is_trial && isLessonPast(l) && inStatsRange(l.lesson_date, monthStart, monthEnd)).length;
+
+  const trialsCompletedThisMonth = (window.__trialRequests || []).filter(r =>
+    r.status === 'completed' && inStatsRange(r.created_at, monthStart, monthEnd));
+  const trialsBought = trialsCompletedThisMonth.filter(r => r.outcome_result === 'Купил абонемент').length;
+  const conversion = trialsCompletedThisMonth.length
+    ? Math.round((trialsBought / trialsCompletedThisMonth.length) * 100)
+    : 0;
+
+  card.innerHTML = `
+    <div>Выручка: <b>${revenue.toLocaleString('ru-RU')} ₽</b></div>
+    <div>Учителям: <b style="color:#B3261E;">−${payout.toLocaleString('ru-RU')} ₽</b></div>
+    <div>Прочие расходы: <b style="color:#B3261E;">−${expenses.toLocaleString('ru-RU')} ₽</b></div>
+    <div style="border-top:1px solid var(--line); margin:8px 0; padding-top:8px;">Чистый доход школы: <b style="color:#3B7A1E;">${net.toLocaleString('ru-RU')} ₽</b></div>
+    <div>Учеников: <b>${totalStudents}</b></div>
+    <div>Новых учеников: <b>${newStudents}</b></div>
+    <div>Проведено занятий: <b>${lessonsCount}</b></div>
+    <div>Проведено пробных: <b>${trialsCount}</b></div>
+    <div>Конверсия пробный → ученик: <b>${conversion}%</b></div>
+  `;
+}
+
+/* ---------- ПРОГНОЗ СЛЕДУЮЩЕГО МЕСЯЦА ---------- */
+function renderForecast(){
+  const minEl = document.getElementById('forecast-min');
+  if (!minEl) return;
+
+  const now = new Date();
+  const nextMonthStart = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  const nextMonthEnd = new Date(now.getFullYear(), now.getMonth() + 2, 1);
+
+  const payments = window.__paymentsList || [];
+  const activePayments = payments.filter(p => p.status === 'active');
+  const avgPayment = activePayments.length
+    ? activePayments.reduce((s,p) => s + (p.amount || 0), 0) / activePayments.length
+    : 0;
+
+  // минимальный: абонементы, которые уже действуют и в следующем месяце (уже оплачено, продлевать не надо)
+  const minimal = activePayments
+    .filter(p => p.valid_until && new Date(p.valid_until) >= nextMonthEnd)
+    .reduce((s,p) => s + (p.amount || 0), 0);
+
+  // ожидаемый: + абонементы, истекающие в этом/следующем месяце, с вероятностью продления 70%
+  const expiringSoon = activePayments.filter(p =>
+    p.valid_until && new Date(p.valid_until) >= now && new Date(p.valid_until) < nextMonthEnd).length;
+  const expected = minimal + expiringSoon * avgPayment * 0.7;
+
+  // оптимистичный: + новые/запланированные заявки, с вероятностью конверсии 35%
+  const openRequests = (window.__trialRequests || []).filter(r => r.status === 'new' || r.status === 'scheduled').length;
+  const optimistic = expected + openRequests * avgPayment * 0.35;
+
+  minEl.textContent = Math.round(minimal).toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('forecast-expected').textContent = Math.round(expected).toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('forecast-optimistic').textContent = Math.round(optimistic).toLocaleString('ru-RU') + ' ₽';
+}
+
 function onStatsPeriodChange(){
   const isCustom = document.getElementById('statsPeriod').value === 'custom';
   document.getElementById('statsCustomRange').classList.toggle('hidden', !isCustom);
@@ -2076,8 +2286,7 @@ function computeRevenueInRange(start, end){
     .reduce((s,p) => s + (p.amount || 0), 0);
 }
 
-function computeNetIncomeInRange(start, end){
-  const revenue = computeRevenueInRange(start, end);
+function computeTeacherPayoutInRange(start, end){
   const lessons = (window.__lessonsList || []).filter(l =>
     !l.is_trial && l.student_id && isLessonPast(l) && (!start || inStatsRange(l.lesson_date, start, end)));
   const rateSoloDefault = Number((document.getElementById('rateSolo') || {}).value) || 500;
@@ -2093,7 +2302,20 @@ function computeNetIncomeInRange(start, end){
       : ((teacher && teacher.rate_solo) || rateSoloDefault);
     payout += hours * rate;
   });
-  return revenue - payout;
+  return payout;
+}
+
+function computeExpensesInRange(start, end){
+  return (window.__expensesList || [])
+    .filter(e => !start || inStatsRange(e.expense_date, start, end))
+    .reduce((s, e) => s + (Number(e.amount) || 0), 0);
+}
+
+function computeNetIncomeInRange(start, end){
+  const revenue = computeRevenueInRange(start, end);
+  const payout = computeTeacherPayoutInRange(start, end);
+  const expenses = computeExpensesInRange(start, end);
+  return revenue - payout - expenses;
 }
 
 function renderDashboardKPIs(){
@@ -2241,6 +2463,14 @@ function renderStats(){
     ? rows.join('')
     : '<tr><td colspan="4" class="empty-state">Нет проведённых уроков за этот период.</td></tr>';
   document.getElementById('stat-payout').textContent = totalPayout.toLocaleString('ru-RU') + ' ₽';
+
+  const expensesInPeriod = computeExpensesInRange(noFilter ? null : start, end);
+  const net = revenue - totalPayout - expensesInPeriod;
+  document.getElementById('stat-net').textContent = net.toLocaleString('ru-RU') + ' ₽';
+
+  renderExpensesTable();
+  renderMonthlyReport();
+  renderForecast();
 }
 
 /* ---------- ГРУППЫ ---------- */
