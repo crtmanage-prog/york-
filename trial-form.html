@@ -106,7 +106,7 @@
       <input id="age" type="number" min="3" max="99" placeholder="Например: 27">
     </div>
 
-    <div class="field">
+    <div class="field" id="sourceQuestionField">
       <label>Откуда узнали о нас?</label>
       <div class="chip-group" id="sourceGroup">
         <label><input type="radio" name="source" value="Программа лояльности"><span>Программа лояльности</span></label>
@@ -115,6 +115,10 @@
         <label><input type="radio" name="source" value="Поиск в интернете / Avito"><span>Поиск в интернете / Avito</span></label>
         <label><input type="radio" name="source" value="Другое"><span>Другое</span></label>
       </div>
+    </div>
+
+    <div class="field hidden" id="referralBanner" style="background:var(--panel); border-radius:12px; padding:14px 16px;">
+      🎉 Ты пришёл(а) по приглашению друга — бонус для вас обоих учтён автоматически.
     </div>
 
     <div class="field hidden" id="referrerField">
@@ -205,6 +209,13 @@
 const SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_jlcvNafksQ0WhrYCY08anw_ju194-I9';
 
+const urlParams = new URLSearchParams(window.location.search);
+const refCode = urlParams.get('ref');
+if (refCode){
+  document.getElementById('sourceQuestionField').classList.add('hidden');
+  document.getElementById('referralBanner').classList.remove('hidden');
+}
+
 document.querySelectorAll('input[name="source"]').forEach(el => {
   el.addEventListener('change', () => {
     const isLoyalty = document.querySelector('input[name="source"]:checked')?.value === 'Программа лояльности';
@@ -219,7 +230,7 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
   const contact = document.getElementById('contact').value.trim();
   const age = document.getElementById('age').value;
   const sourceEl = document.querySelector('input[name="source"]:checked');
-  const source = sourceEl ? sourceEl.value : null;
+  const source = refCode ? 'Программа лояльности' : (sourceEl ? sourceEl.value : null);
   const referrerName = document.getElementById('referrerName').value.trim();
   const levelEl = document.querySelector('input[name="level"]:checked');
   const currentLevel = levelEl ? levelEl.value : null;
@@ -237,7 +248,7 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
     errorMsg.textContent = 'Заполни имя и контакт для связи.';
     return;
   }
-  if (source === 'Программа лояльности' && !referrerName){
+  if (source === 'Программа лояльности' && !referrerName && !refCode){
     errorMsg.textContent = 'Укажи ФИО того, кто тебя пригласил.';
     return;
   }
@@ -264,6 +275,7 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
         age: age ? Number(age) : null,
         source: source,
         referrer_name: (source === 'Программа лояльности' && referrerName) ? referrerName : null,
+        referral_code: refCode || null,
         current_level: currentLevel,
         goal: goal,
         preferred_days: days || null,
