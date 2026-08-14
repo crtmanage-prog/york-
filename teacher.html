@@ -285,6 +285,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   .cal-day.empty{cursor:default;}
   .cal-day:not(.empty):hover{background:var(--panel);}
+  .cal-day.weekend:not(.has-lesson):not(.selected):not(.today){background:rgba(28,28,28,0.045);}
   .cal-day.has-lesson{background:rgba(210,231,57,0.5); font-weight:700;}
   .cal-day.has-lesson:hover{background:rgba(210,231,57,0.7);}
   .cal-day.has-trial{box-shadow:inset 0 0 0 2px var(--ink);}
@@ -379,7 +380,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   <nav class="tabs">
     <button class="tab-btn active" data-tab="overview">Обзор</button>
     <button class="tab-btn" data-tab="students">Мои ученики</button>
-    <button class="tab-btn" data-tab="lessons">Уроки</button>
+    <button class="tab-btn" data-tab="lessons">Расписание</button>
     <button class="tab-btn" data-tab="history">История</button>
     <button class="tab-btn" data-tab="salary">Зарплата</button>
     <button class="tab-btn" data-tab="check">Проверка</button>
@@ -547,7 +548,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     </section>
 
     <section class="panel" id="panel-lessons">
-      <h2 class="panel-title">Уроки</h2>
+      <h2 class="panel-title">Расписание</h2>
 
       <div class="cal-wrap">
         <div class="cal-header">
@@ -1063,6 +1064,35 @@ async function submitRescheduleRequest(lessonId){
   await loadLessons();
 }
 
+function toggleTrialComment(lessonId){
+  const el = document.getElementById('trialcomment-' + lessonId);
+  const isHidden = el.classList.contains('hidden');
+  if (!isHidden){
+    el.classList.add('hidden');
+    return;
+  }
+  const r = window.__myTrialRequestsByLesson[lessonId];
+  el.innerHTML = `
+    <div class="day-note-card">
+      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); margin-bottom:8px;">Комментарий (видишь только ты и админ)</div>
+      <textarea id="trialCommentText-${lessonId}" placeholder="Например: уровень примерно B1, хочет разговорный для работы">${r.teacher_comment || ''}</textarea>
+      <button class="btn btn-dark btn-sm" style="margin-top:8px;" onclick="saveTrialComment('${lessonId}', '${r.id}')">Сохранить</button>
+    </div>
+  `;
+  el.classList.remove('hidden');
+}
+
+async function saveTrialComment(lessonId, requestId){
+  const text = document.getElementById('trialCommentText-' + lessonId).value.trim();
+  const { error } = await supabase.from('trial_requests').update({ teacher_comment: text || null }).eq('id', requestId);
+  if (error){
+    alert('Не получилось сохранить. Попробуй ещё раз.');
+    return;
+  }
+  window.__myTrialRequestsByLesson[lessonId].teacher_comment = text;
+  document.getElementById('trialcomment-' + lessonId).classList.add('hidden');
+}
+
 function pickLessonForEdit(lessonId){
   const lesson = (window.__lessonsList || []).find(l => l.id === lessonId);
   if (!lesson) return;
@@ -1216,6 +1246,12 @@ async function loadLessons(){
     window.__notedStudentIds = new Set((notes || []).map(n => n.student_id));
   }
 
+  const { data: myTrialRequests } = await supabase.from('trial_requests').select('*').eq('assigned_teacher_id', currentUser.id);
+  window.__myTrialRequestsByLesson = {};
+  (myTrialRequests || []).forEach(r => {
+    if (r.converted_lesson_id) window.__myTrialRequestsByLesson[r.converted_lesson_id] = r;
+  });
+
   const todayKeyNow = fmtDateKey(new Date());
   const todaysLessons = list.filter(l => fmtDateKey(l.lesson_date) === todayKeyNow && !isLessonPast(l));
   document.getElementById('ov-today-left').textContent = todaysLessons.filter(l => !l.is_trial).length;
@@ -1294,6 +1330,7 @@ function renderCalendar(){
     const key = fmtDateKey(dateObj);
     const classes = ['cal-day'];
     if (lessonDaysSet.has(key)) classes.push('has-lesson');
+    if (dateObj.getDay() === 0 || dateObj.getDay() === 6) classes.push('weekend');
     if (trialDaysSet.has(key)) classes.push('has-trial');
     if (key === todayKey) classes.push('today');
     if (key === window.__selectedDate) classes.push('selected');
@@ -1373,6 +1410,9 @@ function renderLessonsList(){
           ${!l.is_trial && l.student_id && window.__notedStudentIds && window.__notedStudentIds.has(l.student_id)
             ? `<button class="btn btn-ghost btn-sm" onclick="toggleStudentNotes('${l.student_id}', 'daynotes-${l.id}')" title="Заметка об ученике">📌</button>`
             : ''}
+          ${l.is_trial && window.__myTrialRequestsByLesson && window.__myTrialRequestsByLesson[l.id]
+            ? `<button class="btn btn-ghost btn-sm" onclick="toggleTrialComment('${l.id}')" title="Комментарий (видишь только ты и админ)">💬</button>`
+            : ''}
           ${!l.is_trial ? `<button class="btn btn-ghost btn-sm" onclick="pickLessonForEdit('${l.id}')">✎</button>` : ''}
           ${!isLessonPast(l) && !l.needs_reschedule ? `<button class="btn btn-ghost btn-sm" onclick="toggleRescheduleForm('${l.id}')">Не смогу провести</button>` : ''}
           ${l.needs_reschedule ? `<span class="badge badge-pending">⏳ Ждёт переноса</span>` : ''}
@@ -1380,6 +1420,7 @@ function renderLessonsList(){
         </div>
         <div id="daynotes-${l.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
         <div id="reschedule-${l.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
+        <div id="trialcomment-${l.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
       </div>
     `).join('');
   }
