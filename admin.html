@@ -189,6 +189,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   .stat-card .stat-label{font-size:11.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); margin-bottom:8px;}
   .stat-card .stat-value{font-family:'Unbounded',sans-serif; font-weight:700; font-size:20px;}
+  .stat-clickable{cursor:pointer; transition:background .12s ease, transform .12s ease;}
+  .stat-clickable:hover{background:var(--accent); transform:translateY(-2px);}
+  .chart-bars{display:flex; align-items:flex-end; gap:4px; height:180px; padding:0 4px;}
+  .chart-bar-col{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; min-width:6px;}
+  .chart-bar{width:100%; background:var(--accent); border-radius:3px 3px 0 0; min-height:2px;}
+  .chart-bar-label{font-size:9.5px; color:var(--ink-soft); margin-top:6px; white-space:nowrap; transform:rotate(0deg);}
 
   /* list rows */
   .row-card{
@@ -384,13 +390,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <section class="panel active" id="panel-overview">
       <h2 class="panel-title" id="greetingTitle" style="font-size:24px;">Привет! 👋</h2>
       <p class="section-sub" id="greetingSub" style="margin-top:-8px;">Вот как дела в школе сегодня.</p>
-      <div class="overview-grid" style="grid-template-columns:repeat(3,1fr);">
-        <div class="stat-card">
-          <div class="stat-label">Учеников</div>
+
+      <div class="overview-grid" style="grid-template-columns:repeat(3,1fr); margin-bottom:14px;">
+        <div class="stat-card stat-clickable" onclick="jumpToTab('allstudents')">
+          <div class="stat-label">👥 Учеников</div>
           <div class="stat-value" id="ov-students">—</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Учителей</div>
+        <div class="stat-card stat-clickable" onclick="jumpToTab('allteachers')">
+          <div class="stat-label">👨‍🏫 Учителей</div>
           <div class="stat-value" id="ov-teachers">—</div>
         </div>
         <div class="stat-card">
@@ -398,6 +405,47 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <div class="stat-value" id="ov-tocheck">—</div>
         </div>
       </div>
+      <div class="overview-grid" style="grid-template-columns:repeat(4,1fr); margin-bottom:24px;">
+        <div class="stat-card">
+          <div class="stat-label">📚 Занятий в этом месяце</div>
+          <div class="stat-value" id="ov-lessons-month">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">🎓 Проведено пробных</div>
+          <div class="stat-value" id="ov-trials-total">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">💰 Выручка</div>
+          <div class="stat-value" id="ov-revenue-total">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">💵 Чистый доход</div>
+          <div class="stat-value" id="ov-net-total">—</div>
+        </div>
+      </div>
+
+      <h2 class="panel-title">Динамика</h2>
+      <div style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px;">
+        <div class="field" style="max-width:220px; flex:1; min-width:160px;">
+          <label for="dashPeriod">Период</label>
+          <select id="dashPeriod" onchange="renderDashboardChart()">
+            <option value="7d">7 дней</option>
+            <option value="month" selected>Месяц</option>
+            <option value="3m">3 месяца</option>
+            <option value="year">Год</option>
+          </select>
+        </div>
+        <div class="field" style="max-width:220px; flex:1; min-width:160px;">
+          <label for="dashMetric">Показатель</label>
+          <select id="dashMetric" onchange="renderDashboardChart()">
+            <option value="lessons">Проведённые занятия</option>
+            <option value="trials">Проведённые пробные</option>
+            <option value="revenue">Выручка</option>
+            <option value="net">Чистый доход</option>
+          </select>
+        </div>
+      </div>
+      <div id="dashChart"></div>
     </section>
 
     <section class="panel" id="panel-allstudents">
@@ -1193,6 +1241,8 @@ async function loadAll(){
   renderStats();
   await loadGroups();
   await loadPaymentLinkSettings();
+  renderDashboardKPIs();
+  renderDashboardChart();
 }
 
 function fmtDateKey(d){
@@ -2011,6 +2061,126 @@ function inStatsRange(dateStr, start, end){
   if (start && d < start) return false;
   if (end && d >= end) return false;
   return true;
+}
+
+function jumpToTab(tabName){
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.tab-btn[data-tab="${tabName}"]`).classList.add('active');
+  document.getElementById('panel-' + tabName).classList.add('active');
+}
+
+function computeRevenueInRange(start, end){
+  return (window.__paymentsList || [])
+    .filter(p => p.status === 'active' && (!start || inStatsRange(p.paid_at || p.created_at, start, end)))
+    .reduce((s,p) => s + (p.amount || 0), 0);
+}
+
+function computeNetIncomeInRange(start, end){
+  const revenue = computeRevenueInRange(start, end);
+  const lessons = (window.__lessonsList || []).filter(l =>
+    !l.is_trial && l.student_id && isLessonPast(l) && (!start || inStatsRange(l.lesson_date, start, end)));
+  const rateSoloDefault = Number((document.getElementById('rateSolo') || {}).value) || 500;
+  const rateCrewDefault = Number((document.getElementById('rateCrew') || {}).value) || 600;
+  let payout = 0;
+  lessons.forEach(l => {
+    const student = allStudents.find(s => s.id === l.student_id);
+    const format = student ? student.format : 'SOLO';
+    const teacher = allTeachers.find(t => t.id === l.teacher_id);
+    const hours = (l.duration_minutes || 60) / 60;
+    const rate = format === 'CREW'
+      ? ((teacher && teacher.rate_crew) || rateCrewDefault)
+      : ((teacher && teacher.rate_solo) || rateSoloDefault);
+    payout += hours * rate;
+  });
+  return revenue - payout;
+}
+
+function renderDashboardKPIs(){
+  const now = new Date();
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+
+  const lessonsThisMonth = (window.__lessonsList || []).filter(l =>
+    !l.is_trial && l.student_id && isLessonPast(l) && inStatsRange(l.lesson_date, monthStart, monthEnd));
+  document.getElementById('ov-lessons-month').textContent = lessonsThisMonth.length;
+
+  const trialsTotal = (window.__lessonsList || []).filter(l => l.is_trial && isLessonPast(l));
+  document.getElementById('ov-trials-total').textContent = trialsTotal.length;
+
+  document.getElementById('ov-revenue-total').textContent = computeRevenueInRange(null, null).toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('ov-net-total').textContent = computeNetIncomeInRange(null, null).toLocaleString('ru-RU') + ' ₽';
+}
+
+function getDashboardBuckets(periodKey){
+  const now = new Date();
+  const buckets = [];
+  if (periodKey === '7d'){
+    for (let i = 6; i >= 0; i--){
+      const d = new Date(now); d.setDate(d.getDate() - i); d.setHours(0,0,0,0);
+      const start = new Date(d);
+      const end = new Date(d); end.setDate(end.getDate() + 1);
+      buckets.push({ label: d.toLocaleDateString('ru-RU', { day:'numeric', month:'numeric' }), start, end });
+    }
+  } else if (periodKey === 'month'){
+    for (let i = 29; i >= 0; i--){
+      const d = new Date(now); d.setDate(d.getDate() - i); d.setHours(0,0,0,0);
+      const start = new Date(d);
+      const end = new Date(d); end.setDate(end.getDate() + 1);
+      buckets.push({ label: String(d.getDate()), start, end });
+    }
+  } else if (periodKey === '3m'){
+    for (let i = 11; i >= 0; i--){
+      const end = new Date(now); end.setDate(end.getDate() - i * 7); end.setHours(0,0,0,0);
+      const start = new Date(end); start.setDate(start.getDate() - 7);
+      buckets.push({ label: start.toLocaleDateString('ru-RU', { day:'numeric', month:'numeric' }), start, end });
+    }
+  } else if (periodKey === 'year'){
+    for (let i = 11; i >= 0; i--){
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const end = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+      buckets.push({ label: MONTH_NAMES[d.getMonth()].slice(0,3), start: d, end });
+    }
+  }
+  return buckets;
+}
+
+function computeMetricForRange(metric, start, end){
+  if (metric === 'lessons'){
+    return (window.__lessonsList || []).filter(l => !l.is_trial && l.student_id && isLessonPast(l) && inStatsRange(l.lesson_date, start, end)).length;
+  }
+  if (metric === 'trials'){
+    return (window.__lessonsList || []).filter(l => l.is_trial && isLessonPast(l) && inStatsRange(l.lesson_date, start, end)).length;
+  }
+  if (metric === 'revenue') return computeRevenueInRange(start, end);
+  if (metric === 'net') return computeNetIncomeInRange(start, end);
+  return 0;
+}
+
+function renderDashboardChart(){
+  const periodEl = document.getElementById('dashPeriod');
+  const metricEl = document.getElementById('dashMetric');
+  if (!periodEl || !metricEl) return;
+  const period = periodEl.value;
+  const metric = metricEl.value;
+  const buckets = getDashboardBuckets(period);
+  const values = buckets.map(b => computeMetricForRange(metric, b.start, b.end));
+  const maxVal = Math.max(...values.map(v => Math.abs(v)), 1);
+  const isMoney = metric === 'revenue' || metric === 'net';
+
+  const bars = buckets.map((b, i) => {
+    const v = values[i];
+    const heightPct = v === 0 ? 0 : Math.max((Math.abs(v) / maxVal) * 100, 3);
+    const displayVal = isMoney ? v.toLocaleString('ru-RU') + ' ₽' : v;
+    return `
+      <div class="chart-bar-col" title="${b.label}: ${displayVal}">
+        <div class="chart-bar" style="height:${heightPct}%; ${v < 0 ? 'background:var(--red);' : ''}"></div>
+        <div class="chart-bar-label">${b.label}</div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('dashChart').innerHTML = `<div class="chart-bars">${bars}</div>`;
 }
 
 function renderStats(){
