@@ -143,8 +143,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   /* ---------- APP SHELL ---------- */
   #appScreen{min-height:100vh; display:flex; flex-direction:column;}
   header.app-header{
-    border-bottom:1px solid var(--line);
-    padding:16px 24px;
+    padding:18px 24px 8px;
     display:flex; align-items:center; justify-content:space-between;
     gap:16px; flex-wrap:wrap;
   }
@@ -159,25 +158,113 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
 
   nav.tabs{
-    display:flex; gap:4px; overflow-x:auto;
-    padding:0 24px; border-bottom:1px solid var(--line);
+    display:flex; gap:2px; overflow-x:auto;
+    margin:0 auto 24px; padding:5px;
+    background:var(--panel); border-radius:100px;
+    max-width:max-content; scrollbar-width:none;
   }
+  nav.tabs::-webkit-scrollbar{display:none;}
   nav.tabs button{
-    background:none; border:none;
-    font-family:'Inter',sans-serif; font-weight:600; font-size:14px;
+    background:none; border:none; cursor:pointer;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:13.5px;
     color:var(--ink-soft);
-    padding:14px 16px;
-    border-bottom:2.5px solid transparent;
-    white-space:nowrap;
+    padding:10px 18px; border-radius:100px;
+    white-space:nowrap; transition:background .15s ease, color .15s ease;
   }
-  nav.tabs button.active{color:var(--ink); border-bottom-color:var(--accent);}
+  nav.tabs button:hover{color:var(--ink);}
+  nav.tabs button.active{background:var(--ink); color:#fff;}
 
-  main{flex:1; padding:28px 24px 60px; max-width:820px; width:100%; margin:0 auto;}
+  main{flex:1; padding:0 24px 60px; max-width:1080px; width:100%; margin:0 auto;}
   .panel{display:none; flex-direction:column; gap:16px;}
   .panel.active{display:flex;}
   h2.panel-title{
     font-family:'Unbounded',sans-serif; font-size:20px; font-weight:700; margin:0 0 4px;
   }
+
+  /* dashboard-style layout */
+  .dash-welcome{
+    font-family:'Unbounded',sans-serif; font-weight:500; font-size:34px;
+    color:var(--ink-soft); margin:0 0 20px; line-height:1.2;
+  }
+  .dash-welcome b{color:var(--ink); font-weight:900;}
+  @media (max-width:700px){ .dash-welcome{font-size:26px;} }
+
+  .lang-row{
+    display:flex; gap:8px; background:var(--panel); padding:6px;
+    border-radius:18px; margin-bottom:20px; flex-wrap:wrap;
+  }
+  .lang-pill{
+    flex:1; min-width:140px; text-align:center; cursor:pointer;
+    background:none; border:none; border-radius:14px;
+    padding:13px 16px; font-family:'Inter',sans-serif;
+    font-weight:600; font-size:14px; color:var(--ink-soft);
+    transition:background .15s ease;
+  }
+  .lang-pill.active{background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,0.06);}
+  .lang-pill:hover:not(.active){color:var(--ink);}
+
+  .dash-grid{display:grid; grid-template-columns:2fr 1fr; gap:16px; align-items:start;}
+  @media (max-width:860px){ .dash-grid{grid-template-columns:1fr;} }
+  .dash-col{display:flex; flex-direction:column; gap:16px;}
+  .dash-card{
+    background:#fff; border:1.5px solid var(--line);
+    border-radius:20px; padding:20px;
+  }
+  .dash-card-title{
+    font-family:'Unbounded',sans-serif; font-weight:700; font-size:17px; margin:0 0 14px;
+  }
+
+  .streak-num{font-family:'Unbounded',sans-serif; font-weight:900; font-size:40px; line-height:1;}
+  .streak-days{display:flex; gap:6px; margin-top:14px; flex-wrap:wrap;}
+  .streak-day{
+    width:36px; height:36px; border-radius:11px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; background:var(--panel); color:var(--ink-soft);
+  }
+  .streak-day.done{background:var(--accent); color:var(--ink);}
+
+  .task-row{
+    display:flex; align-items:center; gap:12px;
+    padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .task-row:last-of-type{border-bottom:none;}
+  .task-icon{
+    width:42px; height:42px; border-radius:13px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-size:19px;
+    background:var(--panel);
+  }
+  .task-main{flex:1; min-width:0;}
+  .task-sub{font-size:11.5px; color:var(--ink-soft);}
+  .task-title{font-weight:600; font-size:14px;}
+
+  .level-big{font-family:'Unbounded',sans-serif; font-weight:900; font-size:42px; line-height:1;}
+  .test-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;}
+  @media (max-width:520px){ .test-grid{grid-template-columns:1fr;} }
+  .test-card{
+    background:var(--panel); border-radius:14px; padding:14px;
+    cursor:pointer; transition:transform .12s ease;
+  }
+  .test-card:hover{transform:translateY(-2px);}
+  .test-card .tc-name{font-weight:600; font-size:13.5px; margin-bottom:10px;}
+  .test-bar{height:22px; border-radius:8px; background:rgba(28,28,28,0.07); overflow:hidden; position:relative;}
+  .test-bar-fill{
+    height:100%; border-radius:8px; display:flex; align-items:center;
+    padding-left:9px; font-size:11.5px; font-weight:700; color:#fff;
+  }
+  .test-card.locked{opacity:0.75; cursor:default;}
+  .test-card.locked:hover{transform:none;}
+
+  .course-item{
+    display:flex; align-items:center; gap:12px;
+    background:var(--panel); border-radius:14px; padding:14px; margin-bottom:10px;
+  }
+  .course-item.featured{background:var(--ink); color:#fff;}
+  .course-item.featured .ci-sub{color:rgba(255,255,255,0.65);}
+  .ci-main{flex:1; min-width:0;}
+  .ci-name{font-weight:600; font-size:14px;}
+  .ci-sub{font-size:11.5px; color:var(--ink-soft); margin-top:2px;}
+  .ci-progress{height:6px; border-radius:4px; background:rgba(255,255,255,0.25); margin-top:8px; overflow:hidden;}
+  .ci-progress-fill{height:100%; background:var(--accent); border-radius:4px;}
 
   /* overview grid */
   .overview-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
@@ -735,46 +822,118 @@ function qrMatrixToSVG(text, pixelSize){
 
   <nav class="tabs">
     <button class="tab-btn active" data-tab="overview">Обзор</button>
+    <button class="tab-btn" data-tab="practice">Практика</button>
     <button class="tab-btn" data-tab="schedule">Расписание</button>
-    <button class="tab-btn" data-tab="history">История</button>
     <button class="tab-btn" data-tab="homework">Домашка</button>
     <button class="tab-btn" data-tab="progress">Прогресс</button>
     <button class="tab-btn" data-tab="payment">Оплата</button>
-    <button class="tab-btn" data-tab="game">Игра</button>
-    <button class="tab-btn" data-tab="loyalty">Бонусы</button>
-    <button class="tab-btn" data-tab="documents">Документы</button>
+    <button class="tab-btn" data-tab="support">Поддержка</button>
   </nav>
 
   <main>
 
     <section class="panel active" id="panel-overview">
-      <h2 class="panel-title" id="greetingTitle" style="font-size:24px;">Привет! 👋</h2>
-      <p class="section-sub" id="greetingSub" style="margin-top:-8px;">Вот что у тебя сегодня.</p>
+      <h1 class="dash-welcome">С возвращением, <b id="dashName">друг</b>!</h1>
+
+      <div class="lang-row">
+        <button class="lang-pill active" onclick="switchLang('en')">🇬🇧 &nbsp;Английский</button>
+        <button class="lang-pill" onclick="switchLang('zh')">🇨🇳 &nbsp;Китайский</button>
+      </div>
+
+      <div id="zhNotice" class="hidden" style="background:var(--panel); border-radius:16px; padding:18px 20px; margin-bottom:20px;">
+        <div style="font-weight:700; margin-bottom:6px;">Китайский скоро запустим 🎉</div>
+        <div style="font-size:13.5px; color:var(--ink-soft); line-height:1.6; margin-bottom:12px;">
+          Мы готовим курс китайского языка. Если интересно — напиши, забронируем место в первой группе на особых условиях.
+        </div>
+        <a class="btn btn-dark btn-sm" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Мне интересно →</a>
+      </div>
 
       <div id="lowLessonsReminder" class="hidden" style="background:#FFF4DE; border:1.5px solid #E8C888; border-radius:14px; padding:14px 16px; margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
         <div style="font-size:13.5px; font-weight:600; color:#7A4E00;" id="lowLessonsText"></div>
         <a class="btn btn-dark btn-sm" href="#" onclick="document.querySelector('.tab-btn[data-tab=&quot;payment&quot;]').click(); return false;">Продлить</a>
       </div>
-      <div class="overview-grid">
-        <div class="stat-card">
-          <div class="stat-label">Следующий урок</div>
-          <div class="stat-value" id="ov-next-lesson">—</div>
+
+      <div class="dash-grid" id="enDashboard">
+        <div class="dash-col">
+
+          <div class="dash-card">
+            <h3 class="dash-card-title">Ближайшее</h3>
+            <div class="course-item featured">
+              <div class="ci-main">
+                <div class="ci-name" id="ov-next-lesson-title">Следующий урок</div>
+                <div class="ci-sub" id="ov-next-lesson">—</div>
+              </div>
+              <span id="ov-join-slot"></span>
+            </div>
+            <div class="course-item">
+              <div class="ci-main">
+                <div class="ci-name">Домашка ждёт</div>
+                <div class="ci-sub" id="ov-hw-pending">—</div>
+              </div>
+              <button class="btn btn-ghost btn-sm" onclick="document.querySelector('.tab-btn[data-tab=&quot;homework&quot;]').click()">Открыть</button>
+            </div>
+            <div class="course-item" style="margin-bottom:0;">
+              <div class="ci-main">
+                <div class="ci-name">Абонемент</div>
+                <div class="ci-sub" id="ov-subscription">—</div>
+              </div>
+              <button class="btn btn-ghost btn-sm" onclick="document.querySelector('.tab-btn[data-tab=&quot;payment&quot;]').click()">Оплата</button>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+              <div>
+                <h3 class="dash-card-title" style="margin-bottom:6px;">Уровень</h3>
+                <div class="level-big" id="ov-level">—</div>
+              </div>
+              <a class="btn btn-ghost btn-sm" href="https://crtmanage-prog.github.io/york-/level-test.html" target="_blank" rel="noopener">▷ Пройти тест</a>
+            </div>
+            <div class="test-grid">
+              <div class="test-card" onclick="startTest('core_skill')">
+                <div class="tc-name">Грамматика и лексика</div>
+                <div class="test-bar"><div class="test-bar-fill" id="bar-core_skill" style="width:0%; background:#3B7A1E;"></div></div>
+              </div>
+              <div class="test-card" onclick="startTest('reading')">
+                <div class="tc-name">Чтение</div>
+                <div class="test-bar"><div class="test-bar-fill" id="bar-reading" style="width:0%; background:#6B3FA0;"></div></div>
+              </div>
+              <div class="test-card" onclick="startTest('listening')">
+                <div class="tc-name">Аудирование</div>
+                <div class="test-bar"><div class="test-bar-fill" id="bar-listening" style="width:0%; background:#B36B00;"></div></div>
+              </div>
+              <div class="test-card locked">
+                <div class="tc-name" style="color:var(--ink-soft);">Письмо</div>
+                <div style="font-size:11.5px; color:var(--ink-soft);">Проверяет преподаватель — в домашке</div>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Домашка ждёт</div>
-          <div class="stat-value" id="ov-hw-pending">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Уровень</div>
-          <div class="stat-value" id="ov-level">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Абонемент</div>
-          <div class="stat-value" id="ov-subscription">—</div>
+
+        <div class="dash-col">
+
+          <div class="dash-card">
+            <h3 class="dash-card-title">Активность</h3>
+            <div style="display:flex; align-items:baseline; gap:10px;">
+              <span class="streak-num" id="streakNum">0</span>
+              <span style="font-size:12.5px; color:var(--ink-soft); line-height:1.3;">дней<br>подряд</span>
+            </div>
+            <div class="streak-days" id="streakDays"></div>
+          </div>
+
+          <div class="dash-card">
+            <h3 class="dash-card-title">Задания на сегодня</h3>
+            <div id="dailyTasksList"></div>
+            <button class="btn btn-dark" style="width:100%; margin-top:14px;" onclick="document.querySelector('.tab-btn[data-tab=&quot;practice&quot;]').click()">Перейти к практике</button>
+          </div>
+
         </div>
       </div>
+    </section>
 
-      <h2 class="panel-title" style="margin-top:24px;">Мы на связи</h2>
+    <section class="panel" id="panel-support">
+      <h2 class="panel-title">Мы на связи</h2>
       <div class="contact-list">
         <a class="contact-row" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">
           <span class="contact-ic">🎓</span>
@@ -801,7 +960,11 @@ function qrMatrixToSVG(text, pixelSize){
           <span class="contact-arrow">→</span>
         </a>
       </div>
+
+      <h2 class="panel-title" style="margin-top:24px;">Документы</h2>
+      <div id="myDocumentsList"></div>
     </section>
+
 
     <section class="panel" id="panel-schedule">
       <h2 class="panel-title">Расписание и материалы</h2>
@@ -821,12 +984,69 @@ function qrMatrixToSVG(text, pixelSize){
       <h3 class="cal-day-title" id="calDayTitle">Сегодня</h3>
       <div id="scheduleList"></div>
       <div class="note-box" id="rescheduleNote"></div>
-    </section>
 
-    <section class="panel" id="panel-history">
-      <h2 class="panel-title">История занятий</h2>
+      <h2 class="panel-title" style="margin-top:24px;">История занятий</h2>
       <p class="section-sub" style="margin-bottom:16px;">Все прошедшие уроки — в одном месте.</p>
       <div id="historyList"></div>
+    </section>
+
+    <section class="panel" id="panel-practice">
+      <h2 class="panel-title">Практика</h2>
+      <p class="section-sub" style="margin-bottom:18px;">Занимайся сам в любой день — всё проверяется автоматически, ждать преподавателя не нужно.</p>
+
+      <div id="practiceHome">
+        <div class="dash-grid">
+          <div class="dash-col">
+
+            <div class="dash-card">
+              <h3 class="dash-card-title">Задания на сегодня</h3>
+              <div id="practiceTasksList"></div>
+            </div>
+
+            <div class="dash-card">
+              <h3 class="dash-card-title">Тесты по темам</h3>
+              <p style="font-size:13px; color:var(--ink-soft); margin:-8px 0 14px;">Короткие тесты по грамматике — 5 вопросов, результат сразу.</p>
+              <div id="topicTestsList"></div>
+            </div>
+
+            <div class="dash-card">
+              <h3 class="dash-card-title">Полезные материалы</h3>
+              <div id="materialsList"></div>
+            </div>
+
+          </div>
+
+          <div class="dash-col">
+            <div class="dash-card">
+              <h3 class="dash-card-title">Собери слово</h3>
+              <div style="text-align:center;">
+                <div class="game-score">Счёт: <span id="gameScore2">0</span></div>
+                <div class="game-scrambled" id="gameScrambled2" style="font-size:26px;">—</div>
+                <div class="game-hint" id="gameHint2"></div>
+                <input type="text" id="gameInput2" class="game-input" placeholder="Впиши слово" autocomplete="off" autocapitalize="off">
+                <p id="gameFeedback2" class="game-feedback"></p>
+                <div class="game-btn-row">
+                  <button class="btn btn-accent btn-sm" id="gameCheckBtn2">Проверить</button>
+                  <button class="btn btn-ghost btn-sm" id="gameSkipBtn2">Другое</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <h3 class="dash-card-title">Мои результаты</h3>
+              <div id="myTestResults"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="testRunner" class="hidden"></div>
+    </section>
+
+    <section class="panel" id="panel-history-unused" style="display:none;">
+      <h2 class="panel-title">История занятий</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Все прошедшие уроки — в одном месте.</p>
+      <div id="historyList-unused"></div>
     </section>
 
     <section class="panel" id="panel-homework">
@@ -854,23 +1074,23 @@ function qrMatrixToSVG(text, pixelSize){
       <div id="mainPayQR" class="hidden" style="max-width:220px;"></div>
     </section>
 
-    <section class="panel" id="panel-game">
+    <section class="panel" id="panel-game-unused" style="display:none;">
       <h2 class="panel-title">Собери слово</h2>
       <p class="section-sub" style="margin-bottom:18px;">Пока ждёшь урок — разомнись. Буквы перемешаны, нужно угадать слово.</p>
       <div class="card" style="text-align:center;">
-        <div class="game-score">Счёт: <span id="gameScore">0</span></div>
-        <div class="game-scrambled" id="gameScrambled">—</div>
-        <div class="game-hint" id="gameHint"></div>
-        <input type="text" id="gameInput" class="game-input" placeholder="Впиши слово" autocomplete="off" autocapitalize="off">
-        <p id="gameFeedback" class="game-feedback"></p>
+        <div class="game-score">Счёт: <span id="gameScore-unused">0</span></div>
+        <div class="game-scrambled" id="gameScrambled-unused">—</div>
+        <div class="game-hint" id="gameHint-unused"></div>
+        <input type="text" id="gameInput-unused" class="game-input" placeholder="Впиши слово" autocomplete="off" autocapitalize="off">
+        <p id="gameFeedback-unused" class="game-feedback"></p>
         <div class="game-btn-row">
-          <button class="btn btn-accent" id="gameCheckBtn">Проверить</button>
-          <button class="btn btn-ghost" id="gameSkipBtn">Другое слово</button>
+          <button class="btn btn-accent" id="gameCheckBtn-unused">Проверить</button>
+          <button class="btn btn-ghost" id="gameSkipBtn-unused">Другое слово</button>
         </div>
       </div>
     </section>
 
-    <section class="panel" id="panel-loyalty">
+    <section class="panel" id="panel-loyalty-unused" style="display:none;">
       <h2 class="panel-title">York Club — бонусы за друзей</h2>
       <div class="card" style="margin-bottom:16px;">
         <p style="margin:0 0 14px; font-size:14.5px; line-height:1.6;">
@@ -901,12 +1121,6 @@ function qrMatrixToSVG(text, pixelSize){
         <button class="btn btn-dark btn-sm" id="notifyMeBtn">Узнать первым</button>
         <p id="notifyMeMsg" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0;"></p>
       </div>
-    </section>
-
-    <section class="panel" id="panel-documents">
-      <h2 class="panel-title">Документы</h2>
-      <p class="section-sub" style="margin-bottom:16px;">Договор, чеки и другие документы — только твои, никто другой их не видит.</p>
-      <div id="myDocumentsList"></div>
     </section>
 
   </main>
@@ -1062,6 +1276,8 @@ async function enterApp(user){
   pickGameWord();
   ensureReferralCode();
   loadMyDocuments();
+  loadPracticeProgress();
+  document.getElementById('dashName').textContent = firstName(currentProfile.full_name) || 'друг';
   await loadSchedule();
   await Promise.allSettled([loadHomework(), loadProgress(), loadPayments()]);
 }
@@ -1445,6 +1661,519 @@ async function loadPayments(){
 }
 
 /* ---------- GAME: word scramble ---------- */
+/* ================= ПРАКТИКА: банк вопросов (всё проверяется автоматически) ================= */
+
+// Вопросы с вариантами — правильный ответ всегда индекс 0 до перемешивания
+const QUESTION_BANK = {
+  core_skill: {
+    title: 'Грамматика и лексика',
+    A1: [
+      { q: 'She ___ a teacher.', a: ['is', 'are', 'am', 'be'] },
+      { q: 'I ___ coffee every morning.', a: ['drink', 'drinks', 'drinking', 'drank'] },
+      { q: 'This is ___ apple.', a: ['an', 'a', 'the', '—'] },
+      { q: 'They ___ from Spain.', a: ['are', 'is', 'am', 'be'] },
+      { q: 'He has two ___.', a: ['children', 'childs', 'childrens', 'child'] },
+    ],
+    A2: [
+      { q: 'I ___ to London last year.', a: ['went', 'go', 'have gone', 'going'] },
+      { q: 'She is ___ than her sister.', a: ['taller', 'tallest', 'more tall', 'tall'] },
+      { q: 'We ___ watching a film now.', a: ['are', 'is', 'do', 'have'] },
+      { q: 'There ___ any milk left.', a: ["isn't", "aren't", "doesn't", "don't"] },
+      { q: 'I have lived here ___ 2020.', a: ['since', 'for', 'from', 'during'] },
+    ],
+    B1: [
+      { q: 'I ___ never been to Japan.', a: ['have', 'has', 'am', 'did'] },
+      { q: 'If it rains, we ___ at home.', a: ['will stay', 'stayed', 'would stay', 'stay'] },
+      { q: 'The book ___ by millions of people.', a: ['was read', 'read', 'is reading', 'reads'] },
+      { q: 'She suggested ___ to the cinema.', a: ['going', 'to go', 'go', 'went'] },
+      { q: 'He asked me where I ___.', a: ['lived', 'live', 'am living', 'do live'] },
+    ],
+    B2: [
+      { q: 'By next year I ___ here for a decade.', a: ['will have worked', 'will work', 'work', 'worked'] },
+      { q: 'I wish I ___ more time.', a: ['had', 'have', 'will have', 'would have'] },
+      { q: '___ the rain, we went out.', a: ['Despite', 'Although', 'However', 'Because'] },
+      { q: 'He is said ___ a genius.', a: ['to be', 'being', 'be', 'is'] },
+      { q: 'Hardly ___ when the phone rang.', a: ['had I arrived', 'I arrived', 'I had arrived', 'did I arrive'] },
+    ],
+    C1: [
+      { q: 'Were it not ___ your help, I would have failed.', a: ['for', 'to', 'of', 'with'] },
+      { q: 'She has a ___ grasp of the subject.', a: ['firm', 'hard', 'strong-headed', 'stiff'] },
+      { q: 'Not only ___ late, but he also forgot the papers.', a: ['was he', 'he was', 'he is', 'is he'] },
+      { q: 'The proposal was met with ___ scepticism.', a: ['considerable', 'considerate', 'considered', 'considering'] },
+      { q: 'I would rather you ___ that.', a: ["didn't do", "don't do", "won't do", "not do"] },
+    ],
+    C2: [
+      { q: 'His argument was, at best, ___.', a: ['tenuous', 'tenacious', 'tentative', 'tense'] },
+      { q: 'She took umbrage ___ the remark.', a: ['at', 'to', 'with', 'for'] },
+      { q: 'The policy is tantamount ___ censorship.', a: ['to', 'with', 'of', 'for'] },
+      { q: 'He spoke with ___ conviction.', a: ['unwavering', 'unwaveringly', 'unwaved', 'waverless'] },
+      { q: 'Little ___ that the plan would fail.', a: ['did they know', 'they knew', 'they did know', 'knew they'] },
+    ],
+  },
+  reading: {
+    title: 'Чтение',
+    passage: {
+      A1: 'Tom gets up at seven. He has breakfast and goes to school by bus. School starts at eight thirty. His favourite subject is art. After school he plays football with friends in the park.',
+      A2: 'Anna moved to Berlin two years ago. At first she found the language difficult, but she took evening classes and now she speaks German well. She works in a small bookshop near the river and enjoys meeting customers from all over the world.',
+      B1: 'Remote work has changed how companies operate. Many employees report better work-life balance, but some managers worry about team cohesion. Studies suggest that hybrid models — a few days in the office, the rest at home — tend to produce the best results for both sides.',
+      B2: 'The rise of urban farming reflects a broader shift in how cities think about food security. Rooftop gardens and vertical farms cannot replace rural agriculture, but they shorten supply chains and reduce transport emissions. Critics argue the energy costs of indoor growing offset these gains.',
+      C1: 'Linguistic prescriptivism — the belief that language ought to follow fixed rules — has long been at odds with how speakers actually behave. Descriptivists counter that usage itself constitutes the standard, and that resistance to change reflects social anxiety rather than genuine concern for clarity.',
+      C2: 'The historiography of the period remains contested. Revisionist accounts, drawing on newly declassified archives, complicate the once-settled narrative of inevitable decline, suggesting instead a contingent sequence of decisions whose outcomes were far from predetermined at the time.',
+    },
+    questions: {
+      A1: [
+        { q: 'How does Tom go to school?', a: ['By bus', 'By car', 'On foot', 'By bike'] },
+        { q: 'What time does school start?', a: ['8:30', '7:00', '9:00', '8:00'] },
+        { q: 'What is his favourite subject?', a: ['Art', 'Maths', 'Music', 'Sport'] },
+      ],
+      A2: [
+        { q: 'How long ago did Anna move?', a: ['Two years', 'Two months', 'Last year', 'Five years'] },
+        { q: 'Where does she work?', a: ['In a bookshop', 'In a school', 'In a café', 'In a bank'] },
+        { q: 'How did she learn German?', a: ['Evening classes', 'At university', 'From friends', 'Online'] },
+      ],
+      B1: [
+        { q: 'What do studies suggest works best?', a: ['Hybrid models', 'Full remote', 'Full office', 'Flexible hours'] },
+        { q: 'What worries some managers?', a: ['Team cohesion', 'Productivity', 'Costs', 'Technology'] },
+        { q: 'What do employees report?', a: ['Better work-life balance', 'Higher pay', 'Less work', 'More travel'] },
+      ],
+      B2: [
+        { q: 'What do critics argue about indoor growing?', a: ['Energy costs offset gains', 'It is too slow', 'It tastes worse', 'It needs more land'] },
+        { q: 'What can urban farming NOT do?', a: ['Replace rural agriculture', 'Shorten supply chains', 'Reduce emissions', 'Use rooftops'] },
+        { q: 'Urban farming reflects a shift in thinking about:', a: ['Food security', 'Architecture', 'Tourism', 'Transport law'] },
+      ],
+      C1: [
+        { q: 'What do descriptivists claim?', a: ['Usage constitutes the standard', 'Rules must be fixed', 'Change is dangerous', 'Clarity is irrelevant'] },
+        { q: 'Prescriptivism is described as being at odds with:', a: ['How speakers behave', 'Written grammar', 'Dictionaries', 'Education'] },
+        { q: 'Resistance to change is attributed to:', a: ['Social anxiety', 'Genuine clarity concerns', 'Poor teaching', 'Historical accident'] },
+      ],
+      C2: [
+        { q: 'Revisionist accounts draw on:', a: ['Declassified archives', 'Oral history', 'Statistical models', 'Literary sources'] },
+        { q: 'They suggest outcomes were:', a: ['Far from predetermined', 'Entirely inevitable', 'Well documented', 'Widely predicted'] },
+        { q: 'The historiography is described as:', a: ['Contested', 'Settled', 'Neglected', 'Complete'] },
+      ],
+    },
+  },
+  listening: {
+    title: 'Аудирование',
+    // текст читается голосом браузера — ученик слушает и отвечает
+    script: {
+      A1: 'Hello! My name is Kate. I live in a small house near the sea. I have a dog called Max. Every morning we walk on the beach.',
+      A2: 'Excuse me, does this bus go to the train station? Yes, but you need to change at the market square. It takes about twenty minutes.',
+      B1: 'The meeting has been moved to Thursday afternoon because two of the team members are travelling on Wednesday. Please bring the updated budget figures.',
+      B2: 'Although the initial results looked promising, the research team decided to repeat the experiment under stricter conditions before publishing anything.',
+      C1: 'The committee acknowledged that the proposal, while ambitious in scope, lacked a realistic implementation timeline and would require substantial additional funding.',
+      C2: 'Notwithstanding the reservations expressed by several delegates, the resolution was adopted by a narrow margin, setting a precedent that may prove difficult to reverse.',
+    },
+    questions: {
+      A1: [
+        { q: "What is the dog's name?", a: ['Max', 'Kate', 'Sea', 'Beach'] },
+        { q: 'Where does she live?', a: ['Near the sea', 'In a city', 'On a farm', 'In the mountains'] },
+      ],
+      A2: [
+        { q: 'Where must you change?', a: ['Market square', 'Train station', 'City centre', 'Bus depot'] },
+        { q: 'How long does it take?', a: ['About 20 minutes', 'About an hour', '10 minutes', '45 minutes'] },
+      ],
+      B1: [
+        { q: 'When is the meeting now?', a: ['Thursday afternoon', 'Wednesday', 'Thursday morning', 'Friday'] },
+        { q: 'What should people bring?', a: ['Updated budget figures', 'Laptops', 'Travel tickets', 'Contracts'] },
+      ],
+      B2: [
+        { q: 'What did the team decide?', a: ['Repeat the experiment', 'Publish immediately', 'Cancel the project', 'Change the topic'] },
+        { q: 'The initial results were:', a: ['Promising', 'Disappointing', 'Inconclusive', 'Falsified'] },
+      ],
+      C1: [
+        { q: 'What did the proposal lack?', a: ['Realistic timeline', 'Ambition', 'Support', 'Detail'] },
+        { q: 'What would it require?', a: ['Additional funding', 'New members', 'Legal review', 'Public consultation'] },
+      ],
+      C2: [
+        { q: 'How was the resolution adopted?', a: ['By a narrow margin', 'Unanimously', 'It was rejected', 'By acclamation'] },
+        { q: 'What may prove difficult?', a: ['Reversing the precedent', 'Funding it', 'Explaining it', 'Translating it'] },
+      ],
+    },
+  },
+};
+
+const TOPIC_TESTS = [
+  { key: 'present_perfect', title: 'Present Perfect', questions: [
+    { q: 'I ___ my keys. I can\'t find them.', a: ['have lost', 'lost', 'am losing', 'lose'] },
+    { q: 'She ___ in Paris since 2019.', a: ['has lived', 'lives', 'lived', 'is living'] },
+    { q: '___ you ever eaten sushi?', a: ['Have', 'Did', 'Do', 'Are'] },
+    { q: 'We ___ finished yet.', a: ["haven't", "didn't", "don't", "aren't"] },
+    { q: 'He has been a doctor ___ ten years.', a: ['for', 'since', 'from', 'during'] },
+  ]},
+  { key: 'articles', title: 'Артикли a / an / the', questions: [
+    { q: 'I saw ___ elephant at the zoo.', a: ['an', 'a', 'the', '—'] },
+    { q: '___ sun rises in the east.', a: ['The', 'A', 'An', '—'] },
+    { q: 'She plays ___ piano beautifully.', a: ['the', 'a', 'an', '—'] },
+    { q: 'He is ___ engineer.', a: ['an', 'a', 'the', '—'] },
+    { q: 'I love ___ music.', a: ['—', 'the', 'a', 'an'] },
+  ]},
+  { key: 'conditionals', title: 'Условные предложения', questions: [
+    { q: 'If I ___ rich, I would travel.', a: ['were', 'am', 'will be', 'would be'] },
+    { q: 'If it rains, we ___ inside.', a: ['will stay', 'stayed', 'would stay', 'have stayed'] },
+    { q: 'If she had studied, she ___ passed.', a: ['would have', 'would', 'will have', 'had'] },
+    { q: 'Water boils if you ___ it to 100°C.', a: ['heat', 'will heat', 'would heat', 'heated'] },
+    { q: 'I would call him if I ___ his number.', a: ['knew', 'know', 'have known', 'will know'] },
+  ]},
+  { key: 'prepositions', title: 'Предлоги времени и места', questions: [
+    { q: 'The meeting is ___ Monday.', a: ['on', 'in', 'at', 'to'] },
+    { q: 'I wake up ___ 7 o\'clock.', a: ['at', 'on', 'in', 'by'] },
+    { q: 'She was born ___ May.', a: ['in', 'on', 'at', 'during'] },
+    { q: 'The cat is ___ the table.', a: ['under', 'of', 'to', 'from'] },
+    { q: 'We arrived ___ the airport late.', a: ['at', 'to', 'in', 'on'] },
+  ]},
+  { key: 'phrasal_verbs', title: 'Фразовые глаголы', questions: [
+    { q: 'Please ___ the light, it\'s dark.', a: ['turn on', 'turn of', 'turn in', 'turn up'] },
+    { q: 'I need to ___ this word in a dictionary.', a: ['look up', 'look at', 'look for', 'look after'] },
+    { q: 'She ___ smoking last year.', a: ['gave up', 'gave in', 'gave away', 'gave out'] },
+    { q: 'We ___ early to catch the train.', a: ['set off', 'set up', 'set in', 'set down'] },
+    { q: 'Can you ___ the kids tonight?', a: ['look after', 'look up', 'look out', 'look into'] },
+  ]},
+];
+
+const MATERIALS = [
+  { icon: '📰', title: 'BBC Learning English', desc: 'Короткие видео и статьи по уровням, всё бесплатно', url: 'https://www.bbc.co.uk/learningenglish' },
+  { icon: '📖', title: 'British Council — LearnEnglish', desc: 'Упражнения по грамматике с проверкой', url: 'https://learnenglish.britishcouncil.org' },
+  { icon: '🎧', title: 'ESL Lab — аудирование', desc: 'Диалоги с вопросами, от простого к сложному', url: 'https://www.esl-lab.com' },
+  { icon: '🗂', title: 'Quizlet', desc: 'Карточки для запоминания слов', url: 'https://quizlet.com' },
+  { icon: '🎬', title: 'Наш гайд: Watch & Speak', desc: 'Как учить английский по сериалам', url: 'https://crtmanage-prog.github.io/york-/guide/watch_and_speak_final.html' },
+];
+
+/* ---------- СТРИК И ЕЖЕДНЕВНЫЕ ЗАДАНИЯ ---------- */
+let practiceProgress = { streak_days: 0, last_practice_date: null, words_learned: 0, quizzes_done: 0 };
+let todayTasksDone = JSON.parse(localStorage.getItem('york_tasks_' + new Date().toDateString()) || '{}');
+
+function saveTodayTasks(){
+  localStorage.setItem('york_tasks_' + new Date().toDateString(), JSON.stringify(todayTasksDone));
+}
+
+async function loadPracticeProgress(){
+  const { data } = await supabase.from('practice_progress').select('*').eq('student_id', currentUser.id);
+  if (data && data.length){
+    practiceProgress = data[0];
+  } else {
+    await supabase.from('practice_progress').insert({ student_id: currentUser.id });
+  }
+  await touchStreak();
+  renderStreak();
+  renderDailyTasks();
+  renderTopicTests();
+  renderMaterials();
+  loadMyTestResults();
+}
+
+async function touchStreak(){
+  const today = new Date().toISOString().slice(0,10);
+  if (practiceProgress.last_practice_date === today) return;
+
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0,10);
+  const newStreak = practiceProgress.last_practice_date === yesterday
+    ? (practiceProgress.streak_days || 0) + 1
+    : 1;
+
+  practiceProgress.streak_days = newStreak;
+  practiceProgress.last_practice_date = today;
+  await supabase.from('practice_progress').update({
+    streak_days: newStreak, last_practice_date: today, updated_at: new Date().toISOString()
+  }).eq('student_id', currentUser.id);
+}
+
+function renderStreak(){
+  const el = document.getElementById('streakNum');
+  if (el) el.textContent = practiceProgress.streak_days || 0;
+
+  const daysEl = document.getElementById('streakDays');
+  if (!daysEl) return;
+  const labels = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+  const todayIdx = (new Date().getDay() + 6) % 7;
+  daysEl.innerHTML = labels.map((l, i) => {
+    const done = i <= todayIdx && i > todayIdx - (practiceProgress.streak_days || 0);
+    return `<div class="streak-day ${done ? 'done' : ''}">${done ? '⚡' : l}</div>`;
+  }).join('');
+}
+
+function dailyTasksData(){
+  return [
+    { key: 'word', icon: '🔤', title: 'Собери слово', sub: 'мини-игра', done: !!todayTasksDone.word },
+    { key: 'quiz', icon: '✍️', title: 'Мини-квиз', sub: '5 вопросов', done: !!todayTasksDone.quiz },
+    { key: 'listening', icon: '🎧', title: 'Аудирование', sub: 'послушать и ответить', done: !!todayTasksDone.listening },
+  ];
+}
+
+function renderDailyTasks(){
+  const html = dailyTasksData().map(t => `
+    <div class="task-row">
+      <div class="task-icon" style="${t.done ? 'background:var(--accent);' : ''}">${t.done ? '✓' : t.icon}</div>
+      <div class="task-main">
+        <div class="task-sub">${t.sub}</div>
+        <div class="task-title" style="${t.done ? 'color:var(--ink-soft); text-decoration:line-through;' : ''}">${t.title}</div>
+      </div>
+    </div>
+  `).join('');
+  ['dailyTasksList','practiceTasksList'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = html + (id === 'practiceTasksList'
+      ? `<div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+           <button class="btn btn-accent btn-sm" onclick="startTest('quiz_daily')">Мини-квиз</button>
+           <button class="btn btn-ghost btn-sm" onclick="startTest('listening')">Аудирование</button>
+         </div>`
+      : '');
+  });
+}
+
+function renderTopicTests(){
+  const el = document.getElementById('topicTestsList');
+  if (!el) return;
+  el.innerHTML = TOPIC_TESTS.map(t => `
+    <div class="course-item" style="cursor:pointer;" onclick="startTest('topic_${t.key}')">
+      <div class="ci-main">
+        <div class="ci-name">${t.title}</div>
+        <div class="ci-sub">${t.questions.length} вопросов · проверка сразу</div>
+      </div>
+      <span style="font-size:18px;">›</span>
+    </div>
+  `).join('');
+}
+
+function renderMaterials(){
+  const el = document.getElementById('materialsList');
+  if (!el) return;
+  el.innerHTML = MATERIALS.map(m => `
+    <a class="course-item" href="${m.url}" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+      <span style="font-size:19px;">${m.icon}</span>
+      <div class="ci-main">
+        <div class="ci-name">${m.title}</div>
+        <div class="ci-sub">${m.desc}</div>
+      </div>
+      <span style="font-size:16px; color:var(--ink-soft);">↗</span>
+    </a>
+  `).join('');
+}
+
+/* ---------- ДВИЖОК ТЕСТОВ (автопроверка) ---------- */
+let currentTest = null;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildTest(testKey){
+  const level = (currentProfile && currentProfile.level) || 'A1';
+
+  if (testKey === 'core_skill' || testKey === 'quiz_daily'){
+    const pool = QUESTION_BANK.core_skill[level] || QUESTION_BANK.core_skill.A1;
+    return { key: testKey, title: testKey === 'quiz_daily' ? 'Мини-квиз' : 'Грамматика и лексика', intro: null, questions: pool };
+  }
+  if (testKey === 'reading'){
+    return {
+      key: 'reading', title: 'Чтение',
+      intro: { type: 'text', content: QUESTION_BANK.reading.passage[level] || QUESTION_BANK.reading.passage.A1 },
+      questions: QUESTION_BANK.reading.questions[level] || QUESTION_BANK.reading.questions.A1
+    };
+  }
+  if (testKey === 'listening'){
+    return {
+      key: 'listening', title: 'Аудирование',
+      intro: { type: 'audio', content: QUESTION_BANK.listening.script[level] || QUESTION_BANK.listening.script.A1 },
+      questions: QUESTION_BANK.listening.questions[level] || QUESTION_BANK.listening.questions.A1
+    };
+  }
+  if (testKey.startsWith('topic_')){
+    const topic = TOPIC_TESTS.find(t => 'topic_' + t.key === testKey);
+    if (topic) return { key: testKey, title: topic.title, intro: null, questions: topic.questions };
+  }
+  return null;
+}
+
+function startTest(testKey){
+  const test = buildTest(testKey);
+  if (!test) return;
+
+  // перемешиваем варианты, запоминая правильный
+  currentTest = {
+    ...test,
+    questions: test.questions.map(q => {
+      const correct = q.a[0];
+      const options = shuffle(q.a);
+      return { q: q.q, options, correctIndex: options.indexOf(correct) };
+    }),
+    answers: [],
+    current: 0
+  };
+
+  document.querySelector('.tab-btn[data-tab="practice"]').click();
+  document.getElementById('practiceHome').classList.add('hidden');
+  document.getElementById('testRunner').classList.remove('hidden');
+  renderTestQuestion();
+}
+
+function speakText(text){
+  try {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-GB';
+    u.rate = 0.9;
+    window.speechSynthesis.speak(u);
+  } catch(e){
+    alert('Твой браузер не поддерживает озвучку. Попробуй Chrome.');
+  }
+}
+
+function renderTestQuestion(){
+  const t = currentTest;
+  const q = t.questions[t.current];
+  const el = document.getElementById('testRunner');
+
+  let introHtml = '';
+  if (t.intro && t.current === 0){
+    if (t.intro.type === 'text'){
+      introHtml = `<div class="note-box" style="margin-bottom:16px; color:var(--ink); line-height:1.7;">${t.intro.content}</div>`;
+    } else if (t.intro.type === 'audio'){
+      introHtml = `
+        <div class="note-box" style="margin-bottom:16px; text-align:center;">
+          <button class="btn btn-accent" onclick="speakText(currentTest.intro.content)">🔊 Прослушать</button>
+          <div style="font-size:12px; color:var(--ink-soft); margin-top:8px;">Можно слушать сколько угодно раз</div>
+        </div>`;
+    }
+  } else if (t.intro && t.intro.type === 'audio'){
+    introHtml = `<div style="text-align:center; margin-bottom:14px;">
+        <button class="btn btn-ghost btn-sm" onclick="speakText(currentTest.intro.content)">🔊 Прослушать ещё раз</button>
+      </div>`;
+  } else if (t.intro && t.intro.type === 'text'){
+    introHtml = `<div class="note-box" style="margin-bottom:16px; color:var(--ink); line-height:1.7;">${t.intro.content}</div>`;
+  }
+
+  el.innerHTML = `
+    <div class="dash-card" style="max-width:640px; margin:0 auto;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+        <h3 class="dash-card-title" style="margin:0;">${t.title}</h3>
+        <button class="btn btn-ghost btn-sm" onclick="exitTest()">Выйти</button>
+      </div>
+      <div style="font-size:12.5px; color:var(--ink-soft); margin-bottom:16px;">Вопрос ${t.current + 1} из ${t.questions.length}</div>
+      <div style="background:var(--panel); border-radius:8px; height:6px; margin-bottom:18px; overflow:hidden;">
+        <div style="height:100%; background:var(--accent); width:${(t.current / t.questions.length) * 100}%;"></div>
+      </div>
+      ${introHtml}
+      <div style="font-size:16px; font-weight:600; margin-bottom:16px;">${q.q}</div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        ${q.options.map((opt, i) => `
+          <button class="btn btn-ghost" style="text-align:left; justify-content:flex-start;" onclick="answerTest(${i})">${opt}</button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function answerTest(index){
+  currentTest.answers.push(index);
+  currentTest.current++;
+  if (currentTest.current < currentTest.questions.length){
+    renderTestQuestion();
+  } else {
+    finishTest();
+  }
+}
+
+async function finishTest(){
+  const t = currentTest;
+  const score = t.answers.filter((a, i) => a === t.questions[i].correctIndex).length;
+  const total = t.questions.length;
+  const pct = Math.round((score / total) * 100);
+  const level = (currentProfile && currentProfile.level) || 'A1';
+
+  await supabase.from('test_results').insert({
+    student_id: currentUser.id,
+    test_key: t.key,
+    test_title: t.title,
+    score, total, level
+  });
+
+  // отметить ежедневное задание выполненным
+  if (t.key === 'quiz_daily'){ todayTasksDone.quiz = true; saveTodayTasks(); }
+  if (t.key === 'listening'){ todayTasksDone.listening = true; saveTodayTasks(); }
+
+  const verdict = pct >= 80 ? 'Отлично! 🎉' : pct >= 50 ? 'Неплохо, но есть куда расти 💪' : 'Стоит повторить тему 📚';
+
+  document.getElementById('testRunner').innerHTML = `
+    <div class="dash-card" style="max-width:640px; margin:0 auto; text-align:center;">
+      <div style="font-size:44px; margin-bottom:10px;">${pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '📚'}</div>
+      <h3 class="dash-card-title">${t.title}</h3>
+      <div style="font-family:'Unbounded',sans-serif; font-weight:900; font-size:36px; margin:10px 0;">${score} / ${total}</div>
+      <div style="color:var(--ink-soft); margin-bottom:20px;">${verdict}</div>
+      <div style="text-align:left; margin-bottom:20px;">
+        ${t.questions.map((q, i) => {
+          const ok = t.answers[i] === q.correctIndex;
+          return `
+            <div style="padding:10px 0; border-bottom:1px solid var(--line);">
+              <div style="font-size:13.5px; font-weight:600;">${ok ? '✅' : '❌'} ${q.q}</div>
+              ${!ok ? `<div style="font-size:12.5px; color:var(--ink-soft); margin-top:3px;">Правильно: <b>${q.options[q.correctIndex]}</b></div>` : ''}
+            </div>`;
+        }).join('')}
+      </div>
+      <button class="btn btn-accent" onclick="exitTest()">Готово</button>
+    </div>
+  `;
+  loadMyTestResults();
+  renderDailyTasks();
+}
+
+function exitTest(){
+  try { window.speechSynthesis.cancel(); } catch(e){}
+  currentTest = null;
+  document.getElementById('testRunner').classList.add('hidden');
+  document.getElementById('practiceHome').classList.remove('hidden');
+}
+
+async function loadMyTestResults(){
+  const { data } = await supabase.from('test_results').select('*')
+    .eq('student_id', currentUser.id).order('created_at', { ascending:false }).limit(8);
+  const list = data || [];
+
+  const el = document.getElementById('myTestResults');
+  if (el){
+    el.innerHTML = list.length
+      ? list.map(r => {
+          const pct = r.total ? Math.round((r.score / r.total) * 100) : 0;
+          return `<div class="task-row">
+            <div class="task-main">
+              <div class="task-title" style="font-size:13px;">${r.test_title || r.test_key}</div>
+              <div class="task-sub">${fmtDate(r.created_at)}</div>
+            </div>
+            <span class="badge ${pct >= 80 ? 'badge-active' : pct >= 50 ? 'badge-pending' : 'badge-expired'}">${r.score}/${r.total}</span>
+          </div>`;
+        }).join('')
+      : '<div class="empty-state">Пока нет пройденных тестов.</div>';
+  }
+
+  // прогресс-бары на обзоре — по последнему результату каждого типа
+  ['core_skill','reading','listening'].forEach(key => {
+    const last = list.find(r => r.test_key === key);
+    const bar = document.getElementById('bar-' + key);
+    if (!bar) return;
+    if (last && last.total){
+      const pct = Math.round((last.score / last.total) * 100);
+      bar.style.width = Math.max(pct, 18) + '%';
+      bar.textContent = pct + '%';
+    } else {
+      bar.style.width = '18%';
+      bar.textContent = '—';
+      bar.style.background = 'rgba(28,28,28,0.25)';
+    }
+  });
+}
+
+function switchLang(lang){
+  document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('zhNotice').classList.toggle('hidden', lang !== 'zh');
+  document.getElementById('enDashboard').classList.toggle('hidden', lang === 'zh');
+}
+
 const WORD_BANK = {
   A1: ['cat','book','house','water','friend','table','happy','music','green','apple'],
   A2: ['weather','journey','morning','kitchen','holiday','picture','answer','simple','forget','garden'],
@@ -1474,20 +2203,21 @@ function pickGameWord(){
   const level = (currentProfile && currentProfile.level) || 'A1';
   const pool = WORD_BANK[level] || WORD_BANK.A1;
   gameWord = pool[Math.floor(Math.random() * pool.length)];
-  document.getElementById('gameScrambled').textContent = scrambleWord(gameWord).toUpperCase();
-  document.getElementById('gameHint').textContent = `${gameWord.length} букв · уровень ${level}`;
-  document.getElementById('gameInput').value = '';
-  document.getElementById('gameFeedback').textContent = '';
-  document.getElementById('gameFeedback').className = 'game-feedback';
+  document.getElementById('gameScrambled2').textContent = scrambleWord(gameWord).toUpperCase();
+  document.getElementById('gameHint2').textContent = `${gameWord.length} букв · уровень ${level}`;
+  document.getElementById('gameInput2').value = '';
+  document.getElementById('gameFeedback2').textContent = '';
+  document.getElementById('gameFeedback2').className = 'game-feedback';
 }
 
 function checkGameWord(){
-  const input = document.getElementById('gameInput').value.trim().toLowerCase();
-  const feedback = document.getElementById('gameFeedback');
+  const input = document.getElementById('gameInput2').value.trim().toLowerCase();
+  const feedback = document.getElementById('gameFeedback2');
   if (!input) return;
   if (input === gameWord){
     gameScoreVal++;
-    document.getElementById('gameScore').textContent = gameScoreVal;
+    if (!todayTasksDone.word){ todayTasksDone.word = true; saveTodayTasks(); renderDailyTasks(); }
+    document.getElementById('gameScore2').textContent = gameScoreVal;
     feedback.textContent = 'Точно! 🎉';
     feedback.className = 'game-feedback ok';
     setTimeout(pickGameWord, 900);
@@ -1497,9 +2227,9 @@ function checkGameWord(){
   }
 }
 
-document.getElementById('gameCheckBtn').addEventListener('click', checkGameWord);
-document.getElementById('gameSkipBtn').addEventListener('click', pickGameWord);
-document.getElementById('gameInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkGameWord(); });
+document.getElementById('gameCheckBtn2').addEventListener('click', checkGameWord);
+document.getElementById('gameSkipBtn2').addEventListener('click', pickGameWord);
+document.getElementById('gameInput2').addEventListener('keydown', e => { if (e.key === 'Enter') checkGameWord(); });
 
 /* ---------- LOYALTY ---------- */
 function toggleMainPayQR(){
