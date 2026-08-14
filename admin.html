@@ -363,6 +363,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <button class="tab-btn active" data-tab="overview">Обзор</button>
     <button class="tab-btn" data-tab="allstudents">Ученики</button>
     <button class="tab-btn" data-tab="allteachers">Учителя</button>
+    <button class="tab-btn" data-tab="groups">Группы</button>
     <button class="tab-btn" data-tab="alllessons">Уроки</button>
     <button class="tab-btn" data-tab="payments">Оплата</button>
     <button class="tab-btn" data-tab="requests">Заявки</button>
@@ -375,7 +376,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <section class="panel active" id="panel-overview">
       <h2 class="panel-title" id="greetingTitle" style="font-size:24px;">Привет! 👋</h2>
       <p class="section-sub" id="greetingSub" style="margin-top:-8px;">Вот как дела в школе сегодня.</p>
-      <div class="overview-grid">
+      <div class="overview-grid" style="grid-template-columns:repeat(3,1fr);">
         <div class="stat-card">
           <div class="stat-label">Учеников</div>
           <div class="stat-value" id="ov-students">—</div>
@@ -383,10 +384,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         <div class="stat-card">
           <div class="stat-label">Учителей</div>
           <div class="stat-value" id="ov-teachers">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Уроков впереди</div>
-          <div class="stat-value" id="ov-lessons">—</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">На проверке</div>
@@ -487,6 +484,49 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       </div>
     </section>
 
+    <section class="panel" id="panel-groups">
+      <h2 class="panel-title">Группы</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Группа CREW — чтобы учитель мог задавать домашку сразу всем.</p>
+
+      <div class="card" style="margin-bottom:20px;">
+        <div class="field">
+          <label for="groupName">Название группы</label>
+          <input id="groupName" type="text" placeholder="Например: Вечерний CREW A2">
+        </div>
+        <div class="field">
+          <label for="groupTeacher">Учитель</label>
+          <select id="groupTeacher"></select>
+        </div>
+        <p id="groupError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
+        <p id="groupSuccess" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
+        <button class="btn btn-dark btn-sm" id="groupAddBtn">+ Создать группу</button>
+      </div>
+
+      <div class="table-wrap" style="margin-bottom:20px;">
+        <table class="admin-table" id="groupsTable">
+          <thead>
+            <tr><th>Название</th><th>Учитель</th><th>Учеников</th><th></th></tr>
+          </thead>
+          <tbody id="groupsTableBody"></tbody>
+        </table>
+      </div>
+
+      <h2 class="panel-title">Добавить ученика в группу</h2>
+      <div class="card">
+        <div class="field">
+          <label for="groupMemberStudent">Ученик</label>
+          <select id="groupMemberStudent"></select>
+        </div>
+        <div class="field">
+          <label for="groupMemberGroup">Группа</label>
+          <select id="groupMemberGroup"></select>
+        </div>
+        <p id="groupMemberError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
+        <p id="groupMemberSuccess" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
+        <button class="btn btn-dark btn-sm" id="groupMemberSaveBtn">Сохранить</button>
+      </div>
+    </section>
+
     <section class="panel" id="panel-alllessons">
       <h2 class="panel-title">Все уроки</h2>
 
@@ -543,6 +583,30 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <h2 class="panel-title">Оплата</h2>
       <p class="section-sub" style="margin-bottom:16px;">Прикрепи абонемент ученику — если укажешь дни недели и время, уроки на весь абонемент создадутся сами.</p>
 
+      <h2 class="panel-title" style="margin-top:0;">Ссылки на оплату (Т-Банк)</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Заготовь в приложении Т-Банка 4 ссылки на нужные суммы — система сама подставит нужную при реферальной скидке.</p>
+      <div class="card" style="margin-bottom:20px;">
+        <div class="field">
+          <label for="linkSoloFull">SOLO — полная цена</label>
+          <input id="linkSoloFull" type="text" placeholder="https://www.tinkoff.ru/rm/...">
+        </div>
+        <div class="field">
+          <label for="linkSoloDiscount">SOLO — со скидкой 20%</label>
+          <input id="linkSoloDiscount" type="text" placeholder="https://www.tinkoff.ru/rm/...">
+        </div>
+        <div class="field">
+          <label for="linkCrewFull">CREW — полная цена</label>
+          <input id="linkCrewFull" type="text" placeholder="https://www.tinkoff.ru/rm/...">
+        </div>
+        <div class="field">
+          <label for="linkCrewDiscount">CREW — со скидкой 20%</label>
+          <input id="linkCrewDiscount" type="text" placeholder="https://www.tinkoff.ru/rm/...">
+        </div>
+        <p id="linkSettingsError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
+        <p id="linkSettingsSuccess" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
+        <button class="btn btn-dark btn-sm" id="linkSettingsSaveBtn">Сохранить ссылки</button>
+      </div>
+
       <div class="card">
         <div class="field">
           <label for="payStudent">Ученик</label>
@@ -561,8 +625,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <input id="payLessonsUsed" type="number" min="0" value="0">
         </div>
         <div class="field">
-          <label for="payUrl">Ссылка на оплату — ЮKassa (необязательно)</label>
-          <input id="payUrl" type="text" placeholder="https://yookassa.ru/...">
+          <label for="payUrl">Ссылка на оплату</label>
+          <input id="payUrl" type="text" placeholder="https://www.tinkoff.ru/rm/... или другая">
+          <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-ghost btn-sm" onclick="fillPayUrl(false)">Подставить обычную ссылку</button>
+            <button type="button" class="btn btn-accent btn-sm" onclick="fillPayUrl(true)">Подставить со скидкой 20%</button>
+          </div>
         </div>
         <div class="field">
           <label for="payStatus">Статус</label>
@@ -651,6 +719,37 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
     <section class="panel" id="panel-stats">
       <h2 class="panel-title">Статистика</h2>
+
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div class="field" style="max-width:280px; flex:1; min-width:200px;">
+          <label for="statsPeriod">Период</label>
+          <select id="statsPeriod" onchange="onStatsPeriodChange()">
+            <option value="all">За всё время</option>
+            <option value="month" selected>Этот месяц</option>
+            <option value="lastmonth">Прошлый месяц</option>
+            <option value="year">Этот год</option>
+            <option value="custom">Свой период…</option>
+          </select>
+        </div>
+        <div class="field" style="max-width:280px; flex:1; min-width:200px;">
+          <label for="statsTeacher">Учитель</label>
+          <select id="statsTeacher" onchange="renderStats()">
+            <option value="">Все учителя</option>
+          </select>
+        </div>
+      </div>
+      <div id="statsCustomRange" class="hidden" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;">
+        <div class="field" style="flex:1; min-width:160px;">
+          <label for="statsFrom">С</label>
+          <input id="statsFrom" type="date">
+        </div>
+        <div class="field" style="flex:1; min-width:160px;">
+          <label for="statsTo">По</label>
+          <input id="statsTo" type="date">
+        </div>
+      </div>
+      <button class="btn btn-ghost btn-sm" style="margin-bottom:20px;" onclick="renderStats()">Применить</button>
+
       <div class="overview-grid" style="grid-template-columns:repeat(4,1fr); margin-bottom:24px;">
         <div class="stat-card">
           <div class="stat-label">Пробных проведено</div>
@@ -968,7 +1067,6 @@ async function loadAll(){
 
   document.getElementById('ov-students').textContent = allStudents.length;
   document.getElementById('ov-teachers').textContent = allTeachers.length;
-  document.getElementById('ov-lessons').textContent = window.__lessonsList.length;
   document.getElementById('ov-tocheck').textContent = (hw || []).length;
 
   renderStudentsTable();
@@ -986,6 +1084,8 @@ async function loadAll(){
   await loadPayments();
   await loadTrialRequests();
   renderStats();
+  await loadGroups();
+  await loadPaymentLinkSettings();
 }
 
 function fmtDateKey(d){
@@ -1054,6 +1154,19 @@ function renderCalendar(){
 function isLessonPast(lesson){
   const end = new Date(lesson.lesson_date).getTime() + (lesson.duration_minutes || 60) * 60000;
   return end < Date.now();
+}
+
+// сколько занятий реально осталось в абонементе: считаем прошедшие уроки,
+// привязанные к этому абонементу (payment_id) — если ни один урок не привязан,
+// используем старое ручное поле lessons_used как запасной вариант
+function computeRemaining(payment, allLessons){
+  if (!payment) return null;
+  const linked = (allLessons || []).filter(l => l.payment_id === payment.id);
+  if (linked.length > 0){
+    const usedCount = linked.filter(l => isLessonPast(l)).length;
+    return (payment.lessons_included || 0) - usedCount;
+  }
+  return (payment.lessons_included || 0) - (payment.lessons_used || 0);
 }
 
 function lessonBadge(l){
@@ -1210,6 +1323,8 @@ function fillTeacherDropdowns(){
   document.getElementById('linkTeacher').innerHTML = opts;
   document.getElementById('trialTeacher').innerHTML = opts;
   document.getElementById('editTeacherSelect').innerHTML = opts;
+  document.getElementById('groupTeacher').innerHTML = opts;
+  document.getElementById('statsTeacher').innerHTML = '<option value="">Все учителя</option>' + opts;
   document.getElementById('editStudent').innerHTML = allStudents.map(s => `<option value="${s.id}">${s.full_name}</option>`).join('');
   document.getElementById('payStudent').innerHTML = allStudents.map(s => `<option value="${s.id}">${s.full_name}</option>`).join('');
   if (!document.getElementById('editTimezone').options.length){
@@ -1605,11 +1720,53 @@ async function attachSubscription(){
 
 /* ---------- ЗАЯВКИ НА ПРОБНЫЙ ---------- */
 /* ---------- СТАТИСТИКА ---------- */
+function onStatsPeriodChange(){
+  const isCustom = document.getElementById('statsPeriod').value === 'custom';
+  document.getElementById('statsCustomRange').classList.toggle('hidden', !isCustom);
+  if (!isCustom) renderStats();
+}
+
+function getStatsPeriodRange(){
+  const sel = document.getElementById('statsPeriod').value;
+  const now = new Date();
+  let start = null, end = null;
+  if (sel === 'month'){
+    start = new Date(now.getFullYear(), now.getMonth(), 1);
+    end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  } else if (sel === 'lastmonth'){
+    start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    end = new Date(now.getFullYear(), now.getMonth(), 1);
+  } else if (sel === 'year'){
+    start = new Date(now.getFullYear(), 0, 1);
+    end = new Date(now.getFullYear() + 1, 0, 1);
+  } else if (sel === 'custom'){
+    const fromVal = document.getElementById('statsFrom').value;
+    const toVal = document.getElementById('statsTo').value;
+    start = fromVal ? new Date(fromVal + 'T00:00:00') : null;
+    end = toVal ? new Date(new Date(toVal + 'T00:00:00').getTime() + 86400000) : null;
+  }
+  return { start, end };
+}
+
+function inStatsRange(dateStr, start, end){
+  if (!dateStr) return false;
+  const d = new Date(dateStr);
+  if (start && d < start) return false;
+  if (end && d >= end) return false;
+  return true;
+}
+
 function renderStats(){
+  const { start, end } = getStatsPeriodRange();
+  const noFilter = !start && !end;
+  const teacherFilter = document.getElementById('statsTeacher').value;
+
   const lessons = window.__lessonsList || [];
   const payments = window.__paymentsList || [];
 
-  const pastLessons = lessons.filter(l => isLessonPast(l));
+  let pastLessons = lessons.filter(l => isLessonPast(l) && (noFilter || inStatsRange(l.lesson_date, start, end)));
+  if (teacherFilter) pastLessons = pastLessons.filter(l => l.teacher_id === teacherFilter);
+
   const trialsCount = pastLessons.filter(l => l.is_trial).length;
   const realLessonsCount = pastLessons.filter(l => !l.is_trial).length;
 
@@ -1617,7 +1774,7 @@ function renderStats(){
   document.getElementById('stat-lessons').textContent = realLessonsCount;
 
   const revenue = payments
-    .filter(p => p.status === 'active')
+    .filter(p => p.status === 'active' && (noFilter || inStatsRange(p.paid_at || p.created_at, start, end)))
     .reduce((sum, p) => sum + (p.amount || 0), 0);
   document.getElementById('stat-revenue').textContent = revenue.toLocaleString('ru-RU') + ' ₽';
 
@@ -1653,8 +1810,178 @@ function renderStats(){
 
   document.getElementById('payoutTableBody').innerHTML = rows.length
     ? rows.join('')
-    : '<tr><td colspan="4" class="empty-state">Нет проведённых уроков.</td></tr>';
+    : '<tr><td colspan="4" class="empty-state">Нет проведённых уроков за этот период.</td></tr>';
   document.getElementById('stat-payout').textContent = totalPayout.toLocaleString('ru-RU') + ' ₽';
+}
+
+/* ---------- ГРУППЫ ---------- */
+/* ---------- ССЫЛКИ НА ОПЛАТУ (для реферальной скидки) ---------- */
+async function loadPaymentLinkSettings(){
+  const { data } = await supabase.from('payment_link_settings').select('*').eq('id', 1).single();
+  window.__paymentLinkSettings = data || {};
+  document.getElementById('linkSoloFull').value = window.__paymentLinkSettings.solo_full_url || '';
+  document.getElementById('linkSoloDiscount').value = window.__paymentLinkSettings.solo_discount_url || '';
+  document.getElementById('linkCrewFull').value = window.__paymentLinkSettings.crew_full_url || '';
+  document.getElementById('linkCrewDiscount').value = window.__paymentLinkSettings.crew_discount_url || '';
+}
+
+document.getElementById('linkSettingsSaveBtn').addEventListener('click', async () => {
+  const errEl = document.getElementById('linkSettingsError');
+  const okEl = document.getElementById('linkSettingsSuccess');
+  errEl.textContent = ''; okEl.textContent = '';
+
+  const btn = document.getElementById('linkSettingsSaveBtn');
+  btn.disabled = true; btn.textContent = 'Сохраняем…';
+
+  const { error } = await supabase.from('payment_link_settings').update({
+    solo_full_url: document.getElementById('linkSoloFull').value.trim() || null,
+    solo_discount_url: document.getElementById('linkSoloDiscount').value.trim() || null,
+    crew_full_url: document.getElementById('linkCrewFull').value.trim() || null,
+    crew_discount_url: document.getElementById('linkCrewDiscount').value.trim() || null,
+    updated_at: new Date().toISOString()
+  }).eq('id', 1);
+
+  btn.disabled = false; btn.textContent = 'Сохранить ссылки';
+
+  if (error){
+    errEl.textContent = 'Не получилось сохранить. Попробуй ещё раз.';
+    return;
+  }
+  okEl.textContent = 'Сохранено!';
+  await loadPaymentLinkSettings();
+});
+
+function fillPayUrl(discount){
+  const studentId = document.getElementById('payStudent').value;
+  const student = allStudents.find(s => s.id === studentId);
+  const errEl = document.getElementById('payError');
+  errEl.textContent = '';
+
+  if (!student){
+    errEl.textContent = 'Сначала выбери ученика — по нему определяется формат SOLO/CREW.';
+    return;
+  }
+  const s = window.__paymentLinkSettings || {};
+  const format = student.format === 'CREW' ? 'crew' : 'solo';
+  const key = `${format}_${discount ? 'discount' : 'full'}_url`;
+  const url = s[key];
+
+  if (!url){
+    errEl.textContent = 'Эта ссылка ещё не заполнена в настройках выше.';
+    return;
+  }
+  document.getElementById('payUrl').value = url;
+}
+
+async function loadGroups(){
+  const { data } = await supabase.from('groups').select('*').order('created_at', { ascending:false });
+  window.__groupsList = data || [];
+  renderGroupsTable();
+  fillGroupDropdowns();
+}
+
+function renderGroupsTable(){
+  const body = document.getElementById('groupsTableBody');
+  const groups = window.__groupsList || [];
+  if (!groups.length){
+    body.innerHTML = '<tr><td colspan="4" class="empty-state">Пока нет групп.</td></tr>';
+    return;
+  }
+  body.innerHTML = groups.map(g => {
+    const t = allTeachers.find(t => t.id === g.teacher_id);
+    const count = allStudents.filter(s => s.group_id === g.id).length;
+    return `
+      <tr>
+        <td>${g.name}</td>
+        <td>${t ? t.full_name : '—'}</td>
+        <td>${count}</td>
+        <td><button class="btn btn-ghost btn-sm" onclick="deleteGroup('${g.id}', '${g.name.replace(/'/g, "\\'")}')">Удалить</button></td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function fillGroupDropdowns(){
+  const groups = window.__groupsList || [];
+  const opts = groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
+  const groupMemberGroupEl = document.getElementById('groupMemberGroup');
+  if (groupMemberGroupEl) groupMemberGroupEl.innerHTML = opts;
+  const groupMemberStudentEl = document.getElementById('groupMemberStudent');
+  if (groupMemberStudentEl) groupMemberStudentEl.innerHTML = allStudents.map(s => `<option value="${s.id}">${s.full_name}</option>`).join('');
+}
+
+document.getElementById('groupAddBtn').addEventListener('click', async () => {
+  const name = document.getElementById('groupName').value.trim();
+  const teacherId = document.getElementById('groupTeacher').value;
+  const errEl = document.getElementById('groupError');
+  const okEl = document.getElementById('groupSuccess');
+  errEl.textContent = ''; okEl.textContent = '';
+
+  if (!name || !teacherId){
+    errEl.textContent = 'Укажи название и выбери учителя.';
+    return;
+  }
+
+  const btn = document.getElementById('groupAddBtn');
+  btn.disabled = true; btn.textContent = 'Создаём…';
+
+  const { error } = await supabase.from('groups').insert({ name, teacher_id: teacherId });
+
+  btn.disabled = false; btn.textContent = '+ Создать группу';
+
+  if (error){
+    errEl.textContent = 'Не получилось создать группу. Попробуй ещё раз.';
+    return;
+  }
+  okEl.textContent = 'Готово!';
+  document.getElementById('groupName').value = '';
+  await loadGroups();
+});
+
+document.getElementById('groupMemberSaveBtn').addEventListener('click', async () => {
+  const studentId = document.getElementById('groupMemberStudent').value;
+  const groupId = document.getElementById('groupMemberGroup').value;
+  const errEl = document.getElementById('groupMemberError');
+  const okEl = document.getElementById('groupMemberSuccess');
+  errEl.textContent = ''; okEl.textContent = '';
+
+  if (!studentId || !groupId){
+    errEl.textContent = 'Выбери ученика и группу.';
+    return;
+  }
+
+  const btn = document.getElementById('groupMemberSaveBtn');
+  btn.disabled = true; btn.textContent = 'Сохраняем…';
+
+  const { error } = await supabase.from('profiles').update({ group_id: groupId, format: 'CREW' }).eq('id', studentId);
+
+  btn.disabled = false; btn.textContent = 'Сохранить';
+
+  if (error){
+    errEl.textContent = 'Не получилось сохранить. Попробуй ещё раз.';
+    return;
+  }
+  okEl.textContent = 'Готово! Формат ученика тоже переключён на CREW.';
+  await loadAll();
+});
+
+async function deleteGroup(groupId, name){
+  if (!confirm(`Удалить группу «${name}»? У её учеников просто отвяжется группа, сами ученики не удалятся.`)) return;
+  const { error } = await supabase.from('groups').delete().eq('id', groupId);
+  if (error){
+    alert('Не получилось удалить. Попробуй ещё раз.');
+    return;
+  }
+  await loadGroups();
+}
+
+function referrerDisplay(r){
+  if (r.referral_code){
+    const student = allStudents.find(s => s.referral_code === r.referral_code);
+    return student ? ` (по коду ${r.referral_code} — ${student.full_name})` : ` (код ${r.referral_code}, ученик не найден)`;
+  }
+  if (r.referrer_name) return ` (от ${r.referrer_name})`;
+  return '';
 }
 
 async function loadTrialRequests(){
@@ -1702,7 +2029,7 @@ function renderTrialRequests(){
         <span style="font-size:11.5px; color:var(--ink-soft);">${fmtDateTime(r.created_at)}</span>
       </div>
       <div style="font-size:13.5px; margin-bottom:10px;">
-        ${r.source ? `<div>📌 Узнали: ${r.source}${r.referrer_name ? ' (от ' + r.referrer_name + ')' : ''}</div>` : ''}
+        ${r.source ? `<div>📌 Узнали: ${r.source}${referrerDisplay(r)}</div>` : ''}
         ${r.preferred_days ? `<div>📅 Дни: ${r.preferred_days}</div>` : ''}
         ${r.preferred_time ? `<div>🕐 Время: ${r.preferred_time}${r.preferred_timezone ? ' · ' + r.preferred_timezone : ''}</div>` : ''}
         ${r.comment ? `<div style="margin-top:6px; color:var(--ink-soft);">💬 ${r.comment}</div>` : ''}
@@ -1760,11 +2087,12 @@ async function loadPayments(){
   const list = all || [];
   window.__paymentsList = list;
 
-  // остаток занятий по активному абонементу — для цветных плашек в "Все ученики"
+  // остаток занятий по активному абонементу — считаем по факту прошедших уроков,
+  // привязанных к этому абонементу (payment_id), а не по ручному счётчику
   window.__remainingByStudent = {};
   list.filter(p => p.status === 'active').forEach(p => {
     if (window.__remainingByStudent[p.student_id] === undefined){
-      window.__remainingByStudent[p.student_id] = (p.lessons_included || 0) - (p.lessons_used || 0);
+      window.__remainingByStudent[p.student_id] = computeRemaining(p, window.__lessonsList || []);
     }
   });
   renderStudentsTable();
@@ -1789,10 +2117,13 @@ async function loadPayments(){
   if (!list.length){
     tableBody.innerHTML = '<tr><td colspan="5" class="empty-state">Пока нет абонементов.</td></tr>';
   } else {
-    tableBody.innerHTML = list.map(p => `
+    tableBody.innerHTML = list.map(p => {
+      const remaining = computeRemaining(p, window.__lessonsList || []);
+      const usedReal = (p.lessons_included || 0) - (remaining ?? 0);
+      return `
       <tr>
         <td>${(p.profiles && p.profiles.full_name) || '—'}</td>
-        <td>${(p.lessons_used||0)}/${p.lessons_included || '—'}</td>
+        <td>${usedReal}/${p.lessons_included || '—'}</td>
         <td>${p.amount ? p.amount + ' ₽' : '—'}</td>
         <td><span class="badge badge-${p.status}">${p.status === 'pending' ? 'Ожидает' : p.status === 'active' ? 'Активен' : 'Истёк'}</span></td>
         <td style="display:flex; gap:6px;">
@@ -1800,7 +2131,8 @@ async function loadPayments(){
           <button class="btn btn-ghost btn-sm" onclick="deletePayment('${p.id}')">Удалить</button>
         </td>
       </tr>
-    `).join('');
+    `;
+    }).join('');
   }
 }
 
