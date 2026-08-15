@@ -80,6 +80,16 @@
     text-transform:none; letter-spacing:0; font-size:13px; color:var(--ink-soft); cursor:pointer;
   }
   .consent-label input{width:auto; margin-top:2px; flex-shrink:0;}
+  .slot-day{margin-bottom:12px;}
+  .slot-day-label{font-size:12.5px; font-weight:700; color:var(--ink-soft); margin-bottom:6px;}
+  .slot-hours{display:flex; flex-wrap:wrap; gap:6px;}
+  .slot-btn{
+    padding:8px 12px; border-radius:10px; cursor:pointer;
+    border:1.5px solid var(--line); background:#fff;
+    font-family:'Inter',sans-serif; font-size:13px; font-weight:600; color:var(--ink);
+  }
+  .slot-btn:hover{border-color:var(--ink);}
+  .slot-btn.on{background:var(--accent); border-color:var(--ink);}
   .hidden{display:none !important;}
 </style>
 </head>
@@ -161,29 +171,12 @@
       </div>
     </div>
 
-    <div class="field">
-      <label>Удобное время — слот 1</label>
-      <div style="display:flex; gap:8px;">
-        <select id="slot1Day" style="flex:1; font-family:'Inter',sans-serif; font-size:15px; padding:13px 14px; border-radius:12px; border:1.5px solid var(--line); background:#fff;">
-          <option value="">День недели</option>
-          <option>Понедельник</option><option>Вторник</option><option>Среда</option>
-          <option>Четверг</option><option>Пятница</option><option>Суббота</option><option>Воскресенье</option>
-        </select>
-        <input id="slot1Time" type="time" style="flex:1; font-family:'Inter',sans-serif; font-size:15px; padding:13px 14px; border-radius:12px; border:1.5px solid var(--line); background:#fff;">
+    <div class="field" id="slotsField">
+      <label>Выбери удобные окна <span style="font-weight:400; text-transform:none; letter-spacing:0;">(до двух)</span></label>
+      <div id="slotsPicker">
+        <p style="font-size:13px; color:var(--ink-soft); margin:0;">Сначала выбери преподавателя выше.</p>
       </div>
-    </div>
-
-    <div class="field">
-      <label>Удобное время — слот 2 (необязательно)</label>
-      <div style="display:flex; gap:8px;">
-        <select id="slot2Day" style="flex:1; font-family:'Inter',sans-serif; font-size:15px; padding:13px 14px; border-radius:12px; border:1.5px solid var(--line); background:#fff;">
-          <option value="">День недели</option>
-          <option>Понедельник</option><option>Вторник</option><option>Среда</option>
-          <option>Четверг</option><option>Пятница</option><option>Суббота</option><option>Воскресенье</option>
-        </select>
-        <input id="slot2Time" type="time" style="flex:1; font-family:'Inter',sans-serif; font-size:15px; padding:13px 14px; border-radius:12px; border:1.5px solid var(--line); background:#fff;">
-      </div>
-      <p class="hint-line">Выбор времени — это пожелание, не бронирование. Мы согласуем точное время отдельно.</p>
+      <p class="hint-line">Это пожелание, а не бронирование — точное время мы подтвердим отдельно.</p>
     </div>
 
     <div class="field">
@@ -318,12 +311,91 @@ let selectedTeacherId = null;
       `<label><input type="radio" name="teacher" value="${t.id}"><span>${t.full_name}</span></label>`
     ).join('') + `<label><input type="radio" name="teacher" value=""><span>Не важно</span></label>`;
     teacherGroup.querySelectorAll('input[name="teacher"]').forEach(el => {
-      el.addEventListener('change', () => { selectedTeacherId = el.value || null; });
+      el.addEventListener('change', () => {
+        selectedTeacherId = el.value || null;
+        loadSlotsForTeacher(selectedTeacherId);
+      });
     });
   } catch (err){
     teacherGroup.innerHTML = '<span style="font-size:13px; color:var(--ink-soft);">Мы подберём преподавателя сами</span>';
   }
 })();
+
+/* ---------- свободные окна выбранного преподавателя ---------- */
+const SCHOOL_TZ_LABEL = 'Уфа';
+const DAY_NAMES = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+const MONTHS_SHORT = ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
+let selectedSlots = [];
+
+function dateKeyLocal(d){
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+async function loadSlotsForTeacher(teacherId){
+  const box = document.getElementById('slotsPicker');
+  selectedSlots = [];
+
+  if (!teacherId){
+    box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">Мы подберём преподавателя и предложим удобное время сами.</p>';
+    return;
+  }
+  box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">Загружаем свободные окна…</p>';
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  const from = dateKeyLocal(today);
+  const toDate = new Date(today); toDate.setDate(toDate.getDate() + 13);
+  const to = dateKeyLocal(toDate);
+
+  try {
+    const url = `${SUPABASE_URL}/rest/v1/teacher_availability?teacher_id=eq.${teacherId}`
+      + `&slot_date=gte.${from}&slot_date=lte.${to}&select=slot_date,hour&order=slot_date.asc,hour.asc`;
+    const res = await fetch(url, {
+      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+    });
+    const rows = await res.json();
+
+    if (!Array.isArray(rows) || !rows.length){
+      box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">'
+        + 'У этого преподавателя пока нет отмеченных окон. Оставь заявку — мы согласуем время вручную.</p>';
+      return;
+    }
+
+    const byDate = {};
+    rows.forEach(r => {
+      if (!byDate[r.slot_date]) byDate[r.slot_date] = [];
+      byDate[r.slot_date].push(r.hour);
+    });
+
+    box.innerHTML = Object.keys(byDate).sort().map(dateStr => {
+      const d = new Date(dateStr + 'T00:00:00');
+      const label = `${DAY_NAMES[d.getDay()]}, ${d.getDate()} ${MONTHS_SHORT[d.getMonth()]}`;
+      const hours = byDate[dateStr].sort((a,b)=>a-b).map(hh =>
+        `<button type="button" class="slot-btn" data-date="${dateStr}" data-hour="${hh}" onclick="toggleSlot(this)">${hh}:00</button>`
+      ).join('');
+      return `<div class="slot-day"><div class="slot-day-label">${label}</div><div class="slot-hours">${hours}</div></div>`;
+    }).join('')
+    + `<p style="font-size:12px; color:var(--ink-soft); margin:10px 0 0;">Время указано по ${SCHOOL_TZ_LABEL}.</p>`;
+  } catch (err){
+    box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">'
+      + 'Не удалось загрузить окна. Оставь заявку — согласуем время вручную.</p>';
+  }
+}
+
+function toggleSlot(btn){
+  const key = btn.dataset.date + '|' + btn.dataset.hour;
+  const idx = selectedSlots.findIndex(s => s.key === key);
+  if (idx >= 0){
+    selectedSlots.splice(idx, 1);
+    btn.classList.remove('on');
+  } else {
+    if (selectedSlots.length >= 2){
+      alert('Можно выбрать не больше двух окон.');
+      return;
+    }
+    selectedSlots.push({ key, date: btn.dataset.date, hour: Number(btn.dataset.hour) });
+    btn.classList.add('on');
+  }
+}
 
 const step1 = document.getElementById('step1');
 const step2 = document.getElementById('step2');
@@ -336,13 +408,7 @@ function collectFormData(){
   const teacherEl = document.querySelector('input[name="teacher"]:checked');
   const teacherLabel = teacherEl ? teacherEl.closest('label').querySelector('span').textContent : 'Не важно';
 
-  const slots = [];
-  const s1day = document.getElementById('slot1Day').value;
-  const s1time = document.getElementById('slot1Time').value;
-  if (s1day && s1time) slots.push({ day: s1day, time: s1time });
-  const s2day = document.getElementById('slot2Day').value;
-  const s2time = document.getElementById('slot2Time').value;
-  if (s2day && s2time) slots.push({ day: s2day, time: s2time });
+  const slots = selectedSlots.map(s => ({ date: s.date, hour: s.hour }));
 
   return {
     fullName: document.getElementById('fullName').value.trim(),
@@ -374,7 +440,10 @@ document.getElementById('nextBtn').addEventListener('click', () => {
   }
 
   const slotsText = data.slots.length
-    ? data.slots.map(s => `${s.day} в ${s.time}`).join('; ')
+    ? data.slots.map(s => {
+        const d = new Date(s.date + 'T00:00:00');
+        return `${DAY_NAMES[d.getDay()]}, ${d.getDate()} ${MONTHS_SHORT[d.getMonth()]} в ${s.hour}:00`;
+      }).join('; ')
     : '—';
 
   const rows = [
