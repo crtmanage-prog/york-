@@ -491,6 +491,11 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
   const btn = document.getElementById('submitBtn');
   btn.disabled = true; btn.textContent = 'Отправляем…';
 
+  // одноразовый токен для привязки Telegram — по нему бот поймёт, чья это заявка
+  const linkChars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+  let linkToken = '';
+  for (let i = 0; i < 16; i++) linkToken += linkChars[Math.floor(Math.random() * linkChars.length)];
+
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/trial_requests`, {
       method: 'POST',
@@ -502,6 +507,8 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
       },
       body: JSON.stringify({
         full_name: data.fullName,
+        link_token: linkToken,
+        contact: data.contactPhone,
         contact_phone: data.contactPhone,
         age: data.age ? Number(data.age) : null,
         source: data.source,
@@ -516,7 +523,12 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
     });
 
     if (!res.ok){
-      throw new Error('Request failed: ' + res.status);
+      let detail = '';
+      try {
+        const errBody = await res.json();
+        detail = errBody.message || errBody.hint || errBody.details || '';
+      } catch (e){ /* тело не JSON */ }
+      throw new Error(detail || ('Ошибка ' + res.status));
     }
 
     const created = await res.json();
@@ -527,13 +539,16 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
 
     const connectBtn = document.getElementById('connectTelegramBtn');
     if (trialId){
-      connectBtn.href = `https://t.me/weyorkonlinebot?start=${trialId}`;
+      connectBtn.href = `https://t.me/weyorkonlinebot?start=${linkToken}`;
     } else {
       connectBtn.style.display = 'none';
     }
   } catch (err){
     btn.disabled = false; btn.textContent = 'Отправить заявку';
-    errorMsg.textContent = 'Не получилось отправить. Проверь интернет-соединение и попробуй ещё раз.';
+    const detail = (err && err.message) ? err.message : '';
+    errorMsg.textContent = detail
+      ? 'Не получилось отправить: ' + detail
+      : 'Не получилось отправить. Проверь интернет-соединение и попробуй ещё раз.';
   }
 });
 </script>
