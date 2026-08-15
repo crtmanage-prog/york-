@@ -503,7 +503,7 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
         'apikey': SUPABASE_ANON_KEY,
         'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
         'Content-Type': 'application/json',
-        'Prefer': 'return=representation'
+        'Prefer': 'return=minimal'
       },
       body: JSON.stringify({
         full_name: data.fullName,
@@ -531,18 +531,12 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
       throw new Error(detail || ('Ошибка ' + res.status));
     }
 
-    const created = await res.json();
-    const trialId = created && created[0] && created[0].id;
-
     document.getElementById('trialForm').classList.add('hidden');
     document.getElementById('successBox').classList.remove('hidden');
 
+    // токен мы сгенерировали сами — читать созданную строку не нужно
     const connectBtn = document.getElementById('connectTelegramBtn');
-    if (trialId){
-      connectBtn.href = `https://t.me/weyorkonlinebot?start=${linkToken}`;
-    } else {
-      connectBtn.style.display = 'none';
-    }
+    connectBtn.href = `https://t.me/weyorkonlinebot?start=${linkToken}`;
   } catch (err){
     btn.disabled = false; btn.textContent = 'Отправить заявку';
     const detail = (err && err.message) ? err.message : '';
