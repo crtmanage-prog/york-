@@ -3223,6 +3223,33 @@ function applyPreferredSlot(requestId, dateStr, hour){
   if (tz) tz.value = SCHOOL_TZ;
 }
 
+// Ищет уже существующий пробный, который скорее всего дубль:
+// тот же преподаватель и пересекающееся время, либо то же имя гостя в тот же день.
+function findDuplicateTrial(teacherId, startDate, durationMin, guestName, excludeLessonId){
+  const start = startDate.getTime();
+  const end = start + (durationMin || 30) * 60000;
+  const dayKey = fmtDateKey(startDate);
+  const nameNorm = (guestName || '').trim().toLowerCase();
+
+  return (window.__lessonsList || []).find(l => {
+    if (!l.is_trial) return false;
+    if (excludeLessonId && l.id === excludeLessonId) return false;
+
+    const lStart = new Date(l.lesson_date).getTime();
+    const lEnd = lStart + (l.duration_minutes || 30) * 60000;
+
+    // пересечение по времени у того же преподавателя
+    const sameTeacherOverlap = l.teacher_id === teacherId && lStart < end && start < lEnd;
+
+    // тот же человек в тот же день — даже если время другое
+    const sameGuestSameDay = nameNorm
+      && (l.guest_name || '').trim().toLowerCase() === nameNorm
+      && fmtDateKey(l.lesson_date) === dayKey;
+
+    return sameTeacherOverlap || sameGuestSameDay;
+  }) || null;
+}
+
 async function submitConfirmTrial(requestId){
   const r = (window.__trialRequests || []).find(x => x.id === requestId);
   const teacherId = document.getElementById('confTeacher-' + requestId).value;
@@ -3239,23 +3266,53 @@ async function submitConfirmTrial(requestId){
 
   const [datePart, timePart] = dateVal.split('T');
   const utc = zonedTimeToUtc(datePart, timePart, tz);
+  const durationNum = duration ? Number(duration) : 30;
 
-  // 1) создаём сам урок в расписании
-  const { data: lesson, error: lessonErr } = await supabase.from('lessons').insert({
+  const payload = {
     student_id: null,
     teacher_id: teacherId,
     lesson_date: utc.toISOString(),
     topic: 'Пробный урок',
-    duration_minutes: duration ? Number(duration) : 30,
+    duration_minutes: durationNum,
     guest_name: r.full_name,
     guest_contact: r.contact_telegram || r.contact_phone || r.contact || null,
     is_trial: true,
     status: 'upcoming'
-  }).select().single();
+  };
 
-  if (lessonErr){
-    errEl.textContent = 'Не получилось создать урок. Попробуй ещё раз.';
-    return;
+  let lesson;
+
+  // ЗАЩИТА 1: эта заявка уже подтверждалась — правим тот же урок, а не создаём второй
+  if (r.converted_lesson_id){
+    const { data: updated, error: updErr } = await supabase.from('lessons')
+      .update(payload).eq('id', r.converted_lesson_id).select().single();
+
+    if (updErr || !updated){
+      // урок мог быть удалён вручную — тогда создаём заново
+      const { data: recreated, error: recErr } = await supabase.from('lessons').insert(payload).select().single();
+      if (recErr){ errEl.textContent = 'Не получилось сохранить урок. Попробуй ещё раз.'; return; }
+      lesson = recreated;
+    } else {
+      lesson = updated;
+    }
+  } else {
+    // ЗАЩИТА 2: у этого преподавателя уже есть пробный в это же время?
+    const dup = findDuplicateTrial(teacherId, utc, durationNum, r.full_name, null);
+    if (dup){
+      const when = fmtDateTime(dup.lesson_date);
+      const who = dup.guest_name || 'без имени';
+      if (!confirm(`У этого преподавателя уже стоит пробный на ${when} — «${who}».\n\nВсё равно создать ещё один?`)){
+        errEl.textContent = 'Отменено. Если это тот же пробный — удали лишний в «Расписании».';
+        return;
+      }
+    }
+
+    const { data: created, error: lessonErr } = await supabase.from('lessons').insert(payload).select().single();
+    if (lessonErr){
+      errEl.textContent = 'Не получилось создать урок. Попробуй ещё раз.';
+      return;
+    }
+    lesson = created;
   }
 
   // 2) помечаем заявку подтверждённой
@@ -3359,21 +3416,6 @@ async function submitOutcome(requestId){
     return;
   }
   await loadTrialRequests();
-}
-
-function convertRequestToTrial(requestId){
-  const r = (window.__trialRequests || []).find(r => r.id === requestId);
-  if (!r) return;
-
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelector('.tab-btn[data-tab="alllessons"]').classList.add('active');
-  document.getElementById('panel-alllessons').classList.add('active');
-
-  document.getElementById('trialName').value = r.full_name;
-  document.getElementById('trialContact').value = r.contact;
-  window.__convertingRequestId = requestId;
-  document.getElementById('trialName').scrollIntoView({ behavior:'smooth', block:'center' });
 }
 
 async function declineRequest(requestId){
@@ -3731,6 +3773,19 @@ async function assignTrialLesson(){
   const [datePart, timePart] = dateVal.split('T');
   const utcDate = zonedTimeToUtc(datePart, timePart, timezone);
 
+  // ЗАЩИТА 3: не даём вручную поставить пробный поверх уже существующего
+  if (!editingTrialId){
+    const dup = findDuplicateTrial(teacherId, utcDate, duration ? Number(duration) : 30, name, null);
+    if (dup){
+      const when = fmtDateTime(dup.lesson_date);
+      const who = dup.guest_name || 'без имени';
+      if (!confirm(`Похоже, такой пробный уже есть: ${when} — «${who}».\n\nВсё равно создать ещё один?`)){
+        errEl.textContent = 'Отменено — дубль не создан.';
+        return;
+      }
+    }
+  }
+
   const btn = document.getElementById('trialAddBtn');
   btn.disabled = true; btn.textContent = editingTrialId ? 'Сохраняем…' : 'Назначаем…';
 
@@ -3755,16 +3810,6 @@ async function assignTrialLesson(){
   if (error){
     errEl.textContent = 'Не получилось сохранить. Попробуй ещё раз.';
     return;
-  }
-
-  if (!editingTrialId && window.__convertingRequestId){
-    await supabase.from('trial_requests').update({
-      status: 'scheduled',
-      converted_lesson_id: newLesson.id,
-      assigned_teacher_id: teacherId
-    }).eq('id', window.__convertingRequestId);
-    window.__convertingRequestId = null;
-    await loadTrialRequests();
   }
 
   okEl.textContent = editingTrialId ? 'Изменения сохранены!' : 'Готово! Появится в календаре учителя.';
