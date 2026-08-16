@@ -766,28 +766,33 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <h2 class="panel-title">Оплата</h2>
       <p class="section-sub" style="margin-bottom:16px;">Прикрепи абонемент ученику — если укажешь дни недели и время, уроки на весь абонемент создадутся сами.</p>
 
-      <h2 class="panel-title" style="margin-top:0;">Ссылки на оплату (Т-Банк)</h2>
-      <p class="section-sub" style="margin-bottom:16px;">Заготовь в приложении Т-Банка 4 ссылки на нужные суммы — система сама подставит нужную при реферальной скидке.</p>
+      <h2 class="panel-title" style="margin-top:0;">Цены абонементов</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Полная цена без скидок. Отсюда считается реферальная скидка при оформлении.</p>
       <div class="card" style="margin-bottom:20px;">
-        <div class="field">
-          <label for="linkSoloFull">SOLO — полная цена</label>
-          <input id="linkSoloFull" type="text" placeholder="https://www.tinkoff.ru/rm/...">
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <div class="field" style="flex:1; min-width:150px;">
+            <label for="priceSolo">👤 SOLO, ₽</label>
+            <input id="priceSolo" type="number" min="0" value="4080">
+          </div>
+          <div class="field" style="flex:1; min-width:150px;">
+            <label for="priceCrew">👥 CREW, ₽</label>
+            <input id="priceCrew" type="number" min="0" value="3060">
+          </div>
+          <div class="field" style="flex:1; min-width:120px;">
+            <label for="priceLessons">Занятий</label>
+            <input id="priceLessons" type="number" min="1" value="6">
+          </div>
+          <div class="field" style="flex:1; min-width:120px;">
+            <label for="priceDiscount">Скидка, %</label>
+            <input id="priceDiscount" type="number" min="0" max="100" value="15">
+          </div>
         </div>
         <div class="field">
-          <label for="linkSoloDiscount">SOLO — со скидкой 15%</label>
-          <input id="linkSoloDiscount" type="text" placeholder="https://www.tinkoff.ru/rm/...">
+          <label for="payLinkSingle">Ссылка на оплату</label>
+          <input id="payLinkSingle" type="text" placeholder="https://www.tinkoff.ru/rm/...">
         </div>
-        <div class="field">
-          <label for="linkCrewFull">CREW — полная цена</label>
-          <input id="linkCrewFull" type="text" placeholder="https://www.tinkoff.ru/rm/...">
-        </div>
-        <div class="field">
-          <label for="linkCrewDiscount">CREW — со скидкой 15%</label>
-          <input id="linkCrewDiscount" type="text" placeholder="https://www.tinkoff.ru/rm/...">
-        </div>
-        <p id="linkSettingsError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
-        <p id="linkSettingsSuccess" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
-        <button class="btn btn-dark btn-sm" id="linkSettingsSaveBtn">Сохранить ссылки</button>
+        <p id="priceSettingsMsg" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
+        <button class="btn btn-dark btn-sm" id="priceSaveBtn">Сохранить</button>
       </div>
 
       <div class="card">
@@ -795,6 +800,15 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <label for="payStudent">Ученик</label>
           <select id="payStudent"></select>
         </div>
+
+        <div class="field">
+          <label for="payReferralCode">Реферальный код <span style="font-weight:400; text-transform:none; letter-spacing:0;">(если ученик пришёл по приглашению)</span></label>
+          <input id="payReferralCode" type="text" placeholder="Например: ANNA48" style="text-transform:uppercase;">
+          <p id="payReferralStatus" style="font-size:12.5px; font-weight:600; min-height:18px; margin:6px 0 0;"></p>
+        </div>
+
+        <div id="priceBreakdown" class="hidden" style="background:var(--panel); border-radius:12px; padding:14px 16px; margin-bottom:14px; font-size:13.5px; line-height:1.8;"></div>
+
         <div class="field">
           <label for="payAmount">Сумма, ₽</label>
           <input id="payAmount" type="number" min="0" placeholder="4080">
@@ -810,11 +824,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         <div class="field">
           <label for="payUrl">Ссылка на оплату</label>
           <input id="payUrl" type="text" placeholder="https://www.tinkoff.ru/rm/... или другая">
-          <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
-            <button type="button" class="btn btn-ghost btn-sm" onclick="fillPayUrl(false)">Подставить обычную ссылку</button>
-            <button type="button" class="btn btn-accent btn-sm" onclick="fillPayUrl(true)">Подставить со скидкой 15%</button>
-          </div>
-          <p id="payDiscountNote" style="color:#3B7A1E; font-size:12.5px; font-weight:600; margin-top:8px;"></p>
+          <p id="payDiscountNote" style="color:var(--ink-soft); font-size:12.5px; margin-top:6px;">Подставляется автоматически из настроек выше.</p>
         </div>
         <div class="field">
           <label for="payStatus">Статус</label>
@@ -1378,7 +1388,7 @@ async function loadAll(){
   }
   renderStats();
   await loadGroups();
-  await loadPaymentLinkSettings();
+  await loadPricingSettings();
   renderDashboardKPIs();
   renderDashboardChart();
   renderFunnel();
@@ -2319,6 +2329,11 @@ async function attachSubscription(){
     paymentPayload.discount_percent = window.__pendingDiscountPercent;
     paymentPayload.discount_reason = 'Реферальная программа';
   }
+  // фиксируем, какой код привёл к покупке — для подсчёта эффективности
+  if (!editingPaymentId && window.__pendingReferral){
+    paymentPayload.referral_code = window.__pendingReferral.code;
+    paymentPayload.referrer_id = window.__pendingReferral.referrer_id;
+  }
 
   const btn = document.getElementById('payAddBtn');
   btn.disabled = true; btn.textContent = 'Сохраняем…';
@@ -2420,7 +2435,10 @@ async function attachSubscription(){
   document.getElementById('autoScheduleCheck').checked = false;
   document.getElementById('autoScheduleFields').classList.add('hidden');
   window.__pendingDiscountPercent = null;
-  document.getElementById('payDiscountNote').textContent = '';
+  window.__pendingReferral = null;
+  document.getElementById('payReferralCode').value = '';
+  document.getElementById('payReferralStatus').textContent = '';
+  document.getElementById('priceBreakdown').classList.add('hidden');
 
   await loadPayments();
   await loadAll();
@@ -2890,68 +2908,117 @@ function renderStats(){
 }
 
 /* ---------- ГРУППЫ ---------- */
-/* ---------- ССЫЛКИ НА ОПЛАТУ (для реферальной скидки) ---------- */
-async function loadPaymentLinkSettings(){
-  const { data } = await supabase.from('payment_link_settings').select('*').eq('id', 1).single();
-  window.__paymentLinkSettings = data || {};
-  document.getElementById('linkSoloFull').value = window.__paymentLinkSettings.solo_full_url || '';
-  document.getElementById('linkSoloDiscount').value = window.__paymentLinkSettings.solo_discount_url || '';
-  document.getElementById('linkCrewFull').value = window.__paymentLinkSettings.crew_full_url || '';
-  document.getElementById('linkCrewDiscount').value = window.__paymentLinkSettings.crew_discount_url || '';
+/* ---------- ЦЕНЫ И РЕФЕРАЛЬНАЯ СКИДКА ---------- */
+let pricing = { solo_price:4080, crew_price:3060, lessons_per_package:6, referral_discount_percent:15, pay_link:'' };
+
+async function loadPricingSettings(){
+  const { data } = await supabase.from('pricing_settings').select('*').eq('id', 1);
+  if (data && data.length) pricing = { ...pricing, ...data[0] };
+
+  // ссылка на оплату по-прежнему живёт в payment_link_settings (одна, общая)
+  const { data: linkRow } = await supabase.from('payment_link_settings').select('*').eq('id', 1);
+  if (linkRow && linkRow.length) pricing.pay_link = linkRow[0].solo_full_url || '';
+
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+  set('priceSolo', pricing.solo_price);
+  set('priceCrew', pricing.crew_price);
+  set('priceLessons', pricing.lessons_per_package);
+  set('priceDiscount', pricing.referral_discount_percent);
+  set('payLinkSingle', pricing.pay_link || '');
 }
 
-document.getElementById('linkSettingsSaveBtn').addEventListener('click', async () => {
-  const errEl = document.getElementById('linkSettingsError');
-  const okEl = document.getElementById('linkSettingsSuccess');
-  errEl.textContent = ''; okEl.textContent = '';
-
-  const btn = document.getElementById('linkSettingsSaveBtn');
+document.getElementById('priceSaveBtn').addEventListener('click', async () => {
+  const msg = document.getElementById('priceSettingsMsg');
+  const btn = document.getElementById('priceSaveBtn');
   btn.disabled = true; btn.textContent = 'Сохраняем…';
 
-  const { error } = await supabase.from('payment_link_settings').update({
-    solo_full_url: document.getElementById('linkSoloFull').value.trim() || null,
-    solo_discount_url: document.getElementById('linkSoloDiscount').value.trim() || null,
-    crew_full_url: document.getElementById('linkCrewFull').value.trim() || null,
-    crew_discount_url: document.getElementById('linkCrewDiscount').value.trim() || null,
+  const payload = {
+    solo_price: Number(document.getElementById('priceSolo').value) || 0,
+    crew_price: Number(document.getElementById('priceCrew').value) || 0,
+    lessons_per_package: Number(document.getElementById('priceLessons').value) || 6,
+    referral_discount_percent: Number(document.getElementById('priceDiscount').value) || 0,
     updated_at: new Date().toISOString()
-  }).eq('id', 1);
+  };
+  const link = document.getElementById('payLinkSingle').value.trim();
 
-  btn.disabled = false; btn.textContent = 'Сохранить ссылки';
+  const { error } = await supabase.from('pricing_settings').update(payload).eq('id', 1);
+  await supabase.from('payment_link_settings').update({ solo_full_url: link || null }).eq('id', 1);
 
-  if (error){
-    errEl.textContent = 'Не получилось сохранить. Попробуй ещё раз.';
-    return;
+  btn.disabled = false; btn.textContent = 'Сохранить';
+  msg.textContent = error ? 'Не получилось сохранить.' : 'Сохранено ✓';
+  if (!error){
+    pricing = { ...pricing, ...payload, pay_link: link };
+    recalcSubscriptionPrice();
+    setTimeout(() => { msg.textContent = ''; }, 2000);
   }
-  okEl.textContent = 'Сохранено!';
-  await loadPaymentLinkSettings();
 });
 
-function fillPayUrl(discount){
+// Кто владелец кода — ищем среди учеников
+function findReferrerByCode(code){
+  if (!code) return null;
+  const norm = code.trim().toUpperCase();
+  return allStudents.find(s => (s.referral_code || '').toUpperCase() === norm) || null;
+}
+
+// Главный расчёт: формат ученика + код -> сумма
+function recalcSubscriptionPrice(){
   const studentId = document.getElementById('payStudent').value;
   const student = allStudents.find(s => s.id === studentId);
-  const errEl = document.getElementById('payError');
-  errEl.textContent = '';
+  const codeInput = document.getElementById('payReferralCode');
+  const statusEl = document.getElementById('payReferralStatus');
+  const boxEl = document.getElementById('priceBreakdown');
+  if (!boxEl) return;
 
-  if (!student){
-    errEl.textContent = 'Сначала выбери ученика — по нему определяется формат SOLO/CREW.';
-    return;
-  }
-  const s = window.__paymentLinkSettings || {};
-  const format = student.format === 'CREW' ? 'crew' : 'solo';
-  const key = `${format}_${discount ? 'discount' : 'full'}_url`;
-  const url = s[key];
+  if (!student){ boxEl.classList.add('hidden'); return; }
 
-  if (!url){
-    errEl.textContent = 'Эта ссылка ещё не заполнена в настройках выше.';
-    return;
+  const isCrew = student.format === 'CREW';
+  const base = isCrew ? Number(pricing.crew_price) : Number(pricing.solo_price);
+  const code = (codeInput.value || '').trim().toUpperCase();
+
+  let discountPct = 0;
+  let referrer = null;
+
+  if (code){
+    referrer = findReferrerByCode(code);
+    if (!referrer){
+      statusEl.textContent = '✗ Такого кода нет';
+      statusEl.style.color = 'var(--red)';
+    } else if (referrer.id === studentId){
+      statusEl.textContent = '✗ Это собственный код ученика — скидка не применяется';
+      statusEl.style.color = 'var(--red)';
+      referrer = null;
+    } else {
+      discountPct = Number(pricing.referral_discount_percent) || 0;
+      statusEl.textContent = `✓ Код ${referrer.full_name} — скидка ${discountPct}%`;
+      statusEl.style.color = '#3B7A1E';
+    }
+  } else {
+    statusEl.textContent = '';
   }
-  document.getElementById('payUrl').value = url;
-  window.__pendingDiscountPercent = discount ? 15 : null;
-  const noteEl = document.getElementById('payDiscountNote');
-  if (noteEl){
-    noteEl.textContent = discount ? '✅ К абонементу будет привязана скидка 15% (реферальная программа) — ученик увидит это в своём кабинете.' : '';
-  }
+
+  const discountSum = Math.round(base * discountPct / 100);
+  const total = base - discountSum;
+
+  boxEl.innerHTML = `
+    <div>${isCrew ? '👥 CREW' : '👤 SOLO'} · ${pricing.lessons_per_package} занятий</div>
+    <div>Полная цена: <b>${base.toLocaleString('ru-RU')} ₽</b></div>
+    ${discountPct ? `<div style="color:#3B7A1E;">Скидка ${discountPct}%: <b>−${discountSum.toLocaleString('ru-RU')} ₽</b></div>` : ''}
+    <div style="border-top:1px solid var(--line); margin-top:6px; padding-top:6px;">
+      К оплате: <b style="font-size:16px;">${total.toLocaleString('ru-RU')} ₽</b>
+    </div>`;
+  boxEl.classList.remove('hidden');
+
+  // подставляем в форму
+  document.getElementById('payAmount').value = total;
+  document.getElementById('payLessonsIncluded').value = pricing.lessons_per_package;
+  if (pricing.pay_link) document.getElementById('payUrl').value = pricing.pay_link;
+
+  window.__pendingDiscountPercent = discountPct || null;
+  window.__pendingReferral = referrer ? { code, referrer_id: referrer.id } : null;
 }
+
+document.getElementById('payStudent').addEventListener('change', recalcSubscriptionPrice);
+document.getElementById('payReferralCode').addEventListener('input', recalcSubscriptionPrice);
 
 async function loadGroups(){
   const { data } = await supabase.from('groups').select('*').order('created_at', { ascending:false });
