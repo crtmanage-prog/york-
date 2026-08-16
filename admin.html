@@ -1601,6 +1601,7 @@ function renderLessonsList(){
           : ''}
         ${l.is_trial ? `<button class="btn btn-ghost btn-sm" onclick="pickTrialForEdit('${l.id}')">✎</button>` : ''}
         ${!l.is_trial ? `<button class="btn btn-ghost btn-sm" onclick="toggleRegularLessonEdit('${l.id}')">✎ Перенести</button>` : ''}
+        <button class="btn btn-ghost btn-sm" onclick="deleteLessonFromSchedule('${l.id}')" title="Удалить занятие">🗑</button>
         ${lessonBadge(l)}
       </div>
       <div id="daynotes-${l.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
@@ -3659,6 +3660,39 @@ async function confirmPayment(paymentId){
 document.getElementById('trialAddBtn').addEventListener('click', assignTrialLesson);
 
 let editingTrialId = null;
+
+async function deleteLessonFromSchedule(lessonId){
+  const l = (window.__lessonsList || []).find(x => x.id === lessonId);
+  if (!l) return;
+
+  const who = l.is_trial
+    ? `🎓 пробный — ${l.guest_name || 'без имени'}`
+    : `${(l.student && l.student.full_name) || 'ученик'} — ${l.topic || 'занятие'}`;
+  const when = fmtDateTime(l.lesson_date);
+
+  if (!confirmDestructive(`Удалить занятие?\n\n${who}\n${when}`)) return;
+
+  // если это подтверждённый пробный — заявку возвращаем в работу,
+  // иначе она останется «подтверждённой» без урока
+  const linkedRequest = (window.__trialRequests || []).find(r => r.converted_lesson_id === lessonId);
+
+  const { error } = await supabase.from('lessons').delete().eq('id', lessonId);
+  if (error){
+    alert('Не получилось удалить занятие. Попробуй ещё раз.');
+    return;
+  }
+
+  if (linkedRequest){
+    await supabase.from('trial_requests').update({
+      status: 'pending',
+      confirmed_slot: null,
+      confirmed_at: null,
+      converted_lesson_id: null
+    }).eq('id', linkedRequest.id);
+  }
+
+  await loadAll();
+}
 
 function toggleRegularLessonEdit(lessonId){
   const el = document.getElementById('lessonedit-' + lessonId);
