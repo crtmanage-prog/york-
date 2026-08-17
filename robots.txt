@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Личные кабинеты и админка — не для поисковой выдачи
+Disallow: /admin.html
+Disallow: /teacher.html
+Disallow: /cabinet.html
+
+Sitemap: https://weyork.online/sitemap.xml
