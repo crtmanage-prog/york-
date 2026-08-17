@@ -295,6 +295,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .cal-day.empty{cursor:default;}
   .cal-day:not(.empty):hover{background:var(--panel);}
   .cal-day.weekend:not(.has-lesson):not(.selected):not(.today){background:rgba(28,28,28,0.045);}
+  .cal-day.dayoff:not(.has-lesson):not(.selected):not(.today){
+    background:rgba(179,38,30,0.06); color:rgba(179,38,30,0.75);
+  }
+  .cal-weekdays span:last-child{color:rgba(179,38,30,0.7);}
   .cal-day.has-lesson{background:rgba(210,231,57,0.5); font-weight:700;}
   .cal-day.has-lesson:hover{background:rgba(210,231,57,0.7);}
   .cal-day.has-trial{box-shadow:inset 0 0 0 2px var(--ink);}
@@ -397,6 +401,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <button class="tab-btn" data-tab="payments">Оплата</button>
     <button class="tab-btn" data-tab="requests">Заявки</button>
     <button class="tab-btn" data-tab="stats">Статистика</button>
+    <button class="tab-btn" data-tab="referrals">Рефералы</button>
     <button class="tab-btn" data-tab="link">Добавить человека</button>
   </nav>
 
@@ -455,6 +460,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <select id="dashMetric" onchange="renderDashboardChart()">
             <option value="lessons">Проведённые занятия</option>
             <option value="trials">Проведённые пробные</option>
+            <option value="new_students">Новые ученики</option>
             <option value="revenue">Выручка</option>
             <option value="net">Чистый доход</option>
           </select>
@@ -482,6 +488,27 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         </div>
       </div>
       <div id="churnList" style="margin-top:14px;"></div>
+
+      <h2 class="panel-title" style="margin-top:20px;" id="monthlyReportTitle">Отчёт за месяц</h2>
+      <div class="card" id="monthlyReportCard" style="font-size:14px; line-height:2;"></div>
+
+      <h2 class="panel-title" style="margin-top:20px;">Прогноз следующего месяца</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Оценка, не гарантия — построена на текущих абонементах, вероятности продления (70%) и вероятной конверсии новых заявок (35%).</p>
+      <div class="overview-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="stat-card">
+          <div class="stat-label">Минимальный</div>
+          <div class="stat-value" id="forecast-min" style="font-size:17px;">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ожидаемый</div>
+          <div class="stat-value" id="forecast-expected" style="font-size:17px;">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Оптимистичный</div>
+          <div class="stat-value" id="forecast-optimistic" style="font-size:17px;">—</div>
+        </div>
+      </div>
+
     </section>
 
     <section class="panel" id="panel-allstudents">
@@ -1055,24 +1082,45 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         </table>
       </div>
 
-      <h2 class="panel-title" style="margin-top:20px;" id="monthlyReportTitle">Отчёт за месяц</h2>
-      <div class="card" id="monthlyReportCard" style="font-size:14px; line-height:2;"></div>
+    </section>
 
-      <h2 class="panel-title" style="margin-top:20px;">Прогноз следующего месяца</h2>
-      <p class="section-sub" style="margin-bottom:16px;">Оценка, не гарантия — построена на текущих абонементах, вероятности продления (70%) и вероятной конверсии новых заявок (35%).</p>
-      <div class="overview-grid" style="grid-template-columns:repeat(3,1fr);">
+    <section class="panel" id="panel-referrals">
+      <h2 class="panel-title">🔄 Реферальная программа</h2>
+      <p class="section-sub" style="margin-bottom:18px;">
+        Кто сколько привёл и что из этого вышло. Данные собираются с момента,
+        когда код указан при оформлении абонемента.
+      </p>
+
+      <div class="overview-grid" style="grid-template-columns:repeat(4,1fr); margin-bottom:24px;">
         <div class="stat-card">
-          <div class="stat-label">Минимальный</div>
-          <div class="stat-value" id="forecast-min" style="font-size:17px;">—</div>
+          <div class="stat-label">Пришло по кодам</div>
+          <div class="stat-value" id="ref-leads">—</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Ожидаемый</div>
-          <div class="stat-value" id="forecast-expected" style="font-size:17px;">—</div>
+          <div class="stat-label">Дошли до пробного</div>
+          <div class="stat-value" id="ref-trials">—</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Оптимистичный</div>
-          <div class="stat-value" id="forecast-optimistic" style="font-size:17px;">—</div>
+          <div class="stat-label">Купили абонемент</div>
+          <div class="stat-value" id="ref-purchases">—</div>
         </div>
+        <div class="stat-card">
+          <div class="stat-label">Принесли выручки</div>
+          <div class="stat-value" id="ref-revenue">—</div>
+        </div>
+      </div>
+
+      <h2 class="panel-title">По ученикам</h2>
+      <div class="table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Ученик</th><th>Код</th><th>Заявок</th>
+              <th>Пробных</th><th>Покупок</th><th>Выручка</th><th>Конверсия</th>
+            </tr>
+          </thead>
+          <tbody id="referralsTableBody"></tbody>
+        </table>
       </div>
     </section>
 
@@ -1389,6 +1437,7 @@ async function loadAll(){
   renderStats();
   await loadGroups();
   await loadPricingSettings();
+  await loadReferralStats();
   renderDashboardKPIs();
   renderDashboardChart();
   renderFunnel();
@@ -1444,6 +1493,7 @@ function renderCalendar(){
     const classes = ['cal-day'];
     if (lessonDaysSet.has(key)) classes.push('has-lesson');
     if (dateObj.getDay() === 0 || dateObj.getDay() === 6) classes.push('weekend');
+    if (dateObj.getDay() === 0) classes.push('dayoff');
     if (trialDaysSet.has(key)) classes.push('has-trial');
     if (key === todayKey) classes.push('today');
     if (key === window.__selectedDate) classes.push('selected');
@@ -2690,7 +2740,7 @@ function renderFunnel(){
     { label: 'Купили абонемент', value: bought },
   ];
 
-  el.innerHTML = stages.map((s, i) => {
+  const funnelHtml = stages.map((s, i) => {
     const pct = total ? Math.round((s.value / total) * 100) : 0;
     const widthPct = total ? Math.max((s.value / total) * 100, s.value ? 4 : 0) : 0;
     return `
@@ -2705,6 +2755,27 @@ function renderFunnel(){
       </div>
     `;
   }).join('');
+
+  // отдельно — где именно теряем заявки: отмены, отказы, неявки
+  const cancelled = requests.filter(r => r.status === 'cancelled').length;
+  const declined = requests.filter(r => r.status === 'declined').length;
+  const noShow = requests.filter(r => r.status === 'completed' && r.attended === false).length;
+  const lostTotal = cancelled + declined + noShow;
+
+  const lossHtml = lostTotal ? `
+    <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--line);">
+      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); margin-bottom:10px;">
+        Где теряем заявки
+      </div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div><span style="font-size:18px; font-weight:700;">${cancelled}</span> <span style="color:var(--ink-soft); font-size:12.5px;">отменено</span></div>
+        <div><span style="font-size:18px; font-weight:700;">${declined}</span> <span style="color:var(--ink-soft); font-size:12.5px;">отклонено</span></div>
+        <div><span style="font-size:18px; font-weight:700;">${noShow}</span> <span style="color:var(--ink-soft); font-size:12.5px;">не пришли на пробный</span></div>
+      </div>
+    </div>
+  ` : '';
+
+  el.innerHTML = funnelHtml + lossHtml;
 }
 
 function renderChurnRisk(){
@@ -2807,6 +2878,9 @@ function computeMetricForRange(metric, start, end){
   }
   if (metric === 'trials'){
     return (window.__lessonsList || []).filter(l => l.is_trial && isLessonPast(l) && inStatsRange(l.lesson_date, start, end)).length;
+  }
+  if (metric === 'new_students'){
+    return (allStudents || []).filter(s => s.created_at && inStatsRange(s.created_at, start, end)).length;
   }
   if (metric === 'revenue') return computeRevenueInRange(start, end);
   if (metric === 'net') return computeNetIncomeInRange(start, end);
@@ -3019,6 +3093,57 @@ function recalcSubscriptionPrice(){
 
 document.getElementById('payStudent').addEventListener('change', recalcSubscriptionPrice);
 document.getElementById('payReferralCode').addEventListener('input', recalcSubscriptionPrice);
+
+/* ---------- РЕФЕРАЛЬНАЯ СТАТИСТИКА ---------- */
+async function loadReferralStats(){
+  const { data, error } = await supabase.from('referral_stats').select('*');
+  const el = document.getElementById('referralsTableBody');
+  if (!el) return;
+
+  if (error){
+    el.innerHTML = '<tr><td colspan="7" class="empty-state">Не удалось загрузить. Запущена ли миграция с ценами?</td></tr>';
+    return;
+  }
+
+  // показываем только тех, кто хоть кого-то привёл
+  const rows = (data || [])
+    .filter(r => (r.leads_total || 0) > 0)
+    .sort((a,b) => (b.purchases || 0) - (a.purchases || 0) || (b.leads_total || 0) - (a.leads_total || 0));
+
+  const totals = (data || []).reduce((acc, r) => ({
+    leads: acc.leads + Number(r.leads_total || 0),
+    trials: acc.trials + Number(r.trials_done || 0),
+    purchases: acc.purchases + Number(r.purchases || 0),
+    revenue: acc.revenue + Number(r.revenue_brought || 0)
+  }), { leads:0, trials:0, purchases:0, revenue:0 });
+
+  document.getElementById('ref-leads').textContent = totals.leads;
+  document.getElementById('ref-trials').textContent = totals.trials;
+  document.getElementById('ref-purchases').textContent = totals.purchases;
+  document.getElementById('ref-revenue').textContent = totals.revenue.toLocaleString('ru-RU') + ' ₽';
+
+  if (!rows.length){
+    el.innerHTML = '<tr><td colspan="7" class="empty-state">Пока никто не приводил друзей.</td></tr>';
+    return;
+  }
+
+  el.innerHTML = rows.map(r => {
+    const leads = Number(r.leads_total || 0);
+    const buys = Number(r.purchases || 0);
+    const conv = leads ? Math.round(buys / leads * 100) : 0;
+    const convClass = conv >= 50 ? 'badge-active' : conv > 0 ? 'badge-pending' : '';
+    return `
+      <tr>
+        <td>${r.referrer_name || '—'}</td>
+        <td><code style="font-size:12px;">${r.referral_code || '—'}</code></td>
+        <td>${leads}</td>
+        <td>${r.trials_done || 0}</td>
+        <td><b>${buys}</b></td>
+        <td>${Number(r.revenue_brought || 0).toLocaleString('ru-RU')} ₽</td>
+        <td><span class="badge ${convClass}">${conv}%</span></td>
+      </tr>`;
+  }).join('');
+}
 
 async function loadGroups(){
   const { data } = await supabase.from('groups').select('*').order('created_at', { ascending:false });
@@ -3450,6 +3575,13 @@ function applyPreferredSlot(requestId, dateStr, hour){
 
 // Ищет уже существующий пробный, который скорее всего дубль:
 // тот же преподаватель и пересекающееся время, либо то же имя гостя в тот же день.
+// Воскресенье считается нерабочим, но поставить урок всё же можно — просто спросим
+function confirmIfSunday(utcDate){
+  const dow = new Intl.DateTimeFormat('en-US', { weekday:'short', timeZone:SCHOOL_TZ }).format(utcDate);
+  if (dow !== 'Sun') return true;
+  return confirm('Это воскресенье — обычно нерабочий день.\n\nВсё равно поставить занятие?');
+}
+
 function findDuplicateTrial(teacherId, startDate, durationMin, guestName, excludeLessonId){
   const start = startDate.getTime();
   const end = start + (durationMin || 30) * 60000;
@@ -3492,6 +3624,8 @@ async function submitConfirmTrial(requestId){
   const [datePart, timePart] = dateVal.split('T');
   const utc = zonedTimeToUtc(datePart, timePart, tz);
   const durationNum = duration ? Number(duration) : 30;
+
+  if (!confirmIfSunday(utc)){ errEl.textContent = ''; return; }
 
   const payload = {
     student_id: null,
@@ -3680,6 +3814,7 @@ function renderReqCalendar(){
     const classes = ['cal-day'];
     if (daysSet.has(key)) classes.push('has-trial');
     if (dateObj.getDay() === 0 || dateObj.getDay() === 6) classes.push('weekend');
+    if (dateObj.getDay() === 0) classes.push('dayoff');
     if (key === todayKey) classes.push('today');
     if (key === window.__reqSelectedDate) classes.push('selected');
     cells.push(`<button type="button" class="${classes.join(' ')}" data-date="${key}">${d}</button>`);
@@ -4030,6 +4165,8 @@ async function assignTrialLesson(){
 
   const [datePart, timePart] = dateVal.split('T');
   const utcDate = zonedTimeToUtc(datePart, timePart, timezone);
+
+  if (!confirmIfSunday(utcDate)){ errEl.textContent = ''; return; }
 
   // ЗАЩИТА 3: не даём вручную поставить пробный поверх уже существующего
   if (!editingTrialId){
