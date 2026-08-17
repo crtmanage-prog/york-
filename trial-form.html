@@ -88,14 +88,15 @@
     outline:2px solid var(--ink); outline-offset:2px;
   }
 
-  button.submit{
+  .submit{
     width:100%; font-family:'Unbounded',sans-serif; font-weight:700; font-size:16px;
     color:var(--ink); background:var(--accent); border:none; border-radius:100px;
     padding:17px 24px; cursor:pointer; margin-top:8px;
     transition:transform .15s ease;
+    box-sizing:border-box;
   }
-  button.submit:hover{transform:translateY(-2px);}
-  button.submit:disabled{opacity:0.6; cursor:not-allowed; transform:none;}
+  .submit:hover{transform:translateY(-2px);}
+  .submit:disabled{opacity:0.6; cursor:not-allowed; transform:none;}
 
   #errorMsg{color:#B3261E; font-size:13.5px; font-weight:600; min-height:18px; margin:8px 0 0; text-align:center;}
 
@@ -104,7 +105,7 @@
   .success-box h2{font-family:'Unbounded',sans-serif; font-size:20px; margin:0 0 10px;}
   .success-box p{color:var(--ink-soft); font-size:14.5px; line-height:1.6; max-width:380px; margin:0 auto;}
 
-  @media (prefers-reduced-motion: reduce){ button.submit{transition:none;} }
+  @media (prefers-reduced-motion: reduce){ .submit{transition:none;} }
   .hint-line{font-size:12.5px; color:var(--ink-soft); margin:8px 0 0;}
   .hint-line a{color:var(--ink); font-weight:600; text-decoration:underline; text-underline-offset:3px;}
   .consent-field{margin-top:22px;}
@@ -129,6 +130,25 @@
   }
   .slot-btn.on::after{content:' ✓'; font-weight:700;}
   .hidden{display:none !important;}
+
+  .tg-channel-card{
+    margin-top:18px; background:var(--ink); border-radius:18px;
+    padding:20px 18px; text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .tg-channel-icon{
+    width:44px; height:44px; border-radius:50%; background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+  }
+  .tg-channel-text{display:flex; flex-direction:column; gap:4px;}
+  .tg-channel-text b{color:#fff; font-size:14.5px; line-height:1.35;}
+  .tg-channel-text span{color:rgba(255,255,255,0.6); font-size:12.5px;}
+  .tg-channel-btn{
+    display:inline-block; margin-top:4px;
+    background:var(--accent); color:var(--ink); text-decoration:none;
+    font-weight:700; font-size:13.5px; padding:10px 20px; border-radius:100px;
+  }
 </style>
 </head>
 <body>
@@ -251,6 +271,20 @@
 
     <p id="step1ErrorMsg" style="color:#B3261E; font-size:13.5px; font-weight:600; min-height:18px; margin:8px 0 0; text-align:center;"></p>
     <button class="submit" type="button" id="nextBtn">Далее</button>
+
+    <div class="tg-channel-card">
+      <div class="tg-channel-icon">
+        <svg viewBox="0 0 240 240" width="26" height="26" fill="none">
+          <circle cx="120" cy="120" r="120" fill="#2AABEE"/>
+          <path d="M53 118l125-48c5.8-2.2 10.9 1.4 9 9.9l-21.3 100.4c-1.6 7.3-5.9 9-12 5.6l-33.2-24.5-16 15.4c-1.8 1.8-3.3 3.3-6.7 3.3l2.4-34.2 62.3-56.3c2.7-2.4-.6-3.8-4.2-1.4l-77 48.5-33.2-10.4c-7.2-2.3-7.3-7.2 1.5-9.9z" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="tg-channel-text">
+        <b>Подключите Telegram-бота YORK!</b>
+        <span>Там мы подтвердим пробный, пришлём напоминания и скидки — ничего не пропустишь</span>
+      </div>
+      <a class="tg-channel-btn" href="https://t.me/weyorkonlinebot" target="_blank" rel="noopener">Подключить →</a>
+    </div>
     </div>
 
     <div class="hidden" id="step2">
