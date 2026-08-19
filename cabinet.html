@@ -236,7 +236,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .content{flex:1; min-width:0;}
   header.app-header{
     padding:0 4px 14px;
-    display:flex; align-items:center; justify-content:flex-end;
+    display:flex; align-items:center; justify-content:space-between;
     gap:16px; flex-wrap:wrap;
   }
   .who{display:flex; align-items:center; gap:12px;}
@@ -1035,6 +1035,7 @@ function qrMatrixToSVG(text, pixelSize){
 
     <div class="content">
       <header class="app-header">
+        <a class="btn btn-ghost btn-sm" id="headerTeacherContactBtn" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">💬 Написать преподавателю</a>
         <div class="who">
           <span class="name" id="studentName">—</span>
           <span class="level-pill" id="studentLevel">—</span>
@@ -1595,6 +1596,11 @@ async function loadTeacherContact(){
   const row = teacherRows && teacherRows[0];
   teacherMeetingUrl = (row && row.meeting_url) || false;
   teacherContactTelegram = (row && row.contact_telegram) || false;
+
+  const headerBtn = document.getElementById('headerTeacherContactBtn');
+  if (headerBtn && teacherContactTelegram){
+    headerBtn.href = `https://t.me/${String(teacherContactTelegram).replace('@', '')}`;
+  }
 }
 
 function meetingWindowStatus(lesson){
