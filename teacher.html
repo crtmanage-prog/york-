@@ -123,6 +123,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .login-card .logo span{background:var(--accent); padding:0 4px; border-radius:6px;}
   .login-card p.sub{color:var(--ink-soft); font-size:14px; margin:0 0 28px;}
   .field{margin-bottom:14px; text-align:left;}
+  .hint-line{font-size:12px; color:var(--ink-soft); margin:6px 0 0;}
   .field label{
     display:block; font-size:12px; font-weight:600;
     text-transform:uppercase; letter-spacing:0.04em;
@@ -539,6 +540,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <label for="hwDue">Срок</label>
           <input id="hwDue" type="date">
         </div>
+        <div class="field">
+          <label for="hwAttachment">Материал ученику (необязательно)</label>
+          <input id="hwAttachment" type="file">
+          <p class="hint-line">Задание, аудио, картинка — что угодно, что нужно ученику для выполнения.</p>
+        </div>
         <p id="hwAssignError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
         <button class="btn btn-dark" id="hwAssignBtn">+ Задать домашку</button>
       </div>
@@ -898,6 +904,12 @@ function setupTabs(){
 }
 
 /* ---------- STUDENTS ---------- */
+function studentContactButtons(s){
+  const btns = [];
+  if (s.contact_telegram) btns.push(`<a class="btn btn-ghost btn-sm" href="https://t.me/${String(s.contact_telegram).replace('@','')}" target="_blank" rel="noopener">Telegram</a>`);
+  return btns.join(' ');
+}
+
 async function loadStudents(){
   const { data: students } = await supabase.from('profiles').select('*')
     .eq('teacher_id', currentUser.id).order('full_name', { ascending:true });
@@ -932,6 +944,7 @@ async function loadStudents(){
           <div class="row-sub">${s.level || '—'} · ${s.format === 'CREW' ? 'Группа' : 'Индивидуально'}</div>
         </div>
         <div class="card-actions">
+          ${studentContactButtons(s)}
           <button class="btn btn-ghost btn-sm" onclick="pickStudentForHomework('${s.id}')">Домашка</button>
           <button class="btn btn-ghost btn-sm" onclick="pickStudentForEdit('${s.id}')">Профиль</button>
           <button class="btn btn-ghost btn-sm" onclick="toggleStudentNotes('${s.id}')">📌 Заметки</button>
@@ -1231,12 +1244,27 @@ async function assignHomework(){
   const btn = document.getElementById('hwAssignBtn');
   btn.disabled = true; btn.textContent = 'Задаём…';
 
+  // материал прикрепляем один раз и используем для всех записей (в т.ч. если это группа)
+  let attachmentPath = null;
+  const attachmentFile = document.getElementById('hwAttachment').files[0];
+  if (attachmentFile){
+    const path = `${currentUser.id}/${Date.now()}_${attachmentFile.name}`;
+    const { error: upErr } = await supabase.storage.from('homework').upload(path, attachmentFile);
+    if (upErr){
+      btn.disabled = false; btn.textContent = '+ Задать домашку';
+      errEl.textContent = 'Не получилось загрузить файл. Попробуй ещё раз.';
+      return;
+    }
+    attachmentPath = path;
+  }
+
   const rows = studentIds.map(studentId => ({
     student_id: studentId,
     teacher_id: currentUser.id,
     title,
     description: description || null,
     due_date: dueDate || null,
+    attachment_file_url: attachmentPath,
     status: 'assigned'
   }));
 
@@ -1252,6 +1280,7 @@ async function assignHomework(){
   document.getElementById('hwTitle').value = '';
   document.getElementById('hwDesc').value = '';
   document.getElementById('hwDue').value = '';
+  document.getElementById('hwAttachment').value = '';
   await loadToCheck();
 }
 
