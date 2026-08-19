@@ -2066,7 +2066,7 @@ async function loadHomework(){
 
 function renderHomeworkItem(h){
   let inner = `<div class="row-title">${h.title}</div>
-    <div class="row-sub">${h.description || ''}${h.due_date ? ' · до ' + fmtDate(h.due_date) : ''}</div>`;
+    <div class="row-sub">${h.description ? h.description + ' · ' : ''}${h.due_date ? 'до ' + fmtDate(h.due_date) : 'Без срока'}</div>`;
 
   if (h.attachment_file_url){
     const links = h.attachment_file_url.split('\n').map(s => s.trim()).filter(Boolean);
