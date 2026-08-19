@@ -549,6 +549,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         <div class="field">
           <label for="hwDue">Срок</label>
           <input id="hwDue" type="date">
+          <label style="display:flex; align-items:center; gap:7px; margin-top:8px; text-transform:none; font-weight:500; font-size:13px; cursor:pointer;">
+            <input type="checkbox" id="hwNoDue" style="width:auto;" onchange="
+              document.getElementById('hwDue').disabled = this.checked;
+              if (this.checked) document.getElementById('hwDue').value = '';
+            ">
+            Без срока — ученик выполнит и отметит сам, когда будет готово
+          </label>
         </div>
         <div class="field">
           <label for="hwAttachment">Материал ученику (необязательно)</label>
@@ -705,6 +712,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <section class="panel" id="panel-check">
       <h2 class="panel-title">На проверке</h2>
       <div id="checkList"></div>
+
+      <h2 class="panel-title" style="margin-top:28px;">Ожидают выполнения</h2>
+      <p class="section-sub" style="margin-bottom:14px;">Задано, но ученик ещё не сдал — включая задания без срока.</p>
+      <div id="pendingHomeworkList"></div>
     </section>
 
   </main>
@@ -1291,6 +1302,8 @@ async function assignHomework(){
   document.getElementById('hwTitle').value = '';
   document.getElementById('hwDesc').value = '';
   document.getElementById('hwDue').value = '';
+  document.getElementById('hwDue').disabled = false;
+  document.getElementById('hwNoDue').checked = false;
   document.getElementById('hwAttachment').value = '';
   await loadToCheck();
   await loadAllMyHomework();
@@ -1917,6 +1930,27 @@ async function loadAllMyHomework(){
   const { data } = await supabase.from('homework').select('*, profiles!homework_student_id_fkey(full_name)')
     .eq('teacher_id', currentUser.id).order('due_date', { ascending:true });
   window.__myHomeworkList = data || [];
+  renderPendingHomework();
+}
+
+function renderPendingHomework(){
+  const container = document.getElementById('pendingHomeworkList');
+  if (!container) return;
+
+  const pending = (window.__myHomeworkList || []).filter(h => h.status === 'assigned');
+  if (!pending.length){
+    container.innerHTML = '<div class="empty-state">Сейчас нет заданий, ожидающих выполнения.</div>';
+    return;
+  }
+
+  container.innerHTML = pending.map(h => `
+    <div class="row-card" style="margin-bottom:8px;">
+      <div class="row-main">
+        <div class="row-title">${(h.profiles && h.profiles.full_name) || 'Ученик'} — ${h.title}</div>
+        <div class="row-sub">${h.due_date ? 'до ' + fmtDate(h.due_date) : 'Без срока'}</div>
+      </div>
+    </div>
+  `).join('');
 }
 
 async function loadToCheck(){
