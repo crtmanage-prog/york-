@@ -135,6 +135,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     border:1.5px solid var(--line); background:#fff; color:var(--ink);
   }
   .field input:focus{border-color:var(--ink); outline:none;}
+  .field textarea{
+    width:100%; font-family:'Inter',sans-serif; font-size:14px;
+    padding:13px 14px; border-radius:12px; resize:vertical;
+    border:1.5px solid var(--line); background:#fff; color:var(--ink);
+  }
+  .field textarea:focus{border-color:var(--ink); outline:none;}
   #loginError{
     color:var(--red); font-size:13px; font-weight:600;
     margin:0 0 14px; min-height:18px;
@@ -482,6 +488,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <label for="myMeetingUrl">Ссылка на созвон</label>
           <input id="myMeetingUrl" type="text" placeholder="https://telemost.yandex.ru/j/...">
         </div>
+        <div class="field" style="margin-top:14px;">
+          <label for="myContactTelegram">Мой Telegram (для связи по домашке)</label>
+          <input id="myContactTelegram" type="text" placeholder="@username">
+        </div>
         <p id="meetingUrlSaved" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
         <button class="btn btn-dark btn-sm" id="saveMeetingUrlBtn">Сохранить</button>
       </div>
@@ -542,8 +552,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         </div>
         <div class="field">
           <label for="hwAttachment">Материал ученику (необязательно)</label>
-          <input id="hwAttachment" type="file">
-          <p class="hint-line">Задание, аудио, картинка — что угодно, что нужно ученику для выполнения.</p>
+          <textarea id="hwAttachment" rows="3" placeholder="https://disk.yandex.ru/...&#10;https://drive.google.com/...&#10;https://t.me/c/..."></textarea>
+          <p class="hint-line">Вставь одну или несколько ссылок (каждая с новой строки) — Яндекс.Диск, Google Диск, Облако Mail.ru, Telegram-сообщение и т.п. Так можно прикрепить сколько угодно файлов любого размера, без ограничений платформы.</p>
         </div>
         <p id="hwAssignError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
         <button class="btn btn-dark" id="hwAssignBtn">+ Задать домашку</button>
@@ -859,6 +869,7 @@ async function enterApp(user){
   const __fn = firstName(currentProfile.full_name);
   document.getElementById('greetingTitle').textContent = __fn ? `${timeGreetingWord()}, ${__fn}! 👋` : `${timeGreetingWord()}! 👋`;
   document.getElementById('myMeetingUrl').value = currentProfile.meeting_url || '';
+  document.getElementById('myContactTelegram').value = currentProfile.contact_telegram || '';
   document.getElementById('appScreen').classList.remove('hidden');
 
   setupTabs();
@@ -872,13 +883,15 @@ document.getElementById('saveMeetingUrlBtn').addEventListener('click', saveMeeti
 
 async function saveMeetingUrl(){
   const url = document.getElementById('myMeetingUrl').value.trim();
+  const telegram = document.getElementById('myContactTelegram').value.trim();
   const okEl = document.getElementById('meetingUrlSaved');
   okEl.textContent = '';
 
   const btn = document.getElementById('saveMeetingUrlBtn');
   btn.disabled = true; btn.textContent = 'Сохраняем…';
 
-  const { error } = await supabase.from('profiles').update({ meeting_url: url || null }).eq('id', currentUser.id);
+  const { error } = await supabase.from('profiles')
+    .update({ meeting_url: url || null, contact_telegram: telegram || null }).eq('id', currentUser.id);
 
   btn.disabled = false; btn.textContent = 'Сохранить';
 
@@ -890,6 +903,7 @@ async function saveMeetingUrl(){
   okEl.style.color = '#3B7A1E';
   okEl.textContent = 'Сохранено!';
   currentProfile.meeting_url = url;
+  currentProfile.contact_telegram = telegram;
 }
 
 function setupTabs(){
@@ -1245,18 +1259,10 @@ async function assignHomework(){
   btn.disabled = true; btn.textContent = 'Задаём…';
 
   // материал прикрепляем один раз и используем для всех записей (в т.ч. если это группа)
-  let attachmentPath = null;
-  const attachmentFile = document.getElementById('hwAttachment').files[0];
-  if (attachmentFile){
-    const path = `${currentUser.id}/${Date.now()}_${attachmentFile.name}`;
-    const { error: upErr } = await supabase.storage.from('homework').upload(path, attachmentFile);
-    if (upErr){
-      btn.disabled = false; btn.textContent = '+ Задать домашку';
-      errEl.textContent = 'Не получилось загрузить файл. Попробуй ещё раз.';
-      return;
-    }
-    attachmentPath = path;
-  }
+  const attachmentRaw = document.getElementById('hwAttachment').value.trim();
+  const attachmentPath = attachmentRaw
+    ? attachmentRaw.split('\n').map(s => s.trim()).filter(Boolean).join('\n')
+    : null;
 
   const rows = studentIds.map(studentId => ({
     student_id: studentId,
