@@ -178,9 +178,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   nav.side-nav button.active{background:var(--accent); color:var(--ink);}
 
   .flag-btn{position:relative;}
-  .flag-swap{width:26px; height:26px; display:flex; align-items:center; justify-content:center; transition:opacity .22s ease, transform .22s ease;}
-  .flag-swap .flag-ic{width:24px; height:16px; border-radius:3px; box-shadow:0 0 0 1px rgba(0,0,0,0.08); display:block;}
-  .flag-swap .teaser-emoji{font-size:20px; line-height:1;}
+  .flag-swap{width:24px; height:16px; border-radius:3px; overflow:hidden; display:block; box-shadow:0 0 0 1px rgba(0,0,0,0.08); transition:opacity .22s ease, transform .22s ease;}
+  .flag-swap .flag-ic{width:24px; height:16px; display:block;}
   .flag-swap.flag-swap-out{opacity:0; transform:scale(0.85);}
   .flag-dot{
     position:absolute; top:4px; right:4px; width:7px; height:7px; border-radius:50%;
@@ -205,27 +204,29 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .china-modal-close:hover{background:var(--line);}
   .china-modal-flags{display:flex; justify-content:center; margin-bottom:14px;}
   .china-modal-flags .flag-ic{width:52px; height:35px; border-radius:6px; box-shadow:0 0 0 1px rgba(0,0,0,0.08);}
-  .china-modal-flags .teaser-modal-emoji{font-size:40px; line-height:1;}
   .china-modal-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:16.5px; margin-bottom:10px;}
   .china-modal-text{font-size:13.5px; color:var(--ink-soft); line-height:1.6; margin-bottom:18px;}
 
   .invite-card{
     margin-top:auto; width:56px; height:56px; cursor:pointer; position:relative; overflow:hidden;
-    background:#fff; border:1.5px solid var(--line);
+    background:linear-gradient(155deg, #232323 0%, var(--ink) 55%, #2b2b1a 100%);
+    color:#fff; border:none;
     border-radius:18px; padding:0;
     display:flex; align-items:center; justify-content:center;
     transition:transform .18s ease, box-shadow .18s ease;
     box-shadow:0 2px 0 rgba(0,0,0,0);
   }
+  .invite-card::before{
+    content:""; position:absolute; top:-22px; right:-18px; width:56px; height:56px;
+    background:var(--accent); border-radius:50%; opacity:0.28; filter:blur(2px);
+    transition:transform .35s ease;
+  }
   .invite-card:hover{transform:translateY(-3px) scale(1.04); box-shadow:0 10px 22px rgba(0,0,0,0.18);}
+  .invite-card:hover::before{transform:scale(1.25);}
   .invite-gift{
     font-size:22px; line-height:1; width:38px; height:38px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    position:relative; z-index:1; animation:invite-pulse-scale 2.4s ease-in-out infinite;
-  }
-  @keyframes invite-pulse-scale{
-    0%, 100%{ transform:scale(1); }
-    50%{ transform:scale(1.1); }
+    background:var(--accent); display:flex; align-items:center; justify-content:center;
+    position:relative; z-index:1; animation:invite-pulse 2.4s ease-in-out infinite;
   }
   @keyframes invite-pulse{
     0%, 100%{ box-shadow:0 0 0 0 rgba(210,231,57,0.45); }
@@ -282,7 +283,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .dash-welcome b{color:var(--ink); font-weight:900;}
   @media (max-width:700px){ .dash-welcome{font-size:26px;} }
 
-  .dash-hero-row{position:relative; display:flex; align-items:flex-start; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:4px;}
+  .dash-hero-row{display:flex; align-items:flex-start; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:4px;}
   .dash-welcome-new{
     font-family:'Unbounded',sans-serif; font-weight:900; font-size:36px; line-height:1.18;
     margin:4px 0 0; text-transform:uppercase; color:var(--ink); letter-spacing:-0.01em;
@@ -293,8 +294,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     content:""; position:absolute; left:0; right:4%; bottom:2px; height:9px;
     background:var(--accent); border-radius:5px; z-index:-1;
   }
-  .dash-level-block{position:relative; display:flex; align-items:center; gap:14px; padding-top:8px; flex-shrink:0;}
-  .deco-chevron-up{position:absolute; top:-16px; right:2px; width:18px; height:18px; opacity:0.85; pointer-events:none;}
+  .dash-level-block{display:flex; align-items:center; gap:14px; padding-top:8px; flex-shrink:0;}
   .dash-level-oval{
     background:var(--accent); width:118px; height:76px; border-radius:52% 48% 55% 45% / 58% 55% 45% 42%;
     display:flex; align-items:center; justify-content:center; transform:rotate(-9deg); flex-shrink:0;
@@ -364,15 +364,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     display:flex; flex-direction:column; position:relative; overflow:hidden;
   }
   .deco-flower{position:absolute; top:14px; right:14px; width:26px; height:26px; opacity:0.9;}
-
-  /* ---------- ещё декоративные акценты (фирменная графика York!) ---------- */
-  .deco-heart{position:absolute; top:12px; right:14px; width:22px; height:22px; opacity:0.92; pointer-events:none;}
-  .deco-squiggle{position:absolute; bottom:10px; left:14px; width:38px; height:24px; opacity:0.9; pointer-events:none;}
-  .deco-chevron{position:absolute; top:12px; left:14px; width:20px; height:20px; opacity:0.85; pointer-events:none;}
-  .deco-blob{position:absolute; bottom:-10px; right:-10px; width:54px; height:54px; opacity:0.14; pointer-events:none;}
-  .deco-diamond{position:absolute; top:10px; right:10px; width:12px; height:12px; opacity:0.9; pointer-events:none;}
-  .deco-star2{position:absolute; bottom:12px; right:16px; width:18px; height:18px; opacity:0.85; pointer-events:none;}
-
   .hp-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:16px;}
   .hp-level{font-family:'Unbounded',sans-serif; font-weight:900; font-size:42px; line-height:1; margin:6px 0 16px;}
   .hp-bars{display:flex; flex-direction:column; gap:9px;}
@@ -1029,7 +1020,7 @@ function qrMatrixToSVG(text, pixelSize){
         <button class="tab-btn" data-tab="support" title="Поддержка" aria-label="Поддержка">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </button>
-        <button class="tab-btn flag-btn" id="flagTeaserBtn" title="Скоро в York!" aria-label="Скоро в York!" onclick="openTeaserModal()">
+        <button class="tab-btn flag-btn" id="flagTeaserBtn" title="Китайский скоро в York!" aria-label="Китайский скоро в York!" onclick="openChinaModal()">
           <span class="flag-dot"></span>
           <span class="flag-swap" id="flagSwap">
             <svg class="flag-ic" viewBox="0 0 60 40"><rect width="60" height="40" rx="5" fill="#DE2910"/><g fill="#FFDE00"><polygon points="10,6 11.8,11.4 7.2,8.1 12.8,8.1 8.2,11.4"/><polygon points="20,3 20.7,5.1 18.9,3.8 21.1,3.8 19.3,5.1"/><polygon points="23,7 23.7,9.1 21.9,7.8 24.1,7.8 22.3,9.1"/><polygon points="23,12 23.7,14.1 21.9,12.8 24.1,12.8 22.3,14.1"/><polygon points="20,16 20.7,18.1 18.9,16.8 21.1,16.8 19.3,18.1"/></g></svg>
@@ -1057,7 +1048,6 @@ function qrMatrixToSVG(text, pixelSize){
       <div class="dash-hero-row">
         <h1 class="dash-welcome-new">WELCOME BACK,<br><span class="wb-highlight"><b id="dashName">DARYA</b>!</span></h1>
         <div class="dash-level-block">
-          <svg class="deco-chevron-up" viewBox="0 0 100 100" aria-hidden="true"><path d="M20 65 L50 25 L80 65 L65 65 L50 44 L35 65 Z" fill="#1C1C1C"/></svg>
           <div class="dash-level-oval"><span id="dashLevelOval">A2</span></div>
           <div class="dash-level-next" id="dashNextLevel">NEXT: B1</div>
         </div>
@@ -1087,7 +1077,6 @@ function qrMatrixToSVG(text, pixelSize){
               <button class="btn btn-ghost btn-sm" onclick="document.querySelector('.tab-btn[data-tab=&quot;homework&quot;]').click()">Открыть</button>
             </div>
             <div class="mini-card carousel-card" id="subTasksCard">
-              <svg class="deco-diamond" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 10 L90 50 L50 90 L10 50 Z" fill="var(--accent)" stroke="#1C1C1C" stroke-width="4"/></svg>
               <div class="carousel-slide active" data-slide="sub">
                 <div class="mc-title">Абонемент</div>
                 <div class="mc-sub" id="ov-subscription">—</div>
@@ -1172,11 +1161,6 @@ function qrMatrixToSVG(text, pixelSize){
             Напоминания приходят в @weyorkonlinebot. Чтобы отключить — заблокируй бота в Telegram.
           </p>
         </div>
-      </div>
-
-      <h2 class="panel-title">Твой преподаватель</h2>
-      <div id="teacherContactBlock" style="margin-bottom:24px;">
-        <div class="empty-state">Загружаем…</div>
       </div>
 
       <h2 class="panel-title">Мы на связи</h2>
@@ -1310,9 +1294,7 @@ function qrMatrixToSVG(text, pixelSize){
     </section>
 
     <section class="panel" id="panel-payment">
-      <h2 class="panel-title" style="display:flex; align-items:center; gap:8px;">Оплата и абонемент
-        <svg width="18" height="18" viewBox="0 0 100 100" aria-hidden="true" style="flex-shrink:0;"><path d="M50 88 C50 88 12 62 12 34 C12 18 24 8 38 8 C46 8 50 14 50 14 C50 14 54 8 62 8 C76 8 88 18 88 34 C88 62 50 88 50 88 Z" fill="#1C1C1C"/></svg>
-      </h2>
+      <h2 class="panel-title">Оплата и абонемент</h2>
       <div id="paymentList"></div>
       <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px;">
         <a class="btn btn-accent" id="mainPayBtn" href="https://www.tinkoff.ru/rm/r_omizDKAlyA.rrEPbjdlvM/R2oRo67357" target="_blank" rel="noopener">Оплатить абонемент</a>
@@ -1398,9 +1380,13 @@ function qrMatrixToSVG(text, pixelSize){
 <div class="china-modal-overlay hidden" id="chinaModalOverlay" onclick="if(event.target===this) closeChinaModal();">
   <div class="china-modal">
     <button class="china-modal-close" onclick="closeChinaModal()" aria-label="Закрыть">×</button>
-    <div class="china-modal-flags" id="teaserModalIcon"></div>
-    <div class="china-modal-title" id="teaserModalTitle"></div>
-    <div class="china-modal-text" id="teaserModalText"></div>
+    <div class="china-modal-flags">
+      <svg class="flag-ic" viewBox="0 0 60 40"><rect width="60" height="40" rx="6" fill="#DE2910"/><g fill="#FFDE00"><polygon points="10,6 11.8,11.4 7.2,8.1 12.8,8.1 8.2,11.4"/><polygon points="20,3 20.7,5.1 18.9,3.8 21.1,3.8 19.3,5.1"/><polygon points="23,7 23.7,9.1 21.9,7.8 24.1,7.8 22.3,9.1"/><polygon points="23,12 23.7,14.1 21.9,12.8 24.1,12.8 22.3,14.1"/><polygon points="20,16 20.7,18.1 18.9,16.8 21.1,16.8 19.3,18.1"/></g></svg>
+    </div>
+    <div class="china-modal-title">Китайский скоро в York! 🎉</div>
+    <div class="china-modal-text">
+      Мы готовим курс китайского языка. Если интересно — напиши, забронируем место в первой группе на особых условиях.
+    </div>
     <a class="btn btn-dark btn-sm" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Мне интересно →</a>
   </div>
 </div>
@@ -1576,9 +1562,9 @@ async function enterApp(user){
   ensureReferralCode();
   loadMyDocuments();
   setupTelegramBlock();
-  loadTeacherContact();
   startFlagSwap();
   startSubTasksCarousel();
+  loadTeacherContact();
   loadPracticeProgress();
   const __dashNameEl = document.getElementById('dashName');
   if (__dashNameEl) __dashNameEl.textContent = firstName(currentProfile.full_name) || 'друг';
@@ -1600,39 +1586,16 @@ function setupTabs(){
 
 /* ---------- SCHEDULE ---------- */
 let teacherMeetingUrl = null;
-let myTeacherInfo = null; // {full_name, contact_telegram, contact_phone} — кэшируем один раз
+let teacherContactTelegram = null;
 
 async function loadTeacherContact(){
-  const el = document.getElementById('teacherContactBlock');
-  if (!el) return;
-
-  if (!currentProfile.teacher_id){
-    el.innerHTML = '<div class="empty-state">Преподаватель ещё не назначен — скоро появится здесь.</div>';
-    return;
-  }
-
-  if (!myTeacherInfo){
-    const { data } = await supabase.from('profiles')
-      .select('full_name, contact_telegram, contact_phone')
-      .eq('id', currentProfile.teacher_id);
-    myTeacherInfo = (data && data[0]) || {};
-  }
-
-  const btns = [];
-  if (myTeacherInfo.contact_telegram){
-    btns.push(`<a class="btn btn-accent btn-sm" href="https://t.me/${String(myTeacherInfo.contact_telegram).replace('@','')}" target="_blank" rel="noopener">Написать в Telegram</a>`);
-  }
-
-  el.innerHTML = `
-    <div class="row-card" style="margin-bottom:0;">
-      <div class="row-main">
-        <div class="row-title">${myTeacherInfo.full_name || 'Твой преподаватель'}</div>
-        <div class="row-sub">${btns.length ? '' : 'Контакты пока не указаны — напиши через общую поддержку ниже.'}</div>
-      </div>
-      <div style="display:flex; gap:8px; flex-wrap:wrap;">${btns.join('')}</div>
-    </div>`;
+  if (!currentProfile.teacher_id || teacherMeetingUrl !== null) return;
+  const { data: teacherRows } = await supabase.from('profiles')
+    .select('meeting_url, contact_telegram').eq('id', currentProfile.teacher_id);
+  const row = teacherRows && teacherRows[0];
+  teacherMeetingUrl = (row && row.meeting_url) || false;
+  teacherContactTelegram = (row && row.contact_telegram) || false;
 }
-
 
 function meetingWindowStatus(lesson){
   if (!teacherMeetingUrl) return { state:'none' };
@@ -1660,10 +1623,7 @@ function renderJoinButton(lesson){
 }
 
 async function loadSchedule(){
-  if (currentProfile.teacher_id && teacherMeetingUrl === null){
-    const { data: teacherRows } = await supabase.from('profiles').select('meeting_url').eq('id', currentProfile.teacher_id);
-    teacherMeetingUrl = (teacherRows && teacherRows[0] && teacherRows[0].meeting_url) || false;
-  }
+  await loadTeacherContact();
 
   const { data: lessons } = await supabase.from('lessons').select('*')
     .eq('student_id', currentUser.id).order('lesson_date', { ascending:true });
@@ -2091,8 +2051,6 @@ async function loadHomework(){
       }
       const dl = document.getElementById('dl-' + h.id);
       if (dl) dl.addEventListener('click', (e) => { e.preventDefault(); downloadHomeworkFile(h.submission_file_url); });
-      const mat = document.getElementById('mat-' + h.id);
-      if (mat) mat.addEventListener('click', (e) => { e.preventDefault(); downloadHomeworkFile(h.attachment_file_url); });
     });
   }
 
@@ -2104,13 +2062,26 @@ function renderHomeworkItem(h){
   let inner = `<div class="row-title">${h.title}</div>
     <div class="row-sub">${h.description || ''}${h.due_date ? ' · до ' + fmtDate(h.due_date) : ''}</div>`;
 
+  if (h.attachment_file_url){
+    const links = h.attachment_file_url.split('\n').map(s => s.trim()).filter(Boolean);
+    if (links.length){
+      inner += `<div style="margin-top:6px; display:flex; flex-direction:column; gap:4px;">
+        ${links.map((url, i) => `<a href="${url}" target="_blank" rel="noopener" style="font-size:13px; font-weight:600; text-decoration:underline;">📎 Материал${links.length > 1 ? ' ' + (i + 1) : ''}</a>`).join('')}
+      </div>`;
+    }
+  }
+
   if (h.status === 'assigned'){
+    const teacherLink = teacherContactTelegram
+      ? `https://t.me/${String(teacherContactTelegram).replace('@', '')}`
+      : 'https://t.me/thearbeiter01';
     inner += `
       <div class="hw-detail">
         <textarea id="text-${h.id}" placeholder="Ответ текстом (необязательно, если прикрепите файл)"></textarea>
         <input type="file" id="file-${h.id}">
-        <div style="margin-top:10px;">
+        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
           <button class="btn btn-dark btn-sm" id="submit-${h.id}">Отправить на проверку</button>
+          <a class="btn btn-ghost btn-sm" href="${teacherLink}" target="_blank" rel="noopener">💬 Написать преподавателю</a>
         </div>
       </div>`;
   } else if (h.status === 'submitted'){
@@ -2123,9 +2094,6 @@ function renderHomeworkItem(h){
   }
   if (h.submission_file_url){
     inner += `<div style="margin-top:8px;"><a href="#" id="dl-${h.id}" style="font-size:13px; font-weight:600; text-decoration:underline;">Скачать прикреплённый файл</a></div>`;
-  }
-  if (h.attachment_file_url){
-    inner += `<div style="margin-top:8px;"><a href="#" id="mat-${h.id}" style="font-size:13px; font-weight:600; text-decoration:underline; color:#3B7A1E;">📎 Материал от преподавателя</a></div>`;
   }
 
   return `
@@ -2796,54 +2764,26 @@ async function loadMyTestResults(){
   });
 }
 
+function openChinaModal(){
+  document.getElementById('chinaModalOverlay').classList.remove('hidden');
+}
 function closeChinaModal(){
   document.getElementById('chinaModalOverlay').classList.add('hidden');
 }
 
-// Три тизера будущих продуктов York! — крутятся по очереди в сайдбаре.
-// Флаг — SVG (страны рисуем сами, чтобы не зависеть от эмодзи-шрифта ОС).
-// Остальные — обычные эмодзи, как договорились.
-const CHINA_FLAG_SVG = '<svg class="flag-ic" viewBox="0 0 60 40"><rect width="60" height="40" rx="5" fill="#DE2910"/><g fill="#FFDE00"><polygon points="10,6 11.8,11.4 7.2,8.1 12.8,8.1 8.2,11.4"/><polygon points="20,3 20.7,5.1 18.9,3.8 21.1,3.8 19.3,5.1"/><polygon points="23,7 23.7,9.1 21.9,7.8 24.1,7.8 22.3,9.1"/><polygon points="23,12 23.7,14.1 21.9,12.8 24.1,12.8 22.3,14.1"/><polygon points="20,16 20.7,18.1 18.9,16.8 21.1,16.8 19.3,18.1"/></g></svg>';
-
-const TEASERS = [
-  {
-    navIcon: CHINA_FLAG_SVG,
-    modalIcon: CHINA_FLAG_SVG,
-    title: 'Китайский скоро в York! 🎉',
-    text: 'Мы готовим курс китайского языка. Если интересно — напиши, забронируем место в первой группе на особых условиях.'
-  },
-  {
-    navIcon: '<span class="teaser-emoji">✈️</span>',
-    modalIcon: '<span class="teaser-modal-emoji">✈️</span>',
-    title: 'Новые курсы уже готовятся',
-    text: 'Скоро запустим английский для путешествий и английский для работы — с практикой под конкретные ситуации. Напиши, если хочешь узнать первой.'
-  },
-  {
-    navIcon: '<span class="teaser-emoji">💬</span>',
-    modalIcon: '<span class="teaser-modal-emoji">💬</span>',
-    title: 'Разговорный клуб — скоро!',
-    text: 'Живая практика разговорной речи в мини-группах, без учебников и грамматики — просто говорим. Напиши, если хочешь попасть в первый поток.'
-  }
-];
-
-let currentTeaserIndex = 0;
-
-function openTeaserModal(){
-  const t = TEASERS[currentTeaserIndex];
-  document.getElementById('teaserModalIcon').innerHTML = t.modalIcon;
-  document.getElementById('teaserModalTitle').textContent = t.title;
-  document.getElementById('teaserModalText').textContent = t.text;
-  document.getElementById('chinaModalOverlay').classList.remove('hidden');
-}
-
+const FLAG_SVGS = {
+  cn: '<svg class="flag-ic" viewBox="0 0 60 40"><rect width="60" height="40" rx="5" fill="#DE2910"/><g fill="#FFDE00"><polygon points="10,6 11.8,11.4 7.2,8.1 12.8,8.1 8.2,11.4"/><polygon points="20,3 20.7,5.1 18.9,3.8 21.1,3.8 19.3,5.1"/><polygon points="23,7 23.7,9.1 21.9,7.8 24.1,7.8 22.3,9.1"/><polygon points="23,12 23.7,14.1 21.9,12.8 24.1,12.8 22.3,14.1"/><polygon points="20,16 20.7,18.1 18.9,16.8 21.1,16.8 19.3,18.1"/></g></svg>',
+  en: '<svg class="flag-ic" viewBox="0 0 60 30"><clipPath id="fgb2"><rect width="60" height="30" rx="5"/></clipPath><g clip-path="url(#fgb2)"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30M0,15 H60" stroke="#C8102E" stroke-width="6"/></g></svg>'
+};
 function startFlagSwap(){
   const el = document.getElementById('flagSwap');
   if (!el) return;
+  let showingCn = true;
   setInterval(() => {
-    currentTeaserIndex = (currentTeaserIndex + 1) % TEASERS.length;
+    showingCn = !showingCn;
     el.classList.add('flag-swap-out');
     setTimeout(() => {
-      el.innerHTML = TEASERS[currentTeaserIndex].navIcon;
+      el.innerHTML = FLAG_SVGS[showingCn ? 'cn' : 'en'];
       el.classList.remove('flag-swap-out');
     }, 220);
   }, 4000);
