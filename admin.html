@@ -398,9 +398,16 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <button class="tab-btn" data-tab="allteachers">Учителя</button>
     <button class="tab-btn" data-tab="groups">Группы</button>
     <button class="tab-btn" data-tab="alllessons">Расписание</button>
+    <button class="tab-btn" data-tab="workload">Занятость</button>
     <button class="tab-btn" data-tab="payments">Оплата</button>
-    <button class="tab-btn" data-tab="requests">Заявки</button>
-    <button class="tab-btn" data-tab="stats">Статистика</button>
+    <button class="tab-btn" data-tab="requests" style="position:relative;">
+      Заявки
+      <span id="newRequestsBadge" class="hidden" style="
+        position:absolute; top:2px; right:2px; min-width:16px; height:16px; padding:0 4px;
+        background:var(--red); color:#fff; border-radius:100px;
+        font-size:10px; font-weight:800; line-height:16px; text-align:center;
+      "></span>
+    </button>
     <button class="tab-btn" data-tab="referrals">Рефералы</button>
     <button class="tab-btn" data-tab="link">Добавить человека</button>
   </nav>
@@ -507,6 +514,121 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <div class="stat-label">Оптимистичный</div>
           <div class="stat-value" id="forecast-optimistic" style="font-size:17px;">—</div>
         </div>
+      </div>
+
+      <h2 class="panel-title" style="margin-top:24px;">Статистика за период</h2>
+
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div class="field" style="max-width:280px; flex:1; min-width:200px;">
+          <label for="statsPeriod">Период</label>
+          <select id="statsPeriod" onchange="onStatsPeriodChange()">
+            <option value="all">За всё время</option>
+            <option value="month" selected>Этот месяц</option>
+            <option value="lastmonth">Прошлый месяц</option>
+            <option value="year">Этот год</option>
+            <option value="custom">Свой период…</option>
+          </select>
+        </div>
+        <div class="field" style="max-width:280px; flex:1; min-width:200px;">
+          <label for="statsTeacher">Учитель</label>
+          <select id="statsTeacher" onchange="renderStats()">
+            <option value="">Все учителя</option>
+          </select>
+        </div>
+      </div>
+      <div id="statsCustomRange" class="hidden" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;">
+        <div class="field" style="flex:1; min-width:160px;">
+          <label for="statsFrom">С</label>
+          <input id="statsFrom" type="date">
+        </div>
+        <div class="field" style="flex:1; min-width:160px;">
+          <label for="statsTo">По</label>
+          <input id="statsTo" type="date">
+        </div>
+      </div>
+      <button class="btn btn-ghost btn-sm" style="margin-bottom:20px;" onclick="renderStats()">Применить</button>
+
+      <div class="overview-grid" style="grid-template-columns:repeat(5,1fr); margin-bottom:24px;">
+        <div class="stat-card">
+          <div class="stat-label">Пробных проведено</div>
+          <div class="stat-value" id="stat-trials">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Уроков проведено</div>
+          <div class="stat-value" id="stat-lessons">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Выручка</div>
+          <div class="stat-value" id="stat-revenue">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Выплаты учителям</div>
+          <div class="stat-value" id="stat-payout">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Чистый доход</div>
+          <div class="stat-value" id="stat-net">—</div>
+        </div>
+      </div>
+
+      <h2 class="panel-title" style="margin-top:20px;">Ставка по умолчанию</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Используется, если у учителя не задана своя ставка (во вкладке «Учителя» → «Редактировать учителя»). Считается по всем проведённым (прошедшим) урокам, не пробным.</p>
+      <div class="card">
+        <div class="field">
+          <label for="rateSolo">SOLO, ₽/час</label>
+          <input id="rateSolo" type="number" min="0" value="500">
+        </div>
+        <div class="field">
+          <label for="rateCrew">CREW (группа), ₽/час</label>
+          <input id="rateCrew" type="number" min="0" value="600">
+        </div>
+        <button class="btn btn-dark btn-sm" id="recalcBtn" onclick="renderStats()">Пересчитать</button>
+      </div>
+
+      <h2 class="panel-title" style="margin-top:20px;">Выплаты по учителям</h2>
+      <div class="table-wrap">
+        <table class="admin-table" id="payoutTable">
+          <thead>
+            <tr><th>Учитель</th><th>Часов SOLO</th><th>Часов CREW</th><th>К выплате</th></tr>
+          </thead>
+          <tbody id="payoutTableBody"></tbody>
+        </table>
+      </div>
+
+      <h2 class="panel-title" style="margin-top:20px;">Прочие расходы</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Реклама, сервисы, комиссии и всё остальное, что не зарплата учителям.</p>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="field">
+          <label for="expCategory">Категория</label>
+          <select id="expCategory">
+            <option value="Реклама">Реклама</option>
+            <option value="Сервисы">Сервисы</option>
+            <option value="Комиссии">Комиссии</option>
+            <option value="Прочее">Прочее</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="expAmount">Сумма, ₽</label>
+          <input id="expAmount" type="number" min="0">
+        </div>
+        <div class="field">
+          <label for="expDate">Дата</label>
+          <input id="expDate" type="date">
+        </div>
+        <div class="field">
+          <label for="expDesc">Комментарий (необязательно)</label>
+          <input id="expDesc" type="text" placeholder="Например: таргет во ВКонтакте">
+        </div>
+        <p id="expError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
+        <button class="btn btn-dark btn-sm" id="expAddBtn">+ Добавить расход</button>
+      </div>
+      <div class="table-wrap">
+        <table class="admin-table" id="expensesTable">
+          <thead>
+            <tr><th>Дата</th><th>Категория</th><th>Сумма</th><th>Комментарий</th><th></th></tr>
+          </thead>
+          <tbody id="expensesTableBody"></tbody>
+        </table>
       </div>
 
     </section>
@@ -789,6 +911,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       </div>
     </section>
 
+    <section class="panel" id="panel-workload">
+      <h2 class="panel-title">Занятость учителей</h2>
+      <p class="section-sub" style="margin-bottom:16px;">Две недели вперёд: где у кого свободно, где уже стоит урок или пробный.</p>
+      <div id="workloadView"></div>
+    </section>
+
     <section class="panel" id="panel-payments">
       <h2 class="panel-title">Оплата</h2>
       <p class="section-sub" style="margin-bottom:16px;">Прикрепи абонемент ученику — если укажешь дни недели и время, уроки на весь абонемент создадутся сами.</p>
@@ -966,123 +1094,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       </div>
     </section>
 
-    <section class="panel" id="panel-stats">
-      <h2 class="panel-title">Статистика</h2>
-
-      <div style="display:flex; gap:16px; flex-wrap:wrap;">
-        <div class="field" style="max-width:280px; flex:1; min-width:200px;">
-          <label for="statsPeriod">Период</label>
-          <select id="statsPeriod" onchange="onStatsPeriodChange()">
-            <option value="all">За всё время</option>
-            <option value="month" selected>Этот месяц</option>
-            <option value="lastmonth">Прошлый месяц</option>
-            <option value="year">Этот год</option>
-            <option value="custom">Свой период…</option>
-          </select>
-        </div>
-        <div class="field" style="max-width:280px; flex:1; min-width:200px;">
-          <label for="statsTeacher">Учитель</label>
-          <select id="statsTeacher" onchange="renderStats()">
-            <option value="">Все учителя</option>
-          </select>
-        </div>
-      </div>
-      <div id="statsCustomRange" class="hidden" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;">
-        <div class="field" style="flex:1; min-width:160px;">
-          <label for="statsFrom">С</label>
-          <input id="statsFrom" type="date">
-        </div>
-        <div class="field" style="flex:1; min-width:160px;">
-          <label for="statsTo">По</label>
-          <input id="statsTo" type="date">
-        </div>
-      </div>
-      <button class="btn btn-ghost btn-sm" style="margin-bottom:20px;" onclick="renderStats()">Применить</button>
-
-      <div class="overview-grid" style="grid-template-columns:repeat(5,1fr); margin-bottom:24px;">
-        <div class="stat-card">
-          <div class="stat-label">Пробных проведено</div>
-          <div class="stat-value" id="stat-trials">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Уроков проведено</div>
-          <div class="stat-value" id="stat-lessons">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Выручка</div>
-          <div class="stat-value" id="stat-revenue">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Выплаты учителям</div>
-          <div class="stat-value" id="stat-payout">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Чистый доход</div>
-          <div class="stat-value" id="stat-net">—</div>
-        </div>
-      </div>
-
-      <h2 class="panel-title" style="margin-top:20px;">Ставка по умолчанию</h2>
-      <p class="section-sub" style="margin-bottom:16px;">Используется, если у учителя не задана своя ставка (во вкладке «Учителя» → «Редактировать учителя»). Считается по всем проведённым (прошедшим) урокам, не пробным.</p>
-      <div class="card">
-        <div class="field">
-          <label for="rateSolo">SOLO, ₽/час</label>
-          <input id="rateSolo" type="number" min="0" value="500">
-        </div>
-        <div class="field">
-          <label for="rateCrew">CREW (группа), ₽/час</label>
-          <input id="rateCrew" type="number" min="0" value="600">
-        </div>
-        <button class="btn btn-dark btn-sm" id="recalcBtn" onclick="renderStats()">Пересчитать</button>
-      </div>
-
-      <h2 class="panel-title" style="margin-top:20px;">Выплаты по учителям</h2>
-      <div class="table-wrap">
-        <table class="admin-table" id="payoutTable">
-          <thead>
-            <tr><th>Учитель</th><th>Часов SOLO</th><th>Часов CREW</th><th>К выплате</th></tr>
-          </thead>
-          <tbody id="payoutTableBody"></tbody>
-        </table>
-      </div>
-
-      <h2 class="panel-title" style="margin-top:20px;">Прочие расходы</h2>
-      <p class="section-sub" style="margin-bottom:16px;">Реклама, сервисы, комиссии и всё остальное, что не зарплата учителям.</p>
-      <div class="card" style="margin-bottom:16px;">
-        <div class="field">
-          <label for="expCategory">Категория</label>
-          <select id="expCategory">
-            <option value="Реклама">Реклама</option>
-            <option value="Сервисы">Сервисы</option>
-            <option value="Комиссии">Комиссии</option>
-            <option value="Прочее">Прочее</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="expAmount">Сумма, ₽</label>
-          <input id="expAmount" type="number" min="0">
-        </div>
-        <div class="field">
-          <label for="expDate">Дата</label>
-          <input id="expDate" type="date">
-        </div>
-        <div class="field">
-          <label for="expDesc">Комментарий (необязательно)</label>
-          <input id="expDesc" type="text" placeholder="Например: таргет во ВКонтакте">
-        </div>
-        <p id="expError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
-        <button class="btn btn-dark btn-sm" id="expAddBtn">+ Добавить расход</button>
-      </div>
-      <div class="table-wrap">
-        <table class="admin-table" id="expensesTable">
-          <thead>
-            <tr><th>Дата</th><th>Категория</th><th>Сумма</th><th>Комментарий</th><th></th></tr>
-          </thead>
-          <tbody id="expensesTableBody"></tbody>
-        </table>
-      </div>
-
-    </section>
 
     <section class="panel" id="panel-referrals">
       <h2 class="panel-title">🔄 Реферальная программа</h2>
@@ -1402,7 +1413,7 @@ async function loadAll(){
 
   const { data: lessons } = await supabase.from('lessons')
     .select('*, student:profiles!lessons_student_id_fkey(full_name), teacher:profiles!lessons_teacher_id_fkey(full_name)')
-    .eq('status', 'upcoming').order('lesson_date', { ascending:true });
+    .order('lesson_date', { ascending:true });
   const { data: hw } = await supabase.from('homework').select('id', { count: 'exact' }).eq('status', 'submitted');
 
   window.__lessonsList = lessons || [];
@@ -1523,15 +1534,20 @@ function computeRemaining(payment, allLessons){
   if (!payment) return null;
   const linked = (allLessons || []).filter(l => l.payment_id === payment.id);
   if (linked.length > 0){
-    const usedCount = linked.filter(l => isLessonPast(l)).length;
+    // отменённые и перенесённые не считаются использованными — занятие возвращается в абонемент
+    const usedCount = linked.filter(l =>
+      isLessonPast(l) && l.status !== 'cancelled' && l.status !== 'rescheduled'
+    ).length;
     return (payment.lessons_included || 0) - usedCount;
   }
   return (payment.lessons_included || 0) - (payment.lessons_used || 0);
 }
 
 function lessonBadge(l){
+  if (l.status === 'cancelled') return `<span class="badge" style="background:var(--panel); color:var(--ink-soft);">Отменён</span>`;
+  if (l.status === 'rescheduled') return `<span class="badge" style="background:var(--panel); color:var(--ink-soft);">Перенесён</span>`;
   const past = isLessonPast(l);
-  if (past) return `<span class="badge badge-completed">${l.is_trial ? 'Пробный прошёл' : 'Прошёл'}</span>`;
+  if (past) return `<span class="badge badge-completed">${l.is_trial ? 'Пробный проведён' : '✅ Проведено'}</span>`;
   if (l.is_trial) return `<span class="badge badge-trial">🎓 Пробный</span>`;
   return `<span class="badge badge-upcoming">Предстоит</span>`;
 }
@@ -2583,7 +2599,8 @@ function renderMonthlyReport(){
   const newStudents = allStudents.filter(s => s.created_at && inStatsRange(s.created_at, monthStart, monthEnd)).length;
 
   const lessonsCount = (window.__lessonsList || []).filter(l =>
-    !l.is_trial && l.student_id && isLessonPast(l) && inStatsRange(l.lesson_date, monthStart, monthEnd)).length;
+    !l.is_trial && l.student_id && l.status !== 'cancelled' && l.status !== 'rescheduled'
+    && isLessonPast(l) && inStatsRange(l.lesson_date, monthStart, monthEnd)).length;
   const trialsCount = (window.__lessonsList || []).filter(l =>
     l.is_trial && isLessonPast(l) && inStatsRange(l.lesson_date, monthStart, monthEnd)).length;
 
@@ -2692,7 +2709,8 @@ function computeRevenueInRange(start, end){
 
 function computeTeacherPayoutInRange(start, end){
   const lessons = (window.__lessonsList || []).filter(l =>
-    !l.is_trial && l.student_id && isLessonPast(l) && (!start || inStatsRange(l.lesson_date, start, end)));
+    !l.is_trial && l.student_id && l.status !== 'cancelled' && l.status !== 'rescheduled'
+    && isLessonPast(l) && (!start || inStatsRange(l.lesson_date, start, end)));
   const rateSoloDefault = Number((document.getElementById('rateSolo') || {}).value) || 500;
   const rateCrewDefault = Number((document.getElementById('rateCrew') || {}).value) || 600;
   let payout = 0;
@@ -2828,7 +2846,8 @@ function renderDashboardKPIs(){
   const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 1);
 
   const lessonsThisMonth = (window.__lessonsList || []).filter(l =>
-    !l.is_trial && l.student_id && isLessonPast(l) && inStatsRange(l.lesson_date, monthStart, monthEnd));
+    !l.is_trial && l.student_id && l.status !== 'cancelled' && l.status !== 'rescheduled'
+    && isLessonPast(l) && inStatsRange(l.lesson_date, monthStart, monthEnd));
   document.getElementById('ov-lessons-month').textContent = lessonsThisMonth.length;
 
   const trialsTotal = (window.__lessonsList || []).filter(l => l.is_trial && isLessonPast(l));
@@ -2873,7 +2892,9 @@ function getDashboardBuckets(periodKey){
 
 function computeMetricForRange(metric, start, end){
   if (metric === 'lessons'){
-    return (window.__lessonsList || []).filter(l => !l.is_trial && l.student_id && isLessonPast(l) && inStatsRange(l.lesson_date, start, end)).length;
+    return (window.__lessonsList || []).filter(l =>
+      !l.is_trial && l.student_id && l.status !== 'cancelled' && l.status !== 'rescheduled'
+      && isLessonPast(l) && inStatsRange(l.lesson_date, start, end)).length;
   }
   if (metric === 'trials'){
     return (window.__lessonsList || []).filter(l => l.is_trial && isLessonPast(l) && inStatsRange(l.lesson_date, start, end)).length;
@@ -2923,8 +2944,11 @@ function renderStats(){
   let pastLessons = lessons.filter(l => isLessonPast(l) && (noFilter || inStatsRange(l.lesson_date, start, end)));
   if (teacherFilter) pastLessons = pastLessons.filter(l => l.teacher_id === teacherFilter);
 
+  // отменённые и перенесённые не считаются ни проведённым уроком, ни оплачиваемым учителю
+  const countedLessons = pastLessons.filter(l => l.status !== 'cancelled' && l.status !== 'rescheduled');
+
   const trialsCount = pastLessons.filter(l => l.is_trial).length;
-  const realLessonsCount = pastLessons.filter(l => !l.is_trial).length;
+  const realLessonsCount = countedLessons.filter(l => !l.is_trial).length;
 
   document.getElementById('stat-trials').textContent = trialsCount;
   document.getElementById('stat-lessons').textContent = realLessonsCount;
@@ -2938,7 +2962,7 @@ function renderStats(){
   const rateCrew = Number(document.getElementById('rateCrew').value) || 0;
 
   const byTeacher = {};
-  pastLessons.filter(l => !l.is_trial && l.student_id).forEach(l => {
+  countedLessons.filter(l => !l.is_trial && l.student_id).forEach(l => {
     const student = allStudents.find(s => s.id === l.student_id);
     const format = student ? student.format : 'SOLO';
     const hours = (l.duration_minutes || 60) / 60;
@@ -3324,6 +3348,15 @@ async function loadTrialRequests(){
   renderTrialRequests();
   renderReqCalendar();
   renderTeachersScheduleView();
+  updateNewRequestsBadge();
+}
+
+function updateNewRequestsBadge(){
+  const badge = document.getElementById('newRequestsBadge');
+  if (!badge) return;
+  const count = (window.__trialRequests || []).filter(r => r.status === 'new').length;
+  badge.textContent = count > 9 ? '9+' : String(count);
+  badge.classList.toggle('hidden', count === 0);
 }
 
 function teacherAvailabilityHtml(){
@@ -3880,8 +3913,14 @@ function lessonHourInSchoolTz(lesson){
     .format(new Date(lesson.lesson_date)));
 }
 
+// Рисует сетку занятости во ВСЕ существующие контейнеры сразу
+// (сейчас их два: внутри «Заявок» и в собственной вкладке «Занятость»)
 function renderTeachersScheduleView(){
-  const el = document.getElementById('teachersScheduleView');
+  ['teachersScheduleView', 'workloadView'].forEach(renderTeachersScheduleInto);
+}
+
+function renderTeachersScheduleInto(targetId){
+  const el = document.getElementById(targetId);
   if (!el) return;
   if (!allTeachers.length){ el.innerHTML = '<p class="empty-state">Нет учителей.</p>'; return; }
 
@@ -3903,7 +3942,8 @@ function renderTeachersScheduleView(){
     </div>
   ` + allTeachers.map(t => {
     const myAvail = availAll[t.id] || {};
-    const myLessons = (window.__lessonsList || []).filter(l => l.teacher_id === t.id);
+    const myLessons = (window.__lessonsList || [])
+      .filter(l => l.teacher_id === t.id && l.status !== 'cancelled' && l.status !== 'rescheduled');
 
     const rows = days.map(d => {
       const key = fmtDateKey(d);
