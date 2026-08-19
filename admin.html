@@ -2047,7 +2047,6 @@ function renderStudentSummaryCard(s){
 
   const contactChips = [];
   if (s.contact_telegram) contactChips.push(`<a class="btn btn-ghost btn-sm" href="https://t.me/${s.contact_telegram.replace('@','')}" target="_blank" rel="noopener">Telegram</a>`);
-  if (s.contact_phone) contactChips.push(`<a class="btn btn-ghost btn-sm" href="tel:${s.contact_phone.replace(/[^\d+]/g,'')}" target="_blank" rel="noopener">Позвонить</a>`);
   if (s.contact_email) contactChips.push(`<a class="btn btn-ghost btn-sm" href="mailto:${s.contact_email}">Email</a>`);
   if (s.contact_avito) contactChips.push(`<a class="btn btn-ghost btn-sm" href="${s.contact_avito}" target="_blank" rel="noopener">Avito</a>`);
 
@@ -3372,9 +3371,6 @@ function requestContactButtons(r){
   }
   if (tg){
     btns.push(`<a class="btn btn-ghost btn-sm" href="https://t.me/${tg.replace('@','')}" target="_blank" rel="noopener">Telegram</a>`);
-  }
-  if (phone){
-    btns.push(`<a class="btn btn-ghost btn-sm" href="tel:${phone.replace(/[^\d+]/g,'')}">Позвонить</a>`);
   }
   if (avito){
     btns.push(`<a class="btn btn-ghost btn-sm" href="${avito}" target="_blank" rel="noopener">Avito</a>`);
