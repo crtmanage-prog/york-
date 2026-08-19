@@ -1174,6 +1174,11 @@ function qrMatrixToSVG(text, pixelSize){
         </div>
       </div>
 
+      <h2 class="panel-title">Твой преподаватель</h2>
+      <div id="teacherContactBlock" style="margin-bottom:24px;">
+        <div class="empty-state">Загружаем…</div>
+      </div>
+
       <h2 class="panel-title">Мы на связи</h2>
       <div class="contact-list">
         <a class="contact-row" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">
@@ -1571,6 +1576,7 @@ async function enterApp(user){
   ensureReferralCode();
   loadMyDocuments();
   setupTelegramBlock();
+  loadTeacherContact();
   startFlagSwap();
   startSubTasksCarousel();
   loadPracticeProgress();
@@ -1594,6 +1600,39 @@ function setupTabs(){
 
 /* ---------- SCHEDULE ---------- */
 let teacherMeetingUrl = null;
+let myTeacherInfo = null; // {full_name, contact_telegram, contact_phone} — кэшируем один раз
+
+async function loadTeacherContact(){
+  const el = document.getElementById('teacherContactBlock');
+  if (!el) return;
+
+  if (!currentProfile.teacher_id){
+    el.innerHTML = '<div class="empty-state">Преподаватель ещё не назначен — скоро появится здесь.</div>';
+    return;
+  }
+
+  if (!myTeacherInfo){
+    const { data } = await supabase.from('profiles')
+      .select('full_name, contact_telegram, contact_phone')
+      .eq('id', currentProfile.teacher_id);
+    myTeacherInfo = (data && data[0]) || {};
+  }
+
+  const btns = [];
+  if (myTeacherInfo.contact_telegram){
+    btns.push(`<a class="btn btn-accent btn-sm" href="https://t.me/${String(myTeacherInfo.contact_telegram).replace('@','')}" target="_blank" rel="noopener">Написать в Telegram</a>`);
+  }
+
+  el.innerHTML = `
+    <div class="row-card" style="margin-bottom:0;">
+      <div class="row-main">
+        <div class="row-title">${myTeacherInfo.full_name || 'Твой преподаватель'}</div>
+        <div class="row-sub">${btns.length ? '' : 'Контакты пока не указаны — напиши через общую поддержку ниже.'}</div>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">${btns.join('')}</div>
+    </div>`;
+}
+
 
 function meetingWindowStatus(lesson){
   if (!teacherMeetingUrl) return { state:'none' };
@@ -2052,6 +2091,8 @@ async function loadHomework(){
       }
       const dl = document.getElementById('dl-' + h.id);
       if (dl) dl.addEventListener('click', (e) => { e.preventDefault(); downloadHomeworkFile(h.submission_file_url); });
+      const mat = document.getElementById('mat-' + h.id);
+      if (mat) mat.addEventListener('click', (e) => { e.preventDefault(); downloadHomeworkFile(h.attachment_file_url); });
     });
   }
 
@@ -2082,6 +2123,9 @@ function renderHomeworkItem(h){
   }
   if (h.submission_file_url){
     inner += `<div style="margin-top:8px;"><a href="#" id="dl-${h.id}" style="font-size:13px; font-weight:600; text-decoration:underline;">Скачать прикреплённый файл</a></div>`;
+  }
+  if (h.attachment_file_url){
+    inner += `<div style="margin-top:8px;"><a href="#" id="mat-${h.id}" style="font-size:13px; font-weight:600; text-decoration:underline; color:#3B7A1E;">📎 Материал от преподавателя</a></div>`;
   }
 
   return `
