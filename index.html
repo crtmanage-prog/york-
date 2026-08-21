@@ -319,6 +319,46 @@
     display:inline-block; padding:5px 11px; border-radius:100px; margin-bottom:22px; width:fit-content;
   }
   .price-card.featured .price-save{background:var(--accent); border-color:transparent;}
+
+  /* ---------- пакеты занятий (4 / 8 / 12) ---------- */
+  .discount-note{
+    font-size:12.5px; font-weight:700; color:var(--ink-soft);
+    display:flex; align-items:center; gap:6px; margin-bottom:16px;
+  }
+  .discount-note svg{width:14px; height:14px; flex-shrink:0;}
+  .pkg-table{margin-bottom:18px; border-top:1px solid var(--line);}
+  .pkg-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:14px 0; border-bottom:1px solid var(--line); position:relative;
+  }
+  .pkg-lessons{font-size:14.5px; font-weight:600;}
+  .pkg-lessons small{display:block; font-weight:400; color:var(--ink-soft); font-size:12px; margin-top:1px;}
+  .pkg-price{text-align:right;}
+  .pkg-price b{font-family:'Unbounded',sans-serif; font-size:19px; font-weight:700; display:block;}
+  .pkg-price small{font-size:11.5px; color:var(--ink-soft);}
+  .pkg-row.popular{margin:0 -8px; padding:14px 8px; background:rgba(28,28,28,0.04); border-radius:12px; border-bottom-color:transparent;}
+  .price-card.featured .pkg-row.popular{background:rgba(255,255,255,0.35);}
+  .pkg-badge{
+    position:absolute; top:-9px; left:8px;
+    background:var(--ink); color:var(--accent); font-size:10px; font-weight:700;
+    padding:3px 9px; border-radius:100px; text-transform:uppercase; letter-spacing:0.03em;
+  }
+  .pkg-extra{
+    overflow:hidden; max-height:0; opacity:0;
+    transition:max-height .3s ease, opacity .25s ease;
+  }
+  .pkg-extra.open{max-height:260px; opacity:1;}
+  .pkg-toggle{
+    display:flex; align-items:center; gap:6px; width:100%;
+    background:none; border:none; cursor:pointer; padding:12px 0 6px;
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; color:var(--ink-soft);
+  }
+  .pkg-toggle:hover{color:var(--ink);}
+  .pkg-toggle svg{width:15px; height:15px; transition:transform .25s ease;}
+  .pkg-toggle.open svg{transform:rotate(180deg);}
+  .price-card.featured .pkg-price small,
+  .price-card.featured .pkg-lessons small{color:rgba(28,28,28,0.55);}
+
   .price-card .btn{margin-bottom:10px;}
   .price-manager-note{font-size:12.5px; color:var(--ink-soft);}
   .price-manager-note a{font-weight:600; text-decoration:underline; text-underline-offset:3px;}
@@ -609,7 +649,7 @@
   <div class="wrap">
     <div class="eyebrow">Абонементы</div>
     <h2 class="section-title">Выбери формат</h2>
-    <p class="section-sub">6 занятий по абонементу дешевле, чем поштучно. Формат можно обсудить с менеджером до старта.</p>
+    <p class="section-sub">Чем больше пакет занятий, тем дешевле стоит один урок. Формат можно обсудить с менеджером до старта.</p>
     <div class="urgency reveal">
       <span class="u-dot"></span>
       🔥 Набор в группу <b>CREW</b> почти закрыт — осталось всего пара мест
@@ -617,31 +657,65 @@
     <div class="price-grid">
 
       <div class="price-card reveal">
-        <span class="price-badge">Экономия 720 ₽</span>
         <div class="price-head"><span class="picon">👤</span><h3>SOLO</h3></div>
-        <p class="format-desc">Только ты и преподаватель. Темп, тема и фокус — полностью под тебя. Подходит, если нужен быстрый результат к конкретной цели: переезд, работа, экзамен или просто не любишь группы.</p>
-        <div class="price-row">
-          <span class="price-old">800 ₽/урок</span>
-          <span class="price-new">680 ₽</span>
-          <span class="price-per">/ урок</span>
+        <p class="format-desc">Только он и преподаватель. Темп, тема и фокус — полностью под него. Подходит, если нужен быстрый результат к конкретной цели: переезд, работа, экзамен или просто не любит группы.</p>
+        <div class="discount-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6M12 3v13m0 0-4-4m4 4 4-4"/></svg>
+          Цены — со скидкой 15% на первый месяц
         </div>
-        <div class="price-total">Абонемент на 6 занятий: <b>4 080 ₽</b> вместо 4 800 ₽</div>
-        <span class="price-save">Экономия 720 ₽ на абонементе</span>
+        <div class="pkg-table">
+          <div class="pkg-row popular">
+            <span class="pkg-badge">Популярный</span>
+            <span class="pkg-lessons">8 занятий<small>637,5 ₽ за урок</small></span>
+            <span class="pkg-price"><b>5 100 ₽</b><small>потом 6 000 ₽</small></span>
+          </div>
+          <div class="pkg-extra" id="pkgExtraSolo">
+            <div class="pkg-row">
+              <span class="pkg-lessons">4 занятия<small>680 ₽ за урок</small></span>
+              <span class="pkg-price"><b>2 720 ₽</b><small>потом 3 200 ₽</small></span>
+            </div>
+            <div class="pkg-row">
+              <span class="pkg-lessons">12 занятий<small>595 ₽ за урок</small></span>
+              <span class="pkg-price"><b>7 140 ₽</b><small>потом 8 400 ₽</small></span>
+            </div>
+          </div>
+          <button type="button" class="pkg-toggle" onclick="togglePkg('Solo', this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            <span>Показать все пакеты</span>
+          </button>
+        </div>
         <a class="btn btn-dark" href="trial-form.html" target="_blank" rel="noopener">Записаться на SOLO</a>
         <span class="price-manager-note">Вопросы по формату? <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a></span>
       </div>
 
       <div class="price-card featured reveal">
-        <span class="price-badge">Экономия 540 ₽</span>
         <div class="price-head"><span class="picon">👥</span><h3>CREW</h3></div>
-        <p class="format-desc">Мини-группа. Дешевле, живее и с элементом соревнования: сравниваете успехи, разбираете диалоги в парах и мотивируете друг друга. Тот же результат, но веселее.</p>
-        <div class="price-row">
-          <span class="price-old">600 ₽/урок</span>
-          <span class="price-new">510 ₽</span>
-          <span class="price-per">/ урок</span>
+        <p class="format-desc">Мини-группа 2–4 человека. Дешевле, живее и с элементом соревнования: сравнивают успехи, разбирают диалоги в парах и мотивируют друг друга. Тот же результат, но веселее.</p>
+        <div class="discount-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6M12 3v13m0 0-4-4m4 4 4-4"/></svg>
+          Цены — со скидкой 15% на первый месяц
         </div>
-        <div class="price-total">Абонемент на 6 занятий: <b>3 060 ₽</b> вместо 3 600 ₽</div>
-        <span class="price-save">Экономия 540 ₽ на абонементе</span>
+        <div class="pkg-table">
+          <div class="pkg-row popular">
+            <span class="pkg-badge">Популярный</span>
+            <span class="pkg-lessons">8 занятий<small>467,5 ₽ за урок</small></span>
+            <span class="pkg-price"><b>3 740 ₽</b><small>потом 4 400 ₽</small></span>
+          </div>
+          <div class="pkg-extra" id="pkgExtraCrew">
+            <div class="pkg-row">
+              <span class="pkg-lessons">4 занятия<small>510 ₽ за урок</small></span>
+              <span class="pkg-price"><b>2 040 ₽</b><small>потом 2 400 ₽</small></span>
+            </div>
+            <div class="pkg-row">
+              <span class="pkg-lessons">12 занятий<small>425 ₽ за урок</small></span>
+              <span class="pkg-price"><b>5 100 ₽</b><small>потом 6 000 ₽</small></span>
+            </div>
+          </div>
+          <button type="button" class="pkg-toggle" onclick="togglePkg('Crew', this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            <span>Показать все пакеты</span>
+          </button>
+        </div>
         <a class="btn btn-accent" href="trial-form.html" target="_blank" rel="noopener">Записаться на CREW</a>
         <span class="price-manager-note">Вопросы по формату? <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a></span>
       </div>
@@ -823,8 +897,8 @@
       <div class="foot-col">
         <h4>Абонементы</h4>
         <ul>
-          <li>SOLO — 680 ₽/урок</li>
-          <li>CREW — 510 ₽/урок</li>
+          <li>SOLO — от 2 720 ₽</li>
+          <li>CREW — от 2 040 ₽</li>
           <li><a href="trial-form.html" target="_blank" rel="noopener">Записаться →</a></li>
         </ul>
       </div>
@@ -849,6 +923,13 @@
 </a>
 
 <script>
+function togglePkg(name, btn){
+  var extra = document.getElementById('pkgExtra' + name);
+  var isOpen = extra.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.querySelector('span').textContent = isOpen ? 'Скрыть' : 'Показать все пакеты';
+}
+
 (function(){
   var words = ["для себя","для переезда","для путешествий"];
   var el = document.getElementById('cycleChip');
