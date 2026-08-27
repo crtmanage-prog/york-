@@ -2083,12 +2083,18 @@ function renderHomeworkItem(h){
       : 'https://t.me/thearbeiter01';
     inner += `
       <div class="hw-detail">
-        <textarea id="text-${h.id}" placeholder="Ответ текстом (необязательно, если прикрепите файл или ссылку)"></textarea>
-        <input type="file" id="file-${h.id}">
-        <textarea id="links-${h.id}" rows="2" style="margin-top:8px;" placeholder="Или вставь ссылки — Google Диск, Яндекс.Диск и т.п. (каждая с новой строки)"></textarea>
-        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="btn btn-dark btn-sm" id="submit-${h.id}">Отправить на проверку</button>
+        <div id="hw-choice-${h.id}" style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-dark btn-sm" onclick="markHomeworkDone('${h.id}')">✅ Отметить выполненным</button>
+          <button class="btn btn-ghost btn-sm" onclick="toggleAttachForm('${h.id}')">📎 Прикрепить файл или ссылку</button>
           <a class="btn btn-ghost btn-sm" href="${teacherLink}" target="_blank" rel="noopener">💬 Написать преподавателю</a>
+        </div>
+        <div id="hw-attach-${h.id}" class="hidden" style="margin-top:10px;">
+          <textarea id="text-${h.id}" placeholder="Комментарий к ответу (необязательно)"></textarea>
+          <input type="file" id="file-${h.id}">
+          <textarea id="links-${h.id}" rows="2" style="margin-top:8px;" placeholder="Или вставь ссылки — Google Диск, Яндекс.Диск и т.п. (каждая с новой строки)"></textarea>
+          <div style="margin-top:10px;">
+            <button class="btn btn-dark btn-sm" id="submit-${h.id}">Отправить на проверку</button>
+          </div>
         </div>
       </div>`;
   } else if (h.status === 'submitted'){
@@ -2115,6 +2121,31 @@ function renderHomeworkItem(h){
         <span class="badge badge-${h.status}">${STATUS_LABEL[h.status] || h.status}</span>
       </div>
     </div>`;
+}
+
+function toggleAttachForm(id){
+  const form = document.getElementById('hw-attach-' + id);
+  if (form) form.classList.toggle('hidden');
+}
+
+async function markHomeworkDone(id){
+  const choiceBlock = document.getElementById('hw-choice-' + id);
+  const btn = choiceBlock ? choiceBlock.querySelector('button') : null;
+  if (btn){ btn.disabled = true; btn.textContent = 'Отмечаем…'; }
+
+  // осознанная отметка «выполнено» без вложений — отличается от случайно
+  // пустой отправки понятной пометкой, а не пустыми полями
+  const { error } = await supabase.from('homework').update({
+    submission_text: 'Ученик отметил домашку выполненной (без файла и ссылки)',
+    status: 'submitted'
+  }).eq('id', id);
+
+  if (error){
+    if (btn){ btn.disabled = false; btn.textContent = '✅ Отметить выполненным'; }
+    alert('Не получилось отметить. Попробуйте ещё раз.');
+    return;
+  }
+  await loadHomework();
 }
 
 async function submitHomework(id){
