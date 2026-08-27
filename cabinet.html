@@ -2083,8 +2083,9 @@ function renderHomeworkItem(h){
       : 'https://t.me/thearbeiter01';
     inner += `
       <div class="hw-detail">
-        <textarea id="text-${h.id}" placeholder="Ответ текстом (необязательно, если прикрепите файл)"></textarea>
+        <textarea id="text-${h.id}" placeholder="Ответ текстом (необязательно, если прикрепите файл или ссылку)"></textarea>
         <input type="file" id="file-${h.id}">
+        <textarea id="links-${h.id}" rows="2" style="margin-top:8px;" placeholder="Или вставь ссылки — Google Диск, Яндекс.Диск и т.п. (каждая с новой строки)"></textarea>
         <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
           <button class="btn btn-dark btn-sm" id="submit-${h.id}">Отправить на проверку</button>
           <a class="btn btn-ghost btn-sm" href="${teacherLink}" target="_blank" rel="noopener">💬 Написать преподавателю</a>
@@ -2101,6 +2102,11 @@ function renderHomeworkItem(h){
   if (h.submission_file_url){
     inner += `<div style="margin-top:8px;"><a href="#" id="dl-${h.id}" style="font-size:13px; font-weight:600; text-decoration:underline;">Скачать прикреплённый файл</a></div>`;
   }
+  if (h.submission_links){
+    inner += h.submission_links.split('\n').filter(Boolean).map((link, i) =>
+      `<div style="margin-top:6px;"><a href="${link}" target="_blank" rel="noopener" style="font-size:13px; font-weight:600; text-decoration:underline;">🔗 Твоя ссылка ${i + 1}</a></div>`
+    ).join('');
+  }
 
   return `
     <div class="row-card" style="flex-direction:column; align-items:stretch; margin-bottom:10px;">
@@ -2114,6 +2120,7 @@ function renderHomeworkItem(h){
 async function submitHomework(id){
   const textEl = document.getElementById('text-' + id);
   const fileEl = document.getElementById('file-' + id);
+  const linksEl = document.getElementById('links-' + id);
   const btn = document.getElementById('submit-' + id);
   btn.disabled = true; btn.textContent = 'Отправляем…';
 
@@ -2122,12 +2129,22 @@ async function submitHomework(id){
   if (file){
     const path = `${currentUser.id}/${Date.now()}_${file.name}`;
     const { error: upErr } = await supabase.storage.from('homework').upload(path, file);
-    if (!upErr) fileUrl = path;
+    if (upErr){
+      // раньше ошибка тихо проглатывалась, и домашка уходила на проверку без файла —
+      // теперь останавливаем отправку и честно сообщаем, что файл не прикрепился
+      btn.disabled = false; btn.textContent = 'Отправить на проверку';
+      alert('Не получилось прикрепить файл. Попробуй ещё раз — домашка пока не отправлена.');
+      return;
+    }
+    fileUrl = path;
   }
+
+  const links = (linksEl.value || '').split('\n').map(s => s.trim()).filter(Boolean).join('\n') || null;
 
   const { error } = await supabase.from('homework').update({
     submission_text: textEl.value.trim() || null,
     submission_file_url: fileUrl,
+    submission_links: links,
     status: 'submitted'
   }).eq('id', id);
 
