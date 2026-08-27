@@ -253,9 +253,10 @@
 
     <div class="field">
       <label for="timezone">Укажите ваш часовой пояс</label>
-      <select id="timezone">
+      <select id="timezone" required>
+        <option value="" selected disabled>— выберите —</option>
         <option value="Калининград (МСК-1)">Калининград (МСК-1)</option>
-        <option value="Москва (МСК)" selected>Москва (МСК)</option>
+        <option value="Москва (МСК)">Москва (МСК)</option>
         <option value="Самара (МСК+1)">Самара (МСК+1)</option>
         <option value="Екатеринбург (МСК+2)">Екатеринбург (МСК+2)</option>
         <option value="Омск (МСК+3)">Омск (МСК+3)</option>
@@ -263,8 +264,9 @@
         <option value="Иркутск (МСК+5)">Иркутск (МСК+5)</option>
         <option value="Якутск (МСК+6)">Якутск (МСК+6)</option>
         <option value="Владивосток (МСК+7)">Владивосток (МСК+7)</option>
-        <option value="Другой / за рубежом">Другой / за рубежом</option>
+        <option value="Другой / за рубежом">Другой / за рубежом — укажу сам(а)</option>
       </select>
+      <input type="text" id="timezoneOther" class="hidden" placeholder="Например: Ташкент, UTC+5" style="margin-top:8px;">
     </div>
 
     <div class="field">
@@ -348,8 +350,10 @@ if (refCode){
   document.getElementById('referralBanner').classList.remove('hidden');
 }
 
-document.getElementById('timezone').addEventListener('change', () => {
+document.getElementById('timezone').addEventListener('change', (e) => {
   if (selectedTeacherId) loadSlotsForTeacher(selectedTeacherId);
+  const isOther = e.target.value === 'Другой / за рубежом';
+  document.getElementById('timezoneOther').classList.toggle('hidden', !isOther);
 });
 
 document.getElementById('sourceSelect').addEventListener('change', (e) => {
@@ -713,7 +717,14 @@ function collectFormData(){
     teacherId: teacherEl ? (teacherEl.value || null) : null,
     teacherLabel: teacherLabel,
     slots: slots,
-    timezone: document.getElementById('timezone').value,
+    timezone: (function(){
+      const val = document.getElementById('timezone').value;
+      if (val === 'Другой / за рубежом'){
+        const other = document.getElementById('timezoneOther').value.trim();
+        return other ? `Другой / за рубежом: ${other}` : val;
+      }
+      return val;
+    })(),
     comment: document.getElementById('comment').value.trim()
   };
 }
@@ -732,6 +743,15 @@ document.getElementById('nextBtn').addEventListener('click', () => {
   }
   if (data.source === 'Программа лояльности' && !data.referrerCode && !refCode){
     step1ErrorMsg.textContent = 'Укажи код приглашения.';
+    return;
+  }
+  const tzSelect = document.getElementById('timezone');
+  if (!tzSelect.value){
+    step1ErrorMsg.textContent = 'Укажи свой часовой пояс.';
+    return;
+  }
+  if (tzSelect.value === 'Другой / за рубежом' && !document.getElementById('timezoneOther').value.trim()){
+    step1ErrorMsg.textContent = 'Напиши свой часовой пояс или город в поле ниже.';
     return;
   }
 
