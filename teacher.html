@@ -427,7 +427,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <button class="tab-btn" data-tab="lessons">Расписание</button>
     <button class="tab-btn" data-tab="availability">Доступность</button>
     <button class="tab-btn" data-tab="salary">Зарплата</button>
-    <button class="tab-btn" data-tab="check">Домашка</button>
+    <button class="tab-btn" data-tab="check" style="position:relative;">
+      Домашка
+      <span id="newSubmissionsBadge" class="hidden" style="
+        position:absolute; top:2px; right:2px; min-width:16px; height:16px; padding:0 4px;
+        background:var(--red); color:#fff; border-radius:100px;
+        font-size:10px; font-weight:800; line-height:16px; text-align:center;
+      "></span>
+    </button>
   </nav>
 
   <main>
@@ -1953,12 +1960,20 @@ function renderPendingHomework(){
   `).join('');
 }
 
+function updateNewSubmissionsBadge(count){
+  const badge = document.getElementById('newSubmissionsBadge');
+  if (!badge) return;
+  badge.textContent = count > 9 ? '9+' : String(count);
+  badge.classList.toggle('hidden', count === 0);
+}
+
 async function loadToCheck(){
   const { data: hw } = await supabase.from('homework').select('*, profiles!homework_student_id_fkey(full_name)')
     .eq('teacher_id', currentUser.id).eq('status', 'submitted').order('due_date', { ascending:true });
 
   const list = hw || [];
   document.getElementById('ov-tocheck').textContent = list.length;
+  updateNewSubmissionsBadge(list.length);
 
   const container = document.getElementById('checkList');
   if (!list.length){
@@ -1969,12 +1984,13 @@ async function loadToCheck(){
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">
           <div class="row-main">
             <div class="row-title">${(h.profiles && h.profiles.full_name) || 'Ученик'} — ${h.title}</div>
-            <div class="row-sub">${h.submission_text || 'Ответ прикреплён файлом'}</div>
+            <div class="row-sub">${h.submission_text || (h.submission_file_url || h.submission_links ? 'Ответ прикреплён файлом или ссылкой' : '⚠️ Ответ пуст — ни текста, ни файла, ни ссылки')}</div>
           </div>
           <span class="badge badge-submitted">На проверке</span>
         </div>
         <div class="hw-detail">
           ${h.submission_file_url ? `<div style="margin-bottom:8px;"><a href="#" onclick="downloadSubmission('${h.submission_file_url}'); return false;" style="font-size:13px; font-weight:600; text-decoration:underline;">Скачать прикреплённый файл</a></div>` : ''}
+          ${h.submission_links ? h.submission_links.split('\n').filter(Boolean).map((link, i) => `<div style="margin-bottom:6px;"><a href="${link}" target="_blank" rel="noopener" style="font-size:13px; font-weight:600; text-decoration:underline;">🔗 Ссылка ${i + 1}</a></div>`).join('') : ''}
           <input type="text" id="grade-${h.id}" placeholder="Оценка (например 9/10)" style="margin-bottom:8px; width:100%; font-family:'Inter',sans-serif; font-size:14px; padding:10px 12px; border-radius:10px; border:1.5px solid var(--line);">
           <textarea id="fb-${h.id}" placeholder="Комментарий ученику"></textarea>
           <div style="margin-top:10px;">
