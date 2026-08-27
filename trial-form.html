@@ -844,6 +844,7 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
 
     document.getElementById('trialForm').classList.add('hidden');
     document.getElementById('successBox').classList.remove('hidden');
+    if (window.ym) ym(111997160, 'reachGoal', 'trial_submitted');
 
     // токен мы сгенерировали сами — читать созданную строку не нужно
     const connectBtn = document.getElementById('connectTelegramBtn');
