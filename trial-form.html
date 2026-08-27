@@ -150,6 +150,18 @@
     font-weight:700; font-size:13.5px; padding:10px 20px; border-radius:100px;
   }
 </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111997160', 'ym');
+    ym(111997160, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111997160" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 
@@ -160,6 +172,11 @@
 
   <form id="trialForm">
     <div id="step1">
+    <!-- ловушка для ботов: людям не видна, боты часто заполняют все поля подряд -->
+    <div style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+      <label for="website">Оставьте это поле пустым</label>
+      <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+    </div>
     <div class="field">
       <label for="fullName">Полное ФИО</label>
       <input id="fullName" type="text" placeholder="Фамилия Имя Отчество" required>
@@ -294,7 +311,7 @@
       <div class="field consent-field">
         <label class="consent-label">
           <input type="checkbox" id="consent" required>
-          <span>Согласен(на) на обработку персональных данных</span>
+          <span>Согласен(на) на <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">обработку персональных данных</a></span>
         </label>
       </div>
 
@@ -321,6 +338,7 @@
 const SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_jlcvNafksQ0WhrYCY08anw_ju194-I9';
 
+const PAGE_LOADED_AT = Date.now();
 const urlParams = new URLSearchParams(window.location.search);
 const refCode = urlParams.get('ref');
 if (refCode){
@@ -758,6 +776,21 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
   const consent = document.getElementById('consent').checked;
   const errorMsg = document.getElementById('errorMsg');
   errorMsg.textContent = '';
+
+  // ---------- защита от ботов ----------
+  // 1) ловушка: если скрытое поле заполнено — это бот, тихо выходим,
+  //    как будто всё отправилось (не подсказываем боту, что его поймали)
+  const honeypot = document.getElementById('website');
+  if (honeypot && honeypot.value.trim()){
+    document.getElementById('trialForm').classList.add('hidden');
+    document.getElementById('successBox').classList.remove('hidden');
+    return;
+  }
+  // 2) форма заполнена подозрительно быстро — живой человек так не успевает
+  if (Date.now() - PAGE_LOADED_AT < 3000){
+    errorMsg.textContent = 'Не получилось отправить. Попробуй ещё раз через пару секунд.';
+    return;
+  }
 
   if (!consent){
     errorMsg.textContent = 'Нужно согласие на обработку персональных данных.';
