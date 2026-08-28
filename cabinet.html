@@ -1413,6 +1413,21 @@ function firstName(fullName){
   return fullName.trim().split(/\s+/)[0];
 }
 
+function normalizeExternalUrl(value){
+  let url = String(value || '').trim();
+  if (!url) return '';
+  if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(url)){
+    url = 'https://' + url.replace(/^\/+/, '');
+  }
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return '';
+    return parsed.href;
+  } catch (_) {
+    return '';
+  }
+}
+
 const CEFR_ORDER = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 function renderLevelBadge(level){
   const clean = (level || '').trim().toUpperCase();
@@ -2109,8 +2124,8 @@ function renderHomeworkItem(h){
     inner += `<div style="margin-top:8px;"><a href="#" id="dl-${h.id}" style="font-size:13px; font-weight:600; text-decoration:underline;">Скачать прикреплённый файл</a></div>`;
   }
   if (h.submission_links){
-    inner += h.submission_links.split('\n').filter(Boolean).map((link, i) =>
-      `<div style="margin-top:6px;"><a href="${link}" target="_blank" rel="noopener" style="font-size:13px; font-weight:600; text-decoration:underline;">🔗 Твоя ссылка ${i + 1}</a></div>`
+    inner += h.submission_links.split('\n').map(s => normalizeExternalUrl(s)).filter(Boolean).map((link, i) =>
+      `<div style="margin-top:6px;"><a href="${link}" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:600; text-decoration:underline;">🔗 Твоя ссылка ${i + 1}</a></div>`
     ).join('');
   }
 
@@ -2170,7 +2185,14 @@ async function submitHomework(id){
     fileUrl = path;
   }
 
-  const links = (linksEl.value || '').split('\n').map(s => s.trim()).filter(Boolean).join('\n') || null;
+  const rawLinks = (linksEl.value || '').split('\n').map(s => s.trim()).filter(Boolean);
+  const normalizedLinks = rawLinks.map(normalizeExternalUrl);
+  if (rawLinks.length && normalizedLinks.some(link => !link)){
+    btn.disabled = false; btn.textContent = 'Отправить на проверку';
+    alert('Проверь ссылку: нужны обычные веб-ссылки (например, https://drive.google.com/...).');
+    return;
+  }
+  const links = normalizedLinks.join('\n') || null;
 
   const { error } = await supabase.from('homework').update({
     submission_text: textEl.value.trim() || null,
