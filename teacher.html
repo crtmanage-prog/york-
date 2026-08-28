@@ -2022,7 +2022,7 @@ async function loadToCheck(){
         </div>
         <div class="hw-detail">
           ${h.submission_file_url ? `<div style="margin-bottom:8px;"><a href="#" onclick="downloadSubmission('${h.submission_file_url}'); return false;" style="font-size:13px; font-weight:600; text-decoration:underline;">Скачать прикреплённый файл</a></div>` : ''}
-          ${h.submission_links ? h.submission_links.split('\n').map(s => normalizeExternalUrl(s)).filter(Boolean).map((link, i) => `<div style="margin-bottom:6px;"><a href="#" data-url="${escapeHtml(link)}" onclick="return openHomeworkExternalLink(this);" style="font-size:13px; font-weight:600; text-decoration:underline;">🔗 Открыть ссылку ${i + 1}</a><div style="font-size:12px; color:var(--ink-soft); margin-top:2px; word-break:break-all;">${escapeHtml(link)}</div></div>`).join('') : ''}
+          ${h.submission_links ? h.submission_links.split('\n').map(s => normalizeExternalUrl(s)).filter(Boolean).map((link, i) => `<div style="margin-bottom:8px;"><a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:600; text-decoration:underline;">🔗 Открыть ссылку ${i + 1} ↗</a><div style="font-size:12px; color:var(--ink-soft); margin-top:3px; word-break:break-all;">${escapeHtml(link)}</div></div>`).join('') : ''}
           <input type="text" id="grade-${h.id}" placeholder="Оценка (например 9/10)" style="margin-bottom:8px; width:100%; font-family:'Inter',sans-serif; font-size:14px; padding:10px 12px; border-radius:10px; border:1.5px solid var(--line);">
           <textarea id="fb-${h.id}" placeholder="Комментарий ученику"></textarea>
           <div style="margin-top:10px;">
