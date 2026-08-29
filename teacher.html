@@ -749,38 +749,6 @@ function firstName(fullName){
   return fullName.trim().split(/\s+/)[0];
 }
 
-function normalizeExternalUrl(value){
-  let url = String(value || '').trim();
-  if (!url) return '';
-  // Ученики часто вставляют ссылку без протокола: drive.google.com/...
-  if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(url)){
-    url = 'https://' + url.replace(/^\/+/, '');
-  }
-  try {
-    const parsed = new URL(url);
-    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return '';
-    return parsed.href;
-  } catch (_) {
-    return '';
-  }
-}
-
-function escapeHtml(value){
-  return String(value || '').replace(/[&<>\"']/g, ch => ({
-    '&':'&amp;', '<':'&lt;', '>':'&gt;', '\"':'&quot;', "'":'&#39;'
-  }[ch]));
-}
-
-function openHomeworkExternalLink(el){
-  const url = normalizeExternalUrl(el && el.dataset ? el.dataset.url : '');
-  if (!url) {
-    alert('Ссылка в этой домашке некорректная или пустая.');
-    return false;
-  }
-  window.open(url, '_blank', 'noopener,noreferrer');
-  return false;
-}
-
 const SCHOOL_TZ = 'Asia/Yekaterinburg'; // Уфа (тот же часовой пояс, что Екатеринбург)
 
 const TIMEZONES = [
@@ -2022,7 +1990,7 @@ async function loadToCheck(){
         </div>
         <div class="hw-detail">
           ${h.submission_file_url ? `<div style="margin-bottom:8px;"><a href="#" onclick="downloadSubmission('${h.submission_file_url}'); return false;" style="font-size:13px; font-weight:600; text-decoration:underline;">Скачать прикреплённый файл</a></div>` : ''}
-          ${h.submission_links ? h.submission_links.split('\n').map(s => normalizeExternalUrl(s)).filter(Boolean).map((link, i) => `<div style="margin-bottom:8px;"><a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:600; text-decoration:underline;">🔗 Открыть ссылку ${i + 1} ↗</a><div style="font-size:12px; color:var(--ink-soft); margin-top:3px; word-break:break-all;">${escapeHtml(link)}</div></div>`).join('') : ''}
+          ${h.submission_links ? h.submission_links.split('\n').filter(Boolean).map((link, i) => `<div style="margin-bottom:6px;"><a href="${link}" target="_blank" rel="noopener" style="font-size:13px; font-weight:600; text-decoration:underline;">🔗 Ссылка ${i + 1}</a></div>`).join('') : ''}
           <input type="text" id="grade-${h.id}" placeholder="Оценка (например 9/10)" style="margin-bottom:8px; width:100%; font-family:'Inter',sans-serif; font-size:14px; padding:10px 12px; border-radius:10px; border:1.5px solid var(--line);">
           <textarea id="fb-${h.id}" placeholder="Комментарий ученику"></textarea>
           <div style="margin-top:10px;">
@@ -2036,7 +2004,11 @@ async function loadToCheck(){
 
 async function downloadSubmission(path){
   const { data, error } = await supabase.storage.from('homework').createSignedUrl(path, 60);
-  if (!error && data) window.open(data.signedUrl, '_blank');
+  if (error || !data){
+    alert('Не получилось открыть файл. Попробуйте ещё раз или напишите в поддержку.');
+    return;
+  }
+  window.open(data.signedUrl, '_blank');
 }
 
 async function markReviewed(id){
