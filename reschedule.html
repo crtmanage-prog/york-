@@ -10,63 +10,195 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#FFFFFF; --accent:#D2E739; --ink:#1C1C1C;
-    --ink-soft:rgba(28,28,28,0.62); --line:rgba(28,28,28,0.12); --panel:#F7F8EF;
-    --red:#B3261E;
-  }
-  *{box-sizing:border-box;}
-  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased;}
-  .wrap{max-width:480px; margin:0 auto; padding:28px 20px 60px;}
-  h1{font-family:'Unbounded',sans-serif; font-weight:700; font-size:21px; margin:0 0 6px;}
-  .sub{color:var(--ink-soft); font-size:14px; line-height:1.5; margin:0 0 24px;}
-
-  .card{
-    background:var(--panel); border-radius:18px; padding:16px 18px;
-    margin-bottom:12px; cursor:pointer; border:2px solid transparent;
-    transition:border-color .15s ease, background .15s ease;
-  }
-  .card:hover{border-color:var(--line);}
-  .card.selected{border-color:var(--ink); background:#fff;}
-  .card b{display:block; font-family:'Unbounded',sans-serif; font-size:15px; margin-bottom:3px;}
-  .card span{font-size:13px; color:var(--ink-soft);}
-
-  .day-block{margin-bottom:18px;}
-  .day-label{font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:var(--ink-soft); margin-bottom:8px;}
-  .slot-row{display:flex; flex-wrap:wrap; gap:8px;}
-  .slot-btn{
-    padding:9px 14px; border-radius:100px; cursor:pointer;
-    border:1.5px solid var(--line); background:#fff;
-    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; color:var(--ink-soft);
-    transition:all .15s ease;
-  }
-  .slot-btn:hover{border-color:var(--ink); color:var(--ink);}
-  .slot-btn.on{background:var(--accent); border-color:var(--accent); color:var(--ink);}
-  .slot-btn.on::after{content:' ✓'; font-weight:700;}
-  .slot-btn:disabled{opacity:0.35; cursor:not-allowed;}
-
-  .btn{
-    display:block; width:100%; font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px;
-    text-align:center; background:var(--accent); color:var(--ink); border:none;
-    border-radius:100px; padding:16px 24px; cursor:pointer; margin-top:8px;
-  }
-  .btn:disabled{opacity:0.4; cursor:not-allowed;}
-  .btn-ghost{background:transparent; border:1.5px solid var(--ink); color:var(--ink);}
-
-  .summary-row{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line); font-size:14px;}
-  .summary-row b{font-weight:600;}
-
-  .state{display:none;}
-  .state.active{display:block;}
-  .center{text-align:center; padding:60px 0;}
-  .error-box{background:#FBEAE9; border-radius:16px; padding:18px; font-size:14px; line-height:1.5; margin-bottom:16px;}
-  .hidden{display:none !important;}
-  .honeypot{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;}
+:root{
+  --bg:#090a09;
+  --accent:#d7ef42;
+  --ink:#10110e;
+  --muted:#a7a9a2;
+  --line:rgba(255,255,255,.13);
+  --panel:rgba(255,255,255,.045);
+  --panel-2:rgba(255,255,255,.075);
+  --red:#ff8c82;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);color:#fff;font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased;min-height:100vh;
+}
+a{color:inherit;text-decoration:none}
+.page-shell{
+  width:min(1280px,100%);min-height:100vh;margin:0 auto;
+  display:grid;grid-template-columns:minmax(390px,.9fr) minmax(520px,1.1fr);
+  background:#0b0c0b;
+}
+.editorial-aside{
+  position:sticky;top:0;height:100vh;overflow:hidden;
+  padding:32px 34px 38px;display:flex;flex-direction:column;
+  background:
+    radial-gradient(circle at 62% 38%,rgba(215,239,66,.18),transparent 27%),
+    linear-gradient(155deg,#151b10 0%,#090a09 62%);
+}
+.editorial-aside:before{
+  content:"";position:absolute;width:72%;height:72%;border-radius:52% 48% 0 0;
+  right:-6%;bottom:0;background:linear-gradient(145deg,#283817,#708250);opacity:.7;
+}
+.brand-row{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center}
+.logo{
+  font-family:'Unbounded',sans-serif;font-weight:900;font-size:21px;
+  letter-spacing:-.07em;color:#fff;
+}
+.logo span{background:var(--accent);color:var(--ink);padding:0 5px;border-radius:6px}
+.back-link{font-size:12px;color:#b9bbb4}
+.back-link:hover{color:#fff}
+.aside-copy{position:relative;z-index:2;margin-top:auto;padding-bottom:18px}
+.aside-kicker{
+  color:var(--accent);font:600 10px/1.3 'Unbounded',sans-serif;
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px;
+}
+.aside-title{
+  margin:0;font:700 clamp(40px,4.4vw,68px)/.98 'Unbounded',sans-serif;
+  letter-spacing:-.065em;
+}
+.aside-title em{font-style:normal;color:var(--accent)}
+.aside-text{margin:24px 0 0;max-width:400px;color:#c0c2bb;font-size:14px;line-height:1.65}
+.aside-steps{
+  position:relative;z-index:3;margin-top:30px;padding-top:22px;border-top:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+}
+.aside-step b{display:block;color:#fff;font:600 12px 'Unbounded',sans-serif}
+.aside-step span{display:block;margin-top:7px;color:#a7a9a1;font-size:11px;line-height:1.4}
+.wrap{max-width:none;margin:0;padding:42px clamp(26px,5vw,72px) 70px;background:#0f110f}
+.content-head{max-width:690px;margin:0 auto 28px}
+.eyebrow{
+  color:var(--accent);font:600 10px 'Unbounded',sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;
+}
+h1{
+  font-family:'Unbounded',sans-serif;font-weight:700;
+  font-size:clamp(30px,3.2vw,46px);line-height:1.06;
+  letter-spacing:-.055em;margin:0 0 12px;color:#fff;
+}
+.sub{color:#aeb0aa;font-size:14px;line-height:1.6;margin:0 0 24px}
+.card{
+  background:var(--panel);border-radius:18px;padding:17px 18px;margin-bottom:10px;
+  cursor:pointer;border:1px solid var(--line);
+  transition:border-color .15s ease,background .15s ease,transform .15s ease;
+}
+.card:hover{border-color:rgba(255,255,255,.32);transform:translateY(-1px)}
+.card.selected{border-color:var(--accent);background:rgba(215,239,66,.08)}
+.card b{display:block;font-family:'Unbounded',sans-serif;font-size:14px;margin-bottom:6px;color:#fff}
+.card span{font-size:13px;color:#aeb0aa}
+.day-block{
+  margin-bottom:14px;padding:14px;border-radius:16px;background:rgba(255,255,255,.025);
+  border:1px solid var(--line);
+}
+.day-label{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;
+  color:#969993;margin-bottom:10px;
+}
+.slot-row{display:flex;flex-wrap:wrap;gap:7px}
+.slot-btn{
+  padding:9px 13px;border-radius:100px;cursor:pointer;
+  border:1px solid var(--line);background:rgba(255,255,255,.035);
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#cfd1ca;
+  transition:all .15s ease;
+}
+.slot-btn:hover{border-color:rgba(255,255,255,.38);color:#fff}
+.slot-btn.on{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.slot-btn.on::after{content:' ✓';font-weight:700}
+.slot-btn:disabled{opacity:.35;cursor:not-allowed}
+.btn{
+  display:block;width:100%;font-family:'Inter',sans-serif;font-weight:800;font-size:14px;
+  text-align:center;background:var(--accent);color:var(--ink);border:none;
+  border-radius:999px;padding:16px 22px;cursor:pointer;margin-top:10px;
+  transition:transform .15s ease,filter .15s ease,border-color .15s ease;
+}
+.btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.04)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-ghost{
+  background:transparent;border:1px solid var(--line);color:#d9dad5;
+}
+.btn-ghost:hover:not(:disabled){border-color:rgba(255,255,255,.35);filter:none}
+.summary-row{
+  display:flex;justify-content:space-between;gap:20px;padding:13px 0;
+  border-bottom:1px solid var(--line);font-size:13px;color:#9fa19b;
+}
+.summary-row b{font-weight:700;color:#fff;text-align:right}
+.state{display:none;max-width:690px;margin:0 auto}
+.state.active{display:block}
+.center{text-align:center;padding:80px 0}
+.center h1{margin-left:auto;margin-right:auto}
+.error-box{
+  background:rgba(255,140,130,.08);border:1px solid rgba(255,140,130,.22);
+  border-radius:18px;padding:18px;font-size:14px;line-height:1.55;margin-bottom:16px;color:#f0c5c0;
+}
+.hidden{display:none!important}
+.honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.field{margin-bottom:18px}
+.field label{
+  display:block;font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.07em;color:#969993;margin-bottom:7px;
+}
+.field select{
+  width:100%;font-family:'Inter',sans-serif;font-size:14px;padding:13px 42px 13px 15px;
+  border-radius:13px;border:1px solid var(--line);background-color:rgba(255,255,255,.045);
+  color:#fff;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%23d7ef42' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;
+}
+.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(215,239,66,.12)}
+.field select option{background:#161816;color:#fff}
+#tzFallbackNote{
+  background:rgba(215,239,66,.08)!important;border:1px solid rgba(215,239,66,.18);
+  border-radius:14px!important;color:#cfd8a1!important;
+}
+#confirmError{color:var(--red)!important}
+#summaryBox{border-top:1px solid var(--line)}
+@media(max-width:980px){
+  .page-shell{grid-template-columns:1fr}
+  .editorial-aside{position:relative;height:500px;min-height:500px}
+  .aside-copy{max-width:62%;margin-top:auto}
+}
+@media(max-width:620px){
+  .editorial-aside{height:340px;min-height:340px;padding:22px 20px}
+  .aside-copy{max-width:100%;padding-bottom:0}
+  .aside-title{font-size:40px;max-width:75%}
+  .aside-text{max-width:68%;font-size:12px}
+  .aside-steps{display:none}
+  .wrap{padding:30px 16px 54px}
+  .content-head{margin-bottom:22px}
+  .summary-row{align-items:flex-start}
+}
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<div class="page-shell">
+  <aside class="editorial-aside" aria-label="YORK!">
+    <div class="brand-row">
+      <a class="logo" href="index.html">YORK<span>!</span></a>
+      <a class="back-link" href="index.html">← На главную</a>
+    </div>
+    <div class="aside-copy">
+      <div class="aside-kicker">Lesson reschedule / YORK!</div>
+      <div class="aside-title">ПЛАНЫ<br>МЕНЯЮТСЯ.<br><em>ЭТО ОК.</em></div>
+      <p class="aside-text">Выбери урок и предложи удобное новое время. Мы постараемся сделать перенос максимально простым.</p>
+      <div class="aside-steps">
+        <div class="aside-step"><b>01</b><span>Выбираешь урок</span></div>
+        <div class="aside-step"><b>02</b><span>Предлагаешь время</span></div>
+        <div class="aside-step"><b>03</b><span>Получаешь подтверждение</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="wrap">
+    <div class="content-head">
+      <div class="eyebrow">Manage your lesson</div>
+      <h1>ПЕРЕНЕСЁМ<br>БЕЗ ЛИШНЕГО.</h1>
+      <p class="sub">Выбери урок и новое удобное время — дальше мы всё согласуем.</p>
+    </div>
+
   <div id="stateLoading" class="state active center">
     <p>Загружаем…</p>
   </div>
@@ -134,6 +266,7 @@
     <div class="error-box">Не получилось загрузить данные. Попробуйте открыть ссылку заново или напишите менеджеру.</div>
     <a class="btn" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
   </div>
+  </main>
 </div>
 
 <script>
@@ -243,7 +376,15 @@ async function init(){
 
     studentId = rpcData[0].student_id;
     studentName = rpcData[0].student_name || '';
-    if (rpcData[0].student_timezone) studentTimezone = rpcData[0].student_timezone;
+    if (rpcData[0].student_timezone){
+      try {
+        new Intl.DateTimeFormat('ru-RU', { timeZone: rpcData[0].student_timezone });
+        studentTimezone = rpcData[0].student_timezone;
+        timezoneWasFallback = false;
+      } catch(e){
+        // невалидное значение в профиле — остаёмся на фолбэке (Уфа)
+      }
+    }
 
     const lessonsRes = await fetch(
       `${SUPABASE_URL}/rest/v1/lessons?student_id=eq.${studentId}&status=eq.upcoming` +
@@ -327,6 +468,8 @@ async function loadTeacherSlots(teacherId){
   const tzLabel = TZ_LABELS[studentTimezone] || studentTimezone;
   document.getElementById('slotsHint').textContent =
     `Можно выбрать до двух вариантов — если первый окажется занят, преподаватель предложит второй. Время указано по вашему часовому поясу (${tzLabel}).`;
+  document.getElementById('tzSelect').value = studentTimezone;
+  document.getElementById('tzFallbackNote').classList.toggle('hidden', !timezoneWasFallback);
   emptyMsg.classList.add('hidden');
   selectedSlots = [];
   document.getElementById('toConfirmBtn').disabled = true;
@@ -385,6 +528,13 @@ function toggleSlot(btn){
   }
   document.getElementById('toConfirmBtn').disabled = selectedSlots.length === 0;
 }
+
+document.getElementById('tzSelect').addEventListener('change', (e) => {
+  studentTimezone = e.target.value;
+  timezoneWasFallback = false; // человек выбрал сам — это больше не догадка
+  document.getElementById('tzFallbackNote').classList.add('hidden');
+  loadTeacherSlots(selectedTeacherId);
+});
 
 document.getElementById('backToLessonBtn').addEventListener('click', () => {
   showState(myLessons.length > 1 ? 'statePickLesson' : 'stateInvalid');
