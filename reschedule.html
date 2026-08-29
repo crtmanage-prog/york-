@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Перенос урока — YORK!</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF; --accent:#D2E739; --ink:#1C1C1C;
+    --ink-soft:rgba(28,28,28,0.62); --line:rgba(28,28,28,0.12); --panel:#F7F8EF;
+    --red:#B3261E;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:480px; margin:0 auto; padding:28px 20px 60px;}
+  h1{font-family:'Unbounded',sans-serif; font-weight:700; font-size:21px; margin:0 0 6px;}
+  .sub{color:var(--ink-soft); font-size:14px; line-height:1.5; margin:0 0 24px;}
+
+  .card{
+    background:var(--panel); border-radius:18px; padding:16px 18px;
+    margin-bottom:12px; cursor:pointer; border:2px solid transparent;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .card:hover{border-color:var(--line);}
+  .card.selected{border-color:var(--ink); background:#fff;}
+  .card b{display:block; font-family:'Unbounded',sans-serif; font-size:15px; margin-bottom:3px;}
+  .card span{font-size:13px; color:var(--ink-soft);}
+
+  .day-block{margin-bottom:18px;}
+  .day-label{font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:var(--ink-soft); margin-bottom:8px;}
+  .slot-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .slot-btn{
+    padding:9px 14px; border-radius:100px; cursor:pointer;
+    border:1.5px solid var(--line); background:#fff;
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; color:var(--ink-soft);
+    transition:all .15s ease;
+  }
+  .slot-btn:hover{border-color:var(--ink); color:var(--ink);}
+  .slot-btn.on{background:var(--accent); border-color:var(--accent); color:var(--ink);}
+  .slot-btn.on::after{content:' ✓'; font-weight:700;}
+  .slot-btn:disabled{opacity:0.35; cursor:not-allowed;}
+
+  .btn{
+    display:block; width:100%; font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px;
+    text-align:center; background:var(--accent); color:var(--ink); border:none;
+    border-radius:100px; padding:16px 24px; cursor:pointer; margin-top:8px;
+  }
+  .btn:disabled{opacity:0.4; cursor:not-allowed;}
+  .btn-ghost{background:transparent; border:1.5px solid var(--ink); color:var(--ink);}
+
+  .summary-row{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line); font-size:14px;}
+  .summary-row b{font-weight:600;}
+
+  .state{display:none;}
+  .state.active{display:block;}
+  .center{text-align:center; padding:60px 0;}
+  .error-box{background:#FBEAE9; border-radius:16px; padding:18px; font-size:14px; line-height:1.5; margin-bottom:16px;}
+  .hidden{display:none !important;}
+  .honeypot{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div id="stateLoading" class="state active center">
+    <p>Загружаем…</p>
+  </div>
+
+  <div id="stateInvalid" class="state">
+    <h1>Ссылка недействительна</h1>
+    <div class="error-box">Эта ссылка устарела или уже использована. Напишите менеджеру — поможем перенести урок вручную.</div>
+    <a class="btn" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
+  </div>
+
+  <div id="statePickLesson" class="state">
+    <h1>Какой урок переносим?</h1>
+    <p class="sub" id="hiStudent"></p>
+    <div id="lessonList"></div>
+    <button class="btn" id="toSlotsBtn" disabled>Продолжить</button>
+  </div>
+
+  <div id="statePickSlots" class="state">
+    <h1>Выбери удобное время</h1>
+    <p class="sub" id="slotsHint">Можно выбрать до двух вариантов — если первый окажется занят, преподаватель предложит второй.</p>
+
+    <div id="tzFallbackNote" class="hidden" style="background:#FFF6D9; border-radius:12px; padding:12px 14px; font-size:13px; line-height:1.5; margin-bottom:14px;">
+      ⚠️ Не удалось определить ваш часовой пояс — показываем время по Уфе. Если это не ваш часовой пояс, поправьте его ниже.
+    </div>
+
+    <div class="field" style="margin-bottom:18px;">
+      <label for="tzSelect" style="display:block; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:var(--ink-soft); margin-bottom:6px;">Ваш часовой пояс</label>
+      <select id="tzSelect" style="width:100%; font-family:'Inter',sans-serif; font-size:14.5px; padding:11px 13px; border-radius:11px; border:1.5px solid var(--line); background:#fff; color:var(--ink);">
+        <option value="Europe/Kaliningrad">Калининград (МСК-1)</option>
+        <option value="Europe/Moscow">Москва (МСК)</option>
+        <option value="Europe/Samara">Самара (МСК+1)</option>
+        <option value="Asia/Yekaterinburg">Екатеринбург / Уфа (МСК+2)</option>
+        <option value="Asia/Omsk">Омск (МСК+3)</option>
+        <option value="Asia/Krasnoyarsk">Красноярск (МСК+4)</option>
+        <option value="Asia/Irkutsk">Иркутск (МСК+5)</option>
+        <option value="Asia/Yakutsk">Якутск (МСК+6)</option>
+        <option value="Asia/Vladivostok">Владивосток (МСК+7)</option>
+      </select>
+    </div>
+
+    <div id="slotsContainer"></div>
+    <p id="slotsEmpty" class="sub hidden">У преподавателя пока нет свободных окон на ближайшие две недели — напишите менеджеру, поможем найти время.</p>
+    <button class="btn" id="toConfirmBtn" disabled>Продолжить</button>
+    <button class="btn btn-ghost" id="backToLessonBtn">← Назад</button>
+  </div>
+
+  <div id="stateConfirm" class="state">
+    <h1>Проверь и отправь</h1>
+    <div id="summaryBox" style="margin-bottom:20px;"></div>
+    <input type="text" id="hpField" class="honeypot" tabindex="-1" autocomplete="off">
+    <p id="confirmError" style="color:var(--red); font-size:13.5px; font-weight:600; min-height:18px;"></p>
+    <button class="btn" id="submitBtn">Отправить запрос</button>
+    <button class="btn btn-ghost" id="backToSlotsBtn">← Назад</button>
+  </div>
+
+  <div id="stateSuccess" class="state center">
+    <div style="font-size:44px; margin-bottom:12px;">✅</div>
+    <h1>Запрос отправлен</h1>
+    <p class="sub">Преподаватель и школа рассмотрят удобное время — как только всё согласуют, вам придёт подтверждение.</p>
+    <a class="btn btn-ghost" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
+  </div>
+
+  <div id="stateError" class="state">
+    <h1>Что-то пошло не так</h1>
+    <div class="error-box">Не получилось загрузить данные. Попробуйте открыть ссылку заново или напишите менеджеру.</div>
+    <a class="btn" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
+  </div>
+</div>
+
+<script>
+const PAGE_LOADED_AT = Date.now();
+const SCHOOL_TZ = 'Asia/Yekaterinburg';
+const SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_jlcvNafksQ0WhrYCY08anw_ju194-I9';
+const HEADERS = {
+  'apikey': SUPABASE_ANON_KEY,
+  'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+  'Content-Type': 'application/json'
+};
+
+let studentId = null;
+let studentName = '';
+let myLessons = [];
+let selectedLesson = null;
+let selectedTeacherId = null;
+let selectedSlots = [];
+
+function showState(id){
+  document.querySelectorAll('.state').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function tzOffsetMinutes(date, timeZone){
+  const dtf = new Intl.DateTimeFormat('en-US', {
+    timeZone, hour12:false,
+    year:'numeric', month:'2-digit', day:'2-digit',
+    hour:'2-digit', minute:'2-digit', second:'2-digit'
+  });
+  const parts = {};
+  dtf.formatToParts(date).forEach(p => { if (p.type !== 'literal') parts[p.type] = p.value; });
+  const asUTC = Date.UTC(
+    Number(parts.year), Number(parts.month) - 1, Number(parts.day),
+    Number(parts.hour === '24' ? '0' : parts.hour), Number(parts.minute), Number(parts.second)
+  );
+  return (asUTC - date.getTime()) / 60000;
+}
+
+function schoolWallToInstant(dateStr, hour){
+  const naive = Date.UTC(
+    Number(dateStr.slice(0,4)), Number(dateStr.slice(5,7)) - 1, Number(dateStr.slice(8,10)), hour, 0, 0
+  );
+  let guess = new Date(naive);
+  for (let i = 0; i < 2; i++){
+    guess = new Date(naive - tzOffsetMinutes(guess, SCHOOL_TZ) * 60000);
+  }
+  return guess;
+}
+
+function fmtSchoolTz(instant){
+  const dtf = new Intl.DateTimeFormat('ru-RU', {
+    timeZone: SCHOOL_TZ, weekday:'short', day:'numeric', month:'short',
+    hour:'2-digit', minute:'2-digit', hour12:false
+  });
+  const parts = {};
+  dtf.formatToParts(instant).forEach(p => { if (p.type !== 'literal') parts[p.type] = p.value; });
+  return {
+    dayKey: new Intl.DateTimeFormat('en-CA', { timeZone: SCHOOL_TZ }).format(instant),
+    dayLabel: `${parts.weekday}, ${parts.day} ${parts.month}`,
+    time: `${parts.hour}:${parts.minute}`
+  };
+}
+
+// Личный пояс ученика — берём из его профиля (resolve_reschedule_token),
+// если пуст или невалиден — тихо откатываемся на школьный пояс (Уфа),
+// чтобы страница не сломалась из-за отсутствующих данных.
+let studentTimezone = SCHOOL_TZ;
+let timezoneWasFallback = true; // пока не пришли реальные данные — считаем, что это заглушка
+
+function fmtStudentTz(instant){
+  let tz = studentTimezone;
+  try {
+    new Intl.DateTimeFormat('ru-RU', { timeZone: tz });
+  } catch(e){
+    tz = SCHOOL_TZ; // невалидное значение в профиле — не роняем страницу
+  }
+  const dtf = new Intl.DateTimeFormat('ru-RU', {
+    timeZone: tz, weekday:'short', day:'numeric', month:'short',
+    hour:'2-digit', minute:'2-digit', hour12:false
+  });
+  const parts = {};
+  dtf.formatToParts(instant).forEach(p => { if (p.type !== 'literal') parts[p.type] = p.value; });
+  return {
+    dayKey: new Intl.DateTimeFormat('en-CA', { timeZone: tz }).format(instant),
+    dayLabel: `${parts.weekday}, ${parts.day} ${parts.month}`,
+    time: `${parts.hour}:${parts.minute}`
+  };
+}
+
+function firstName(full){
+  return (full || '').trim().split(' ')[0] || '';
+}
+
+async function init(){
+  const token = new URLSearchParams(window.location.search).get('token');
+  if (!token){ showState('stateInvalid'); return; }
+
+  try {
+    const rpcRes = await fetch(`${SUPABASE_URL}/rest/v1/rpc/resolve_reschedule_token`, {
+      method: 'POST', headers: HEADERS, body: JSON.stringify({ p_token: token })
+    });
+    if (!rpcRes.ok){ showState('stateInvalid'); return; }
+    const rpcData = await rpcRes.json();
+    if (!Array.isArray(rpcData) || !rpcData.length){ showState('stateInvalid'); return; }
+
+    studentId = rpcData[0].student_id;
+    studentName = rpcData[0].student_name || '';
+    if (rpcData[0].student_timezone) studentTimezone = rpcData[0].student_timezone;
+
+    const lessonsRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/lessons?student_id=eq.${studentId}&status=eq.upcoming` +
+      `&select=id,teacher_id,lesson_date,topic,duration_minutes,profiles!lessons_teacher_id_fkey(full_name)` +
+      `&order=lesson_date.asc&limit=2`,
+      { headers: HEADERS }
+    );
+    if (!lessonsRes.ok){ showState('stateError'); return; }
+    myLessons = await lessonsRes.json();
+
+    if (!myLessons.length){
+      document.getElementById('stateInvalid').querySelector('.error-box').textContent =
+        'Не нашли предстоящих уроков для переноса. Если это ошибка — напишите менеджеру.';
+      showState('stateInvalid');
+      return;
+    }
+
+    if (myLessons.length === 1){
+      await selectLesson(myLessons[0]);
+      return;
+    }
+
+    document.getElementById('hiStudent').textContent = studentName ? `Привет, ${firstName(studentName)}!` : '';
+    renderLessonPicker();
+    showState('statePickLesson');
+  } catch(e){
+    showState('stateError');
+  }
+}
+
+function renderLessonPicker(){
+  const box = document.getElementById('lessonList');
+  box.innerHTML = myLessons.map((l, i) => {
+    const v = fmtStudentTz(new Date(l.lesson_date));
+    const teacherName = (l.profiles && l.profiles.full_name) || 'Преподаватель';
+    return `
+      <div class="card" data-idx="${i}" onclick="pickLessonCard(${i})">
+        <b>${v.dayLabel} в ${v.time}</b>
+        <span>${l.topic || 'Занятие'} · ${teacherName}</span>
+      </div>`;
+  }).join('');
+}
+
+function pickLessonCard(idx){
+  document.querySelectorAll('#lessonList .card').forEach(c => c.classList.remove('selected'));
+  document.querySelector(`#lessonList .card[data-idx="${idx}"]`).classList.add('selected');
+  selectedLesson = myLessons[idx];
+  document.getElementById('toSlotsBtn').disabled = false;
+}
+
+document.getElementById('toSlotsBtn').addEventListener('click', () => {
+  if (selectedLesson) selectLesson(selectedLesson);
+});
+
+async function selectLesson(lesson){
+  selectedLesson = lesson;
+  selectedTeacherId = lesson.teacher_id;
+  showState('stateLoading');
+  await loadTeacherSlots(selectedTeacherId);
+  showState('statePickSlots');
+}
+
+// та же таблица меток, что уже используется в админке —
+// только в обратную сторону, для показа человеку
+const TZ_LABELS = {
+  'Europe/Kaliningrad': 'Калининград',
+  'Europe/Moscow': 'Москва',
+  'Europe/Samara': 'Самара',
+  'Asia/Yekaterinburg': 'Екатеринбург / Уфа',
+  'Asia/Omsk': 'Омск',
+  'Asia/Krasnoyarsk': 'Красноярск',
+  'Asia/Irkutsk': 'Иркутск',
+  'Asia/Yakutsk': 'Якутск',
+  'Asia/Vladivostok': 'Владивосток'
+};
+
+async function loadTeacherSlots(teacherId){
+  const box = document.getElementById('slotsContainer');
+  const emptyMsg = document.getElementById('slotsEmpty');
+  box.innerHTML = '';
+  const tzLabel = TZ_LABELS[studentTimezone] || studentTimezone;
+  document.getElementById('slotsHint').textContent =
+    `Можно выбрать до двух вариантов — если первый окажется занят, преподаватель предложит второй. Время указано по вашему часовому поясу (${tzLabel}).`;
+  emptyMsg.classList.add('hidden');
+  selectedSlots = [];
+  document.getElementById('toConfirmBtn').disabled = true;
+
+  const today = new Date();
+  const from = new Intl.DateTimeFormat('en-CA', { timeZone:SCHOOL_TZ }).format(today);
+  const toDate = new Date(today); toDate.setDate(toDate.getDate() + 13);
+  const to = new Intl.DateTimeFormat('en-CA', { timeZone:SCHOOL_TZ }).format(toDate);
+
+  let rows = [];
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/teacher_availability?teacher_id=eq.${teacherId}` +
+      `&slot_date=gte.${from}&slot_date=lte.${to}` +
+      `&select=slot_date,hour&order=slot_date.asc,hour.asc`,
+      { headers: HEADERS }
+    );
+    if (res.ok) rows = await res.json();
+  } catch(e){ rows = []; }
+
+  if (!rows || !rows.length){
+    emptyMsg.classList.remove('hidden');
+    return;
+  }
+
+  const byDay = {};
+  rows.forEach(r => {
+    (byDay[r.slot_date] = byDay[r.slot_date] || []).push(r.hour);
+  });
+
+  box.innerHTML = Object.keys(byDay).sort().map(dateKey => {
+    const v = fmtStudentTz(schoolWallToInstant(dateKey, 12));
+    const hours = byDay[dateKey].map(h => {
+      const t = fmtStudentTz(schoolWallToInstant(dateKey, h));
+      return `<button type="button" class="slot-btn" data-date="${dateKey}" data-hour="${h}" onclick="toggleSlot(this)">${t.time}</button>`;
+    }).join('');
+    return `<div class="day-block"><div class="day-label">${v.dayLabel}</div><div class="slot-row">${hours}</div></div>`;
+  }).join('');
+}
+
+function toggleSlot(btn){
+  const date = btn.dataset.date;
+  const hour = Number(btn.dataset.hour);
+  const idx = selectedSlots.findIndex(s => s.date === date && s.hour === hour);
+
+  if (idx >= 0){
+    selectedSlots.splice(idx, 1);
+    btn.classList.remove('on');
+  } else {
+    if (selectedSlots.length >= 2){
+      alert('Можно выбрать не больше двух вариантов времени.');
+      return;
+    }
+    selectedSlots.push({ date, hour });
+    btn.classList.add('on');
+  }
+  document.getElementById('toConfirmBtn').disabled = selectedSlots.length === 0;
+}
+
+document.getElementById('backToLessonBtn').addEventListener('click', () => {
+  showState(myLessons.length > 1 ? 'statePickLesson' : 'stateInvalid');
+});
+
+document.getElementById('toConfirmBtn').addEventListener('click', () => {
+  renderSummary();
+  showState('stateConfirm');
+});
+
+document.getElementById('backToSlotsBtn').addEventListener('click', () => {
+  showState('statePickSlots');
+});
+
+function renderSummary(){
+  const oldV = fmtStudentTz(new Date(selectedLesson.lesson_date));
+  const slotsHtml = selectedSlots.map((s, i) => {
+    const v = fmtStudentTz(schoolWallToInstant(s.date, s.hour));
+    return `<div class="summary-row"><span>Вариант ${i + 1}</span><b>${v.dayLabel}, ${v.time}</b></div>`;
+  }).join('');
+
+  document.getElementById('summaryBox').innerHTML = `
+    <div class="summary-row"><span>Текущее время</span><b>${oldV.dayLabel}, ${oldV.time}</b></div>
+    ${slotsHtml}
+  `;
+}
+
+document.getElementById('submitBtn').addEventListener('click', async () => {
+  const errEl = document.getElementById('confirmError');
+  errEl.textContent = '';
+
+  // ловушка для ботов — тихо считаем успехом, не подсказываем, что поймали
+  if (document.getElementById('hpField').value.trim()){
+    showState('stateSuccess');
+    return;
+  }
+  if (Date.now() - PAGE_LOADED_AT < 2000){
+    errEl.textContent = 'Не получилось отправить. Попробуй ещё раз через пару секунд.';
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = 'Отправляем…';
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/reschedule_requests`, {
+      method: 'POST',
+      headers: { ...HEADERS, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({
+        lesson_id: selectedLesson.id,
+        student_id: studentId,
+        teacher_id: selectedTeacherId,
+        original_date: selectedLesson.lesson_date,
+        preferred_slots: selectedSlots,
+        status: 'pending'
+      })
+    });
+
+    btn.disabled = false; btn.textContent = 'Отправить запрос';
+
+    if (!res.ok){
+      errEl.textContent = 'Не получилось отправить запрос. Попробуйте ещё раз.';
+      return;
+    }
+    showState('stateSuccess');
+  } catch(e){
+    btn.disabled = false; btn.textContent = 'Отправить запрос';
+    errEl.textContent = 'Не получилось отправить запрос. Проверьте соединение и попробуйте ещё раз.';
+  }
+});
+
+init();
+</script>
+
+</body>
+</html>
