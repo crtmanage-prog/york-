@@ -34,6 +34,7 @@ h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:26px;line-height
 .field select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%231C1C1C' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}.field select:invalid,.field select.is-empty{color:var(--ink-soft)}
 .field-row{display:flex;gap:10px}.field-row .field{flex:1;min-width:0}@media(max-width:420px){.field-row{flex-direction:column;gap:0}}
 .chip-group{display:flex;flex-wrap:wrap;gap:7px}.chip-group label{position:relative;display:inline-flex;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:100px;padding:9px 15px;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--ink-soft);text-transform:none;letter-spacing:0;transition:.15s;user-select:none}.chip-group input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}.chip-group label:hover{border-color:var(--ink);color:var(--ink)}.chip-group label:has(input:checked),.chip-group label.selected{background:var(--accent);border-color:var(--accent);color:var(--ink);box-shadow:0 2px 8px rgba(210,231,57,.5)}
+.chip-static{display:inline-flex;align-items:center;background:var(--panel,#f5f5f0);border:1.5px solid var(--line);border-radius:100px;padding:9px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:default;opacity:.65}
 .hint-line{font-size:12.5px;color:var(--ink-soft);margin:8px 0 0}.hint-line a{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .submit{width:100%;font-family:'Unbounded',sans-serif;font-weight:700;font-size:15px;color:var(--ink);background:var(--accent);border:none;border-radius:100px;padding:17px 24px;cursor:pointer;margin-top:10px;transition:transform .15s ease}.submit:hover{transform:translateY(-2px)}.submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .secondary{background:transparent;border:1.5px solid var(--line);margin-top:10px}.microcopy{text-align:center;font-size:12.5px;color:var(--ink-soft);line-height:1.45;margin:10px auto 0;max-width:390px}
@@ -260,6 +261,7 @@ document.getElementById('referrerCode').addEventListener('input', (e) => {
 });
 
 let selectedTeacherId = null;
+let realTeacherIds = []; // доступно и внутри loadSlotsForTeacher, для объединённого просмотра "Не важно"
 (async () => {
   const teacherGroup = document.getElementById('teacherGroup');
   const headers = {
@@ -303,9 +305,23 @@ let selectedTeacherId = null;
     return;
   }
 
-  teacherGroup.innerHTML = teachers.map(t =>
+  // "Екатерина Тест Тьютор" — служебный тестовый профиль для проверки бота,
+  // ему не место в реальном публичном списке преподавателей. Убираем из
+  // кликабельных вариантов; она же (переименованная) и вымышленная "Мария"
+  // показываются отдельно как некликабельные — просто для вида, пока нет
+  // свободного времени на реальные занятия.
+  const TEST_TUTOR_ID = 'd492122c-5d5b-41ad-aae9-e01c044fd77f';
+  const realTeachers = teachers.filter(t =>
+    t.id !== TEST_TUTOR_ID && t.full_name !== 'Екатерина Тест Тьютор'
+  );
+  realTeacherIds = realTeachers.map(t => t.id);
+
+  teacherGroup.innerHTML = realTeachers.map(t =>
     `<label><input type="radio" name="teacher" value="${t.id}"><span>${t.full_name}</span></label>`
-  ).join('') + `<label><input type="radio" name="teacher" value=""><span>Не важно</span></label>`;
+  ).join('')
+    + `<label><input type="radio" name="teacher" value="" checked><span>Не важно</span></label>`
+    + `<span class="chip-static">Екатерина</span>`
+    + `<span class="chip-static">Мария</span>`;
 
   teacherGroup.querySelectorAll('input[name="teacher"]').forEach(el => {
     el.addEventListener('change', () => {
@@ -313,6 +329,13 @@ let selectedTeacherId = null;
       loadSlotsForTeacher(selectedTeacherId);
     });
   });
+
+  // раньше слоты появлялись только после явного клика по преподавателю —
+  // большинство просто пропускали необязательный вопрос про преподавателя
+  // и никогда не видели выбор времени вообще. Показываем слоты сразу,
+  // по умолчанию "Не важно", а если человек всё же выберет конкретного
+  // преподавателя — обновится через обычный обработчик выше.
+  loadSlotsForTeacher(null);
 })();
 
 /* ---------- часовые пояса: показываем время так, как его видит ученик ---------- */
@@ -412,16 +435,51 @@ async function loadSlotsForTeacher(teacherId){
   const box = document.getElementById('slotsPicker');
   selectedSlots = [];
 
-  if (!teacherId){
-    box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">Мы подберём преподавателя и предложим удобное время сами.</p>';
-    return;
-  }
-  box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">Загружаем свободные окна…</p>';
-
   const today = new Date(); today.setHours(0,0,0,0);
   const from = dateKeyLocal(today);
   const toDate = new Date(today); toDate.setDate(toDate.getDate() + 13);
   const to = dateKeyLocal(toDate);
+
+  if (!teacherId){
+    // "Не важно" — показываем объединённую доступность ВСЕХ реальных
+    // преподавателей на 2 недели вперёд, а не просто текст "подберём сами".
+    // Так человек всё равно выбирает конкретное время, а какой именно
+    // преподаватель попадёт на это время — решает уже школа при подтверждении.
+    if (!realTeacherIds.length){
+      box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">Мы подберём преподавателя и предложим удобное время сами.</p>';
+      return;
+    }
+    box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">Загружаем свободные окна…</p>';
+    try {
+      const idsFilter = realTeacherIds.join(',');
+      const url = `${SUPABASE_URL}/rest/v1/teacher_availability?teacher_id=in.(${idsFilter})`
+        + `&slot_date=gte.${from}&slot_date=lte.${to}&select=slot_date,hour&order=slot_date.asc,hour.asc`;
+      const res = await fetch(url, {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+      });
+      const rows = await res.json();
+
+      if (!Array.isArray(rows) || !rows.length){
+        box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">Пока нет отмеченных окон. Оставь заявку — мы согласуем время вручную.</p>';
+        return;
+      }
+
+      // объединяем: если несколько преподавателей свободны в один и тот же
+      // час, показываем это как один слот, а не дублируем кнопку
+      const seen = new Set();
+      const uniqueRows = rows.filter(r => {
+        const key = r.slot_date + '|' + r.hour;
+        if (seen.has(key)) return false;
+        seen.add(key); return true;
+      });
+      renderSlotButtons(uniqueRows, box);
+    } catch(e){
+      box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">Не получилось загрузить свободные окна. Оставь заявку — мы согласуем время вручную.</p>';
+    }
+    return;
+  }
+
+  box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">Загружаем свободные окна…</p>';
 
   try {
     const url = `${SUPABASE_URL}/rest/v1/teacher_availability?teacher_id=eq.${teacherId}`
@@ -436,7 +494,13 @@ async function loadSlotsForTeacher(teacherId){
         + 'У этого преподавателя пока нет отмеченных окон. Оставь заявку — мы согласуем время вручную.</p>';
       return;
     }
+    renderSlotButtons(rows, box);
+  } catch(e){
+    box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">Не получилось загрузить свободные окна. Оставь заявку — мы согласуем время вручную.</p>';
+  }
+}
 
+function renderSlotButtons(rows, box){
     // пересчитываем каждое окно в часовой пояс ученика
     const items = rows.map(r => {
       const instant = schoolWallToInstant(r.slot_date, r.hour);
@@ -462,11 +526,6 @@ async function loadSlotsForTeacher(teacherId){
       </div>`;
     }).join('')
     + `<p style="font-size:12px; color:var(--ink-soft); margin:10px 0 0;">🕐 Время показано по ${studentTzLabel()} — вашему часовому поясу.</p>`;
-
-  } catch (err){
-    box.innerHTML = '<p style="font-size:13px; color:var(--ink-soft); margin:0;">'
-      + 'Не удалось загрузить окна. Оставь заявку — согласуем время вручную.</p>';
-  }
 }
 
 function toggleSlot(btn){
