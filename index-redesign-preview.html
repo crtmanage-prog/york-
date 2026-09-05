@@ -41,80 +41,6 @@
 }
 </script>
 
-<!-- FAQPage — из реального FAQ-блока на странице, для rich snippet в поиске -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Как проходят занятия и где они проводятся?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Занятия проходят онлайн на платформе Яндекс Телемост. На уроках мы используем электронные интерактивные материалы, доски и медиа-контент, а у каждого ученика есть доступ к личному кабинету со словариком и материалами."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Для кого подходят уроки — только для детей или для взрослых тоже?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Мы работаем и со школьниками/подростками (подтягиваем успеваемость, помогаем с ДЗ, готовимся к ВПР и контрольным), и со взрослыми (разговорный английский для жизни, работы, путешествий и просмотра сериалов в оригинале)."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "В каких форматах можно заниматься?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Вы можете выбрать удобный формат: SOLO: индивидуальные занятия (1 на 1) с персональной программой под ваш темп. CREW: мини-группы по 3–4 человек для максимальной разговорной практики и комфортного общения."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Что нужно для первого урока?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Только ноутбук или планшет с хорошим интернет-соединением, гарнитура/микрофон и ваше желание учиться! Все учебные материалы, рабочие тетради и интерактивные карточки мы предоставляем."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Как проходит бесплатный пробный урок?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Пробное занятие длится 30 минут. За это время мы познакомимся, определим текущий уровень владения языком, обсудим ваши цели и покажем, как устроен наш формат обучения."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Как работает программа лояльности «York Club»?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "У нас действует реферальная система: рекомендуйте школу YORK! друзьям или знакомым и получайте скидку 15% на следующий месяц обучения за каждого приведённого друга, который начнёт у нас заниматься. Учиться вместе не только веселее, но и выгоднее!"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Что происходит, если пропустить занятие?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Если у вас не получается присутствовать на уроке, просто предупредите нас заранее (не позднее чем за 24 часа до начала). Мы перенесём занятие на удобное вам время."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Можно ли сменить формат обучения SOLO ↔ CREW?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Да, конечно! Вы можете в любой момент перейти с индивидуальных занятий (SOLO) в мини-группу (CREW) или наоборот. Мы адаптируем программу и пересчитаем абонемент."
-      }
-    }
-  ]
-}
-</script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -216,19 +142,16 @@
   }
   .logo{font-family:'Unbounded',sans-serif; font-weight:900; font-size:20px;}
   .logo span{color:var(--ink); background:var(--accent); padding:0 4px; border-radius:6px;}
-  .nav-links{display:flex; gap:26px; font-size:14.5px; font-weight:500; list-style:none; margin:0; padding:0;}
-  .nav-links a{text-decoration:none; opacity:0.75; position:relative; padding-bottom:2px;}
-  .nav-links a::after{
-    content:"";
-    position:absolute; left:0; bottom:-2px;
-    width:100%; height:2px;
-    background:var(--ink);
-    transform:scaleX(0);
-    transform-origin:right;
-    transition:transform .25s ease;
+  .nav-links{
+    display:flex; gap:2px; list-style:none; margin:0; padding:5px;
+    background:var(--panel); border-radius:100px;
   }
-  .nav-links a:hover{opacity:1;}
-  .nav-links a:hover::after{transform:scaleX(1); transform-origin:left;}
+  .nav-links a{
+    display:block; text-decoration:none; color:var(--ink-soft);
+    font-size:13.5px; font-weight:600; padding:9px 16px; border-radius:100px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .nav-links a:hover{color:var(--ink); background:rgba(28,28,28,0.05);}
   .nav-cta{display:flex; gap:10px; align-items:center;}
   @media (max-width:820px){ .nav-links{display:none;} }
   @media (max-width:360px){
@@ -238,24 +161,23 @@
 
   /* ---------- HERO ---------- */
   .hero{padding-top:56px;}
-  .hero-grid{
-    max-width:600px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
+  .hero-split{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;
+    max-width:1120px; margin:0 auto;
   }
-  .hero .hero-ctas{justify-content:center;}
-  .hero p.lead{margin-left:auto; margin-right:auto;}
+  .hero-text{max-width:520px;}
+  .hero .hero-ctas{justify-content:flex-start;}
+  .hero p.lead{margin-left:0; margin-right:0;}
   .hero h1{
     font-family:'Unbounded',sans-serif;
     font-weight:700;
-    font-size:clamp(32px,5.2vw,52px);
+    font-size:clamp(32px,3.6vw,50px);
     line-height:1.12;
     margin-bottom:14px;
   }
   .cycle-line{
     display:flex;
-    justify-content:center;
+    justify-content:flex-start;
     align-items:center;
     height:44px;
     margin-bottom:22px;
@@ -266,7 +188,7 @@
     color:var(--ink);
     font-family:'Unbounded',sans-serif;
     font-weight:600;
-    font-size:clamp(11px,2.6vw,19px);
+    font-size:clamp(11px,2.2vw,19px);
     line-height:1.3;
     padding:7px 16px;
     border-radius:100px;
@@ -274,7 +196,7 @@
     text-align:center;
     white-space:nowrap;
   }
-  @media (max-width:360px){
+  @media (max-width:400px){
     .cycle-chip{font-size:9px; padding:6px 10px;}
   }
   .hero p.lead{
@@ -287,10 +209,54 @@
   .hero-ctas{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px;}
   .hero-note{font-size:13.5px; color:var(--ink-soft);}
   .hero-note a{font-weight:600; color:var(--ink); text-decoration:underline; text-underline-offset:3px;}
-  @media (max-width:520px){
-    .hero-grid{text-align:center; margin-left:auto; margin-right:auto;}
+
+  /* ---------- HERO: макет кабинета ---------- */
+  .hero-mockup{position:relative; display:flex; justify-content:center;}
+  .mockup-deco{position:absolute; pointer-events:none;}
+  .mockup-heart{width:30px; height:30px; top:-6px; right:18px; opacity:0.95;}
+  .mockup-diamond{width:24px; height:24px; bottom:26px; left:-6px; opacity:0.95;}
+
+  .mockup-card{
+    width:100%; max-width:340px; background:#fff; border-radius:26px;
+    box-shadow:0 30px 70px -20px rgba(28,28,28,0.28), 0 0 0 1px rgba(28,28,28,0.06);
+    transform:rotate(1.4deg); overflow:hidden;
+  }
+  .mockup-topbar{display:flex; gap:6px; padding:14px 16px 0;}
+  .mockup-dot{width:8px; height:8px; border-radius:50%; background:var(--line);}
+  .mockup-body{padding:16px 20px 22px;}
+  .mockup-header{display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:16px;}
+  .mockup-hi{font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px;}
+  .mockup-hi-sub{font-size:11.5px; color:var(--ink-soft); margin-top:2px; white-space:nowrap;}
+  .mockup-level{
+    font-family:'Unbounded',sans-serif; font-weight:800; font-size:12px; flex-shrink:0;
+    background:var(--ink); color:var(--accent); padding:5px 11px; border-radius:100px;
+  }
+  .mockup-lesson{
+    background:var(--ink); color:#fff; border-radius:16px; padding:14px 16px; margin-bottom:12px;
+  }
+  .mockup-lesson-label{font-size:10.5px; color:rgba(255,255,255,0.55); margin-bottom:4px;}
+  .mockup-lesson-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px; color:var(--accent);}
+  .mockup-lesson-time{font-size:11.5px; color:rgba(255,255,255,0.75); margin-top:3px;}
+  .mockup-row{display:flex; gap:10px; margin-bottom:12px;}
+  .mockup-mini{
+    flex:1; background:var(--panel); border-radius:14px; padding:11px 13px;
+  }
+  .mockup-mini-accent{background:var(--accent);}
+  .mockup-mini-label{font-size:10px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.03em; margin-bottom:3px;}
+  .mockup-mini-accent .mockup-mini-label{color:rgba(28,28,28,0.6);}
+  .mockup-mini-val{font-weight:700; font-size:13px;}
+  .mockup-progress{background:var(--panel); border-radius:14px; padding:13px 15px;}
+  .mockup-progress-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:12.5px; margin-bottom:9px;}
+  .mockup-bar{height:7px; border-radius:5px; background:rgba(28,28,28,0.08); margin-bottom:6px; overflow:hidden;}
+  .mockup-bar:last-child{margin-bottom:0;}
+  .mockup-bar-fill{height:100%; background:var(--ink); border-radius:5px;}
+
+  @media (max-width:900px){
+    .hero-split{grid-template-columns:1fr; text-align:center; gap:40px;}
+    .hero-text{max-width:600px; margin:0 auto;}
     .hero .hero-ctas, .cycle-line{justify-content:center;}
     .hero p.lead{margin-left:auto; margin-right:auto;}
+    .mockup-card{max-width:300px; transform:none;}
   }
 
   /* ---------- GUIDE BANNER ---------- */
@@ -353,7 +319,7 @@
   @media (max-width:760px){ .price-grid{grid-template-columns:1fr;} }
   .price-card{
     border:1.5px solid var(--line);
-    border-radius:var(--radius);
+    border-radius:22px;
     padding:30px;
     position:relative;
     display:flex;
@@ -364,7 +330,13 @@
     transform:translateY(-6px);
     box-shadow:0 16px 32px rgba(28,28,28,0.1);
   }
-  .price-card.featured{border-color:var(--ink); background:var(--panel);}
+  .price-card.featured{border-color:var(--accent); background:var(--accent);}
+  .price-card.featured .format-desc,
+  .price-card.featured .price-per,
+  .price-card.featured .price-manager-note,
+  .price-card.featured .price-manager-note a{color:rgba(28,28,28,0.65);}
+  .price-card.featured .price-old{color:rgba(28,28,28,0.45);}
+  .price-card.featured .price-badge{background:var(--ink); color:var(--accent);}
   .price-badge{
     position:absolute; top:24px; right:24px;
     background:var(--accent);
@@ -392,47 +364,7 @@
     background:#fff; border:1px solid var(--line);
     display:inline-block; padding:5px 11px; border-radius:100px; margin-bottom:22px; width:fit-content;
   }
-  .price-card.featured .price-save{background:var(--accent); border-color:transparent;}
-
-  /* ---------- пакеты занятий (4 / 8 / 12) ---------- */
-  .discount-note{
-    font-size:12.5px; font-weight:700; color:var(--ink-soft);
-    display:flex; align-items:center; gap:6px; margin-bottom:16px;
-  }
-  .discount-note svg{width:14px; height:14px; flex-shrink:0;}
-  .pkg-table{margin-bottom:18px; border-top:1px solid var(--line);}
-  .pkg-row{
-    display:flex; align-items:center; justify-content:space-between; gap:10px;
-    padding:14px 0; border-bottom:1px solid var(--line); position:relative;
-  }
-  .pkg-lessons{font-size:14.5px; font-weight:600;}
-  .pkg-lessons small{display:block; font-weight:400; color:var(--ink-soft); font-size:12px; margin-top:1px;}
-  .pkg-price{text-align:right;}
-  .pkg-price b{font-family:'Unbounded',sans-serif; font-size:19px; font-weight:700; display:block;}
-  .pkg-price small{font-size:11.5px; color:var(--ink-soft);}
-  .pkg-row.popular{margin:0 -8px; padding:14px 8px; background:rgba(28,28,28,0.04); border-radius:12px; border-bottom-color:transparent;}
-  .price-card.featured .pkg-row.popular{background:rgba(255,255,255,0.35);}
-  .pkg-badge{
-    position:absolute; top:-9px; left:8px;
-    background:var(--ink); color:var(--accent); font-size:10px; font-weight:700;
-    padding:3px 9px; border-radius:100px; text-transform:uppercase; letter-spacing:0.03em;
-  }
-  .pkg-extra{
-    overflow:hidden; max-height:0; opacity:0;
-    transition:max-height .3s ease, opacity .25s ease;
-  }
-  .pkg-extra.open{max-height:260px; opacity:1;}
-  .pkg-toggle{
-    display:flex; align-items:center; gap:6px; width:100%;
-    background:none; border:none; cursor:pointer; padding:12px 0 6px;
-    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; color:var(--ink-soft);
-  }
-  .pkg-toggle:hover{color:var(--ink);}
-  .pkg-toggle svg{width:15px; height:15px; transition:transform .25s ease;}
-  .pkg-toggle.open svg{transform:rotate(180deg);}
-  .price-card.featured .pkg-price small,
-  .price-card.featured .pkg-lessons small{color:rgba(28,28,28,0.55);}
-
+  .price-card.featured .price-save{background:#fff; border-color:transparent;}
   .price-card .btn{margin-bottom:10px;}
   .price-manager-note{font-size:12.5px; color:var(--ink-soft);}
   .price-manager-note a{font-weight:600; text-decoration:underline; text-underline-offset:3px;}
@@ -628,18 +560,6 @@
     .nav-links a::after{transition:none;}
   }
 </style>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111997160', 'ym');
-    ym(111997160, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/111997160" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 <noscript><style>.reveal{opacity:1 !important; transform:none !important;}</style></noscript>
@@ -650,7 +570,6 @@
     <ul class="nav-links">
       <li><a href="#why">Почему мы</a></li>
       <li><a href="#pricing">Абонементы</a></li>
-      <li><a href="talk-club.html">TALK CLUB</a></li>
       <li><a href="#reviews">Отзывы</a></li>
       <li><a href="#faq">Вопросы</a></li>
       <li><a href="#contacts">Контакты</a></li>
@@ -663,16 +582,62 @@
 </header>
 
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div class="eyebrow">Онлайн-школа английского языка в Уфе</div>
-    <h1>Заговори по-английски</h1>
-    <div class="cycle-line"><span class="cycle-chip" id="cycleChip">для себя</span></div>
-    <p class="lead">Без нудных правил. Учим английский онлайн — живём в Уфе, а заниматься можно из любой точки. Разберёмся, зачем тебе язык, подберём формат и преподавателя — и уже на пробном уроке составим план.</p>
-    <div class="hero-ctas">
-      <a class="btn btn-accent" href="trial-form.html" target="_blank" rel="noopener">Записаться на бесплатный урок</a>
-      <a class="btn btn-ghost" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
+  <div class="wrap hero-split">
+    <div class="hero-text">
+      <div class="eyebrow">Онлайн-школа английского языка в Уфе</div>
+      <h1>Заговори по-английски</h1>
+      <div class="cycle-line"><span class="cycle-chip" id="cycleChip">для себя</span></div>
+      <p class="lead">Без нудных правил. Учим английский онлайн — живём в Уфе, а заниматься можно из любой точки. Разберёмся, зачем тебе язык, подберём формат и преподавателя — и уже на пробном уроке составим план.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-accent" href="trial-form.html" target="_blank" rel="noopener">Записаться на бесплатный урок</a>
+        <a class="btn btn-ghost" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
+      </div>
+      <div class="hero-note">Не знаешь свой уровень? <a href="level-test.html" target="_blank" rel="noopener">Пройди тест за 5 минут →</a></div>
     </div>
-    <div class="hero-note">Не знаешь свой уровень? <a href="level-test.html" target="_blank" rel="noopener">Пройди тест за 5 минут →</a></div>
+
+    <div class="hero-mockup" aria-hidden="true">
+      <svg class="mockup-deco mockup-heart" viewBox="0 0 100 100"><path d="M50 88 C50 88 12 62 12 34 C12 18 24 8 38 8 C46 8 50 14 50 14 C50 14 54 8 62 8 C76 8 88 18 88 34 C88 62 50 88 50 88 Z" fill="#1C1C1C"/></svg>
+      <svg class="mockup-deco mockup-diamond" viewBox="0 0 100 100"><path d="M50 10 L90 50 L50 90 L10 50 Z" fill="var(--accent)" stroke="#1C1C1C" stroke-width="5"/></svg>
+
+      <div class="mockup-card">
+        <div class="mockup-topbar">
+          <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+        </div>
+        <div class="mockup-body">
+          <div class="mockup-header">
+            <div>
+              <div class="mockup-hi">Привет, Александра!</div>
+              <div class="mockup-hi-sub">Готова к новым знаниям?</div>
+            </div>
+            <span class="mockup-level">B1</span>
+          </div>
+
+          <div class="mockup-lesson">
+            <div class="mockup-lesson-label">Следующий урок</div>
+            <div class="mockup-lesson-title">Present Perfect</div>
+            <div class="mockup-lesson-time">Ср, 20 августа · 18:00</div>
+          </div>
+
+          <div class="mockup-row">
+            <div class="mockup-mini">
+              <div class="mockup-mini-label">Домашка</div>
+              <div class="mockup-mini-val">2 задания</div>
+            </div>
+            <div class="mockup-mini mockup-mini-accent">
+              <div class="mockup-mini-label">Стрик</div>
+              <div class="mockup-mini-val">🔥 5 дней</div>
+            </div>
+          </div>
+
+          <div class="mockup-progress">
+            <div class="mockup-progress-title">Твой прогресс</div>
+            <div class="mockup-bar"><div class="mockup-bar-fill" style="width:78%;"></div></div>
+            <div class="mockup-bar"><div class="mockup-bar-fill" style="width:55%;"></div></div>
+            <div class="mockup-bar"><div class="mockup-bar-fill" style="width:40%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -735,7 +700,7 @@
   <div class="wrap">
     <div class="eyebrow">Абонементы</div>
     <h2 class="section-title">Выбери формат</h2>
-    <p class="section-sub">Чем больше пакет занятий, тем дешевле стоит один урок. Формат можно обсудить с менеджером до старта.</p>
+    <p class="section-sub">6 занятий по абонементу дешевле, чем поштучно. Формат можно обсудить с менеджером до старта.</p>
     <div class="urgency reveal">
       <span class="u-dot"></span>
       🔥 Набор в группу <b>CREW</b> почти закрыт — осталось всего пара мест
@@ -743,66 +708,32 @@
     <div class="price-grid">
 
       <div class="price-card reveal">
+        <span class="price-badge">Экономия 720 ₽</span>
         <div class="price-head"><span class="picon">👤</span><h3>SOLO</h3></div>
-        <p class="format-desc">Только он и преподаватель. Темп, тема и фокус — полностью под него. Подходит, если нужен быстрый результат к конкретной цели: переезд, работа, экзамен или просто не любит группы.</p>
-        <div class="discount-note">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6M12 3v13m0 0-4-4m4 4 4-4"/></svg>
-          Цены — со скидкой 15% на первый месяц
+        <p class="format-desc">Только ты и преподаватель. Темп, тема и фокус — полностью под тебя. Подходит, если нужен быстрый результат к конкретной цели: переезд, работа, экзамен или просто не любишь группы.</p>
+        <div class="price-row">
+          <span class="price-old">800 ₽/урок</span>
+          <span class="price-new">680 ₽</span>
+          <span class="price-per">/ урок</span>
         </div>
-        <div class="pkg-table">
-          <div class="pkg-row popular">
-            <span class="pkg-badge">Популярный</span>
-            <span class="pkg-lessons">8 занятий<small>637,5 ₽ за урок</small></span>
-            <span class="pkg-price"><b>5 100 ₽</b><small>потом 6 000 ₽</small></span>
-          </div>
-          <div class="pkg-extra" id="pkgExtraSolo">
-            <div class="pkg-row">
-              <span class="pkg-lessons">4 занятия<small>680 ₽ за урок</small></span>
-              <span class="pkg-price"><b>2 720 ₽</b><small>потом 3 200 ₽</small></span>
-            </div>
-            <div class="pkg-row">
-              <span class="pkg-lessons">12 занятий<small>595 ₽ за урок</small></span>
-              <span class="pkg-price"><b>7 140 ₽</b><small>потом 8 400 ₽</small></span>
-            </div>
-          </div>
-          <button type="button" class="pkg-toggle" onclick="togglePkg('Solo', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            <span>Показать все пакеты</span>
-          </button>
-        </div>
+        <div class="price-total">Абонемент на 6 занятий: <b>4 080 ₽</b> вместо 4 800 ₽</div>
+        <span class="price-save">Экономия 720 ₽ на абонементе</span>
         <a class="btn btn-dark" href="trial-form.html" target="_blank" rel="noopener">Записаться на SOLO</a>
         <span class="price-manager-note">Вопросы по формату? <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a></span>
       </div>
 
       <div class="price-card featured reveal">
+        <span class="price-badge">Экономия 540 ₽</span>
         <div class="price-head"><span class="picon">👥</span><h3>CREW</h3></div>
-        <p class="format-desc">Мини-группа 2–4 человека. Дешевле, живее и с элементом соревнования: сравнивают успехи, разбирают диалоги в парах и мотивируют друг друга. Тот же результат, но веселее.</p>
-        <div class="discount-note">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6M12 3v13m0 0-4-4m4 4 4-4"/></svg>
-          Цены — со скидкой 15% на первый месяц
+        <p class="format-desc">Мини-группа. Дешевле, живее и с элементом соревнования: сравниваете успехи, разбираете диалоги в парах и мотивируете друг друга. Тот же результат, но веселее.</p>
+        <div class="price-row">
+          <span class="price-old">600 ₽/урок</span>
+          <span class="price-new">510 ₽</span>
+          <span class="price-per">/ урок</span>
         </div>
-        <div class="pkg-table">
-          <div class="pkg-row popular">
-            <span class="pkg-badge">Популярный</span>
-            <span class="pkg-lessons">8 занятий<small>467,5 ₽ за урок</small></span>
-            <span class="pkg-price"><b>3 740 ₽</b><small>потом 4 400 ₽</small></span>
-          </div>
-          <div class="pkg-extra" id="pkgExtraCrew">
-            <div class="pkg-row">
-              <span class="pkg-lessons">4 занятия<small>510 ₽ за урок</small></span>
-              <span class="pkg-price"><b>2 040 ₽</b><small>потом 2 400 ₽</small></span>
-            </div>
-            <div class="pkg-row">
-              <span class="pkg-lessons">12 занятий<small>425 ₽ за урок</small></span>
-              <span class="pkg-price"><b>5 100 ₽</b><small>потом 6 000 ₽</small></span>
-            </div>
-          </div>
-          <button type="button" class="pkg-toggle" onclick="togglePkg('Crew', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            <span>Показать все пакеты</span>
-          </button>
-        </div>
-        <a class="btn btn-accent" href="trial-form.html" target="_blank" rel="noopener">Записаться на CREW</a>
+        <div class="price-total">Абонемент на 6 занятий: <b>3 060 ₽</b> вместо 3 600 ₽</div>
+        <span class="price-save">Экономия 540 ₽ на абонементе</span>
+        <a class="btn btn-dark" href="trial-form.html" target="_blank" rel="noopener">Записаться на CREW</a>
         <span class="price-manager-note">Вопросы по формату? <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a></span>
       </div>
 
@@ -915,7 +846,7 @@
         </button>
         <div class="faq-a">
           <div class="faq-a-inner">
-            <p>У нас действует реферальная система: рекомендуйте школу YORK! друзьям или знакомым и получайте скидку 15% на следующий месяц обучения за каждого приведённого друга, который начнёт у нас заниматься. Учиться вместе не только веселее, но и выгоднее!</p>
+            <p>У нас действует реферальная система: рекомендуйте школу YORK! друзьям или знакомым и получайте скидку 20% на следующий месяц обучения за каждого приведённого друга, который начнёт у нас заниматься. Учиться вместе не только веселее, но и выгоднее!</p>
           </div>
         </div>
       </div>
@@ -973,7 +904,6 @@
         <ul>
           <li><a href="#why">Почему мы</a></li>
           <li><a href="#pricing">Абонементы</a></li>
-          <li><a href="talk-club.html">TALK CLUB</a></li>
           <li><a href="#reviews">Отзывы</a></li>
           <li><a href="#faq">Вопросы</a></li>
           <li><a href="login.html">Личный кабинет</a></li>
@@ -983,8 +913,8 @@
       <div class="foot-col">
         <h4>Абонементы</h4>
         <ul>
-          <li>SOLO — от 2 720 ₽</li>
-          <li>CREW — от 2 040 ₽</li>
+          <li>SOLO — 680 ₽/урок</li>
+          <li>CREW — 510 ₽/урок</li>
           <li><a href="trial-form.html" target="_blank" rel="noopener">Записаться →</a></li>
         </ul>
       </div>
@@ -1009,13 +939,6 @@
 </a>
 
 <script>
-function togglePkg(name, btn){
-  var extra = document.getElementById('pkgExtra' + name);
-  var isOpen = extra.classList.toggle('open');
-  btn.classList.toggle('open', isOpen);
-  btn.querySelector('span').textContent = isOpen ? 'Скрыть' : 'Показать все пакеты';
-}
-
 (function(){
   var words = ["для себя","для переезда","для путешествий"];
   var el = document.getElementById('cycleChip');
