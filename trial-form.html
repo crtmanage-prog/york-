@@ -238,7 +238,10 @@ const urlParams = new URLSearchParams(window.location.search);
 const refCode = urlParams.get('ref');
 if (refCode){
   document.getElementById('sourceQuestionField').classList.add('hidden');
-  document.getElementById('referralBanner').classList.remove('hidden');
+  const banner = document.getElementById('referralBanner');
+  banner.innerHTML = '🎁 Ты пришёл(ла) по приглашению друга — после первой оплаты вы оба получите бонус!';
+  banner.style.cssText = 'background:#F3F8DC; border:1.5px solid var(--accent); border-radius:12px; padding:14px 16px; font-size:14px; line-height:1.5; margin-bottom:14px;';
+  banner.classList.remove('hidden');
 }
 
 document.getElementById('timezone').addEventListener('change', (e) => {
