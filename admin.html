@@ -4141,7 +4141,11 @@ async function submitRegularLessonEdit(lessonId){
   const { error } = await supabase.from('lessons').update({
     topic: topic || null,
     lesson_date: utcDate.toISOString(),
-    duration_minutes: duration ? Number(duration) : 60
+    duration_minutes: duration ? Number(duration) : 60,
+    status: 'upcoming' // если урок был отменён (вернули в абонемент) и теперь
+                        // переносится на новую дату — статус должен снова
+                        // стать "upcoming", иначе он никогда не засчитается
+                        // использованным даже после того, как дата пройдёт
   }).eq('id', lessonId);
 
   if (error){
