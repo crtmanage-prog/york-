@@ -53,6 +53,7 @@
     font-weight:900;
     font-size:20px;
     letter-spacing:0.02em;
+    color:var(--ink);
   }
   .logo span{color:var(--accent); -webkit-text-stroke:1px var(--ink);}
   .tag{
@@ -157,7 +158,7 @@
     outline:3px solid var(--ink);
     outline-offset:2px;
   }
-  button.ghost{
+  button.ghost, a.ghost{
     font-family:'Inter',sans-serif;
     font-weight:600;
     font-size:14px;
@@ -168,6 +169,10 @@
     padding:14px 20px;
     cursor:pointer;
     width:100%;
+    display:block;
+    box-sizing:border-box;
+    text-align:center;
+    text-decoration:none;
   }
 
   /* QUIZ */
@@ -331,9 +336,16 @@
     <p class="result-copy" id="levelCopy"></p>
 
     <div class="lead-card" id="leadCard">
-      <h3>Разберите результат на бесплатном уроке</h3>
+      <h3>Хотите заниматься и поднять уровень?</h3>
       <p>Покажем, что учить в первую очередь при вашем уровне, и подберём формат — <a href="index.html#pricing">индивидуально SOLO или в мини-группе CREW</a>.</p>
       <a class="primary cta-link" href="trial-form.html" target="_blank" rel="noopener">Записаться на бесплатный урок</a>
+    </div>
+
+    <div class="lead-card">
+      <h3>Нужна разговорная практика?</h3>
+      <p>TALK CLUB — небольшие группы, живое общение на разные темы каждую неделю.</p>
+      <a class="ghost" href="talk-club-form.html" target="_blank" rel="noopener" style="margin-bottom:10px;">Записаться в разговорный клуб</a>
+      <a class="ghost" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
     </div>
 
     <button class="ghost" onclick="restart()">Пройти тест заново</button>
