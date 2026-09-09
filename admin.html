@@ -408,7 +408,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         font-size:10px; font-weight:800; line-height:16px; text-align:center;
       "></span>
     </button>
-    <button class="tab-btn" data-tab="talkclub">TALK CLUB</button>
+    <button class="tab-btn" data-tab="talkclub" style="position:relative;">
+      TALK CLUB
+      <span id="newTalkClubBadge" class="hidden" style="
+        position:absolute; top:2px; right:2px; min-width:16px; height:16px; padding:0 4px;
+        background:var(--red); color:#fff; border-radius:100px;
+        font-size:10px; font-weight:800; line-height:16px; text-align:center;
+      "></span>
+    </button>
     <button class="tab-btn" data-tab="referrals">Рефералы</button>
     <button class="tab-btn" data-tab="link">Добавить человека</button>
   </nav>
@@ -3390,6 +3397,17 @@ async function loadTalkClubLeads(){
     .order('created_at', { ascending:false });
   window.__talkClubLeads = data || [];
   renderTalkClubLeads();
+  updateNewTalkClubBadge();
+}
+
+function updateNewTalkClubBadge(){
+  const badge = document.getElementById('newTalkClubBadge');
+  if (!badge) return;
+  // у talk_club_leads нет статуса new/pending как у trial_requests —
+  // "новая" здесь значит "ещё не в архиве", т.е. не обработана
+  const count = (window.__talkClubLeads || []).filter(l => !l.archived).length;
+  badge.textContent = count > 9 ? '9+' : String(count);
+  badge.classList.toggle('hidden', count === 0);
 }
 
 function talkClubLeadCardHtml(l){
