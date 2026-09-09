@@ -408,6 +408,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         font-size:10px; font-weight:800; line-height:16px; text-align:center;
       "></span>
     </button>
+    <button class="tab-btn" data-tab="talkclub">TALK CLUB</button>
     <button class="tab-btn" data-tab="referrals">Рефералы</button>
     <button class="tab-btn" data-tab="link">Добавить человека</button>
   </nav>
@@ -1095,6 +1096,27 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     </section>
 
 
+    <section class="panel" id="panel-talkclub">
+      <h2 class="panel-title">Заявки TALK CLUB</h2>
+
+      <div class="chip-group" style="margin-bottom:18px;">
+        <label><input type="radio" name="tcLevelFilter" value="all" checked onchange="renderTalkClubLeads()"><span>Все уровни</span></label>
+        <label><input type="radio" name="tcLevelFilter" value="A1-A2" onchange="renderTalkClubLeads()"><span>A1–A2</span></label>
+        <label><input type="radio" name="tcLevelFilter" value="B1" onchange="renderTalkClubLeads()"><span>B1</span></label>
+        <label><input type="radio" name="tcLevelFilter" value="B2+" onchange="renderTalkClubLeads()"><span>B2+</span></label>
+        <label><input type="radio" name="tcLevelFilter" value="Не уверен(а)" onchange="renderTalkClubLeads()"><span>Не уверен(а)</span></label>
+      </div>
+
+      <div id="talkClubLeadsList"></div>
+
+      <div style="margin-top:24px;">
+        <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; cursor:pointer;">
+          <input type="checkbox" id="tcShowArchived" onchange="renderTalkClubLeads()" style="width:auto;">
+          Показать архив
+        </label>
+      </div>
+    </section>
+
     <section class="panel" id="panel-referrals">
       <h2 class="panel-title">🔄 Реферальная программа</h2>
       <p class="section-sub" style="margin-bottom:18px;">
@@ -1441,6 +1463,7 @@ async function loadAll(){
 
   await loadPayments();
   await loadTrialRequests();
+  await loadTalkClubLeads();
   await loadExpenses();
   if (document.getElementById('expDate') && !document.getElementById('expDate').value){
     document.getElementById('expDate').value = new Date().toISOString().slice(0,10);
@@ -3357,6 +3380,77 @@ function updateNewRequestsBadge(){
   const count = (window.__trialRequests || []).filter(r => r.status === 'new').length;
   badge.textContent = count > 9 ? '9+' : String(count);
   badge.classList.toggle('hidden', count === 0);
+}
+
+/* ============================================================
+   TALK CLUB — заявки (talk_club_leads), отдельно от trial_requests
+   ============================================================ */
+async function loadTalkClubLeads(){
+  const { data } = await supabase.from('talk_club_leads').select('*')
+    .order('created_at', { ascending:false });
+  window.__talkClubLeads = data || [];
+  renderTalkClubLeads();
+}
+
+function talkClubLeadCardHtml(l){
+  const days = (l.preferred_days || []).join(', ');
+  return `
+    <div class="card" style="margin-bottom:14px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px;">
+        <div>
+          <div style="font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px;">${l.full_name}</div>
+          <div style="font-size:13px; color:var(--ink-soft);">
+            ${l.level ? 'уровень: ' + l.level : 'уровень не указан'}
+            ${l.is_existing_student ? ' · уже ученик YORK!' : ' · новый человек'}
+          </div>
+        </div>
+        <span style="font-size:11.5px; color:var(--ink-soft); text-align:right;">${fmtDateTime(l.created_at)}</span>
+      </div>
+
+      <div style="font-size:13.5px; margin-bottom:10px;">
+        <div>📞 Контакт: ${l.contact}</div>
+        ${l.timezone ? `<div>🌍 Часовой пояс: ${l.timezone}</div>` : ''}
+        ${days ? `<div>📅 Удобные дни: ${days}</div>` : ''}
+        ${l.preferred_time_of_day ? `<div>🕐 Удобное время: ${l.preferred_time_of_day}</div>` : ''}
+        ${l.referrer_name ? `<div>🎁 Пригласил(а): ${l.referrer_name}</div>` : ''}
+        ${l.comment ? `<div style="margin-top:6px; color:var(--ink-soft);">💬 ${l.comment}</div>` : ''}
+      </div>
+
+      <div class="card-actions">
+        ${l.archived
+          ? `<button class="btn btn-ghost btn-sm" onclick="archiveTalkClubLead('${l.id}', false)">Вернуть из архива</button>`
+          : `<button class="btn btn-ghost btn-sm" onclick="archiveTalkClubLead('${l.id}', true)">В архив</button>`
+        }
+      </div>
+    </div>
+  `;
+}
+
+async function archiveTalkClubLead(id, toArchive){
+  const { error } = await supabase.from('talk_club_leads').update({ archived: toArchive }).eq('id', id);
+  if (error){
+    alert('Не получилось сохранить: ' + error.message);
+    return;
+  }
+  await loadTalkClubLeads();
+}
+
+function renderTalkClubLeads(){
+  const all = (window.__talkClubLeads || []);
+  const container = document.getElementById('talkClubLeadsList');
+  if (!container) return;
+
+  const levelFilterEl = document.querySelector('input[name="tcLevelFilter"]:checked');
+  const levelFilter = levelFilterEl ? levelFilterEl.value : 'all';
+  const showArchived = document.getElementById('tcShowArchived')?.checked;
+
+  const filtered = all
+    .filter(l => showArchived ? l.archived : !l.archived)
+    .filter(l => levelFilter === 'all' || l.level === levelFilter);
+
+  container.innerHTML = filtered.length
+    ? filtered.map(talkClubLeadCardHtml).join('')
+    : `<p class="empty-state">${showArchived ? 'В архиве пока пусто.' : 'Новых заявок пока нет.'}</p>`;
 }
 
 function teacherAvailabilityHtml(){
