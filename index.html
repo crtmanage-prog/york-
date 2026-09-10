@@ -294,25 +294,38 @@
     .hero p.lead{margin-left:auto; margin-right:auto;}
   }
 
-  /* ---------- GUIDE BANNER ---------- */
-  .guide-banner{
+  /* ---------- CLUB BANNER ---------- */
+  .club-banner{
     background:var(--ink);
-    color:#fff;
-    border-radius:var(--radius);
-    padding:36px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:24px;
-    flex-wrap:wrap;
+    border-radius:26px;
+    padding:40px 36px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
   }
-  .guide-banner .gtext h3{
-    font-family:'Unbounded',sans-serif;
-    font-size:20px;
-    margin-bottom:8px;
+  .club-banner-glow{
+    position:absolute; top:-140px; left:50%; transform:translateX(-50%);
+    width:420px; height:240px; border-radius:50%;
+    background:radial-gradient(circle, rgba(210,231,57,0.35) 0%, rgba(210,231,57,0) 70%);
+    pointer-events:none;
   }
-  .guide-banner .gtext p{color:rgba(255,255,255,0.7); margin:0; max-width:480px; font-size:14.5px; line-height:1.55;}
-  .guide-emoji{font-size:34px; margin-bottom:10px; display:block;}
+  .club-banner-badge{
+    position:relative; z-index:1;
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.16);
+    color:#fff; font-size:12px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
+    padding:7px 16px; border-radius:100px; margin-bottom:16px;
+  }
+  .club-banner h3{
+    position:relative; z-index:1;
+    font-family:'Unbounded',sans-serif; font-weight:900; color:#fff;
+    font-size:clamp(20px,3vw,26px); margin:0 0 10px; line-height:1.2;
+  }
+  .club-banner p{
+    position:relative; z-index:1;
+    color:rgba(255,255,255,0.68); font-size:14.5px; line-height:1.55;
+    max-width:440px; margin:0 auto 22px;
+  }
 
   /* ---------- WHY CARDS ---------- */
   .why-grid{
@@ -679,12 +692,11 @@
 
 <section>
   <div class="wrap">
-    <div class="guide-banner reveal">
-      <div class="gtext">
-        <span class="guide-emoji">💬</span>
-        <h3>Стартует пилотный разговорный клуб</h3>
-        <p>Для всех уровней английского: живое общение на разные темы, небольшие группы. Оставляйте заявку, мест немного.</p>
-      </div>
+    <div class="club-banner reveal">
+      <div class="club-banner-glow"></div>
+      <div class="club-banner-badge">💬 Новинка</div>
+      <h3>Стартует пилотный разговорный клуб</h3>
+      <p>Для всех уровней английского: живое общение на разные темы, небольшие группы. Оставляйте заявку, мест немного.</p>
       <a class="btn btn-accent" href="talk-club-form.html" target="_blank" rel="noopener">Записаться в клуб</a>
     </div>
   </div>
