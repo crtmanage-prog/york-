@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="description" content="TALK CLUB: разговорный клуб английского языка онлайн от школы YORK!. Небольшие группы, живое общение на разные темы, уровни A1–A2 и B1. Первый месяц: 1 490 ₽.">
+<meta name="description" content="TALK CLUB: разговорный клуб английского языка онлайн от школы YORK!. Небольшие группы, живое общение на разные темы, уровни A1–A2 и B1. Первый месяц: 1 990 ₽.">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://weyork.online/talk-club.html">
@@ -160,6 +160,17 @@
 
   /* ---------- TOPICS ---------- */
   .topics-wrap{background:var(--panel); border-radius:28px; padding:48px 40px;}
+  .compare-wrap{background:var(--panel); border-radius:28px; padding:44px 40px;}
+  .compare-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:28px;}
+  .compare-card{background:#fff; border-radius:20px; padding:26px 24px;}
+  .compare-card.is-club{border:2px solid var(--ink);}
+  .compare-card .compare-head{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .compare-card .compare-icon{font-size:20px;}
+  .compare-card h3{font-family:'Unbounded',sans-serif; font-size:16px; font-weight:700;}
+  .compare-card ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+  .compare-card li{display:flex; align-items:flex-start; gap:8px; font-size:13.5px; line-height:1.5; color:var(--ink-soft);}
+  .compare-card li svg{flex-shrink:0; margin-top:2px; width:16px; height:16px;}
+  @media (max-width:640px){ .compare-grid{grid-template-columns:1fr;} }
   .topics-chips{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:24px;}
   .topic-chip{
     background:#fff; border:1.5px solid var(--line); border-radius:100px;
@@ -243,7 +254,7 @@
   },
   "offers": {
     "@type": "Offer",
-    "price": "1490",
+    "price": "1990",
     "priceCurrency": "RUB",
     "url": "https://weyork.online/talk-club.html"
   }
@@ -333,6 +344,33 @@
 
 <section class="club-section" style="padding-top:0;">
   <div class="wrap">
+    <div class="compare-wrap">
+      <div class="section-eyebrow">Частый вопрос</div>
+      <h2 class="section-title" style="margin-bottom:0;">Чем клуб отличается от CREW?</h2>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="compare-head"><span class="compare-icon">📚</span><h3>CREW</h3></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#3B7A1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Мини-группа 2–4 человека, структурированные занятия по учебной программе</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#3B7A1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Тот же формат, что SOLO, но с другими учениками: для динамики и экономии</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#3B7A1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Цель: пройти учебный план и закрыть конкретные темы</li>
+          </ul>
+        </div>
+        <div class="compare-card is-club">
+          <div class="compare-head"><span class="compare-icon">💬</span><h3>TALK CLUB</h3></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#3B7A1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Свободные тематические дискуссии, без формальной программы урока</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#3B7A1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Акцент на разговорной практике и вовлечённости, а не на плане урока</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#3B7A1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Цель: живое общение и уверенность в разговоре</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="club-section" style="padding-top:0;">
+  <div class="wrap">
     <div class="topics-wrap">
       <div class="section-eyebrow">О чём говорим</div>
       <h2 class="section-title" style="margin-bottom:0;">Живые темы, а не учебник</h2>
@@ -357,8 +395,8 @@
     <h2 class="section-title">Начать легко</h2>
     <div class="club-price-card">
       <div class="club-price-tag">🎁 Стартовое предложение</div>
-      <div class="club-price-main">1 490 ₽</div>
-      <div class="club-price-sub">за 4 встречи в первый месяц</div>
+      <div class="club-price-main">1 990 ₽</div>
+      <div class="club-price-sub">за 4 встречи в первый месяц (497,5 ₽ за встречу)</div>
       <div class="club-price-then">Далее: <b>2 490 ₽ / месяц</b> за 4 встречи, продление автоматически по желанию.</div>
       <div class="club-price-free">
         <svg viewBox="0 0 24 24" fill="none" stroke="#3B7A1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
@@ -397,7 +435,7 @@
       <div class="foot-col">
         <h4>TALK CLUB</h4>
         <ul>
-          <li>Старт: 1 490 ₽ / 4 встречи</li>
+          <li>Старт: 1 990 ₽ / 4 встречи</li>
           <li>Далее: 2 490 ₽ / месяц</li>
           <li><a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Записаться →</a></li>
         </ul>
