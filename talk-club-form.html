@@ -55,12 +55,11 @@ h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:24px;line-height
 .cta-footer p b{color:var(--ink);font-family:'Unbounded',sans-serif;font-size:14px}
 .cta-footer .hint-line{margin:0}
 .cta-footer .hint-line a{color:var(--ink)}
-.urgency{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:100px;padding:12px 20px;font-size:13.5px;font-weight:600;text-align:center;margin:24px 0 18px}
-.urgency .u-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:pulse 1.8s ease-in-out infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(210,231,57,.55)}50%{box-shadow:0 0 0 5px rgba(210,231,57,0)}}
-.trust-card{background:var(--panel);border-radius:18px;padding:18px 20px;text-align:left}
-.trust-title{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;margin-bottom:7px}
-.trust-card p{font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin:0}
+.club-cta-card{background:linear-gradient(155deg,#F3F8DC 0%,var(--panel) 100%);border:1.5px solid rgba(210,231,57,.6);border-radius:20px;padding:22px;text-align:center;margin-top:24px}
+.club-cta-card .cc-emoji{font-size:26px;margin-bottom:8px}
+.club-cta-card .cc-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px;line-height:1.35}
+.club-cta-card .cc-text{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin:0 0 16px}
+.club-cta-card .cc-btn{display:inline-flex;align-items:center;gap:8px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:14.5px;color:#fff;background:var(--ink);border-radius:100px;padding:14px 22px;text-decoration:none}
 </style>
 
 <!-- Yandex.Metrika counter -->
@@ -194,15 +193,11 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
   <h2>Заявка принята!</h2>
   <p>Спасибо! Мы свяжемся с вами, подберём группу и подтвердим время первой встречи.</p>
 
-  <div class="urgency">
-    <span class="u-dot"></span>
-    ⚡ Первая группа TALK CLUB — мест немного, успейте присоединиться!
-  </div>
-
-  <div class="trust-card">
-    <div class="trust-title">📲 ЕЩЁ НЕ В НАШЕМ БОТЕ?</div>
-    <p>Загляните сюда — узнаете о старте группы первыми, до всех остальных.</p>
-    <a class="submit" href="https://t.me/weyorkonlinebot" target="_blank" rel="noopener" style="display:block;text-decoration:none;text-align:center;margin-top:12px;">Перейти в Telegram-бот →</a>
+  <div class="club-cta-card">
+    <div class="cc-emoji">💬</div>
+    <div class="cc-title">Первая группа TALK CLUB уже набирается — мест немного!</div>
+    <p class="cc-text">Загляните в наш Telegram-бот — узнаете о старте группы первыми, до всех остальных.</p>
+    <a class="cc-btn" href="https://t.me/weyorkonlinebot" target="_blank" rel="noopener">📲 Перейти в бот →</a>
   </div>
 </div>
 
