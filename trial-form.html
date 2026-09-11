@@ -37,6 +37,14 @@ h2{font-family:'Unbounded',sans-serif;font-weight:700;font-size:26px;line-height
 .chip-group{display:flex;flex-wrap:wrap;gap:7px}.chip-group label{position:relative;display:inline-flex;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:100px;padding:9px 15px;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--ink-soft);text-transform:none;letter-spacing:0;transition:.15s;user-select:none}.chip-group input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}.chip-group label:hover{border-color:var(--ink);color:var(--ink)}.chip-group label:has(input:checked),.chip-group label.selected{background:var(--accent);border-color:var(--accent);color:var(--ink);box-shadow:0 2px 8px rgba(210,231,57,.5)}
 .chip-static{display:inline-flex;align-items:center;background:var(--panel,#f5f5f0);border:1.5px solid var(--line);border-radius:100px;padding:9px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:default;opacity:.65}
 .hint-line{font-size:12.5px;color:var(--ink-soft);margin:8px 0 0}.hint-line a{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.slot-warning{display:flex;gap:10px;align-items:flex-start;background:var(--panel);border-radius:12px;padding:12px 14px;margin-top:12px}
+.slot-warning .sw-icon{font-size:16px;line-height:1.4}
+.slot-warning .sw-text{font-size:13px;line-height:1.5;color:var(--ink-soft)}
+.slot-warning .sw-text b{color:var(--ink)}
+.slot-warning-actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.slot-warning-actions button{font-family:'Inter',sans-serif;font-weight:600;font-size:13px;border-radius:100px;padding:10px 16px;cursor:pointer;border:none}
+.slot-warning-actions .sw-btn-pick{background:var(--ink);color:#fff}
+.slot-warning-actions .sw-btn-skip{background:transparent;color:var(--ink-soft);border:1.5px solid var(--line)}
 .submit{width:100%;font-family:'Unbounded',sans-serif;font-weight:700;font-size:15px;color:var(--ink);background:var(--accent);border:none;border-radius:100px;padding:17px 24px;cursor:pointer;margin-top:10px;transition:transform .15s ease}.submit:hover{transform:translateY(-2px)}.submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .secondary{background:transparent;border:1.5px solid var(--line);margin-top:10px}.microcopy{text-align:center;font-size:12.5px;color:var(--ink-soft);line-height:1.45;margin:10px auto 0;max-width:390px}
 #step1ErrorMsg,#errorMsg{color:#B3261E;font-size:13.5px;font-weight:600;min-height:18px;margin:10px 0 0;text-align:center}
@@ -155,7 +163,18 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
   <div class="field"><label>Есть пожелания по преподавателю?</label><div class="chip-group" id="teacherGroup"><span style="font-size:13px;color:var(--ink-soft)">Загружаем список…</span></div></div>
 
-  <div class="field" id="slotsField"><label>Когда вам удобно заниматься? <span style="font-weight:400;text-transform:none;letter-spacing:0">(до двух вариантов)</span></label><div id="slotsPicker"><p style="font-size:13px;color:var(--ink-soft);margin:0">Сначала выберите преподавателя выше.</p></div><p class="hint-line">Это пожелание, а не бронирование, точное время мы подтвердим отдельно.</p></div>
+  <div class="field" id="slotsField"><label>Когда вам удобно заниматься? <span style="font-weight:400;text-transform:none;letter-spacing:0">(до двух вариантов)</span></label><div id="slotsPicker"><p style="font-size:13px;color:var(--ink-soft);margin:0">Сначала выберите преподавателя выше.</p></div><p class="hint-line">Это пожелание, а не бронирование, точное время мы подтвердим отдельно.</p>
+    <div class="slot-warning hidden" id="slotWarning">
+      <span class="sw-icon">🕐</span>
+      <div class="sw-text">
+        <b>Время не выбрано.</b> Без этого сложнее быстро подобрать урок. Выберите хотя бы один вариант выше, или продолжите без выбора.
+        <div class="slot-warning-actions">
+          <button type="button" class="sw-btn-pick" id="slotWarningPick">Выбрать время</button>
+          <button type="button" class="sw-btn-skip" id="slotWarningSkip">Продолжить без выбора →</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="field" id="sourceQuestionField"><label for="sourceSelect">Как вы узнали о YORK!? <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label><select id="sourceSelect"><option value="">— выберите вариант —</option><option value="Программа лояльности">Программа лояльности</option><option value="Соц. сети">Соц. сети</option><option value="Флаеры">Флаеры</option><option value="Поиск в интернете / Avito">Поиск в интернете / Avito</option><option value="Другое">Другое</option></select></div>
   <div class="field hidden" id="referrerField"><label for="referrerCode">Код приглашения друга</label><input id="referrerCode" type="text" placeholder="Например: FRIEND10"><p id="referrerCodeStatus" style="font-size:12.5px;margin:6px 0 0;min-height:16px"></p></div>
@@ -458,6 +477,7 @@ const SCHOOL_TZ_LABEL = 'Уфа';
 const DAY_NAMES = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
 const MONTHS_SHORT = ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
 let selectedSlots = [];
+let slotsWarningAcknowledged = false; // true, если явно нажали "Продолжить без выбора"
 
 function dateKeyLocal(d){
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -575,6 +595,9 @@ function toggleSlot(btn){
      reachGoal('trial_slot_select');
     btn.classList.add('on');
   }
+  // выбрал время после предупреждения — прячем его
+  const warning = document.getElementById('slotWarning');
+  if (selectedSlots.length && warning) warning.classList.add('hidden');
 }
 
 /* ---------- телефон: маска для РФ, свободный ввод для других стран ---------- */
@@ -695,6 +718,16 @@ document.getElementById('nextBtn').addEventListener('click', () => {
   step1.classList.add('hidden'); questionnaireStep.classList.remove('hidden');
   window.scrollTo({top:0, behavior:'smooth'});
 });
+document.getElementById('slotWarningPick').addEventListener('click', () => {
+  document.getElementById('slotWarning').classList.add('hidden');
+  document.getElementById('slotsPicker').scrollIntoView({ behavior:'smooth', block:'center' });
+});
+document.getElementById('slotWarningSkip').addEventListener('click', () => {
+  slotsWarningAcknowledged = true;
+  document.getElementById('slotWarning').classList.add('hidden');
+  document.getElementById('nextBtn2').click();
+});
+
 document.getElementById('backToStep1').addEventListener('click', () => {
   reachGoal('trial_form_back'); questionnaireStep.classList.add('hidden'); step1.classList.remove('hidden');
   window.scrollTo({top:0, behavior:'smooth'});
@@ -723,6 +756,12 @@ document.getElementById('nextBtn2').addEventListener('click', () => {
   }
   if (tzSelect.value === 'Другой / за рубежом' && !document.getElementById('timezoneOther').value.trim()){
     step1ErrorMsg.textContent = 'Напишите свой часовой пояс или город в поле ниже.';
+    return;
+  }
+  if (!selectedSlots.length && !slotsWarningAcknowledged){
+    const warning = document.getElementById('slotWarning');
+    warning.classList.remove('hidden');
+    warning.scrollIntoView({ behavior:'smooth', block:'center' });
     return;
   }
 
