@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оформить абонемент в YORK!</title>
+<meta name="description" content="Самостоятельное оформление абонемента в онлайн-школе английского YORK!: выберите пакет занятий, преподавателя и удобное время.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://weyork.online/subscription-setup.html">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{--bg:#fff;--accent:#D2E739;--ink:#1C1C1C;--ink-soft:rgba(28,28,28,.62);--line:rgba(28,28,28,.12);--panel:#F7F8EF}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto;padding:32px 20px 64px}
+.logo{font-family:'Unbounded',sans-serif;font-weight:900;font-size:22px;text-align:center;margin-bottom:28px}.logo span{background:var(--accent);padding:0 5px;border-radius:7px}
+.step-kicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:26px;line-height:1.22;margin:0 0 12px}
+h2{font-family:'Unbounded',sans-serif;font-weight:700;font-size:21px;line-height:1.22;margin:0 0 10px}
+.sub{color:var(--ink-soft);font-size:15px;line-height:1.5;margin:0 0 26px}
+.section-label{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;margin:0 0 14px}
+.field{margin-bottom:16px}.field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;font-family:'Inter',sans-serif;font-size:15px;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease}
+.field textarea{min-height:72px;resize:vertical}.field input:hover,.field select:hover,.field textarea:hover{border-color:rgba(28,28,28,.28)}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(210,231,57,.45)}
+.field select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%231C1C1C' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}.field select:invalid,.field select.is-empty{color:var(--ink-soft)}
+.chip-group{display:flex;flex-wrap:wrap;gap:7px}.chip-group label{position:relative;display:inline-flex;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:100px;padding:9px 15px;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--ink-soft);text-transform:none;letter-spacing:0;transition:.15s;user-select:none}.chip-group input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}.chip-group label:hover{border-color:var(--ink);color:var(--ink)}.chip-group label:has(input:checked),.chip-group label.selected{background:var(--accent);border-color:var(--accent);color:var(--ink);box-shadow:0 2px 8px rgba(210,231,57,.5)}
+.chip-static{display:inline-flex;align-items:center;background:var(--panel,#f5f5f0);border:1.5px solid var(--line);border-radius:100px;padding:9px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:default;opacity:.65}
+.hint-line{font-size:12.5px;color:var(--ink-soft);margin:8px 0 0}.hint-line a{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.price-box{background:var(--panel);border-radius:16px;padding:16px 18px;margin:4px 0 16px;font-size:14px;line-height:1.7}
+.price-box .old{opacity:.55;text-decoration:line-through;margin-right:8px}
+.price-box .total{font-family:'Unbounded',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.02em}
+.submit{width:100%;font-family:'Unbounded',sans-serif;font-weight:700;font-size:15px;color:var(--ink);background:var(--accent);border:none;border-radius:100px;padding:17px 24px;cursor:pointer;margin-top:10px;transition:transform .15s ease}.submit:hover{transform:translateY(-2px)}.submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.microcopy{text-align:center;font-size:12.5px;color:var(--ink-soft);line-height:1.45;margin:10px auto 0;max-width:390px}
+#errorMsg{color:#B3261E;font-size:13.5px;font-weight:600;min-height:18px;margin:10px 0 0;text-align:center}
+.slot-day{margin-bottom:12px}.slot-day-label{font-size:12.5px;font-weight:700;color:var(--ink-soft);margin-bottom:6px}.slot-hours{display:flex;flex-wrap:wrap;gap:6px}.slot-btn{padding:9px 14px;border-radius:100px;cursor:pointer;border:1.5px solid var(--line);background:#fff;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;color:var(--ink-soft)}.slot-btn:hover{border-color:var(--ink);color:var(--ink)}.slot-btn.on{background:var(--accent);border-color:var(--accent);color:var(--ink);box-shadow:0 2px 8px rgba(210,231,57,.5)}.slot-btn.on::after{content:' ✓';font-weight:700}
+.pay-card{background:var(--panel);border-radius:16px;padding:16px 18px;margin:0 0 16px;font-size:14px;line-height:1.6}
+.pay-card a{color:var(--ink);font-weight:700}
+.success-box{text-align:center;padding:28px 4px}.success-box .big{font-size:48px;margin-bottom:14px}.success-box h2{font-family:'Unbounded',sans-serif;font-size:21px;margin:0 0 10px}.success-box p{color:var(--ink-soft);font-size:14.5px;line-height:1.6;max-width:390px;margin:0 auto}.next-steps{text-align:left;background:var(--panel);border-radius:18px;padding:8px 18px;margin:24px 0}.next-step{padding:14px 0;border-bottom:1px solid var(--line)}.next-step:last-child{border-bottom:0}.next-step b{display:block;font-size:13px;margin-bottom:3px}.next-step span{font-size:12.5px;color:var(--ink-soft)}
+.hidden{display:none!important}
+</style>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=111997160','ym');
+ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111997160" style="position:absolute;left:-9999px" alt=""></div></noscript>
+</head>
+<body>
+<div class="wrap">
+<div class="logo">YORK<span>!</span></div>
+
+<form id="subForm">
+  <div class="step-kicker">Оформление абонемента</div>
+  <h1>Оформите абонемент самостоятельно.</h1>
+  <p class="sub">Заполните форму — мы проверим оплату и в течение нескольких часов пришлём логин и пароль от личного кабинета в Telegram.</p>
+
+  <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label for="website">Оставьте это поле пустым</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+
+  <div class="field"><label for="fullName">Как вас зовут?</label><input id="fullName" type="text" placeholder="Имя и фамилия" required></div>
+
+  <div class="field"><label for="timezone">Ваш часовой пояс</label><select id="timezone" required><option value="" selected disabled>— выберите —</option><option value="Калининград (МСК-1)">Калининград (МСК-1)</option><option value="Москва (МСК)">Москва (МСК)</option><option value="Самара (МСК+1)">Самара (МСК+1)</option><option value="Екатеринбург (МСК+2)">Екатеринбург (МСК+2)</option><option value="Омск (МСК+3)">Омск (МСК+3)</option><option value="Красноярск (МСК+4)">Красноярск (МСК+4)</option><option value="Иркутск (МСК+5)">Иркутск (МСК+5)</option><option value="Якутск (МСК+6)">Якутск (МСК+6)</option><option value="Владивосток (МСК+7)">Владивосток (МСК+7)</option><option value="Другой / за рубежом">Другой / за рубежом (укажу вручную)</option></select><input type="text" id="timezoneOther" class="hidden" placeholder="Например: Ташкент, UTC+5" style="margin-top:8px"></div>
+
+  <div class="field">
+    <label>Формат занятий</label>
+    <div class="chip-group">
+      <label class="selected"><input type="radio" name="format" value="SOLO" checked>SOLO — индивидуально</label>
+      <span class="chip-static">CREW — мини-группа (скоро)</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Занятий в месяц</label>
+    <div class="chip-group" id="lessonsGroup">
+      <label><input type="radio" name="lessons" value="4">4</label>
+      <label class="selected"><input type="radio" name="lessons" value="8" checked>8</label>
+      <label><input type="radio" name="lessons" value="12">12</label>
+    </div>
+    <p class="hint-line">Абонемент не растягивается — это количество занятий именно в этом месяце. Если урок переносится, использовать его нужно в пределах того же месяца.</p>
+  </div>
+
+  <div class="price-box" id="priceBox">Загружаем цены…</div>
+
+  <div class="field">
+    <label for="promoCode">Промокод <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label>
+    <input id="promoCode" type="text" placeholder="YORK15 или реферальный код">
+    <p id="promoStatus" style="font-size:12.5px;margin:6px 0 0;min-height:16px"></p>
+  </div>
+
+  <div class="field">
+    <label>Преподаватель</label>
+    <div class="chip-group" id="teacherGroup"><span style="font-size:13px;color:var(--ink-soft)">Загружаем…</span></div>
+  </div>
+
+  <div class="field" id="slotsField">
+    <label>Когда вам удобно заниматься? <span style="font-weight:400;text-transform:none;letter-spacing:0">(до двух вариантов)</span></label>
+    <div id="slotsPicker"><p style="font-size:13px;color:var(--ink-soft);margin:0">Сначала выберите преподавателя выше.</p></div>
+    <p class="hint-line">Это не бронирование — мы подтвердим точное время после оформления.</p>
+  </div>
+
+  <div class="field"><label for="timeComment">Комментарий по времени <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label><textarea id="timeComment" placeholder="Например: по утрам удобнее, не каждую неделю одинаково"></textarea></div>
+
+  <div class="pay-card" id="payCard">Загружаем ссылку на оплату…</div>
+
+  <p id="errorMsg"></p>
+  <button class="submit" type="submit" id="submitBtn">Отправить заявку →</button>
+  <p class="microcopy">Мы проверим оплату вручную и подтвердим абонемент — оплата по ссылке выше считается согласием на условия занятий.</p>
+</form>
+
+<div class="success-box hidden" id="successBox">
+  <div class="big">🎉</div>
+  <h2>Заявка отправлена!</h2>
+  <p>Логин и пароль пришлём в течение нескольких часов после проверки оплаты.</p>
+  <div class="next-steps">
+    <div class="next-step"><b>Обязательно подпишитесь на бота</b><span>Иначе не сможем отправить доступ — это единственный канал, куда придёт логин и пароль.</span></div>
+    <div class="next-step"><b>Если что-то пошло не так</b><span>Напишите менеджеру — поможем разобраться.</span></div>
+  </div>
+  <a id="connectTelegramBtn" href="#" target="_blank" class="submit" style="display:block;text-decoration:none;text-align:center">Подписаться на бота →</a>
+  <p class="hint-line" style="text-align:center"><a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a></p>
+</div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_jlcvNafksQ0WhrYCY08anw_ju194-I9';
+const REST_HEADERS = { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Content-Type': 'application/json' };
+const PAGE_LOADED_AT = Date.now();
+const TEST_TUTOR_ID = 'd492122c-5d5b-41ad-aae9-e01c044fd77f';
+
+function reachGoal(name){ if (window.ym) ym(111997160, 'reachGoal', name); }
+reachGoal('subscription_setup_view');
+
+/* ---------- тайм-зона: часовой пояс "другое" ---------- */
+document.getElementById('timezone').addEventListener('change', (e) => {
+  const isOther = e.target.value === 'Другой / за рубежом';
+  document.getElementById('timezoneOther').classList.toggle('hidden', !isOther);
+  // время слотов зависит от часового пояса — перерисовываем без повторного запроса
+  if (lastSlotRows) renderSlotButtons(lastSlotRows, document.getElementById('slotsPicker'));
+});
+
+/* ---------- чипы формата / количества занятий ---------- */
+document.querySelectorAll('#lessonsGroup input[type="radio"]').forEach(el => {
+  el.addEventListener('change', () => {
+    document.querySelectorAll('#lessonsGroup label').forEach(l => l.classList.remove('selected'));
+    el.closest('label').classList.add('selected');
+    recalcPrice();
+  });
+});
+
+/* ---------- цены: из pricing_settings, единый источник с главной страницей ---------- */
+let pricingData = null;
+let referralDiscountPercent = 15;
+
+async function loadPricing(){
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/pricing_settings?id=eq.1&select=*`, { headers: REST_HEADERS });
+    const rows = await res.json();
+    if (Array.isArray(rows) && rows.length){
+      pricingData = rows[0];
+      referralDiscountPercent = Number(pricingData.referral_discount_percent) || 15;
+    }
+  } catch(e){ /* покажем ошибку в price-box ниже */ }
+  recalcPrice();
+}
+
+function currentLessonsCount(){
+  const checked = document.querySelector('#lessonsGroup input:checked');
+  return checked ? Number(checked.value) : 8;
+}
+
+let promoDiscountApplied = false;
+
+function recalcPrice(){
+  const box = document.getElementById('priceBox');
+  if (!pricingData){ box.textContent = 'Не получилось загрузить цены. Обновите страницу.'; return; }
+
+  const n = currentLessonsCount();
+  const base = Number(pricingData['solo_' + n]) || 0;
+
+  if (promoDiscountApplied){
+    const discounted = Math.round(base * (1 - referralDiscountPercent / 100));
+    box.innerHTML = `<span class="old">${base.toLocaleString('ru-RU')} ₽</span><span class="total">${discounted.toLocaleString('ru-RU')} ₽</span><div style="margin-top:4px;color:#3B7A1E;">Скидка ${referralDiscountPercent}% применена</div>`;
+  } else {
+    box.innerHTML = `<span class="total">${base.toLocaleString('ru-RU')} ₽</span><div style="margin-top:4px;">SOLO · ${n} занятий в месяц</div>`;
+  }
+}
+
+/* ---------- промокод ---------- */
+document.getElementById('promoCode').addEventListener('input', (e) => {
+  const val = e.target.value.trim();
+  const status = document.getElementById('promoStatus');
+  if (!val){
+    status.textContent = '';
+    promoDiscountApplied = false;
+  } else if (val.toUpperCase() === 'YORK15'){
+    status.textContent = `✓ Промокод применён — скидка ${referralDiscountPercent}% на первый месяц`;
+    status.style.color = '#3B7A1E';
+    promoDiscountApplied = true;
+  } else {
+    status.textContent = 'Проверим этот код при обработке заявки';
+    status.style.color = 'var(--ink-soft)';
+    promoDiscountApplied = false;
+  }
+  recalcPrice();
+});
+
+/* ---------- ссылка на оплату — из payment_link_settings, то же место, что правится в админке ---------- */
+(async () => {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/payment_link_settings?id=eq.1&select=solo_full_url`, { headers: REST_HEADERS });
+    const rows = await res.json();
+    const url = (Array.isArray(rows) && rows.length && rows[0].solo_full_url) || '';
+    const card = document.getElementById('payCard');
+    card.innerHTML = url
+      ? `Оплатите абонемент по ссылке: <a href="${url}" target="_blank" rel="noopener">перейти к оплате →</a><p class="hint-line" style="margin-top:8px">Мы проверяем поступление оплаты вручную.</p>`
+      : `Ссылка на оплату временно недоступна — напишите менеджеру после отправки заявки.`;
+  } catch(e){
+    document.getElementById('payCard').textContent = 'Не получилось загрузить ссылку на оплату — напишите менеджеру после отправки заявки.';
+  }
+})();
+
+/* ---------- преподаватель: Софья кликабельна, остальные (кроме тестового) — некликабельные плашки ---------- */
+let selectedTeacherId = null;
+(async () => {
+  const teacherGroup = document.getElementById('teacherGroup');
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/profiles?role=eq.teacher&select=id,full_name&order=full_name`, { headers: REST_HEADERS });
+    const teachers = await res.json();
+    const realTeachers = (Array.isArray(teachers) ? teachers : []).filter(t => t.id !== TEST_TUTOR_ID);
+
+    const sofia = realTeachers.find(t => /софь/i.test(t.full_name));
+    const others = realTeachers.filter(t => !sofia || t.id !== sofia.id);
+
+    let html = '';
+    if (sofia){
+      html += `<label class="selected"><input type="radio" name="teacher" value="${sofia.id}" checked>${sofia.full_name}</label>`;
+      selectedTeacherId = sofia.id;
+    }
+    html += others.map(t => `<span class="chip-static">${t.full_name}</span>`).join('');
+    teacherGroup.innerHTML = html || '<span style="font-size:13px;color:var(--ink-soft)">Сейчас нет доступных преподавателей — напишите менеджеру.</span>';
+
+    if (selectedTeacherId) loadSlotsForTeacher(selectedTeacherId);
+  } catch(e){
+    teacherGroup.innerHTML = '<span style="font-size:13px;color:var(--ink-soft)">Не получилось загрузить список — напишите менеджеру.</span>';
+  }
+})();
+
+/* ---------- часовые пояса: показываем слоты в поясе ученика ---------- */
+const SCHOOL_TZ = 'Asia/Yekaterinburg';
+const TZ_MAP = {
+  'Калининград (МСК-1)': 'Europe/Kaliningrad', 'Москва (МСК)': 'Europe/Moscow', 'Самара (МСК+1)': 'Europe/Samara',
+  'Екатеринбург (МСК+2)': 'Asia/Yekaterinburg', 'Омск (МСК+3)': 'Asia/Omsk', 'Красноярск (МСК+4)': 'Asia/Krasnoyarsk',
+  'Иркутск (МСК+5)': 'Asia/Irkutsk', 'Якутск (МСК+6)': 'Asia/Yakutsk', 'Владивосток (МСК+7)': 'Asia/Vladivostok'
+};
+const TZ_DATIVE = {
+  'Калининград (МСК-1)': 'Калининграду', 'Москва (МСК)': 'Москве', 'Самара (МСК+1)': 'Самаре',
+  'Екатеринбург (МСК+2)': 'Екатеринбургу', 'Омск (МСК+3)': 'Омску', 'Красноярск (МСК+4)': 'Красноярску',
+  'Иркутск (МСК+5)': 'Иркутску', 'Якутск (МСК+6)': 'Якутску', 'Владивосток (МСК+7)': 'Владивостоку'
+};
+function studentTz(){ const label = document.getElementById('timezone').value; return TZ_MAP[label] || Intl.DateTimeFormat().resolvedOptions().timeZone; }
+function studentTzLabel(){ const label = document.getElementById('timezone').value; return TZ_DATIVE[label] || ''; }
+function slotsTzHint(){ const label = studentTzLabel(); return label ? `🕐 Время показано по вашему часовому поясу (${label}).` : '🕐 Время показано по часовому поясу, который вы укажете выше.'; }
+
+function tzOffsetMinutes(date, timeZone){
+  const dtf = new Intl.DateTimeFormat('en-US', { timeZone, hour12:false, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit' });
+  const parts = {};
+  dtf.formatToParts(date).forEach(p => { if (p.type !== 'literal') parts[p.type] = p.value; });
+  const asUTC = Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day), Number(parts.hour === '24' ? '0' : parts.hour), Number(parts.minute), Number(parts.second));
+  return (asUTC - date.getTime()) / 60000;
+}
+function schoolWallToInstant(dateStr, hour){
+  const naive = Date.UTC(Number(dateStr.slice(0,4)), Number(dateStr.slice(5,7)) - 1, Number(dateStr.slice(8,10)), hour, 0, 0);
+  let guess = new Date(naive);
+  for (let i = 0; i < 2; i++){ guess = new Date(naive - tzOffsetMinutes(guess, SCHOOL_TZ) * 60000); }
+  return guess;
+}
+function instantInStudentTz(instant){
+  const tz = studentTz();
+  const dtf = new Intl.DateTimeFormat('ru-RU', { timeZone: tz, weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit', hour12:false });
+  const parts = {};
+  dtf.formatToParts(instant).forEach(p => { if (p.type !== 'literal') parts[p.type] = p.value; });
+  return { dayKey: new Intl.DateTimeFormat('en-CA', { timeZone: tz }).format(instant), dayLabel: `${parts.weekday}, ${parts.day} ${parts.month}`, time: `${parts.hour}:${parts.minute}` };
+}
+function dateKeyLocal(d){ return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+
+let selectedSlots = [];
+let lastSlotRows = null;
+
+async function loadSlotsForTeacher(teacherId){
+  const box = document.getElementById('slotsPicker');
+  selectedSlots = [];
+  const today = new Date(); today.setHours(0,0,0,0);
+  const from = dateKeyLocal(today);
+  const toDate = new Date(today); toDate.setDate(toDate.getDate() + 13);
+  const to = dateKeyLocal(toDate);
+
+  box.innerHTML = '<p style="font-size:13px;color:var(--ink-soft);margin:0">Загружаем свободные окна…</p>';
+  try {
+    const url = `${SUPABASE_URL}/rest/v1/teacher_availability?teacher_id=eq.${teacherId}&slot_date=gte.${from}&slot_date=lte.${to}&select=slot_date,hour&order=slot_date.asc,hour.asc`;
+    const res = await fetch(url, { headers: REST_HEADERS });
+    const rows = await res.json();
+    if (!Array.isArray(rows) || !rows.length){
+      lastSlotRows = null;
+      box.innerHTML = '<p style="font-size:13px;color:var(--ink-soft);margin:0">Пока нет отмеченных окон — оставьте заявку, мы согласуем время вручную.</p>';
+      return;
+    }
+    lastSlotRows = rows;
+    renderSlotButtons(rows, box);
+  } catch(e){
+    box.innerHTML = '<p style="font-size:13px;color:var(--ink-soft);margin:0">Не получилось загрузить свободные окна — оставьте заявку, мы согласуем время вручную.</p>';
+  }
+}
+
+function renderSlotButtons(rows, box){
+  const items = rows.map(r => {
+    const instant = schoolWallToInstant(r.slot_date, r.hour);
+    const view = instantInStudentTz(instant);
+    return { srcDate: r.slot_date, srcHour: r.hour, instant, view };
+  }).sort((a,b) => a.instant - b.instant);
+
+  const byDay = {};
+  items.forEach(it => { (byDay[it.view.dayKey] = byDay[it.view.dayKey] || { label: it.view.dayLabel, slots: [] }).slots.push(it); });
+
+  box.innerHTML = Object.keys(byDay).sort().map(dayKey => {
+    const d = byDay[dayKey];
+    return `<div class="slot-day"><div class="slot-day-label">${d.label}</div><div class="slot-hours">${d.slots.map(it => {
+      const isOn = selectedSlots.some(s => s.key === it.srcDate + '|' + it.srcHour);
+      return `<button type="button" class="slot-btn${isOn ? ' on' : ''}" data-date="${it.srcDate}" data-hour="${it.srcHour}" onclick="toggleSlot(this)">${it.view.time}</button>`;
+    }).join('')}</div></div>`;
+  }).join('') + `<p style="font-size:12px;color:var(--ink-soft);margin:10px 0 0;">${slotsTzHint()}</p>`;
+}
+
+function toggleSlot(btn){
+  const key = btn.dataset.date + '|' + btn.dataset.hour;
+  const idx = selectedSlots.findIndex(s => s.key === key);
+  if (idx >= 0){
+    selectedSlots.splice(idx, 1);
+    btn.classList.remove('on');
+  } else {
+    if (selectedSlots.length >= 2){ alert('Можно выбрать не больше двух окон.'); return; }
+    selectedSlots.push({ key, date: btn.dataset.date, hour: Number(btn.dataset.hour) });
+    btn.classList.add('on');
+  }
+}
+
+/* ---------- отправка формы ---------- */
+document.getElementById('subForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const errorMsg = document.getElementById('errorMsg');
+  errorMsg.textContent = '';
+
+  // защита от ботов — honeypot + минимальное время на форме
+  const honeypot = document.getElementById('website');
+  if (honeypot && honeypot.value.trim()){
+    document.getElementById('subForm').classList.add('hidden');
+    document.getElementById('successBox').classList.remove('hidden');
+    return;
+  }
+  if (Date.now() - PAGE_LOADED_AT < 3000){
+    errorMsg.textContent = 'Не получилось отправить. Попробуйте ещё раз через пару секунд.';
+    return;
+  }
+
+  const fullName = document.getElementById('fullName').value.trim();
+  const tzSelect = document.getElementById('timezone');
+  const timezoneOther = document.getElementById('timezoneOther');
+  if (!fullName){ errorMsg.textContent = 'Напишите, как вас зовут.'; return; }
+  if (!tzSelect.value){ errorMsg.textContent = 'Выберите часовой пояс.'; return; }
+  if (tzSelect.value === 'Другой / за рубежом' && !timezoneOther.value.trim()){
+    errorMsg.textContent = 'Напишите свой часовой пояс или город.'; return;
+  }
+  const timezone = tzSelect.value === 'Другой / за рубежом' ? timezoneOther.value.trim() : tzSelect.value;
+
+  const lessonsPerMonth = currentLessonsCount();
+  const base = pricingData ? Number(pricingData['solo_' + lessonsPerMonth]) || 0 : 0;
+  const price = promoDiscountApplied ? Math.round(base * (1 - referralDiscountPercent / 100)) : base;
+  const promoCode = document.getElementById('promoCode').value.trim() || null;
+  const timeComment = document.getElementById('timeComment').value.trim() || null;
+
+  if (!selectedTeacherId){ errorMsg.textContent = 'Сейчас нет доступного преподавателя — напишите менеджеру.'; return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = 'Отправляем…';
+
+  // персональный токен для привязки Telegram — по нему бот поймёт, чья это заявка
+  const linkChars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+  let linkToken = 'sub_';
+  for (let i = 0; i < 16; i++) linkToken += linkChars[Math.floor(Math.random() * linkChars.length)];
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/subscription_setup_requests`, {
+      method: 'POST',
+      headers: { ...REST_HEADERS, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({
+        full_name: fullName,
+        timezone,
+        format: 'SOLO',
+        lessons_per_month: lessonsPerMonth,
+        price,
+        promo_code: promoCode,
+        teacher_id: selectedTeacherId,
+        preferred_slots: selectedSlots.length ? selectedSlots : null,
+        time_comment: timeComment,
+        bot_connect_token: linkToken
+      })
+    });
+
+    if (!res.ok){
+      let detail = '';
+      try { const errBody = await res.json(); detail = errBody.message || errBody.hint || errBody.details || ''; } catch(e){}
+      throw new Error(detail || ('Ошибка ' + res.status));
+    }
+
+    document.getElementById('subForm').classList.add('hidden');
+    document.getElementById('successBox').classList.remove('hidden');
+    reachGoal('subscription_setup_submitted');
+    document.getElementById('connectTelegramBtn').href = `https://t.me/weyorkonlinebot?start=${linkToken}`;
+  } catch(err){
+    btn.disabled = false; btn.textContent = 'Отправить заявку';
+    const detail = (err && err.message) ? err.message : '';
+    errorMsg.textContent = detail ? 'Не получилось отправить: ' + detail : 'Не получилось отправить. Проверьте интернет-соединение и попробуйте ещё раз.';
+  }
+});
+
+loadPricing();
+</script>
+</body>
+</html>

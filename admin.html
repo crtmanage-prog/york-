@@ -422,6 +422,14 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         font-size:10px; font-weight:800; line-height:16px; text-align:center;
       "></span>
     </button>
+    <button class="tab-btn" data-tab="subs" style="position:relative;">
+      Заявки на абонемент
+      <span id="newSubsBadge" class="hidden" style="
+        position:absolute; top:2px; right:2px; min-width:16px; height:16px; padding:0 4px;
+        background:var(--red); color:#fff; border-radius:100px;
+        font-size:10px; font-weight:800; line-height:16px; text-align:center;
+      "></span>
+    </button>
     <button class="tab-btn" data-tab="referrals">Рефералы</button>
     <button class="tab-btn" data-tab="link">Добавить человека</button>
   </nav>
@@ -936,25 +944,39 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <p class="section-sub" style="margin-bottom:16px;">Прикрепи абонемент ученику — если укажешь дни недели и время, уроки на весь абонемент создадутся сами.</p>
 
       <h2 class="panel-title" style="margin-top:0;">Цены абонементов</h2>
-      <p class="section-sub" style="margin-bottom:16px;">Полная цена без скидок. Отсюда считается реферальная скидка при оформлении.</p>
+      <p class="section-sub" style="margin-bottom:16px;">Полные цены без скидок, по пакетам занятий в месяц — те же цифры, что на главной странице сайта. Отсюда считается скидка (промокод/реферальный код) при оформлении.</p>
       <div class="card" style="margin-bottom:20px;">
         <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <div class="field" style="flex:1; min-width:150px;">
-            <label for="priceSolo">👤 SOLO, ₽</label>
-            <input id="priceSolo" type="number" min="0" value="4080">
-          </div>
-          <div class="field" style="flex:1; min-width:150px;">
-            <label for="priceCrew">👥 CREW, ₽</label>
-            <input id="priceCrew" type="number" min="0" value="3060">
+          <div class="field" style="flex:1; min-width:120px;">
+            <label for="priceSolo4">👤 SOLO, 4 занятия</label>
+            <input id="priceSolo4" type="number" min="0" value="3600">
           </div>
           <div class="field" style="flex:1; min-width:120px;">
-            <label for="priceLessons">Занятий</label>
-            <input id="priceLessons" type="number" min="1" value="6">
+            <label for="priceSolo8">👤 SOLO, 8 занятий</label>
+            <input id="priceSolo8" type="number" min="0" value="6800">
           </div>
           <div class="field" style="flex:1; min-width:120px;">
-            <label for="priceDiscount">Скидка, %</label>
-            <input id="priceDiscount" type="number" min="0" max="100" value="15">
+            <label for="priceSolo12">👤 SOLO, 12 занятий</label>
+            <input id="priceSolo12" type="number" min="0" value="9600">
           </div>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;">
+          <div class="field" style="flex:1; min-width:120px;">
+            <label for="priceCrew4">👥 CREW, 4 занятия</label>
+            <input id="priceCrew4" type="number" min="0" value="2600">
+          </div>
+          <div class="field" style="flex:1; min-width:120px;">
+            <label for="priceCrew8">👥 CREW, 8 занятий</label>
+            <input id="priceCrew8" type="number" min="0" value="4800">
+          </div>
+          <div class="field" style="flex:1; min-width:120px;">
+            <label for="priceCrew12">👥 CREW, 12 занятий</label>
+            <input id="priceCrew12" type="number" min="0" value="6600">
+          </div>
+        </div>
+        <div class="field" style="margin-top:12px;">
+          <label for="priceDiscount">Скидка (промокод/реферальный код), %</label>
+          <input id="priceDiscount" type="number" min="0" max="100" value="15">
         </div>
         <div class="field">
           <label for="payLinkSingle">Ссылка на оплату</label>
@@ -968,6 +990,15 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         <div class="field">
           <label for="payStudent">Ученик</label>
           <select id="payStudent"></select>
+        </div>
+
+        <div class="field">
+          <label for="payPackageLessons">Пакет занятий</label>
+          <select id="payPackageLessons">
+            <option value="4">4 занятия</option>
+            <option value="8" selected>8 занятий</option>
+            <option value="12">12 занятий</option>
+          </select>
         </div>
 
         <div class="field">
@@ -1126,6 +1157,20 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; cursor:pointer;">
           <input type="checkbox" id="tcShowArchived" onchange="renderTalkClubLeads()" style="width:auto;">
           Показать архив
+        </label>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-subs">
+      <h2 class="panel-title">Заявки на абонемент</h2>
+      <p class="section-sub" style="margin-bottom:18px;">С публичной страницы самостоятельного оформления абонемента. Отдельно от заявок на пробный.</p>
+
+      <div id="subsRequestsList"></div>
+
+      <div style="margin-top:24px;">
+        <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; cursor:pointer;">
+          <input type="checkbox" id="subsShowArchived" onchange="renderSubsRequests()" style="width:auto;">
+          Показать обработанные (подтверждено/отклонено)
         </label>
       </div>
     </section>
@@ -1477,6 +1522,7 @@ async function loadAll(){
   await loadPayments();
   await loadTrialRequests();
   await loadTalkClubLeads();
+  await loadSubsRequests();
   await loadExpenses();
   if (document.getElementById('expDate') && !document.getElementById('expDate').value){
     document.getElementById('expDate').value = new Date().toISOString().slice(0,10);
@@ -3060,7 +3106,11 @@ function renderStats(){
 
 /* ---------- ГРУППЫ ---------- */
 /* ---------- ЦЕНЫ И РЕФЕРАЛЬНАЯ СКИДКА ---------- */
-let pricing = { solo_price:4080, crew_price:3060, lessons_per_package:6, referral_discount_percent:15, pay_link:'' };
+let pricing = {
+  solo_4:3600, solo_8:6800, solo_12:9600,
+  crew_4:2600, crew_8:4800, crew_12:6600,
+  referral_discount_percent:15, pay_link:''
+};
 
 async function loadPricingSettings(){
   const { data } = await supabase.from('pricing_settings').select('*').eq('id', 1);
@@ -3071,9 +3121,12 @@ async function loadPricingSettings(){
   if (linkRow && linkRow.length) pricing.pay_link = linkRow[0].solo_full_url || '';
 
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
-  set('priceSolo', pricing.solo_price);
-  set('priceCrew', pricing.crew_price);
-  set('priceLessons', pricing.lessons_per_package);
+  set('priceSolo4', pricing.solo_4);
+  set('priceSolo8', pricing.solo_8);
+  set('priceSolo12', pricing.solo_12);
+  set('priceCrew4', pricing.crew_4);
+  set('priceCrew8', pricing.crew_8);
+  set('priceCrew12', pricing.crew_12);
   set('priceDiscount', pricing.referral_discount_percent);
   set('payLinkSingle', pricing.pay_link || '');
 }
@@ -3084,9 +3137,12 @@ document.getElementById('priceSaveBtn').addEventListener('click', async () => {
   btn.disabled = true; btn.textContent = 'Сохраняем…';
 
   const payload = {
-    solo_price: Number(document.getElementById('priceSolo').value) || 0,
-    crew_price: Number(document.getElementById('priceCrew').value) || 0,
-    lessons_per_package: Number(document.getElementById('priceLessons').value) || 6,
+    solo_4: Number(document.getElementById('priceSolo4').value) || 0,
+    solo_8: Number(document.getElementById('priceSolo8').value) || 0,
+    solo_12: Number(document.getElementById('priceSolo12').value) || 0,
+    crew_4: Number(document.getElementById('priceCrew4').value) || 0,
+    crew_8: Number(document.getElementById('priceCrew8').value) || 0,
+    crew_12: Number(document.getElementById('priceCrew12').value) || 0,
     referral_discount_percent: Number(document.getElementById('priceDiscount').value) || 0,
     updated_at: new Date().toISOString()
   };
@@ -3123,7 +3179,8 @@ function recalcSubscriptionPrice(){
   if (!student){ boxEl.classList.add('hidden'); return; }
 
   const isCrew = student.format === 'CREW';
-  const base = isCrew ? Number(pricing.crew_price) : Number(pricing.solo_price);
+  const packageLessons = Number(document.getElementById('payPackageLessons').value) || 8;
+  const base = Number(pricing[(isCrew ? 'crew_' : 'solo_') + packageLessons]) || 0;
   const code = (codeInput.value || '').trim().toUpperCase();
 
   let discountPct = 0;
@@ -3151,7 +3208,7 @@ function recalcSubscriptionPrice(){
   const total = base - discountSum;
 
   boxEl.innerHTML = `
-    <div>${isCrew ? '👥 CREW' : '👤 SOLO'} · ${pricing.lessons_per_package} занятий</div>
+    <div>${isCrew ? '👥 CREW' : '👤 SOLO'} · ${packageLessons} занятий</div>
     <div>Полная цена: <b>${base.toLocaleString('ru-RU')} ₽</b></div>
     ${discountPct ? `<div style="color:#3B7A1E;">Скидка ${discountPct}%: <b>−${discountSum.toLocaleString('ru-RU')} ₽</b></div>` : ''}
     <div style="border-top:1px solid var(--line); margin-top:6px; padding-top:6px;">
@@ -3161,7 +3218,7 @@ function recalcSubscriptionPrice(){
 
   // подставляем в форму
   document.getElementById('payAmount').value = total;
-  document.getElementById('payLessonsIncluded').value = pricing.lessons_per_package;
+  document.getElementById('payLessonsIncluded').value = packageLessons;
   if (pricing.pay_link) document.getElementById('payUrl').value = pricing.pay_link;
 
   window.__pendingDiscountPercent = discountPct || null;
@@ -3170,6 +3227,7 @@ function recalcSubscriptionPrice(){
 
 document.getElementById('payStudent').addEventListener('change', recalcSubscriptionPrice);
 document.getElementById('payReferralCode').addEventListener('input', recalcSubscriptionPrice);
+document.getElementById('payPackageLessons').addEventListener('change', recalcSubscriptionPrice);
 
 /* ---------- РЕФЕРАЛЬНАЯ СТАТИСТИКА ---------- */
 async function loadReferralStats(){
@@ -3495,6 +3553,193 @@ function renderTalkClubLeads(){
     : `<p class="empty-state">${showArchived ? 'В архиве пока пусто.' : 'Новых заявок пока нет.'}</p>`;
 }
 
+/* ---------- Заявки на абонемент (subscription_setup_requests) — отдельно от trial_requests ---------- */
+async function loadSubsRequests(){
+  const { data } = await supabase.from('subscription_setup_requests').select('*')
+    .order('created_at', { ascending:false });
+  window.__subsRequests = data || [];
+  renderSubsRequests();
+  updateNewSubsBadge();
+}
+
+function updateNewSubsBadge(){
+  const badge = document.getElementById('newSubsBadge');
+  if (!badge) return;
+  const count = (window.__subsRequests || []).filter(r => r.status === 'pending').length;
+  badge.textContent = count > 9 ? '9+' : String(count);
+  badge.classList.toggle('hidden', count === 0);
+}
+
+function subsRequestCardHtml(r){
+  const teacher = allTeachers.find(t => t.id === r.teacher_id);
+  const slots = (r.preferred_slots || []).map(s => {
+    const [y,m,d] = s.date.split('-');
+    return `${d}.${m} в ${String(s.hour).padStart(2,'0')}:00`;
+  }).join(', ');
+
+  let promoLine = '';
+  if (r.promo_code){
+    if (r.referral_code_valid){
+      promoLine = r.is_referral
+        ? `<div>🎁 Реферальный код: <b>${r.promo_code}</b> ✅</div>`
+        : `<div>🎁 Промокод: <b>${r.promo_code}</b> ✅</div>`;
+    } else {
+      promoLine = `<div>🎁 Код: <b>${r.promo_code}</b> ⚠️ не найден — проверь вручную</div>`;
+    }
+  }
+
+  const statusLabel = { pending:'⏳ Ожидает', confirmed:'✅ Подтверждено', declined:'✗ Отклонено' }[r.status] || r.status;
+
+  return `
+    <div class="card" style="margin-bottom:14px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px;">
+        <div>
+          <div style="font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px;">${r.full_name || '-'}</div>
+          <div style="font-size:13px; color:var(--ink-soft);">${statusLabel}${r.telegram_chat_id ? ' · Telegram подключён' : ' · Telegram не подключён'}</div>
+        </div>
+        <span style="font-size:11.5px; color:var(--ink-soft); text-align:right;">${fmtDateTime(r.created_at)}</span>
+      </div>
+
+      <div style="font-size:13.5px; margin-bottom:10px;">
+        <div>📦 ${r.format} · ${r.lessons_per_month} занятий/мес · <b>${(r.price || 0).toLocaleString('ru-RU')} ₽</b></div>
+        <div>👩‍🏫 Преподаватель: ${teacher ? teacher.full_name : '-'}</div>
+        <div>🌍 Часовой пояс: ${r.timezone || '-'}</div>
+        ${slots ? `<div>🕐 Удобное время: ${slots}</div>` : ''}
+        ${r.time_comment ? `<div style="margin-top:6px; color:var(--ink-soft);">💬 ${r.time_comment}</div>` : ''}
+        ${promoLine}
+      </div>
+
+      <div class="card-actions">
+        ${r.status === 'pending' ? `
+          <button class="btn btn-accent btn-sm" onclick="confirmSubscriptionSetup('${r.id}')">Подтвердить</button>
+          <button class="btn btn-ghost btn-sm" onclick="declineSubscriptionSetup('${r.id}')">Отклонить</button>
+        ` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function renderSubsRequests(){
+  const all = (window.__subsRequests || []);
+  const container = document.getElementById('subsRequestsList');
+  if (!container) return;
+  const showArchived = document.getElementById('subsShowArchived')?.checked;
+
+  const filtered = all.filter(r => showArchived ? r.status !== 'pending' : r.status === 'pending');
+
+  container.innerHTML = filtered.length
+    ? filtered.map(subsRequestCardHtml).join('')
+    : `<p class="empty-state">${showArchived ? 'Обработанных заявок пока нет.' : 'Новых заявок пока нет.'}</p>`;
+}
+
+async function declineSubscriptionSetup(id){
+  if (!confirm('Точно отклонить эту заявку?')) return;
+  const { error } = await supabase.from('subscription_setup_requests')
+    .update({ status:'declined', resolved_at: new Date().toISOString() }).eq('id', id);
+  if (error){ alert('Не получилось: ' + error.message); return; }
+  await loadSubsRequests();
+}
+
+function randomPassword(len){
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+  let out = '';
+  for (let i = 0; i < len; i++) out += chars[Math.floor(Math.random() * chars.length)];
+  return out;
+}
+
+async function confirmSubscriptionSetup(id){
+  const r = (window.__subsRequests || []).find(x => x.id === id);
+  if (!r){ alert('Не нашла эту заявку.'); return; }
+  if (!confirm(`Подтвердить абонемент для «${r.full_name}» — ${r.format} · ${r.lessons_per_month} занятий · ${r.price} ₽?`)) return;
+
+  try {
+    let studentId = r.converted_student_id;
+    let generatedPassword = null;
+    let generatedEmail = null;
+
+    if (!studentId){
+      // логин человеку не нужен — вход только по логину/паролю, которые пришлём в Telegram
+      // (новая страница оформления абонемента не собирает email вообще)
+      generatedEmail = 'sub' + Math.random().toString(16).slice(2, 10) + '@weyork.internal';
+      generatedPassword = randomPassword(12);
+
+      const { data: createData, error: createErr } = await supabase.functions.invoke('smart-endpoint', {
+        body: {
+          email: generatedEmail, password: generatedPassword, full_name: r.full_name, role: 'student',
+          teacher_id: r.teacher_id || null,
+          format: r.format || 'SOLO',
+          level: 'A1',
+          timezone: r.timezone || null
+        }
+      });
+
+      if (createErr || (createData && createData.error)){
+        let msg = (createData && createData.error) || (createErr && createErr.message) || 'Не получилось создать логин.';
+        alert('Не получилось создать ученика: ' + msg);
+        return;
+      }
+      studentId = createData.id;
+    }
+
+    const today = new Date();
+    const validUntil = new Date(today);
+    validUntil.setMonth(validUntil.getMonth() + 1);
+
+    const { data: linkRow } = await supabase.from('payment_link_settings').select('solo_full_url').eq('id', 1);
+    const payUrl = (linkRow && linkRow.length && linkRow[0].solo_full_url) || null;
+    const appliedDiscount = (r.promo_code && r.referral_code_valid) ? Number(pricing.referral_discount_percent) || null : null;
+
+    const { error: payErr } = await supabase.from('payments').insert({
+      student_id: studentId,
+      amount: r.price,
+      lessons_included: r.lessons_per_month,
+      lessons_used: 0,
+      paid_at: fmtDateKey(today),
+      valid_until: fmtDateKey(validUntil),
+      status: 'active',
+      payment_url: payUrl,
+      discount_percent: appliedDiscount,
+      discount_reason: appliedDiscount ? (r.is_referral ? 'Реферальный код' : 'Промокод') : null,
+      referral_code: r.is_referral ? r.promo_code : null,
+      referrer_id: r.is_referral ? r.referrer_student_id : null
+    });
+
+    if (payErr){
+      alert('Ученик создан, но не получилось создать абонемент: ' + payErr.message + '\nСоздай оплату вручную во вкладке «Оплата».');
+    }
+
+    const updatePayload = {
+      status: 'confirmed',
+      resolved_at: new Date().toISOString(),
+      converted_student_id: studentId
+    };
+
+    if (r.telegram_chat_id){
+      // человек уже подписан на бота — шлём логин/пароль сразу
+      await supabase.from('profiles').update({ telegram_chat_id: r.telegram_chat_id, telegram_linked_at: new Date().toISOString() }).eq('id', studentId);
+      if (generatedPassword && generatedEmail){
+        await supabase.rpc('tg_send', {
+          msg: `🎉 <b>Абонемент оформлен!</b>\n\nЛогин и пароль от личного кабинета:\n👤 ${generatedEmail}\n🔑 ${generatedPassword}\n\nВойти: https://weyork.online/login.html`,
+          target_chat_id: r.telegram_chat_id
+        });
+      }
+      updatePayload.pending_password = null;
+    } else if (generatedPassword){
+      // ещё не подписался на бота — пароль подождёт в pending_password,
+      // link_telegram_by_token отправит его сам при подключении Telegram (см. SQL-функцию)
+      updatePayload.pending_password = generatedPassword;
+    }
+
+    const { error: updErr } = await supabase.from('subscription_setup_requests').update(updatePayload).eq('id', id);
+    if (updErr){ alert('Абонемент создан, но не получилось обновить статус заявки: ' + updErr.message); }
+
+    alert('Готово! ' + (r.telegram_chat_id ? 'Логин и пароль отправлены в Telegram.' : 'Как только человек подпишется на бота — логин и пароль придут автоматически.'));
+    await loadSubsRequests();
+  } catch (e){
+    alert('Не получилось подтвердить: ' + (e.message || e));
+  }
+}
+
 function teacherAvailabilityHtml(){
   if (!allTeachers.length) return '<p class="empty-state">Нет учителей.</p>';
   const now = Date.now();
@@ -3602,6 +3847,8 @@ function requestCardHtml(r, mode){
         ` : ''}
         ${mode === 'new' ? `<button class="btn btn-ghost btn-sm" onclick="setRequestStatus('${r.id}','pending')">Взять в работу</button>` : ''}
         ${mode === 'needsOutcome' ? `<button class="btn btn-accent btn-sm" onclick="toggleOutcomeForm('${r.id}')">Завершить пробный</button>` : ''}
+        <button class="btn btn-ghost btn-sm" onclick="populateLinkFromTrial('${r.id}')">Создать абонемент</button>
+        <button class="btn btn-ghost btn-sm" onclick="showSubscriptionSetupLink()">Ссылка на оформление абонемента</button>
         <button class="btn btn-ghost btn-sm" onclick="toggleAdminComment('${r.id}')">🔒 Заметка</button>
         ${(mode !== 'done' && mode !== 'archive') ? `
           <button class="btn btn-ghost btn-sm" onclick="setRequestStatus('${r.id}','cancelled')">Отменить</button>
@@ -3675,6 +3922,48 @@ async function archiveRequest(requestId, toArchive){
   const { error } = await supabase.from('trial_requests').update({ archived: toArchive }).eq('id', requestId);
   if (error){ alert('Не получилось. Попробуй ещё раз.'); return; }
   await loadTrialRequests();
+}
+
+/* ---------- «Создать абонемент»: переход на «Добавить человека» + подстановка данных из заявки ---------- */
+function populateLinkFromTrial(requestId){
+  const r = (window.__trialRequests || []).find(x => x.id === requestId);
+  if (!r){ alert('Не нашла эту заявку.'); return; }
+
+  jumpToTab('link');
+
+  document.getElementById('linkRole').value = 'student';
+  updateLinkFormVisibility();
+  document.getElementById('linkName').value = r.full_name || '';
+  document.getElementById('linkContactTelegram').value = r.contact_telegram || '';
+  document.getElementById('linkContactPhone').value = r.contact_phone || '';
+
+  const teacherId = r.assigned_teacher_id || r.preferred_teacher_id || '';
+  if (teacherId) document.getElementById('linkTeacher').value = teacherId;
+
+  const tzSelect = document.getElementById('linkTimezone');
+  if (r.preferred_timezone && tzSelect){
+    const hasOption = Array.from(tzSelect.options).some(o => o.value === r.preferred_timezone);
+    if (!hasOption){
+      const opt = document.createElement('option');
+      opt.value = r.preferred_timezone;
+      opt.textContent = r.preferred_timezone;
+      tzSelect.appendChild(opt);
+    }
+    tzSelect.value = r.preferred_timezone;
+  }
+}
+
+/* ---------- «Ссылка на оформление абонемента»: одна постоянная ссылка, ничего не генерирует ---------- */
+function showSubscriptionSetupLink(){
+  const url = 'https://weyork.online/subscription-setup.html';
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(
+      () => alert('Ссылка скопирована:\n' + url),
+      () => prompt('Скопируй ссылку на оформление абонемента:', url)
+    );
+  } else {
+    prompt('Скопируй ссылку на оформление абонемента:', url);
+  }
 }
 
 async function setRequestStatus(requestId, status){
