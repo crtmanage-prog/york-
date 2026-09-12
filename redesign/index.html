@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YORK! Онлайн-школа английского языка</title>
+<meta name="description" content="Слышали нас по радио? Это YORK! Онлайн-школа английского языка. SOLO и CREW, бесплатный пробный урок, преподаватель под вашу цель. Уфа и вся Россия.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://weyork.online/">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YORK! Онлайн-школа английского языка">
+<meta property="og:description" content="SOLO и CREW, бесплатный пробный урок, преподаватель под вашу цель. Уфа и вся Россия.">
+<meta property="og:url" content="https://weyork.online/">
+<meta property="og:image" content="https://weyork.online/og-image.png">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#090A09">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "YORK! English",
+  "alternateName": ["YORK!", "Йорк", "Онлайн-школа английского языка YORK!"],
+  "url": "https://weyork.online/",
+  "description": "Онлайн-школа английского языка. Индивидуальные (SOLO) и групповые (CREW) занятия, бесплатный пробный урок, разговорный клуб Talk Club.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Уфа",
+    "addressCountry": "RU"
+  },
+  "areaServed": ["Уфа", "Россия"],
+  "sameAs": [
+    "https://t.me/weyorkonline",
+    "https://www.instagram.com/weyorkonline"
+  ]
+}
+</script>
+<!-- FAQPage — из реального FAQ-блока на этой странице, для rich snippet в поиске -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Как проходят занятия?", "acceptedAnswer": { "@type": "Answer", "text": "Онлайн, в Яндекс Телемосте. Обычное занятие SOLO или CREW длится 55 минут. Используем интерактивные материалы, доски и медиа-контент, а у каждого ученика есть личный кабинет со словариком и материалами." } },
+    { "@type": "Question", "name": "Кому подходит YORK!?", "acceptedAnswer": { "@type": "Answer", "text": "Школьникам, подросткам и взрослым: от нуля до уверенной разговорной практики. Программы у детей и взрослых разные." } },
+    { "@type": "Question", "name": "Что происходит на пробном уроке?", "acceptedAnswer": { "@type": "Answer", "text": "Знакомимся, определяем текущий уровень, обсуждаем цель и показываем, как устроен формат. 30 минут, бесплатно." } },
+    { "@type": "Question", "name": "Можно ли сменить формат?", "acceptedAnswer": { "@type": "Answer", "text": "Да, между SOLO и CREW можно перейти в любой момент. Адаптируем программу и пересчитаем абонемент." } },
+    { "@type": "Question", "name": "Чем CREW отличается от Talk Club?", "acceptedAnswer": { "@type": "Answer", "text": "CREW: мини-группа (2–4 человека) со структурированными занятиями по учебной программе, как и SOLO, но с другими учениками для динамики и экономии. Talk Club: свободные тематические дискуссии без формальной программы занятия, акцент на разговорной практике и живом общении, а не на плане урока." } },
+    { "@type": "Question", "name": "Как работает «York Club»?", "acceptedAnswer": { "@type": "Answer", "text": "Реферальная программа: приведите друга, и когда он начнёт заниматься, вы оба получите скидку 15% на следующий месяц обучения." } },
+    { "@type": "Question", "name": "Что если пропустить занятие?", "acceptedAnswer": { "@type": "Answer", "text": "Предупредите не позднее чем за 24 часа, перенесём урок на удобное время." } }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0}
+body{background:#090A09;color:#fff;font-family:"Golos Text",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:hover{opacity:.72}
+button{font-family:inherit}
+@keyframes yk3-mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* header / nav */
+.nav-toggle-input{display:none}
+.nav-toggle-btn{display:none;margin-left:auto;font-size:22px;color:#fff;cursor:pointer;line-height:1;background:none;border:0}
+.nav-drop{position:relative}
+.nav-drop summary{cursor:pointer;list-style:none;color:#c9cac5;font-size:12px}
+.nav-drop summary::-webkit-details-marker{display:none}
+.nav-drop summary::after{content:" ▾";font-size:10px}
+.nav-drop[open] summary{color:#fff}
+.nav-drop-panel{position:absolute;top:28px;left:0;background:#0a0a09;border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:2px;min-width:220px;box-shadow:0 12px 28px rgba(0,0,0,.4);z-index:20}
+.nav-drop-panel a{padding:9px 12px;border-radius:8px;color:#c9cac5;font-size:12px;display:block}
+.nav-drop-panel a:hover{background:rgba(255,255,255,.06);color:#fff}
+@media(max-width:850px){
+  .nav-toggle-btn{display:block}
+  .navlinks{display:none;position:absolute;top:100%;left:0;width:100%;background:#0a0a09;flex-direction:column;gap:0;padding:12px 0;border-top:1px solid rgba(255,255,255,.13)}
+  .nav-toggle-input:checked ~ .navlinks{display:flex}
+  .navlinks a,.nav-drop summary{padding:12px 24px;font-size:14px}
+  .nav-drop-panel{position:static;box-shadow:none;border:none;padding:0 24px;background:transparent}
+}
+.site-header{position:fixed;top:0;left:0;width:100%;z-index:50;background:rgba(9,10,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+#top,#how,#formats,#talk,#faq,#final{scroll-margin-top:88px}
+
+/* shared buttons */
+.btn-lime{display:inline-flex;align-items:center;gap:10px;padding:16px 22px;border-radius:999px;font-weight:700;font-size:14px;background:#D7EF42;color:#0a0a09}
+.btn-lime:hover{opacity:1;background:#fff}
+
+/* hero layout + mini-form */
+.hero-grid2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,340px);gap:clamp(24px,4vw,56px);align-items:end}
+@media(max-width:850px){.hero-grid2{grid-template-columns:1fr}}
+.hf{padding:22px;border-radius:24px;background:#F3F2ED;color:#11120E;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.hf-tag{display:inline-block;font:700 10.5px "Unbounded",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#0a0a09;background:#D7EF42;padding:6px 12px;border-radius:999px;margin-bottom:14px}
+.hf-title{font:600 14px "Unbounded",sans-serif;letter-spacing:-.01em;margin:0 0 14px;line-height:1.3}
+.hf-row{display:flex;flex-direction:column;gap:8px}
+.hf input{padding:13px 16px;border-radius:14px;border:1px solid rgba(0,0,0,.14);background:#fff;color:#11120E;font:14px "Golos Text",sans-serif}
+.hf input::placeholder{color:#8b8c85}
+.hf-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:10px;padding:14px 18px;border-radius:999px;font-weight:700;font-size:13.5px;background:#0a0a09;color:#D7EF42}
+.hf-btn:hover{background:#D7EF42;color:#0a0a09}
+.hf-note{margin:10px 0 0;font-size:11px;color:#6c6d65;line-height:1.5}
+
+/* goal/format selector */
+.gsel-panel{min-height:320px;border-radius:24px;padding:clamp(24px,3.4vw,40px);background:linear-gradient(160deg,rgba(255,255,255,.05),transparent);border:1px solid rgba(255,255,255,.13);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,3vw,32px);align-items:center}
+.gsel-text{display:flex;flex-direction:column;gap:22px}
+.gsel-photo{border-radius:20px;overflow:hidden;height:clamp(220px,24vw,300px);background:#1b1d17}
+.gsel-photo img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:700px){.gsel-panel{grid-template-columns:1fr}.gsel-photo{order:-1;height:200px}}
+.gsel-tabs{display:flex;gap:8px;margin-bottom:22px}
+.gsel-tab{padding:10px 18px;border-radius:999px;font:700 12px "Unbounded",sans-serif;letter-spacing:.02em;border:1px solid rgba(255,255,255,.16)}
+.gsel-tab.on{background:#D7EF42;color:#0a0a09;border-color:#D7EF42}
+.gsel-tab.off{background:rgba(255,255,255,.03);color:#c9cac5}
+.goal-tabs{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;margin-bottom:26px;scrollbar-width:none}
+.goal-tabs::-webkit-scrollbar{display:none}
+.gtab{flex:0 0 auto;padding:13px 22px;border-radius:999px;font:700 13px "Unbounded",sans-serif;letter-spacing:-.01em;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.03);color:#c9cac5;cursor:pointer;white-space:nowrap}
+.gtab.on{background:#D7EF42;color:#0a0a09;border-color:#D7EF42}
+.goal-kicker{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:11px;color:#D7EF42}
+.goal-title{font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(22px,3vw,32px);line-height:1.08;letter-spacing:-.03em;margin:14px 0 0}
+.goal-text{color:#c3c4bd;line-height:1.65;font-size:14.5px;max-width:48ch;margin:16px 0 0}
+
+/* how-it-works hover lift */
+.step-card{transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
+.step-card:hover{border-color:#D7EF42;box-shadow:0 0 0 1px rgba(215,239,66,.55),0 22px 46px rgba(215,239,66,.22);transform:translateY(-8px)}
+
+/* pricing cards */
+.fmt-card{transition:box-shadow .25s ease}
+.fmt-card:hover{box-shadow:0 14px 34px rgba(17,18,14,.14)}
+.pkg-row{position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding-top:14px;border-top:1px solid var(--line)}
+.pkg-row.pkg-popular{padding-top:30px}
+.pkg-badge{position:absolute;top:8px;left:0;font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em}
+.pkg-toggle{display:flex;align-items:center;gap:6px;width:100%;background:none;border:0;cursor:pointer;padding:14px 0 0;font-size:12.5px;font-weight:600;color:inherit;opacity:.65;text-align:left}
+.pkg-toggle:hover{opacity:1}
+.pkg-chevron{transition:transform .2s ease}
+.fmt-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:18px;padding:15px 21px;border-radius:999px;font-weight:700;font-size:14px}
+.fmt-cta:hover{opacity:.85}
+
+/* assistant chip */
+.asst-btn{position:fixed;right:22px;bottom:22px;z-index:40;width:56px;height:56px;border-radius:50%;background:#D7EF42;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,.45)}
+.asst-panel{position:fixed;right:22px;bottom:88px;z-index:40;width:min(300px,calc(100vw - 44px));border-radius:20px;background:#14150F;border:1px solid rgba(255,255,255,.13);padding:18px;box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.asst-panel[hidden]{display:none}
+.asst-bubble{position:relative;background:#D7EF42;color:#0a0a09;border-radius:18px 18px 4px 18px;padding:16px 34px 16px 16px;font:700 13.5px "Unbounded",sans-serif;line-height:1.4;letter-spacing:-.01em}
+.asst-close{position:absolute;top:9px;right:9px;width:22px;height:22px;border-radius:50%;background:rgba(10,10,9,.14);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#0a0a09}
+.asst-chip{display:block;width:100%;text-align:left;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-size:12.5px;font-weight:600;margin-top:8px}
+.asst-chip:hover{background:rgba(215,239,66,.14);border-color:rgba(215,239,66,.4);color:#fff}
+
+/* teachers */
+.teacher-cta:hover{opacity:1;background:#11120F;color:#fff}
+
+/* review arc tag */
+.rv-arc{display:inline-block;font:600 10.5px "Unbounded",sans-serif;letter-spacing:.02em;text-transform:uppercase;color:#D7EF42;background:rgba(215,239,66,.1);border:1px solid rgba(215,239,66,.3);padding:6px 11px;border-radius:999px;margin-bottom:14px}
+/* review carousel */
+.rv-stage{max-width:760px;margin:44px auto 0;text-align:center}
+.rv-quote{font-family:Unbounded,sans-serif;font-weight:600;font-size:clamp(20px,3.4vw,32px);line-height:1.35;letter-spacing:-.01em;color:#f0f0ec;margin:0}
+.rv-who{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:32px}
+.rv-avatar{width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#2a2d26;display:flex;align-items:center;justify-content:center}
+.rv-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.rv-initial{font-family:Unbounded,sans-serif;font-weight:600;font-size:15px;color:#D7EF42}
+.rv-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:38px}
+.rv-nav-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.rv-dots{display:flex;gap:8px}
+.rv-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;border:0;padding:0}
+.rv-dot.on{background:#D7EF42;width:20px;border-radius:5px}
+
+/* faq */
+.faq-item{border-bottom:1px solid #d0d1c9}
+.faq-toggle{width:100%;background:none;border:0;cursor:pointer;padding:22px 0;display:flex;justify-content:space-between;gap:20px;text-align:left;font-family:Unbounded,sans-serif;font-weight:600;font-size:clamp(14px,1.6vw,16px);line-height:1.35;color:#11120E}
+.faq-toggle:hover{opacity:.6}
+.faq-sign{opacity:.5}
+.faq-body{display:none}
+.faq-body p{max-width:760px;color:#55574F;line-height:1.65;margin:0;padding:0 0 22px;font-size:14.5px}
+.faq-contact:hover{opacity:.85}
+
+/* reveal-on-scroll */
+[data-reveal]{opacity:0;transform:translateY(18px)}
+</style>
+</head>
+<body>
+<div style="max-width:100%;overflow-x:hidden;background:#090A09">
+
+<header class="site-header">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto;padding:18px 0;display:flex;align-items:center;gap:20px">
+    <a href="#top" style="font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.06em">YORK<span style="color:#D7EF42">!</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+    <label for="nav-toggle" class="nav-toggle-btn" aria-label="Меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></label>
+    <nav class="navlinks" style="display:flex;align-items:center;gap:24px;margin-left:auto;font-size:12px;color:#c9cac5">
+      <a href="#how">Как это работает</a>
+      <details class="nav-drop">
+        <summary>Направления</summary>
+        <div class="nav-drop-panel">
+          <a href="english-for-kids.html">Детям</a>
+          <a href="english-for-adults.html">Взрослым</a>
+          <a href="school-english.html">Школьная программа и ВПР</a>
+          <a href="#talk">Talk Club</a>
+        </div>
+      </details>
+      <a href="#formats">Цены</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;gap:8px">
+      <a href="login.html" style="font-size:13px;font-weight:700;padding:13px 19px;border-radius:999px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.03)">Войти</a>
+      <a href="#final" class="btn-lime" style="padding:13px 19px;font-size:13px">Записаться на пробное <span style="font-size:16px;line-height:0">→</span></a>
+    </div>
+  </div>
+</header>
+
+<section style="position:relative;min-height:min(94vh,860px);display:flex;flex-direction:column;overflow:hidden;padding-top:92px">
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 78% 42%,rgba(215,239,66,.22) 0,rgba(52,66,27,.22) 22%,transparent 46%),linear-gradient(120deg,#0b0d0b,#070807)"></div>
+
+  <div id="top" style="position:relative;z-index:3;width:min(1180px,calc(100% - 48px));margin:0 auto;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:36px 0 clamp(120px,14vw,170px)">
+    <div class="hero-grid2">
+      <div style="max-width:700px">
+        <div data-reveal style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42">Онлайн-школа английского YORK!</div>
+        <h1 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(32px,7vw,92px);line-height:.96;letter-spacing:-.055em;margin:20px 0 0;text-transform:uppercase">Не ещё один курс.<br><span style="color:#D7EF42">Английский для жизни.</span></h1>
+        <p data-reveal style="max-width:52ch;color:#c3c4bd;font-size:16px;line-height:1.65;margin:24px 0 0">Экзамен, собеседование, разговор в путешествии или сериал в оригинале. На бесплатном уроке разберёмся, что мешает вам говорить, и подберём формат под вашу цель.</p>
+        <div data-reveal style="display:flex;flex-wrap:wrap;gap:12px;margin-top:30px">
+          <a href="#final" class="btn-lime">Попробовать бесплатно <span style="font-size:18px;line-height:0">→</span></a>
+          <a href="level-test.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;padding:16px 22px;border-radius:999px;font-weight:700;font-size:14px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04)">Узнать свой уровень</a>
+        </div>
+      </div>
+      <div data-reveal class="hf">
+        <span class="hf-tag">Бесплатный пробный урок</span>
+        <div class="hf-title">Оставьте имя и телефон, свяжемся с вами и подберём формат</div>
+        <div class="hf-row">
+          <input type="text" placeholder="Ваше имя" aria-label="Ваше имя">
+          <input type="tel" placeholder="Телефон" aria-label="Телефон">
+        </div>
+        <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="hf-btn">Записаться <span style="font-size:16px;line-height:0">→</span></a>
+        <p class="hf-note">Свяжемся с вами в течение дня и подберём удобное время.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:absolute;z-index:4;bottom:0;left:50%;transform:translateX(-50%);width:min(1050px,calc(100% - 48px));display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));background:rgba(18,20,18,.92);border:1px solid rgba(255,255,255,.13);border-bottom:0;border-radius:28px 28px 0 0;overflow:hidden;backdrop-filter:blur(6px)">
+    <div style="padding:22px 30px;border-right:1px solid rgba(255,255,255,.13)">
+      <b style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:16px">SOLO</b>
+      <span style="display:block;margin-top:7px;color:#a8a9a2;font-size:12px">индивидуально</span>
+    </div>
+    <div style="padding:22px 30px;border-right:1px solid rgba(255,255,255,.13)">
+      <b style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:16px">CREW</b>
+      <span style="display:block;margin-top:7px;color:#a8a9a2;font-size:12px">в мини-группе</span>
+    </div>
+    <div style="padding:22px 30px;border-right:1px solid rgba(255,255,255,.13)">
+      <b style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:16px">FREE TRIAL</b>
+      <span style="display:block;margin-top:7px;color:#a8a9a2;font-size:12px">первый урок бесплатно</span>
+    </div>
+  </div>
+</section>
+
+<section style="background:#F3F2ED;color:#141512">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto;padding:clamp(56px,10vw,130px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,5vw,70px);align-items:end">
+    <div style="min-width:0">
+      <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a8b82">YORK! approach</div>
+      <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(30px,6vw,68px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 0;text-transform:uppercase;overflow-wrap:break-word">Знать правила<br>недостаточно.</h2>
+    </div>
+    <div style="min-width:0">
+      <p style="font-size:clamp(16px,1.8vw,20px);line-height:1.55;margin:0;color:#505149">Практикуем речь, ошибаемся и учимся использовать язык в реальных ситуациях, а не заполняем таблицы времён.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:40px">
+        <div data-reveal style="border-top:1px solid #c7c8bf;padding-top:15px">
+          <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px">01</b>
+          <p style="font-size:12.5px;margin:8px 0 0;line-height:1.45;color:#505149">Больше живой практики</p>
+        </div>
+        <div data-reveal style="border-top:1px solid #c7c8bf;padding-top:15px">
+          <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px">02</b>
+          <p style="font-size:12.5px;margin:8px 0 0;line-height:1.45;color:#505149">Преподаватель под цель</p>
+        </div>
+        <div data-reveal style="border-top:1px solid #c7c8bf;padding-top:15px">
+          <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px">03</b>
+          <p style="font-size:12.5px;margin:8px 0 0;line-height:1.45;color:#505149">Онлайн из любой точки</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(56px,9vw,110px) 0">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="max-width:780px;margin-bottom:34px">
+      <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42">Choose your way</div>
+      <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(28px,6vw,62px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 16px;text-transform:uppercase">С чем помочь именно вам?</h2>
+      <p style="color:#aaa;line-height:1.65;margin:0;font-size:15px;max-width:52ch">Выберите, что ближе, соберём короткий ответ и предложим формат. Если вам нужен не урок, а живое общение, загляните в Talk Club.</p>
+    </div>
+    <div class="gsel-tabs">
+      <span class="gsel-tab on">Английский</span>
+      <a href="#talk" class="gsel-tab off">Talk Club</a>
+    </div>
+    <div class="goal-tabs" id="goalTabs">
+      <button class="gtab on" data-goal="travel">Для путешествий</button>
+      <button class="gtab" data-goal="exam">Для школы и ВПР</button>
+      <button class="gtab" data-goal="solo">SOLO</button>
+      <button class="gtab" data-goal="crew">CREW</button>
+      <button class="gtab" data-goal="self">Для себя</button>
+    </div>
+    <div class="gsel-panel">
+      <div class="gsel-text">
+        <div>
+          <small class="goal-kicker" id="goalKicker">01 / travel</small>
+          <h3 class="goal-title" id="goalTitle">Не теряться в незнакомой стране</h3>
+          <p class="goal-text" id="goalDesc">Аэропорт, отель, разговор с местными: базовые ситуации, в которых чаще всего не хватает слов, даже если грамматику вы знаете неплохо.</p>
+        </div>
+        <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="btn-lime" id="goalCta">Подобрать формат <span style="font-size:16px;line-height:0">→</span></a>
+      </div>
+      <div class="gsel-photo">
+        <img id="goalPhoto" src="images/goal-travel.jpg" alt="Путешествия">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="background:#D7EF42;color:#0a0a09;overflow:hidden;padding:11px 0">
+  <div style="display:flex;width:max-content;animation:yk3-mq 32s linear infinite;font-family:Unbounded,sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase">
+    <span style="display:flex;gap:28px;padding-right:28px"><span>Успейте забрать свою осеннюю скидку 15%</span><span>·</span><span>Работа</span><span>·</span><span>Путешествия</span><span>·</span><span>Сериалы</span><span>·</span><span>Новые люди</span><span>·</span><span>Свободный английский</span><span>·</span></span>
+    <span style="display:flex;gap:28px;padding-right:28px"><span>Успейте забрать свою осеннюю скидку 15%</span><span>·</span><span>Работа</span><span>·</span><span>Путешествия</span><span>·</span><span>Сериалы</span><span>·</span><span>Новые люди</span><span>·</span><span>Свободный английский</span><span>·</span></span>
+  </div>
+</div>
+
+<section id="how" style="padding:clamp(40px,7vw,90px) 0 clamp(56px,9vw,110px)">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,60px);margin-bottom:34px">
+      <div style="min-width:0">
+        <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42">How it works</div>
+        <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(28px,6vw,62px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 0;text-transform:uppercase;overflow-wrap:break-word">Начать<br>не сложно.</h2>
+      </div>
+      <p style="color:#aaa;line-height:1.65;align-self:end;margin:0;font-size:15px;max-width:44ch;min-width:0">Приходите на бесплатный урок: познакомимся, определим уровень и посмотрим, подходит ли вам формат. Без обязательств.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px">
+      <article data-reveal class="step-card" style="min-height:clamp(220px,26vw,320px);padding:28px;border:1px solid rgba(255,255,255,.13);border-radius:22px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(160deg,rgba(255,255,255,.035),transparent)">
+        <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px;color:#D7EF42">01 / TRY</b>
+        <div>
+          <h3 style="font-family:Unbounded,sans-serif;font-weight:600;font-size:clamp(20px,2.3vw,25px);line-height:1.1;margin:20px 0 12px">Пробуем</h3>
+          <p style="color:#a8aaa4;line-height:1.55;font-size:14px;margin:0">Приходите на бесплатный пробный урок и знакомитесь с форматом.</p>
+        </div>
+      </article>
+      <article data-reveal class="step-card" style="min-height:clamp(220px,26vw,320px);padding:28px;border:1px solid rgba(255,255,255,.13);border-radius:22px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(160deg,rgba(255,255,255,.035),transparent)">
+        <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px;color:#D7EF42">02 / MATCH</b>
+        <div>
+          <h3 style="font-family:Unbounded,sans-serif;font-weight:600;font-size:clamp(20px,2.3vw,25px);line-height:1.1;margin:20px 0 12px">Подбираем</h3>
+          <p style="color:#a8aaa4;line-height:1.55;font-size:14px;margin:0">Определяем уровень, цель, преподавателя и удобное время.</p>
+        </div>
+      </article>
+      <article data-reveal class="step-card" style="min-height:clamp(220px,26vw,320px);padding:28px;border:1px solid rgba(255,255,255,.13);border-radius:22px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(160deg,rgba(255,255,255,.035),transparent)">
+        <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px;color:#D7EF42">03 / SPEAK</b>
+        <div>
+          <h3 style="font-family:Unbounded,sans-serif;font-weight:600;font-size:clamp(20px,2.3vw,25px);line-height:1.1;margin:20px 0 12px">Говорим</h3>
+          <p style="color:#a8aaa4;line-height:1.55;font-size:14px;margin:0">Начинаем заниматься и постепенно переносим английский в реальную жизнь.</p>
+        </div>
+      </article>
+    </div>
+    <div style="text-align:center;margin-top:34px">
+      <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="btn-lime">Записаться на бесплатный урок <span style="font-size:18px;line-height:0">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="formats" style="background:#fff;padding:clamp(56px,9vw,110px) 0">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="max-width:780px;margin-bottom:40px">
+      <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a8b82">Choose your way</div>
+      <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(30px,5vw,68px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 16px;text-transform:uppercase;color:#11120E">SOLO или CREW?</h2>
+      <p style="color:#5c5d55;line-height:1.6;margin:0;font-size:15px">Один на один или вместе с другими. Выбирайте формат под свою цель, график и темп, поменять его можно в любой момент.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;align-items:start">
+
+      <article data-reveal class="fmt-card" style="--line:rgba(0,0,0,.14);border-radius:28px;padding:clamp(26px,3.4vw,38px);min-height:clamp(360px,40vw,430px);display:flex;flex-direction:column;justify-content:space-between;gap:26px;background:#F3F2ED;color:#10110E;border:1px solid rgba(17,18,14,.10)">
+        <div>
+          <small style="font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:11px;opacity:.65">01 / one to one</small>
+          <div style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(42px,6vw,60px);line-height:.95;letter-spacing:-.06em;margin-top:6px">SOLO</div>
+          <p style="max-width:42ch;min-height:3.2em;line-height:1.6;font-size:15px;margin:16px 0 0;opacity:.85">Индивидуальные занятия. Ваш темп, ваши задачи и больше пространства для персональной работы.</p>
+          <span style="display:inline-block;margin-top:16px;padding:9px 12px;border-radius:999px;border:1px solid currentColor;font-size:11px;opacity:.8">1 ученик + преподаватель</span>
+        </div>
+        <div>
+          <div style="font-size:11px;opacity:.6;margin-bottom:6px">Цена со скидкой 15% на первый месяц</div>
+          <div class="pkg-row pkg-extra" style="display:none">
+            <div><b style="display:block;font-size:14px;font-weight:600">4 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">765 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">3 060 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 3 600 ₽</span></div>
+          </div>
+          <div class="pkg-row pkg-popular">
+            <span class="pkg-badge" style="background:#10110E;color:#D7EF42">Популярный</span>
+            <div><b style="display:block;font-size:14px;font-weight:600">8 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">722,5 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">5 780 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 6 800 ₽</span></div>
+          </div>
+          <div class="pkg-row pkg-extra" style="display:none">
+            <div><b style="display:block;font-size:14px;font-weight:600">12 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">680 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">8 160 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 9 600 ₽</span></div>
+          </div>
+          <button class="pkg-toggle" type="button">
+            <span class="pkg-toggle-label">Показать все пакеты (4 и 12 занятий)</span>
+            <svg class="pkg-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="fmt-cta" style="background:#10110E;color:#fff">Записаться на SOLO <span style="font-size:17px;line-height:0">→</span></a>
+        </div>
+      </article>
+
+      <article data-reveal class="fmt-card" style="--line:rgba(255,255,255,.14);border-radius:28px;padding:clamp(26px,3.4vw,38px);min-height:clamp(360px,40vw,430px);display:flex;flex-direction:column;justify-content:space-between;gap:26px;background:linear-gradient(140deg,#273215,#10140D);color:#fff;border:1px solid rgba(215,239,66,.28)">
+        <div>
+          <small style="font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:11px;opacity:.65">02 / learn together</small>
+          <div style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(42px,6vw,60px);line-height:.95;letter-spacing:-.06em;margin-top:6px">CREW</div>
+          <p style="max-width:42ch;min-height:3.2em;line-height:1.6;font-size:15px;margin:16px 0 0;opacity:.85">Мини-группа: разговорная практика, диалоги в парах и больше взаимодействия. Вместе проще и веселее.</p>
+          <span style="display:inline-block;margin-top:16px;padding:9px 12px;border-radius:999px;border:1px solid currentColor;font-size:11px;opacity:.8">2–4 участника</span>
+        </div>
+        <div>
+          <div style="font-size:11px;opacity:.6;margin-bottom:6px">Цена со скидкой 15% на первый месяц</div>
+          <div class="pkg-row pkg-extra" style="display:none">
+            <div><b style="display:block;font-size:14px;font-weight:600">4 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">552,5 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">2 210 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 2 600 ₽</span></div>
+          </div>
+          <div class="pkg-row pkg-popular">
+            <span class="pkg-badge" style="background:#D7EF42;color:#0a0a09">Популярный</span>
+            <div><b style="display:block;font-size:14px;font-weight:600">8 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">510 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">4 080 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 4 800 ₽</span></div>
+          </div>
+          <div class="pkg-row pkg-extra" style="display:none">
+            <div><b style="display:block;font-size:14px;font-weight:600">12 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">467,5 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">5 610 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 6 600 ₽</span></div>
+          </div>
+          <button class="pkg-toggle" type="button">
+            <span class="pkg-toggle-label">Показать все пакеты (4 и 12 занятий)</span>
+            <svg class="pkg-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="fmt-cta" style="background:#D7EF42;color:#0a0a09">Записаться на CREW <span style="font-size:17px;line-height:0">→</span></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="talk" style="position:relative;overflow:hidden;background:#0e0f0c;padding:clamp(70px,11vw,130px) 0">
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 30%,rgba(215,239,66,.24),transparent 60%)"></div>
+  <div style="position:relative;width:min(980px,calc(100% - 48px));margin:0 auto;text-align:center">
+    <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;color:#fff;font-size:clamp(40px,8vw,84px);line-height:.98;letter-spacing:-.045em;margin:0;text-transform:uppercase">Talk Club</h2>
+    <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:15px;color:#aaa;margin:16px 0 28px">Разговорный клуб</div>
+    <p style="color:#c3c4bd;font-size:18px;line-height:1.6;max-width:640px;margin:0 auto 40px">Живое общение, маленькие группы, встречи под ваш уровень. Без учебника и домашки, только практика и разговор с людьми, которым это тоже интересно.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="https://weyork.online/talk-club-form.html" target="_blank" rel="noopener" class="btn-lime" style="padding:17px 26px;font-size:14.5px">Записаться <span style="font-size:18px;line-height:0">→</span></a>
+      <a href="https://weyork.online/talk-club.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:17px 26px;border-radius:999px;font-weight:700;font-size:14.5px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.04);color:#fff">Узнать больше</a>
+    </div>
+  </div>
+</section>
+
+<div style="background:#D7EF42;color:#0a0a09;overflow:hidden;padding:11px 0">
+  <div style="display:flex;width:max-content;animation:yk3-mq 32s linear infinite;font-family:Unbounded,sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase">
+    <span style="display:flex;gap:28px;padding-right:28px"><span>Free trial</span><span>·</span><span>SOLO</span><span>·</span><span>CREW</span><span>·</span><span>Talk Club</span><span>·</span><span>Дети и взрослые</span><span>·</span><span>Онлайн из любой точки</span><span>·</span></span>
+    <span style="display:flex;gap:28px;padding-right:28px"><span>Free trial</span><span>·</span><span>SOLO</span><span>·</span><span>CREW</span><span>·</span><span>Talk Club</span><span>·</span><span>Дети и взрослые</span><span>·</span><span>Онлайн из любой точки</span><span>·</span></span>
+  </div>
+</div>
+
+<!-- TODO(Клод Код): секция скрыта намеренно (display:none) до появления реальных фото преподавателей — см. HANDOFF.md -->
+<section id="teachers" style="display:none;background:#F3F2ED;color:#11120F;padding:clamp(56px,9vw,110px) 0">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,5vw,70px);align-items:center">
+    <div style="min-width:0">
+      <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a8b82">Meet the crew</div>
+      <h2 style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(26px,7vw,62px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 0;text-transform:uppercase;overflow-wrap:break-word">Те, с кем<br>вы будете<br>говорить.</h2>
+      <p style="color:#5c5d55;line-height:1.65;font-size:15px;max-width:44ch;margin:18px 0 0">Подбираем преподавателя под цель и уровень, а не одного и того же для всех: по возрасту, темпу и тому, ради чего вы учите язык.</p>
+      <a href="#final" class="teacher-cta" style="display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:15px 21px;border-radius:999px;font-weight:700;font-size:14px;background:#D7EF42;color:#0a0a09">Подобрать преподавателя <span style="font-size:17px;line-height:0">→</span></a>
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px">
+        <div style="height:clamp(240px,26vw,330px);border-radius:24px;overflow:hidden;background:#d9dad2"><!-- TODO: фото преподавателя 01 --></div>
+        <div style="height:clamp(240px,26vw,330px);margin-top:clamp(0px,4vw,55px);border-radius:24px;overflow:hidden;background:#d9dad2"><!-- TODO: фото преподавателя 02 --></div>
+      </div>
+      <p style="font-size:12px;color:#777;margin:18px 0 0">Заглушки. Заменим на реальные фото команды.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:#10120F;padding:clamp(56px,9vw,110px) 0">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42">Students say</div>
+    <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,62px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 0;text-transform:uppercase;overflow-wrap:break-word;max-width:14ch">Не нам<br>рассказывать.</h2>
+    <div class="rv-stage" data-reveal>
+      <span class="rv-arc" id="rvArc"></span>
+      <p class="rv-quote" id="rvQuote"></p>
+      <div class="rv-who">
+        <div class="rv-avatar" id="rvAvatar"></div>
+        <div style="text-align:left"><b style="font-size:13px" id="rvName"></b><span style="display:block;color:#8d8f88;font-size:12px;margin-top:2px" id="rvCity"></span></div>
+      </div>
+      <div class="rv-nav">
+        <button class="rv-nav-btn" id="rvPrev" type="button" aria-label="Предыдущий отзыв"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="rv-dots" id="rvDots">
+          <button class="rv-dot on" type="button" data-i="0" aria-label="Отзыв 1"></button>
+          <button class="rv-dot" type="button" data-i="1" aria-label="Отзыв 2"></button>
+          <button class="rv-dot" type="button" data-i="2" aria-label="Отзыв 3"></button>
+        </div>
+        <button class="rv-nav-btn" id="rvNext" type="button" aria-label="Следующий отзыв"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:#F3F2ED;color:#11120E;padding:clamp(56px,9vw,110px) 0">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a8b82">FAQ</div>
+    <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,62px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 0;text-transform:uppercase">Ваши вопросы<br>и наши ответы.</h2>
+    <div style="margin-top:34px;border-top:1px solid #d0d1c9" id="faqList">
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Как проходят занятия?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Онлайн, в Яндекс Телемосте. Обычное занятие SOLO или CREW длится 55 минут. Используем интерактивные материалы, доски и медиа-контент, а у каждого ученика есть личный кабинет со словариком и материалами.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Кому подходит YORK!?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Школьникам, подросткам и взрослым: от нуля до уверенной разговорной практики. Программы у детей и взрослых разные.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Что происходит на пробном уроке?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Знакомимся, определяем текущий уровень, обсуждаем цель и показываем, как устроен формат. 30 минут, бесплатно.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Можно ли сменить формат?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Да, между SOLO и CREW можно перейти в любой момент. Адаптируем программу и пересчитаем абонемент.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Чем CREW отличается от Talk Club?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>CREW: мини-группа (2–4 человека) со структурированными занятиями по учебной программе, как и SOLO, но с другими учениками для динамики и экономии. Talk Club: свободные тематические дискуссии без формальной программы занятия, акцент на разговорной практике и живом общении, а не на плане урока.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Как работает «York Club»?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Реферальная программа: приведите друга, и когда он начнёт заниматься, вы оба получите скидку 15% на следующий месяц обучения.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Что если пропустить занятие?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Предупредите не позднее чем за 24 часа, перенесём урок на удобное время.</p></div>
+      </div>
+    </div>
+    <div style="margin-top:34px;text-align:center">
+      <p style="margin:0 0 16px;font-size:13px;color:#6c6d65">Остались вопросы?</p>
+      <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener" class="faq-contact" style="display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:999px;font-weight:700;font-size:14px;background:#11120E;color:#fff">Связаться с менеджером <span style="font-size:17px;line-height:0">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="final" style="position:relative;overflow:hidden;text-align:center;padding:clamp(70px,12vw,130px) 0">
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 40%,rgba(215,239,66,.16),transparent 55%)"></div>
+  <div style="position:relative;width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42">Ready?</div>
+    <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(48px,11vw,140px);line-height:.9;letter-spacing:-.07em;margin:16px 0 0">LET'S<br>START.</h2>
+    <p style="color:#aaa;max-width:520px;margin:24px auto 30px;line-height:1.65;font-size:15.5px">Первый урок бесплатный. Познакомимся, разберёмся, что мешает говорить, и найдём формат, который подойдёт именно вам.</p>
+    <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="btn-lime" style="padding:17px 26px">Записаться на пробный урок <span style="font-size:18px;line-height:0">→</span></a>
+  </div>
+</section>
+
+<footer style="border-top:1px solid rgba(255,255,255,.13);padding:38px 0 48px;color:#999">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto;display:flex;justify-content:space-between;gap:30px;font-size:12px;flex-wrap:wrap;align-items:center">
+    <div style="font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.06em;color:#fff">YORK<span style="color:#D7EF42">!</span></div>
+    <nav style="display:flex;gap:18px;flex-wrap:wrap">
+      <a href="#how">Как это работает</a><a href="english-for-kids.html">Детям</a><a href="english-for-adults.html">Взрослым</a><a href="school-english.html">Школьная программа и ВПР</a><a href="#talk">Talk Club</a><a href="level-test.html">Тест на уровень</a><a href="#formats">Цены</a><a href="#faq">FAQ</a><a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Не нашли что искали? →</a>
+    </nav>
+    <span>© YORK! English</span>
+  </div>
+</footer>
+
+<button class="asst-btn" id="asstBtn" type="button" aria-label="Помощник">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0a0a09" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</button>
+<div class="asst-panel" id="asstPanel">
+  <div class="asst-bubble">
+    Подберу формат под вашу цель и уровень, с чего начнём?
+    <button class="asst-close" id="asstClose" type="button" aria-label="Закрыть">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <a class="asst-chip" href="level-test.html" target="_blank" rel="noopener">Пройти тест на уровень</a>
+  <a class="asst-chip" href="https://weyork.online/trial-form.html" target="_blank" rel="noopener">Записаться на бесплатный урок</a>
+  <a class="asst-chip" href="#talk">Рассказать про Talk Club</a>
+  <a class="asst-chip" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
+</div>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* reveal-on-scroll */
+  var els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+  function show(el){ el.style.transition = 'opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1)'; el.style.opacity = '1'; el.style.transform = 'none'; }
+  var pending = els.slice();
+  function sweep(){
+    pending = pending.filter(function(el){
+      var r = el.getBoundingClientRect();
+      if (r.top < (window.innerHeight || 800) * 0.94 && r.bottom > -40) { show(el); return false; }
+      return true;
+    });
+  }
+  sweep();
+  var t0 = Date.now();
+  var iv = setInterval(function(){ sweep(); if (!pending.length || Date.now() - t0 > 20000) clearInterval(iv); }, 150);
+  window.addEventListener('scroll', sweep, { passive: true, capture: true });
+  window.addEventListener('resize', sweep);
+
+  /* goal tabs */
+  var goalsData = {
+    travel: { kicker: '01 / travel', title: 'Не теряться в незнакомой стране', text: 'Аэропорт, отель, разговор с местными: базовые ситуации, в которых чаще всего не хватает слов, даже если грамматику вы знаете неплохо.', cta: 'Подобрать формат', photo: 'images/goal-travel.jpg', alt: 'Путешествия' },
+    exam: { kicker: '02 / school', title: 'Спокойно сдавать контрольные и ВПР', text: 'Разбираем школьную программу, закрываем пробелы и снимаем страх перед проверочными: важнее оценки то, что уходит паника.', cta: 'Подробнее для школьников', photo: 'images/goal-exam.jpg', alt: 'Школа и ВПР' },
+    solo: { kicker: '03 / one to one', title: 'Заниматься один на один', text: 'Индивидуальный темп, программа под вашу цель и больше пространства для личной работы с преподавателем.', cta: 'Выбрать SOLO', photo: 'images/goal-solo.jpg', alt: 'SOLO' },
+    crew: { kicker: '04 / together', title: 'Учиться в мини-группе', text: '2–4 человека, больше живого диалога и разговорной практики, и это дешевле, чем SOLO.', cta: 'Выбрать CREW', photo: 'images/goal-crew.jpg', alt: 'CREW' },
+    self: { kicker: '05 / for you', title: 'Учить английский для себя, без привязки к экзамену', text: 'Общий уровень, разговорная практика, фильмы и книги в оригинале, без формального повода, просто чтобы свободно владеть языком.', cta: 'Подобрать формат', photo: 'images/goal-self.jpg', alt: 'Для себя' }
+  };
+  var goalTabs = document.querySelectorAll('#goalTabs .gtab');
+  var goalKicker = document.getElementById('goalKicker');
+  var goalTitle = document.getElementById('goalTitle');
+  var goalDesc = document.getElementById('goalDesc');
+  var goalCta = document.getElementById('goalCta');
+  var goalPhoto = document.getElementById('goalPhoto');
+  function renderGoal(key){
+    var g = goalsData[key];
+    if (!g) return;
+    goalKicker.textContent = g.kicker;
+    goalTitle.textContent = g.title;
+    goalDesc.textContent = g.text;
+    goalCta.childNodes[0].nodeValue = g.cta + ' ';
+    goalPhoto.src = g.photo;
+    goalPhoto.alt = g.alt;
+    goalTabs.forEach(function(t){ t.classList.toggle('on', t.getAttribute('data-goal') === key); });
+  }
+  goalTabs.forEach(function(t){
+    t.addEventListener('click', function(){ renderGoal(t.getAttribute('data-goal')); });
+  });
+
+  /* pricing package toggle (per card, independent) */
+  document.querySelectorAll('.pkg-toggle').forEach(function(btn){
+    var card = btn.closest('.fmt-card');
+    var extras = card.querySelectorAll('.pkg-extra');
+    var label = btn.querySelector('.pkg-toggle-label');
+    var chevron = btn.querySelector('.pkg-chevron');
+    var open = false;
+    btn.addEventListener('click', function(){
+      open = !open;
+      extras.forEach(function(el){ el.style.display = open ? 'flex' : 'none'; });
+      label.textContent = open ? 'Скрыть остальные пакеты' : 'Показать все пакеты (4 и 12 занятий)';
+      chevron.style.transform = open ? 'rotate(180deg)' : 'none';
+    });
+  });
+
+  /* FAQ accordion (one open at a time) */
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var btn = item.querySelector('.faq-toggle');
+    var body = item.querySelector('.faq-body');
+    var sign = item.querySelector('.faq-sign');
+    btn.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(o){
+        o.classList.remove('open');
+        o.querySelector('.faq-body').style.display = 'none';
+        o.querySelector('.faq-sign').textContent = '+';
+      });
+      if (!isOpen){
+        item.classList.add('open');
+        body.style.display = 'block';
+        sign.textContent = '−';
+      }
+    });
+  });
+
+  /* reviews carousel */
+  var reviewsData = [
+    { arc: 'Языковой барьер → уверенная речь', text: '«Пришёл с языковым барьером и не мог говорить устно, хотя грамматику знал неплохо. Спустя три месяца стало гораздо проще».', name: 'Ян', city: 'Уфа', photo: 'images/review-yan.jpg' },
+    { arc: 'Ноль → разговорная база за месяц', text: '«Начинала с нуля. За месяц освоила базу и поняла принцип языка, хотя раньше всё было непонятно».', name: 'Галина', city: 'Екатеринбург', photo: 'images/review-galina.jpg' },
+    { arc: 'Страх контрольных → уверенность на ВПР', text: '«Готовили сына к ВПР в короткий срок. Успеваемость выросла, и, что важнее, ушёл страх контрольных».', name: 'Олег', city: 'Москва', initial: 'О' }
+  ];
+  var reviewIndex = 0;
+  var rvArc = document.getElementById('rvArc');
+  var rvQuote = document.getElementById('rvQuote');
+  var rvAvatar = document.getElementById('rvAvatar');
+  var rvName = document.getElementById('rvName');
+  var rvCity = document.getElementById('rvCity');
+  var rvDots = document.querySelectorAll('#rvDots .rv-dot');
+  function renderReview(){
+    var r = reviewsData[reviewIndex];
+    rvArc.textContent = r.arc;
+    rvQuote.textContent = r.text;
+    rvName.textContent = r.name;
+    rvCity.textContent = r.city;
+    if (r.photo) {
+      rvAvatar.innerHTML = '<img src="' + r.photo + '" alt="' + r.name + '">';
+    } else {
+      rvAvatar.innerHTML = '<span class="rv-initial">' + r.initial + '</span>';
+    }
+    rvDots.forEach(function(d, i){ d.classList.toggle('on', i === reviewIndex); });
+  }
+  document.getElementById('rvPrev').addEventListener('click', function(){
+    reviewIndex = (reviewIndex - 1 + reviewsData.length) % reviewsData.length;
+    renderReview();
+  });
+  document.getElementById('rvNext').addEventListener('click', function(){
+    reviewIndex = (reviewIndex + 1) % reviewsData.length;
+    renderReview();
+  });
+  rvDots.forEach(function(d){
+    d.addEventListener('click', function(){
+      reviewIndex = parseInt(d.getAttribute('data-i'), 10);
+      renderReview();
+    });
+  });
+  renderReview();
+
+  /* assistant panel (open by default) */
+  var asstPanel = document.getElementById('asstPanel');
+  function toggleAssistant(){ asstPanel.hidden = !asstPanel.hidden; }
+  document.getElementById('asstBtn').addEventListener('click', toggleAssistant);
+  document.getElementById('asstClose').addEventListener('click', toggleAssistant);
+})();
+</script>
+</body>
+</html>
