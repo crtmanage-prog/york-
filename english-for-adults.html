@@ -80,8 +80,8 @@ button{font-family:inherit}
   .nav-drop-panel{position:static;box-shadow:none;border:none;padding:0 24px;background:transparent}
   .site-header>div{padding:12px 0}
   .hero-grid{grid-template-columns:1fr !important}
-  .hero-grid .hero-photo{order:-1}
-  .hero-grid .hero-photo img{max-width:100%;margin:0 auto}
+  .hero-grid .hero-photo{order:-1;position:static;align-self:auto;min-height:260px}
+  .hero-grid .hero-photo img{position:static;width:100%;max-width:340px;height:auto;margin:0 auto}
 }
 .hero-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr)}
 .site-header{position:fixed;top:0;left:0;width:100%;z-index:50;background:rgba(9,10,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
@@ -164,10 +164,10 @@ button{font-family:inherit}
   </div>
 </header>
 
-<section style="position:relative;overflow:hidden;padding:clamp(120px,16vw,170px) 0 0">
-  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 82% 20%,rgba(215,239,66,.2) 0,transparent 46%),linear-gradient(120deg,#0b0d0b,#070807)"></div>
+<section style="position:relative;padding:clamp(120px,16vw,170px) 0 0">
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;background:radial-gradient(circle at 82% 20%,rgba(215,239,66,.2) 0,transparent 46%),linear-gradient(120deg,#0b0d0b,#070807)"></div>
   <div class="wrap hero-grid" style="position:relative;gap:clamp(24px,4vw,56px);align-items:end">
-    <div style="min-width:0;padding-bottom:clamp(40px,6vw,64px)">
+    <div style="min-width:0;padding-bottom:clamp(40px,6vw,64px);position:relative;z-index:2">
       <div class="kicker">Английский для взрослых</div>
       <h1 style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(32px,5.2vw,54px);line-height:1.06;letter-spacing:-.04em;margin:16px 0 0">Учим то, что нужно <span style="color:#D7EF42">именно вам</span>.</h1>
       <p style="color:#c3c4bd;font-size:15.5px;line-height:1.65;max-width:52ch;margin:22px 0 30px">Работа, переезд, путешествия или разговорная практика для себя: подбираем формат, темы и преподавателя под вашу цель и график, без лишней теории и без ощущения, что вы снова сели за школьную парту.</p>
@@ -176,7 +176,7 @@ button{font-family:inherit}
         <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener" class="btn-ghost">Написать менеджеру</a>
       </div>
     </div>
-    <div class="hero-photo" style="min-width:0;display:flex;justify-content:center"><img src="images/adults-hero.webp" alt="Взрослый ученик на онлайн-уроке английского в YORK!" style="width:100%;max-width:900px;height:auto;display:block"></div>
+    <div class="hero-photo" style="min-width:0;align-self:stretch;position:relative"><img src="images/adults-hero.webp" alt="Взрослый ученик на онлайн-уроке английского в YORK!" style="position:absolute;right:0;bottom:0;height:100%;width:auto;max-width:none;display:block"></div>
   </div>
 </section>
 
