@@ -54,6 +54,13 @@ h1{font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(28px,5vw,40p
 .section{margin-top:44px}
 .section-title{font-family:Unbounded,sans-serif;font-weight:700;font-size:13px;letter-spacing:.02em;color:#fff;margin:0 0 18px;display:flex;align-items:center;gap:8px}
 
+.progress{display:flex;gap:8px;margin:22px 0 0}
+.progress-item{font-family:Unbounded,sans-serif;font-size:11.5px;font-weight:700;color:#8a8b82;padding:8px 14px;border:1px solid rgba(255,255,255,.16);border-radius:100px}
+.progress-item.active{background:#D7EF42;border-color:#D7EF42;color:#0a0a09}
+.step-actions{display:flex;gap:12px;margin-top:8px}
+.btn-ghost-dark{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;padding:16px 22px;border-radius:999px;font-weight:700;font-size:14px;font-family:Unbounded,sans-serif;background:none;border:1px solid rgba(255,255,255,.16);color:#c9cac5;cursor:pointer}
+.btn-ghost-dark:hover{border-color:rgba(255,255,255,.4);color:#fff}
+
 .field{margin-bottom:18px}
 .field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#8a8b82;margin-bottom:8px}
 .field input,.field select,.field textarea{width:100%;font-family:"Golos Text",sans-serif;font-size:15px;padding:14px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff;transition:border-color .15s ease,box-shadow .15s ease}
@@ -151,72 +158,88 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
   <h1>Запись на занятия</h1>
   <p class="sub">Заполните форму и выберите удобное время.</p>
 
+  <div class="progress">
+    <div class="progress-item active" id="progressStep1">1. Данные</div>
+    <div class="progress-item" id="progressStep2">2. Оплата</div>
+  </div>
+
   <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label for="website">Оставьте это поле пустым</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 
-  <div class="section">
-    <div class="field"><label for="fullName">Как вас зовут?</label><input id="fullName" type="text" placeholder="Имя и фамилия" required></div>
+  <div id="step1">
+    <div class="section">
+      <div class="field"><label for="fullName">Как вас зовут?</label><input id="fullName" type="text" placeholder="Имя и фамилия" required></div>
 
-    <div class="field"><label for="timezone">Ваш часовой пояс</label><select id="timezone" required><option value="" selected disabled>— выберите —</option><option value="Калининград (МСК-1)">Калининград (МСК-1)</option><option value="Москва (МСК)">Москва (МСК)</option><option value="Самара (МСК+1)">Самара (МСК+1)</option><option value="Екатеринбург (МСК+2)">Екатеринбург (МСК+2)</option><option value="Омск (МСК+3)">Омск (МСК+3)</option><option value="Красноярск (МСК+4)">Красноярск (МСК+4)</option><option value="Иркутск (МСК+5)">Иркутск (МСК+5)</option><option value="Якутск (МСК+6)">Якутск (МСК+6)</option><option value="Владивосток (МСК+7)">Владивосток (МСК+7)</option><option value="Другой / за рубежом">Другой / за рубежом (укажу вручную)</option></select><input type="text" id="timezoneOther" class="hidden" placeholder="Например: Ташкент, UTC+5" style="margin-top:8px"></div>
+      <div class="field"><label for="timezone">Ваш часовой пояс</label><select id="timezone" required><option value="" selected disabled>— выберите —</option><option value="Калининград (МСК-1)">Калининград (МСК-1)</option><option value="Москва (МСК)">Москва (МСК)</option><option value="Самара (МСК+1)">Самара (МСК+1)</option><option value="Екатеринбург (МСК+2)">Екатеринбург (МСК+2)</option><option value="Омск (МСК+3)">Омск (МСК+3)</option><option value="Красноярск (МСК+4)">Красноярск (МСК+4)</option><option value="Иркутск (МСК+5)">Иркутск (МСК+5)</option><option value="Якутск (МСК+6)">Якутск (МСК+6)</option><option value="Владивосток (МСК+7)">Владивосток (МСК+7)</option><option value="Другой / за рубежом">Другой / за рубежом (укажу вручную)</option></select><input type="text" id="timezoneOther" class="hidden" placeholder="Например: Ташкент, UTC+5" style="margin-top:8px"></div>
 
-    <div class="field">
-      <label>Формат занятий</label>
-      <div class="chip-group">
-        <label><input type="radio" name="format" value="SOLO" checked>SOLO — индивидуально</label>
-        <span class="chip-static">CREW — мини-группа (скоро)</span>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>Занятий в месяц</label>
-      <div class="chip-group" id="lessonsGroup">
-        <label><input type="radio" name="lessons" value="4">4</label>
-        <label><input type="radio" name="lessons" value="8" checked>8</label>
-        <label><input type="radio" name="lessons" value="12">12</label>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>Преподаватель</label>
-      <div class="chip-group" id="teacherGroup"><span style="font-size:13px;color:#8a8b82">Загружаем…</span></div>
-    </div>
-
-    <div class="field">
-      <label>Когда вам удобно заниматься? <span style="font-weight:400;text-transform:none;letter-spacing:0">(до двух вариантов)</span></label>
-      <div id="slotsPicker"><p style="font-size:13px;color:#8a8b82;margin:0">Сначала выберите преподавателя выше.</p></div>
-    </div>
-
-    <div class="field"><label for="timeComment">Комментарий <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label><textarea id="timeComment" placeholder="Например: по утрам удобнее"></textarea></div>
-  </div>
-
-  <div class="section">
-    <button type="button" class="promo-toggle" id="promoToggle"><span>Есть промокод?</span><span id="promoChevron">+</span></button>
-    <div class="promo-body" id="promoBody">
-      <div class="field" style="margin-bottom:0"><label for="promoCode">Промокод <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label><input id="promoCode" type="text" placeholder="Например: YORK15"><p id="promoStatus"></p></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">Оплата</div>
-    <div class="pay-card">
-      <div class="tariff">
-        <div>
-          <div class="tariff-name" id="tariffName">SOLO · 8 занятий</div>
-        </div>
-        <div id="tariffPrice">
-          <span class="tariff-price">—</span>
+      <div class="field">
+        <label>Формат занятий</label>
+        <div class="chip-group">
+          <label><input type="radio" name="format" value="SOLO" checked>SOLO — индивидуально</label>
+          <span class="chip-static">CREW — мини-группа (скоро)</span>
         </div>
       </div>
-      <a href="#" target="_blank" rel="noopener" class="pay-link-btn" id="payLinkBtn">Перейти к оплате →</a>
-      <p class="after-pay">После оплаты нажмите «Подтвердить запись».</p>
+
+      <div class="field">
+        <label>Занятий в месяц</label>
+        <div class="chip-group" id="lessonsGroup">
+          <label><input type="radio" name="lessons" value="4">4</label>
+          <label><input type="radio" name="lessons" value="8" checked>8</label>
+          <label><input type="radio" name="lessons" value="12">12</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Преподаватель</label>
+        <div class="chip-group" id="teacherGroup"><span style="font-size:13px;color:#8a8b82">Загружаем…</span></div>
+      </div>
+
+      <div class="field">
+        <label>Когда вам удобно заниматься? <span style="font-weight:400;text-transform:none;letter-spacing:0">(до двух вариантов)</span></label>
+        <div id="slotsPicker"><p style="font-size:13px;color:#8a8b82;margin:0">Сначала выберите преподавателя выше.</p></div>
+      </div>
+
+      <div class="field"><label for="timeComment">Комментарий <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label><textarea id="timeComment" placeholder="Например: по утрам удобнее"></textarea></div>
     </div>
+
+    <p id="step1ErrorMsg" style="color:#F3958A;font-size:13.5px;font-weight:600;min-height:18px;margin:12px 0 0;text-align:center"></p>
+    <button type="button" class="btn-lime" id="nextBtn" style="width:100%">Продолжить →</button>
   </div>
 
-  <div class="section">
-    <div class="confirm-card">
-      <h2>Подтвердить запись</h2>
-      <p>Проверим оплату, подтвердим расписание и пришлём данные для личного кабинета в Telegram.</p>
-      <button class="btn-lime" type="submit" id="submitBtn" style="width:100%">Подтвердить запись →</button>
-      <p id="errorMsg"></p>
+  <div id="step2" class="hidden">
+    <div class="section" style="margin-top:36px">
+      <button type="button" class="promo-toggle" id="promoToggle"><span>Есть промокод?</span><span id="promoChevron">+</span></button>
+      <div class="promo-body" id="promoBody">
+        <div class="field" style="margin-bottom:0"><label for="promoCode">Промокод <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label><input id="promoCode" type="text" placeholder="Например: YORK15"><p id="promoStatus"></p></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Оплата</div>
+      <div class="pay-card">
+        <div class="tariff">
+          <div>
+            <div class="tariff-name" id="tariffName">SOLO · 8 занятий</div>
+          </div>
+          <div id="tariffPrice">
+            <span class="tariff-price">—</span>
+          </div>
+        </div>
+        <a href="#" target="_blank" rel="noopener" class="pay-link-btn" id="payLinkBtn">Перейти к оплате →</a>
+        <p class="after-pay">После оплаты нажмите «Подтвердить запись».</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="confirm-card">
+        <h2>Подтвердить запись</h2>
+        <p>Проверим оплату, подтвердим расписание и пришлём данные для личного кабинета в Telegram.</p>
+        <button class="btn-lime" type="submit" id="submitBtn" style="width:100%">Подтвердить запись →</button>
+        <p id="errorMsg"></p>
+      </div>
+    </div>
+
+    <div class="step-actions">
+      <button type="button" class="btn-ghost-dark" id="backBtn">← Назад</button>
     </div>
   </div>
 </form>
@@ -477,6 +500,38 @@ function toggleSlot(btn){
     btn.classList.add('on');
   }
 }
+
+/* ---------- переключение шагов 1 → 2 ---------- */
+document.getElementById('nextBtn').addEventListener('click', () => {
+  const step1Err = document.getElementById('step1ErrorMsg');
+  step1Err.textContent = '';
+
+  const fullName = document.getElementById('fullName').value.trim();
+  const tzSelect = document.getElementById('timezone');
+  const timezoneOther = document.getElementById('timezoneOther');
+
+  if (!fullName){ step1Err.textContent = 'Напишите, как вас зовут.'; return; }
+  if (!tzSelect.value){ step1Err.textContent = 'Выберите часовой пояс.'; return; }
+  if (tzSelect.value === 'Другой / за рубежом' && !timezoneOther.value.trim()){
+    step1Err.textContent = 'Напишите свой часовой пояс или город.'; return;
+  }
+  if (!selectedTeacherId){ step1Err.textContent = 'Сейчас нет доступного преподавателя — напишите менеджеру.'; return; }
+
+  reachGoal('subscription_setup_step2');
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('step2').classList.remove('hidden');
+  document.getElementById('progressStep1').classList.remove('active');
+  document.getElementById('progressStep2').classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+document.getElementById('backBtn').addEventListener('click', () => {
+  document.getElementById('step2').classList.add('hidden');
+  document.getElementById('step1').classList.remove('hidden');
+  document.getElementById('progressStep2').classList.remove('active');
+  document.getElementById('progressStep1').classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+});
 
 /* ---------- отправка формы ("Подтвердить запись") ---------- */
 document.getElementById('subForm').addEventListener('submit', async (e) => {
