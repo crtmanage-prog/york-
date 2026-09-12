@@ -1,1093 +1,709 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>YORK! Онлайн-школа английского языка</title>
+<meta name="description" content="Слышали нас по радио? Это YORK! Онлайн-школа английского языка. SOLO и CREW, бесплатный пробный урок, преподаватель под вашу цель. Уфа и вся Россия.">
+<meta name="robots" content="index,follow">
 <link rel="canonical" href="https://weyork.online/">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="description" content="YORK! Онлайн-школа английского языка. Индивидуальные (SOLO) и групповые (CREW) занятия, бесплатный пробный урок, тест на уровень. Заговоришь за 3 месяца.">
-
-<!-- Open Graph — превью при отправке ссылки в Telegram, ВКонтакте, Instagram -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://weyork.online/">
 <meta property="og:title" content="YORK! Онлайн-школа английского языка">
-<meta property="og:description" content="YORK! Онлайн-школа английского языка. Индивидуальные (SOLO) и групповые (CREW) занятия, бесплатный пробный урок, тест на уровень. Заговоришь за 3 месяца.">
+<meta property="og:description" content="SOLO и CREW, бесплатный пробный урок, преподаватель под вашу цель. Уфа и вся Россия.">
+<meta property="og:url" content="https://weyork.online/">
 <meta property="og:image" content="https://weyork.online/og-image.png">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
-
-<!-- Структурированные данные — помогают Яндексу и Google понять, что это школа в Уфе -->
+<meta name="theme-color" content="#090A09">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
   "name": "YORK! English",
   "alternateName": ["YORK!", "Йорк", "Онлайн-школа английского языка YORK!"],
-  "description": "Онлайн-школа английского языка в Уфе. Индивидуальные и групповые занятия для детей и взрослых.",
   "url": "https://weyork.online/",
+  "description": "Онлайн-школа английского языка. Индивидуальные (SOLO) и групповые (CREW) занятия, бесплатный пробный урок, разговорный клуб Talk Club.",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Уфа",
     "addressCountry": "RU"
   },
-  "areaServed": "Уфа",
+  "areaServed": ["Уфа", "Россия"],
   "sameAs": [
     "https://t.me/weyorkonline",
     "https://www.instagram.com/weyorkonline"
   ]
 }
 </script>
-
-<!-- FAQPage — из реального FAQ-блока на странице, для rich snippet в поиске -->
+<!-- FAQPage — из реального FAQ-блока на этой странице, для rich snippet в поиске -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Как проходят занятия и где они проводятся?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Занятия проходят онлайн на платформе Яндекс Телемост. На уроках мы используем электронные интерактивные материалы, доски и медиа-контент, а у каждого ученика есть доступ к личному кабинету со словариком и материалами."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Для кого подходят уроки: только для детей или для взрослых тоже?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Мы работаем и со школьниками/подростками (подтягиваем успеваемость, помогаем с ДЗ, готовимся к ВПР и контрольным), и со взрослыми (разговорный английский для жизни, работы, путешествий и просмотра сериалов в оригинале)."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "В каких форматах можно заниматься?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Вы можете выбрать удобный формат: SOLO: индивидуальные занятия (1 на 1) с персональной программой под ваш темп. CREW: мини-группы по 3–4 человек для максимальной разговорной практики и комфортного общения."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Что нужно для первого урока?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Только ноутбук или планшет с хорошим интернет-соединением, гарнитура/микрофон и ваше желание учиться! Все учебные материалы, рабочие тетради и интерактивные карточки мы предоставляем."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Как проходит бесплатный пробный урок?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Пробное занятие длится 30 минут. За это время мы познакомимся, определим текущий уровень владения языком, обсудим ваши цели и покажем, как устроен наш формат обучения."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Как работает программа лояльности «York Club»?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "У нас действует реферальная система: рекомендуйте школу YORK! друзьям или знакомым и получайте скидку 15% на следующий месяц обучения за каждого приведённого друга, который начнёт у нас заниматься. Учиться вместе не только веселее, но и выгоднее!"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Что происходит, если пропустить занятие?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Если у вас не получается присутствовать на уроке, просто предупредите нас заранее (не позднее чем за 24 часа до начала). Мы перенесём занятие на удобное вам время."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Можно ли сменить формат обучения SOLO ↔ CREW?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Да, конечно! Вы можете в любой момент перейти с индивидуальных занятий (SOLO) в мини-группу (CREW) или наоборот. Мы адаптируем программу и пересчитаем абонемент."
-      }
-    }
+    { "@type": "Question", "name": "Как проходят занятия?", "acceptedAnswer": { "@type": "Answer", "text": "Онлайн, в Яндекс Телемосте. Обычное занятие SOLO или CREW длится 55 минут. Используем интерактивные материалы, доски и медиа-контент, а у каждого ученика есть личный кабинет со словариком и материалами." } },
+    { "@type": "Question", "name": "Кому подходит YORK!?", "acceptedAnswer": { "@type": "Answer", "text": "Школьникам, подросткам и взрослым: от нуля до уверенной разговорной практики. Программы у детей и взрослых разные." } },
+    { "@type": "Question", "name": "Что происходит на пробном уроке?", "acceptedAnswer": { "@type": "Answer", "text": "Знакомимся, определяем текущий уровень, обсуждаем цель и показываем, как устроен формат. 30 минут, бесплатно." } },
+    { "@type": "Question", "name": "Можно ли сменить формат?", "acceptedAnswer": { "@type": "Answer", "text": "Да, между SOLO и CREW можно перейти в любой момент. Адаптируем программу и пересчитаем абонемент." } },
+    { "@type": "Question", "name": "Чем CREW отличается от Talk Club?", "acceptedAnswer": { "@type": "Answer", "text": "CREW: мини-группа (2–4 человека) со структурированными занятиями по учебной программе, как и SOLO, но с другими учениками для динамики и экономии. Talk Club: свободные тематические дискуссии без формальной программы занятия, акцент на разговорной практике и живом общении, а не на плане урока." } },
+    { "@type": "Question", "name": "Как работает «York Club»?", "acceptedAnswer": { "@type": "Answer", "text": "Реферальная программа: приведите друга, и когда он начнёт заниматься, вы оба получите скидку 15% на следующий месяц обучения." } },
+    { "@type": "Question", "name": "Что если пропустить занятие?", "acceptedAnswer": { "@type": "Answer", "text": "Предупредите не позднее чем за 24 часа, перенесём урок на удобное время." } }
   ]
 }
 </script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#FFFFFF;
-    --accent:#D2E739;
-    --ink:#1C1C1C;
-    --ink-soft:rgba(28,28,28,0.62);
-    --line:rgba(28,28,28,0.12);
-    --panel:#F7F8EF;
-    --radius:22px;
-    --maxw:1120px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  .display{font-family:'Unbounded',sans-serif;}
-  a{color:inherit;}
-  img,svg{display:block;max-width:100%;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
-  section{padding:76px 0;}
-  @media (max-width:640px){ section{padding:52px 0;} }
+html,body{margin:0;padding:0}
+body{background:#090A09;color:#fff;font-family:"Golos Text",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:hover{opacity:.72}
+button{font-family:inherit}
+@keyframes yk3-mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  h1,h2,h3{margin:0;}
-  .eyebrow{
-    font-size:12.5px;
-    font-weight:700;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    margin-bottom:14px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:8px; height:8px; border-radius:50%;
-    background:var(--accent);
-    box-shadow:0 0 0 3px rgba(210,231,57,0.35);
-  }
-  h2.section-title{
-    font-family:'Unbounded',sans-serif;
-    font-weight:700;
-    font-size:clamp(26px,4vw,38px);
-    line-height:1.15;
-    margin-bottom:14px;
-  }
-  .section-sub{
-    font-size:16px;
-    color:var(--ink-soft);
-    max-width:560px;
-    line-height:1.6;
-    margin-bottom:36px;
-  }
+/* header / nav */
+.nav-toggle-input{display:none}
+.nav-toggle-btn{display:none;margin-left:auto;font-size:22px;color:#fff;cursor:pointer;line-height:1;background:none;border:0}
+.nav-drop{position:relative}
+.nav-drop summary{cursor:pointer;list-style:none;color:#c9cac5;font-size:12px}
+.nav-drop summary::-webkit-details-marker{display:none}
+.nav-drop summary::after{content:" ▾";font-size:10px}
+.nav-drop[open] summary{color:#fff}
+.nav-drop-panel{position:absolute;top:28px;left:0;background:#0a0a09;border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:2px;min-width:220px;box-shadow:0 12px 28px rgba(0,0,0,.4);z-index:20}
+.nav-drop-panel a{padding:9px 12px;border-radius:8px;color:#c9cac5;font-size:12px;display:block}
+.nav-drop-panel a:hover{background:rgba(255,255,255,.06);color:#fff}
+@media(max-width:850px){
+  .nav-toggle-btn{display:block}
+  .navlinks{display:none;position:absolute;top:100%;left:0;width:100%;background:#0a0a09;flex-direction:column;gap:0;padding:12px 0;border-top:1px solid rgba(255,255,255,.13)}
+  .nav-toggle-input:checked ~ .navlinks{display:flex}
+  .navlinks a,.nav-drop summary{padding:12px 24px;font-size:14px}
+  .nav-drop-panel{position:static;box-shadow:none;border:none;padding:0 24px;background:transparent}
+}
+.site-header{position:fixed;top:0;left:0;width:100%;z-index:50;background:rgba(9,10,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+#top,#how,#formats,#talk,#faq,#final{scroll-margin-top:88px}
 
-  /* Buttons */
-  .btn{
-    font-family:'Unbounded',sans-serif;
-    font-weight:700;
-    font-size:14.5px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    text-decoration:none;
-    border-radius:100px;
-    padding:15px 24px;
-    white-space:nowrap;
-    cursor:pointer;
-    transition:transform .15s ease, box-shadow .15s ease;
-    border:1.5px solid transparent;
-  }
-  .btn:hover{transform:translateY(-2px);}
-  .btn-accent{background:var(--accent); color:var(--ink);}
-  .btn-dark{background:var(--ink); color:#fff;}
-  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--ink);}
-  .btn-ghost:hover{background:var(--ink); color:#fff;}
-  .btn-sm{padding:11px 18px; font-size:13px;}
-  .btn:focus-visible{outline:3px solid var(--ink); outline-offset:2px;}
+/* shared buttons */
+.btn-lime{display:inline-flex;align-items:center;gap:10px;padding:16px 22px;border-radius:999px;font-weight:700;font-size:14px;background:#D7EF42;color:#0a0a09}
+.btn-lime:hover{opacity:1;background:#fff}
 
-  /* ---------- HEADER ---------- */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(255,255,255,0.9);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 0;
-  }
-  .logo{font-family:'Unbounded',sans-serif; font-weight:900; font-size:20px;}
-  .logo span{color:var(--ink); background:var(--accent); padding:0 4px; border-radius:6px;}
-  .nav-links{display:flex; gap:26px; font-size:14.5px; font-weight:500; list-style:none; margin:0; padding:0;}
-  .nav-links a{text-decoration:none; opacity:0.75; position:relative; padding-bottom:2px;}
-  .nav-links a::after{
-    content:"";
-    position:absolute; left:0; bottom:-2px;
-    width:100%; height:2px;
-    background:var(--ink);
-    transform:scaleX(0);
-    transform-origin:right;
-    transition:transform .25s ease;
-  }
-  .nav-links a:hover{opacity:1;}
-  .nav-links a:hover::after{transform:scaleX(1); transform-origin:left;}
-  .nav-cta{display:flex; gap:10px; align-items:center;}
-  @media (max-width:820px){ .nav-links{display:none;} }
-  @media (max-width:360px){
-    .nav-cta{gap:6px;}
-    .nav-cta .btn-sm{padding:9px 11px; font-size:11.5px;}
-  }
+/* hero layout + mini-form */
+.hero-grid2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,340px);gap:clamp(24px,4vw,56px);align-items:end}
+@media(max-width:850px){.hero-grid2{grid-template-columns:1fr}}
+.hf{padding:22px;border-radius:24px;background:#F3F2ED;color:#11120E;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.hf-tag{display:inline-block;font:700 10.5px "Unbounded",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#0a0a09;background:#D7EF42;padding:6px 12px;border-radius:999px;margin-bottom:14px}
+.hf-title{font:600 14px "Unbounded",sans-serif;letter-spacing:-.01em;margin:0 0 14px;line-height:1.3}
+.hf-row{display:flex;flex-direction:column;gap:8px}
+.hf input{padding:13px 16px;border-radius:14px;border:1px solid rgba(0,0,0,.14);background:#fff;color:#11120E;font:14px "Golos Text",sans-serif}
+.hf input::placeholder{color:#8b8c85}
+.hf-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:10px;padding:14px 18px;border-radius:999px;font-weight:700;font-size:13.5px;background:#0a0a09;color:#D7EF42}
+.hf-btn:hover{background:#D7EF42;color:#0a0a09}
+.hf-note{margin:10px 0 0;font-size:11px;color:#6c6d65;line-height:1.5}
 
-  /* ---------- HERO ---------- */
-  .hero{padding-top:56px;}
-  .hero-grid{
-    max-width:600px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
-  }
-  .hero .hero-ctas{justify-content:center;}
-  .hero p.lead{margin-left:auto; margin-right:auto;}
-  .hero h1{
-    font-family:'Unbounded',sans-serif;
-    font-weight:700;
-    font-size:clamp(32px,5.2vw,52px);
-    line-height:1.12;
-    margin-bottom:14px;
-  }
-  .cycle-line{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:44px;
-    margin-bottom:22px;
-  }
-  .cycle-chip{
-    display:inline-block;
-    background:var(--accent);
-    color:var(--ink);
-    font-family:'Unbounded',sans-serif;
-    font-weight:600;
-    font-size:clamp(11px,2.6vw,19px);
-    line-height:1.3;
-    padding:7px 16px;
-    border-radius:100px;
-    max-width:100%;
-    text-align:center;
-    white-space:nowrap;
-  }
-  @media (max-width:360px){
-    .cycle-chip{font-size:9px; padding:6px 10px;}
-  }
-  .hero p.lead{
-    font-size:17px;
-    line-height:1.6;
-    color:var(--ink-soft);
-    max-width:480px;
-    margin-bottom:30px;
-  }
-  .hero-ctas{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px;}
-  .hero-note{font-size:13.5px; color:var(--ink-soft);}
-  .hero-note a{font-weight:600; color:var(--ink); text-decoration:underline; text-underline-offset:3px;}
-  @media (max-width:520px){
-    .hero-grid{text-align:center; margin-left:auto; margin-right:auto;}
-    .hero .hero-ctas, .cycle-line{justify-content:center;}
-    .hero p.lead{margin-left:auto; margin-right:auto;}
-  }
+/* goal/format selector */
+.gsel-panel{min-height:320px;border-radius:24px;padding:clamp(24px,3.4vw,40px);background:linear-gradient(160deg,rgba(255,255,255,.05),transparent);border:1px solid rgba(255,255,255,.13);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,3vw,32px);align-items:center}
+.gsel-text{display:flex;flex-direction:column;gap:22px}
+.gsel-photo{border-radius:20px;overflow:hidden;height:clamp(220px,24vw,300px);background:#1b1d17}
+.gsel-photo img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:700px){.gsel-panel{grid-template-columns:1fr}.gsel-photo{order:-1;height:200px}}
+.gsel-tabs{display:flex;gap:8px;margin-bottom:22px}
+.gsel-tab{padding:10px 18px;border-radius:999px;font:700 12px "Unbounded",sans-serif;letter-spacing:.02em;border:1px solid rgba(255,255,255,.16)}
+.gsel-tab.on{background:#D7EF42;color:#0a0a09;border-color:#D7EF42}
+.gsel-tab.off{background:rgba(255,255,255,.03);color:#c9cac5}
+.goal-tabs{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;margin-bottom:26px;scrollbar-width:none}
+.goal-tabs::-webkit-scrollbar{display:none}
+.gtab{flex:0 0 auto;padding:13px 22px;border-radius:999px;font:700 13px "Unbounded",sans-serif;letter-spacing:-.01em;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.03);color:#c9cac5;cursor:pointer;white-space:nowrap}
+.gtab.on{background:#D7EF42;color:#0a0a09;border-color:#D7EF42}
+.goal-kicker{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:11px;color:#D7EF42}
+.goal-title{font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(22px,3vw,32px);line-height:1.08;letter-spacing:-.03em;margin:14px 0 0}
+.goal-text{color:#c3c4bd;line-height:1.65;font-size:14.5px;max-width:48ch;margin:16px 0 0}
 
-  /* ---------- CLUB BANNER ---------- */
-  .club-banner{
-    background:var(--ink);
-    border-radius:26px;
-    padding:40px 36px;
-    text-align:left;
-    position:relative;
-    overflow:hidden;
-  }
-  .club-banner-glow{
-    position:absolute; top:-140px; left:-60px;
-    width:420px; height:240px; border-radius:50%;
-    background:radial-gradient(circle, rgba(210,231,57,0.35) 0%, rgba(210,231,57,0) 70%);
-    pointer-events:none;
-  }
-  .club-banner-badge{
-    position:relative; z-index:1;
-    display:inline-flex; align-items:center; gap:8px;
-    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.16);
-    color:#fff; font-size:12px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
-    padding:7px 16px; border-radius:100px; margin-bottom:16px;
-  }
-  .club-banner h3{
-    position:relative; z-index:1;
-    font-family:'Unbounded',sans-serif; font-weight:900; color:#fff;
-    font-size:clamp(20px,3vw,26px); margin:0 0 10px; line-height:1.2;
-  }
-  .club-banner p{
-    position:relative; z-index:1;
-    color:rgba(255,255,255,0.68); font-size:14.5px; line-height:1.55;
-    max-width:440px; margin:0 0 22px;
-  }
+/* how-it-works hover lift */
+.step-card{transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
+.step-card:hover{border-color:#D7EF42;box-shadow:0 0 0 1px rgba(215,239,66,.55),0 22px 46px rgba(215,239,66,.22);transform:translateY(-8px)}
 
-  /* ---------- WHY CARDS ---------- */
-  .why-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-  }
-  @media (max-width:900px){ .why-grid{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:560px){ .why-grid{grid-template-columns:1fr;} }
-  .why-card{
-    background:var(--panel);
-    border-radius:18px;
-    padding:24px 20px;
-  }
-  .why-card .wicon{font-size:26px; margin-bottom:14px;}
-  .why-card h3{font-family:'Unbounded',sans-serif; font-size:15px; margin-bottom:8px; line-height:1.3;}
-  .why-card p{font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin:0;}
+/* pricing cards */
+.fmt-card{transition:box-shadow .25s ease}
+.fmt-card:hover{box-shadow:0 14px 34px rgba(17,18,14,.14)}
+.pkg-row{position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding-top:14px;border-top:1px solid var(--line)}
+.pkg-row.pkg-popular{padding-top:30px}
+.pkg-badge{position:absolute;top:8px;left:0;font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em}
+.pkg-toggle{display:flex;align-items:center;gap:6px;width:100%;background:none;border:0;cursor:pointer;padding:14px 0 0;font-size:12.5px;font-weight:600;color:inherit;opacity:.65;text-align:left}
+.pkg-toggle:hover{opacity:1}
+.pkg-chevron{transition:transform .2s ease}
+.fmt-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:18px;padding:15px 21px;border-radius:999px;font-weight:700;font-size:14px}
+.fmt-cta:hover{opacity:.85}
 
-  /* ---------- TEST BANNER ---------- */
-  .test-banner{
-    border:1.5px dashed var(--line);
-    border-radius:var(--radius);
-    padding:30px 28px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    flex-wrap:wrap;
-  }
-  .test-banner h3{font-family:'Unbounded',sans-serif; font-size:18px; margin-bottom:6px;}
-  .test-banner p{margin:0; color:var(--ink-soft); font-size:14px; max-width:400px;}
+/* assistant chip */
+.asst-btn{position:fixed;right:22px;bottom:22px;z-index:40;width:56px;height:56px;border-radius:50%;background:#D7EF42;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,.45)}
+.asst-panel{position:fixed;right:22px;bottom:88px;z-index:40;width:min(300px,calc(100vw - 44px));border-radius:20px;background:#14150F;border:1px solid rgba(255,255,255,.13);padding:18px;box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.asst-panel[hidden]{display:none}
+.asst-bubble{position:relative;background:#D7EF42;color:#0a0a09;border-radius:18px 18px 4px 18px;padding:16px 34px 16px 16px;font:700 13.5px "Unbounded",sans-serif;line-height:1.4;letter-spacing:-.01em}
+.asst-close{position:absolute;top:9px;right:9px;width:22px;height:22px;border-radius:50%;background:rgba(10,10,9,.14);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#0a0a09}
+.asst-chip{display:block;width:100%;text-align:left;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-size:12.5px;font-weight:600;margin-top:8px}
+.asst-chip:hover{background:rgba(215,239,66,.14);border-color:rgba(215,239,66,.4);color:#fff}
 
-  /* ---------- PRICING ---------- */
-  .price-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-  }
-  @media (max-width:760px){ .price-grid{grid-template-columns:1fr;} }
-  .price-card{
-    border:1.5px solid var(--line);
-    border-radius:var(--radius);
-    padding:30px;
-    position:relative;
-    display:flex;
-    flex-direction:column;
-    transition:transform .2s ease, box-shadow .2s ease;
-  }
-  .price-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 16px 32px rgba(28,28,28,0.1);
-  }
-  .price-card.featured{border-color:var(--ink); background:var(--panel);}
-  .price-badge{
-    position:absolute; top:24px; right:24px;
-    background:var(--accent);
-    font-size:12px; font-weight:700;
-    padding:5px 12px; border-radius:100px;
-  }
-  .price-head{display:flex; align-items:center; gap:10px; margin-bottom:6px;}
-  .price-head .picon{font-size:22px;}
-  .price-card h3{font-family:'Unbounded',sans-serif; font-size:20px;}
-  .price-card .format-desc{font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin:10px 0 22px;}
-  .price-row{
-    display:flex;
-    align-items:baseline;
-    gap:10px;
-    margin-bottom:4px;
-    flex-wrap:wrap;
-  }
-  .price-old{font-size:15px; color:var(--ink-soft); text-decoration:line-through;}
-  .price-new{font-family:'Unbounded',sans-serif; font-size:26px; font-weight:700;}
-  .price-per{font-size:12.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.04em;}
-  .price-total{font-size:13.5px; color:var(--ink-soft); margin-bottom:18px;}
-  .price-total b{color:var(--ink);}
-  .price-save{
-    font-size:12.5px; font-weight:700; color:var(--ink);
-    background:#fff; border:1px solid var(--line);
-    display:inline-block; padding:5px 11px; border-radius:100px; margin-bottom:22px; width:fit-content;
-  }
-  .price-card.featured .price-save{background:var(--accent); border-color:transparent;}
+/* teachers */
+.teacher-cta:hover{opacity:1;background:#11120F;color:#fff}
 
-  /* ---------- пакеты занятий (4 / 8 / 12) ---------- */
-  .discount-note{
-    font-size:12.5px; font-weight:700; color:var(--ink-soft);
-    display:flex; align-items:center; gap:6px; margin-bottom:16px;
-  }
-  .discount-note svg{width:14px; height:14px; flex-shrink:0;}
-  .pkg-table{margin-bottom:18px; border-top:1px solid var(--line);}
-  .pkg-row{
-    display:flex; align-items:center; justify-content:space-between; gap:10px;
-    padding:14px 0; border-bottom:1px solid var(--line); position:relative;
-  }
-  .pkg-lessons{font-size:14.5px; font-weight:600;}
-  .pkg-lessons small{display:block; font-weight:400; color:var(--ink-soft); font-size:12px; margin-top:1px;}
-  .pkg-price{text-align:right;}
-  .pkg-price b{font-family:'Unbounded',sans-serif; font-size:19px; font-weight:700; display:block;}
-  .pkg-price small{font-size:11.5px; color:var(--ink-soft);}
-  .pkg-row.popular{margin:0 -8px; padding:14px 8px; background:rgba(28,28,28,0.04); border-radius:12px; border-bottom-color:transparent;}
-  .price-card.featured .pkg-row.popular{background:rgba(255,255,255,0.35);}
-  .pkg-badge{
-    position:absolute; top:-9px; left:8px;
-    background:var(--ink); color:var(--accent); font-size:10px; font-weight:700;
-    padding:3px 9px; border-radius:100px; text-transform:uppercase; letter-spacing:0.03em;
-  }
-  .pkg-extra{
-    overflow:hidden; max-height:0; opacity:0;
-    transition:max-height .3s ease, opacity .25s ease;
-  }
-  .pkg-extra.open{max-height:260px; opacity:1;}
-  .pkg-toggle{
-    display:flex; align-items:center; gap:6px; width:100%;
-    background:none; border:none; cursor:pointer; padding:12px 0 6px;
-    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; color:var(--ink-soft);
-  }
-  .pkg-toggle:hover{color:var(--ink);}
-  .pkg-toggle svg{width:15px; height:15px; transition:transform .25s ease;}
-  .pkg-toggle.open svg{transform:rotate(180deg);}
-  .price-card.featured .pkg-price small,
-  .price-card.featured .pkg-lessons small{color:rgba(28,28,28,0.55);}
+/* review arc tag */
+.rv-arc{display:inline-block;font:600 10.5px "Unbounded",sans-serif;letter-spacing:.02em;text-transform:uppercase;color:#D7EF42;background:rgba(215,239,66,.1);border:1px solid rgba(215,239,66,.3);padding:6px 11px;border-radius:999px;margin-bottom:14px}
+/* review carousel */
+.rv-stage{max-width:760px;margin:44px auto 0;text-align:center}
+.rv-quote{font-family:Unbounded,sans-serif;font-weight:600;font-size:clamp(20px,3.4vw,32px);line-height:1.35;letter-spacing:-.01em;color:#f0f0ec;margin:0}
+.rv-who{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:32px}
+.rv-avatar{width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#2a2d26;display:flex;align-items:center;justify-content:center}
+.rv-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.rv-initial{font-family:Unbounded,sans-serif;font-weight:600;font-size:15px;color:#D7EF42}
+.rv-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:38px}
+.rv-nav-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.rv-dots{display:flex;gap:8px}
+.rv-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;border:0;padding:0}
+.rv-dot.on{background:#D7EF42;width:20px;border-radius:5px}
 
-  .price-card .btn{margin-bottom:10px;}
-  .price-manager-note{font-size:12.5px; color:var(--ink-soft);}
-  .price-manager-note a{font-weight:600; text-decoration:underline; text-underline-offset:3px;}
+/* faq */
+.faq-item{border-bottom:1px solid #d0d1c9}
+.faq-toggle{width:100%;background:none;border:0;cursor:pointer;padding:22px 0;display:flex;justify-content:space-between;gap:20px;text-align:left;font-family:Unbounded,sans-serif;font-weight:600;font-size:clamp(14px,1.6vw,16px);line-height:1.35;color:#11120E}
+.faq-toggle:hover{opacity:.6}
+.faq-sign{opacity:.5}
+.faq-body{display:none}
+.faq-body p{max-width:760px;color:#55574F;line-height:1.65;margin:0;padding:0 0 22px;font-size:14.5px}
+.faq-contact:hover{opacity:.85}
 
-  /* ---------- TESTIMONIALS ---------- */
-  .reviews-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-  }
-  @media (max-width:900px){ .reviews-grid{grid-template-columns:1fr;} }
-  .review-card{
-    background:var(--panel);
-    border-radius:18px;
-    padding:26px;
-    display:flex;
-    flex-direction:column;
-    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
-  }
-  .review-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 16px 32px rgba(28,28,28,0.1);
-    background:#fff;
-  }
-  .review-stars{color:var(--ink); letter-spacing:2px; margin-bottom:14px; font-size:14px;}
-  .review-quote{font-size:14.5px; line-height:1.6; margin:0 0 18px; flex:1;}
-  .review-who{font-family:'Unbounded',sans-serif; font-size:13px; font-weight:700;}
-  .review-city{font-size:12.5px; color:var(--ink-soft);}
-
-  /* ---------- FINAL CTA ---------- */
-  .final-cta{
-    background:var(--ink);
-    color:#fff;
-    border-radius:var(--radius);
-    padding:56px 40px;
-    text-align:center;
-  }
-  .final-cta h2{
-    font-family:'Unbounded',sans-serif;
-    font-size:clamp(26px,4.5vw,40px);
-    margin-bottom:14px;
-  }
-  .final-cta p{color:rgba(255,255,255,0.7); font-size:15.5px; margin:0 0 30px;}
-  .final-ctas{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
-  .final-cta .btn-ghost{border-color:rgba(255,255,255,0.4); color:#fff;}
-  .final-cta .btn-ghost:hover{background:#fff; color:var(--ink);}
-
-  /* ---------- FOOTER ---------- */
-  footer{
-    border-top:1px solid var(--line);
-    padding:56px 0 30px;
-  }
-  .foot-grid{
-    display:grid;
-    grid-template-columns:1.3fr 1fr 1fr 1fr;
-    gap:32px;
-    margin-bottom:40px;
-  }
-  @media (max-width:760px){ .foot-grid{grid-template-columns:1fr 1fr;} }
-  @media (max-width:460px){ .foot-grid{grid-template-columns:1fr;} }
-  .foot-brand .logo{margin-bottom:12px;}
-  .foot-brand p{font-size:13.5px; color:var(--ink-soft); max-width:220px; line-height:1.55;}
-  .foot-col h4{
-    font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
-    color:var(--ink-soft); margin-bottom:14px;
-  }
-  .foot-col ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
-  .foot-col a{font-size:14px; text-decoration:none;}
-  .foot-col a:hover{text-decoration:underline;}
-  .foot-bottom{
-    border-top:1px solid var(--line);
-    padding-top:22px;
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
-    font-size:12.5px; color:var(--ink-soft);
-  }
-
-  /* ---------- SCROLL REVEAL ---------- */
-  .reveal{
-    opacity:0;
-    transform:translateY(22px);
-    transition:opacity .6s ease, transform .6s ease;
-  }
-  .reveal.is-visible{
-    opacity:1;
-    transform:translateY(0);
-  }
-  .reveal-stagger.is-visible > *{transition-delay:calc(var(--i, 0) * 90ms);}
-
-  /* ---------- URGENCY BANNER ---------- */
-  .urgency{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-    background:var(--ink);
-    color:#fff;
-    border-radius:100px;
-    padding:12px 22px;
-    font-size:13.5px;
-    font-weight:600;
-    margin-bottom:34px;
-    text-align:center;
-  }
-  .urgency .u-dot{
-    width:8px; height:8px; border-radius:50%;
-    background:var(--accent);
-    flex-shrink:0;
-    animation:pulse 1.8s ease-in-out infinite;
-  }
-  .urgency b{color:var(--accent); font-family:'Unbounded',sans-serif; font-size:13px;}
-  @keyframes pulse{
-    0%, 100%{box-shadow:0 0 0 0 rgba(210,231,57,0.55);}
-    50%{box-shadow:0 0 0 5px rgba(210,231,57,0);}
-  }
-
-  /* ---------- FAQ ---------- */
-  .faq-list{display:flex; flex-direction:column; gap:12px;}
-  .faq-item{
-    border:1.5px solid var(--line);
-    border-radius:16px;
-    overflow:hidden;
-    background:#fff;
-  }
-  .faq-q{
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    background:none;
-    border:none;
-    text-align:left;
-    font-family:'Inter',sans-serif;
-    font-weight:600;
-    font-size:15px;
-    color:var(--ink);
-    padding:18px 20px;
-    cursor:pointer;
-  }
-  .faq-q .faq-icon{
-    flex-shrink:0;
-    width:26px; height:26px;
-    border-radius:50%;
-    background:var(--panel);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Unbounded',sans-serif;
-    font-size:15px;
-    transition:transform .25s ease, background .25s ease;
-  }
-  .faq-item.open .faq-q .faq-icon{background:var(--accent); transform:rotate(45deg);}
-  .faq-a{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .3s ease;
-  }
-  .faq-a-inner{padding:0 20px 20px;}
-  .faq-a p{
-    margin:0 0 8px;
-    font-size:14px;
-    line-height:1.6;
-    color:var(--ink-soft);
-  }
-  .faq-a p:last-child{margin-bottom:0;}
-  .faq-a ul{margin:8px 0 0; padding-left:18px;}
-  .faq-a li{font-size:14px; line-height:1.6; color:var(--ink-soft);}
-  .faq-a li b{color:var(--ink);}
-
-  /* ---------- FLOATING MANAGER BUTTON ---------- */
-  .float-manager{
-    position:fixed;
-    right:18px; bottom:18px;
-    z-index:60;
-    background:var(--ink);
-    color:#fff;
-    font-family:'Unbounded',sans-serif;
-    font-weight:700;
-    font-size:13px;
-    display:flex; align-items:center; gap:8px;
-    padding:13px 18px;
-    border-radius:100px;
-    text-decoration:none;
-    box-shadow:0 8px 24px rgba(0,0,0,0.18);
-    transition:transform .15s ease;
-  }
-  .float-manager:hover{transform:translateY(-2px);}
-  .float-manager .dot{width:8px; height:8px; border-radius:50%; background:var(--accent);}
-
-  @media (prefers-reduced-motion: reduce){
-    .btn, .float-manager{transition:none;}
-    .reveal{opacity:1; transform:none; transition:none;}
-    .u-dot{animation:none;}
-    .nav-links a::after{transition:none;}
-  }
+/* reveal-on-scroll */
+[data-reveal]{opacity:0;transform:translateY(18px)}
 </style>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111997160', 'ym');
-    ym(111997160, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/111997160" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
 </head>
 <body>
-<noscript><style>.reveal{opacity:1 !important; transform:none !important;}</style></noscript>
+<div style="max-width:100%;overflow-x:hidden;background:#090A09">
 
-<header>
-  <div class="wrap nav">
-    <div class="logo">YORK<span>!</span></div>
-    <ul class="nav-links">
-      <li><a href="#why">Почему мы</a></li>
-      <li><a href="#pricing">Абонементы</a></li>
-      <li><a href="talk-club.html">TALK CLUB</a></li>
-      <li><a href="#reviews">Отзывы</a></li>
-      <li><a href="#faq">Вопросы</a></li>
-      <li><a href="#contacts">Контакты</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a class="btn btn-ghost btn-sm" href="login.html">Личный кабинет</a>
-      <a class="btn btn-accent btn-sm" href="trial-form.html" target="_blank" rel="noopener">Записаться</a>
+<header class="site-header">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto;padding:18px 0;display:flex;align-items:center;gap:20px">
+    <a href="#top" style="font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.06em">YORK<span style="color:#D7EF42">!</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+    <label for="nav-toggle" class="nav-toggle-btn" aria-label="Меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></label>
+    <nav class="navlinks" style="display:flex;align-items:center;gap:24px;margin-left:auto;font-size:12px;color:#c9cac5">
+      <a href="#how">Как это работает</a>
+      <details class="nav-drop">
+        <summary>Направления</summary>
+        <div class="nav-drop-panel">
+          <a href="english-for-kids.html">Детям</a>
+          <a href="english-for-adults.html">Взрослым</a>
+          <a href="school-english.html">Школьная программа и ВПР</a>
+          <a href="#talk">Talk Club</a>
+        </div>
+      </details>
+      <a href="#formats">Цены</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;gap:8px">
+      <a href="login.html" style="font-size:13px;font-weight:700;padding:13px 19px;border-radius:999px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.03)">Войти</a>
+      <a href="#final" class="btn-lime" style="padding:13px 19px;font-size:13px">Записаться на пробное <span style="font-size:16px;line-height:0">→</span></a>
     </div>
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="eyebrow">Онлайн-школа английского языка в Уфе</div>
-    <h1>Заговорите по-английски</h1>
-    <div class="cycle-line"><span class="cycle-chip" id="cycleChip">для себя</span></div>
-    <p class="lead">Без нудных правил. Учим английский онлайн: живём в Уфе, а заниматься можно из любой точки. Разберёмся, зачем вам язык, подберём формат и преподавателя, и уже на пробном уроке составим план.</p>
-    <div class="hero-ctas">
-      <a class="btn btn-accent" href="trial-form.html" target="_blank" rel="noopener">Записаться на бесплатный урок</a>
-      <a class="btn btn-ghost" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
-    </div>
-    <div class="hero-note">Не знаете свой уровень? <a href="level-test.html" target="_blank" rel="noopener">Пройдите тест за 5 минут →</a></div>
-  </div>
-</section>
+<section style="position:relative;min-height:min(94vh,860px);display:flex;flex-direction:column;overflow:hidden;padding-top:92px">
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 78% 42%,rgba(215,239,66,.22) 0,rgba(52,66,27,.22) 22%,transparent 46%),linear-gradient(120deg,#0b0d0b,#070807)"></div>
 
-<section>
-  <div class="wrap">
-    <div class="club-banner reveal">
-      <div class="club-banner-glow"></div>
-      <div class="club-banner-badge">💬 Новинка</div>
-      <h3>Стартует пилотный разговорный клуб</h3>
-      <p>Для всех уровней английского: живое общение на разные темы, небольшие группы. Оставляйте заявку, мест немного.</p>
-      <a class="btn btn-accent" href="talk-club-form.html" target="_blank" rel="noopener">Записаться в клуб</a>
-    </div>
-  </div>
-</section>
-
-<section id="why">
-  <div class="wrap">
-    <div class="eyebrow">Почему YORK!</div>
-    <h2 class="section-title">Не просто «учим английский»</h2>
-    <p class="section-sub">Мы проникаемся культурой, комплексно подходим к изучению и подстраиваем программу под то, зачем он вам нужен.</p>
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <div class="wicon">🎓</div>
-        <h3>Сертифицированные преподаватели</h3>
-        <p>Наши преподаватели: прикладные лингвисты. Умеем не только говорить на английском, но и объяснять его.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="wicon">🧒</div>
-        <h3>Находим подход к детям</h3>
-        <p>Наша команда работала вожатыми в детских лагерях, поэтому знаем, как удержать внимание ребёнка и не превратить урок в скуку.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="wicon">🧑‍💼</div>
-        <h3>Работаем и со взрослыми</h3>
-        <p>Отдельные программы для взрослых с той же внимательностью к темпу и цели.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="wicon">🎯</div>
-        <h3>Адаптивность плана</h3>
-        <p>Для себя, переезда или путешествий: подстроим план под вашу цель.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="test-banner reveal">
-      <div>
-        <h3>Не знаете с чего начать?</h3>
-        <p>Пройдите тест на уровень английского: 12 вопросов, 5 минут, результат сразу.</p>
-      </div>
-      <a class="btn btn-dark" href="level-test.html" target="_blank" rel="noopener">Пройти тест</a>
-    </div>
-  </div>
-</section>
-
-<section id="pricing">
-  <div class="wrap">
-    <div class="eyebrow">Абонементы</div>
-    <h2 class="section-title">Выберите формат</h2>
-    <p class="section-sub">Чем больше пакет занятий, тем дешевле стоит один урок. Формат можно обсудить с менеджером до старта.</p>
-    <div class="urgency reveal">
-      <span class="u-dot"></span>
-      🔥 Набор в группу <b>CREW</b> почти закрыт, осталось всего пара мест
-    </div>
-    <div class="price-grid">
-
-      <div class="price-card reveal">
-        <div class="price-head"><span class="picon">👤</span><h3>SOLO</h3></div>
-        <p class="format-desc">Только он и преподаватель. Темп, тема и фокус полностью под него. Подходит, если нужен быстрый результат к конкретной цели: переезд, работа, экзамен или просто не любит группы.</p>
-        <div class="discount-note">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6M12 3v13m0 0-4-4m4 4 4-4"/></svg>
-          Цены со скидкой 15% на первый месяц
+  <div id="top" style="position:relative;z-index:3;width:min(1180px,calc(100% - 48px));margin:0 auto;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:36px 0 clamp(120px,14vw,170px)">
+    <div class="hero-grid2">
+      <div style="max-width:700px">
+        <div data-reveal style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42">Онлайн-школа английского YORK!</div>
+        <h1 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(32px,7vw,92px);line-height:.96;letter-spacing:-.055em;margin:20px 0 0;text-transform:uppercase">Не ещё один курс.<br><span style="color:#D7EF42">Английский для жизни.</span></h1>
+        <p data-reveal style="max-width:52ch;color:#c3c4bd;font-size:16px;line-height:1.65;margin:24px 0 0">Экзамен, собеседование, разговор в путешествии или сериал в оригинале. На бесплатном уроке разберёмся, что мешает вам говорить, и подберём формат под вашу цель.</p>
+        <div data-reveal style="display:flex;flex-wrap:wrap;gap:12px;margin-top:30px">
+          <a href="#final" class="btn-lime">Попробовать бесплатно <span style="font-size:18px;line-height:0">→</span></a>
+          <a href="level-test.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;padding:16px 22px;border-radius:999px;font-weight:700;font-size:14px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04)">Узнать свой уровень</a>
         </div>
-        <div class="pkg-table">
-          <div class="pkg-row popular">
-            <span class="pkg-badge">Популярный</span>
-            <span class="pkg-lessons">8 занятий<small>722,5 ₽ за урок</small></span>
-            <span class="pkg-price"><b>5 780 ₽</b><small>потом 6 800 ₽</small></span>
+      </div>
+      <div data-reveal class="hf">
+        <span class="hf-tag">Бесплатный пробный урок</span>
+        <div class="hf-title">Оставьте имя и телефон, свяжемся с вами и подберём формат</div>
+        <div class="hf-row">
+          <input type="text" placeholder="Ваше имя" aria-label="Ваше имя">
+          <input type="tel" placeholder="Телефон" aria-label="Телефон">
+        </div>
+        <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="hf-btn">Записаться <span style="font-size:16px;line-height:0">→</span></a>
+        <p class="hf-note">Свяжемся с вами в течение дня и подберём удобное время.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:absolute;z-index:4;bottom:0;left:50%;transform:translateX(-50%);width:min(1050px,calc(100% - 48px));display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));background:rgba(18,20,18,.92);border:1px solid rgba(255,255,255,.13);border-bottom:0;border-radius:28px 28px 0 0;overflow:hidden;backdrop-filter:blur(6px)">
+    <div style="padding:22px 30px;border-right:1px solid rgba(255,255,255,.13)">
+      <b style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:16px">SOLO</b>
+      <span style="display:block;margin-top:7px;color:#a8a9a2;font-size:12px">индивидуально</span>
+    </div>
+    <div style="padding:22px 30px;border-right:1px solid rgba(255,255,255,.13)">
+      <b style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:16px">CREW</b>
+      <span style="display:block;margin-top:7px;color:#a8a9a2;font-size:12px">в мини-группе</span>
+    </div>
+    <div style="padding:22px 30px;border-right:1px solid rgba(255,255,255,.13)">
+      <b style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:16px">FREE TRIAL</b>
+      <span style="display:block;margin-top:7px;color:#a8a9a2;font-size:12px">первый урок бесплатно</span>
+    </div>
+  </div>
+</section>
+
+<section style="background:#F3F2ED;color:#141512">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto;padding:clamp(56px,10vw,130px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,5vw,70px);align-items:end">
+    <div style="min-width:0">
+      <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a8b82">YORK! approach</div>
+      <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(30px,6vw,68px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 0;text-transform:uppercase;overflow-wrap:break-word">Знать правила<br>недостаточно.</h2>
+    </div>
+    <div style="min-width:0">
+      <p style="font-size:clamp(16px,1.8vw,20px);line-height:1.55;margin:0;color:#505149">Практикуем речь, ошибаемся и учимся использовать язык в реальных ситуациях, а не заполняем таблицы времён.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:40px">
+        <div data-reveal style="border-top:1px solid #c7c8bf;padding-top:15px">
+          <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px">01</b>
+          <p style="font-size:12.5px;margin:8px 0 0;line-height:1.45;color:#505149">Больше живой практики</p>
+        </div>
+        <div data-reveal style="border-top:1px solid #c7c8bf;padding-top:15px">
+          <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px">02</b>
+          <p style="font-size:12.5px;margin:8px 0 0;line-height:1.45;color:#505149">Преподаватель под цель</p>
+        </div>
+        <div data-reveal style="border-top:1px solid #c7c8bf;padding-top:15px">
+          <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px">03</b>
+          <p style="font-size:12.5px;margin:8px 0 0;line-height:1.45;color:#505149">Онлайн из любой точки</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(56px,9vw,110px) 0">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="max-width:780px;margin-bottom:34px">
+      <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42">Choose your way</div>
+      <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(28px,6vw,62px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 16px;text-transform:uppercase">С чем помочь именно вам?</h2>
+      <p style="color:#aaa;line-height:1.65;margin:0;font-size:15px;max-width:52ch">Выберите, что ближе, соберём короткий ответ и предложим формат. Если вам нужен не урок, а живое общение, загляните в Talk Club.</p>
+    </div>
+    <div class="gsel-tabs">
+      <span class="gsel-tab on">Английский</span>
+      <a href="#talk" class="gsel-tab off">Talk Club</a>
+    </div>
+    <div class="goal-tabs" id="goalTabs">
+      <button class="gtab on" data-goal="travel">Для путешествий</button>
+      <button class="gtab" data-goal="exam">Для школы и ВПР</button>
+      <button class="gtab" data-goal="solo">SOLO</button>
+      <button class="gtab" data-goal="crew">CREW</button>
+      <button class="gtab" data-goal="self">Для себя</button>
+    </div>
+    <div class="gsel-panel">
+      <div class="gsel-text">
+        <div>
+          <small class="goal-kicker" id="goalKicker">01 / travel</small>
+          <h3 class="goal-title" id="goalTitle">Не теряться в незнакомой стране</h3>
+          <p class="goal-text" id="goalDesc">Аэропорт, отель, разговор с местными: базовые ситуации, в которых чаще всего не хватает слов, даже если грамматику вы знаете неплохо.</p>
+        </div>
+        <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="btn-lime" id="goalCta">Подобрать формат <span style="font-size:16px;line-height:0">→</span></a>
+      </div>
+      <div class="gsel-photo">
+        <img id="goalPhoto" src="images/goal-travel.jpg" alt="Путешествия">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="background:#D7EF42;color:#0a0a09;overflow:hidden;padding:11px 0">
+  <div style="display:flex;width:max-content;animation:yk3-mq 32s linear infinite;font-family:Unbounded,sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase">
+    <span style="display:flex;gap:28px;padding-right:28px"><span>Успейте забрать свою осеннюю скидку 15%</span><span>·</span><span>Работа</span><span>·</span><span>Путешествия</span><span>·</span><span>Сериалы</span><span>·</span><span>Новые люди</span><span>·</span><span>Свободный английский</span><span>·</span></span>
+    <span style="display:flex;gap:28px;padding-right:28px"><span>Успейте забрать свою осеннюю скидку 15%</span><span>·</span><span>Работа</span><span>·</span><span>Путешествия</span><span>·</span><span>Сериалы</span><span>·</span><span>Новые люди</span><span>·</span><span>Свободный английский</span><span>·</span></span>
+  </div>
+</div>
+
+<section id="how" style="padding:clamp(40px,7vw,90px) 0 clamp(56px,9vw,110px)">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,60px);margin-bottom:34px">
+      <div style="min-width:0">
+        <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42">How it works</div>
+        <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(28px,6vw,62px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 0;text-transform:uppercase;overflow-wrap:break-word">Начать<br>не сложно.</h2>
+      </div>
+      <p style="color:#aaa;line-height:1.65;align-self:end;margin:0;font-size:15px;max-width:44ch;min-width:0">Приходите на бесплатный урок: познакомимся, определим уровень и посмотрим, подходит ли вам формат. Без обязательств.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px">
+      <article data-reveal class="step-card" style="min-height:clamp(220px,26vw,320px);padding:28px;border:1px solid rgba(255,255,255,.13);border-radius:22px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(160deg,rgba(255,255,255,.035),transparent)">
+        <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px;color:#D7EF42">01 / TRY</b>
+        <div>
+          <h3 style="font-family:Unbounded,sans-serif;font-weight:600;font-size:clamp(20px,2.3vw,25px);line-height:1.1;margin:20px 0 12px">Пробуем</h3>
+          <p style="color:#a8aaa4;line-height:1.55;font-size:14px;margin:0">Приходите на бесплатный пробный урок и знакомитесь с форматом.</p>
+        </div>
+      </article>
+      <article data-reveal class="step-card" style="min-height:clamp(220px,26vw,320px);padding:28px;border:1px solid rgba(255,255,255,.13);border-radius:22px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(160deg,rgba(255,255,255,.035),transparent)">
+        <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px;color:#D7EF42">02 / MATCH</b>
+        <div>
+          <h3 style="font-family:Unbounded,sans-serif;font-weight:600;font-size:clamp(20px,2.3vw,25px);line-height:1.1;margin:20px 0 12px">Подбираем</h3>
+          <p style="color:#a8aaa4;line-height:1.55;font-size:14px;margin:0">Определяем уровень, цель, преподавателя и удобное время.</p>
+        </div>
+      </article>
+      <article data-reveal class="step-card" style="min-height:clamp(220px,26vw,320px);padding:28px;border:1px solid rgba(255,255,255,.13);border-radius:22px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(160deg,rgba(255,255,255,.035),transparent)">
+        <b style="font-family:Unbounded,sans-serif;font-weight:600;font-size:13px;color:#D7EF42">03 / SPEAK</b>
+        <div>
+          <h3 style="font-family:Unbounded,sans-serif;font-weight:600;font-size:clamp(20px,2.3vw,25px);line-height:1.1;margin:20px 0 12px">Говорим</h3>
+          <p style="color:#a8aaa4;line-height:1.55;font-size:14px;margin:0">Начинаем заниматься и постепенно переносим английский в реальную жизнь.</p>
+        </div>
+      </article>
+    </div>
+    <div style="text-align:center;margin-top:34px">
+      <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="btn-lime">Записаться на бесплатный урок <span style="font-size:18px;line-height:0">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="formats" style="background:#fff;padding:clamp(56px,9vw,110px) 0">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="max-width:780px;margin-bottom:40px">
+      <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a8b82">Choose your way</div>
+      <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(30px,5vw,68px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 16px;text-transform:uppercase;color:#11120E">SOLO или CREW?</h2>
+      <p style="color:#5c5d55;line-height:1.6;margin:0;font-size:15px">Один на один или вместе с другими. Выбирайте формат под свою цель, график и темп, поменять его можно в любой момент.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;align-items:start">
+
+      <article data-reveal class="fmt-card" style="--line:rgba(0,0,0,.14);border-radius:28px;padding:clamp(26px,3.4vw,38px);min-height:clamp(360px,40vw,430px);display:flex;flex-direction:column;justify-content:space-between;gap:26px;background:#F3F2ED;color:#10110E;border:1px solid rgba(17,18,14,.10)">
+        <div>
+          <small style="font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:11px;opacity:.65">01 / one to one</small>
+          <div style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(42px,6vw,60px);line-height:.95;letter-spacing:-.06em;margin-top:6px">SOLO</div>
+          <p style="max-width:42ch;min-height:3.2em;line-height:1.6;font-size:15px;margin:16px 0 0;opacity:.85">Индивидуальные занятия. Ваш темп, ваши задачи и больше пространства для персональной работы.</p>
+          <span style="display:inline-block;margin-top:16px;padding:9px 12px;border-radius:999px;border:1px solid currentColor;font-size:11px;opacity:.8">1 ученик + преподаватель</span>
+        </div>
+        <div>
+          <div style="font-size:11px;opacity:.6;margin-bottom:6px">Цена со скидкой 15% на первый месяц</div>
+          <div class="pkg-row pkg-extra" style="display:none">
+            <div><b style="display:block;font-size:14px;font-weight:600">4 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">765 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">3 060 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 3 600 ₽</span></div>
           </div>
-          <div class="pkg-extra" id="pkgExtraSolo">
-            <div class="pkg-row">
-              <span class="pkg-lessons">4 занятия<small>765 ₽ за урок</small></span>
-              <span class="pkg-price"><b>3 060 ₽</b><small>потом 3 600 ₽</small></span>
-            </div>
-            <div class="pkg-row">
-              <span class="pkg-lessons">12 занятий<small>680 ₽ за урок</small></span>
-              <span class="pkg-price"><b>8 160 ₽</b><small>потом 9 600 ₽</small></span>
-            </div>
+          <div class="pkg-row pkg-popular">
+            <span class="pkg-badge" style="background:#10110E;color:#D7EF42">Популярный</span>
+            <div><b style="display:block;font-size:14px;font-weight:600">8 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">722,5 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">5 780 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 6 800 ₽</span></div>
           </div>
-          <button type="button" class="pkg-toggle" onclick="togglePkg('Solo', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            <span>Показать все пакеты</span>
+          <div class="pkg-row pkg-extra" style="display:none">
+            <div><b style="display:block;font-size:14px;font-weight:600">12 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">680 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">8 160 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 9 600 ₽</span></div>
+          </div>
+          <button class="pkg-toggle" type="button">
+            <span class="pkg-toggle-label">Показать все пакеты (4 и 12 занятий)</span>
+            <svg class="pkg-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
+          <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="fmt-cta" style="background:#10110E;color:#fff">Записаться на SOLO <span style="font-size:17px;line-height:0">→</span></a>
         </div>
-        <a class="btn btn-dark" href="trial-form.html" target="_blank" rel="noopener">Записаться на SOLO</a>
-        <span class="price-manager-note">Вопросы по формату? <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a></span>
-      </div>
+      </article>
 
-      <div class="price-card featured reveal">
-        <div class="price-head"><span class="picon">👥</span><h3>CREW</h3></div>
-        <p class="format-desc">Мини-группа 2–4 человека. Дешевле, живее и с элементом соревнования: сравнивают успехи, разбирают диалоги в парах и мотивируют друг друга. Тот же результат, но веселее.</p>
-        <div class="discount-note">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6M12 3v13m0 0-4-4m4 4 4-4"/></svg>
-          Цены со скидкой 15% на первый месяц
+      <article data-reveal class="fmt-card" style="--line:rgba(255,255,255,.14);border-radius:28px;padding:clamp(26px,3.4vw,38px);min-height:clamp(360px,40vw,430px);display:flex;flex-direction:column;justify-content:space-between;gap:26px;background:linear-gradient(140deg,#273215,#10140D);color:#fff;border:1px solid rgba(215,239,66,.28)">
+        <div>
+          <small style="font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:11px;opacity:.65">02 / learn together</small>
+          <div style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(42px,6vw,60px);line-height:.95;letter-spacing:-.06em;margin-top:6px">CREW</div>
+          <p style="max-width:42ch;min-height:3.2em;line-height:1.6;font-size:15px;margin:16px 0 0;opacity:.85">Мини-группа: разговорная практика, диалоги в парах и больше взаимодействия. Вместе проще и веселее.</p>
+          <span style="display:inline-block;margin-top:16px;padding:9px 12px;border-radius:999px;border:1px solid currentColor;font-size:11px;opacity:.8">2–4 участника</span>
         </div>
-        <div class="pkg-table">
-          <div class="pkg-row popular">
-            <span class="pkg-badge">Популярный</span>
-            <span class="pkg-lessons">8 занятий<small>510 ₽ за урок</small></span>
-            <span class="pkg-price"><b>4 080 ₽</b><small>потом 4 800 ₽</small></span>
+        <div>
+          <div style="font-size:11px;opacity:.6;margin-bottom:6px">Цена со скидкой 15% на первый месяц</div>
+          <div class="pkg-row pkg-extra" style="display:none">
+            <div><b style="display:block;font-size:14px;font-weight:600">4 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">552,5 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">2 210 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 2 600 ₽</span></div>
           </div>
-          <div class="pkg-extra" id="pkgExtraCrew">
-            <div class="pkg-row">
-              <span class="pkg-lessons">4 занятия<small>552,5 ₽ за урок</small></span>
-              <span class="pkg-price"><b>2 210 ₽</b><small>потом 2 600 ₽</small></span>
-            </div>
-            <div class="pkg-row">
-              <span class="pkg-lessons">12 занятий<small>467,5 ₽ за урок</small></span>
-              <span class="pkg-price"><b>5 610 ₽</b><small>потом 6 600 ₽</small></span>
-            </div>
+          <div class="pkg-row pkg-popular">
+            <span class="pkg-badge" style="background:#D7EF42;color:#0a0a09">Популярный</span>
+            <div><b style="display:block;font-size:14px;font-weight:600">8 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">510 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">4 080 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 4 800 ₽</span></div>
           </div>
-          <button type="button" class="pkg-toggle" onclick="togglePkg('Crew', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            <span>Показать все пакеты</span>
+          <div class="pkg-row pkg-extra" style="display:none">
+            <div><b style="display:block;font-size:14px;font-weight:600">12 занятий</b><span style="display:block;opacity:.6;margin-top:3px;font-size:12px">467,5 ₽ за урок</span></div>
+            <div style="text-align:right"><strong style="display:block;font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em">5 610 ₽</strong><span style="display:block;opacity:.55;text-decoration:line-through;margin-top:3px;font-size:11px">потом 6 600 ₽</span></div>
+          </div>
+          <button class="pkg-toggle" type="button">
+            <span class="pkg-toggle-label">Показать все пакеты (4 и 12 занятий)</span>
+            <svg class="pkg-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
+          <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="fmt-cta" style="background:#D7EF42;color:#0a0a09">Записаться на CREW <span style="font-size:17px;line-height:0">→</span></a>
         </div>
-        <a class="btn btn-accent" href="trial-form.html" target="_blank" rel="noopener">Записаться на CREW</a>
-        <span class="price-manager-note">Вопросы по формату? <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a></span>
-      </div>
-
-    </div>
-    <p class="section-sub" style="margin:20px 0 0; max-width:none;">CREW: структурированные занятия по учебной программе. Для свободного разговорного формата без учебного плана: <a href="talk-club.html" style="font-weight:600; text-decoration:underline; text-underline-offset:3px;">TALK CLUB</a>.</p>
-  </div>
-</section>
-
-<section id="reviews">
-  <div class="wrap">
-    <div class="eyebrow">Отзывы</div>
-    <h2 class="section-title">Что говорят ученики</h2>
-    <div class="reviews-grid">
-      <div class="review-card reveal">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">Пришёл с языковым барьером и не мог говорить устно, хотя грамматику знал неплохо. Спустя 3 месяца стало гораздо проще, есть результат. Преподаватель Софья отлично объясняет.</p>
-        <div class="review-who">Ян</div>
-        <div class="review-city">Уфа</div>
-      </div>
-      <div class="review-card reveal">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">Начинала с нуля. За месяц уже освоила базу и поняла принцип языка, хотя раньше в принципе было все непонятно. Буду заниматься дальше.</p>
-        <div class="review-who">Галина</div>
-        <div class="review-city">Екатеринбург</div>
-      </div>
-      <div class="review-card reveal">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">Занимался сын — экстренно готовили к ВПР в короткий срок. Улучшили успеваемость и, что важнее, прошёл страх перед контрольными. Все довольны. Спасибо преподавателю Екатерине!</p>
-        <div class="review-who">Олег</div>
-        <div class="review-city">Москва</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="faq">
-  <div class="wrap">
-    <div class="eyebrow">Вопросы</div>
-    <h2 class="section-title">Часто задаваемые вопросы</h2>
-    <p class="section-sub">Не нашёл ответ? <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener" style="font-weight:600; text-decoration:underline; text-underline-offset:3px;">Спроси менеджера</a>, ответит быстро.</p>
-    <div class="faq-list">
-
-      <div class="faq-item reveal">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>1. Как проходят занятия и где они проводятся?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>Занятия проходят онлайн на платформе Яндекс Телемост. На уроках мы используем электронные интерактивные материалы, доски и медиа-контент, а у каждого ученика есть доступ к личному кабинету со словариком и материалами.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item reveal">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>2. Для кого подходят уроки: только для детей или для взрослых тоже?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>Мы работаем и со школьниками/подростками (подтягиваем успеваемость, помогаем с ДЗ, готовимся к ВПР и контрольным), и со взрослыми (разговорный английский для жизни, работы, путешествий и просмотра сериалов в оригинале).</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item reveal">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>3. В каких форматах можно заниматься?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>Вы можете выбрать удобный формат:</p>
-            <ul>
-              <li><b>SOLO</b>: индивидуальные занятия (1 на 1) с персональной программой под ваш темп.</li>
-              <li><b>CREW</b>: мини-группы по 3–4 человек для максимальной разговорной практики и комфортного общения.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item reveal">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>4. Что нужно для первого урока?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>Только ноутбук или планшет с хорошим интернет-соединением, гарнитура/микрофон и ваше желание учиться! Все учебные материалы, рабочие тетради и интерактивные карточки мы предоставляем.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item reveal">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>5. Как проходит бесплатный пробный урок?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>Пробное занятие длится 30 минут. За это время мы познакомимся, определим текущий уровень владения языком, обсудим ваши цели и покажем, как устроен наш формат обучения.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item reveal">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>6. Как работает программа лояльности «York Club»?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>У нас действует реферальная система: рекомендуйте школу YORK! друзьям или знакомым и получайте скидку 15% на следующий месяц обучения за каждого приведённого друга, который начнёт у нас заниматься. Учиться вместе не только веселее, но и выгоднее!</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item reveal">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>7. Что происходит, если пропустить занятие?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>Если у вас не получается присутствовать на уроке, просто предупредите нас заранее (не позднее чем за 24 часа до начала). Мы перенесём занятие на удобное вам время.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item reveal">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>8. Можно ли сменить формат обучения SOLO ↔ CREW?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>Да, конечно! Вы можете в любой момент перейти с индивидуальных занятий (SOLO) в мини-группу (CREW) или наоборот. Мы адаптируем программу и пересчитаем абонемент.</p>
-          </div>
-        </div>
-      </div>
+      </article>
 
     </div>
   </div>
 </section>
 
-<section id="contacts">
-  <div class="wrap">
-    <div class="final-cta">
-      <h2>Готов начать?</h2>
-      <p>Пробный урок: знакомство, разбор цели и уровня. Дальше решишь, продолжать ли.</p>
-      <div class="final-ctas">
-        <a class="btn btn-accent" href="trial-form.html" target="_blank" rel="noopener">Записаться на бесплатный урок</a>
-        <a class="btn btn-ghost" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
+<section id="talk" style="position:relative;overflow:hidden;background:#0e0f0c;padding:clamp(70px,11vw,130px) 0">
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 30%,rgba(215,239,66,.24),transparent 60%)"></div>
+  <div style="position:relative;width:min(980px,calc(100% - 48px));margin:0 auto;text-align:center">
+    <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;color:#fff;font-size:clamp(40px,8vw,84px);line-height:.98;letter-spacing:-.045em;margin:0;text-transform:uppercase">Talk Club</h2>
+    <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:15px;color:#aaa;margin:16px 0 28px">Разговорный клуб</div>
+    <p style="color:#c3c4bd;font-size:18px;line-height:1.6;max-width:640px;margin:0 auto 40px">Живое общение, маленькие группы, встречи под ваш уровень. Без учебника и домашки, только практика и разговор с людьми, которым это тоже интересно.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="https://weyork.online/talk-club-form.html" target="_blank" rel="noopener" class="btn-lime" style="padding:17px 26px;font-size:14.5px">Записаться <span style="font-size:18px;line-height:0">→</span></a>
+      <a href="https://weyork.online/talk-club.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:17px 26px;border-radius:999px;font-weight:700;font-size:14.5px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.04);color:#fff">Узнать больше</a>
+    </div>
+  </div>
+</section>
+
+<div style="background:#D7EF42;color:#0a0a09;overflow:hidden;padding:11px 0">
+  <div style="display:flex;width:max-content;animation:yk3-mq 32s linear infinite;font-family:Unbounded,sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase">
+    <span style="display:flex;gap:28px;padding-right:28px"><span>Free trial</span><span>·</span><span>SOLO</span><span>·</span><span>CREW</span><span>·</span><span>Talk Club</span><span>·</span><span>Дети и взрослые</span><span>·</span><span>Онлайн из любой точки</span><span>·</span></span>
+    <span style="display:flex;gap:28px;padding-right:28px"><span>Free trial</span><span>·</span><span>SOLO</span><span>·</span><span>CREW</span><span>·</span><span>Talk Club</span><span>·</span><span>Дети и взрослые</span><span>·</span><span>Онлайн из любой точки</span><span>·</span></span>
+  </div>
+</div>
+
+<!-- TODO(Клод Код): секция скрыта намеренно (display:none) до появления реальных фото преподавателей — см. HANDOFF.md -->
+<section id="teachers" style="display:none;background:#F3F2ED;color:#11120F;padding:clamp(56px,9vw,110px) 0">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,5vw,70px);align-items:center">
+    <div style="min-width:0">
+      <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a8b82">Meet the crew</div>
+      <h2 style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(26px,7vw,62px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 0;text-transform:uppercase;overflow-wrap:break-word">Те, с кем<br>вы будете<br>говорить.</h2>
+      <p style="color:#5c5d55;line-height:1.65;font-size:15px;max-width:44ch;margin:18px 0 0">Подбираем преподавателя под цель и уровень, а не одного и того же для всех: по возрасту, темпу и тому, ради чего вы учите язык.</p>
+      <a href="#final" class="teacher-cta" style="display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:15px 21px;border-radius:999px;font-weight:700;font-size:14px;background:#D7EF42;color:#0a0a09">Подобрать преподавателя <span style="font-size:17px;line-height:0">→</span></a>
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px">
+        <div style="height:clamp(240px,26vw,330px);border-radius:24px;overflow:hidden;background:#d9dad2"><!-- TODO: фото преподавателя 01 --></div>
+        <div style="height:clamp(240px,26vw,330px);margin-top:clamp(0px,4vw,55px);border-radius:24px;overflow:hidden;background:#d9dad2"><!-- TODO: фото преподавателя 02 --></div>
+      </div>
+      <p style="font-size:12px;color:#777;margin:18px 0 0">Заглушки. Заменим на реальные фото команды.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:#10120F;padding:clamp(56px,9vw,110px) 0">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42">Students say</div>
+    <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,62px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 0;text-transform:uppercase;overflow-wrap:break-word;max-width:14ch">Не нам<br>рассказывать.</h2>
+    <div class="rv-stage" data-reveal>
+      <span class="rv-arc" id="rvArc"></span>
+      <p class="rv-quote" id="rvQuote"></p>
+      <div class="rv-who">
+        <div class="rv-avatar" id="rvAvatar"></div>
+        <div style="text-align:left"><b style="font-size:13px" id="rvName"></b><span style="display:block;color:#8d8f88;font-size:12px;margin-top:2px" id="rvCity"></span></div>
+      </div>
+      <div class="rv-nav">
+        <button class="rv-nav-btn" id="rvPrev" type="button" aria-label="Предыдущий отзыв"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="rv-dots" id="rvDots">
+          <button class="rv-dot on" type="button" data-i="0" aria-label="Отзыв 1"></button>
+          <button class="rv-dot" type="button" data-i="1" aria-label="Отзыв 2"></button>
+          <button class="rv-dot" type="button" data-i="2" aria-label="Отзыв 3"></button>
+        </div>
+        <button class="rv-nav-btn" id="rvNext" type="button" aria-label="Следующий отзыв"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <div class="logo">YORK<span>!</span></div>
-        <p>Онлайн-школа английского. Учим говорить, а не только сдавать тесты.</p>
+<section id="faq" style="background:#F3F2ED;color:#11120E;padding:clamp(56px,9vw,110px) 0">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a8b82">FAQ</div>
+    <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,62px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 0;text-transform:uppercase">Ваши вопросы<br>и наши ответы.</h2>
+    <div style="margin-top:34px;border-top:1px solid #d0d1c9" id="faqList">
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Как проходят занятия?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Онлайн, в Яндекс Телемосте. Обычное занятие SOLO или CREW длится 55 минут. Используем интерактивные материалы, доски и медиа-контент, а у каждого ученика есть личный кабинет со словариком и материалами.</p></div>
       </div>
-      <div class="foot-col">
-        <h4>Разделы</h4>
-        <ul>
-          <li><a href="#why">Почему мы</a></li>
-          <li><a href="#pricing">Абонементы</a></li>
-          <li><a href="talk-club.html">TALK CLUB</a></li>
-          <li><a href="#reviews">Отзывы</a></li>
-          <li><a href="#faq">Вопросы</a></li>
-          <li><a href="login.html">Личный кабинет</a></li>
-          <li><a href="level-test.html" target="_blank" rel="noopener">Тест на уровень</a></li>
-        </ul>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Кому подходит YORK!?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Школьникам, подросткам и взрослым: от нуля до уверенной разговорной практики. Программы у детей и взрослых разные.</p></div>
       </div>
-      <div class="foot-col">
-        <h4>Абонементы</h4>
-        <ul>
-          <li>SOLO: от 3 060 ₽</li>
-          <li>CREW: от 2 210 ₽</li>
-          <li><a href="trial-form.html" target="_blank" rel="noopener">Записаться →</a></li>
-        </ul>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Что происходит на пробном уроке?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Знакомимся, определяем текущий уровень, обсуждаем цель и показываем, как устроен формат. 30 минут, бесплатно.</p></div>
       </div>
-      <div class="foot-col">
-        <h4>Мы на связи</h4>
-        <ul>
-          <li><a href="https://t.me/weyorkonline" target="_blank" rel="noopener">Telegram-канал</a></li>
-          <li><a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Менеджер (всегда на связи)</a></li>
-        </ul>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Можно ли сменить формат?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Да, между SOLO и CREW можно перейти в любой момент. Адаптируем программу и пересчитаем абонемент.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Чем CREW отличается от Talk Club?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>CREW: мини-группа (2–4 человека) со структурированными занятиями по учебной программе, как и SOLO, но с другими учениками для динамики и экономии. Talk Club: свободные тематические дискуссии без формальной программы занятия, акцент на разговорной практике и живом общении, а не на плане урока.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Как работает «York Club»?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Реферальная программа: приведите друга, и когда он начнёт заниматься, вы оба получите скидку 15% на следующий месяц обучения.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-toggle" type="button"><span>Что если пропустить занятие?</span><span class="faq-sign">+</span></button>
+        <div class="faq-body"><p>Предупредите не позднее чем за 24 часа, перенесём урок на удобное время.</p></div>
       </div>
     </div>
-    <div class="foot-bottom">
-      <span>© 2026 YORK! english school</span>
-      <span>Онлайн-уроки · SOLO и CREW · Дети и взрослые</span>
-      <span><a href="privacy-policy.html" style="color:inherit;">Политика конфиденциальности</a></span>
+    <div style="margin-top:34px;text-align:center">
+      <p style="margin:0 0 16px;font-size:13px;color:#6c6d65">Остались вопросы?</p>
+      <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener" class="faq-contact" style="display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:999px;font-weight:700;font-size:14px;background:#11120E;color:#fff">Связаться с менеджером <span style="font-size:17px;line-height:0">→</span></a>
     </div>
+  </div>
+</section>
+
+<section id="final" style="position:relative;overflow:hidden;text-align:center;padding:clamp(70px,12vw,130px) 0">
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 40%,rgba(215,239,66,.16),transparent 55%)"></div>
+  <div style="position:relative;width:min(1180px,calc(100% - 48px));margin:0 auto">
+    <div style="font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42">Ready?</div>
+    <h2 data-reveal style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(48px,11vw,140px);line-height:.9;letter-spacing:-.07em;margin:16px 0 0">LET'S<br>START.</h2>
+    <p style="color:#aaa;max-width:520px;margin:24px auto 30px;line-height:1.65;font-size:15.5px">Первый урок бесплатный. Познакомимся, разберёмся, что мешает говорить, и найдём формат, который подойдёт именно вам.</p>
+    <a href="https://weyork.online/trial-form.html" target="_blank" rel="noopener" class="btn-lime" style="padding:17px 26px">Записаться на пробный урок <span style="font-size:18px;line-height:0">→</span></a>
+  </div>
+</section>
+
+<footer style="border-top:1px solid rgba(255,255,255,.13);padding:38px 0 48px;color:#999">
+  <div style="width:min(1180px,calc(100% - 48px));margin:0 auto;display:flex;justify-content:space-between;gap:30px;font-size:12px;flex-wrap:wrap;align-items:center">
+    <div style="font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.06em;color:#fff">YORK<span style="color:#D7EF42">!</span></div>
+    <nav style="display:flex;gap:18px;flex-wrap:wrap">
+      <a href="#how">Как это работает</a><a href="english-for-kids.html">Детям</a><a href="english-for-adults.html">Взрослым</a><a href="school-english.html">Школьная программа и ВПР</a><a href="#talk">Talk Club</a><a href="level-test.html">Тест на уровень</a><a href="#formats">Цены</a><a href="#faq">FAQ</a><a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Не нашли что искали? →</a>
+    </nav>
+    <span>© YORK! English</span>
   </div>
 </footer>
 
-<a class="float-manager" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">
-  <span class="dot"></span> Менеджер на связи
-</a>
+<button class="asst-btn" id="asstBtn" type="button" aria-label="Помощник">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0a0a09" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</button>
+<div class="asst-panel" id="asstPanel">
+  <div class="asst-bubble">
+    Подберу формат под вашу цель и уровень, с чего начнём?
+    <button class="asst-close" id="asstClose" type="button" aria-label="Закрыть">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <a class="asst-chip" href="level-test.html" target="_blank" rel="noopener">Пройти тест на уровень</a>
+  <a class="asst-chip" href="https://weyork.online/trial-form.html" target="_blank" rel="noopener">Записаться на бесплатный урок</a>
+  <a class="asst-chip" href="#talk">Рассказать про Talk Club</a>
+  <a class="asst-chip" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
+</div>
+
+</div>
 
 <script>
-function togglePkg(name, btn){
-  var extra = document.getElementById('pkgExtra' + name);
-  var isOpen = extra.classList.toggle('open');
-  btn.classList.toggle('open', isOpen);
-  btn.querySelector('span').textContent = isOpen ? 'Скрыть' : 'Показать все пакеты';
-}
-
 (function(){
-  var words = ["для себя","для переезда","для путешествий"];
-  var el = document.getElementById('cycleChip');
-  var i = 0;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) return;
-  setInterval(function(){
-    i = (i + 1) % words.length;
-    el.style.opacity = 0;
-    setTimeout(function(){
-      el.textContent = words[i];
-      el.style.opacity = 1;
-    }, 200);
-  }, 2400);
-  el.style.transition = 'opacity .2s ease';
-})();
+  'use strict';
 
-// Scroll reveal
-(function(){
-  var items = document.querySelectorAll('.reveal');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) {
-    items.forEach(function(el){ el.classList.add('is-visible'); });
-    return;
-  }
-  var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if (entry.isIntersecting){
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
+  /* reveal-on-scroll */
+  var els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+  function show(el){ el.style.transition = 'opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1)'; el.style.opacity = '1'; el.style.transform = 'none'; }
+  var pending = els.slice();
+  function sweep(){
+    pending = pending.filter(function(el){
+      var r = el.getBoundingClientRect();
+      if (r.top < (window.innerHeight || 800) * 0.94 && r.bottom > -40) { show(el); return false; }
+      return true;
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-  items.forEach(function(el){ observer.observe(el); });
-})();
+  }
+  sweep();
+  var t0 = Date.now();
+  var iv = setInterval(function(){ sweep(); if (!pending.length || Date.now() - t0 > 20000) clearInterval(iv); }, 150);
+  window.addEventListener('scroll', sweep, { passive: true, capture: true });
+  window.addEventListener('resize', sweep);
 
-// FAQ accordion
-(function(){
-  var items = document.querySelectorAll('.faq-item');
-  items.forEach(function(item){
-    var btn = item.querySelector('.faq-q');
-    var answer = item.querySelector('.faq-a');
+  /* goal tabs */
+  var goalsData = {
+    travel: { kicker: '01 / travel', title: 'Не теряться в незнакомой стране', text: 'Аэропорт, отель, разговор с местными: базовые ситуации, в которых чаще всего не хватает слов, даже если грамматику вы знаете неплохо.', cta: 'Подобрать формат', photo: 'images/goal-travel.jpg', alt: 'Путешествия' },
+    exam: { kicker: '02 / school', title: 'Спокойно сдавать контрольные и ВПР', text: 'Разбираем школьную программу, закрываем пробелы и снимаем страх перед проверочными: важнее оценки то, что уходит паника.', cta: 'Подробнее для школьников', photo: 'images/goal-exam.jpg', alt: 'Школа и ВПР' },
+    solo: { kicker: '03 / one to one', title: 'Заниматься один на один', text: 'Индивидуальный темп, программа под вашу цель и больше пространства для личной работы с преподавателем.', cta: 'Выбрать SOLO', photo: 'images/goal-solo.jpg', alt: 'SOLO' },
+    crew: { kicker: '04 / together', title: 'Учиться в мини-группе', text: '2–4 человека, больше живого диалога и разговорной практики, и это дешевле, чем SOLO.', cta: 'Выбрать CREW', photo: 'images/goal-crew.jpg', alt: 'CREW' },
+    self: { kicker: '05 / for you', title: 'Учить английский для себя, без привязки к экзамену', text: 'Общий уровень, разговорная практика, фильмы и книги в оригинале, без формального повода, просто чтобы свободно владеть языком.', cta: 'Подобрать формат', photo: 'images/goal-self.jpg', alt: 'Для себя' }
+  };
+  var goalTabs = document.querySelectorAll('#goalTabs .gtab');
+  var goalKicker = document.getElementById('goalKicker');
+  var goalTitle = document.getElementById('goalTitle');
+  var goalDesc = document.getElementById('goalDesc');
+  var goalCta = document.getElementById('goalCta');
+  var goalPhoto = document.getElementById('goalPhoto');
+  function renderGoal(key){
+    var g = goalsData[key];
+    if (!g) return;
+    goalKicker.textContent = g.kicker;
+    goalTitle.textContent = g.title;
+    goalDesc.textContent = g.text;
+    goalCta.childNodes[0].nodeValue = g.cta + ' ';
+    goalPhoto.src = g.photo;
+    goalPhoto.alt = g.alt;
+    goalTabs.forEach(function(t){ t.classList.toggle('on', t.getAttribute('data-goal') === key); });
+  }
+  goalTabs.forEach(function(t){
+    t.addEventListener('click', function(){ renderGoal(t.getAttribute('data-goal')); });
+  });
+
+  /* pricing package toggle (per card, independent) */
+  document.querySelectorAll('.pkg-toggle').forEach(function(btn){
+    var card = btn.closest('.fmt-card');
+    var extras = card.querySelectorAll('.pkg-extra');
+    var label = btn.querySelector('.pkg-toggle-label');
+    var chevron = btn.querySelector('.pkg-chevron');
+    var open = false;
+    btn.addEventListener('click', function(){
+      open = !open;
+      extras.forEach(function(el){ el.style.display = open ? 'flex' : 'none'; });
+      label.textContent = open ? 'Скрыть остальные пакеты' : 'Показать все пакеты (4 и 12 занятий)';
+      chevron.style.transform = open ? 'rotate(180deg)' : 'none';
+    });
+  });
+
+  /* FAQ accordion (one open at a time) */
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var btn = item.querySelector('.faq-toggle');
+    var body = item.querySelector('.faq-body');
+    var sign = item.querySelector('.faq-sign');
     btn.addEventListener('click', function(){
       var isOpen = item.classList.contains('open');
-      items.forEach(function(other){
-        other.classList.remove('open');
-        other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-        other.querySelector('.faq-a').style.maxHeight = null;
+      document.querySelectorAll('.faq-item.open').forEach(function(o){
+        o.classList.remove('open');
+        o.querySelector('.faq-body').style.display = 'none';
+        o.querySelector('.faq-sign').textContent = '+';
       });
       if (!isOpen){
         item.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
+        body.style.display = 'block';
+        sign.textContent = '−';
       }
     });
   });
+
+  /* reviews carousel */
+  var reviewsData = [
+    { arc: 'Языковой барьер → уверенная речь', text: '«Пришёл с языковым барьером и не мог говорить устно, хотя грамматику знал неплохо. Спустя три месяца стало гораздо проще».', name: 'Ян', city: 'Уфа', photo: 'images/review-yan.jpg' },
+    { arc: 'Ноль → разговорная база за месяц', text: '«Начинала с нуля. За месяц освоила базу и поняла принцип языка, хотя раньше всё было непонятно».', name: 'Галина', city: 'Екатеринбург', photo: 'images/review-galina.jpg' },
+    { arc: 'Страх контрольных → уверенность на ВПР', text: '«Готовили сына к ВПР в короткий срок. Успеваемость выросла, и, что важнее, ушёл страх контрольных».', name: 'Олег', city: 'Москва', initial: 'О' }
+  ];
+  var reviewIndex = 0;
+  var rvArc = document.getElementById('rvArc');
+  var rvQuote = document.getElementById('rvQuote');
+  var rvAvatar = document.getElementById('rvAvatar');
+  var rvName = document.getElementById('rvName');
+  var rvCity = document.getElementById('rvCity');
+  var rvDots = document.querySelectorAll('#rvDots .rv-dot');
+  function renderReview(){
+    var r = reviewsData[reviewIndex];
+    rvArc.textContent = r.arc;
+    rvQuote.textContent = r.text;
+    rvName.textContent = r.name;
+    rvCity.textContent = r.city;
+    if (r.photo) {
+      rvAvatar.innerHTML = '<img src="' + r.photo + '" alt="' + r.name + '">';
+    } else {
+      rvAvatar.innerHTML = '<span class="rv-initial">' + r.initial + '</span>';
+    }
+    rvDots.forEach(function(d, i){ d.classList.toggle('on', i === reviewIndex); });
+  }
+  document.getElementById('rvPrev').addEventListener('click', function(){
+    reviewIndex = (reviewIndex - 1 + reviewsData.length) % reviewsData.length;
+    renderReview();
+  });
+  document.getElementById('rvNext').addEventListener('click', function(){
+    reviewIndex = (reviewIndex + 1) % reviewsData.length;
+    renderReview();
+  });
+  rvDots.forEach(function(d){
+    d.addEventListener('click', function(){
+      reviewIndex = parseInt(d.getAttribute('data-i'), 10);
+      renderReview();
+    });
+  });
+  renderReview();
+
+  /* assistant panel (open by default) */
+  var asstPanel = document.getElementById('asstPanel');
+  function toggleAssistant(){ asstPanel.hidden = !asstPanel.hidden; }
+  document.getElementById('asstBtn').addEventListener('click', toggleAssistant);
+  document.getElementById('asstClose').addEventListener('click', toggleAssistant);
 })();
 </script>
-
 </body>
 </html>
