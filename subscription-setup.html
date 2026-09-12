@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Оформить абонемент в YORK!</title>
-<meta name="description" content="Самостоятельное оформление абонемента в онлайн-школе английского YORK!: выберите пакет занятий, преподавателя и удобное время.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Запись на занятия — YORK!</title>
+<meta name="description" content="Запись на занятия в онлайн-школе английского YORK!: выберите формат, преподавателя и удобное время.">
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://weyork.online/subscription-setup.html">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -13,37 +13,109 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root{--bg:#fff;--accent:#D2E739;--ink:#1C1C1C;--ink-soft:rgba(28,28,28,.62);--line:rgba(28,28,28,.12);--panel:#F7F8EF}
-*{box-sizing:border-box} html,body{margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
-.wrap{max-width:560px;margin:0 auto;padding:32px 20px 64px}
-.logo{font-family:'Unbounded',sans-serif;font-weight:900;font-size:22px;text-align:center;margin-bottom:28px}.logo span{background:var(--accent);padding:0 5px;border-radius:7px}
-.step-kicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
-h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:26px;line-height:1.22;margin:0 0 12px}
-h2{font-family:'Unbounded',sans-serif;font-weight:700;font-size:21px;line-height:1.22;margin:0 0 10px}
-.sub{color:var(--ink-soft);font-size:15px;line-height:1.5;margin:0 0 26px}
-.section-label{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;margin:0 0 14px}
-.field{margin-bottom:16px}.field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);margin-bottom:6px}
-.field input,.field select,.field textarea{width:100%;font-family:'Inter',sans-serif;font-size:15px;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease}
-.field textarea{min-height:72px;resize:vertical}.field input:hover,.field select:hover,.field textarea:hover{border-color:rgba(28,28,28,.28)}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(210,231,57,.45)}
-.field select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%231C1C1C' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}.field select:invalid,.field select.is-empty{color:var(--ink-soft)}
-.chip-group{display:flex;flex-wrap:wrap;gap:7px}.chip-group label{position:relative;display:inline-flex;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:100px;padding:9px 15px;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--ink-soft);text-transform:none;letter-spacing:0;transition:.15s;user-select:none}.chip-group input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}.chip-group label:hover{border-color:var(--ink);color:var(--ink)}.chip-group label:has(input:checked),.chip-group label.selected{background:var(--accent);border-color:var(--accent);color:var(--ink);box-shadow:0 2px 8px rgba(210,231,57,.5)}
-.chip-static{display:inline-flex;align-items:center;background:var(--panel,#f5f5f0);border:1.5px solid var(--line);border-radius:100px;padding:9px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:default;opacity:.65}
-.hint-line{font-size:12.5px;color:var(--ink-soft);margin:8px 0 0}.hint-line a{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
-.price-box{background:var(--panel);border-radius:16px;padding:16px 18px;margin:4px 0 16px;font-size:14px;line-height:1.7}
-.price-box .old{opacity:.55;text-decoration:line-through;margin-right:8px}
-.price-box .total{font-family:'Unbounded',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.02em}
-.submit{width:100%;font-family:'Unbounded',sans-serif;font-weight:700;font-size:15px;color:var(--ink);background:var(--accent);border:none;border-radius:100px;padding:17px 24px;cursor:pointer;margin-top:10px;transition:transform .15s ease}.submit:hover{transform:translateY(-2px)}.submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.microcopy{text-align:center;font-size:12.5px;color:var(--ink-soft);line-height:1.45;margin:10px auto 0;max-width:390px}
-#errorMsg{color:#B3261E;font-size:13.5px;font-weight:600;min-height:18px;margin:10px 0 0;text-align:center}
-.slot-day{margin-bottom:12px}.slot-day-label{font-size:12.5px;font-weight:700;color:var(--ink-soft);margin-bottom:6px}.slot-hours{display:flex;flex-wrap:wrap;gap:6px}.slot-btn{padding:9px 14px;border-radius:100px;cursor:pointer;border:1.5px solid var(--line);background:#fff;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;color:var(--ink-soft)}.slot-btn:hover{border-color:var(--ink);color:var(--ink)}.slot-btn.on{background:var(--accent);border-color:var(--accent);color:var(--ink);box-shadow:0 2px 8px rgba(210,231,57,.5)}.slot-btn.on::after{content:' ✓';font-weight:700}
-.pay-card{background:var(--panel);border-radius:16px;padding:16px 18px;margin:0 0 16px;font-size:14px;line-height:1.6}
-.pay-card a{color:var(--ink);font-weight:700}
-.success-box{text-align:center;padding:28px 4px}.success-box .big{font-size:48px;margin-bottom:14px}.success-box h2{font-family:'Unbounded',sans-serif;font-size:21px;margin:0 0 10px}.success-box p{color:var(--ink-soft);font-size:14.5px;line-height:1.6;max-width:390px;margin:0 auto}.next-steps{text-align:left;background:var(--panel);border-radius:18px;padding:8px 18px;margin:24px 0}.next-step{padding:14px 0;border-bottom:1px solid var(--line)}.next-step:last-child{border-bottom:0}.next-step b{display:block;font-size:13px;margin-bottom:3px}.next-step span{font-size:12.5px;color:var(--ink-soft)}
+html,body{margin:0;padding:0}
+body{background:#090A09;color:#fff;font-family:"Golos Text",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:hover{opacity:.72}
+button{font-family:inherit}
+
+/* header / nav — как на главной */
+.nav-toggle-input{display:none}
+.nav-toggle-btn{display:none;align-items:center;justify-content:center;width:40px;height:40px;margin-left:2px;color:#fff;cursor:pointer;line-height:1;background:none;border:0;border-radius:10px}
+.nav-toggle-btn:hover{background:rgba(255,255,255,.06)}
+.header-icon-btn{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;color:#fff;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.03)}
+.header-cta-text{display:inline-flex}
+.header-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
+.navlinks{display:flex;align-items:center;gap:24px;margin-left:auto;font-size:12px;color:#c9cac5}
+@media(max-width:850px){
+  .nav-toggle-btn{display:flex}
+  .header-icon-btn{display:flex}
+  .header-actions .header-cta-text{display:none !important}
+  .navlinks{display:none;position:absolute;top:100%;left:0;width:100%;background:#0a0a09;flex-direction:column;gap:0;padding:12px 0;border-top:1px solid rgba(255,255,255,.13)}
+  .nav-toggle-input:checked ~ .navlinks{display:flex}
+  .navlinks a{padding:12px 24px;font-size:14px}
+  .site-header>div{padding:12px 0}
+}
+.site-header{position:fixed;top:0;left:0;width:100%;z-index:50;background:rgba(9,10,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+
+.btn-lime{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 22px;border-radius:999px;font-weight:700;font-size:14px;background:#D7EF42;color:#0a0a09;border:0;cursor:pointer;font-family:Unbounded,sans-serif}
+.btn-lime:hover{opacity:1;background:#fff}
+.btn-lime:disabled{opacity:.5;cursor:not-allowed}
+
+.wrap{width:min(620px,calc(100% - 40px));margin:0 auto}
+.kicker{font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42}
+h1{font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(28px,5vw,40px);line-height:1.08;letter-spacing:-.03em;margin:14px 0 0}
+.sub{color:#9a9b93;font-size:15px;line-height:1.6;margin:14px 0 0;max-width:44ch}
+
+.section{margin-top:44px}
+.section-title{font-family:Unbounded,sans-serif;font-weight:700;font-size:13px;letter-spacing:.02em;color:#fff;margin:0 0 18px;display:flex;align-items:center;gap:8px}
+
+.field{margin-bottom:18px}
+.field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#8a8b82;margin-bottom:8px}
+.field input,.field select,.field textarea{width:100%;font-family:"Golos Text",sans-serif;font-size:15px;padding:14px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff;transition:border-color .15s ease,box-shadow .15s ease}
+.field textarea{min-height:74px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.32)}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:rgba(255,255,255,.28)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#D7EF42;outline:none;box-shadow:0 0 0 3px rgba(215,239,66,.18)}
+.field select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%23ffffff' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center}
+.field select option{background:#161710;color:#fff}
+
+.chip-group{display:flex;flex-wrap:wrap;gap:8px}
+.chip-group label{position:relative;display:inline-flex;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:11px 18px;font-size:13.5px;font-weight:600;cursor:pointer;color:#c9cac5;transition:.15s;user-select:none}
+.chip-group input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+.chip-group label:hover{border-color:rgba(255,255,255,.4);color:#fff}
+.chip-group label:has(input:checked){background:#D7EF42;border-color:#D7EF42;color:#0a0a09}
+.chip-static{display:inline-flex;align-items:center;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:11px 18px;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.32);cursor:default}
+
+.hint-line{font-size:12.5px;color:#8a8b82;line-height:1.5;margin:10px 0 0}
+
+.slot-day{margin-bottom:14px}
+.slot-day-label{font-size:12.5px;font-weight:700;color:#8a8b82;margin-bottom:7px}
+.slot-hours{display:flex;flex-wrap:wrap;gap:6px}
+.slot-btn{padding:9px 15px;border-radius:999px;cursor:pointer;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.03);font-family:"Golos Text",sans-serif;font-size:13.5px;font-weight:600;color:#c9cac5}
+.slot-btn:hover{border-color:rgba(255,255,255,.4);color:#fff}
+.slot-btn.on{background:#D7EF42;border-color:#D7EF42;color:#0a0a09}
+.slot-btn.on::after{content:' ✓';font-weight:700}
+
+.promo-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px;cursor:pointer;color:#fff;font-size:14px;font-weight:600}
+.promo-toggle:hover{border-color:rgba(255,255,255,.3)}
+.promo-body{display:none;margin-top:14px}
+.promo-body.open{display:block}
+#promoStatus{font-size:12.5px;margin:8px 0 0;min-height:16px}
+
+/* блок оплаты — светлая карточка, визуально выделена, но часть формы */
+.pay-card{background:#F3F2ED;color:#11120E;border-radius:22px;padding:26px;margin-top:16px}
+.pay-card .tariff{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.pay-card .tariff-name{font-size:13.5px;color:#6c6d65;font-weight:600}
+.pay-card .tariff-price{font-family:Unbounded,sans-serif;font-size:26px;font-weight:700;letter-spacing:-.02em}
+.pay-card .tariff-old{font-size:13px;color:#8a8b82;text-decoration:line-through;margin-right:8px;font-weight:600}
+.pay-link-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 22px;border-radius:999px;font-weight:700;font-size:14px;font-family:Unbounded,sans-serif;background:#11120E;color:#fff}
+.pay-link-btn:hover{opacity:.85}
+.pay-card .after-pay{font-size:12.5px;color:#6c6d65;text-align:center;margin:12px 0 0}
+
+/* блок подтверждения — финальный шаг, лаймовый акцент */
+.confirm-card{background:linear-gradient(160deg,rgba(215,239,66,.14),rgba(255,255,255,.03));border:1px solid rgba(215,239,66,.3);border-radius:22px;padding:26px;margin-top:16px;text-align:center}
+.confirm-card h2{font-family:Unbounded,sans-serif;font-weight:700;font-size:19px;margin:0 0 10px}
+.confirm-card p{color:#c3c4bd;font-size:14px;line-height:1.6;margin:0 0 20px}
+
+#errorMsg{color:#F3958A;font-size:13.5px;font-weight:600;min-height:18px;margin:12px 0 0;text-align:center}
 .hidden{display:none!important}
+
+.success-box{text-align:center;padding:40px 4px}
+.success-box .big{font-size:48px;margin-bottom:14px}
+.success-box h2{font-family:Unbounded,sans-serif;font-size:22px;margin:0 0 10px}
+.success-box p{color:#9a9b93;font-size:14.5px;line-height:1.6;max-width:400px;margin:0 auto}
+.next-steps{text-align:left;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:8px 18px;margin:26px 0}
+.next-step{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.next-step:last-child{border-bottom:0}
+.next-step b{display:block;font-size:13px;margin-bottom:3px}
+.next-step span{font-size:12.5px;color:#9a9b93}
+
+footer{border-top:1px solid rgba(255,255,255,.13);padding:38px 0 48px;color:#999;margin-top:60px}
 </style>
 
 <!-- Yandex.Metrika counter -->
@@ -54,78 +126,121 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 <noscript><div><img src="https://mc.yandex.ru/watch/111997160" style="position:absolute;left:-9999px" alt=""></div></noscript>
 </head>
 <body>
-<div class="wrap">
-<div class="logo">YORK<span>!</span></div>
+
+<header class="site-header">
+  <div class="wrap" style="padding:18px 0;display:flex;align-items:center;gap:20px;width:min(1180px,calc(100% - 48px))">
+    <a href="/" style="font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.06em">YORK<span style="color:#D7EF42">!</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+    <nav class="navlinks">
+      <a href="/#how">Как это работает</a>
+      <a href="/#formats">Цены</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a href="login.html" class="header-icon-btn" aria-label="Войти"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg></a>
+      <a href="login.html" class="header-cta-text" style="font-size:13px;font-weight:700;padding:13px 19px;border-radius:999px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.03)">Войти</a>
+      <label for="nav-toggle" class="nav-toggle-btn" aria-label="Меню"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></label>
+    </div>
+  </div>
+</header>
+
+<div class="wrap" style="padding:clamp(120px,16vw,150px) 0 60px">
 
 <form id="subForm">
-  <div class="step-kicker">Оформление абонемента</div>
-  <h1>Оформите абонемент самостоятельно.</h1>
-  <p class="sub">Заполните форму — мы проверим оплату и в течение нескольких часов пришлём логин и пароль от личного кабинета в Telegram.</p>
+  <div class="kicker">YORK!</div>
+  <h1>Запись на занятия</h1>
+  <p class="sub">Заполните форму и выберите удобное время.</p>
 
   <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label for="website">Оставьте это поле пустым</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 
-  <div class="field"><label for="fullName">Как вас зовут?</label><input id="fullName" type="text" placeholder="Имя и фамилия" required></div>
+  <div class="section">
+    <div class="field"><label for="fullName">Как вас зовут?</label><input id="fullName" type="text" placeholder="Имя и фамилия" required></div>
 
-  <div class="field"><label for="timezone">Ваш часовой пояс</label><select id="timezone" required><option value="" selected disabled>— выберите —</option><option value="Калининград (МСК-1)">Калининград (МСК-1)</option><option value="Москва (МСК)">Москва (МСК)</option><option value="Самара (МСК+1)">Самара (МСК+1)</option><option value="Екатеринбург (МСК+2)">Екатеринбург (МСК+2)</option><option value="Омск (МСК+3)">Омск (МСК+3)</option><option value="Красноярск (МСК+4)">Красноярск (МСК+4)</option><option value="Иркутск (МСК+5)">Иркутск (МСК+5)</option><option value="Якутск (МСК+6)">Якутск (МСК+6)</option><option value="Владивосток (МСК+7)">Владивосток (МСК+7)</option><option value="Другой / за рубежом">Другой / за рубежом (укажу вручную)</option></select><input type="text" id="timezoneOther" class="hidden" placeholder="Например: Ташкент, UTC+5" style="margin-top:8px"></div>
+    <div class="field"><label for="timezone">Ваш часовой пояс</label><select id="timezone" required><option value="" selected disabled>— выберите —</option><option value="Калининград (МСК-1)">Калининград (МСК-1)</option><option value="Москва (МСК)">Москва (МСК)</option><option value="Самара (МСК+1)">Самара (МСК+1)</option><option value="Екатеринбург (МСК+2)">Екатеринбург (МСК+2)</option><option value="Омск (МСК+3)">Омск (МСК+3)</option><option value="Красноярск (МСК+4)">Красноярск (МСК+4)</option><option value="Иркутск (МСК+5)">Иркутск (МСК+5)</option><option value="Якутск (МСК+6)">Якутск (МСК+6)</option><option value="Владивосток (МСК+7)">Владивосток (МСК+7)</option><option value="Другой / за рубежом">Другой / за рубежом (укажу вручную)</option></select><input type="text" id="timezoneOther" class="hidden" placeholder="Например: Ташкент, UTC+5" style="margin-top:8px"></div>
 
-  <div class="field">
-    <label>Формат занятий</label>
-    <div class="chip-group">
-      <label class="selected"><input type="radio" name="format" value="SOLO" checked>SOLO — индивидуально</label>
-      <span class="chip-static">CREW — мини-группа (скоро)</span>
+    <div class="field">
+      <label>Формат занятий</label>
+      <div class="chip-group">
+        <label><input type="radio" name="format" value="SOLO" checked>SOLO — индивидуально</label>
+        <span class="chip-static">CREW — мини-группа (скоро)</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Занятий в месяц</label>
+      <div class="chip-group" id="lessonsGroup">
+        <label><input type="radio" name="lessons" value="4">4</label>
+        <label><input type="radio" name="lessons" value="8" checked>8</label>
+        <label><input type="radio" name="lessons" value="12">12</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Преподаватель</label>
+      <div class="chip-group" id="teacherGroup"><span style="font-size:13px;color:#8a8b82">Загружаем…</span></div>
+    </div>
+
+    <div class="field">
+      <label>Когда вам удобно заниматься? <span style="font-weight:400;text-transform:none;letter-spacing:0">(до двух вариантов)</span></label>
+      <div id="slotsPicker"><p style="font-size:13px;color:#8a8b82;margin:0">Сначала выберите преподавателя выше.</p></div>
+    </div>
+
+    <div class="field"><label for="timeComment">Комментарий <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label><textarea id="timeComment" placeholder="Например: по утрам удобнее"></textarea></div>
+  </div>
+
+  <div class="section">
+    <button type="button" class="promo-toggle" id="promoToggle"><span>Есть промокод?</span><span id="promoChevron">+</span></button>
+    <div class="promo-body" id="promoBody">
+      <div class="field" style="margin-bottom:0"><label for="promoCode">Промокод <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label><input id="promoCode" type="text" placeholder="Например: YORK15"><p id="promoStatus"></p></div>
     </div>
   </div>
 
-  <div class="field">
-    <label>Занятий в месяц</label>
-    <div class="chip-group" id="lessonsGroup">
-      <label><input type="radio" name="lessons" value="4">4</label>
-      <label class="selected"><input type="radio" name="lessons" value="8" checked>8</label>
-      <label><input type="radio" name="lessons" value="12">12</label>
+  <div class="section">
+    <div class="section-title">Оплата</div>
+    <div class="pay-card">
+      <div class="tariff">
+        <div>
+          <div class="tariff-name" id="tariffName">SOLO · 8 занятий</div>
+        </div>
+        <div id="tariffPrice">
+          <span class="tariff-price">—</span>
+        </div>
+      </div>
+      <a href="#" target="_blank" rel="noopener" class="pay-link-btn" id="payLinkBtn">Перейти к оплате →</a>
+      <p class="after-pay">После оплаты нажмите «Подтвердить запись».</p>
     </div>
-    <p class="hint-line">Абонемент не растягивается — это количество занятий именно в этом месяце. Если урок переносится, использовать его нужно в пределах того же месяца.</p>
   </div>
 
-  <div class="price-box" id="priceBox">Загружаем цены…</div>
-
-  <div class="field">
-    <label for="promoCode">Промокод <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label>
-    <input id="promoCode" type="text" placeholder="YORK15 или реферальный код">
-    <p id="promoStatus" style="font-size:12.5px;margin:6px 0 0;min-height:16px"></p>
+  <div class="section">
+    <div class="confirm-card">
+      <h2>Подтвердить запись</h2>
+      <p>Проверим оплату, подтвердим расписание и пришлём данные для личного кабинета в Telegram.</p>
+      <button class="btn-lime" type="submit" id="submitBtn" style="width:100%">Подтвердить запись →</button>
+      <p id="errorMsg"></p>
+    </div>
   </div>
-
-  <div class="field">
-    <label>Преподаватель</label>
-    <div class="chip-group" id="teacherGroup"><span style="font-size:13px;color:var(--ink-soft)">Загружаем…</span></div>
-  </div>
-
-  <div class="field" id="slotsField">
-    <label>Когда вам удобно заниматься? <span style="font-weight:400;text-transform:none;letter-spacing:0">(до двух вариантов)</span></label>
-    <div id="slotsPicker"><p style="font-size:13px;color:var(--ink-soft);margin:0">Сначала выберите преподавателя выше.</p></div>
-    <p class="hint-line">Это не бронирование — мы подтвердим точное время после оформления.</p>
-  </div>
-
-  <div class="field"><label for="timeComment">Комментарий по времени <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label><textarea id="timeComment" placeholder="Например: по утрам удобнее, не каждую неделю одинаково"></textarea></div>
-
-  <div class="pay-card" id="payCard">Загружаем ссылку на оплату…</div>
-
-  <p id="errorMsg"></p>
-  <button class="submit" type="submit" id="submitBtn">Отправить заявку →</button>
-  <p class="microcopy">Мы проверим оплату вручную и подтвердим абонемент — оплата по ссылке выше считается согласием на условия занятий.</p>
 </form>
 
 <div class="success-box hidden" id="successBox">
   <div class="big">🎉</div>
-  <h2>Заявка отправлена!</h2>
-  <p>Логин и пароль пришлём в течение нескольких часов после проверки оплаты.</p>
+  <h2>Запись подтверждена!</h2>
+  <p>Данные для личного кабинета пришлём в течение нескольких часов после проверки оплаты.</p>
   <div class="next-steps">
     <div class="next-step"><b>Обязательно подпишитесь на бота</b><span>Иначе не сможем отправить доступ — это единственный канал, куда придёт логин и пароль.</span></div>
     <div class="next-step"><b>Если что-то пошло не так</b><span>Напишите менеджеру — поможем разобраться.</span></div>
   </div>
-  <a id="connectTelegramBtn" href="#" target="_blank" class="submit" style="display:block;text-decoration:none;text-align:center">Подписаться на бота →</a>
-  <p class="hint-line" style="text-align:center"><a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a></p>
+  <a id="connectTelegramBtn" href="#" target="_blank" class="btn-lime" style="display:flex;text-decoration:none;text-align:center">Подписаться на бота →</a>
+  <p class="hint-line" style="text-align:center;margin-top:16px"><a href="https://t.me/thearbeiter01" target="_blank" rel="noopener" style="text-decoration:underline">Написать менеджеру</a></p>
 </div>
+
 </div>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:30px;font-size:12px;flex-wrap:wrap;align-items:center;width:min(1180px,calc(100% - 48px))">
+    <a href="/" style="font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.06em;color:#fff">YORK<span style="color:#D7EF42">!</span></a>
+    <span>© YORK! English</span>
+  </div>
+</footer>
 
 <script>
 const SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
@@ -137,21 +252,23 @@ const TEST_TUTOR_ID = 'd492122c-5d5b-41ad-aae9-e01c044fd77f';
 function reachGoal(name){ if (window.ym) ym(111997160, 'reachGoal', name); }
 reachGoal('subscription_setup_view');
 
+/* ---------- промокод: сворачиваемый блок ---------- */
+document.getElementById('promoToggle').addEventListener('click', () => {
+  const body = document.getElementById('promoBody');
+  const open = body.classList.toggle('open');
+  document.getElementById('promoChevron').textContent = open ? '−' : '+';
+});
+
 /* ---------- тайм-зона: часовой пояс "другое" ---------- */
 document.getElementById('timezone').addEventListener('change', (e) => {
   const isOther = e.target.value === 'Другой / за рубежом';
   document.getElementById('timezoneOther').classList.toggle('hidden', !isOther);
-  // время слотов зависит от часового пояса — перерисовываем без повторного запроса
   if (lastSlotRows) renderSlotButtons(lastSlotRows, document.getElementById('slotsPicker'));
 });
 
-/* ---------- чипы формата / количества занятий ---------- */
+/* ---------- чипы количества занятий ---------- */
 document.querySelectorAll('#lessonsGroup input[type="radio"]').forEach(el => {
-  el.addEventListener('change', () => {
-    document.querySelectorAll('#lessonsGroup label').forEach(l => l.classList.remove('selected'));
-    el.closest('label').classList.add('selected');
-    recalcPrice();
-  });
+  el.addEventListener('change', recalcPrice);
 });
 
 /* ---------- цены: из pricing_settings, единый источник с главной страницей ---------- */
@@ -166,7 +283,7 @@ async function loadPricing(){
       pricingData = rows[0];
       referralDiscountPercent = Number(pricingData.referral_discount_percent) || 15;
     }
-  } catch(e){ /* покажем ошибку в price-box ниже */ }
+  } catch(e){ /* покажем прочерк в карточке оплаты */ }
   recalcPrice();
 }
 
@@ -178,17 +295,18 @@ function currentLessonsCount(){
 let promoDiscountApplied = false;
 
 function recalcPrice(){
-  const box = document.getElementById('priceBox');
-  if (!pricingData){ box.textContent = 'Не получилось загрузить цены. Обновите страницу.'; return; }
-
   const n = currentLessonsCount();
-  const base = Number(pricingData['solo_' + n]) || 0;
+  document.getElementById('tariffName').textContent = `SOLO · ${n} занятий`;
+  const priceEl = document.getElementById('tariffPrice');
 
+  if (!pricingData){ priceEl.innerHTML = '<span class="tariff-price">—</span>'; return; }
+
+  const base = Number(pricingData['solo_' + n]) || 0;
   if (promoDiscountApplied){
     const discounted = Math.round(base * (1 - referralDiscountPercent / 100));
-    box.innerHTML = `<span class="old">${base.toLocaleString('ru-RU')} ₽</span><span class="total">${discounted.toLocaleString('ru-RU')} ₽</span><div style="margin-top:4px;color:#3B7A1E;">Скидка ${referralDiscountPercent}% применена</div>`;
+    priceEl.innerHTML = `<span class="tariff-old">${base.toLocaleString('ru-RU')} ₽</span><span class="tariff-price">${discounted.toLocaleString('ru-RU')} ₽</span>`;
   } else {
-    box.innerHTML = `<span class="total">${base.toLocaleString('ru-RU')} ₽</span><div style="margin-top:4px;">SOLO · ${n} занятий в месяц</div>`;
+    priceEl.innerHTML = `<span class="tariff-price">${base.toLocaleString('ru-RU')} ₽</span>`;
   }
 }
 
@@ -200,12 +318,12 @@ document.getElementById('promoCode').addEventListener('input', (e) => {
     status.textContent = '';
     promoDiscountApplied = false;
   } else if (val.toUpperCase() === 'YORK15'){
-    status.textContent = `✓ Промокод применён — скидка ${referralDiscountPercent}% на первый месяц`;
-    status.style.color = '#3B7A1E';
+    status.textContent = `✓ Промокод применён — скидка ${referralDiscountPercent}%`;
+    status.style.color = '#8FD14F';
     promoDiscountApplied = true;
   } else {
     status.textContent = 'Проверим этот код при обработке заявки';
-    status.style.color = 'var(--ink-soft)';
+    status.style.color = '#8a8b82';
     promoDiscountApplied = false;
   }
   recalcPrice();
@@ -217,12 +335,17 @@ document.getElementById('promoCode').addEventListener('input', (e) => {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/payment_link_settings?id=eq.1&select=solo_full_url`, { headers: REST_HEADERS });
     const rows = await res.json();
     const url = (Array.isArray(rows) && rows.length && rows[0].solo_full_url) || '';
-    const card = document.getElementById('payCard');
-    card.innerHTML = url
-      ? `Оплатите абонемент по ссылке: <a href="${url}" target="_blank" rel="noopener">перейти к оплате →</a><p class="hint-line" style="margin-top:8px">Мы проверяем поступление оплаты вручную.</p>`
-      : `Ссылка на оплату временно недоступна — напишите менеджеру после отправки заявки.`;
+    const btn = document.getElementById('payLinkBtn');
+    if (url){
+      btn.href = url;
+    } else {
+      btn.href = 'https://t.me/thearbeiter01';
+      btn.textContent = 'Написать менеджеру →';
+    }
   } catch(e){
-    document.getElementById('payCard').textContent = 'Не получилось загрузить ссылку на оплату — напишите менеджеру после отправки заявки.';
+    const btn = document.getElementById('payLinkBtn');
+    btn.href = 'https://t.me/thearbeiter01';
+    btn.textContent = 'Написать менеджеру →';
   }
 })();
 
@@ -240,15 +363,15 @@ let selectedTeacherId = null;
 
     let html = '';
     if (sofia){
-      html += `<label class="selected"><input type="radio" name="teacher" value="${sofia.id}" checked>${sofia.full_name}</label>`;
+      html += `<label><input type="radio" name="teacher" value="${sofia.id}" checked>${sofia.full_name}</label>`;
       selectedTeacherId = sofia.id;
     }
     html += others.map(t => `<span class="chip-static">${t.full_name}</span>`).join('');
-    teacherGroup.innerHTML = html || '<span style="font-size:13px;color:var(--ink-soft)">Сейчас нет доступных преподавателей — напишите менеджеру.</span>';
+    teacherGroup.innerHTML = html || '<span style="font-size:13px;color:#8a8b82">Сейчас нет доступных преподавателей — напишите менеджеру.</span>';
 
     if (selectedTeacherId) loadSlotsForTeacher(selectedTeacherId);
   } catch(e){
-    teacherGroup.innerHTML = '<span style="font-size:13px;color:var(--ink-soft)">Не получилось загрузить список — напишите менеджеру.</span>';
+    teacherGroup.innerHTML = '<span style="font-size:13px;color:#8a8b82">Не получилось загрузить список — напишите менеджеру.</span>';
   }
 })();
 
@@ -266,7 +389,12 @@ const TZ_DATIVE = {
 };
 function studentTz(){ const label = document.getElementById('timezone').value; return TZ_MAP[label] || Intl.DateTimeFormat().resolvedOptions().timeZone; }
 function studentTzLabel(){ const label = document.getElementById('timezone').value; return TZ_DATIVE[label] || ''; }
-function slotsTzHint(){ const label = studentTzLabel(); return label ? `🕐 Время показано по вашему часовому поясу (${label}).` : '🕐 Время показано по часовому поясу, который вы укажете выше.'; }
+function slotsTzHint(){
+  const label = studentTzLabel();
+  return label
+    ? `🕐 Время указано по вашему часовому поясу (${label}). Точное время подтвердим после записи.`
+    : '🕐 Время указано по часовому поясу, который вы укажете выше. Точное время подтвердим после записи.';
+}
 
 function tzOffsetMinutes(date, timeZone){
   const dtf = new Intl.DateTimeFormat('en-US', { timeZone, hour12:false, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit' });
@@ -301,20 +429,20 @@ async function loadSlotsForTeacher(teacherId){
   const toDate = new Date(today); toDate.setDate(toDate.getDate() + 13);
   const to = dateKeyLocal(toDate);
 
-  box.innerHTML = '<p style="font-size:13px;color:var(--ink-soft);margin:0">Загружаем свободные окна…</p>';
+  box.innerHTML = '<p style="font-size:13px;color:#8a8b82;margin:0">Загружаем свободные окна…</p>';
   try {
     const url = `${SUPABASE_URL}/rest/v1/teacher_availability?teacher_id=eq.${teacherId}&slot_date=gte.${from}&slot_date=lte.${to}&select=slot_date,hour&order=slot_date.asc,hour.asc`;
     const res = await fetch(url, { headers: REST_HEADERS });
     const rows = await res.json();
     if (!Array.isArray(rows) || !rows.length){
       lastSlotRows = null;
-      box.innerHTML = '<p style="font-size:13px;color:var(--ink-soft);margin:0">Пока нет отмеченных окон — оставьте заявку, мы согласуем время вручную.</p>';
+      box.innerHTML = '<p style="font-size:13px;color:#8a8b82;margin:0">Пока нет отмеченных окон — оставьте заявку, мы согласуем время вручную.</p>';
       return;
     }
     lastSlotRows = rows;
     renderSlotButtons(rows, box);
   } catch(e){
-    box.innerHTML = '<p style="font-size:13px;color:var(--ink-soft);margin:0">Не получилось загрузить свободные окна — оставьте заявку, мы согласуем время вручную.</p>';
+    box.innerHTML = '<p style="font-size:13px;color:#8a8b82;margin:0">Не получилось загрузить свободные окна — оставьте заявку, мы согласуем время вручную.</p>';
   }
 }
 
@@ -334,7 +462,7 @@ function renderSlotButtons(rows, box){
       const isOn = selectedSlots.some(s => s.key === it.srcDate + '|' + it.srcHour);
       return `<button type="button" class="slot-btn${isOn ? ' on' : ''}" data-date="${it.srcDate}" data-hour="${it.srcHour}" onclick="toggleSlot(this)">${it.view.time}</button>`;
     }).join('')}</div></div>`;
-  }).join('') + `<p style="font-size:12px;color:var(--ink-soft);margin:10px 0 0;">${slotsTzHint()}</p>`;
+  }).join('') + `<p class="hint-line">${slotsTzHint()}</p>`;
 }
 
 function toggleSlot(btn){
@@ -350,7 +478,7 @@ function toggleSlot(btn){
   }
 }
 
-/* ---------- отправка формы ---------- */
+/* ---------- отправка формы ("Подтвердить запись") ---------- */
 document.getElementById('subForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const errorMsg = document.getElementById('errorMsg');
@@ -420,10 +548,11 @@ document.getElementById('subForm').addEventListener('submit', async (e) => {
 
     document.getElementById('subForm').classList.add('hidden');
     document.getElementById('successBox').classList.remove('hidden');
+    window.scrollTo({top:0, behavior:'smooth'});
     reachGoal('subscription_setup_submitted');
     document.getElementById('connectTelegramBtn').href = `https://t.me/weyorkonlinebot?start=${linkToken}`;
   } catch(err){
-    btn.disabled = false; btn.textContent = 'Отправить заявку';
+    btn.disabled = false; btn.textContent = 'Подтвердить запись →';
     const detail = (err && err.message) ? err.message : '';
     errorMsg.textContent = detail ? 'Не получилось отправить: ' + detail : 'Не получилось отправить. Проверьте интернет-соединение и попробуйте ещё раз.';
   }

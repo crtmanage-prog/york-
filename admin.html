@@ -3851,7 +3851,6 @@ function requestCardHtml(r, mode){
         <button class="btn btn-ghost btn-sm" onclick="showSubscriptionSetupLink()">Ссылка на оформление абонемента</button>
         <button class="btn btn-ghost btn-sm" onclick="toggleAdminComment('${r.id}')">🔒 Заметка</button>
         ${(mode !== 'done' && mode !== 'archive') ? `
-          <button class="btn btn-ghost btn-sm" onclick="setRequestStatus('${r.id}','cancelled')">Отменить</button>
           <button class="btn btn-ghost btn-sm" onclick="setRequestStatus('${r.id}','declined')">Отклонить</button>
         ` : ''}
         ${(mode === 'done' || mode === 'closed') ? `<button class="btn btn-ghost btn-sm" onclick="archiveRequest('${r.id}', true)">В архив</button>` : ''}
