@@ -78,6 +78,7 @@ button{font-family:inherit}
 .nav-drop-panel{position:absolute;top:28px;left:0;background:#0a0a09;border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:2px;min-width:220px;box-shadow:0 12px 28px rgba(0,0,0,.4);z-index:20}
 .nav-drop-panel a{padding:9px 12px;border-radius:8px;color:#c9cac5;font-size:12px;display:block}
 .nav-drop-panel a:hover{background:rgba(255,255,255,.06);color:#fff}
+.navlinks{display:flex;align-items:center;gap:24px;margin-left:auto;font-size:12px;color:#c9cac5}
 @media(max-width:850px){
   .nav-toggle-btn{display:block}
   .navlinks{display:none;position:absolute;top:100%;left:0;width:100%;background:#0a0a09;flex-direction:column;gap:0;padding:12px 0;border-top:1px solid rgba(255,255,255,.13)}
@@ -187,7 +188,7 @@ button{font-family:inherit}
     <a href="#top" style="font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.06em">YORK<span style="color:#D7EF42">!</span></a>
     <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
     <label for="nav-toggle" class="nav-toggle-btn" aria-label="Меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></label>
-    <nav class="navlinks" style="display:flex;align-items:center;gap:24px;margin-left:auto;font-size:12px;color:#c9cac5">
+    <nav class="navlinks">
       <a href="#how">Как это работает</a>
       <details class="nav-drop">
         <summary>Направления</summary>
