@@ -111,6 +111,13 @@ button{font-family:inherit}
 .faq-sign{opacity:.5}
 .faq-body{display:none}
 .faq-body p{max-width:760px;color:#55574F;line-height:1.65;margin:0;padding:0 0 22px;font-size:14.5px}
+
+/* FAQ category tabs — тот же принцип, что и goal-tabs/gtab на главной */
+.faq-tabs{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.faq-tabs::-webkit-scrollbar{display:none}
+.ftab{flex:0 0 auto;padding:13px 20px;border-radius:999px;font:700 13px "Unbounded",sans-serif;letter-spacing:-.01em;border:1px solid rgba(17,18,14,.16);background:#fff;color:#55574F;cursor:pointer;white-space:nowrap}
+.ftab.on{background:#D7EF42;color:#0a0a09;border-color:#D7EF42}
+.faq-panel[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -214,9 +221,15 @@ button{font-family:inherit}
     <div class="kicker" style="color:#8a8b82">FAQ</div>
     <h2 style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(28px,4vw,48px);line-height:1.08;letter-spacing:-.03em;margin:16px 0 0">Вопросы родителей</h2>
 
-    <div style="margin-top:40px" class="faq-group">
-      <div style="font-family:Unbounded,sans-serif;font-weight:700;font-size:15px;margin-bottom:2px">📚 Обучение</div>
-      <div style="border-top:1px solid #d0d1c9" id="faqList">
+    <div class="faq-tabs" id="faqTabs" style="margin-top:34px">
+      <button class="ftab on" data-cat="learn">📚 Обучение</button>
+      <button class="ftab" data-cat="approach">💬 Подход к детям</button>
+      <button class="ftab" data-cat="org">🗓️ Организация занятий</button>
+      <button class="ftab" data-cat="progress">📈 Прогресс</button>
+    </div>
+
+    <div id="faqList">
+      <div class="faq-panel" data-panel="learn" style="border-top:1px solid #d0d1c9">
         <div class="faq-item">
           <button class="faq-toggle" type="button"><span>С какого возраста можно начать обучение?</span><span class="faq-sign">+</span></button>
           <div class="faq-body"><p>Берём учеников примерно с 7 лет: с этого возраста ребёнку уже комфортно заниматься онлайн и удерживать внимание на уроке.</p></div>
@@ -238,11 +251,8 @@ button{font-family:inherit}
           <div class="faq-body"><p>Растущую уверенность в разговоре на английском и понятный прогресс по уровню: регулярно сверяем, что усвоено, и подстраиваем программу под ребёнка.</p></div>
         </div>
       </div>
-    </div>
 
-    <div style="margin-top:34px" class="faq-group">
-      <div style="font-family:Unbounded,sans-serif;font-weight:700;font-size:15px;margin-bottom:2px">💬 Подход к детям</div>
-      <div style="border-top:1px solid #d0d1c9">
+      <div class="faq-panel" data-panel="approach" style="border-top:1px solid #d0d1c9" hidden>
         <div class="faq-item">
           <button class="faq-toggle" type="button"><span>Чем ваши занятия отличаются от школьных уроков английского?</span><span class="faq-sign">+</span></button>
           <div class="faq-body"><p>Больше живого разговора и меньше зубрёжки: занятие подстраивается под конкретного ребёнка, а не под класс из 25 человек, и нет оценок, которые давят.</p></div>
@@ -260,11 +270,8 @@ button{font-family:inherit}
           <div class="faq-body"><p>Строим занятия вокруг того, что реально интересно ребёнку: игры, сериалы, блогеры, а не только учебник, добавляя нужную грамматику и лексику по ходу.</p></div>
         </div>
       </div>
-    </div>
 
-    <div style="margin-top:34px" class="faq-group">
-      <div style="font-family:Unbounded,sans-serif;font-weight:700;font-size:15px;margin-bottom:2px">🗓️ Организация занятий</div>
-      <div style="border-top:1px solid #d0d1c9">
+      <div class="faq-panel" data-panel="org" style="border-top:1px solid #d0d1c9" hidden>
         <div class="faq-item">
           <button class="faq-toggle" type="button"><span>Как часто проходят занятия?</span><span class="faq-sign">+</span></button>
           <div class="faq-body"><p>Обычно 1–2 раза в неделю: конкретную частоту и удобное расписание подбираем вместе с вами.</p></div>
@@ -282,11 +289,8 @@ button{font-family:inherit}
           <div class="faq-body"><p>Предупредите не позднее чем за 24 часа, перенесём урок на удобное время.</p></div>
         </div>
       </div>
-    </div>
 
-    <div style="margin-top:34px" class="faq-group">
-      <div style="font-family:Unbounded,sans-serif;font-weight:700;font-size:15px;margin-bottom:2px">📈 Прогресс</div>
-      <div style="border-top:1px solid #d0d1c9">
+      <div class="faq-panel" data-panel="progress" style="border-top:1px solid #d0d1c9" hidden>
         <div class="faq-item">
           <button class="faq-toggle" type="button"><span>Как вы отслеживаете прогресс ребёнка?</span><span class="faq-sign">+</span></button>
           <div class="faq-body"><p>У каждого ученика есть личный кабинет: там видно расписание, домашние задания и историю занятий, а преподаватель фиксирует, что усвоено.</p></div>
@@ -351,6 +355,15 @@ document.querySelectorAll('.faq-item').forEach(function(item){
       body.style.display = 'block';
       sign.textContent = '−';
     }
+  });
+});
+
+/* FAQ category tabs — тот же принцип, что и переключатель целей на главной */
+document.querySelectorAll('#faqTabs .ftab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    var cat = tab.getAttribute('data-cat');
+    document.querySelectorAll('#faqTabs .ftab').forEach(function(t){ t.classList.toggle('on', t === tab); });
+    document.querySelectorAll('.faq-panel').forEach(function(p){ p.hidden = p.getAttribute('data-panel') !== cat; });
   });
 });
 
