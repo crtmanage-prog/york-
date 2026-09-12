@@ -430,6 +430,14 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         font-size:10px; font-weight:800; line-height:16px; text-align:center;
       "></span>
     </button>
+    <button class="tab-btn" data-tab="leveltest" style="position:relative;">
+      Тест на уровень
+      <span id="newLevelTestBadge" class="hidden" style="
+        position:absolute; top:2px; right:2px; min-width:16px; height:16px; padding:0 4px;
+        background:var(--red); color:#fff; border-radius:100px;
+        font-size:10px; font-weight:800; line-height:16px; text-align:center;
+      "></span>
+    </button>
     <button class="tab-btn" data-tab="referrals">Рефералы</button>
     <button class="tab-btn" data-tab="link">Добавить человека</button>
   </nav>
@@ -1175,6 +1183,20 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       </div>
     </section>
 
+    <section class="panel" id="panel-leveltest">
+      <h2 class="panel-title">Тест на уровень</h2>
+      <p class="section-sub" style="margin-bottom:18px;">Кто прошёл тест на уровень и оставил контакты. Можно написать и предложить формат занятий.</p>
+
+      <div id="levelTestList"></div>
+
+      <div style="margin-top:24px;">
+        <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; cursor:pointer;">
+          <input type="checkbox" id="ltShowArchived" onchange="renderLevelTestResults()" style="width:auto;">
+          Показать обработанные
+        </label>
+      </div>
+    </section>
+
     <section class="panel" id="panel-referrals">
       <h2 class="panel-title">🔄 Реферальная программа</h2>
       <p class="section-sub" style="margin-bottom:18px;">
@@ -1523,6 +1545,7 @@ async function loadAll(){
   await loadTrialRequests();
   await loadTalkClubLeads();
   await loadSubsRequests();
+  await loadLevelTestResults();
   await loadExpenses();
   if (document.getElementById('expDate') && !document.getElementById('expDate').value){
     document.getElementById('expDate').value = new Date().toISOString().slice(0,10);
@@ -3738,6 +3761,73 @@ async function confirmSubscriptionSetup(id){
   } catch (e){
     alert('Не получилось подтвердить: ' + (e.message || e));
   }
+}
+
+async function loadLevelTestResults(){
+  const { data } = await supabase.from('level_test_results').select('*')
+    .order('created_at', { ascending:false });
+  window.__levelTestResults = data || [];
+  renderLevelTestResults();
+  updateNewLevelTestBadge();
+}
+
+function updateNewLevelTestBadge(){
+  const badge = document.getElementById('newLevelTestBadge');
+  if (!badge) return;
+  const count = (window.__levelTestResults || []).filter(r => !r.contacted && !r.archived).length;
+  badge.textContent = count > 9 ? '9+' : String(count);
+  badge.classList.toggle('hidden', count === 0);
+}
+
+function levelTestCardHtml(r){
+  const testTypeLabel = r.test_type === 'express' ? '⚡ Экспресс' : '🌊 Полный';
+  return `
+    <div class="card" style="margin-bottom:14px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px;">
+        <div>
+          <div style="font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px;">${r.full_name || '-'}</div>
+          <div style="font-size:13px; color:var(--ink-soft);">${r.contacted ? '✅ Связались' : '⏳ Ещё не связались'}</div>
+        </div>
+        <span style="font-size:11.5px; color:var(--ink-soft); text-align:right;">${fmtDateTime(r.created_at)}</span>
+      </div>
+
+      <div style="font-size:13.5px; margin-bottom:10px;">
+        <div>📞 ${r.contact || '-'}</div>
+        <div>🎯 Уровень: <b>${r.level || '-'}</b>${r.level_name ? ' · ' + r.level_name : ''}</div>
+        <div>📝 ${testTypeLabel} · ${r.score ?? '-'} из ${r.max_score ?? '-'}</div>
+      </div>
+
+      <div class="card-actions">
+        ${!r.contacted ? `<button class="btn btn-accent btn-sm" onclick="markLevelTestContacted('${r.id}')">Отметить: связались</button>` : ''}
+        ${!r.archived ? `<button class="btn btn-ghost btn-sm" onclick="archiveLevelTestResult('${r.id}')">В архив</button>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function renderLevelTestResults(){
+  const all = (window.__levelTestResults || []);
+  const container = document.getElementById('levelTestList');
+  if (!container) return;
+  const showArchived = document.getElementById('ltShowArchived')?.checked;
+
+  const filtered = all.filter(r => showArchived ? r.archived : !r.archived);
+
+  container.innerHTML = filtered.length
+    ? filtered.map(levelTestCardHtml).join('')
+    : `<p class="empty-state">${showArchived ? 'В архиве пока пусто.' : 'Пока никто не прошёл тест.'}</p>`;
+}
+
+async function markLevelTestContacted(id){
+  const { error } = await supabase.from('level_test_results').update({ contacted:true }).eq('id', id);
+  if (error){ alert('Не получилось: ' + error.message); return; }
+  await loadLevelTestResults();
+}
+
+async function archiveLevelTestResult(id){
+  const { error } = await supabase.from('level_test_results').update({ archived:true }).eq('id', id);
+  if (error){ alert('Не получилось: ' + error.message); return; }
+  await loadLevelTestResults();
 }
 
 function teacherAvailabilityHtml(){
