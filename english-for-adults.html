@@ -81,9 +81,10 @@ button{font-family:inherit}
   .site-header>div{padding:12px 0}
   .hero-grid{grid-template-columns:1fr !important}
   .hero-grid .hero-photo{order:-1;position:static;align-self:auto;min-height:260px}
-  .hero-grid .hero-photo img{position:static;width:100%;max-width:340px;height:auto;margin:0 auto}
+  .hero-grid .hero-photo .hero-photo-img{position:static !important;left:auto !important;bottom:auto !important;width:100% !important;max-width:340px;height:auto !important;margin:0 auto}
 }
 .hero-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr)}
+.hero-photo-img{position:absolute;left:50%;bottom:0;height:100%;width:auto;max-width:none;display:block}
 .site-header{position:fixed;top:0;left:0;width:100%;z-index:50;background:rgba(9,10,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
 #faq{scroll-margin-top:88px}
 
@@ -164,7 +165,7 @@ button{font-family:inherit}
         <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener" class="btn-ghost">Написать менеджеру</a>
       </div>
     </div>
-    <div class="hero-photo" style="min-width:0;align-self:stretch"><img src="images/adults-hero.webp" alt="Взрослый ученик на онлайн-уроке английского в YORK!" style="position:absolute;left:50%;bottom:0;height:100%;width:auto;max-width:none;display:block"></div>
+    <div class="hero-photo" style="min-width:0;align-self:stretch"><img class="hero-photo-img" src="images/adults-hero.webp" alt="Взрослый ученик на онлайн-уроке английского в YORK!"></div>
   </div>
 </section>
 
