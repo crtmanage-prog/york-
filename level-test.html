@@ -1,287 +1,20 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YORK! Проверьте свой уровень английского</title>
-<meta name="description" content="Бесплатный тест на уровень английского языка от школы YORK!. За 5 минут станет понятно, с какого уровня начинать обучение: от A1 до C2.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тест на уровень английского — YORK!</title>
+<meta name="description" content="Бесплатный тест на уровень английского языка от школы YORK!: экспресс-версия или полное погружение. Узнайте свой уровень от A1 до C2.">
+<meta name="robots" content="index,follow">
 <link rel="canonical" href="https://weyork.online/level-test.html">
-<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#090A09">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#FFFFFF;
-    --accent:#D2E739;
-    --ink:#1C1C1C;
-    --ink-soft:rgba(28,28,28,0.62);
-    --line:rgba(28,28,28,0.12);
-    --radius:22px;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    min-height:100vh;
-    display:flex;
-    align-items:flex-start;
-    justify-content:center;
-    -webkit-font-smoothing:antialiased;
-  }
-  .display{font-family:'Unbounded',sans-serif;}
-  .app{
-    width:100%;
-    max-width:520px;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    padding:24px 20px 40px;
-  }
-
-  /* ---------- HEADER ---------- */
-  .brandbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:28px;
-  }
-  .logo{
-    font-family:'Unbounded',sans-serif;
-    font-weight:900;
-    font-size:20px;
-    letter-spacing:0.02em;
-    color:var(--ink);
-  }
-  .logo span{color:var(--accent); -webkit-text-stroke:1px var(--ink);}
-  .tag{
-    font-size:11px;
-    font-weight:600;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    border:1px solid var(--line);
-    padding:6px 10px;
-    border-radius:100px;
-  }
-
-  /* ---------- PROGRESS (segmented — one segment per question, order matters) ---------- */
-  .progress{
-    display:flex;
-    gap:5px;
-    margin-bottom:22px;
-  }
-  .seg{
-    flex:1;
-    height:6px;
-    border-radius:4px;
-    background:var(--line);
-    overflow:hidden;
-    position:relative;
-  }
-  .seg.done{background:var(--accent);}
-  .seg.current{background:linear-gradient(90deg, var(--accent) 50%, var(--line) 50%);}
-
-  /* ---------- SCREENS ---------- */
-  .screen{display:none; flex:1; flex-direction:column;}
-  .screen.active{display:flex;}
-
-  /* START */
-  #start .hero-shape{
-    width:100%;
-    aspect-ratio:1.5/1;
-    background:var(--accent);
-    border-radius:38% 62% 55% 45% / 45% 38% 62% 55%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:28px;
-    padding:20px;
-  }
-  #start .hero-shape .level-preview{
-    font-family:'Unbounded',sans-serif;
-    font-weight:900;
-    font-size:min(19vw,88px);
-    line-height:1;
-    color:var(--ink);
-  }
-  h1.display{
-    font-size:30px;
-    font-weight:700;
-    line-height:1.15;
-    margin:0 0 12px;
-  }
-  .lead{
-    font-size:15.5px;
-    line-height:1.55;
-    color:var(--ink-soft);
-    margin:0 0 26px;
-  }
-  .meta-row{
-    display:flex;
-    gap:10px;
-    margin-bottom:30px;
-    flex-wrap:wrap;
-  }
-  .meta-chip{
-    font-size:12.5px;
-    font-weight:600;
-    padding:8px 12px;
-    border-radius:100px;
-    background:#F5F6EE;
-    border:1px solid var(--line);
-  }
-  .spacer{flex:1;}
-
-  button.primary, a.primary{
-    font-family:'Unbounded',sans-serif;
-    font-weight:700;
-    font-size:16px;
-    color:var(--ink);
-    background:var(--accent);
-    border:none;
-    border-radius:100px;
-    padding:18px 24px;
-    cursor:pointer;
-    width:100%;
-    transition:transform .15s ease;
-    text-align:center;
-    text-decoration:none;
-    display:block;
-    box-sizing:border-box;
-  }
-  button.primary:hover, a.primary:hover{transform:translateY(-2px);}
-  button.primary:active, a.primary:active{transform:translateY(0);}
-  button.primary:focus-visible, a.primary:focus-visible, button.opt:focus-visible, input:focus-visible{
-    outline:3px solid var(--ink);
-    outline-offset:2px;
-  }
-  button.ghost, a.ghost{
-    font-family:'Inter',sans-serif;
-    font-weight:600;
-    font-size:14px;
-    color:var(--ink);
-    background:transparent;
-    border:1.5px solid var(--ink);
-    border-radius:100px;
-    padding:14px 20px;
-    cursor:pointer;
-    width:100%;
-    display:block;
-    box-sizing:border-box;
-    text-align:center;
-    text-decoration:none;
-  }
-
-  /* QUIZ */
-  .qcount{
-    font-size:12.5px;
-    font-weight:700;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    margin-bottom:10px;
-  }
-  .qtext{
-    font-size:21px;
-    font-weight:600;
-    line-height:1.4;
-    margin:0 0 22px;
-  }
-  .options{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    margin-bottom:20px;
-  }
-  button.opt{
-    text-align:left;
-    font-family:'Inter',sans-serif;
-    font-size:15.5px;
-    font-weight:500;
-    color:var(--ink);
-    background:#fff;
-    border:1.5px solid var(--line);
-    border-radius:14px;
-    padding:15px 16px;
-    cursor:pointer;
-    transition:border-color .12s ease, background .12s ease;
-  }
-  button.opt:hover{border-color:var(--ink);}
-  button.opt.picked{border-color:var(--ink); background:var(--accent);}
-  .quiz-foot{margin-top:auto; display:flex; gap:10px;}
-
-  /* RESULT */
-  #result .badge-wrap{
-    width:100%;
-    aspect-ratio:1.3/1;
-    background:var(--accent);
-    border-radius:42% 58% 50% 50% / 50% 45% 55% 50%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:24px;
-    padding:20px;
-    text-align:center;
-  }
-  #result .badge-eyebrow{
-    font-size:12.5px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.08em;
-    margin-bottom:4px;
-  }
-  #result .badge-level{
-    font-family:'Unbounded',sans-serif;
-    font-weight:900;
-    font-size:min(22vw,104px);
-    line-height:1;
-  }
-  #result .badge-name{
-    font-family:'Unbounded',sans-serif;
-    font-weight:700;
-    font-size:16px;
-    margin-top:6px;
-  }
-  .result-copy{font-size:15.5px; line-height:1.6; color:var(--ink-soft); margin:0 0 22px;}
-  .result-copy b{color:var(--ink);}
-
-  .lead-card{
-    border:1.5px solid var(--line);
-    border-radius:var(--radius);
-    padding:20px;
-    margin-bottom:16px;
-  }
-  .lead-card h3{
-    font-family:'Unbounded',sans-serif;
-    font-size:15px;
-    font-weight:700;
-    margin:0 0 6px;
-  }
-  .lead-card p{font-size:13.5px; color:var(--ink-soft); margin:0 0 16px; line-height:1.5;}
-  .lead-card p a{color:var(--ink); font-weight:600; text-decoration:underline; text-underline-offset:3px;}
-  .footnote{font-size:12px; color:var(--ink-soft); text-align:center; margin-top:18px; line-height:1.5;}
-  .footnote a{color:var(--ink);}
-
-  @media (prefers-reduced-motion: reduce){
-    button.primary{transition:none;}
-  }
-</style>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111997160', 'ym');
-    ym(111997160, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/111997160" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -292,39 +25,185 @@
   ]
 }
 </script>
+<style>
+html,body{margin:0;padding:0}
+body{background:#090A09;color:#fff;font-family:"Golos Text",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:hover{opacity:.72}
+button{font-family:inherit}
+
+/* header / nav — как на главной */
+.nav-toggle-input{display:none}
+.nav-toggle-btn{display:none;align-items:center;justify-content:center;width:40px;height:40px;margin-left:2px;color:#fff;cursor:pointer;line-height:1;background:none;border:0;border-radius:10px}
+.nav-toggle-btn:hover{background:rgba(255,255,255,.06)}
+.header-icon-btn{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;color:#fff;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.03)}
+.header-cta-text{display:inline-flex}
+.header-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
+.navlinks{display:flex;align-items:center;gap:24px;margin-left:auto;font-size:12px;color:#c9cac5}
+@media(max-width:850px){
+  .nav-toggle-btn{display:flex}
+  .header-icon-btn{display:flex}
+  .header-actions .header-cta-text{display:none !important}
+  .navlinks{display:none;position:absolute;top:100%;left:0;width:100%;background:#0a0a09;flex-direction:column;gap:0;padding:12px 0;border-top:1px solid rgba(255,255,255,.13)}
+  .nav-toggle-input:checked ~ .navlinks{display:flex}
+  .navlinks a{padding:12px 24px;font-size:14px}
+  .site-header>div{padding:12px 0}
+}
+.site-header{position:fixed;top:0;left:0;width:100%;z-index:50;background:rgba(9,10,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+
+.btn-lime{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:17px 24px;border-radius:999px;font-weight:700;font-size:15px;font-family:Unbounded,sans-serif;background:#D7EF42;color:#0a0a09;border:0;cursor:pointer;width:100%;transition:transform .15s ease}
+.btn-lime:hover{opacity:1;background:#fff;transform:translateY(-2px)}
+.btn-lime:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 22px;border-radius:999px;font-weight:700;font-size:14px;font-family:Unbounded,sans-serif;border:1.5px solid rgba(255,255,255,.28);background:rgba(255,255,255,.03);color:#fff;cursor:pointer;width:100%}
+.btn-ghost:hover{opacity:1;border-color:rgba(255,255,255,.55)}
+
+.app{width:min(560px,calc(100% - 40px));margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:clamp(96px,15vw,120px) 0 60px}
+.kicker{font-family:Unbounded,sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#D7EF42}
+
+/* progress */
+.progress{display:flex;gap:5px;margin-bottom:26px}
+.seg{flex:1;height:6px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden}
+.seg.done{background:#D7EF42}
+.seg.current{background:linear-gradient(90deg,#D7EF42 50%,rgba(255,255,255,.12) 50%)}
+
+.screen{display:none;flex:1;flex-direction:column}
+.screen.active{display:flex}
+
+/* blob shape with level letters */
+.badge-wrap{width:100%;aspect-ratio:1.5/1;background:#D7EF42;border-radius:38% 62% 55% 45% / 45% 38% 62% 55%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:26px;padding:20px;text-align:center}
+.badge-eyebrow{font-family:Unbounded,sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#0a0a09;margin-bottom:4px}
+.badge-level{font-family:Unbounded,sans-serif;font-weight:900;font-size:min(19vw,84px);line-height:1;color:#0a0a09}
+.badge-name{font-family:Unbounded,sans-serif;font-weight:700;font-size:15px;margin-top:6px;color:#0a0a09}
+.badge-wrap.blurred{filter:blur(10px)}
+
+h1.display{font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(26px,5vw,32px);line-height:1.15;letter-spacing:-.02em;margin:0 0 12px}
+.lead{font-size:15px;line-height:1.6;color:#aaa;margin:0 0 24px}
+
+.meta-row{display:flex;gap:10px;margin-bottom:26px;flex-wrap:wrap}
+.meta-chip{font-size:12.5px;font-weight:600;padding:9px 13px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.13);color:#c9cac5}
+.spacer{flex:1}
+
+/* format choice */
+.format-options{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+.format-card{text-align:left;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.13);border-radius:20px;padding:18px 20px;cursor:pointer;transition:border-color .15s ease,background .15s ease}
+.format-card:hover{border-color:rgba(255,255,255,.4)}
+.format-card.picked{border-color:#D7EF42;background:rgba(215,239,66,.1)}
+.format-card h3{font-family:Unbounded,sans-serif;font-size:15px;font-weight:700;margin:0 0 6px;color:#fff}
+.format-card p{font-size:13.5px;color:#aaa;margin:0;line-height:1.5}
+
+/* quiz */
+.qcount{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a8b82;margin-bottom:10px}
+.qtext{font-family:Unbounded,sans-serif;font-size:20px;font-weight:600;line-height:1.4;margin:0 0 22px;letter-spacing:-.01em}
+.options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+button.opt{text-align:left;font-family:"Golos Text",sans-serif;font-size:15px;font-weight:500;color:#fff;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.13);border-radius:14px;padding:15px 16px;cursor:pointer;transition:border-color .12s ease,background .12s ease}
+button.opt:hover{border-color:rgba(255,255,255,.4)}
+button.opt.picked{border-color:#D7EF42;background:rgba(215,239,66,.14)}
+.quiz-foot{margin-top:auto;display:flex;gap:10px}
+
+/* lead gate */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#8a8b82;margin-bottom:8px}
+.field input{width:100%;font-family:"Golos Text",sans-serif;font-size:15px;padding:14px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff}
+.field input::placeholder{color:rgba(255,255,255,.32)}
+.field input:focus{outline:none;border-color:#D7EF42;box-shadow:0 0 0 3px rgba(215,239,66,.18)}
+#leadErrorMsg{color:#F3958A;font-size:13.5px;font-weight:600;min-height:18px;margin:6px 0 0;text-align:center}
+
+/* result */
+.result-copy{font-size:15px;line-height:1.65;color:#c3c4bd;margin:0 0 24px}
+.result-copy b{color:#fff}
+.lead-card{border-radius:20px;padding:20px;margin-bottom:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1)}
+.lead-card h3{font-family:Unbounded,sans-serif;font-size:15px;font-weight:700;margin:0 0 6px;color:#fff}
+.lead-card p{font-size:13.5px;color:#aaa;margin:0 0 16px;line-height:1.5}
+.lead-card p a{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.lead-card .btn-ghost{margin-bottom:10px}
+.footnote{font-size:12px;color:#777;text-align:center;margin-top:22px;line-height:1.5}
+.footnote a{color:#aaa;text-decoration:underline}
+
+footer{border-top:1px solid rgba(255,255,255,.13);padding:38px 0 48px;color:#999;margin-top:20px}
+.wrap{width:min(1180px,calc(100% - 48px));margin:0 auto}
+
+@media (prefers-reduced-motion: reduce){ .btn-lime{transition:none} }
+</style>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=111997160','ym');
+ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111997160" style="position:absolute;left:-9999px" alt=""></div></noscript>
 </head>
 <body>
-<div class="app">
 
-  <div class="brandbar">
-    <a href="/" class="logo" style="text-decoration:none;">YORK<span>!</span></a>
-    <div class="tag">Онлайн-школа</div>
+<header class="site-header">
+  <div class="wrap" style="padding:18px 0;display:flex;align-items:center;gap:20px">
+    <a href="/" style="font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.06em">YORK<span style="color:#D7EF42">!</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+    <nav class="navlinks">
+      <a href="/#how">Как это работает</a>
+      <a href="/#formats">Цены</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a href="login.html" class="header-icon-btn" aria-label="Войти"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg></a>
+      <a href="login.html" class="header-cta-text" style="font-size:13px;font-weight:700;padding:13px 19px;border-radius:999px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.03)">Войти</a>
+      <label for="nav-toggle" class="nav-toggle-btn" aria-label="Меню"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></label>
+    </div>
   </div>
+</header>
+
+<div class="app">
 
   <div class="progress" id="progressBar"></div>
 
   <!-- START SCREEN -->
   <div class="screen active" id="start">
-    <div class="hero-shape"><div class="level-preview">A1–C2</div></div>
-    <h1 class="display">Какой у вас уровень английского?</h1>
-    <p class="lead">12 вопросов: от базовой грамматики до тонкостей уровня C2. Результат увидите сразу, без регистрации.</p>
-    <div class="meta-row">
-      <div class="meta-chip">⏱ ~5 минут</div>
-      <div class="meta-chip">📝 12 вопросов</div>
-      <div class="meta-chip">📊 Результат мгновенно</div>
+    <div class="kicker">Тест на уровень</div>
+    <h1 class="display" style="margin-top:14px">Какой у вас уровень английского?</h1>
+    <p class="lead">От базовой грамматики до тонкостей уровня C2. Выберите формат теста, в конце покажем ваш результат.</p>
+
+    <div class="format-options" id="formatOptions">
+      <button type="button" class="format-card picked" data-type="express" onclick="pickFormat('express', this)">
+        <h3>⚡ Экспресс-тест</h3>
+        <p>6 вопросов, ~2 минуты. Быстро понять примерный уровень.</p>
+      </button>
+      <button type="button" class="format-card" data-type="full" onclick="pickFormat('full', this)">
+        <h3>🌊 Полное погружение</h3>
+        <p>12 вопросов, ~5 минут. Более точный результат.</p>
+      </button>
     </div>
+
     <div class="spacer"></div>
-    <button class="primary" onclick="startQuiz()">Начать тест</button>
+    <button class="btn-lime" onclick="startQuiz()">Начать тест →</button>
   </div>
 
   <!-- QUIZ SCREEN -->
   <div class="screen" id="quiz">
-    <div class="qcount" id="qcount">ВОПРОС 1 ИЗ 12</div>
+    <div class="qcount" id="qcount">ВОПРОС 1 ИЗ 6</div>
     <div class="qtext" id="qtext"></div>
     <div class="options" id="options"></div>
     <div class="quiz-foot">
-      <button class="primary" id="nextBtn" onclick="nextQuestion()" disabled>Далее</button>
+      <button class="btn-lime" id="nextBtn" onclick="nextQuestion()" disabled>Далее</button>
     </div>
+  </div>
+
+  <!-- LEAD GATE SCREEN — результат скрыт, пока не оставят контакты -->
+  <div class="screen" id="leadGate">
+    <div class="badge-wrap blurred"><div class="badge-level">??</div></div>
+    <h1 class="display">Тест пройден!</h1>
+    <p class="lead">Оставьте имя и телефон или Telegram — покажем ваш уровень и что учить дальше.</p>
+
+    <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+      <label for="leadWebsite">Оставьте это поле пустым</label>
+      <input id="leadWebsite" type="text" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="field"><label for="leadName">Как вас зовут?</label><input id="leadName" type="text" placeholder="Имя и фамилия" required></div>
+    <div class="field"><label for="leadContact">Телефон или Telegram</label><input id="leadContact" type="text" placeholder="+7 999 123-45-67 или @username" required></div>
+    <p id="leadErrorMsg"></p>
+
+    <div class="spacer"></div>
+    <button class="btn-lime" id="leadSubmitBtn" onclick="submitLead()">Показать результат</button>
   </div>
 
   <!-- RESULT SCREEN -->
@@ -339,21 +218,28 @@
     <div class="lead-card" id="leadCard">
       <h3>Хотите заниматься и поднять уровень?</h3>
       <p>Покажем, что учить в первую очередь при вашем уровне, и подберём формат: <a href="/#formats">индивидуально SOLO или в мини-группе CREW</a>.</p>
-      <a class="primary cta-link" href="trial-form.html" target="_blank" rel="noopener">Записаться на бесплатный урок</a>
+      <a class="btn-lime" href="trial-form.html" target="_blank" rel="noopener" style="text-decoration:none;display:flex">Записаться на бесплатный урок</a>
     </div>
 
     <div class="lead-card">
       <h3>Нужна разговорная практика?</h3>
       <p>TALK CLUB: небольшие группы, живое общение на разные темы каждую неделю.</p>
-      <a class="ghost" href="talk-club-form.html" target="_blank" rel="noopener" style="margin-bottom:10px;">Записаться в разговорный клуб</a>
-      <a class="ghost" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
+      <a class="btn-ghost" href="talk-club-form.html" target="_blank" rel="noopener" style="text-decoration:none">Записаться в разговорный клуб</a>
+      <a class="btn-ghost" href="https://t.me/thearbeiter01" target="_blank" rel="noopener" style="text-decoration:none">Написать менеджеру</a>
     </div>
 
-    <button class="ghost" onclick="restart()">Пройти тест заново</button>
-    <p class="footnote">YORK! · english school<br>Результат ориентировочный, по шкале CEFR.</p>
+    <button class="btn-ghost" onclick="restart()">Пройти тест заново</button>
+    <p class="footnote">YORK! · online school<br>Результат ориентировочный, по шкале CEFR.</p>
   </div>
 
 </div>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:30px;font-size:12px;flex-wrap:wrap;align-items:center">
+    <a href="/" style="font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.06em;color:#fff">YORK<span style="color:#D7EF42">!</span></a>
+    <span>© YORK! English</span>
+  </div>
+</footer>
 
 <script>
 /* ============================================================
@@ -386,8 +272,8 @@ const QUESTIONS = [
     options:["chuck out","dump","eliminate","throw away"], answer:2 },
 ];
 
-/* Score thresholds -> CEFR level */
-const LEVEL_INFO = [
+/* Score thresholds -> CEFR level, для полного теста (12 вопросов) */
+const LEVEL_INFO_FULL = [
   { min:0,  max:2,  letters:"A1", name:"Beginner",
     copy:"Вы только начинаете путь в английском, и это отличная точка старта. <b>Курс Starter в YORK!</b> поможет уверенно заговорить на базовые темы уже через пару месяцев." },
   { min:3,  max:4,  letters:"A2", name:"Elementary",
@@ -402,24 +288,46 @@ const LEVEL_INFO = [
     copy:"Это уровень носителя языка, поздравляем!" },
 ];
 
+/* Экспресс-тест — по 1 вопросу на уровень (6 вопросов), те же пороги, вдвое короче */
+const LEVEL_INFO_EXPRESS = [
+  { min:0, max:0, letters:"A1", name:"Beginner",   copy:LEVEL_INFO_FULL[0].copy },
+  { min:1, max:1, letters:"A2", name:"Elementary", copy:LEVEL_INFO_FULL[1].copy },
+  { min:2, max:2, letters:"B1", name:"Intermediate", copy:LEVEL_INFO_FULL[2].copy },
+  { min:3, max:3, letters:"B2", name:"Upper-Intermediate", copy:LEVEL_INFO_FULL[3].copy },
+  { min:4, max:4, letters:"C1", name:"Advanced", copy:LEVEL_INFO_FULL[4].copy },
+  { min:5, max:6, letters:"C2", name:"Proficiency", copy:LEVEL_INFO_FULL[5].copy },
+];
+
 /* ============================================================
    STATE
    ============================================================ */
+const SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_jlcvNafksQ0WhrYCY08anw_ju194-I9';
+const PAGE_LOADED_AT = Date.now();
+
+let selectedFormat = 'express';
+let ACTIVE_QUESTIONS = [];
 let current = 0;
 let picked = null;
 let score = 0;
+let pendingResult = null; // посчитанный результат — раскрывается только после отправки контактов
+
+function pickFormat(type, el){
+  selectedFormat = type;
+  document.querySelectorAll('#formatOptions .format-card').forEach(c => c.classList.remove('picked'));
+  el.classList.add('picked');
+}
 
 function buildProgress(){
   const bar = document.getElementById('progressBar');
   bar.innerHTML = '';
-  QUESTIONS.forEach((_, i) => {
+  ACTIVE_QUESTIONS.forEach((_, i) => {
     const seg = document.createElement('div');
     seg.className = 'seg';
     seg.id = 'seg-' + i;
     bar.appendChild(seg);
   });
 }
-buildProgress();
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -427,6 +335,12 @@ function showScreen(id){
 }
 
 function startQuiz(){
+  // экспресс — первый вопрос каждого уровня (индексы 0,2,4...), полный — все
+  ACTIVE_QUESTIONS = selectedFormat === 'express'
+    ? QUESTIONS.filter((_, i) => i % 2 === 0)
+    : QUESTIONS.slice();
+
+  buildProgress();
   current = 0; score = 0;
   showScreen('quiz');
   renderQuestion();
@@ -434,8 +348,8 @@ function startQuiz(){
 
 function renderQuestion(){
   picked = null;
-  const q = QUESTIONS[current];
-  document.getElementById('qcount').textContent = `ВОПРОС ${current+1} ИЗ ${QUESTIONS.length}`;
+  const q = ACTIVE_QUESTIONS[current];
+  document.getElementById('qcount').textContent = `ВОПРОС ${current+1} ИЗ ${ACTIVE_QUESTIONS.length}`;
   document.getElementById('qtext').textContent = q.text;
 
   const optWrap = document.getElementById('options');
@@ -449,10 +363,10 @@ function renderQuestion(){
   });
 
   document.getElementById('nextBtn').disabled = true;
-  document.getElementById('nextBtn').textContent = (current === QUESTIONS.length - 1) ? 'Показать результат' : 'Далее';
+  document.getElementById('nextBtn').textContent = (current === ACTIVE_QUESTIONS.length - 1) ? 'Показать результат' : 'Далее';
 
   // progress segments
-  QUESTIONS.forEach((_, i) => {
+  ACTIVE_QUESTIONS.forEach((_, i) => {
     const seg = document.getElementById('seg-' + i);
     seg.classList.remove('done','current');
     if (i < current) seg.classList.add('done');
@@ -469,9 +383,9 @@ function selectOption(i, el){
 
 function nextQuestion(){
   if (picked === null) return;
-  if (picked === QUESTIONS[current].answer) score++;
+  if (picked === ACTIVE_QUESTIONS[current].answer) score++;
 
-  if (current === QUESTIONS.length - 1){
+  if (current === ACTIVE_QUESTIONS.length - 1){
     finishQuiz();
   } else {
     current++;
@@ -484,17 +398,82 @@ function finishQuiz(){
   seg.classList.remove('current');
   seg.classList.add('done');
 
-  const info = LEVEL_INFO.find(l => score >= l.min && score <= l.max) || LEVEL_INFO[0];
+  const table = selectedFormat === 'express' ? LEVEL_INFO_EXPRESS : LEVEL_INFO_FULL;
+  const info = table.find(l => score >= l.min && score <= l.max) || table[0];
+
+  // результат посчитан, но не показываем — сначала контакты
+  pendingResult = { score, maxScore: ACTIVE_QUESTIONS.length, info };
+  showScreen('leadGate');
+}
+
+/* ---------- отправка контактов и раскрытие результата ---------- */
+async function submitLead(){
+  const errorMsg = document.getElementById('leadErrorMsg');
+  errorMsg.textContent = '';
+
+  const honeypot = document.getElementById('leadWebsite');
+  if (honeypot && honeypot.value.trim()){
+    revealResult(); // тихо пропускаем ботов дальше, как будто всё ок
+    return;
+  }
+  if (Date.now() - PAGE_LOADED_AT < 3000){
+    errorMsg.textContent = 'Секунду… попробуйте ещё раз.';
+    return;
+  }
+
+  const fullName = document.getElementById('leadName').value.trim();
+  const contact = document.getElementById('leadContact').value.trim();
+  if (!fullName){ errorMsg.textContent = 'Напишите, как вас зовут.'; return; }
+  if (!contact){ errorMsg.textContent = 'Оставьте телефон или Telegram.'; return; }
+
+  const btn = document.getElementById('leadSubmitBtn');
+  btn.disabled = true; btn.textContent = 'Отправляем…';
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/level_test_results`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        full_name: fullName,
+        contact,
+        test_type: selectedFormat,
+        score: pendingResult.score,
+        max_score: pendingResult.maxScore,
+        level: pendingResult.info.letters,
+        level_name: pendingResult.info.name
+      })
+    });
+    if (!res.ok){
+      let detail = '';
+      try { const b = await res.json(); detail = b.message || b.hint || ''; } catch(e){}
+      throw new Error(detail || ('Ошибка ' + res.status));
+    }
+    revealResult();
+  } catch(err){
+    btn.disabled = false; btn.textContent = 'Показать результат';
+    errorMsg.textContent = 'Не получилось отправить. Проверьте соединение и попробуйте ещё раз.';
+  }
+}
+
+function revealResult(){
+  const info = pendingResult.info;
   document.getElementById('levelLetters').textContent = info.letters;
   document.getElementById('levelName').textContent = info.name;
   document.getElementById('levelCopy').innerHTML = info.copy;
-
-  window.__lastResult = { score, level: info.letters };
-
   showScreen('result');
 }
 
 function restart(){
+  document.getElementById('leadName').value = '';
+  document.getElementById('leadContact').value = '';
+  document.getElementById('leadErrorMsg').textContent = '';
+  const btn = document.getElementById('leadSubmitBtn');
+  btn.disabled = false; btn.textContent = 'Показать результат';
   showScreen('start');
 }
 </script>
