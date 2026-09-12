@@ -80,7 +80,10 @@ button{font-family:inherit}
   .navlinks a,.nav-drop summary{padding:12px 24px;font-size:14px}
   .nav-drop-panel{position:static;box-shadow:none;border:none;padding:0 24px;background:transparent}
   .site-header>div{padding:12px 0}
+  .hero-grid{grid-template-columns:1fr !important}
+  .hero-grid .ph-img{order:-1;max-height:280px}
 }
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr)}
 .site-header{position:fixed;top:0;left:0;width:100%;z-index:50;background:rgba(9,10,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
 #faq{scroll-margin-top:88px}
 
@@ -151,7 +154,7 @@ button{font-family:inherit}
 
 <section style="position:relative;overflow:hidden;padding:clamp(120px,16vw,170px) 0 clamp(50px,7vw,80px)">
   <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 82% 20%,rgba(215,239,66,.2) 0,transparent 46%),linear-gradient(120deg,#0b0d0b,#070807)"></div>
-  <div class="wrap" style="position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr);gap:clamp(24px,4vw,56px);align-items:center">
+  <div class="wrap hero-grid" style="position:relative;gap:clamp(24px,4vw,56px);align-items:center">
     <div style="min-width:0">
       <div class="kicker">Английский для детей и подростков</div>
       <h1 style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(32px,5.2vw,54px);line-height:1.06;letter-spacing:-.04em;margin:16px 0 0">Без зубрёжки.<br>С разговором, играми<br>и <span style="color:#D7EF42">интересом</span>.</h1>
