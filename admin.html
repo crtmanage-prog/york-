@@ -580,7 +580,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       </div>
 
       <h2 class="panel-title" style="margin-top:20px;">Ставка по умолчанию</h2>
-      <p class="section-sub" style="margin-bottom:16px;">Используется, если у учителя не задана своя ставка (во вкладке «Учителя» → «Редактировать учителя»). Считается по всем проведённым (прошедшим) урокам, не пробным.</p>
+      <p class="section-sub" style="margin-bottom:16px;">Используется, если у учителя не задана своя ставка (во вкладке «Учителя» → «Редактировать учителя»). Считается по всем проведённым (прошедшим) урокам пропорционально их длительности — например, пробный урок 30 минут оплачивается в половину часовой ставки SOLO.</p>
       <div class="card">
         <div class="field">
           <label for="rateSolo">SOLO, ₽/час</label>
@@ -597,7 +597,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <div class="table-wrap">
         <table class="admin-table" id="payoutTable">
           <thead>
-            <tr><th>Учитель</th><th>Часов SOLO</th><th>Часов CREW</th><th>К выплате</th></tr>
+            <tr><th>Учитель</th><th>Часов SOLO</th><th>Часов CREW</th><th>Часов пробных</th><th>К выплате</th></tr>
           </thead>
           <tbody id="payoutTableBody"></tbody>
         </table>
@@ -2741,6 +2741,9 @@ function computeTeacherPayoutInRange(start, end){
   const lessons = (window.__lessonsList || []).filter(l =>
     !l.is_trial && l.student_id && l.status !== 'cancelled' && l.status !== 'rescheduled'
     && isLessonPast(l) && (!start || inStatsRange(l.lesson_date, start, end)));
+  const trials = (window.__lessonsList || []).filter(l =>
+    l.is_trial && l.status !== 'cancelled' && l.status !== 'rescheduled'
+    && isLessonPast(l) && (!start || inStatsRange(l.lesson_date, start, end)));
   const rateSoloDefault = Number((document.getElementById('rateSolo') || {}).value) || 500;
   const rateCrewDefault = Number((document.getElementById('rateCrew') || {}).value) || 600;
   let payout = 0;
@@ -2752,6 +2755,13 @@ function computeTeacherPayoutInRange(start, end){
     const rate = format === 'CREW'
       ? ((teacher && teacher.rate_crew) || rateCrewDefault)
       : ((teacher && teacher.rate_solo) || rateSoloDefault);
+    payout += hours * rate;
+  });
+  // пробные — по ставке SOLO, пропорционально длительности (напр. 30 мин = половина часовой ставки)
+  trials.forEach(l => {
+    const teacher = allTeachers.find(t => t.id === l.teacher_id);
+    const hours = (l.duration_minutes || 30) / 60;
+    const rate = (teacher && teacher.rate_solo) || rateSoloDefault;
     payout += hours * rate;
   });
   return payout;
@@ -2996,25 +3006,33 @@ function renderStats(){
     const student = allStudents.find(s => s.id === l.student_id);
     const format = student ? student.format : 'SOLO';
     const hours = (l.duration_minutes || 60) / 60;
-    if (!byTeacher[l.teacher_id]) byTeacher[l.teacher_id] = { soloHours: 0, crewHours: 0 };
+    if (!byTeacher[l.teacher_id]) byTeacher[l.teacher_id] = { soloHours: 0, crewHours: 0, trialHours: 0 };
     if (format === 'CREW') byTeacher[l.teacher_id].crewHours += hours;
     else byTeacher[l.teacher_id].soloHours += hours;
+  });
+  // пробные — по ставке SOLO, пропорционально длительности
+  countedLessons.filter(l => l.is_trial).forEach(l => {
+    const hours = (l.duration_minutes || 30) / 60;
+    if (!byTeacher[l.teacher_id]) byTeacher[l.teacher_id] = { soloHours: 0, crewHours: 0, trialHours: 0 };
+    byTeacher[l.teacher_id].trialHours += hours;
   });
 
   let totalPayout = 0;
   const teacherIds = Object.keys(byTeacher);
   const rows = teacherIds.map(teacherId => {
     const t = allTeachers.find(t => t.id === teacherId);
-    const { soloHours, crewHours } = byTeacher[teacherId];
+    const { soloHours, crewHours, trialHours } = byTeacher[teacherId];
     const soloRate = (t && t.rate_solo) ? Number(t.rate_solo) : rateSolo;
     const crewRate = (t && t.rate_crew) ? Number(t.rate_crew) : rateCrew;
-    const payout = soloHours * soloRate + crewHours * crewRate;
+    // пробные оплачиваются по ставке SOLO
+    const payout = soloHours * soloRate + crewHours * crewRate + trialHours * soloRate;
     totalPayout += payout;
     return `
       <tr>
         <td>${t ? t.full_name : '—'}</td>
         <td>${soloHours.toFixed(1)}</td>
         <td>${crewHours.toFixed(1)}</td>
+        <td>${trialHours.toFixed(1)}</td>
         <td>${payout.toLocaleString('ru-RU')} ₽</td>
       </tr>
     `;
@@ -3022,7 +3040,7 @@ function renderStats(){
 
   document.getElementById('payoutTableBody').innerHTML = rows.length
     ? rows.join('')
-    : '<tr><td colspan="4" class="empty-state">Нет проведённых уроков за этот период.</td></tr>';
+    : '<tr><td colspan="5" class="empty-state">Нет проведённых уроков за этот период.</td></tr>';
   document.getElementById('stat-payout').textContent = totalPayout.toLocaleString('ru-RU') + ' ₽';
 
   const expensesInPeriod = computeExpensesInRange(noFilter ? null : start, end);
