@@ -81,9 +81,9 @@ button{font-family:inherit}
   .site-header>div{padding:12px 0}
   .hero-grid{grid-template-columns:1fr !important}
   .hero-grid .hero-photo{order:-1}
-  .hero-grid .hero-photo img{max-width:280px;margin:0 auto}
+  .hero-grid .hero-photo img{max-width:100%;margin:0 auto}
 }
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr)}
 .site-header{position:fixed;top:0;left:0;width:100%;z-index:50;background:rgba(9,10,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
 #faq{scroll-margin-top:88px}
 
@@ -121,6 +121,18 @@ button{font-family:inherit}
 .ftab{flex:0 0 auto;padding:13px 20px;border-radius:999px;font:700 13px "Unbounded",sans-serif;letter-spacing:-.01em;border:1px solid rgba(17,18,14,.16);background:#fff;color:#55574F;cursor:pointer;white-space:nowrap}
 .ftab.on{background:#D7EF42;color:#0a0a09;border-color:#D7EF42}
 .faq-panel[hidden]{display:none}
+
+/* FAQ: фото ученицы во всю высоту плашки слева */
+.faq-grid{display:grid;grid-template-columns:minmax(240px,28vw) minmax(0,1fr);align-items:stretch}
+.faq-photo{min-height:100%}
+.faq-photo img{width:100%;height:100%;min-height:560px;object-fit:cover;display:block}
+.faq-content{padding:clamp(56px,9vw,110px) clamp(24px,4vw,48px) clamp(56px,9vw,110px) clamp(24px,4vw,56px)}
+.faq-content .wrap{width:100%;max-width:820px;margin:0}
+@media(max-width:850px){
+  .faq-grid{grid-template-columns:1fr}
+  .faq-photo img{min-height:320px;max-height:400px}
+  .faq-content{padding:40px 24px}
+}
 </style>
 </head>
 <body>
@@ -164,7 +176,7 @@ button{font-family:inherit}
         <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener" class="btn-ghost">Написать менеджеру</a>
       </div>
     </div>
-    <div class="hero-photo" style="min-width:0;display:flex;justify-content:center"><img src="images/adults-hero.webp" alt="Взрослый ученик на онлайн-уроке английского в YORK!" style="width:100%;max-width:620px;height:auto;display:block"></div>
+    <div class="hero-photo" style="min-width:0;display:flex;justify-content:center"><img src="images/adults-hero.webp" alt="Взрослый ученик на онлайн-уроке английского в YORK!" style="width:100%;max-width:900px;height:auto;display:block"></div>
   </div>
 </section>
 
@@ -218,8 +230,10 @@ button{font-family:inherit}
   </div>
 </section>
 
-<section id="faq" style="background:#F3F2ED;color:#11120E;padding:clamp(56px,9vw,110px) 0">
-  <div class="wrap">
+<section id="faq" style="background:#F3F2ED;color:#11120E;padding:0">
+  <div class="faq-grid">
+    <div class="faq-photo"><img src="images/adults-faq-girl.webp" alt="Взрослая ученица YORK! с учебником" loading="lazy"></div>
+    <div class="faq-content">
     <div class="kicker" style="color:#8a8b82">FAQ</div>
     <h2 style="font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(28px,4vw,48px);line-height:1.08;letter-spacing:-.03em;margin:16px 0 0">Вопросы, которые обычно задают взрослые ученики</h2>
 
@@ -312,6 +326,7 @@ button{font-family:inherit}
       <p style="margin:0 0 16px;font-size:13px;color:#6c6d65">Не нашли ответ на свой вопрос?</p>
       <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:999px;font-weight:700;font-size:14px;background:#11120E;color:#fff">Написать менеджеру YORK! <span style="font-size:17px;line-height:0">→</span></a>
       <p style="margin:14px 0 0;font-size:13px;color:#6c6d65">Поможем подобрать подходящий формат обучения именно вам.</p>
+    </div>
     </div>
   </div>
 </section>
