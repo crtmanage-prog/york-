@@ -2090,7 +2090,7 @@ function renderSalary(){
   const rateCrew = (currentProfile && currentProfile.rate_crew) ? Number(currentProfile.rate_crew) : 600;
   document.getElementById('salary-rate').textContent = `${rateSolo}₽ SOLO / ${rateCrew}₽ CREW`;
 
-  const lessons = (window.__lessonsList || []).filter(l => !l.is_trial && l.student_id && isLessonPast(l));
+  const lessons = (window.__lessonsList || []).filter(l => (l.is_trial || l.student_id) && isLessonPast(l));
   const inRange = lessons.filter(l => {
     if (noFilter) return true;
     const d = new Date(l.lesson_date);
@@ -2101,17 +2101,19 @@ function renderSalary(){
 
   let totalHours = 0, total = 0;
   const rows = inRange.map(l => {
-    const student = myStudents.find(s => s.id === l.student_id);
-    const format = student ? student.format : 'SOLO';
+    const student = l.is_trial ? null : myStudents.find(s => s.id === l.student_id);
+    const format = student ? student.format : 'SOLO'; // пробный всегда индивидуальный — считаем по ставке SOLO
     const hours = (l.duration_minutes || 60) / 60;
     const rate = format === 'CREW' ? rateCrew : rateSolo;
     const pay = hours * rate;
     totalHours += hours; total += pay;
+    const name = l.is_trial ? `🎓 ${l.guest_name || 'Пробный'}` : ((l.profiles && l.profiles.full_name) || (student && student.full_name) || 'Ученик');
+    const formatLabel = l.is_trial ? 'Пробный' : (format === 'CREW' ? 'Группа' : 'Индивидуально');
     return `
       <div class="row-card" style="margin-bottom:10px;">
         <div class="row-main">
-          <div class="row-title">${(l.profiles && l.profiles.full_name) || (student && student.full_name) || 'Ученик'} — ${l.topic || 'Занятие'}</div>
-          <div class="row-sub">${fmtDateTime(l.lesson_date)} · ${format === 'CREW' ? 'Группа' : 'Индивидуально'} · ${hours.toFixed(1)} ч</div>
+          <div class="row-title">${name} — ${l.topic || 'Занятие'}</div>
+          <div class="row-sub">${fmtDateTime(l.lesson_date)} · ${formatLabel} · ${hours.toFixed(1)} ч</div>
         </div>
         <span class="badge badge-active">${pay.toLocaleString('ru-RU')} ₽</span>
       </div>
