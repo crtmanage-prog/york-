@@ -4004,10 +4004,44 @@ function fmtSlotRu(s){
   return `${days[d.getDay()]}, ${d.getDate()} ${MONTH_NAMES[d.getMonth()].slice(0,3)} в ${s.hour}:00`;
 }
 
+// метки часовых поясов на trial-form.html — вида "Москва (МСК)" / "Иркутск (МСК+5)" —
+// офсет от МСК зашит прямо в тексте, парсим его, чтобы пересчитать время ученика.
+// Школа (Уфа/Екатеринбург) = МСК+2 — preferred_slots.hour хранится именно в этом поясе.
+const SCHOOL_MSK_OFFSET = 2;
+function parseMskOffset(label){
+  if (!label) return null;
+  const m = label.match(/МСК([+-]\d+)?\)/);
+  if (!m) return null;
+  return m[1] ? parseInt(m[1], 10) : 0;
+}
+function tzCityName(label){
+  const m = label && label.match(/^(.*?)\s*\(МСК/);
+  return m ? m[1] : label;
+}
+
+function fmtSlotBothRu(s, timezoneLabel){
+  const schoolStr = fmtSlotRu(s);
+  const offset = parseMskOffset(timezoneLabel);
+  if (offset === null) return `${schoolStr} (Уфа)${timezoneLabel ? ' · ' + timezoneLabel : ''}`;
+  const delta = offset - SCHOOL_MSK_OFFSET;
+  if (delta === 0) return `${schoolStr} (Уфа)`;
+
+  const days = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+  const studentDate = new Date(s.date + 'T00:00:00');
+  let studentHour = s.hour + delta;
+  if (studentHour < 0){ studentHour += 24; studentDate.setDate(studentDate.getDate() - 1); }
+  if (studentHour >= 24){ studentHour -= 24; studentDate.setDate(studentDate.getDate() + 1); }
+  const sameDay = studentDate.toDateString() === new Date(s.date + 'T00:00:00').toDateString();
+  const studentTimeStr = sameDay
+    ? `${String(studentHour).padStart(2,'0')}:00`
+    : `${days[studentDate.getDay()]}, ${studentDate.getDate()} ${MONTH_NAMES[studentDate.getMonth()].slice(0,3)} в ${String(studentHour).padStart(2,'0')}:00`;
+  return `${schoolStr} Уфа · ${studentTimeStr} ${tzCityName(timezoneLabel)}`;
+}
+
 function preferredSlotsHtml(r){
   const slots = r.preferred_slots;
   if (!slots || !slots.length) return '';
-  return `<div>🕐 Пожелания: ${slots.map(fmtSlotRu).join(' / ')}${r.preferred_timezone ? ' · ' + r.preferred_timezone : ''}</div>`;
+  return `<div>🕐 Пожелания: ${slots.map(s => fmtSlotBothRu(s, r.preferred_timezone)).join(' / ')}</div>`;
 }
 
 const REQ_STATUS_LABEL = {
