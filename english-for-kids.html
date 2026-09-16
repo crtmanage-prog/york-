@@ -121,6 +121,15 @@ button{font-family:inherit}
 .ftab{flex:0 0 auto;padding:13px 20px;border-radius:999px;font:700 13px "Unbounded",sans-serif;letter-spacing:-.01em;border:1px solid rgba(17,18,14,.16);background:#fff;color:#55574F;cursor:pointer;white-space:nowrap}
 .ftab.on{background:#D7EF42;color:#0a0a09;border-color:#D7EF42}
 .faq-panel[hidden]{display:none}
+
+/* assistant chip */
+.asst-btn{position:fixed;right:22px;bottom:22px;z-index:40;width:56px;height:56px;border-radius:50%;background:#D7EF42;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,.45)}
+.asst-panel{position:fixed;right:22px;bottom:88px;z-index:40;width:min(300px,calc(100vw - 44px));border-radius:20px;background:#14150F;border:1px solid rgba(255,255,255,.13);padding:18px;box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.asst-panel[hidden]{display:none}
+.asst-bubble{position:relative;background:#D7EF42;color:#0a0a09;border-radius:18px 18px 4px 18px;padding:16px 34px 16px 16px;font:700 13.5px "Unbounded",sans-serif;line-height:1.4;letter-spacing:-.01em}
+.asst-close{position:absolute;top:9px;right:9px;width:22px;height:22px;border-radius:50%;background:rgba(10,10,9,.14);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#0a0a09}
+.asst-chip{display:block;width:100%;text-align:left;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-size:12.5px;font-weight:600;margin-top:8px}
+.asst-chip:hover{background:rgba(215,239,66,.14);border-color:rgba(215,239,66,.4);color:#fff}
 </style>
 </head>
 <body>
@@ -340,6 +349,29 @@ button{font-family:inherit}
     <span>© YORK! English</span>
   </div>
 </footer>
+
+<button class="asst-btn" id="asstBtn" type="button" aria-label="Помощник">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0a0a09" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</button>
+<div class="asst-panel" id="asstPanel">
+  <div class="asst-bubble">
+    Подберём формат для ребёнка — с чего начнём?
+    <button class="asst-close" id="asstClose" type="button" aria-label="Закрыть">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <a class="asst-chip" href="level-test.html">Пройти тест на уровень</a>
+  <a class="asst-chip" href="https://weyork.online/trial-form.html" target="_blank" rel="noopener">Записаться на бесплатный урок</a>
+  <a class="asst-chip" href="#faq">С какого возраста берёте?</a>
+  <a class="asst-chip" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
+</div>
+<script>
+  var asstPanel = document.getElementById('asstPanel');
+  function toggleAssistant(){ asstPanel.hidden = !asstPanel.hidden; }
+  document.getElementById('asstBtn').addEventListener('click', toggleAssistant);
+  document.getElementById('asstClose').addEventListener('click', toggleAssistant);
+</script>
+
 
 <script>
 document.querySelectorAll('.faq-item').forEach(function(item){
