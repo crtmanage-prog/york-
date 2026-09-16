@@ -873,7 +873,13 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         </div>
       </div>
 
-      <h2 class="panel-title">По урокам</h2>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <h2 class="panel-title" style="margin:0;">По урокам</h2>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span id="salaryCopyMsg" style="font-size:12.5px; font-weight:600; color:#3B7A1E; min-height:16px;"></span>
+          <button class="btn btn-ghost btn-sm" onclick="copySalarySummary()">📋 Скопировать сводку</button>
+        </div>
+      </div>
       <div id="salaryLessonsList"></div>
     </section>
 
@@ -2114,6 +2120,7 @@ function renderSalary(){
   }).sort((a,b) => new Date(b.lesson_date) - new Date(a.lesson_date));
 
   let totalHours = 0, total = 0;
+  const summaryLines = [];
   const rows = inRange.map(l => {
     const student = l.is_trial ? null : myStudents.find(s => s.id === l.student_id);
     const format = student ? student.format : 'SOLO'; // пробный всегда индивидуальный — считаем по ставке SOLO
@@ -2123,6 +2130,7 @@ function renderSalary(){
     totalHours += hours; total += pay;
     const name = l.is_trial ? `🎓 ${l.guest_name || 'Пробный'}` : ((l.profiles && l.profiles.full_name) || (student && student.full_name) || 'Ученик');
     const formatLabel = l.is_trial ? 'Пробный' : (format === 'CREW' ? 'Группа' : 'Индивидуально');
+    summaryLines.push(`${fmtDateTime(l.lesson_date)}\t${name}\t${l.topic || 'Занятие'}\t${formatLabel}\t${hours.toFixed(1)} ч\t${pay.toLocaleString('ru-RU')} ₽`);
     return `
       <div class="row-card" style="margin-bottom:10px;">
         <div class="row-main">
@@ -2137,6 +2145,28 @@ function renderSalary(){
   document.getElementById('salary-hours').textContent = totalHours.toFixed(1);
   document.getElementById('salary-total').textContent = total.toLocaleString('ru-RU') + ' ₽';
   document.getElementById('salaryLessonsList').innerHTML = rows || '<div class="empty-state">Нет уроков за этот период.</div>';
+
+  const periodLabel = document.getElementById('salaryPeriod').selectedOptions[0].textContent;
+  const teacherLabel = (currentProfile && currentProfile.full_name) || '';
+  const header = `Зарплата — ${teacherLabel}${teacherLabel ? ', ' : ''}${periodLabel}\nСтавка: ${rateSolo}₽ SOLO / ${rateCrew}₽ CREW\nЧасов: ${totalHours.toFixed(1)} · Итого: ${total.toLocaleString('ru-RU')} ₽\n`;
+  const tableHeader = 'Дата и время\tУченик\tТема\tФормат\tЧасов\tСумма';
+  window.__salarySummaryText = summaryLines.length
+    ? header + '\n' + tableHeader + '\n' + summaryLines.join('\n')
+    : header + '\nНет уроков за этот период.';
+}
+
+async function copySalarySummary(){
+  const msgEl = document.getElementById('salaryCopyMsg');
+  const text = window.__salarySummaryText || '';
+  try {
+    await navigator.clipboard.writeText(text);
+    msgEl.textContent = 'Скопировано! Вставьте в Sheets или куда нужно.';
+  } catch (err) {
+    msgEl.style.color = 'var(--red)';
+    msgEl.textContent = 'Не получилось скопировать — попробуйте выделить текст вручную.';
+  }
+  clearTimeout(window.__salaryCopyMsgTimer);
+  window.__salaryCopyMsgTimer = setTimeout(() => { msgEl.textContent = ''; }, 4000);
 }
 
 function renderTeacherHistoryList(){
