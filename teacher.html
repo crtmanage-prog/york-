@@ -687,6 +687,9 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
     <section class="panel" id="panel-students">
       <h2 class="panel-title">Мои ученики</h2>
+      <div class="field" style="max-width:320px;">
+        <input id="studentSearch" type="text" placeholder="Поиск по имени…" oninput="renderStudentsList(this.value)">
+      </div>
       <div id="studentsList"></div>
 
       <h2 class="panel-title" style="margin-top:20px;">Задать домашку</h2>
@@ -1115,6 +1118,41 @@ function studentContactButtons(s){
   return btns.join(' ');
 }
 
+function renderStudentsList(filterText){
+  const list = document.getElementById('studentsList');
+  const q = (filterText || '').trim().toLowerCase();
+  const filtered = q ? myStudents.filter(s => (s.full_name || '').toLowerCase().includes(q)) : myStudents;
+
+  if (!myStudents.length){
+    list.innerHTML = '<div class="empty-state">Пока нет привязанных учеников. Добавь ученика через Supabase → Table Editor → profiles → teacher_id.</div>';
+    return;
+  }
+  if (!filtered.length){
+    list.innerHTML = `<div class="empty-state">Никого не нашлось по запросу «${filterText}».</div>`;
+    return;
+  }
+  list.innerHTML = filtered.map(s => {
+    const remaining = window.__teacherRemainingByStudent ? window.__teacherRemainingByStudent[s.id] : undefined;
+    const pillClass = remaining === undefined ? '' : (remaining <= 2 ? 'badge-expired' : remaining === 3 ? 'badge-pending' : 'badge-active');
+    const pillHtml = remaining === undefined ? '' : `<span class="badge ${pillClass}" style="margin-left:8px;">${remaining} ост.</span>`;
+    return `
+    <div class="student-card">
+      <div class="row-main">
+        <div class="row-title">${s.full_name || '—'}${pillHtml}</div>
+        <div class="row-sub">${s.level || '—'} · ${s.format === 'CREW' ? 'Группа' : 'Индивидуально'}</div>
+      </div>
+      <div class="card-actions">
+        ${studentContactButtons(s)}
+        <button class="btn btn-ghost btn-sm" onclick="pickStudentForHomework('${s.id}')">Домашка</button>
+        <button class="btn btn-ghost btn-sm" onclick="pickStudentForEdit('${s.id}')">Профиль</button>
+        <button class="btn btn-ghost btn-sm" onclick="toggleStudentNotes('${s.id}')">📌 Заметки</button>
+      </div>
+      <div id="notes-${s.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
+    </div>
+  `;
+  }).join('');
+}
+
 async function loadStudents(){
   const { data: students } = await supabase.from('profiles').select('*')
     .eq('teacher_id', currentUser.id).order('full_name', { ascending:true });
@@ -1134,31 +1172,7 @@ async function loadStudents(){
     });
   }
 
-  const list = document.getElementById('studentsList');
-  if (!myStudents.length){
-    list.innerHTML = '<div class="empty-state">Пока нет привязанных учеников. Добавь ученика через Supabase → Table Editor → profiles → teacher_id.</div>';
-  } else {
-    list.innerHTML = myStudents.map(s => {
-      const remaining = window.__teacherRemainingByStudent[s.id];
-      const pillClass = remaining === undefined ? '' : (remaining <= 2 ? 'badge-expired' : remaining === 3 ? 'badge-pending' : 'badge-active');
-      const pillHtml = remaining === undefined ? '' : `<span class="badge ${pillClass}" style="margin-left:8px;">${remaining} ост.</span>`;
-      return `
-      <div class="student-card">
-        <div class="row-main">
-          <div class="row-title">${s.full_name || '—'}${pillHtml}</div>
-          <div class="row-sub">${s.level || '—'} · ${s.format === 'CREW' ? 'Группа' : 'Индивидуально'}</div>
-        </div>
-        <div class="card-actions">
-          ${studentContactButtons(s)}
-          <button class="btn btn-ghost btn-sm" onclick="pickStudentForHomework('${s.id}')">Домашка</button>
-          <button class="btn btn-ghost btn-sm" onclick="pickStudentForEdit('${s.id}')">Профиль</button>
-          <button class="btn btn-ghost btn-sm" onclick="toggleStudentNotes('${s.id}')">📌 Заметки</button>
-        </div>
-        <div id="notes-${s.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
-      </div>
-    `;
-    }).join('');
-  }
+  renderStudentsList(document.getElementById('studentSearch') ? document.getElementById('studentSearch').value : '');
 
   const select = document.getElementById('hwStudent');
   select.innerHTML = myStudents.map(s => `<option value="${s.id}">${s.full_name || s.id}</option>`).join('');

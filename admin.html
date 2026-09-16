@@ -771,6 +771,9 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
     <section class="panel" id="panel-allstudents">
       <h2 class="panel-title">Все ученики</h2>
+      <div class="field" style="max-width:320px;">
+        <input id="studentsSearch" type="text" placeholder="Поиск по имени или учителю…" oninput="renderStudentsTable(this.value)">
+      </div>
       <div class="table-wrap">
         <table class="admin-table" id="studentsTable">
           <thead>
@@ -1637,7 +1640,7 @@ async function loadAll(){
   document.getElementById('ov-teachers').textContent = allTeachers.length;
   document.getElementById('ov-tocheck').textContent = (hw || []).length;
 
-  renderStudentsTable();
+  renderStudentsTable(document.getElementById('studentsSearch') ? document.getElementById('studentsSearch').value : '');
   renderTeachersTable();
   fillTeacherDropdowns();
 
@@ -2112,13 +2115,21 @@ function contactButtons(s){
   return btns.length ? btns.join(' ') : '<span style="color:var(--ink-soft); font-size:12.5px;">нет контакта</span>';
 }
 
-function renderStudentsTable(){
+function renderStudentsTable(filterText){
   const body = document.getElementById('studentsTableBody');
   if (!allStudents.length){
     body.innerHTML = '<tr><td colspan="8" class="empty-state">Пока нет учеников.</td></tr>';
     return;
   }
-  body.innerHTML = allStudents.map(s => {
+  const q = (filterText || '').trim().toLowerCase();
+  const filtered = q
+    ? allStudents.filter(s => (s.full_name || '').toLowerCase().includes(q) || teacherName(s.teacher_id).toLowerCase().includes(q))
+    : allStudents;
+  if (!filtered.length){
+    body.innerHTML = `<tr><td colspan="8" class="empty-state">Никого не нашлось по запросу «${filterText}».</td></tr>`;
+    return;
+  }
+  body.innerHTML = filtered.map(s => {
     return `
     <tr>
       <td>${s.full_name || '—'}</td>
@@ -4662,7 +4673,7 @@ async function loadPayments(){
       window.__remainingByStudent[p.student_id] = computeRemaining(p, window.__lessonsList || []);
     }
   });
-  renderStudentsTable();
+  renderStudentsTable(document.getElementById('studentsSearch') ? document.getElementById('studentsSearch').value : '');
 
   const pending = list.filter(p => p.status === 'pending');
   const pendingContainer = document.getElementById('pendingPaymentsList');
