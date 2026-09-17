@@ -244,6 +244,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .stat-card .stat-value{font-family:'Unbounded',sans-serif; font-weight:700; font-size:20px;}
   .stat-clickable{cursor:pointer; transition:background .12s ease, transform .12s ease;}
   .stat-clickable:hover{background:var(--accent); transform:translateY(-2px);}
+  .audience-chip{
+    padding:9px 15px; border-radius:999px; border:1.5px solid var(--line); background:#fff;
+    font-size:12.5px; font-weight:600; color:var(--ink-soft); cursor:pointer;
+  }
+  .audience-chip.active{background:var(--ink); color:var(--accent); border-color:var(--ink);}
+  .audience-chip:hover:not(.active){border-color:var(--ink);}
   .chart-bars{display:flex; align-items:flex-end; gap:4px; height:180px; padding:0 4px;}
   .chart-bar-col{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; min-width:6px;}
   .chart-bar{width:100%; background:var(--accent); border-radius:3px 3px 0 0; min-height:2px;}
@@ -797,8 +803,15 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <p class="section-sub" style="margin-bottom:20px;">Пиши новости и важные объявления ученикам сама — без обращения к Клоду.</p>
 
       <div class="stat-card" style="max-width:560px;">
-        <div class="stat-label" style="margin-bottom:10px;">Новость для учеников</div>
-        <p style="font-size:12.5px; color:#8a8b82; margin:0 0 10px;">Уйдёт всем ученикам в Telegram и появится в колокольчике личного кабинета — один и тот же текст в обоих местах.</p>
+        <div class="stat-label" style="margin-bottom:10px;">Новость</div>
+
+        <div style="display:flex; gap:8px; margin-bottom:12px;" id="broadcastAudienceChips">
+          <button type="button" class="audience-chip active" data-audience="students" onclick="setBroadcastAudience('students')">Ученикам</button>
+          <button type="button" class="audience-chip" data-audience="teachers" onclick="setBroadcastAudience('teachers')">Учителям</button>
+          <button type="button" class="audience-chip" data-audience="all" onclick="setBroadcastAudience('all')">Всем</button>
+        </div>
+
+        <p style="font-size:12.5px; color:#8a8b82; margin:0 0 10px;" id="broadcastAudienceHint">Уйдёт всем ученикам в Telegram и появится в колокольчике личного кабинета — один и тот же текст в обоих местах.</p>
         <textarea id="broadcastText" rows="4" placeholder="Например: с понедельника меняем расписание на праздничной неделе..." style="width:100%; border:1.5px solid #E4E5DB; border-radius:12px; padding:10px 12px; font-family:inherit; font-size:14px; resize:vertical; box-sizing:border-box;"></textarea>
         <div style="display:flex; align-items:center; gap:12px; margin-top:10px;">
           <button class="btn btn-dark btn-sm" id="broadcastSendBtn" onclick="sendBroadcastNotification()">Отправить</button>
@@ -1676,18 +1689,39 @@ async function loadBroadcastHistory(){
   });
 }
 
+window.__broadcastAudience = 'students';
+const BROADCAST_AUDIENCE_TEXT = {
+  students: 'Уйдёт всем ученикам в Telegram и появится в колокольчике личного кабинета — один и тот же текст в обоих местах.',
+  teachers: 'Уйдёт всем учителям в Telegram. У учителей нет колокольчика в кабинете — только Telegram.',
+  all: 'Уйдёт всем ученикам и учителям в Telegram. Ученикам заодно появится в колокольчике личного кабинета.'
+};
+const BROADCAST_AUDIENCE_CONFIRM = {
+  students: 'всем ученикам',
+  teachers: 'всем учителям',
+  all: 'всем ученикам и учителям'
+};
+
+function setBroadcastAudience(audience){
+  window.__broadcastAudience = audience;
+  document.querySelectorAll('#broadcastAudienceChips .audience-chip').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.audience === audience);
+  });
+  document.getElementById('broadcastAudienceHint').textContent = BROADCAST_AUDIENCE_TEXT[audience];
+}
+
 async function sendBroadcastNotification(){
   const text = document.getElementById('broadcastText').value.trim();
   const statusEl = document.getElementById('broadcastStatus');
   if (!text){ statusEl.style.color = '#C0392B'; statusEl.textContent = 'Введите текст новости.'; return; }
-  if (!confirm('Отправить это сообщение всем ученикам в Telegram и в кабинет?\n\n' + text)) return;
+  const audience = window.__broadcastAudience || 'students';
+  if (!confirm(`Отправить это сообщение ${BROADCAST_AUDIENCE_CONFIRM[audience]} в Telegram?\n\n` + text)) return;
 
   const btn = document.getElementById('broadcastSendBtn');
   btn.disabled = true;
   statusEl.style.color = '#5a5b52';
   statusEl.textContent = 'Отправка...';
   try {
-    const { error } = await supabase.rpc('broadcast_cabinet_notification', { p_message: text });
+    const { error } = await supabase.rpc('broadcast_cabinet_notification', { p_message: text, p_audience: audience });
     if (error) throw error;
     document.getElementById('broadcastText').value = '';
     statusEl.style.color = '#3B7A1E';
