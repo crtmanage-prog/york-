@@ -401,71 +401,91 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .dash-sub{color:var(--ink-soft); font-size:15px; margin:0 0 22px;}
 
   /* ---------- геройская сетка обзора ---------- */
-  .hero-grid{display:grid; grid-template-columns:1.35fr 1fr 1.1fr; gap:16px; margin-bottom:16px; align-items:stretch;}
-  @media (max-width:980px){ .hero-grid{grid-template-columns:1fr 1fr;} .hero-progress{grid-column:1 / -1;} }
-  @media (max-width:640px){ .hero-grid{grid-template-columns:1fr;} }
-
   .hero-lesson{
-    background:var(--ink); color:#fff; border-radius:22px; padding:24px;
-    display:flex; flex-direction:column; min-height:210px; position:relative; overflow:hidden;
+    background:var(--ink); color:#fff; border-radius:26px; padding:28px 30px;
+    display:flex; align-items:center; gap:26px; position:relative; overflow:hidden;
+    margin-bottom:16px; box-shadow:0 24px 50px -30px rgba(20,21,18,.7);
   }
-  .hero-lesson-glow{position:absolute; bottom:-30px; right:-20px; width:110px; height:110px; border-radius:50%; background:radial-gradient(circle, rgba(215,239,66,.3), transparent 70%); pointer-events:none;}
-  .deco-arrow{position:absolute; bottom:14px; right:14px; width:46px; height:46px; opacity:0.9; pointer-events:none;}
-  .hl-label{position:relative; font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px;}
-  .hl-date{font-family:'Unbounded',sans-serif; font-weight:900; font-size:30px; line-height:1.15; color:var(--accent);}
-  .hl-topic{font-size:13.5px; color:rgba(255,255,255,0.75); margin-top:8px;}
+  @media (max-width:860px){ .hero-lesson{flex-direction:column; align-items:stretch;} }
+  .hero-lesson-glow{position:absolute; bottom:-30px; right:-20px; width:160px; height:160px; border-radius:50%; background:radial-gradient(circle, rgba(215,239,66,.3), transparent 70%); pointer-events:none;}
+  .hero-lesson-main{position:relative; min-width:0; flex:1;}
+  .hl-label{position:relative; font-family:'Unbounded',sans-serif; font-weight:600; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .hl-date{font-family:'Unbounded',sans-serif; font-weight:700; font-size:32px; line-height:1.08; letter-spacing:-0.03em;}
+  .hl-topic{display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:13px; color:rgba(255,255,255,0.72); margin-top:12px;}
+  .hl-cta-row{display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;}
+  .hl-cta-row .btn{padding:13px 20px; border-radius:999px; font-size:13.5px; font-weight:600;}
+  .hl-glass{
+    position:relative; flex:0 0 220px; border-radius:20px; padding:20px 22px;
+    background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); backdrop-filter:blur(12px);
+  }
+  @media (max-width:860px){ .hl-glass{flex:1;} }
+  .hlg-label{font-size:11.5px; color:#a9aaa2;}
+  .hlg-countdown{font-family:'Unbounded',sans-serif; font-weight:700; font-size:30px; letter-spacing:-0.03em; margin-top:6px;}
+  .hlg-sep{height:1px; background:rgba(255,255,255,.14); margin:16px 0;}
+  .hlg-row{display:flex; justify-content:space-between; font-size:12px; color:#b9bab2; padding:4px 0;}
+  .hlg-row b{color:#fff; font-weight:600;}
 
-  .hero-mid{display:flex; flex-direction:column; gap:16px;}
-  .mini-card{
-    background:#fff; border:1.5px solid var(--line); border-radius:20px;
-    padding:18px 20px; flex:1; display:flex; flex-direction:column; gap:6px; align-items:flex-start;
-  }
-  .mc-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px;}
-  .mc-sub{font-size:13px; color:var(--ink-soft); margin-bottom:6px;}
+  .dash-row-3{display:grid; grid-template-columns:1.15fr 1fr 1fr; gap:16px; margin-bottom:16px; align-items:stretch;}
+  @media (max-width:980px){ .dash-row-3{grid-template-columns:1fr 1fr;} }
+  @media (max-width:640px){ .dash-row-3{grid-template-columns:1fr;} }
+  .dash-row-2{display:grid; grid-template-columns:1.35fr 1fr; gap:16px; margin-bottom:16px; align-items:start;}
+  @media (max-width:860px){ .dash-row-2{grid-template-columns:1fr;} }
 
-  .carousel-card{position:relative; overflow:hidden; padding:0; min-height:128px;}
-  .carousel-slide{
-    position:absolute; inset:0; padding:18px 20px;
-    display:flex; flex-direction:column; gap:6px; align-items:flex-start;
-    opacity:0; transform:translateX(14px); pointer-events:none;
-    transition:opacity .45s ease, transform .45s ease;
+  .ov-card{
+    background:#fff; border-radius:24px; padding:24px;
+    border:1px solid var(--line); box-shadow:0 1px 2px rgba(20,21,18,.05), 0 18px 40px -28px rgba(20,21,18,.4);
+    display:flex; flex-direction:column;
   }
-  .carousel-slide.active{opacity:1; transform:translateX(0); pointer-events:auto;}
-  .carousel-tasks-head{display:flex; align-items:center; justify-content:space-between; width:100%; margin-bottom:2px;}
-  .carousel-tasks-count{font-size:11.5px; color:var(--ink-soft); font-weight:600;}
-  .carousel-tasks-list{width:100%;}
-  .ov-task-row{
-    display:flex; align-items:center; gap:9px; padding:5px 0; cursor:pointer;
-    border-bottom:1px solid var(--line); font-size:12.5px;
-  }
-  .ov-task-row:last-child{border-bottom:none;}
-  .ov-task-num{width:15px; flex-shrink:0; color:var(--ink-soft); font-weight:700; font-size:11.5px;}
-  .ov-task-row.done .ov-task-num{color:#3B7A1E;}
-  .ov-task-name{flex:1; min-width:0; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-  .ov-task-row.done .ov-task-name{color:var(--ink-soft); text-decoration:line-through;}
-  .ov-task-arrow{color:var(--ink-soft); flex-shrink:0;}
-  .carousel-dots{position:absolute; bottom:10px; right:16px; display:flex; gap:4px;}
-  .carousel-dots .dot{width:5px; height:5px; border-radius:50%; background:var(--line); transition:background .3s ease;}
-  .carousel-dots .dot.active{background:var(--ink);}
+  .ov-card-head{font-family:'Unbounded',sans-serif; font-weight:600; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft);}
+  .ov-card-num{font-family:'Unbounded',sans-serif; font-weight:700; font-size:40px; letter-spacing:-0.05em; line-height:1; margin-top:10px;}
+  .ov-card-sub{font-size:13px; color:var(--ink-soft);}
+  .ov-bar-track{height:8px; border-radius:999px; background:#EDECE6; overflow:hidden; margin-top:16px;}
+  .ov-bar-fill{display:block; height:100%; border-radius:999px; background:var(--ink);}
+  .ov-card-note{font-size:12px; color:var(--ink-soft); margin-top:12px; line-height:1.5;}
+  .ov-card-cta{margin-top:auto; padding-top:16px;}
+  .ov-card-cta .btn{width:100%; justify-content:center;}
 
-  .hero-progress{
-    background:var(--accent); border-radius:22px; padding:22px 24px;
-    display:flex; flex-direction:column; position:relative; overflow:hidden;
-  }
-  .deco-flower{position:absolute; top:14px; right:14px; width:26px; height:26px; opacity:0.9;}
-  .hp-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:16px;}
-  .hp-level{font-family:'Unbounded',sans-serif; font-weight:900; font-size:42px; line-height:1; margin:6px 0 16px;}
-  .hp-bars{display:flex; flex-direction:column; gap:9px;}
-  .hp-row{
-    display:flex; align-items:center; gap:10px; cursor:pointer;
-    font-size:11.5px; font-weight:600;
-  }
-  .hp-row span{flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-  .hp-bar{width:88px; height:9px; border-radius:6px; background:rgba(255,255,255,0.55); overflow:hidden; flex-shrink:0;}
-  .hp-fill{height:100%; background:var(--ink); border-radius:6px;}
+  .ov-level-card{background:var(--accent); box-shadow:0 18px 40px -26px rgba(122,140,30,.8); border:none;}
+  .hp-bars{display:flex; flex-direction:column; gap:9px; margin-top:20px;}
+  .hp-row{display:flex; align-items:center; gap:10px; cursor:pointer; font-size:12px;}
+  .hp-row span{flex:0 0 84px; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .hp-bar{flex:1; min-width:0; height:6px; border-radius:999px; background:rgba(20,21,18,.13); overflow:hidden;}
+  .hp-fill{height:100%; background:var(--ink); border-radius:999px;}
+  .hp-pct{flex:0 0 30px; text-align:right; font-family:'Unbounded',sans-serif; font-size:11px;}
+  @media (max-width:420px){ .hp-row span{flex-basis:74px; font-size:11px;} }
 
-  .lower-grid{display:grid; grid-template-columns:1fr 1.6fr; gap:16px;}
-  @media (max-width:760px){ .lower-grid{grid-template-columns:1fr;} }
+  .streak-num{font-family:'Unbounded',sans-serif; font-weight:700; font-size:40px; letter-spacing:-0.05em; line-height:1;}
+  .streak-days{display:flex; gap:6px; margin-top:20px;}
+  .streak-day{
+    flex:1; height:38px; border-radius:11px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:600; background:var(--panel); color:var(--ink-soft); border:1px solid var(--line);
+  }
+  .streak-day.done{background:var(--accent); color:var(--ink); border-color:var(--accent);}
+
+  .week-row{display:flex; align-items:center; gap:16px; padding:13px 0; border-top:1px solid var(--line);}
+  .week-row:first-of-type{border-top:none;}
+  .week-daybox{flex:0 0 44px; text-align:center;}
+  .week-daybox b{display:block; font-family:'Unbounded',sans-serif; font-size:15px; letter-spacing:-0.03em;}
+  .week-daybox span{display:block; font-size:10.5px; color:#9a9b92; margin-top:2px; text-transform:capitalize;}
+  .week-bar{flex:0 0 3px; align-self:stretch; border-radius:999px; background:var(--line);}
+  .week-bar.today{background:var(--accent);}
+  .week-bar.done{background:#DBDAD3;}
+  .week-main{min-width:0; flex:1;}
+  .week-main b{display:block; font-size:13.5px;}
+  .week-main span{display:block; font-size:11.5px; color:var(--ink-soft); margin-top:3px;}
+  .week-chip{font-size:11px; font-weight:600; padding:6px 11px; border-radius:999px; background:#F2F1EB; color:#6e6f66; white-space:nowrap;}
+  .week-chip.today{background:var(--accent); color:var(--ink);}
+
+  .hwrow{display:flex; align-items:center; gap:13px; padding:14px; border-radius:16px; background:var(--panel); border:1px solid var(--line); text-decoration:none; color:inherit; cursor:pointer;}
+  .hwrow.urgent{background:var(--accent); border-color:var(--accent);}
+  .hwrow + .hwrow{margin-top:9px;}
+  .hwrow-box{flex:0 0 20px; height:20px; border-radius:7px; border:1.5px solid rgba(20,21,18,.25); display:flex; align-items:center; justify-content:center; font-size:12px;}
+  .hwrow.done .hwrow-box{background:var(--accent); border-color:var(--accent);}
+  .hwrow-main{min-width:0; flex:1;}
+  .hwrow-main b{display:block; font-size:13px; line-height:1.35;}
+  .hwrow-main span{display:block; font-size:11.5px; color:var(--ink-soft); margin-top:3px;}
+
   .tasks-inline{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
   @media (max-width:620px){ .tasks-inline{grid-template-columns:1fr;} }
   .tasks-inline .task-row{border-bottom:none; padding:0;}
@@ -480,15 +500,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .dash-card-title{
     font-family:'Unbounded',sans-serif; font-weight:700; font-size:17px; margin:0 0 14px;
   }
-
-  .streak-num{font-family:'Unbounded',sans-serif; font-weight:900; font-size:40px; line-height:1;}
-  .streak-days{display:flex; gap:6px; margin-top:14px; flex-wrap:wrap;}
-  .streak-day{
-    width:36px; height:36px; border-radius:11px;
-    display:flex; align-items:center; justify-content:center;
-    font-size:13px; font-weight:700; background:var(--panel); color:var(--ink-soft);
-  }
-  .streak-day.done{background:var(--accent); color:var(--ink);}
 
   .task-row{
     display:flex; align-items:center; gap:12px;
@@ -1184,81 +1195,85 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       </div>
 
       <div id="enDashboard">
-        <div class="hero-grid">
 
-          <div class="hero-lesson">
-            <div class="hero-lesson-glow" aria-hidden="true"></div>
+        <div class="hero-lesson">
+          <div class="hero-lesson-glow" aria-hidden="true"></div>
+          <div class="hero-lesson-main">
             <div class="hl-label">Следующий урок</div>
             <div class="hl-date" id="ov-next-lesson">—</div>
             <div class="hl-topic" id="ov-next-lesson-title"></div>
-            <div id="ov-join-slot" style="margin-top:auto;"></div>
-            <svg class="deco-arrow" viewBox="0 0 100 100" aria-hidden="true"><path d="M20 85 C30 55 50 30 78 15 L78 32 L92 18 L72 5 L74 22 C50 36 32 58 22 86 Z" fill="var(--accent)"/></svg>
+            <div class="hl-cta-row" id="ov-join-slot"></div>
           </div>
-
-          <div class="hero-mid">
-            <div class="mini-card">
-              <div class="mc-title">Домашка ждёт</div>
-              <div class="mc-sub" id="ov-hw-pending">—</div>
-              <button class="btn btn-ghost btn-sm" onclick="document.querySelector('.tab-btn[data-tab=&quot;homework&quot;]').click()">Открыть</button>
-            </div>
-            <div class="mini-card carousel-card" id="subTasksCard">
-              <div class="carousel-slide active" data-slide="sub">
-                <div class="mc-title">Абонемент</div>
-                <div class="mc-sub" id="ov-subscription">—</div>
-                <button class="btn btn-ghost btn-sm" onclick="document.querySelector('.tab-btn[data-tab=&quot;payment&quot;]').click()">Оплата</button>
-              </div>
-              <div class="carousel-slide" data-slide="tasks">
-                <div class="carousel-tasks-head">
-                  <div class="mc-title">Задания на сегодня</div>
-                  <span class="carousel-tasks-count" id="ovTasksCount">—</span>
-                </div>
-                <div class="carousel-tasks-list" id="ovTasksPreview"></div>
-              </div>
-              <div class="carousel-dots"><span class="dot active"></span><span class="dot"></span></div>
-            </div>
+          <div class="hl-glass" id="ov-glass">
+            <div class="hlg-label">До начала</div>
+            <div class="hlg-countdown" id="ov-countdown">—</div>
+            <div class="hlg-sep"></div>
+            <div id="ov-glass-rows"></div>
           </div>
+        </div>
 
-          <div class="hero-progress">
-            <svg class="deco-flower" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8 L58 38 L86 22 L64 46 L92 50 L64 54 L86 78 L58 62 L50 92 L42 62 L14 78 L36 54 L8 50 L36 46 L14 22 L42 38 Z" fill="#1C1C1C"/></svg>
-            <div class="hp-title">Твой прогресс</div>
-            <div class="hp-level" id="ov-level">—</div>
+        <div class="dash-row-3">
+          <div class="ov-card ov-level-card">
+            <div class="ov-card-head">Твой уровень</div>
+            <div class="ov-card-num" id="ov-level">—</div>
             <div class="hp-bars">
               <div class="hp-row" onclick="startTest('core_skill')">
                 <span>Грамматика и лексика</span>
                 <div class="hp-bar"><div class="hp-fill" id="bar-core_skill" style="width:0%;"></div></div>
+                <b class="hp-pct" id="bar-core_skill-pct">0%</b>
               </div>
               <div class="hp-row" onclick="startTest('reading')">
                 <span>Чтение</span>
                 <div class="hp-bar"><div class="hp-fill" id="bar-reading" style="width:0%;"></div></div>
+                <b class="hp-pct" id="bar-reading-pct">0%</b>
               </div>
               <div class="hp-row" onclick="startTest('listening')">
                 <span>Аудирование</span>
                 <div class="hp-bar"><div class="hp-fill" id="bar-listening" style="width:0%;"></div></div>
+                <b class="hp-pct" id="bar-listening-pct">0%</b>
               </div>
               <div class="hp-row" style="cursor:default;" title="Проверяет преподаватель — в домашке">
                 <span>Письмо</span>
                 <div class="hp-bar"><div class="hp-fill" style="width:0%;"></div></div>
+                <b class="hp-pct"></b>
               </div>
             </div>
           </div>
 
+          <div class="ov-card">
+            <div class="ov-card-head">Абонемент</div>
+            <div class="ov-card-num"><span id="ov-sub-num">—</span></div>
+            <div class="ov-card-sub" id="ov-sub-total"></div>
+            <div class="ov-bar-track"><span class="ov-bar-fill" id="ov-sub-bar" style="width:0%;"></span></div>
+            <div class="ov-card-note" id="ov-sub-note"></div>
+            <div class="ov-card-cta"><button class="btn btn-dark btn-sm" onclick="document.querySelector('.tab-btn[data-tab=&quot;payment&quot;]').click()">Продлить</button></div>
+          </div>
+
+          <div class="ov-card">
+            <div class="ov-card-head">Занимаешься подряд</div>
+            <div class="ov-card-num"><span class="streak-num" id="streakNum">0</span></div>
+            <div class="ov-card-sub">дней</div>
+            <div class="streak-days" id="streakDays"></div>
+            <div class="ov-card-note">Не пропускай занятия — стрик считается по практике и урокам.</div>
+          </div>
         </div>
 
-        <div class="lower-grid">
-          <div class="dash-card">
-            <h3 class="dash-card-title">Активность</h3>
-            <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
-              <div style="display:flex; align-items:baseline; gap:8px;">
-                <span class="streak-num" id="streakNum">0</span>
-                <span style="font-size:12px; color:var(--ink-soft); line-height:1.25;">дней<br>подряд</span>
-              </div>
-              <div class="streak-days" id="streakDays" style="margin-top:0;"></div>
+        <div class="dash-row-2">
+          <div class="ov-card">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+              <b style="font-family:'Unbounded',sans-serif; font-weight:600; font-size:15px;">Эта неделя</b>
+              <a href="#" style="font-size:12px; color:var(--ink-soft);" onclick="document.querySelector('.tab-btn[data-tab=&quot;schedule&quot;]').click(); return false;">Всё расписание →</a>
             </div>
+            <div id="ov-week-list"></div>
           </div>
 
-          <div class="dash-card">
-            <h3 class="dash-card-title">Задания на сегодня</h3>
-            <div id="dailyTasksList" class="tasks-inline"></div>
+          <div class="ov-card">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+              <b style="font-family:'Unbounded',sans-serif; font-weight:600; font-size:15px;">Домашка</b>
+              <span id="ov-hw-pending" class="week-chip today" style="display:none;"></span>
+            </div>
+            <div id="ov-hw-list"></div>
+            <a href="#" style="display:block; margin-top:14px; font-size:12px; color:var(--ink-soft);" onclick="document.querySelector('.tab-btn[data-tab=&quot;homework&quot;]').click(); return false;">Все задания →</a>
           </div>
         </div>
       </div>
@@ -1710,7 +1725,6 @@ async function enterApp(user){
   loadMyDocuments();
   setupTelegramBlock();
   startFlagSwap();
-  startSubTasksCarousel();
   loadTeacherContact();
   loadPracticeProgress();
   setupNotifBell();
@@ -1870,23 +1884,104 @@ async function loadSchedule(){
 
   const dateEl = document.getElementById('ov-next-lesson');
   const topicEl = document.getElementById('ov-next-lesson-title');
+  const joinSlot = document.getElementById('ov-join-slot');
+  window.__ovUpcoming = upcoming || null;
   if (upcoming){
     const d = new Date(upcoming.lesson_date);
     const tz = myTimezone();
     const dayStr = d.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:tz });
     const timeStr = d.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:tz });
     if (dateEl) dateEl.innerHTML = `${dayStr}<br>${timeStr}`;
-    if (topicEl) topicEl.textContent = upcoming.topic || '';
+    if (topicEl) topicEl.textContent = upcoming.topic || (upcoming.is_trial ? 'Пробный урок' : 'Регулярное занятие');
+    const materialsBtn = upcoming.materials_url
+      ? `<a href="${upcoming.materials_url}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Материалы урока</a>`
+      : `<a href="#" class="btn btn-ghost btn-sm" onclick="alert('Материалы урока пока не добавлены — скоро появятся прямо здесь. Если нужно что-то сейчас — напиши преподавателю.'); return false;">Материалы урока</a>`;
+    if (joinSlot) joinSlot.innerHTML = renderJoinButton(upcoming) + materialsBtn;
   } else {
     if (dateEl) dateEl.textContent = 'Уроков пока нет';
     if (topicEl) topicEl.textContent = '';
+    if (joinSlot) joinSlot.innerHTML = '';
   }
   document.getElementById('ov-level').textContent = currentProfile.level || '—';
+  renderOvGlass();
+  if (!window.__ovGlassTicking){
+    window.__ovGlassTicking = true;
+    setInterval(renderOvGlass, 30000);
+  }
+  renderWeekPreview();
 
   if (!window.__scheduleTicking){
     window.__scheduleTicking = true;
     setInterval(renderScheduleList, 30000); // обновляем состояние кнопки каждые 30 сек
   }
+}
+
+function renderOvGlass(){
+  const rowsEl = document.getElementById('ov-glass-rows');
+  const cdEl = document.getElementById('ov-countdown');
+  if (!rowsEl || !cdEl) return;
+  const upcoming = window.__ovUpcoming;
+  if (!upcoming){
+    cdEl.textContent = '—';
+    rowsEl.innerHTML = '';
+    return;
+  }
+  const diffMs = new Date(upcoming.lesson_date).getTime() - Date.now();
+  if (diffMs <= 0){
+    cdEl.textContent = 'Сейчас';
+  } else {
+    const totalMin = Math.floor(diffMs / 60000);
+    const h = Math.floor(totalMin / 60);
+    const m = totalMin % 60;
+    cdEl.textContent = h > 0 ? `${h}:${String(m).padStart(2,'0')}` : `${m} мин`;
+  }
+  const rows = [];
+  const active = window.__activePayment;
+  if (active){
+    const remaining = computeRemaining(active, window.__scheduleList || []);
+    const total = active.lessons_included || 0;
+    if (remaining !== null && total){
+      rows.push(`<span>Урок</span><b>${total - remaining + 1} из ${total}</b>`);
+    }
+  }
+  if (currentProfile.format) rows.push(`<span>Формат</span><b>${currentProfile.format}</b>`);
+  if (upcoming.duration_minutes) rows.push(`<span>Длительность</span><b>${upcoming.duration_minutes} мин</b>`);
+  rowsEl.innerHTML = rows.map(r => `<div class="hlg-row">${r}</div>`).join('');
+}
+
+function renderWeekPreview(){
+  const el = document.getElementById('ov-week-list');
+  if (!el) return;
+  const list = window.__scheduleList || [];
+  const now = Date.now();
+  const upcoming = list.filter(l => l.status !== 'cancelled')
+    .filter(l => new Date(l.lesson_date).getTime() > now - 24 * 3600 * 1000)
+    .sort((a, b) => new Date(a.lesson_date) - new Date(b.lesson_date))
+    .slice(0, 5);
+  if (!upcoming.length){
+    el.innerHTML = '<div class="empty-state">Уроков пока нет.</div>';
+    return;
+  }
+  const tz = myTimezone();
+  const todayKey = fmtDateKey(new Date());
+  el.innerHTML = upcoming.map(l => {
+    const d = new Date(l.lesson_date);
+    const key = fmtDateKey(d);
+    const isToday = key === todayKey;
+    const isPast = isLessonPast(l);
+    const dayNum = d.toLocaleDateString('ru-RU', { day:'numeric', timeZone:tz });
+    const weekday = d.toLocaleDateString('ru-RU', { weekday:'short', timeZone:tz });
+    const timeStr = d.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:tz });
+    const barCls = isToday ? 'today' : (isPast ? 'done' : '');
+    const chipCls = isToday ? 'today' : '';
+    const chipText = isToday ? 'сегодня' : (isPast ? 'пройден' : (l.status === 'upcoming' ? 'запланирован' : l.status));
+    return `<div class="week-row">
+      <span class="week-daybox"><b>${dayNum}</b><span>${weekday}</span></span>
+      <span class="week-bar ${barCls}"></span>
+      <span class="week-main"><b>${l.topic || (l.is_trial ? 'Пробный урок' : 'Занятие')}</b><span>${timeStr}</span></span>
+      <span class="week-chip ${chipCls}">${chipText}</span>
+    </div>`;
+  }).join('');
 }
 
 function fmtDateKey(d){
@@ -2277,7 +2372,34 @@ async function loadHomework(){
   }
 
   const pending = list.filter(h => h.status === 'assigned').length;
-  document.getElementById('ov-hw-pending').textContent = pending;
+  const pendingChip = document.getElementById('ov-hw-pending');
+  if (pendingChip){
+    if (pending > 0){
+      pendingChip.textContent = pending + ' ' + pluralTasks(pending);
+      pendingChip.style.display = '';
+    } else {
+      pendingChip.style.display = 'none';
+    }
+  }
+
+  const previewEl = document.getElementById('ov-hw-list');
+  if (previewEl){
+    const preview = list.slice(0, 3);
+    if (!preview.length){
+      previewEl.innerHTML = '<div class="empty-state">Домашних заданий пока нет.</div>';
+    } else {
+      previewEl.innerHTML = preview.map(h => {
+        const done = h.status !== 'assigned';
+        const due = h.status === 'reviewed' ? 'проверено' + (h.grade ? ' · ' + h.grade : '')
+          : h.status === 'submitted' ? 'на проверке'
+          : (h.due_date ? 'до ' + fmtDate(h.due_date) : 'без срока');
+        return `<a class="hwrow${done ? ' done' : ''}${!done && h.due_date && new Date(h.due_date) <= new Date() ? ' urgent' : ''}" href="#" onclick="document.querySelector('.tab-btn[data-tab=&quot;homework&quot;]').click(); return false;">
+          <span class="hwrow-box">${done ? '✓' : ''}</span>
+          <span class="hwrow-main"><b>${h.title}</b><span>${due}</span></span>
+        </a>`;
+      }).join('');
+    }
+  }
 }
 
 function renderHomeworkItem(h){
@@ -2474,7 +2596,24 @@ async function loadPayments(){
 
   const active = list.find(p => p.status === 'active');
   const remainingActive = active ? computeRemaining(active, window.__scheduleList || []) : null;
-  document.getElementById('ov-subscription').textContent = remainingActive !== null ? `${remainingActive} ост.` : 'Нет';
+  window.__activePayment = active || null;
+
+  const numEl = document.getElementById('ov-sub-num');
+  const totalEl = document.getElementById('ov-sub-total');
+  const barEl = document.getElementById('ov-sub-bar');
+  const noteEl = document.getElementById('ov-sub-note');
+  if (numEl && active){
+    const total = active.lessons_included || 0;
+    numEl.textContent = remainingActive !== null ? remainingActive : '—';
+    if (totalEl) totalEl.textContent = 'из ' + total + ' ' + pluralLessons(total);
+    if (barEl) barEl.style.width = total ? Math.max(0, Math.min(100, (remainingActive / total) * 100)) + '%' : '0%';
+    if (noteEl) noteEl.textContent = (active.valid_until ? 'Действует до ' + fmtDate(active.valid_until) + ' ' : '') + '· Списание — после каждого урока.';
+  } else if (numEl){
+    numEl.textContent = '0';
+    if (totalEl) totalEl.textContent = 'абонемент не оформлен';
+    if (barEl) barEl.style.width = '0%';
+    if (noteEl) noteEl.textContent = 'Оформи абонемент на вкладке «Абонемент».';
+  }
 
   const reminderEl = document.getElementById('lowLessonsReminder');
   if (reminderEl){
@@ -2487,6 +2626,14 @@ async function loadPayments(){
       reminderEl.classList.add('hidden');
     }
   }
+  renderOvGlass();
+}
+
+function pluralLessons(n){
+  const n10 = n % 10, n100 = n % 100;
+  if (n10 === 1 && n100 !== 11) return 'урока';
+  if (n10 >= 2 && n10 <= 4 && !(n100 >= 12 && n100 <= 14)) return 'уроков';
+  return 'уроков';
 }
 
 /* ---------- GAME: word scramble ---------- */
@@ -2748,13 +2895,6 @@ function renderDailyTasks(){
          </div>`
       : '');
   });
-  renderOvTasksPreview();
-}
-
-function ovTaskClick(key){
-  if (key === 'word'){ document.querySelector('.tab-btn[data-tab="practice"]').click(); return; }
-  if (key === 'quiz'){ startTest('quiz_daily'); return; }
-  if (key === 'listening'){ startTest('listening'); return; }
 }
 
 function pluralTasks(n){
@@ -2762,39 +2902,6 @@ function pluralTasks(n){
   if (n10 === 1 && n100 !== 11) return 'задание';
   if (n10 >= 2 && n10 <= 4 && !(n100 >= 12 && n100 <= 14)) return 'задания';
   return 'заданий';
-}
-
-function renderOvTasksPreview(){
-  const listEl = document.getElementById('ovTasksPreview');
-  const countEl = document.getElementById('ovTasksCount');
-  if (!listEl) return;
-  const tasks = dailyTasksData();
-  const remaining = tasks.filter(t => !t.done).length;
-  if (countEl) countEl.textContent = remaining + ' ' + pluralTasks(remaining);
-  listEl.innerHTML = tasks.map((t, i) => `
-    <div class="ov-task-row${t.done ? ' done' : ''}" onclick="ovTaskClick('${t.key}')">
-      <span class="ov-task-num">${t.done ? '✓' : (i + 1)}</span>
-      <span class="ov-task-name">${t.title}</span>
-      <span class="ov-task-arrow">→</span>
-    </div>
-  `).join('');
-}
-
-function startSubTasksCarousel(){
-  renderOvTasksPreview();
-  const card = document.getElementById('subTasksCard');
-  if (!card) return;
-  const subSlide = card.querySelector('[data-slide="sub"]');
-  const tasksSlide = card.querySelector('[data-slide="tasks"]');
-  const dots = card.querySelectorAll('.carousel-dots .dot');
-  let showingTasks = false;
-  setInterval(() => {
-    showingTasks = !showingTasks;
-    if (subSlide) subSlide.classList.toggle('active', !showingTasks);
-    if (tasksSlide) tasksSlide.classList.toggle('active', showingTasks);
-    if (dots[0]) dots[0].classList.toggle('active', !showingTasks);
-    if (dots[1]) dots[1].classList.toggle('active', showingTasks);
-  }, 8000);
 }
 
 function renderTopicTests(){
@@ -3033,6 +3140,8 @@ async function loadMyTestResults(){
     if (!bar) return;
     const pct = (last && last.total) ? Math.round((last.score / last.total) * 100) : 0;
     bar.style.width = pct + '%';
+    const pctEl = document.getElementById('bar-' + key + '-pct');
+    if (pctEl) pctEl.textContent = pct + '%';
     const row = bar.closest('.hp-row');
     if (row) row.title = pct ? `Последний результат: ${pct}% — нажми, чтобы пройти снова` : 'Ещё не пройден — нажми, чтобы начать';
   });
