@@ -4112,14 +4112,21 @@ function linkedLessonFor(r){
 function requestContactButtons(r){
   const btns = [];
   const tg = (r.contact_telegram || '').trim();
+  const tgUsername = (r.telegram_username || '').trim();
   const phone = (r.contact_phone || r.contact || '').trim();
   const avito = (r.contact_avito || '').trim();
 
   if (r.telegram_chat_id){
-    btns.push(`<span class="badge badge-active" title="Ученик подключил Telegram — бот шлёт ему напоминания">🤖 TG подключён</span>`);
+    if (tgUsername){
+      // username пришёл от самого Telegram при подключении бота — это проверенный
+      // контакт (человек реально нажал /start), надёжнее, чем текст в поле "телефон"
+      btns.push(`<a class="btn btn-dark btn-sm" href="https://t.me/${tgUsername.replace('@','')}" target="_blank" rel="noopener" title="Подтверждённый Telegram — можно писать напрямую">✍️ Написать в Telegram (@${tgUsername.replace('@','')})</a>`);
+    } else {
+      btns.push(`<span class="badge badge-active" title="Ученик подключил Telegram, но у него не задан username — написать напрямую нельзя, бот шлёт ему напоминания">🤖 TG подключён (без username)</span>`);
+    }
   }
   if (tg){
-    btns.push(`<a class="btn btn-ghost btn-sm" href="https://t.me/${tg.replace('@','')}" target="_blank" rel="noopener">Telegram</a>`);
+    btns.push(`<a class="btn btn-ghost btn-sm" href="https://t.me/${tg.replace('@','')}" target="_blank" rel="noopener">Telegram (из формы)</a>`);
   }
   if (avito){
     btns.push(`<a class="btn btn-ghost btn-sm" href="${avito}" target="_blank" rel="noopener">Avito</a>`);
