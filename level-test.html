@@ -75,7 +75,6 @@ button{font-family:inherit}
 .badge-eyebrow{font-family:Unbounded,sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#0a0a09;margin-bottom:4px}
 .badge-level{font-family:Unbounded,sans-serif;font-weight:900;font-size:min(19vw,84px);line-height:1;color:#0a0a09}
 .badge-name{font-family:Unbounded,sans-serif;font-weight:700;font-size:15px;margin-top:6px;color:#0a0a09}
-.badge-wrap.blurred{filter:blur(10px)}
 
 h1.display{font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(26px,5vw,32px);line-height:1.15;letter-spacing:-.02em;margin:0 0 12px}
 .lead{font-size:15px;line-height:1.6;color:#aaa;margin:0 0 24px}
@@ -100,14 +99,6 @@ button.opt{text-align:left;font-family:"Golos Text",sans-serif;font-size:15px;fo
 button.opt:hover{border-color:rgba(255,255,255,.4)}
 button.opt.picked{border-color:#D7EF42;background:rgba(215,239,66,.14)}
 .quiz-foot{margin-top:auto;display:flex;gap:10px}
-
-/* lead gate */
-.field{margin-bottom:14px}
-.field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#8a8b82;margin-bottom:8px}
-.field input{width:100%;font-family:"Golos Text",sans-serif;font-size:15px;padding:14px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff}
-.field input::placeholder{color:rgba(255,255,255,.32)}
-.field input:focus{outline:none;border-color:#D7EF42;box-shadow:0 0 0 3px rgba(215,239,66,.18)}
-#leadErrorMsg{color:#F3958A;font-size:13.5px;font-weight:600;min-height:18px;margin:6px 0 0;text-align:center}
 
 /* result */
 .result-copy{font-size:15px;line-height:1.65;color:#c3c4bd;margin:0 0 24px}
@@ -185,25 +176,6 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
     <div class="quiz-foot">
       <button class="btn-lime" id="nextBtn" onclick="nextQuestion()" disabled>Далее</button>
     </div>
-  </div>
-
-  <!-- LEAD GATE SCREEN — результат скрыт, пока не оставят контакты -->
-  <div class="screen" id="leadGate">
-    <div class="badge-wrap blurred"><div class="badge-level">??</div></div>
-    <h1 class="display">Тест пройден!</h1>
-    <p class="lead">Оставьте имя и телефон или Telegram — покажем ваш уровень и что учить дальше.</p>
-
-    <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
-      <label for="leadWebsite">Оставьте это поле пустым</label>
-      <input id="leadWebsite" type="text" tabindex="-1" autocomplete="off">
-    </div>
-
-    <div class="field"><label for="leadName">Как вас зовут?</label><input id="leadName" type="text" placeholder="Имя и фамилия" required></div>
-    <div class="field"><label for="leadContact">Телефон или Telegram</label><input id="leadContact" type="text" placeholder="+7 999 123-45-67 или @username" required></div>
-    <p id="leadErrorMsg"></p>
-
-    <div class="spacer"></div>
-    <button class="btn-lime" id="leadSubmitBtn" onclick="submitLead()">Показать результат</button>
   </div>
 
   <!-- RESULT SCREEN -->
@@ -303,7 +275,6 @@ const LEVEL_INFO_EXPRESS = [
    ============================================================ */
 const SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_jlcvNafksQ0WhrYCY08anw_ju194-I9';
-const PAGE_LOADED_AT = Date.now();
 
 let selectedFormat = 'express';
 let ACTIVE_QUESTIONS = [];
@@ -401,36 +372,15 @@ function finishQuiz(){
   const table = selectedFormat === 'express' ? LEVEL_INFO_EXPRESS : LEVEL_INFO_FULL;
   const info = table.find(l => score >= l.min && score <= l.max) || table[0];
 
-  // результат посчитан, но не показываем — сначала контакты
   pendingResult = { score, maxScore: ACTIVE_QUESTIONS.length, info };
-  showScreen('leadGate');
+  saveResultQuietly(); // без контактов, только для статистики — не блокирует показ результата
+  revealResult();
 }
 
-/* ---------- отправка контактов и раскрытие результата ---------- */
-async function submitLead(){
-  const errorMsg = document.getElementById('leadErrorMsg');
-  errorMsg.textContent = '';
-
-  const honeypot = document.getElementById('leadWebsite');
-  if (honeypot && honeypot.value.trim()){
-    revealResult(); // тихо пропускаем ботов дальше, как будто всё ок
-    return;
-  }
-  if (Date.now() - PAGE_LOADED_AT < 3000){
-    errorMsg.textContent = 'Секунду… попробуйте ещё раз.';
-    return;
-  }
-
-  const fullName = document.getElementById('leadName').value.trim();
-  const contact = document.getElementById('leadContact').value.trim();
-  if (!fullName){ errorMsg.textContent = 'Напишите, как вас зовут.'; return; }
-  if (!contact){ errorMsg.textContent = 'Оставьте телефон или Telegram.'; return; }
-
-  const btn = document.getElementById('leadSubmitBtn');
-  btn.disabled = true; btn.textContent = 'Отправляем…';
-
+/* ---------- сохранение результата для статистики (без блокирующей формы контактов) ---------- */
+async function saveResultQuietly(){
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/level_test_results`, {
+    await fetch(`${SUPABASE_URL}/rest/v1/level_test_results`, {
       method: 'POST',
       headers: {
         'apikey': SUPABASE_ANON_KEY,
@@ -439,8 +389,6 @@ async function submitLead(){
         'Prefer': 'return=minimal'
       },
       body: JSON.stringify({
-        full_name: fullName,
-        contact,
         test_type: selectedFormat,
         score: pendingResult.score,
         max_score: pendingResult.maxScore,
@@ -448,15 +396,8 @@ async function submitLead(){
         level_name: pendingResult.info.name
       })
     });
-    if (!res.ok){
-      let detail = '';
-      try { const b = await res.json(); detail = b.message || b.hint || ''; } catch(e){}
-      throw new Error(detail || ('Ошибка ' + res.status));
-    }
-    revealResult();
-  } catch(err){
-    btn.disabled = false; btn.textContent = 'Показать результат';
-    errorMsg.textContent = 'Не получилось отправить. Проверьте соединение и попробуйте ещё раз.';
+  } catch(e){
+    // статистика необязательна — результат уже показан, ошибку сохранения не показываем
   }
 }
 
@@ -469,11 +410,6 @@ function revealResult(){
 }
 
 function restart(){
-  document.getElementById('leadName').value = '';
-  document.getElementById('leadContact').value = '';
-  document.getElementById('leadErrorMsg').textContent = '';
-  const btn = document.getElementById('leadSubmitBtn');
-  btn.disabled = false; btn.textContent = 'Показать результат';
   showScreen('start');
 }
 </script>
