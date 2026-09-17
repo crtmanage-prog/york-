@@ -152,10 +152,6 @@ h1{
 }
 .field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(215,239,66,.12)}
 .field select option{background:#161816;color:#fff}
-#tzFallbackNote{
-  background:rgba(215,239,66,.08)!important;border:1px solid rgba(215,239,66,.18);
-  border-radius:14px!important;color:#cfd8a1!important;
-}
 #confirmError{color:var(--red)!important}
 #summaryBox{border-top:1px solid var(--line)}
 @media(max-width:980px){
@@ -229,24 +225,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
     <h1>Выбери удобное время</h1>
     <p class="sub" id="slotsHint">Можно выбрать до двух вариантов: если первый окажется занят, преподаватель предложит второй.</p>
 
-    <div id="tzFallbackNote" class="hidden" style="background:#FFF6D9; border-radius:12px; padding:12px 14px; font-size:13px; line-height:1.5; margin-bottom:14px;">
-      ⚠️ Не удалось определить ваш часовой пояс, поэтому показываем время по Екатеринбургу. Если это не ваш часовой пояс, поправьте его ниже.
-    </div>
-
-    <div class="field" style="margin-bottom:18px;">
-      <label for="tzSelect" style="display:block; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:var(--ink-soft); margin-bottom:6px;">Ваш часовой пояс</label>
-      <select id="tzSelect" style="width:100%; font-family:'Inter',sans-serif; font-size:14.5px; padding:11px 13px; border-radius:11px; border:1.5px solid var(--line); background:#fff; color:var(--ink);">
-        <option value="Europe/Kaliningrad">Калининград (МСК-1)</option>
-        <option value="Europe/Moscow">Москва (МСК)</option>
-        <option value="Europe/Samara">Самара (МСК+1)</option>
-        <option value="Asia/Yekaterinburg">Екатеринбург / Уфа (МСК+2)</option>
-        <option value="Asia/Omsk">Омск (МСК+3)</option>
-        <option value="Asia/Krasnoyarsk">Красноярск (МСК+4)</option>
-        <option value="Asia/Irkutsk">Иркутск (МСК+5)</option>
-        <option value="Asia/Yakutsk">Якутск (МСК+6)</option>
-        <option value="Asia/Vladivostok">Владивосток (МСК+7)</option>
-      </select>
-    </div>
+    <p class="sub" style="margin-top:-8px; margin-bottom:18px;">Время везде указано по Москве (МСК).</p>
 
     <div id="slotsContainer"></div>
     <p id="slotsEmpty" class="sub hidden">У преподавателя пока нет свободных окон на ближайшие две недели — напишите менеджеру, поможем найти время.</p>
@@ -341,27 +320,20 @@ function fmtSchoolTz(instant){
   };
 }
 
-// Личный пояс ученика — берём из его профиля (resolve_reschedule_token),
-// если пуст или невалиден — тихо откатываемся на школьный пояс (Уфа),
-// чтобы страница не сломалась из-за отсутствующих данных.
-let studentTimezone = SCHOOL_TZ;
-let timezoneWasFallback = true; // пока не пришли реальные данные — считаем, что это заглушка
+// Ученики всегда видят время по МСК (единый пояс для всех, как в личном
+// кабинете и в Telegram-уведомлениях) — личный часовой пояс из профиля
+// здесь больше не используется.
+const STUDENT_TZ = 'Europe/Moscow';
 
 function fmtStudentTz(instant){
-  let tz = studentTimezone;
-  try {
-    new Intl.DateTimeFormat('ru-RU', { timeZone: tz });
-  } catch(e){
-    tz = SCHOOL_TZ; // невалидное значение в профиле — не роняем страницу
-  }
   const dtf = new Intl.DateTimeFormat('ru-RU', {
-    timeZone: tz, weekday:'short', day:'numeric', month:'short',
+    timeZone: STUDENT_TZ, weekday:'short', day:'numeric', month:'short',
     hour:'2-digit', minute:'2-digit', hour12:false
   });
   const parts = {};
   dtf.formatToParts(instant).forEach(p => { if (p.type !== 'literal') parts[p.type] = p.value; });
   return {
-    dayKey: new Intl.DateTimeFormat('en-CA', { timeZone: tz }).format(instant),
+    dayKey: new Intl.DateTimeFormat('en-CA', { timeZone: STUDENT_TZ }).format(instant),
     dayLabel: `${parts.weekday}, ${parts.day} ${parts.month}`,
     time: `${parts.hour}:${parts.minute}`
   };
@@ -385,15 +357,6 @@ async function init(){
 
     studentId = rpcData[0].student_id;
     studentName = rpcData[0].student_name || '';
-    if (rpcData[0].student_timezone){
-      try {
-        new Intl.DateTimeFormat('ru-RU', { timeZone: rpcData[0].student_timezone });
-        studentTimezone = rpcData[0].student_timezone;
-        timezoneWasFallback = false;
-      } catch(e){
-        // невалидное значение в профиле — остаёмся на фолбэке (Уфа)
-      }
-    }
 
     const lessonsRes = await fetch(
       `${SUPABASE_URL}/rest/v1/lessons?student_id=eq.${studentId}&status=eq.upcoming` +
@@ -431,7 +394,7 @@ function renderLessonPicker(){
     const teacherName = (l.profiles && l.profiles.full_name) || 'Преподаватель';
     return `
       <div class="card" data-idx="${i}" onclick="pickLessonCard(${i})">
-        <b>${v.dayLabel} в ${v.time}</b>
+        <b>${v.dayLabel} в ${v.time} (МСК)</b>
         <span>${l.topic || 'Занятие'} · ${teacherName}</span>
       </div>`;
   }).join('');
@@ -456,29 +419,12 @@ async function selectLesson(lesson){
   showState('statePickSlots');
 }
 
-// та же таблица меток, что уже используется в админке —
-// только в обратную сторону, для показа человеку
-const TZ_LABELS = {
-  'Europe/Kaliningrad': 'Калининград',
-  'Europe/Moscow': 'Москва',
-  'Europe/Samara': 'Самара',
-  'Asia/Yekaterinburg': 'Екатеринбург / Уфа',
-  'Asia/Omsk': 'Омск',
-  'Asia/Krasnoyarsk': 'Красноярск',
-  'Asia/Irkutsk': 'Иркутск',
-  'Asia/Yakutsk': 'Якутск',
-  'Asia/Vladivostok': 'Владивосток'
-};
-
 async function loadTeacherSlots(teacherId){
   const box = document.getElementById('slotsContainer');
   const emptyMsg = document.getElementById('slotsEmpty');
   box.innerHTML = '';
-  const tzLabel = TZ_LABELS[studentTimezone] || studentTimezone;
   document.getElementById('slotsHint').textContent =
-    `Можно выбрать до двух вариантов — если первый окажется занят, преподаватель предложит второй. Время указано по вашему часовому поясу (${tzLabel}).`;
-  document.getElementById('tzSelect').value = studentTimezone;
-  document.getElementById('tzFallbackNote').classList.toggle('hidden', !timezoneWasFallback);
+    'Можно выбрать до двух вариантов — если первый окажется занят, преподаватель предложит второй. Время указано по Москве (МСК).';
   emptyMsg.classList.add('hidden');
   selectedSlots = [];
   document.getElementById('toConfirmBtn').disabled = true;
@@ -538,13 +484,6 @@ function toggleSlot(btn){
   document.getElementById('toConfirmBtn').disabled = selectedSlots.length === 0;
 }
 
-document.getElementById('tzSelect').addEventListener('change', (e) => {
-  studentTimezone = e.target.value;
-  timezoneWasFallback = false; // человек выбрал сам — это больше не догадка
-  document.getElementById('tzFallbackNote').classList.add('hidden');
-  loadTeacherSlots(selectedTeacherId);
-});
-
 document.getElementById('backToLessonBtn').addEventListener('click', () => {
   showState(myLessons.length > 1 ? 'statePickLesson' : 'stateInvalid');
 });
@@ -562,11 +501,11 @@ function renderSummary(){
   const oldV = fmtStudentTz(new Date(selectedLesson.lesson_date));
   const slotsHtml = selectedSlots.map((s, i) => {
     const v = fmtStudentTz(schoolWallToInstant(s.date, s.hour));
-    return `<div class="summary-row"><span>Вариант ${i + 1}</span><b>${v.dayLabel}, ${v.time}</b></div>`;
+    return `<div class="summary-row"><span>Вариант ${i + 1}</span><b>${v.dayLabel}, ${v.time} (МСК)</b></div>`;
   }).join('');
 
   document.getElementById('summaryBox').innerHTML = `
-    <div class="summary-row"><span>Текущее время</span><b>${oldV.dayLabel}, ${oldV.time}</b></div>
+    <div class="summary-row"><span>Текущее время</span><b>${oldV.dayLabel}, ${oldV.time} (МСК)</b></div>
     ${slotsHtml}
   `;
 }

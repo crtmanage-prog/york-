@@ -149,32 +149,36 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   #appScreen{min-height:100vh; display:flex; background:var(--bg); max-width:1600px; margin:0 auto;}
 
   .app-sidebar{
-    width:64px; flex-shrink:0; margin:16px 0 16px 16px;
+    width:220px; flex-shrink:0; margin:16px 0 16px 16px;
     background:#fff; border:1px solid var(--line); border-radius:18px;
-    display:flex; flex-direction:column; align-items:center; gap:6px;
-    padding:16px 0; position:sticky; top:16px; align-self:flex-start;
+    display:flex; flex-direction:column; align-items:stretch; gap:3px;
+    padding:16px 12px; position:sticky; top:16px; align-self:flex-start;
     max-height:calc(100vh - 32px); overflow-y:auto;
   }
-  .app-sidebar .sb-logo{font-family:'Unbounded',sans-serif; font-weight:900; font-size:14px; color:#8a9f1f; margin-bottom:6px; flex-shrink:0;}
+  .app-sidebar .sb-logo{font-family:'Unbounded',sans-serif; font-weight:900; font-size:15px; color:#8a9f1f; margin:0 6px 10px; flex-shrink:0;}
   .app-sidebar .tab-btn{
-    width:36px; height:36px; border-radius:11px; border:none; background:none;
-    display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative;
-    color:var(--ink-soft); flex-shrink:0;
+    width:100%; height:auto; border-radius:11px; border:none; background:none;
+    display:flex; align-items:center; gap:12px; justify-content:flex-start; padding:10px 10px;
+    cursor:pointer; position:relative;
+    color:var(--ink-soft); flex-shrink:0; font-family:'Golos Text',sans-serif; font-size:13.5px; font-weight:500;
+    text-align:left; white-space:nowrap;
   }
-  .app-sidebar .tab-btn svg{width:17px; height:17px; stroke:var(--ink-soft);}
-  .app-sidebar .tab-btn.active{background:var(--accent);}
+  .app-sidebar .tab-btn svg{width:17px; height:17px; stroke:var(--ink-soft); flex-shrink:0;}
+  .app-sidebar .tab-btn.active{background:var(--accent); color:var(--ink); font-weight:600;}
   .app-sidebar .tab-btn.active svg{stroke:#090A09;}
   .app-sidebar .tab-btn:hover:not(.active){background:var(--panel);}
+  .app-sidebar .sb-label{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis;}
   .app-sidebar .sb-badge{
-    position:absolute; top:1px; right:2px; width:13px; height:13px; border-radius:50%;
+    position:relative; top:auto; right:auto; flex-shrink:0; min-width:13px; height:13px; padding:0 4px; border-radius:999px;
     background:var(--red); color:#fff; font-size:8px; font-weight:800;
     display:flex; align-items:center; justify-content:center;
   }
   .app-sidebar .sb-logout{
-    margin-top:auto; width:36px; height:36px; border-radius:11px; border:none; background:none;
-    display:flex; align-items:center; justify-content:center; color:var(--ink-soft); cursor:pointer; flex-shrink:0;
+    margin-top:10px; width:100%; height:auto; border-radius:11px; border:none; background:none;
+    display:flex; align-items:center; gap:12px; padding:10px; color:var(--ink-soft); cursor:pointer; flex-shrink:0;
+    font-family:'Golos Text',sans-serif; font-size:13.5px; font-weight:500;
   }
-  .app-sidebar .sb-logout svg{width:16px; height:16px; stroke:var(--ink-soft);}
+  .app-sidebar .sb-logout svg{width:16px; height:16px; stroke:var(--ink-soft); flex-shrink:0;}
   .app-sidebar .sb-logout:hover{background:var(--panel);}
 
   .app-main-col{flex:1; min-width:0; display:flex; flex-direction:column;}
@@ -443,49 +447,67 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
     <div class="sb-logo">Y!</div>
     <button class="tab-btn active" data-tab="overview" title="Обзор" aria-label="Обзор">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+      <span class="sb-label">Обзор</span>
+    </button>
+    <button class="tab-btn" data-tab="notify" title="Уведомления" aria-label="Уведомления">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="sb-label">Уведомления</span>
     </button>
     <button class="tab-btn" data-tab="allstudents" title="Ученики" aria-label="Ученики">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 8.2a3 3 0 1 1 0 5.8"/><path d="M22 20c0-2.6-1.7-4.8-4-5.6"/></svg>
+      <span class="sb-label">Ученики</span>
     </button>
     <button class="tab-btn" data-tab="allteachers" title="Учителя" aria-label="Учителя">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-6.5 7-6.5s7 3 7 6.5"/><path d="M16 10l2 2 4-4"/></svg>
+      <span class="sb-label">Учителя</span>
     </button>
     <button class="tab-btn" data-tab="groups" title="Группы" aria-label="Группы">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5-10-5z"/><path d="M2 13l10 5 10-5"/></svg>
+      <span class="sb-label">Группы</span>
     </button>
     <button class="tab-btn" data-tab="alllessons" title="Расписание" aria-label="Расписание">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/></svg>
+      <span class="sb-label">Расписание</span>
     </button>
     <button class="tab-btn" data-tab="workload" title="Занятость" aria-label="Занятость">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
+      <span class="sb-label">Занятость</span>
     </button>
     <button class="tab-btn" data-tab="payments" title="Оплата" aria-label="Оплата">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M17 14h1.5"/></svg>
+      <span class="sb-label">Оплата</span>
     </button>
     <button class="tab-btn" data-tab="requests" title="Заявки" aria-label="Заявки">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+      <span class="sb-label">Заявки</span>
       <span id="newRequestsBadge" class="sb-badge hidden"></span>
     </button>
     <button class="tab-btn" data-tab="talkclub" title="Talk Club" aria-label="Talk Club">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      <span class="sb-label">Talk Club</span>
       <span id="newTalkClubBadge" class="sb-badge hidden"></span>
     </button>
     <button class="tab-btn" data-tab="subs" title="Заявки на абонемент" aria-label="Заявки на абонемент">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      <span class="sb-label">Абонементы</span>
       <span id="newSubsBadge" class="sb-badge hidden"></span>
     </button>
     <button class="tab-btn" data-tab="leveltest" title="Тест на уровень" aria-label="Тест на уровень">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>
+      <span class="sb-label">Тест на уровень</span>
       <span id="newLevelTestBadge" class="sb-badge hidden"></span>
     </button>
     <button class="tab-btn" data-tab="referrals" title="Рефералы" aria-label="Рефералы">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+      <span class="sb-label">Рефералы</span>
     </button>
     <button class="tab-btn" data-tab="link" title="Добавить человека" aria-label="Добавить человека">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
+      <span class="sb-label">Добавить человека</span>
     </button>
     <button class="sb-logout" id="logoutBtn" title="Выйти" aria-label="Выйти">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      <span class="sb-label">Выйти</span>
     </button>
   </aside>
 
@@ -506,6 +528,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
   <nav class="tabs">
     <button class="tab-btn active" data-tab="overview">Обзор</button>
+    <button class="tab-btn" data-tab="notify">Уведомления</button>
     <button class="tab-btn" data-tab="allstudents">Ученики</button>
     <button class="tab-btn" data-tab="allteachers">Учителя</button>
     <button class="tab-btn" data-tab="groups">Группы</button>
@@ -553,17 +576,6 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
     <section class="panel active" id="panel-overview">
       <h2 class="panel-title" id="greetingTitle" style="font-size:24px;">Привет! 👋</h2>
       <p class="section-sub" id="greetingSub" style="margin-top:-8px;">Вот как дела в школе сегодня.</p>
-
-      <div class="stat-card" style="margin-bottom:24px;">
-        <div class="stat-label" style="margin-bottom:10px;">📣 Новость для учеников</div>
-        <p style="font-size:12.5px; color:#8a8b82; margin:0 0 10px;">Уйдёт всем ученикам в Telegram и появится в колокольчике личного кабинета.</p>
-        <textarea id="broadcastText" rows="3" placeholder="Например: с понедельника меняем расписание на праздничной неделе..." style="width:100%; border:1.5px solid #E4E5DB; border-radius:12px; padding:10px 12px; font-family:inherit; font-size:14px; resize:vertical; box-sizing:border-box;"></textarea>
-        <div style="display:flex; align-items:center; gap:12px; margin-top:10px;">
-          <button class="btn btn-dark btn-sm" id="broadcastSendBtn" onclick="sendBroadcastNotification()">Отправить</button>
-          <span id="broadcastStatus" style="font-size:12.5px; font-weight:600;"></span>
-        </div>
-        <div id="broadcastHistory" style="margin-top:14px; font-size:12.5px; color:#5a5b52;"></div>
-      </div>
 
       <div class="overview-grid" style="grid-template-columns:repeat(3,1fr); margin-bottom:14px;">
         <div class="stat-card stat-clickable" onclick="jumpToTab('allstudents')">
@@ -778,6 +790,22 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         </table>
       </div>
 
+    </section>
+
+    <section class="panel" id="panel-notify">
+      <h2 class="panel-title">📣 Уведомления</h2>
+      <p class="section-sub" style="margin-bottom:20px;">Пиши новости и важные объявления ученикам сама — без обращения к Клоду.</p>
+
+      <div class="stat-card" style="max-width:560px;">
+        <div class="stat-label" style="margin-bottom:10px;">Новость для учеников</div>
+        <p style="font-size:12.5px; color:#8a8b82; margin:0 0 10px;">Уйдёт всем ученикам в Telegram и появится в колокольчике личного кабинета — один и тот же текст в обоих местах.</p>
+        <textarea id="broadcastText" rows="4" placeholder="Например: с понедельника меняем расписание на праздничной неделе..." style="width:100%; border:1.5px solid #E4E5DB; border-radius:12px; padding:10px 12px; font-family:inherit; font-size:14px; resize:vertical; box-sizing:border-box;"></textarea>
+        <div style="display:flex; align-items:center; gap:12px; margin-top:10px;">
+          <button class="btn btn-dark btn-sm" id="broadcastSendBtn" onclick="sendBroadcastNotification()">Отправить</button>
+          <span id="broadcastStatus" style="font-size:12.5px; font-weight:600;"></span>
+        </div>
+        <div id="broadcastHistory" style="margin-top:14px; font-size:12.5px; color:#5a5b52;"></div>
+      </div>
     </section>
 
     <section class="panel" id="panel-allstudents">
@@ -1514,8 +1542,10 @@ function fmtDate(d){
 function fmtDateTime(d){
   if (!d) return '—';
   const date = new Date(d);
-  return date.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:SCHOOL_TZ }) + ', ' +
-         date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:SCHOOL_TZ }) + ' (Уфа)';
+  const dayStr = date.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:SCHOOL_TZ });
+  const ufaTime = date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:SCHOOL_TZ });
+  const mskTime = date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:'Europe/Moscow' });
+  return `${dayStr}, ${ufaTime} (Уфа) · ${mskTime} (МСК)`;
 }
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }

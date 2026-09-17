@@ -966,8 +966,10 @@ function googleCalendarUrl(title, startDate, durationMinutes, details){
 function fmtDateTime(d){
   if (!d) return '—';
   const date = new Date(d);
-  return date.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:SCHOOL_TZ }) + ', ' +
-         date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:SCHOOL_TZ }) + ' (Уфа)';
+  const dayStr = date.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:SCHOOL_TZ });
+  const ufaTime = date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:SCHOOL_TZ });
+  const mskTime = date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:'Europe/Moscow' });
+  return `${dayStr}, ${ufaTime} (Уфа) · ${mskTime} (МСК)`;
 }
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
