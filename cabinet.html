@@ -153,29 +153,57 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   #appScreen{min-height:100vh;}
   .shell{display:flex; align-items:flex-start; gap:26px; padding:26px; max-width:1560px; margin:0 auto;}
 
-  /* ---------- боковая панель ---------- */
-  .sidebar{
+  /* ---------- боковая панель: рельс 68px, раскрытие по ховеру до 236px, закрепление ---------- */
+  .sidebar-rail{
     position:sticky; top:26px; flex-shrink:0;
-    width:96px; display:flex; flex-direction:column; align-items:center;
-    gap:18px; padding:18px 10px;
-    background:#fff; border:1.5px solid var(--line); border-radius:26px;
+    width:68px; align-self:flex-start;
+    transition:width .26s cubic-bezier(.4,0,.2,1);
   }
+  .sidebar-rail.pinned{width:236px;}
+  .sidebar{
+    position:absolute; top:0; left:0; width:68px; z-index:5;
+    display:flex; flex-direction:column; align-items:stretch;
+    gap:16px; padding:18px 10px;
+    background:#fff; border:1.5px solid var(--line); border-radius:26px;
+    overflow:hidden;
+    transition:width .26s cubic-bezier(.4,0,.2,1), box-shadow .26s ease;
+  }
+  .sidebar-rail:hover .sidebar, .sidebar-rail.pinned .sidebar{
+    width:236px; box-shadow:24px 0 60px -20px rgba(20,21,18,.28);
+  }
+  .sidebar-rail.pinned .sidebar{box-shadow:none;}
+
+  .side-top-row{display:flex; align-items:center; justify-content:space-between; width:100%; padding:0 4px;}
   .side-logo{
     font-family:'Unbounded',sans-serif; font-weight:900; font-size:20px;
-    color:var(--ink); text-decoration:none; line-height:1;
+    color:var(--ink); text-decoration:none; line-height:1; flex-shrink:0;
   }
   .side-logo span{background:var(--accent); padding:0 4px; border-radius:6px;}
-
-  nav.side-nav{display:flex; flex-direction:column; gap:8px; width:100%; align-items:center;}
-  nav.side-nav button{
-    width:46px; height:46px; border:none; cursor:pointer;
-    background:none; color:var(--ink-soft);
-    border-radius:15px; display:flex; align-items:center; justify-content:center;
-    transition:background .15s ease, color .15s ease;
+  .side-pin-btn{
+    width:26px; height:26px; border-radius:8px; border:none; background:transparent;
+    color:var(--ink-soft); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; pointer-events:none; transition:opacity .18s ease, background .15s ease, color .15s ease;
+    flex-shrink:0;
   }
-  nav.side-nav button svg{width:21px; height:21px;}
+  .side-pin-btn svg{width:14px; height:14px;}
+  .sidebar-rail:hover .side-pin-btn, .sidebar-rail.pinned .side-pin-btn{opacity:1; pointer-events:auto;}
+  .sidebar-rail.pinned .side-pin-btn{background:var(--accent); color:var(--ink);}
+
+  nav.side-nav{display:flex; flex-direction:column; gap:6px; width:100%; align-items:stretch;}
+  nav.side-nav button{
+    width:100%; height:46px; border:none; cursor:pointer;
+    background:none; color:var(--ink-soft);
+    border-radius:15px; display:flex; align-items:center; gap:12px; justify-content:flex-start;
+    padding:0 11px; transition:background .15s ease, color .15s ease;
+  }
+  nav.side-nav button svg{width:21px; height:21px; flex-shrink:0;}
   nav.side-nav button:hover{background:var(--panel); color:var(--ink);}
   nav.side-nav button.active{background:var(--accent); color:var(--ink);}
+  .side-label{
+    font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden;
+    max-width:0; opacity:0; transition:opacity .16s ease, max-width .22s ease;
+  }
+  .sidebar-rail:hover .side-label, .sidebar-rail.pinned .side-label{max-width:150px; opacity:1;}
 
   .flag-btn{position:relative;}
   .flag-swap{width:24px; height:16px; border-radius:3px; overflow:hidden; display:block; box-shadow:0 0 0 1px rgba(0,0,0,0.08); transition:opacity .22s ease, transform .22s ease;}
@@ -208,11 +236,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .china-modal-text{font-size:13.5px; color:var(--ink-soft); line-height:1.6; margin-bottom:18px;}
 
   .invite-card{
-    margin-top:auto; width:56px; height:56px; cursor:pointer; position:relative; overflow:hidden;
+    margin-top:auto; width:100%; min-height:56px; cursor:pointer; position:relative; overflow:hidden;
     background:linear-gradient(155deg, #232323 0%, var(--ink) 55%, #2b2b1a 100%);
     color:#fff; border:none;
-    border-radius:18px; padding:0;
-    display:flex; align-items:center; justify-content:center;
+    border-radius:16px; padding:9px;
+    display:flex; align-items:center; gap:10px; justify-content:flex-start; text-align:left;
     transition:transform .18s ease, box-shadow .18s ease;
     box-shadow:0 2px 0 rgba(0,0,0,0);
   }
@@ -221,13 +249,17 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     background:var(--accent); border-radius:50%; opacity:0.28; filter:blur(2px);
     transition:transform .35s ease;
   }
-  .invite-card:hover{transform:translateY(-3px) scale(1.04); box-shadow:0 10px 22px rgba(0,0,0,0.18);}
+  .invite-card:hover{transform:translateY(-3px) scale(1.02); box-shadow:0 10px 22px rgba(0,0,0,0.18);}
   .invite-card:hover::before{transform:scale(1.25);}
   .invite-gift{
     font-size:22px; line-height:1; width:38px; height:38px; border-radius:50%;
     background:var(--accent); display:flex; align-items:center; justify-content:center;
-    position:relative; z-index:1; animation:invite-pulse 2.4s ease-in-out infinite;
+    position:relative; z-index:1; flex-shrink:0; animation:invite-pulse 2.4s ease-in-out infinite;
   }
+  .invite-text{position:relative; z-index:1; display:flex; flex-direction:column; max-width:0; overflow:hidden; white-space:nowrap; opacity:0; transition:opacity .16s ease, max-width .22s ease;}
+  .sidebar-rail:hover .invite-text, .sidebar-rail.pinned .invite-text{max-width:150px; opacity:1; white-space:normal;}
+  .invite-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:12px; line-height:1.3;}
+  .invite-sub{font-size:10px; color:rgba(255,255,255,.6); margin-top:3px; line-height:1.35;}
   @keyframes invite-pulse{
     0%, 100%{ box-shadow:0 0 0 0 rgba(215,239,66,0.45); }
     50%{ box-shadow:0 0 0 7px rgba(215,239,66,0); }
@@ -298,21 +330,26 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   /* мобильная версия — панель уезжает вниз горизонтально */
   @media (max-width:760px){
     .shell{flex-direction:column; gap:0; padding:14px 14px 88px;}
-    .sidebar{
-      position:fixed; bottom:0; left:0; right:0; top:auto; z-index:50;
-      width:auto; flex-direction:row; align-items:center; justify-content:center;
-      border-radius:18px 18px 0 0; padding:8px 6px;
-      gap:2px; box-shadow:0 -3px 14px rgba(0,0,0,0.07);
+    .sidebar-rail{
+      position:fixed; bottom:0; left:0; right:0; top:auto; width:auto !important; height:auto;
     }
-    .side-logo{display:none;}
+    .sidebar{
+      position:static; width:auto !important; box-shadow:none !important;
+      flex-direction:row; align-items:center; justify-content:center;
+      border-radius:18px 18px 0 0; padding:8px 6px;
+      gap:2px; z-index:50; box-shadow:0 -3px 14px rgba(0,0,0,0.07);
+    }
+    .side-top-row{display:none;}
     nav.side-nav{flex-direction:row; justify-content:center; gap:2px; width:auto;}
-    nav.side-nav button{width:40px; height:40px; border-radius:13px;}
+    nav.side-nav button{width:40px; height:40px; border-radius:13px; padding:0; justify-content:center;}
     nav.side-nav button svg{width:19px; height:19px;}
+    .side-label{display:none;}
     .invite-card{
-      margin-top:0; margin-left:4px; width:40px; height:40px; border-radius:13px;
+      margin-top:0; margin-left:4px; width:40px; height:40px; min-height:0; border-radius:13px;
       padding:0; justify-content:center; flex-shrink:0;
     }
     .invite-gift{font-size:17px;}
+    .invite-text{display:none;}
     .content{width:100%;}
   }
 
@@ -1053,43 +1090,59 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 <div id="appScreen" class="hidden">
   <div class="shell">
 
+    <div class="sidebar-rail" id="sidebarRail">
     <aside class="sidebar">
-      <a class="side-logo" href="/" title="На сайт">Y<span>!</span></a>
+      <div class="side-top-row">
+        <a class="side-logo" href="/" title="На сайт">Y<span>!</span></a>
+        <button class="side-pin-btn" id="sidebarPinBtn" title="Закрепить меню" aria-label="Закрепить меню">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6.5M12 2 8 6M12 2l4 4"/><path d="M6 12h12l-2 4H8z"/><path d="M12 16v6"/></svg>
+        </button>
+      </div>
 
       <nav class="tabs side-nav">
         <button class="tab-btn active" data-tab="overview" title="Обзор" aria-label="Обзор">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
+          <span class="side-label">Обзор</span>
         </button>
         <button class="tab-btn" data-tab="practice" title="Практика" aria-label="Практика">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v16H4z"/><path d="M13 4h7v16h-7z"/></svg>
+          <span class="side-label">Практика</span>
         </button>
         <button class="tab-btn" data-tab="schedule" title="Расписание" aria-label="Расписание">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+          <span class="side-label">Расписание</span>
         </button>
         <button class="tab-btn" data-tab="homework" title="Домашка" aria-label="Домашка">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+          <span class="side-label">Домашка</span>
         </button>
         <button class="tab-btn" data-tab="progress" title="Прогресс" aria-label="Прогресс">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>
+          <span class="side-label">Прогресс</span>
         </button>
         <button class="tab-btn" data-tab="payment" title="Оплата" aria-label="Оплата">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M2.5 10h19"/></svg>
+          <span class="side-label">Абонемент</span>
         </button>
         <button class="tab-btn" data-tab="support" title="Поддержка" aria-label="Поддержка">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="side-label">Поддержка</span>
         </button>
         <button class="tab-btn flag-btn" id="flagTeaserBtn" title="Китайский скоро в York!" aria-label="Китайский скоро в York!" onclick="openChinaModal()">
           <span class="flag-dot"></span>
           <span class="flag-swap" id="flagSwap">
             <svg class="flag-ic" viewBox="0 0 60 40"><rect width="60" height="40" rx="5" fill="#DE2910"/><g fill="#FFDE00"><polygon points="10,6 11.8,11.4 7.2,8.1 12.8,8.1 8.2,11.4"/><polygon points="20,3 20.7,5.1 18.9,3.8 21.1,3.8 19.3,5.1"/><polygon points="23,7 23.7,9.1 21.9,7.8 24.1,7.8 22.3,9.1"/><polygon points="23,12 23.7,14.1 21.9,12.8 24.1,12.8 22.3,14.1"/><polygon points="20,16 20.7,18.1 18.9,16.8 21.1,16.8 19.3,18.1"/></g></svg>
           </span>
+          <span class="side-label">Китайский скоро</span>
         </button>
       </nav>
 
       <button class="invite-card" onclick="document.querySelector('.tab-btn[data-tab=&quot;payment&quot;]').click(); setTimeout(function(){var e=document.getElementById('referralBlock'); if(e) e.scrollIntoView({behavior:'smooth', block:'center'});}, 100);" title="Пригласи друга и получи бонус" aria-label="Пригласи друга и получи бонус">
         <span class="invite-gift">🎁</span>
+        <span class="invite-text"><span class="invite-title">Приведи друга</span><span class="invite-sub">урок в подарок вам обоим</span></span>
       </button>
     </aside>
+    </div>
 
     <div class="content">
       <header class="app-header">
@@ -1661,11 +1714,26 @@ async function enterApp(user){
   loadTeacherContact();
   loadPracticeProgress();
   setupNotifBell();
+  setupSidebarPin();
   const __dashNameEl = document.getElementById('dashName');
   if (__dashNameEl) __dashNameEl.textContent = firstName(currentProfile.full_name) || 'друг';
   await loadMyRescheduleRequests();
   await loadSchedule();
   await Promise.allSettled([loadHomework(), loadProgress(), loadPayments()]);
+}
+
+function setupSidebarPin(){
+  const rail = document.getElementById('sidebarRail');
+  const pinBtn = document.getElementById('sidebarPinBtn');
+  if (!rail || !pinBtn) return;
+  let pinned = false;
+  try { pinned = localStorage.getItem('york_sidebar_pinned') === '1'; } catch(e){}
+  if (pinned) rail.classList.add('pinned');
+  pinBtn.addEventListener('click', () => {
+    pinned = !pinned;
+    rail.classList.toggle('pinned', pinned);
+    try { localStorage.setItem('york_sidebar_pinned', pinned ? '1' : '0'); } catch(e){}
+  });
 }
 
 async function setupNotifBell(){
