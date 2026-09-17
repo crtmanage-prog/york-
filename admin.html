@@ -554,6 +554,17 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <h2 class="panel-title" id="greetingTitle" style="font-size:24px;">Привет! 👋</h2>
       <p class="section-sub" id="greetingSub" style="margin-top:-8px;">Вот как дела в школе сегодня.</p>
 
+      <div class="stat-card" style="margin-bottom:24px;">
+        <div class="stat-label" style="margin-bottom:10px;">📣 Новость для учеников</div>
+        <p style="font-size:12.5px; color:#8a8b82; margin:0 0 10px;">Уйдёт всем ученикам в Telegram и появится в колокольчике личного кабинета.</p>
+        <textarea id="broadcastText" rows="3" placeholder="Например: с понедельника меняем расписание на праздничной неделе..." style="width:100%; border:1.5px solid #E4E5DB; border-radius:12px; padding:10px 12px; font-family:inherit; font-size:14px; resize:vertical; box-sizing:border-box;"></textarea>
+        <div style="display:flex; align-items:center; gap:12px; margin-top:10px;">
+          <button class="btn btn-dark btn-sm" id="broadcastSendBtn" onclick="sendBroadcastNotification()">Отправить</button>
+          <span id="broadcastStatus" style="font-size:12.5px; font-weight:600;"></span>
+        </div>
+        <div id="broadcastHistory" style="margin-top:14px; font-size:12.5px; color:#5a5b52;"></div>
+      </div>
+
       <div class="overview-grid" style="grid-template-columns:repeat(3,1fr); margin-bottom:14px;">
         <div class="stat-card stat-clickable" onclick="jumpToTab('allstudents')">
           <div class="stat-label">👥 Учеников</div>
@@ -1618,7 +1629,50 @@ function setupTabs(){
   });
 }
 
+async function loadBroadcastHistory(){
+  const el = document.getElementById('broadcastHistory');
+  const { data } = await supabase.from('cabinet_notifications').select('message, created_at').order('created_at', { ascending: false }).limit(5);
+  el.innerHTML = '';
+  if (!data || !data.length) return;
+  const title = document.createElement('div');
+  title.style.cssText = 'font-weight:600; margin-bottom:6px;';
+  title.textContent = 'Последние отправленные:';
+  el.appendChild(title);
+  data.forEach(n => {
+    const row = document.createElement('div');
+    row.style.cssText = 'padding:6px 0; border-top:1px solid #EEF0E4;';
+    row.textContent = fmtDateTime(n.created_at) + ' — ' + n.message;
+    el.appendChild(row);
+  });
+}
+
+async function sendBroadcastNotification(){
+  const text = document.getElementById('broadcastText').value.trim();
+  const statusEl = document.getElementById('broadcastStatus');
+  if (!text){ statusEl.style.color = '#C0392B'; statusEl.textContent = 'Введите текст новости.'; return; }
+  if (!confirm('Отправить это сообщение всем ученикам в Telegram и в кабинет?\n\n' + text)) return;
+
+  const btn = document.getElementById('broadcastSendBtn');
+  btn.disabled = true;
+  statusEl.style.color = '#5a5b52';
+  statusEl.textContent = 'Отправка...';
+  try {
+    const { error } = await supabase.rpc('broadcast_cabinet_notification', { p_message: text });
+    if (error) throw error;
+    document.getElementById('broadcastText').value = '';
+    statusEl.style.color = '#3B7A1E';
+    statusEl.textContent = 'Отправлено!';
+    await loadBroadcastHistory();
+  } catch (e){
+    statusEl.style.color = '#C0392B';
+    statusEl.textContent = 'Не получилось: ' + (e.message || e);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 async function loadAll(){
+  loadBroadcastHistory();
   const { data: students } = await supabase.from('profiles').select('*').eq('role', 'student').order('full_name');
   const { data: teachers } = await supabase.from('profiles').select('*').eq('role', 'teacher').order('full_name');
   allStudents = students || [];
