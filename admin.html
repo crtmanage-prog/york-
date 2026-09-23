@@ -331,46 +331,84 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .pill-role.admin{background:var(--accent); color:var(--ink);}
 /* calendar */
   .cal-wrap{border:1.5px solid var(--line); border-radius:var(--radius); padding:18px; margin-bottom:8px;}
-  .cal-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .cal-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; gap:12px; flex-wrap:wrap;}
+  .cal-header-left{display:flex; align-items:center; gap:12px;}
   .cal-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px; text-transform:capitalize;}
   .cal-nav{
     width:32px; height:32px; border-radius:50%; border:1.5px solid var(--line); background:#fff;
     font-size:16px; line-height:1; cursor:pointer; color:var(--ink);
   }
   .cal-nav:hover{background:var(--panel);}
+  .cal-chips{display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
+  .cal-chip{
+    height:32px; padding:0 12px; border-radius:999px; border:1px solid var(--line); background:#fff;
+    font-size:12.5px; font-weight:700; display:flex; align-items:center; gap:6px; cursor:pointer;
+    color:var(--ink); font-family:'Golos Text',sans-serif;
+  }
+  .cal-chip.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .cal-chip-dot{width:9px; height:9px; border-radius:999px; box-sizing:border-box; flex-shrink:0;}
+  .cal-chip-count{font-weight:600; opacity:.6;}
   .cal-weekdays{
-    display:grid; grid-template-columns:repeat(7,1fr); gap:4px;
-    font-size:11px; font-weight:700; text-transform:uppercase; color:var(--ink-soft);
+    display:grid; grid-template-columns:repeat(7,1fr); gap:6px;
+    font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft);
     text-align:center; margin-bottom:6px;
   }
-  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:4px;}
+  .cal-weekdays span:last-child{color:rgba(179,38,30,0.75);}
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px;}
   .cal-day{
-    position:relative; aspect-ratio:1/1; border-radius:10px;
-    display:flex; align-items:center; justify-content:center;
-    font-size:13px; cursor:pointer; background:none; border:none; color:var(--ink);
-    font-family:'Golos Text',sans-serif;
-    transition:background .12s ease;
+    position:relative; min-height:118px; border-radius:14px; box-sizing:border-box;
+    display:flex; flex-direction:column; gap:3px; padding:8px;
+    font-size:13px; cursor:pointer; background:#fff; border:1px solid var(--line); color:var(--ink);
+    font-family:'Golos Text',sans-serif; text-align:left;
+    transition:background .12s ease, border-color .12s ease;
   }
-  .cal-day.empty{cursor:default;}
+  .cal-day.empty{cursor:default; border:none; background:transparent; min-height:118px;}
   .cal-day:not(.empty):hover{background:var(--panel);}
-  .cal-day.weekend:not(.has-lesson):not(.selected):not(.today){background:rgba(28,28,28,0.045);}
-  .cal-day.dayoff:not(.has-lesson):not(.selected):not(.today){
-    background:rgba(179,38,30,0.06); color:rgba(179,38,30,0.75);
+  .cal-day.sun:not(.selected){background:rgba(179,38,30,0.045);}
+  .cal-day.sun:not(.selected) .cal-day-num{color:rgba(179,38,30,0.8);}
+  .cal-day.has-lesson:not(.selected){background:#FAFAF7;}
+  .cal-day.today{border-color:var(--ink); border-width:1.5px;}
+  .cal-day.selected{background:var(--ink) !important; border-color:var(--ink); color:#fff;}
+  .cal-day.selected .cal-day-num{color:#fff;}
+  .cal-day-top{display:flex; align-items:center; justify-content:space-between; gap:4px; min-height:18px;}
+  .cal-day-num{font-size:13px; font-weight:600;}
+  .cal-day.has-lesson .cal-day-num{font-weight:800;}
+  .cal-today-badge{
+    font-size:9px; font-weight:800; letter-spacing:.04em; padding:2px 6px; border-radius:999px;
+    background:var(--ink); color:#fff; white-space:nowrap;
   }
-  .cal-weekdays span:last-child{color:rgba(179,38,30,0.7);}
-  .cal-day.has-lesson{background:rgba(210,231,57,0.5); font-weight:700;}
-  .cal-day.has-lesson:hover{background:rgba(210,231,57,0.7);}
-  .cal-day.has-trial{box-shadow:inset 0 0 0 2px var(--ink);}
-  .cal-day.today{box-shadow:inset 0 0 0 1.5px var(--ink); font-weight:700;}
-  .cal-day .student-note-dot{
-    position:absolute; bottom:3px; left:5px;
-    font-size:8px; line-height:1;
+  .cal-day.selected .cal-today-badge{background:#fff; color:var(--ink);}
+  .cal-day .student-note-dot{font-size:9px; line-height:1;}
+  .cal-day-pills{display:flex; flex-direction:column; gap:3px; overflow:hidden;}
+  .cal-pill{
+    display:flex; align-items:center; gap:4px; height:20px; padding:0 8px; border-radius:999px;
+    font-size:11px; white-space:nowrap; overflow:hidden; color:var(--ink);
   }
-  .cal-day.today.has-trial{box-shadow:inset 0 0 0 2px var(--ink);}
-  .cal-day.selected{background:var(--ink) !important; color:#fff; box-shadow:none; font-weight:700;}
+  .cal-pill-time{font-weight:800; flex-shrink:0;}
+  .cal-pill-name{overflow:hidden; text-overflow:ellipsis;}
+  .cal-pill-trial{
+    background:#FFE7DA; border:1.5px dashed #F0773F; color:#8A2E0C; padding-left:3px; box-sizing:border-box;
+  }
+  .cal-pill-avatar{
+    width:14px; height:14px; flex-shrink:0; border-radius:999px; background:#E2E2E2;
+    font-size:8px; font-weight:800; color:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cal-more{font-size:10.5px; font-weight:700; color:var(--ink-soft); padding:0 2px;}
+  .cal-legend{display:flex; align-items:center; gap:18px; flex-wrap:wrap; font-size:12.5px; color:var(--ink-soft); padding-top:10px;}
+  .cal-legend-item{display:flex; align-items:center; gap:7px;}
+  .cal-legend-dot{width:28px; height:14px; border-radius:999px; box-sizing:border-box; flex-shrink:0;}
   .cal-day-title{
     font-family:'Unbounded',sans-serif; font-weight:700; font-size:15px;
     margin:18px 0 10px;
+  }
+  @media (max-width:760px){
+    .cal-day{min-height:88px; padding:6px; border-radius:11px;}
+    .cal-day.empty{min-height:88px;}
+    .cal-pill{height:17px; font-size:9.5px; padding:0 6px;}
+    .cal-pill-avatar{width:12px; height:12px; font-size:7px;}
+    .cal-today-badge{display:none;}
+    .cal-legend{gap:12px; font-size:11.5px;}
   }
   .divider-line{border:none; border-top:1px solid var(--line); margin:6px 0 16px;}
   .weekday-picker{display:flex; flex-wrap:wrap; gap:8px;}
@@ -1055,14 +1093,18 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
       <div class="cal-wrap">
         <div class="cal-header">
-          <button class="cal-nav" id="calPrev" aria-label="Предыдущий месяц">‹</button>
-          <div class="cal-title" id="calMonthLabel">—</div>
-          <button class="cal-nav" id="calNext" aria-label="Следующий месяц">›</button>
+          <div class="cal-header-left">
+            <button class="cal-nav" id="calPrev" aria-label="Предыдущий месяц">‹</button>
+            <div class="cal-title" id="calMonthLabel">—</div>
+            <button class="cal-nav" id="calNext" aria-label="Следующий месяц">›</button>
+          </div>
+          <div class="cal-chips" id="calChips"></div>
         </div>
         <div class="cal-weekdays">
           <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
         </div>
         <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-legend" id="calLegend"></div>
       </div>
 
       <h3 class="cal-day-title" id="calDayTitle">Сегодня</h3>
@@ -1813,38 +1855,153 @@ function shiftMonth(delta){
   renderCalendar();
 }
 
+const CAL_PALETTE = [
+  { bg:'#E3F08A', border:'#A3BD1E' },
+  { bg:'#DCD2FF', border:'#8E72F5' },
+  { bg:'#BFE3FF', border:'#4FA8E0' },
+  { bg:'#FFD8EC', border:'#E876B8' },
+  { bg:'#FFE7B0', border:'#E0A83B' },
+  { bg:'#C9F5DC', border:'#3FBE7C' }
+];
+function calTeacherOrder(){
+  return (allTeachers || []).slice().sort((a,b) => (a.id || '').localeCompare(b.id || ''));
+}
+function teacherCalColor(teacherId){
+  const idx = calTeacherOrder().findIndex(t => t.id === teacherId);
+  return CAL_PALETTE[idx >= 0 ? idx % CAL_PALETTE.length : 0];
+}
+function teacherInitial(teacherId){
+  const t = (allTeachers || []).find(t => t.id === teacherId);
+  const name = (t && t.full_name) || '';
+  return name.trim().charAt(0).toUpperCase() || '?';
+}
+function fmtHourMin(dateStr){
+  return new Intl.DateTimeFormat('ru-RU', { timeZone:SCHOOL_TZ, hour:'2-digit', minute:'2-digit' }).format(new Date(dateStr));
+}
+
+function renderCalChips(){
+  const wrap = document.getElementById('calChips');
+  if (!wrap) return;
+  const s = window.__calState;
+  const filter = window.__calFilter || 'all';
+  const monthLessons = (window.__lessonsList || []).filter(l => {
+    if (l.status === 'cancelled') return false;
+    const d = new Date(l.lesson_date);
+    return d.getFullYear() === s.year && d.getMonth() === s.month;
+  });
+
+  const defs = [{ id:'all', label:'Все' }];
+  calTeacherOrder().forEach(t => defs.push({ id:t.id, label:(t.full_name || 'Учитель').split(' ')[0], color:teacherCalColor(t.id) }));
+  defs.push({ id:'trial', label:'Пробные', color:{ bg:'#FFE7DA', border:'#F0773F', dashed:true } });
+
+  wrap.innerHTML = defs.map(c => {
+    const count = c.id === 'all' ? monthLessons.length
+      : c.id === 'trial' ? monthLessons.filter(l => l.is_trial).length
+      : monthLessons.filter(l => l.teacher_id === c.id).length;
+    const on = filter === c.id;
+    const dotStyle = c.color
+      ? `background:${c.color.bg}; border:${c.color.dashed ? '1.5px dashed ' + c.color.border : '1px solid ' + c.color.border};`
+      : `background:${on ? '#fff' : 'var(--ink)'}; border:none;`;
+    return `<button type="button" class="cal-chip${on ? ' active' : ''}" onclick="setCalFilter('${c.id}')">
+      <span class="cal-chip-dot" style="${dotStyle}"></span>
+      <span>${c.label}</span>
+      <span class="cal-chip-count">${count}</span>
+    </button>`;
+  }).join('');
+}
+
+function setCalFilter(filterId){
+  window.__calFilter = filterId;
+  renderCalendar();
+}
+
+function renderCalLegend(){
+  const wrap = document.getElementById('calLegend');
+  if (!wrap) return;
+  const items = calTeacherOrder().map(t => {
+    const c = teacherCalColor(t.id);
+    return `<div class="cal-legend-item"><span class="cal-legend-dot" style="background:${c.bg}; border:1px solid ${c.border};"></span>${t.full_name || 'Учитель'}</div>`;
+  });
+  items.push(`<div class="cal-legend-item"><span class="cal-legend-dot" style="background:#FFE7DA; border:1.5px dashed #F0773F;"></span>Пробное (кружок = кто ведёт)</div>`);
+  wrap.innerHTML = items.join('');
+}
+
 function renderCalendar(){
   const s = window.__calState;
-  const list = window.__lessonsList || [];
+  const all = window.__lessonsList || [];
   document.getElementById('calMonthLabel').textContent = `${MONTH_NAMES[s.month]} ${s.year}`;
+  renderCalChips();
 
-  const lessonDaysSet = new Set(list.map(l => fmtDateKey(l.lesson_date)));
-  const trialDaysSet = new Set(list.filter(l => l.is_trial).map(l => fmtDateKey(l.lesson_date)));
+  const filter = window.__calFilter || 'all';
+  const passFilter = l => filter === 'all' || (filter === 'trial' ? l.is_trial : l.teacher_id === filter);
+
+  const byDay = {};
+  all.forEach(l => {
+    if (l.status === 'cancelled') return;
+    if (!passFilter(l)) return;
+    const key = fmtDateKey(l.lesson_date);
+    (byDay[key] = byDay[key] || []).push(l);
+  });
+  Object.values(byDay).forEach(arr => arr.sort((a, b) => new Date(a.lesson_date) - new Date(b.lesson_date)));
+
   const noteStudentDaysSet = new Set(
-    list.filter(l => l.student_id && window.__notedStudentIds && window.__notedStudentIds.has(l.student_id))
-        .map(l => fmtDateKey(l.lesson_date))
+    all.filter(l => l.student_id && window.__notedStudentIds && window.__notedStudentIds.has(l.student_id))
+       .map(l => fmtDateKey(l.lesson_date))
   );
 
   const firstOfMonth = new Date(s.year, s.month, 1);
   const leadBlanks = (firstOfMonth.getDay() + 6) % 7;
   const daysInMonth = new Date(s.year, s.month + 1, 0).getDate();
-
   const todayKey = fmtDateKey(new Date());
+
   const cells = [];
   for (let i = 0; i < leadBlanks; i++) cells.push('<div class="cal-day empty"></div>');
   for (let d = 1; d <= daysInMonth; d++){
     const dateObj = new Date(s.year, s.month, d);
     const key = fmtDateKey(dateObj);
+    const isSun = dateObj.getDay() === 0;
+    const isToday = key === todayKey;
+    const isSelected = key === window.__selectedDate;
+    const dayLessons = byDay[key] || [];
+    const shown = dayLessons.slice(0, 3);
+    const more = dayLessons.length - shown.length;
+
+    const pillsHtml = shown.map(l => {
+      if (l.is_trial){
+        const c = l.teacher_id ? teacherCalColor(l.teacher_id) : { bg:'#E2E2E2', border:'#B5B5B5' };
+        return `<div class="cal-pill cal-pill-trial">
+          <span class="cal-pill-avatar" style="background:${c.bg};">${teacherInitial(l.teacher_id)}</span>
+          <span class="cal-pill-time">${fmtHourMin(l.lesson_date)}</span>
+          <span class="cal-pill-name">${l.guest_name || 'Пробный'}</span>
+        </div>`;
+      }
+      const c = teacherCalColor(l.teacher_id);
+      const name = (l.student && l.student.full_name) || 'Ученик';
+      return `<div class="cal-pill" style="background:${c.bg};">
+        <span class="cal-pill-time">${fmtHourMin(l.lesson_date)}</span>
+        <span class="cal-pill-name">${name}</span>
+      </div>`;
+    }).join('');
+
     const classes = ['cal-day'];
-    if (lessonDaysSet.has(key)) classes.push('has-lesson');
-    if (dateObj.getDay() === 0 || dateObj.getDay() === 6) classes.push('weekend');
-    if (dateObj.getDay() === 0) classes.push('dayoff');
-    if (trialDaysSet.has(key)) classes.push('has-trial');
-    if (key === todayKey) classes.push('today');
-    if (key === window.__selectedDate) classes.push('selected');
+    if (isSun) classes.push('sun');
+    if (dayLessons.length) classes.push('has-lesson');
+    if (isToday) classes.push('today');
+    if (isSelected) classes.push('selected');
+
     const studentNoteDot = noteStudentDaysSet.has(key) ? '<span class="student-note-dot" title="Есть заметка об ученике">📌</span>' : '';
-    cells.push(`<button type="button" class="${classes.join(' ')}" data-date="${key}">${d}${studentNoteDot}</button>`);
+
+    cells.push(`<button type="button" class="${classes.join(' ')}" data-date="${key}">
+      <div class="cal-day-top">
+        <span class="cal-day-num">${d}</span>
+        ${isToday ? '<span class="cal-today-badge">Сегодня</span>' : ''}
+        ${studentNoteDot}
+      </div>
+      <div class="cal-day-pills">${pillsHtml}</div>
+      ${more > 0 ? `<div class="cal-more">+${more} ещё</div>` : ''}
+    </button>`);
   }
+  while (cells.length % 7) cells.push('<div class="cal-day empty"></div>');
   document.getElementById('calGrid').innerHTML = cells.join('');
 
   document.querySelectorAll('.cal-day:not(.empty)').forEach(btn => {
@@ -1854,6 +2011,8 @@ function renderCalendar(){
       renderLessonsList();
     });
   });
+
+  renderCalLegend();
 }
 
 function isLessonPast(lesson){
