@@ -370,29 +370,20 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .cal-day.today{border-color:var(--ink); border-width:1.5px;}
   .cal-day.selected{background:var(--ink) !important; border-color:var(--ink); color:#fff;}
   .cal-day.selected .cal-day-num{color:#fff;}
-  .cal-day-top{display:flex; align-items:center; justify-content:space-between; gap:4px; min-height:18px;}
+  .cal-day-top{display:flex; align-items:center; justify-content:space-between; gap:4px; min-height:16px;}
   .cal-day-num{font-size:13px; font-weight:600;}
   .cal-day.has-lesson .cal-day-num{font-weight:800;}
-  .cal-today-badge{
-    font-size:9px; font-weight:800; letter-spacing:.04em; padding:2px 6px; border-radius:999px;
-    background:var(--ink); color:#fff; white-space:nowrap;
-  }
-  .cal-day.selected .cal-today-badge{background:#fff; color:var(--ink);}
   .cal-day .student-note-dot{font-size:9px; line-height:1;}
-  .cal-day-pills{display:flex; flex-direction:column; gap:3px; overflow:hidden;}
+  .cal-day-pills{display:flex; flex-direction:column; gap:3px;}
   .cal-pill{
-    display:flex; align-items:center; gap:4px; height:20px; padding:0 8px; border-radius:999px;
-    font-size:11px; white-space:nowrap; overflow:hidden; color:var(--ink);
+    display:block; padding:3px 7px; border-radius:7px;
+    font-size:11px; line-height:1.35; color:var(--ink); background:rgba(210,231,57,0.55);
+    overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
   }
-  .cal-pill-time{font-weight:800; flex-shrink:0;}
-  .cal-pill-name{overflow:hidden; text-overflow:ellipsis;}
+  .cal-pill-time{font-weight:800;}
+  .cal-pill-name{font-weight:500;}
   .cal-pill-trial{
-    background:#FFE7DA; border:1.5px dashed #F0773F; color:#8A2E0C; padding-left:3px; box-sizing:border-box;
-  }
-  .cal-pill-avatar{
-    width:14px; height:14px; flex-shrink:0; border-radius:999px; background:#E2E2E2;
-    font-size:8px; font-weight:800; color:var(--ink);
-    display:flex; align-items:center; justify-content:center;
+    background:#FFE7DA; border:1.5px dashed #F0773F; color:#8A2E0C; padding:2.5px 6.5px;
   }
   .cal-more{font-size:10.5px; font-weight:700; color:var(--ink-soft); padding:0 2px;}
   .cal-legend{display:flex; align-items:center; gap:18px; flex-wrap:wrap; font-size:12.5px; color:var(--ink-soft); padding-top:10px;}
@@ -415,11 +406,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     .cal-day-top{min-height:14px;}
     .cal-day-num{font-size:11.5px;}
     .cal-day-pills{flex-direction:row; flex-wrap:wrap; gap:3px; align-items:center;}
-    .cal-pill{height:8px; width:8px; padding:0; border-radius:50%; overflow:visible;}
+    .cal-pill{display:block; height:8px; width:8px; padding:0; border-radius:50%; overflow:visible;}
     .cal-pill-trial{border-width:1.5px; box-sizing:border-box;}
-    .cal-pill-time, .cal-pill-name, .cal-pill-avatar{display:none;}
+    .cal-pill-time, .cal-pill-name{display:none;}
     .cal-more{display:none;}
-    .cal-today-badge{display:none;}
     .cal-legend{gap:10px; font-size:11px;}
     .cal-legend-dot{width:18px; height:11px;}
   }
@@ -1883,11 +1873,6 @@ function teacherCalColor(teacherId){
   const idx = calTeacherOrder().findIndex(t => t.id === teacherId);
   return CAL_PALETTE[idx >= 0 ? idx % CAL_PALETTE.length : 0];
 }
-function teacherInitial(teacherId){
-  const t = (allTeachers || []).find(t => t.id === teacherId);
-  const name = (t && t.full_name) || '';
-  return name.trim().charAt(0).toUpperCase() || '?';
-}
 function fmtHourMin(dateStr){
   return new Intl.DateTimeFormat('ru-RU', { timeZone:SCHOOL_TZ, hour:'2-digit', minute:'2-digit' }).format(new Date(dateStr));
 }
@@ -1935,7 +1920,7 @@ function renderCalLegend(){
     const c = teacherCalColor(t.id);
     return `<div class="cal-legend-item"><span class="cal-legend-dot" style="background:${c.bg}; border:1px solid ${c.border};"></span>${t.full_name || 'Учитель'}</div>`;
   });
-  items.push(`<div class="cal-legend-item"><span class="cal-legend-dot" style="background:#FFE7DA; border:1.5px dashed #F0773F;"></span>Пробное (кружок = кто ведёт)</div>`);
+  items.push(`<div class="cal-legend-item"><span class="cal-legend-dot" style="background:#FFE7DA; border:1.5px dashed #F0773F;"></span>Пробное (цвет = кто ведёт)</div>`);
   wrap.innerHTML = items.join('');
 }
 
@@ -1976,23 +1961,18 @@ function renderCalendar(){
     const isToday = key === todayKey;
     const isSelected = key === window.__selectedDate;
     const dayLessons = byDay[key] || [];
-    const shown = dayLessons.slice(0, 3);
-    const more = dayLessons.length - shown.length;
 
-    const pillsHtml = shown.map(l => {
+    const pillsHtml = dayLessons.map(l => {
       if (l.is_trial){
-        const c = l.teacher_id ? teacherCalColor(l.teacher_id) : { bg:'#E2E2E2', border:'#B5B5B5' };
-        return `<div class="cal-pill cal-pill-trial">
-          <span class="cal-pill-avatar" style="background:${c.bg};">${teacherInitial(l.teacher_id)}</span>
-          <span class="cal-pill-time">${fmtHourMin(l.lesson_date)}</span>
-          <span class="cal-pill-name">${l.guest_name || 'Пробный'}</span>
+        const c = l.teacher_id ? teacherCalColor(l.teacher_id) : { bg:'#FFF3ED', border:'#B5B5B5' };
+        return `<div class="cal-pill cal-pill-trial" style="background:${c.bg};">
+          <span class="cal-pill-time">🌱 ${fmtHourMin(l.lesson_date)}</span> <span class="cal-pill-name">${l.guest_name || 'Пробный'}</span>
         </div>`;
       }
       const c = teacherCalColor(l.teacher_id);
       const name = (l.student && l.student.full_name) || 'Ученик';
       return `<div class="cal-pill" style="background:${c.bg};">
-        <span class="cal-pill-time">${fmtHourMin(l.lesson_date)}</span>
-        <span class="cal-pill-name">${name}</span>
+        <span class="cal-pill-time">${fmtHourMin(l.lesson_date)}</span> <span class="cal-pill-name">${name}</span>
       </div>`;
     }).join('');
 
@@ -2007,11 +1987,9 @@ function renderCalendar(){
     cells.push(`<button type="button" class="${classes.join(' ')}" data-date="${key}">
       <div class="cal-day-top">
         <span class="cal-day-num">${d}</span>
-        ${isToday ? '<span class="cal-today-badge">Сегодня</span>' : ''}
         ${studentNoteDot}
       </div>
       <div class="cal-day-pills">${pillsHtml}</div>
-      ${more > 0 ? `<div class="cal-more">+${more} ещё</div>` : ''}
     </button>`);
   }
   while (cells.length % 7) cells.push('<div class="cal-day empty"></div>');
