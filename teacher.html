@@ -1374,10 +1374,24 @@ function availabilityCountForDay(dateKey, dayBusy){
 
 function flashAvailSaved(){
   const msg = document.getElementById('availSaveMsg');
-  if (!msg) return;
-  msg.textContent = 'Сохранено ✓';
-  clearTimeout(window.__availMsgTimer);
-  window.__availMsgTimer = setTimeout(() => { msg.textContent = ''; }, 1800);
+  if (msg){
+    msg.textContent = 'Сохранено ✓';
+    clearTimeout(window.__availMsgTimer);
+    window.__availMsgTimer = setTimeout(() => { msg.textContent = ''; }, 1800);
+  }
+  scheduleAvailabilityAdminNotify();
+}
+
+// одно сводное уведомление админу через паузу после правок,
+// а не сообщение на каждый клик по ячейке доступности
+function scheduleAvailabilityAdminNotify(){
+  clearTimeout(window.__availAdminNotifyTimer);
+  window.__availAdminNotifyTimer = setTimeout(() => {
+    const teacherName = (currentProfile && currentProfile.full_name) || 'Учитель';
+    supabase.rpc('tg_send', {
+      msg: `🗓 <b>${teacherName}</b> обновил(а) доступность в календаре.`
+    });
+  }, 15000);
 }
 
 async function toggleAvailability(dateStr, hour){
