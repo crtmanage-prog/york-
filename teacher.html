@@ -193,6 +193,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     background:linear-gradient(135deg, var(--accent), #7a8f1f);
   }
   .app-topbar .name{font-weight:600; font-size:12.5px; color:var(--ink);}
+  .tz-indicator{font-size:12px; font-weight:600; color:var(--ink-soft);}
 
   nav.tabs, header.app-header{display:none;}
 
@@ -591,6 +592,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
   <div class="app-main-col">
   <div class="app-topbar">
+    <span class="tz-indicator" id="tzIndicator"></span>
     <div class="avatar-chip">
       <span class="avatar-circle"></span>
       <span class="name" id="teacherName">—</span>
@@ -1117,6 +1119,8 @@ async function enterApp(user){
   }
 
   document.getElementById('teacherName').textContent = currentProfile.full_name || user.email;
+  const tzIndicatorEl = document.getElementById('tzIndicator');
+  if (tzIndicatorEl) tzIndicatorEl.textContent = teacherShowsDualTz() ? '🕐 Время: Уфа + МСК' : '🕐 Время: МСК';
   const __fn = firstName(currentProfile.full_name);
   document.getElementById('greetingTitle').textContent = __fn ? `${timeGreetingWord()}, ${__fn}! 👋` : `${timeGreetingWord()}! 👋`;
   document.getElementById('myMeetingUrl').value = currentProfile.meeting_url || '';
