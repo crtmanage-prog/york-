@@ -1185,7 +1185,7 @@ function renderStudentsList(filterText){
   const filtered = q ? myStudents.filter(s => (s.full_name || '').toLowerCase().includes(q)) : myStudents;
 
   if (!myStudents.length){
-    list.innerHTML = '<div class="empty-state">Пока нет привязанных учеников. Добавь ученика через Supabase → Table Editor → profiles → teacher_id.</div>';
+    list.innerHTML = '<div class="empty-state">Пока нет привязанных учеников.</div>';
     return;
   }
   if (!filtered.length){
