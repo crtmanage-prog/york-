@@ -1798,7 +1798,7 @@ async function loadAll(){
   allTeachers = teachers || [];
 
   const { data: lessons } = await supabase.from('lessons')
-    .select('*, student:profiles!lessons_student_id_fkey(full_name), teacher:profiles!lessons_teacher_id_fkey(full_name)')
+    .select('*, student:profiles!lessons_student_id_fkey(full_name), teacher:profiles!lessons_teacher_id_fkey(full_name, telegram_chat_id)')
     .order('lesson_date', { ascending:true });
   const { data: hw } = await supabase.from('homework').select('id', { count: 'exact' }).eq('status', 'submitted');
 
@@ -5056,6 +5056,14 @@ async function deleteLessonFromSchedule(lessonId){
       confirmed_at: null,
       converted_lesson_id: null
     }).eq('id', linkedRequest.id);
+  }
+
+  const teacherChat = l.teacher && l.teacher.telegram_chat_id;
+  if (teacherChat){
+    await supabase.rpc('tg_send', {
+      msg: `❌ <b>Занятие удалено из расписания</b>\n\n${who}\n🕐 ${when}\n\nОно больше не в твоём календаре.`,
+      target_chat_id: teacherChat
+    });
   }
 
   await loadAll();
