@@ -2085,8 +2085,9 @@ function renderTodayAgenda(todaysAllLessons){
     <div class="agenda-card">
       <div class="agenda-time">${fmtTimeOnly(l.lesson_date)}</div>
       <div class="agenda-main">
-        <div class="agenda-title">${l.is_trial ? `🎓 ${l.guest_name || 'Пробный'}` : ((l.profiles && l.profiles.full_name) || 'Ученик')}</div>
+        <div class="agenda-title">${l.is_trial ? `🎓 ${l.guest_name || 'Пробный'}` : ((l.profiles && l.profiles.full_name) || 'Ученик')}${l.admin_note ? ' 📝' : ''}</div>
         <div class="agenda-sub">${l.topic || (l.is_trial ? 'Пробный урок' : 'Занятие')}</div>
+        ${l.admin_note ? `<div class="note-box" style="margin-top:6px; padding:8px 10px; font-size:12.5px;">${l.admin_note}</div>` : ''}
       </div>
       <div style="display:flex; align-items:center; gap:8px;">
         ${teacherJoinButton(l)}
@@ -2178,6 +2179,7 @@ function renderLessonsList(){
           <div class="row-sub">${fmtDateTime(l.lesson_date)}${l.is_trial && l.guest_contact ? ' · ' + l.guest_contact : ''}</div>
           ${l.rescheduled_from_date ? `<div class="row-sub" style="color:#6B3FA0; font-weight:600;">↪ Перенос с ${fmtDate(l.rescheduled_from_date)}</div>` : ''}
           ${l.status === 'cancelled' ? `<div class="row-sub" style="color:var(--ink-soft);">Отменён — ученик не придёт</div>` : ''}
+          ${l.admin_note ? `<div class="note-box" style="margin-top:8px; padding:10px 12px;">📝 ${l.admin_note}</div>` : ''}
         </div>
         <div style="display:flex; align-items:center; gap:10px;">
           ${teacherJoinButton(l)}

@@ -2337,16 +2337,43 @@ function renderLessonsList(){
         ${!l.is_trial && l.student_id && window.__notedStudentIds && window.__notedStudentIds.has(l.student_id)
           ? `<button class="btn btn-ghost btn-sm" onclick="toggleStudentNotesInline('${l.student_id}', 'daynotes-${l.id}')" title="Заметка об ученике">📌</button>`
           : ''}
+        <button class="btn btn-ghost btn-sm" onclick="toggleLessonNoteInline('${l.id}')" title="Заметка к уроку для учителя" style="${l.admin_note ? 'background:var(--accent); font-weight:700;' : ''}">📝</button>
         ${l.is_trial ? `<button class="btn btn-ghost btn-sm" onclick="pickTrialForEdit('${l.id}')">✎</button>` : ''}
         ${!l.is_trial ? `<button class="btn btn-ghost btn-sm" onclick="toggleRegularLessonEdit('${l.id}')">✎ Перенести</button>` : ''}
         ${!l.is_trial && l.status === 'upcoming' ? `<button class="btn btn-ghost btn-sm" onclick="returnLessonToBalance('${l.id}')" title="Вернуть занятие в абонемент">↩</button>` : ''}
         <button class="btn btn-ghost btn-sm" onclick="deleteLessonFromSchedule('${l.id}')" title="Удалить занятие">🗑</button>
         ${lessonBadge(l)}
       </div>
+      ${l.admin_note ? `<div class="note-box" style="width:100%; margin-top:10px;">📝 ${l.admin_note}</div>` : ''}
       <div id="daynotes-${l.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
+      <div id="lessonnote-${l.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
       <div id="lessonedit-${l.id}" class="hidden" style="width:100%; margin-top:10px;"></div>
     </div>
   `).join('');
+}
+
+function toggleLessonNoteInline(lessonId){
+  const el = document.getElementById('lessonnote-' + lessonId);
+  if (!el) return;
+  const isHidden = el.classList.contains('hidden');
+  if (!isHidden){ el.classList.add('hidden'); return; }
+
+  const l = (window.__lessonsList || []).find(x => x.id === lessonId);
+  const current = (l && l.admin_note) || '';
+
+  el.innerHTML = `
+    <textarea id="lessonNoteText-${lessonId}" placeholder="Заметка к этому уроку — увидит учитель" style="width:100%; min-height:60px; font-family:'Golos Text',sans-serif; font-size:14px; padding:12px; border-radius:10px; border:1.5px solid var(--line); resize:vertical; margin-bottom:10px;">${current.replace(/</g,'&lt;')}</textarea>
+    <button class="btn btn-dark btn-sm" onclick="saveLessonNote('${lessonId}')">Сохранить</button>
+  `;
+  el.classList.remove('hidden');
+}
+
+async function saveLessonNote(lessonId){
+  const textEl = document.getElementById('lessonNoteText-' + lessonId);
+  const text = textEl.value.trim();
+  const { error } = await supabase.from('lessons').update({ admin_note: text || null }).eq('id', lessonId);
+  if (error){ alert('Не получилось сохранить заметку. Попробуй ещё раз.'); return; }
+  await loadAll();
 }
 
 async function toggleStudentNotesInline(studentId, containerId){
