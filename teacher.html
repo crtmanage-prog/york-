@@ -962,6 +962,17 @@ function firstName(fullName){
 
 const SCHOOL_TZ = 'Asia/Yekaterinburg'; // Уфа (тот же часовой пояс, что Екатеринбург)
 
+// эти учителя физически в Уфе — им время показываем как раньше, Уфа+МСК.
+// у всех остальных учителей по умолчанию только МСК (проще ориентироваться
+// с учениками, у которых МСК-привязанные часовые пояса)
+const TEACHER_DUAL_TZ_EXCEPTIONS = new Set([
+  '5fe5ee21-388b-4bf4-a245-a43bd6306c1d', // Софья
+  'a6b11228-6886-4e17-ada5-2e8593986410'  // Дарья П
+]);
+function teacherShowsDualTz(){
+  return !!(currentUser && TEACHER_DUAL_TZ_EXCEPTIONS.has(currentUser.id));
+}
+
 const TIMEZONES = [
   { tz:'Europe/Kaliningrad', label:'Калининград (МСК-1)' },
   { tz:'Europe/Moscow', label:'Москва (МСК)' },
@@ -1006,9 +1017,13 @@ function googleCalendarUrl(title, startDate, durationMinutes, details){
 function fmtDateTime(d){
   if (!d) return '—';
   const date = new Date(d);
+  const mskTime = date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:'Europe/Moscow' });
+  if (!teacherShowsDualTz()){
+    const dayStr = date.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:'Europe/Moscow' });
+    return `${dayStr}, ${mskTime} (МСК)`;
+  }
   const dayStr = date.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:SCHOOL_TZ });
   const ufaTime = date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:SCHOOL_TZ });
-  const mskTime = date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:'Europe/Moscow' });
   return `${dayStr}, ${ufaTime} (Уфа) · ${mskTime} (МСК)`;
 }
 
@@ -1919,7 +1934,8 @@ function shiftMonth(delta){
 }
 
 function fmtHourMin(dateStr){
-  return new Intl.DateTimeFormat('ru-RU', { timeZone:SCHOOL_TZ, hour:'2-digit', minute:'2-digit' }).format(new Date(dateStr));
+  const tz = teacherShowsDualTz() ? SCHOOL_TZ : 'Europe/Moscow';
+  return new Intl.DateTimeFormat('ru-RU', { timeZone:tz, hour:'2-digit', minute:'2-digit' }).format(new Date(dateStr));
 }
 
 function renderCalChips(){
@@ -2067,7 +2083,8 @@ function teacherJoinButton(l){
 }
 
 function fmtTimeOnly(d){
-  return new Date(d).toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:SCHOOL_TZ });
+  const tz = teacherShowsDualTz() ? SCHOOL_TZ : 'Europe/Moscow';
+  return new Date(d).toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:tz });
 }
 
 function renderNextLessonHero(allLessons){
@@ -2083,7 +2100,8 @@ function renderNextLessonHero(allLessons){
   }
   const name = next.is_trial ? `🎓 ${next.guest_name || 'Пробный'}` : ((next.profiles && next.profiles.full_name) || 'Ученик');
   const todayKey = fmtDateKey(new Date());
-  const whenLabel = fmtDateKey(next.lesson_date) === todayKey ? 'сегодня' : new Date(next.lesson_date).toLocaleDateString('ru-RU', { day:'numeric', month:'short', timeZone:SCHOOL_TZ });
+  const whenLabelTz = teacherShowsDualTz() ? SCHOOL_TZ : 'Europe/Moscow';
+  const whenLabel = fmtDateKey(next.lesson_date) === todayKey ? 'сегодня' : new Date(next.lesson_date).toLocaleDateString('ru-RU', { day:'numeric', month:'short', timeZone:whenLabelTz });
   el.textContent = `${name} · ${whenLabel} ${fmtTimeOnly(next.lesson_date)}`;
 }
 
