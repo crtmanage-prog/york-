@@ -986,12 +986,26 @@ function fmtDate(d){
   const date = new Date(d);
   return date.toLocaleDateString('ru-RU', { day:'numeric', month:'long', year:'numeric' });
 }
-function timeGreetingWord(){
+const GREETINGS_MORNING = [
+  "Good morning, {name}!","Up early, {name}?","Morning, {name}! Already here?","Look who's up, {name}.","Rise and shine, {name}!",
+  "{name}, coffee yet?","Hello, {name}. New day unlocked.","Morning, {name}! How are we feeling?","{name}, starting bright and early?","Good morning, {name}. What's on the agenda?",
+  "Early bird spotted, {name}.","{name}, the day has officially begun.","Morning, {name}! What are we getting into?","Awake and online, {name}. Nice.","{name}, fancy seeing you here this early."
+];
+const GREETINGS_DAY = [
+  "Good afternoon, {name}!","How's the day treating you, {name}?","Hey, {name}! What brings you here?","Midday already, {name}.","{name}, how's everything going?",
+  "Hello, {name}! Taking a little break?","Afternoon, {name}. What's happening?","{name}, got a minute to spare?","Hey there, {name}. How's the energy?","{name}, somewhere between lunch and dinner.",
+  "Good afternoon, {name}. How's your day been?","{name}, the afternoon is calling.","Hello, {name}. What's on your list?","{name}, halfway through the day already.","Good afternoon, {name}. Hope your day is behaving."
+];
+const GREETINGS_EVENING = [
+  "Staying late, {name}?","Good evening, {name}!","Night owl spotted, {name}.","Late one today, {name}?","Look who made it to the evening, {name}.",
+  "{name}, not ready to call it a day?","Evening, {name}! How did the day go?","Still online at this hour, {name}?","{name}, burning the midnight oil?","Good evening, {name}. Take a breath.",
+  "Hello from the after-hours, {name}.","{name}, one last stop?","Evening mode activated, {name}.","Good evening, latecomer.","{name}, the day is winding down."
+];
+function timeGreetingWord(name){
   const h = new Date().getHours();
-  if (h >= 5 && h < 12) return 'Доброе утро';
-  if (h >= 12 && h < 18) return 'Добрый день';
-  if (h >= 18 && h < 23) return 'Добрый вечер';
-  return 'Доброй ночи';
+  const pool = (h >= 5 && h < 12) ? GREETINGS_MORNING : (h >= 12 && h < 18) ? GREETINGS_DAY : GREETINGS_EVENING;
+  const line = pool[Math.floor(Math.random() * pool.length)];
+  return line.replace('{name}', name || 'there');
 }
 
 function firstName(fullName){
@@ -1158,8 +1172,7 @@ async function enterApp(user){
   document.getElementById('teacherName').textContent = currentProfile.full_name || user.email;
   const tzIndicatorEl = document.getElementById('tzIndicator');
   if (tzIndicatorEl) tzIndicatorEl.textContent = teacherShowsDualTz() ? '🕐 Время: Уфа + МСК' : '🕐 Время: МСК';
-  const __fn = firstName(currentProfile.full_name);
-  document.getElementById('greetingTitle').textContent = __fn ? `${timeGreetingWord()}, ${__fn}! 👋` : `${timeGreetingWord()}! 👋`;
+  document.getElementById('greetingTitle').textContent = `${timeGreetingWord(firstName(currentProfile.full_name))} 👋`;
   document.getElementById('myMeetingUrl').value = currentProfile.meeting_url || '';
   document.getElementById('myContactTelegram').value = currentProfile.contact_telegram || '';
   document.getElementById('appScreen').classList.remove('hidden');
