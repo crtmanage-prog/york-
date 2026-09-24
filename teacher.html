@@ -183,7 +183,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .app-sidebar .sb-logout:hover{background:var(--panel);}
 
   .app-main-col{flex:1; min-width:0; display:flex; flex-direction:column;}
-  .app-topbar{display:flex; align-items:center; justify-content:flex-end; gap:10px; padding:22px 28px 0; max-width:1300px; margin:0 auto;}
+  .app-topbar{display:flex; align-items:center; justify-content:flex-end; gap:10px; padding:22px 28px 0; max-width:1300px; margin:0 auto; flex-wrap:wrap; row-gap:8px;}
   .app-topbar .avatar-chip{
     display:flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--line);
     border-radius:100px; padding:5px 12px 5px 5px;
@@ -194,6 +194,33 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   .app-topbar .name{font-weight:600; font-size:12.5px; color:var(--ink);}
   .tz-indicator{font-size:12px; font-weight:600; color:var(--ink-soft);}
+
+  .bell-wrap{position:relative;}
+  .bell-btn{
+    position:relative; width:38px; height:38px; border-radius:999px;
+    border:1px solid var(--line); background:#fff; color:var(--ink);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 1px 2px rgba(20,21,18,.04);
+  }
+  .bell-btn svg{width:17px; height:17px;}
+  .bell-dot{
+    position:absolute; top:6px; right:6px; width:8px; height:8px;
+    border-radius:50%; background:#E0483E; display:none;
+  }
+  .notif-panel{
+    display:none; position:absolute; top:44px; right:0; z-index:60;
+    width:300px; max-width:82vw; max-height:360px; overflow-y:auto;
+    background:#fff; border:1.5px solid var(--line); border-radius:16px;
+    box-shadow:0 12px 32px rgba(0,0,0,0.12); padding:8px;
+  }
+  .notif-panel-title{
+    font-family:'Unbounded',sans-serif; font-weight:700; font-size:12px;
+    text-transform:uppercase; letter-spacing:.03em; color:var(--ink-soft);
+    padding:8px 10px 4px;
+  }
+  .notif-item{padding:9px 10px; border-top:1px solid var(--line); font-size:13.5px; line-height:1.5; white-space:pre-wrap;}
+  .notif-item:first-of-type{border-top:none;}
+  .notif-item-date{font-size:11px; color:var(--ink-soft); margin-top:3px;}
+  .notif-empty{padding:16px 10px; font-size:13px; color:var(--ink-soft); text-align:center;}
 
   nav.tabs, header.app-header{display:none;}
 
@@ -593,6 +620,16 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
   <div class="app-main-col">
   <div class="app-topbar">
     <span class="tz-indicator" id="tzIndicator"></span>
+    <div class="bell-wrap">
+      <button class="bell-btn" id="notifBellBtn" title="Уведомления" aria-label="Уведомления">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="bell-dot" id="notifBellDot"></span>
+      </button>
+      <div class="notif-panel" id="notifPanel">
+        <div class="notif-panel-title">Новости</div>
+        <div id="notifList"></div>
+      </div>
+    </div>
     <div class="avatar-chip">
       <span class="avatar-circle"></span>
       <span class="name" id="teacherName">—</span>
@@ -1131,7 +1168,60 @@ async function enterApp(user){
   document.getElementById('lsTimezone').innerHTML = timezoneOptionsHtml(SCHOOL_TZ);
   await loadLessons();
   setupTelegramBlock();
+  await setupNotifBell();
   await Promise.allSettled([loadStudents(), loadToCheck(), loadMyGroups(), loadAvailability(), loadAllMyHomework()]);
+}
+
+async function setupNotifBell(){
+  const btn = document.getElementById('notifBellBtn');
+  const panel = document.getElementById('notifPanel');
+  const dot = document.getElementById('notifBellDot');
+  const list = document.getElementById('notifList');
+  if (!btn || !panel) return;
+
+  const { data } = await supabase.from('cabinet_notifications').select('message, created_at')
+    .in('audience', ['teachers','all']).order('created_at', { ascending:false }).limit(20);
+  const notifications = data || [];
+  const readAt = currentProfile.notifications_read_at ? new Date(currentProfile.notifications_read_at) : null;
+  let hasUnread = notifications.some(n => !readAt || new Date(n.created_at) > readAt);
+  dot.style.display = hasUnread ? 'block' : 'none';
+
+  list.innerHTML = '';
+  if (!notifications.length){
+    const empty = document.createElement('div');
+    empty.className = 'notif-empty';
+    empty.textContent = 'Пока новостей нет.';
+    list.appendChild(empty);
+  } else {
+    notifications.forEach(n => {
+      const item = document.createElement('div');
+      item.className = 'notif-item';
+      const msg = document.createElement('div');
+      msg.textContent = n.message;
+      const date = document.createElement('div');
+      date.className = 'notif-item-date';
+      date.textContent = fmtDate(n.created_at);
+      item.appendChild(msg);
+      item.appendChild(date);
+      list.appendChild(item);
+    });
+  }
+
+  btn.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const opening = panel.style.display !== 'block';
+    panel.style.display = opening ? 'block' : 'none';
+    if (opening && hasUnread){
+      hasUnread = false;
+      dot.style.display = 'none';
+      const now = new Date().toISOString();
+      currentProfile.notifications_read_at = now;
+      await supabase.from('profiles').update({ notifications_read_at: now }).eq('id', currentUser.id);
+    }
+  });
+  document.addEventListener('click', (e) => {
+    if (!panel.contains(e.target) && e.target !== btn) panel.style.display = 'none';
+  });
 }
 
 document.getElementById('saveMeetingUrlBtn').addEventListener('click', saveMeetingUrl);

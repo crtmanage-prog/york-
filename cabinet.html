@@ -1881,7 +1881,7 @@ async function setupNotifBell(){
   const list = document.getElementById('notifList');
   if (!btn || !panel) return;
 
-  const { data } = await supabase.from('cabinet_notifications').select('message, created_at').order('created_at', { ascending: false }).limit(20);
+  const { data } = await supabase.from('cabinet_notifications').select('message, created_at').in('audience', ['students','all']).order('created_at', { ascending: false }).limit(20);
   const notifications = data || [];
   const readAt = currentProfile.notifications_read_at ? new Date(currentProfile.notifications_read_at) : null;
   const hasUnread = notifications.some(n => !readAt || new Date(n.created_at) > readAt);
