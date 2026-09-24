@@ -1385,14 +1385,27 @@ function flashAvailSaved(){
 // одно сводное уведомление админу через паузу после правок,
 // а не сообщение на каждый клик по ячейке доступности
 function scheduleAvailabilityAdminNotify(){
+  window.__availAdminNotifyPending = true;
   clearTimeout(window.__availAdminNotifyTimer);
-  window.__availAdminNotifyTimer = setTimeout(() => {
-    const teacherName = (currentProfile && currentProfile.full_name) || 'Учитель';
-    supabase.rpc('tg_send', {
-      msg: `🗓 <b>${teacherName}</b> обновил(а) доступность в календаре.`
-    });
-  }, 15000);
+  window.__availAdminNotifyTimer = setTimeout(flushAvailabilityAdminNotify, 8000);
 }
+
+// если страница закрывается/сворачивается раньше, чем истёк таймер,
+// нельзя просто ждать — setTimeout умрёт вместе со страницей и
+// уведомление молча потеряется (уже бывало), поэтому досылаем сразу
+function flushAvailabilityAdminNotify(){
+  if (!window.__availAdminNotifyPending) return;
+  window.__availAdminNotifyPending = false;
+  clearTimeout(window.__availAdminNotifyTimer);
+  const teacherName = (currentProfile && currentProfile.full_name) || 'Учитель';
+  supabase.rpc('tg_send', {
+    msg: `🗓 <b>${teacherName}</b> обновил(а) доступность в календаре.`
+  });
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') flushAvailabilityAdminNotify();
+});
+window.addEventListener('pagehide', flushAvailabilityAdminNotify);
 
 async function toggleAvailability(dateStr, hour){
   const key = availKey(dateStr, hour);
