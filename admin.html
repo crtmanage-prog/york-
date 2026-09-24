@@ -5254,6 +5254,12 @@ async function assignTrialLesson(){
     return;
   }
 
+  if (editingTrialId){
+    // дата урока поменялась — синхронизируем confirmed_slot в заявке,
+    // иначе по старой (прошедшей) дате она ошибочно попадёт в "нужен итог"
+    await supabase.from('trial_requests').update({ confirmed_slot: utcDate.toISOString() }).eq('converted_lesson_id', editingTrialId);
+  }
+
   okEl.textContent = editingTrialId ? 'Изменения сохранены!' : 'Готово! Появится в календаре учителя.';
   document.getElementById('trialName').value = '';
   document.getElementById('trialContact').value = '';
