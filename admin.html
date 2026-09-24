@@ -90,8 +90,34 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .badge-active{background:#EAF7E5; color:#3B7A1E;}
   .badge-expired{background:#FBEAEA; color:var(--red);}
   .badge-pending{background:#FFF4DE; color:#96650B;}
-  .badge-trial{background:#F1EAFB; color:#6B3FA0; font-weight:700;}
+  .badge-trial{background:#F3F2ED; color:#505149; font-weight:700;}
   .row-card.row-trial{border-left:4px solid #6B3FA0; padding-left:14px;}
+
+  .trial-teacher{display:flex; align-items:center; gap:10px; padding:4px 18px 4px 4px; border-radius:999px; white-space:nowrap;}
+  .trial-teacher__avatar{
+    width:38px; height:38px; flex-shrink:0; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Unbounded',sans-serif; font-weight:700; font-size:16px;
+  }
+  .trial-teacher__text{display:flex; flex-direction:column; gap:1px; line-height:1.2;}
+  .trial-teacher__label{font-size:11px;}
+  .trial-teacher__name{font-family:'Unbounded',sans-serif; font-size:14px; font-weight:700;}
+
+  .trial-teacher--ink{background:#0A0A09; color:#fff;}
+  .trial-teacher--ink .trial-teacher__avatar{background:#D7EF42; color:#0A0A09;}
+  .trial-teacher--ink .trial-teacher__label{color:#C9CAC5;}
+
+  .trial-teacher--lime{background:#D7EF42; color:#0A0A09;}
+  .trial-teacher--lime .trial-teacher__avatar{background:#0A0A09; color:#D7EF42;}
+  .trial-teacher--lime .trial-teacher__label{color:#3A3B33;}
+
+  .trial-teacher--default{background:#F3F2ED; color:#0A0A09; border:1.5px solid #0A0A09;}
+  .trial-teacher--default .trial-teacher__avatar{background:#0A0A09; color:#D7EF42;}
+  .trial-teacher--default .trial-teacher__label{color:#505149;}
+
+  .trial-teacher--none{background:#fff; color:#505149; border:1.5px dashed #a8aaa4;}
+
+  .trial-divider{width:1px; height:32px; background:rgba(0,0,0,.12); margin:0 4px;}
   .card{
     border:1.5px solid var(--line);
     border-radius:var(--radius);
@@ -1868,6 +1894,35 @@ function shiftMonth(delta){
   renderCalendar();
 }
 
+// Стиль чипа учителя на карточках пробных (id → класс), держим в одном месте,
+// чтобы легко добавить нового учителя. Софья/Дарья — по id, остальные — дефолт.
+const TRIAL_TEACHER_CHIP_STYLE = {
+  '5fe5ee21-388b-4bf4-a245-a43bd6306c1d': 'trial-teacher--ink',   // Софья
+  '2a5e4f88-5bb3-4792-b5a6-739c88a14b71': 'trial-teacher--lime'   // Дарья
+};
+
+function trialTeacherChipHtml(teacherId){
+  if (!teacherId){
+    return `<div class="trial-teacher trial-teacher--none">
+      <div class="trial-teacher__text"><span class="trial-teacher__name">Учитель не назначен</span></div>
+    </div>`;
+  }
+  const t = (allTeachers || []).find(x => x.id === teacherId);
+  const name = (t && t.full_name) || 'Учитель';
+  const initial = name.trim().charAt(0).toUpperCase() || '?';
+  const cls = TRIAL_TEACHER_CHIP_STYLE[teacherId] || 'trial-teacher--default';
+  const nameEl = document.createElement('span');
+  nameEl.className = 'trial-teacher__name';
+  nameEl.textContent = name;
+  return `<div class="trial-teacher ${cls}">
+    <div class="trial-teacher__avatar">${initial}</div>
+    <div class="trial-teacher__text">
+      <span class="trial-teacher__label">Проводит пробный</span>
+      ${nameEl.outerHTML}
+    </div>
+  </div>`;
+}
+
 const CAL_PALETTE = [
   { bg:'#E3F08A', border:'#A3BD1E' },
   { bg:'#DCD2FF', border:'#8E72F5' },
@@ -2326,9 +2381,10 @@ function renderLessonsList(){
     <div class="row-card ${l.is_trial ? 'row-trial' : ''}" style="margin-bottom:10px;">
       <div class="row-main">
         <div class="row-title">${l.is_trial ? `🎓 ${l.guest_name || 'Пробный'}` : ((l.student && l.student.full_name) || 'Ученик')} — ${l.topic || 'Занятие'}</div>
-        <div class="row-sub">${fmtDateTime(l.lesson_date)} · учитель: ${(l.teacher && l.teacher.full_name) || '—'}${l.is_trial && l.guest_contact ? ' · ' + l.guest_contact : ''}</div>
+        <div class="row-sub">${fmtDateTime(l.lesson_date)}${l.is_trial ? '' : ' · учитель: ' + ((l.teacher && l.teacher.full_name) || '—')}${l.is_trial && l.guest_contact ? ' · ' + l.guest_contact : ''}</div>
       </div>
-      <div style="display:flex; align-items:center; gap:10px;">
+      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+        ${l.is_trial ? trialTeacherChipHtml(l.teacher_id) + '<div class="trial-divider"></div>' : ''}
         <a class="btn btn-ghost btn-sm" href="${googleCalendarUrl(
           (l.is_trial ? `Пробный: ${l.guest_name || ''}` : (l.student && l.student.full_name) || 'Урок') + (l.topic ? ' — ' + l.topic : ''),
           l.lesson_date, l.duration_minutes,
