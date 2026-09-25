@@ -5327,6 +5327,52 @@ async function assignTrialLesson(){
     // дата урока поменялась — синхронизируем confirmed_slot в заявке,
     // иначе по старой (прошедшей) дате она ошибочно попадёт в "нужен итог"
     await supabase.from('trial_requests').update({ confirmed_slot: utcDate.toISOString() }).eq('converted_lesson_id', editingTrialId);
+  } else if (newLesson){
+    // без заявки в trial_requests вся машинерия напоминаний (за день, за час)
+    // и уведомление учителю ищут получателя именно через converted_lesson_id
+    // и молча ничего не находят — заводим заявку и сразу привязываем к уроку
+    const isTelegramHandle = /^@?[A-Za-z][A-Za-z0-9_]{3,31}$/.test(contact);
+    const tgHandle = isTelegramHandle ? contact.replace('@', '') : null;
+
+    let matched = null;
+    if (contact){
+      let q = supabase.from('trial_requests').select('telegram_chat_id, telegram_username')
+        .not('telegram_chat_id', 'is', null).order('created_at', { ascending:false }).limit(1);
+      q = tgHandle ? q.ilike('telegram_username', tgHandle) : q.eq('contact_phone', contact);
+      const { data: matches } = await q;
+      matched = (matches || [])[0] || null;
+    }
+
+    const { data: newRequest } = await supabase.from('trial_requests').insert({
+      full_name: name,
+      contact: contact || null,
+      contact_phone: tgHandle ? null : (contact || null),
+      contact_telegram: tgHandle || null,
+      status: 'new',
+      telegram_chat_id: matched ? matched.telegram_chat_id : null,
+      telegram_username: matched ? matched.telegram_username : null
+    }).select().single();
+
+    if (newRequest){
+      await supabase.from('trial_requests').update({
+        status: 'confirmed',
+        assigned_teacher_id: teacherId,
+        confirmed_slot: utcDate.toISOString(),
+        confirmed_at: new Date().toISOString(),
+        converted_lesson_id: newLesson.id
+      }).eq('id', newRequest.id);
+
+      if (matched && matched.telegram_chat_id){
+        const teacherObj = (allTeachers || []).find(t => t.id === teacherId);
+        const teacherName = teacherObj ? teacherObj.full_name : '-';
+        const teacherLink = teacherObj && teacherObj.meeting_url ? `\n🔗 Ссылка на урок: ${teacherObj.meeting_url}` : '';
+        const mskTime = new Intl.DateTimeFormat('ru-RU', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit', timeZone:'Europe/Moscow' }).format(utcDate);
+        await supabase.rpc('tg_send', {
+          msg: `📅 <b>У вас новый пробный урок в YORK!</b>\n\n🕐 Время: <b>${mskTime} (МСК)</b>\n🧑‍🏫 Преподаватель: ${teacherName}${teacherLink}\n\nЖдём вас!`,
+          target_chat_id: matched.telegram_chat_id
+        });
+      }
+    }
   }
 
   okEl.textContent = editingTrialId ? 'Изменения сохранены!' : 'Готово! Появится в календаре учителя.';
