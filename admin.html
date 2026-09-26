@@ -450,7 +450,15 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     .cal-legend-dot{width:18px; height:11px;}
   }
   .divider-line{border:none; border-top:1px solid var(--line); margin:6px 0 16px;}
-  .weekday-picker{display:flex; flex-wrap:wrap; gap:8px;}
+  .weekday-time-picker{display:flex; flex-direction:column; gap:6px;}
+  .wtp-row{display:flex; align-items:center; gap:10px;}
+  .wtp-check{
+    display:flex; align-items:center; gap:6px; width:76px; flex-shrink:0;
+    background:var(--panel); border-radius:100px; padding:7px 12px;
+    font-size:13px; font-weight:600; cursor:pointer;
+  }
+  .field .wtp-time{width:110px; padding:8px 10px; opacity:.45;}
+  .wtp-row:has(.wtp-day:checked) .wtp-time{opacity:1;}
   .legend-box{display:inline-block; width:12px; height:12px; border-radius:4px; vertical-align:-1px; margin-right:3px;}
   .sched-row{display:flex; align-items:center; gap:10px; padding:5px 0; flex-wrap:wrap;}
   .sched-day{width:112px; flex-shrink:0; font-size:12.5px; font-weight:600;}
@@ -473,11 +481,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   .chip-group input{width:auto;}
   .chip-group label:has(input:checked){background:var(--accent);}
-  .weekday-picker label{
-    display:flex; align-items:center; gap:5px;
-    background:var(--panel); border-radius:100px; padding:7px 12px;
-    font-size:13px; font-weight:600; cursor:pointer;
-  }
   .field label input[type=checkbox]{margin-right:6px;}
 </style>
 </head>
@@ -1302,20 +1305,16 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         </p>
         <div id="autoScheduleFields" class="hidden">
           <div class="field">
-            <label>Дни недели</label>
-            <div class="weekday-picker">
-              <label><input type="checkbox" value="1"> Пн</label>
-              <label><input type="checkbox" value="2"> Вт</label>
-              <label><input type="checkbox" value="3"> Ср</label>
-              <label><input type="checkbox" value="4"> Чт</label>
-              <label><input type="checkbox" value="5"> Пт</label>
-              <label><input type="checkbox" value="6"> Сб</label>
-              <label><input type="checkbox" value="0"> Вс</label>
+            <label>Дни недели и время (у каждого дня — своё время)</label>
+            <div class="weekday-time-picker" id="weekdayTimePicker">
+              <div class="wtp-row"><label class="wtp-check"><input type="checkbox" value="1" class="wtp-day"> Пн</label><input type="time" class="wtp-time" value="18:00"></div>
+              <div class="wtp-row"><label class="wtp-check"><input type="checkbox" value="2" class="wtp-day"> Вт</label><input type="time" class="wtp-time" value="18:00"></div>
+              <div class="wtp-row"><label class="wtp-check"><input type="checkbox" value="3" class="wtp-day"> Ср</label><input type="time" class="wtp-time" value="18:00"></div>
+              <div class="wtp-row"><label class="wtp-check"><input type="checkbox" value="4" class="wtp-day"> Чт</label><input type="time" class="wtp-time" value="18:00"></div>
+              <div class="wtp-row"><label class="wtp-check"><input type="checkbox" value="5" class="wtp-day"> Пт</label><input type="time" class="wtp-time" value="18:00"></div>
+              <div class="wtp-row"><label class="wtp-check"><input type="checkbox" value="6" class="wtp-day"> Сб</label><input type="time" class="wtp-time" value="18:00"></div>
+              <div class="wtp-row"><label class="wtp-check"><input type="checkbox" value="0" class="wtp-day"> Вс</label><input type="time" class="wtp-time" value="18:00"></div>
             </div>
-          </div>
-          <div class="field">
-            <label for="autoTime">Время урока</label>
-            <input id="autoTime" type="time" value="18:00">
           </div>
           <div class="field">
             <label for="autoTimezone">Часовой пояс (в котором указано время)</label>
@@ -3046,19 +3045,26 @@ async function attachSubscription(){
   const student = allStudents.find(s => s.id === studentId);
   const autoSchedule = document.getElementById('autoScheduleCheck').checked;
   let weekdays = [];
-  let time, startDate, duration, topic, timezone;
+  let startDate, duration, topic, timezone;
 
+  let timeByWeekday = {};
   if (autoSchedule){
-    weekdays = Array.from(document.querySelectorAll('.weekday-picker input:checked')).map(el => Number(el.value));
-    time = document.getElementById('autoTime').value;
+    // у каждого отмеченного дня — своя строка с чекбоксом и полем времени рядом
+    Array.from(document.querySelectorAll('.wtp-row')).forEach(row => {
+      const check = row.querySelector('.wtp-day');
+      if (check.checked){
+        weekdays.push(Number(check.value));
+        timeByWeekday[Number(check.value)] = row.querySelector('.wtp-time').value;
+      }
+    });
     startDate = document.getElementById('autoStartDate').value;
     timezone = document.getElementById('autoTimezone').value || SCHOOL_TZ;
     duration = Number(document.getElementById('autoDuration').value) || 60;
     topic = document.getElementById('autoTopic').value.trim() || 'Регулярное занятие';
 
-    if (!weekdays.length || !time || !startDate){
+    if (!weekdays.length || weekdays.some(w => !timeByWeekday[w]) || !startDate){
       btn.disabled = false; btn.textContent = '+ Прикрепить абонемент';
-      errEl.textContent = 'Для автосоздания уроков укажи дни недели, время и дату начала.';
+      errEl.textContent = 'Для автосоздания уроков укажи дни недели, время для каждого дня и дату начала.';
       return;
     }
     if (!student || !student.teacher_id){
@@ -3081,7 +3087,8 @@ async function attachSubscription(){
     const dates = nextWeekdayDates(startDate, weekdays, Math.max(remaining, 0));
     const rows = dates.map(d => {
       const dateStr = fmtDateKey(d);
-      const utcDate = zonedTimeToUtc(dateStr, time, timezone);
+      const dayTime = timeByWeekday[d.getDay()];
+      const utcDate = zonedTimeToUtc(dateStr, dayTime, timezone);
       return {
         student_id: studentId,
         teacher_id: student.teacher_id,
