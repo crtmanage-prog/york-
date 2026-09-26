@@ -1487,7 +1487,10 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <div class="card">
         <div class="field">
           <label for="linkEmail">Email</label>
-          <input id="linkEmail" type="email" placeholder="person@email.com">
+          <div style="display:flex; gap:8px;">
+            <input id="linkEmail" type="email" placeholder="person@email.com" style="flex:1;">
+            <button type="button" class="btn btn-ghost btn-sm" id="linkGenEmailBtn" title="Если почты нет — сгенерировать служебную для входа">Сгенерировать</button>
+          </div>
         </div>
         <div class="field">
           <label for="linkPassword">Пароль</label>
@@ -5428,6 +5431,11 @@ document.getElementById('linkGenPassBtn').addEventListener('click', () => {
   let pass = '';
   for (let i = 0; i < 10; i++) pass += chars[Math.floor(Math.random() * chars.length)];
   document.getElementById('linkPassword').value = pass;
+});
+
+document.getElementById('linkGenEmailBtn').addEventListener('click', () => {
+  // служебный адрес только для входа — реальный email ученику не нужен
+  document.getElementById('linkEmail').value = 'stu' + Math.random().toString(16).slice(2, 10) + '@weyork.internal';
 });
 
 async function deletePerson(userId, name, studentCount){
