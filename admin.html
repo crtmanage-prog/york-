@@ -3474,10 +3474,13 @@ function renderChurnRisk(){
     const student = allStudents.find(s => s.id === p.student_id);
     if (!student) return;
     const remaining = computeRemaining(p, window.__lessonsList || []);
+    // уже не активны (0 занятий, не продлили) — не "риск", а свершившийся факт,
+    // им отдельное место во вкладке "Все ученики", здесь только зашумляют
+    if (remaining <= 0) return;
     const validUntil = p.valid_until ? new Date(p.valid_until) : null;
     const expiringSoon = validUntil && validUntil <= in3Days;
 
-    if (remaining <= 0 || expiringSoon){
+    if (expiringSoon){
       buckets.red.push({ student, remaining, validUntil });
     } else if (remaining <= 2){
       buckets.yellow.push({ student, remaining, validUntil });
@@ -3496,7 +3499,7 @@ function renderChurnRisk(){
     ? urgent.map(u => `
         <div class="row-card" style="margin-bottom:8px;">
           <div class="row-main">
-            <div class="row-title">${u.remaining <= 0 ? '🔴' : (u.validUntil && u.validUntil <= in3Days ? '🔴' : '🟡')} ${u.student.full_name}</div>
+            <div class="row-title">${u.validUntil && u.validUntil <= in3Days ? '🔴' : '🟡'} ${u.student.full_name}</div>
             <div class="row-sub">${u.remaining} занятий осталось${u.validUntil ? ' · до ' + fmtDate(u.validUntil) : ''}</div>
           </div>
           <button class="btn btn-ghost btn-sm" onclick="pickStudentForEdit('${u.student.id}')">Открыть</button>
