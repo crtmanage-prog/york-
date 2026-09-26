@@ -3098,6 +3098,19 @@ async function attachSubscription(){
     }
   }
 
+  // считаем даты уроков заранее — при автосоздании "действует до" вычисляем
+  // по дате последнего занятия, а не просим вводить руками
+  let autoDates = [];
+  if (autoSchedule){
+    const remaining = Number(lessonsIncluded) - Number(lessonsUsed);
+    autoDates = nextWeekdayDates(startDate, weekdays, Math.max(remaining, 0));
+    if (autoDates.length){
+      const lastDateKey = fmtDateKey(autoDates[autoDates.length - 1]);
+      paymentPayload.valid_until = lastDateKey;
+      document.getElementById('payValidUntil').value = lastDateKey;
+    }
+  }
+
   const { data: newPayment, error } = await supabase.from('payments').insert(paymentPayload).select().single();
 
   if (error){
@@ -3107,9 +3120,7 @@ async function attachSubscription(){
   }
 
   if (autoSchedule){
-    const remaining = Number(lessonsIncluded) - Number(lessonsUsed);
-    const dates = nextWeekdayDates(startDate, weekdays, Math.max(remaining, 0));
-    const rows = dates.map(d => {
+    const rows = autoDates.map(d => {
       const dateStr = fmtDateKey(d);
       const dayTime = timeByWeekday[d.getDay()];
       const utcDate = zonedTimeToUtc(dateStr, dayTime, timezone);
