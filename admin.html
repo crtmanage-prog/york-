@@ -5532,6 +5532,35 @@ async function linkNewProfile(){
   }
 
   okEl.textContent = `Готово! Логин: ${email} · Пароль: ${password}`;
+
+  // если этот человек уже подключал Telegram-бота раньше (тот же телефон/юзернейм
+  // встречается в заявках) — сразу привязываем чат к новому профилю и шлём логин
+  // с паролем, руками копировать и пересылать не нужно
+  const newUserId = data && data.id;
+  if (newUserId && (contactTelegram || contactPhone)){
+    const isTelegramHandle = /^@?[A-Za-z][A-Za-z0-9_]{3,31}$/.test(contactTelegram);
+    const tgHandle = isTelegramHandle ? contactTelegram.replace('@', '') : null;
+    if (tgHandle || contactPhone){
+      let q = supabase.from('trial_requests').select('telegram_chat_id, telegram_username')
+        .not('telegram_chat_id', 'is', null).order('created_at', { ascending:false }).limit(1);
+      q = tgHandle ? q.ilike('telegram_username', tgHandle) : q.eq('contact_phone', contactPhone);
+      const { data: matches } = await q;
+      const matched = (matches || [])[0] || null;
+
+      if (matched && matched.telegram_chat_id){
+        await supabase.from('profiles').update({
+          telegram_chat_id: matched.telegram_chat_id,
+          telegram_linked_at: new Date().toISOString()
+        }).eq('id', newUserId);
+        await supabase.rpc('tg_send', {
+          msg: `🎉 <b>Добро пожаловать в YORK!</b>\n\nЛогин и пароль от личного кабинета:\n👤 ${email}\n🔑 ${password}\n\nВойти: https://weyork.online/login.html`,
+          target_chat_id: matched.telegram_chat_id
+        });
+        okEl.textContent += ' Логин и пароль отправлены в Telegram.';
+      }
+    }
+  }
+
   document.getElementById('linkEmail').value = '';
   document.getElementById('linkPassword').value = '';
   document.getElementById('linkName').value = '';
