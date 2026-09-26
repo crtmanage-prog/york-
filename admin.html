@@ -903,9 +903,13 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
     <section class="panel" id="panel-allstudents">
       <h2 class="panel-title">Все ученики</h2>
-      <div class="field" style="max-width:320px;">
-        <input id="studentsSearch" type="text" placeholder="Поиск по имени или учителю…" oninput="renderStudentsTable(this.value)">
+      <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:8px;">
+        <div class="field" style="max-width:320px; margin-bottom:0;">
+          <input id="studentsSearch" type="text" placeholder="Поиск по имени или учителю…" oninput="renderStudentsTable(this.value)">
+        </div>
+        <button class="btn btn-ghost btn-sm" id="studentsZeroBalanceBtn" onclick="toggleZeroBalanceStudents()"></button>
       </div>
+      <p class="section-sub hidden" id="zeroBalanceHint">Ученики, у которых закончились занятия и абонемент не продлили — остаются в базе, но не мешают в основном списке.</p>
       <div class="table-wrap">
         <table class="admin-table" id="studentsTable">
           <thead>
@@ -2503,18 +2507,38 @@ function contactButtons(s){
   return btns.length ? btns.join(' ') : '<span style="color:var(--ink-soft); font-size:12.5px;">нет контакта</span>';
 }
 
+function isZeroBalanceStudent(studentId){
+  return window.__remainingByStudent && window.__remainingByStudent[studentId] === 0;
+}
+
+function toggleZeroBalanceStudents(){
+  window.__showZeroBalanceStudents = !window.__showZeroBalanceStudents;
+  renderStudentsTable(document.getElementById('studentsSearch').value);
+}
+
 function renderStudentsTable(filterText){
   const body = document.getElementById('studentsTableBody');
+  const showZero = !!window.__showZeroBalanceStudents;
+  const zeroCount = allStudents.filter(s => isZeroBalanceStudent(s.id)).length;
+
+  const btn = document.getElementById('studentsZeroBalanceBtn');
+  if (btn) btn.textContent = showZero ? '← К активным ученикам' : `Без занятий в абонементе (${zeroCount})`;
+  const hint = document.getElementById('zeroBalanceHint');
+  if (hint) hint.classList.toggle('hidden', !showZero);
+
   if (!allStudents.length){
     body.innerHTML = '<tr><td colspan="8" class="empty-state">Пока нет учеников.</td></tr>';
     return;
   }
+  const base = allStudents.filter(s => isZeroBalanceStudent(s.id) === showZero);
   const q = (filterText || '').trim().toLowerCase();
   const filtered = q
-    ? allStudents.filter(s => (s.full_name || '').toLowerCase().includes(q) || teacherName(s.teacher_id).toLowerCase().includes(q))
-    : allStudents;
+    ? base.filter(s => (s.full_name || '').toLowerCase().includes(q) || teacherName(s.teacher_id).toLowerCase().includes(q))
+    : base;
   if (!filtered.length){
-    body.innerHTML = `<tr><td colspan="8" class="empty-state">Никого не нашлось по запросу «${filterText}».</td></tr>`;
+    body.innerHTML = q
+      ? `<tr><td colspan="8" class="empty-state">Никого не нашлось по запросу «${filterText}».</td></tr>`
+      : `<tr><td colspan="8" class="empty-state">${showZero ? 'Таких пока нет.' : 'Пока нет учеников.'}</td></tr>`;
     return;
   }
   body.innerHTML = filtered.map(s => {
