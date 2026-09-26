@@ -5556,6 +5556,9 @@ async function linkNewProfile(){
           msg: `🎉 <b>Добро пожаловать в YORK!</b>\n\nЛогин и пароль от личного кабинета:\n👤 ${email}\n🔑 ${password}\n\nВойти: https://weyork.online/login.html`,
           target_chat_id: matched.telegram_chat_id
         });
+        await supabase.rpc('tg_send', {
+          msg: `✅ <b>Логин и пароль отправлены</b>\n\n👤 ${fullName}\n📧 ${email}`
+        });
         okEl.textContent += ' Логин и пароль отправлены в Telegram.';
       }
     }
