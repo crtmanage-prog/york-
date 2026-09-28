@@ -1854,7 +1854,6 @@ async function loadAll(){
     window.__notedStudentIds = new Set((notes || []).map(n => n.student_id));
   }
 
-  document.getElementById('ov-students').textContent = allStudents.length;
   document.getElementById('ov-teachers').textContent = allTeachers.length;
   document.getElementById('ov-tocheck').textContent = (hw || []).length;
 
@@ -5115,6 +5114,8 @@ async function loadPayments(){
     }
   });
   renderStudentsTable(document.getElementById('studentsSearch') ? document.getElementById('studentsSearch').value : '');
+  // в обзоре считаем только активных — без тех, у кого 0 занятий и не продлили
+  document.getElementById('ov-students').textContent = allStudents.filter(s => !isZeroBalanceStudent(s.id)).length;
 
   const pending = list.filter(p => p.status === 'pending');
   const pendingContainer = document.getElementById('pendingPaymentsList');
