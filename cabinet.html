@@ -258,6 +258,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     padding:0 4px 18px;
     display:flex; align-items:center; gap:18px; flex-wrap:wrap;
   }
+  .app-header-logo{
+    display:none; font-family:'Unbounded',sans-serif; font-weight:800; font-size:18px;
+    color:var(--ink); text-decoration:none; flex-shrink:0;
+  }
+  .app-header-logo span{color:var(--accent);}
+  @media (max-width:760px){ .app-header-logo{display:inline-block;} }
   .tb-date{font-size:12.5px; color:var(--ink-soft);}
   .tb-greeting{font-family:'Unbounded',sans-serif; font-weight:700; font-size:26px; letter-spacing:-0.045em; margin-top:5px;}
   .who{display:flex; align-items:center; gap:10px; margin-left:auto;}
@@ -1213,6 +1219,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
     <div class="content">
       <header class="app-header">
+        <a class="app-header-logo" href="/" title="На сайт">Y<span>!</span></a>
         <div>
           <div class="tb-date" id="tbDate">—</div>
           <div class="tb-greeting" id="tbGreeting">Привет!</div>
