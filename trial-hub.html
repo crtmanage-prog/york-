@@ -21,6 +21,7 @@
      structure.json   — цель, принципы, таймлайн 30-минутного урока, опыт ученика
      checklist.json   — чек-лист преподавателя
      materials.json   — материалы (рабочие листы, домашки)
+     translations.json — переводы английских фраз на русский (показываются серой строкой)
    Чтобы добавить тему или активность — добавьте объект в нужный JSON,
    код страницы менять не нужно. Схема полей — trial-hub/content/README.md.
    ===================================================================== */
@@ -31,6 +32,7 @@ const CONTENT_FILES = {
   structure: 'trial-hub/content/structure.json',
   checklist: 'trial-hub/content/checklist.json',
   materials: 'trial-hub/content/materials.json',
+  translations: 'trial-hub/content/translations.json',   // «английский текст» → «перевод»
 };
 </script>
 <style>
@@ -46,6 +48,17 @@ h1,h2,h3,h4{font-family:Unbounded,sans-serif;letter-spacing:-.01em}
 button{font:inherit;color:inherit;cursor:pointer}
 a{color:inherit}
 [hidden]{display:none !important}
+
+/* ---------- перевод на русский ---------- */
+.ru{display:block;font-size:.8em;line-height:1.3;color:var(--ink-3);font-weight:400;font-style:normal;font-family:'Golos Text',sans-serif;margin-top:2px;letter-spacing:0;text-transform:none}
+.ru-i{display:inline;margin:0}
+.ru-prompt{font-size:1em;color:var(--ink-2);font-weight:500}
+.ru-prompt::before{content:"🇷🇺 ";}
+body.no-ru .ru{display:none !important}
+.item:not(.ok) .ru-after{display:none}
+.hc-dark .ru,.goal-hero .ru,.sit-card .ru,.tl-time .ru{color:rgba(255,255,255,.62)}
+.goal-hero > .ru{font-size:15px;margin-top:10px}
+.ru-toggle[aria-pressed="true"]{background:var(--panel)}
 
 /* ---------- каркас: сайдбар как в кабинете, но с подписями (Notion-стиль) ---------- */
 .shell{min-height:100vh;display:flex;max-width:1500px;margin:0 auto}
@@ -425,12 +438,13 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
     <div class="sb-sub">Trial Lesson Hub</div>
     <nav id="nav"></nav>
     <div class="sb-sep"></div>
+    <button class="nav-btn ru-toggle" data-ru-toggle><span class="ni">🇷🇺</span><span class="rt">Перевод: вкл</span></button>
     <a class="nav-btn" href="teacher.html"><span class="ni">↩</span>Кабинет учителя</a>
   </aside>
 
   <div class="main-col">
     <div class="mobile-top">
-      <div class="mt-head"><a class="sb-logo" href="#/" style="padding:0">YORK<span>!</span> <span class="muted" style="font-family:'Golos Text'">Trial Hub</span></a><a class="btn ghost" href="teacher.html">Кабинет</a></div>
+      <div class="mt-head"><a class="sb-logo" href="#/" style="padding:0">YORK<span>!</span> <span class="muted" style="font-family:'Golos Text'">Trial Hub</span></a><span style="display:flex;gap:6px"><button class="btn ghost ru-toggle" data-ru-toggle><span class="rt">Перевод: вкл</span></button><a class="btn ghost" href="teacher.html">Кабинет</a></span></div>
       <nav id="navMobile"></nav>
     </div>
     <main class="page" id="page"><div class="loading">Загружаем материалы…</div></main>
@@ -449,6 +463,7 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
     <span class="grow"></span>
     <span class="clock" id="clock" title="Время урока">⏱ 00:00</span>
     <button class="btn" id="showLink" title="Скопировать ссылку, чтобы ученик открыл урок у себя">🔗 Ссылка ученику</button>
+    <button class="btn ru-toggle" data-ru-toggle title="Показать или скрыть перевод на русский">🇷🇺 <span class="rt">Перевод: вкл</span></button>
     <button class="btn" id="showFs">⛶ Во весь экран</button>
   </div>
   <nav class="steps" id="steps"></nav>
@@ -472,6 +487,18 @@ const store = {
   set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} },
 };
 const lvClass = lv => 'lv-' + String(lv).replace(/[^A-Z0-9]/gi, '');
+
+/* ---------- перевод: ищем фразу в translations.json ---------- */
+const trOf = x => (DB && DB.translations && typeof x === 'string' && DB.translations[x]) || '';
+const ru = x => { const r = trOf(x); return r ? `<span class="ru">${esc(r)}</span>` : ''; };            // строкой ниже
+const ruI = x => { const r = trOf(x); return r ? ` <span class="ru ru-i">— ${esc(r)}</span>` : ''; };  // в той же строке
+const T = x => esc(x) + ru(x);                                                                          // английский + перевод
+const ruOn = () => store.get('york-hub-ru', true);
+function setRu(on){
+  store.set('york-hub-ru', on);
+  document.body.classList.toggle('no-ru', !on);
+  document.querySelectorAll('[data-ru-toggle]').forEach(b => { b.setAttribute('aria-pressed', on); b.querySelector('.rt').textContent = on ? 'Перевод: вкл' : 'Перевод: выкл'; });
+}
 
 let DB = null;            // загруженный контент
 let byId = {};            // все темы и активности по id
@@ -540,9 +567,9 @@ const Components = {
   LessonCard(l){
     return `<article class="card">
       <div class="card-top"><div class="grow">${Components.LevelBadge(l.level)}${Components.CategoryTag(l.category)}</div>${starBtn(l.id)}</div>
-      <h3><span class="ic">${l.icon || '📘'}</span><button data-open="${esc(l.id)}">${esc(l.title)}</button></h3>
+      <h3><span class="ic">${l.icon || '📘'}</span><span><button data-open="${esc(l.id)}">${esc(l.title)}</button>${ru(l.title)}</span></h3>
       <p class="outcome">«${esc(l.outcome)}»</p>
-      ${l.leadIn ? `<div class="lead"><b>Lead-in question</b>${esc(l.leadIn)}</div>` : ''}
+      ${l.leadIn ? `<div class="lead"><b>Lead-in question</b>${T(l.leadIn)}</div>` : ''}
       <div class="actions">
         <button class="btn primary" data-show="${esc(l.id)}">▶ Show to student</button>
         <button class="btn ghost" data-open="${esc(l.id)}">Open card</button>
@@ -554,10 +581,10 @@ const Components = {
     const cat = DB.activities.categories.find(c => c.id === a.category);
     return `<article class="card">
       <div class="card-top"><div class="grow">${Components.LevelRange(a.levels)}<span class="tag">${cat ? cat.icon + ' ' + esc(cat.label) : ''}${a.sub ? ' · ' + esc(a.sub) : ''}</span></div>${starBtn(a.id)}</div>
-      <h3><span class="ic">${a.icon || '🎲'}</span><span>${esc(a.title)}</span></h3>
+      <h3><span class="ic">${a.icon || '🎲'}</span><span>${T(a.title)}</span></h3>
       <div class="kv"><b>Goal</b>${esc(a.goal)}</div>
       <div class="kv"><b>How to run</b>${esc(a.how)}</div>
-      ${a.phrases.length ? `<ul class="phrases">${a.phrases.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+      ${a.phrases.length ? `<ul class="phrases">${a.phrases.map(p => `<li>${T(p)}</li>`).join('')}</ul>` : ''}
       <div class="actions">
         <button class="btn primary" data-show="${esc(a.id)}">▶ Show to student</button>
         ${a.phrases.length ? `<button class="btn ghost" data-copy="${esc(a.id)}">Copy phrases</button>` : ''}
@@ -569,17 +596,17 @@ const Components = {
     const note = l.lesson && l.lesson.visual && l.lesson.visual.note;
     return `<article class="card">
       <div class="card-top"><div class="grow">${Components.LevelBadge(l.level)}<span class="tag">${esc(l.section || '')}</span></div>${starBtn(l.id)}</div>
-      <h3><span class="ic">${l.icon || '🧩'}</span><button data-open="${esc(l.id)}">${esc(l.title)}</button></h3>
+      <h3><span class="ic">${l.icon || '🧩'}</span><span><button data-open="${esc(l.id)}">${esc(l.title)}</button>${ru(l.title)}</span></h3>
       <div class="kv"><b>Explanation</b>${esc(l.idea)}${note ? ' ' + esc(note) : ''}</div>
-      <div class="kv"><b>Examples</b></div><ul class="phrases">${l.explanation.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+      <div class="kv"><b>Examples</b></div><ul class="phrases">${l.explanation.map(p => `<li>${T(p)}</li>`).join('')}</ul>
       ${l.mistakes ? `<div class="kv"><b>Common mistakes</b></div>${Components.Mistakes(l.mistakes)}` : ''}
-      ${l.speaking ? `<div class="lead"><b>Speaking task</b>${esc(l.speaking)}</div>` : ''}
+      ${l.speaking ? `<div class="lead"><b>Speaking task</b>${T(l.speaking)}</div>` : ''}
       <div class="actions"><button class="btn primary" data-show="${esc(l.id)}">▶ Show to student</button></div>
     </article>`;
   },
 
   Mistakes: list => `<div class="mistakes">${list.map(([bad, good]) =>
-    `<div class="mistake"><span class="bad">✗ ${esc(bad)}</span><span class="arr">→</span><span class="good">✓ ${esc(good)}</span></div>`).join('')}</div>`,
+    `<div class="mistake"><span class="bad">✗ ${esc(bad)}</span><span class="arr">→</span><span class="good">✓ ${esc(good)}${ru(good)}</span></div>`).join('')}</div>`,
 
   // FilterBar: конфиг рядов → элемент. Каждый ряд сам сообщает о выборе через onChange.
   FilterBar({ rows = [], search, saved }){
@@ -622,10 +649,10 @@ const Components = {
     return `<div class="tl">
       <div class="tl-time">${b.from}–${b.to} min</div>
       <div class="tl-body">
-        <h3>${esc(b.title)}</h3>
+        <h3>${T(b.title)}</h3>
         <p>${esc(b.text)}</p>
         <div class="tl-bar" title="${b.to - b.from} минут из ${total}"><span style="width:${pct}%;margin-left:${(b.from / total) * 100}%"></span></div>
-        <div class="tl-groups">${(b.groups || []).map(g => `<div class="tl-group"><b>${esc(g.label)}</b><ul>${g.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul></div>`).join('')}</div>
+        <div class="tl-groups">${(b.groups || []).map(g => `<div class="tl-group"><b>${esc(g.label)}</b><ul>${g.items.map(i => `<li>${T(i)}</li>`).join('')}</ul></div>`).join('')}</div>
         ${ex ? `<div class="tl-example"><p class="muted" style="margin:0 0 8px">Пример карточки темы:</p>${Components.LessonCard(ex)}</div>` : ''}
         ${b.link ? `<div class="actions" style="margin-top:12px"><a class="btn ghost" href="#/${esc(b.link)}">Open Speaking Activities →</a></div>` : ''}
       </div>
@@ -639,8 +666,8 @@ const Components = {
     const total = groups.reduce((n, g) => n + g.items.length, 0);
     el.innerHTML = `<div class="result-line"><b id="clCount"></b><button class="btn ghost" id="clReset">↺ New lesson</button></div>
       <div class="progress"><span id="clBar"></span></div>
-      <div class="checklist">${groups.map(g => `<div class="cl-group"><h3>${esc(g.title)}</h3>
-        ${g.items.map((it, i) => { const key = g.id + ':' + i; return `<label class="cl-item"><input type="checkbox" data-key="${esc(key)}" ${state[key] ? 'checked' : ''}><span>${esc(it)}</span></label>`; }).join('')}
+      <div class="checklist">${groups.map(g => `<div class="cl-group"><h3><span>${T(g.title)}</span></h3>
+        ${g.items.map((it, i) => { const key = g.id + ':' + i; return `<label class="cl-item"><input type="checkbox" data-key="${esc(key)}" ${state[key] ? 'checked' : ''}><span>${T(it)}</span></label>`; }).join('')}
       </div>`).join('')}</div>`;
     const upd = () => {
       const n = el.querySelectorAll('input:checked').length;
@@ -655,7 +682,7 @@ const Components = {
 
   ResourceCard(r, cat){
     return `<div class="res"><span class="ri">${cat ? cat.icon : '📎'}</span><div>
-      <h3>${esc(r.title)}</h3><p>${esc(r.description || '')}</p>
+      <h3>${T(r.title)}</h3><p>${esc(r.description || '')}</p>
       ${r.url ? `<a class="btn primary" href="${esc(r.url)}" target="_blank" rel="noopener">Open →</a>`
               : `<button class="btn ghost" disabled title="Ссылку ещё не добавили в materials.json">Link coming soon</button>`}
     </div></div>`;
@@ -687,8 +714,8 @@ const Pages = {
       root.innerHTML = `
         <h1 class="page-title">Trial Lesson Hub</h1>
         <p class="page-sub">Подготовиться к пробному, выбрать тему и активность, собрать урок за пару минут.</p>
-        <div class="goal-hero"><div class="hc-label">Главная идея пробного урока</div><blockquote>${esc(S.goal)}</blockquote></div>
-        <div class="stats">${S.principles.map(p => `<div class="stat"><div class="si">${p.icon}</div><b>${esc(p.title)}</b><p>${esc(p.text)}</p></div>`).join('')}</div>
+        <div class="goal-hero"><div class="hc-label">Главная идея пробного урока</div><blockquote>${esc(S.goal)}</blockquote>${ru(S.goal)}</div>
+        <div class="stats">${S.principles.map(p => `<div class="stat"><div class="si">${p.icon}</div><b>${T(p.title)}</b><p>${esc(p.text)}</p></div>`).join('')}</div>
         <h2 class="h-sec">Sections</h2>
         <div class="grid">${sections.map(s => `<a class="sec-card" href="#/${s.route}"><span class="si">${s.icon}</span><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p><span class="cnt">${esc(s.cnt)}</span></a>`).join('')}</div>
         <h2 class="h-sec">What should a student feel?</h2>
@@ -851,19 +878,19 @@ function refreshGrid(root, cards, total, noun){
   root.querySelector('.grid').innerHTML = cards.join('') || '<div class="empty">Ничего не нашлось — сбросьте фильтры.</div>';
   root.querySelector('.result-line .muted').textContent = `${cards.length} of ${total} ${noun}`;
 }
-const studentJourney = () => `<div class="journey">${DB.structure.experience.map(e => `<div class="jstep"><div class="at">${esc(e.at)}</div><div class="feel">«${esc(e.feel)}»</div></div>`).join('')}</div>`;
+const studentJourney = () => `<div class="journey">${DB.structure.experience.map(e => `<div class="jstep"><div class="at">${esc(e.at)}${ruI(e.at)}</div><div class="feel">«${esc(e.feel)}»${ru(e.feel)}</div></div>`).join('')}</div>`;
 
 /* ======================= карточка темы (drawer) ======================= */
 function openDrawer(l){
   $('#drawerTags').innerHTML = `${Components.LevelBadge(l.level)} ${Components.CategoryTag(l.category)}`;
   $('#drawerBody').innerHTML = `
     <div class="ic">${l.icon || '📘'}</div>
-    <h2>${esc(l.title)}</h2>
+    <h2>${esc(l.title)}</h2>${ru(l.title)}
     <div class="field-row"><b>Student outcome</b><p class="outcome" style="font-size:16px">«${esc(l.outcome)}»</p></div>
-    ${l.leadIn ? `<div class="field-row"><b>Lead-in question</b><div class="lead" style="font-size:15px">${esc(l.leadIn)}</div></div>` : ''}
-    <div class="field-row"><b>Explanation</b><p style="margin:0 0 6px">${esc(l.idea)}</p><ul class="phrases">${l.explanation.map(p => `<li>${esc(p)}</li>`).join('')}</ul></div>
+    ${l.leadIn ? `<div class="field-row"><b>Lead-in question</b><div class="lead" style="font-size:15px">${T(l.leadIn)}</div></div>` : ''}
+    <div class="field-row"><b>Explanation</b><p style="margin:0 0 6px">${esc(l.idea)}</p><ul class="phrases">${l.explanation.map(p => `<li>${T(p)}</li>`).join('')}</ul></div>
     ${l.practice ? `<div class="field-row"><b>Practice</b><div>${esc(l.practice)}</div></div>` : ''}
-    ${l.speaking ? `<div class="field-row"><b>Speaking</b><div class="lead" style="font-size:15px">${esc(l.speaking)}</div></div>` : ''}
+    ${l.speaking ? `<div class="field-row"><b>Speaking</b><div class="lead" style="font-size:15px">${T(l.speaking)}</div></div>` : ''}
     ${l.mistakes ? `<div class="field-row"><b>Common mistakes</b>${Components.Mistakes(l.mistakes)}</div>` : ''}
     <div class="actions">
       <button class="btn primary" data-show="${esc(l.id)}">▶ Show to student</button>
@@ -931,6 +958,8 @@ document.addEventListener('click', e => {
     if (currentRoute === '' || filters.lessons.saved || filters.activities.saved) renderPage();
   }
 });
+document.querySelectorAll('[data-ru-toggle]').forEach(b => b.onclick = () => setRu(!ruOn()));
+setRu(ruOn());
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#drawer').classList.contains('open')) closeDrawer(); });
 
 /* ---------- копирование ---------- */
@@ -970,7 +999,7 @@ let lesson = null;   // { topic, steps: [{label, node}], cur, started, clockTime
 
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 function node(html){ const d = document.createElement('div'); d.className = 'step'; d.innerHTML = html; return d; }
-const head = (kicker, title) => `<p class="kicker">${kicker}</p>${title ? `<h2>${esc(title)}</h2>` : ''}`;
+const head = (kicker, title) => `<p class="kicker">${kicker}</p>${title ? `<h2>${esc(title)}${ru(title)}</h2>` : ''}`;
 
 function lessonSteps(t){
   if (t.play) return actSteps(t);
@@ -987,24 +1016,24 @@ function lessonSteps(t){
 const stepCount = t => { if (t.play) return 2; const L = t.lesson || {}; return (L.warmup ? 1 : 0) + 1 + (L.visual ? 1 : 0) + (L.tasks || []).length + (L.speak ? 1 : 0) + 1; };
 
 function stepWarmup(qs){
-  return node(`${head('Разминка', 'Let’s talk!')}<div class="bubbles">${qs.map(q => `<div class="bubble">${esc(q)}</div>`).join('')}</div>`);
+  return node(`${head('Разминка', 'Let’s talk!')}<div class="bubbles">${qs.map(q => `<div class="bubble">${T(q)}</div>`).join('')}</div>`);
 }
 
 function stepIntro(t){
-  return node(`<div class="show-ic">${t.icon}</div><h2>${esc(t.title)}</h2>
+  return node(`<div class="show-ic">${t.icon}</div><h2>${esc(t.title)}${ru(t.title)}</h2>
     <p class="show-idea">${esc(t.idea)}</p>
-    <ul class="show-phrases">${(t.explanation || t.phrases).map(p => `<li>${esc(p)}</li>`).join('')}</ul>`);
+    <ul class="show-phrases">${(t.explanation || t.phrases).map(p => `<li>${T(p)}</li>`).join('')}</ul>`);
 }
 
 function stepVisual(t, v){
   let body = '';
   if (v.type === 'compare') body = `<div class="v-compare">${v.cols.map(c => `<div class="v-col">
       <div class="ic">${c.icon || ''}</div><h4>${esc(c.label)}</h4>${c.sub ? `<div class="sub">${esc(c.sub)}</div>` : ''}
-      <ul>${c.examples.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>`;
-  if (v.type === 'formula') body = `<div class="v-formula">${v.parts.map(p => `<div class="v-part"><b>${esc(p.t)}</b><span>${esc(p.ex)}</span></div>`).join('')}</div>`;
+      <ul>${c.examples.map(x => `<li>${T(x)}</li>`).join('')}</ul></div>`).join('')}</div>`;
+  if (v.type === 'formula') body = `<div class="v-formula">${v.parts.map(p => `<div class="v-part"><b>${esc(p.t)}</b><span>${T(p.ex)}</span></div>`).join('')}</div>`;
   if (v.type === 'scale') body = `<div class="v-scale">${v.steps.map(s => `<div class="v-step"><b>${esc(s.w)}</b><span>${esc(s.d)}</span></div>`).join('')}</div>`;
-  if (v.type === 'upgrade') body = `<div class="v-up">${v.pairs.map(([a, b]) => `<div class="v-up-row"><span class="from">${esc(a)}</span><span class="arr">→</span><span class="to">${esc(b)}</span></div>`).join('')}</div>`;
-  if (v.type === 'table') body = `<div class="v-table">${v.rows.map(r => `<div class="v-row"><span class="e">${r[0]}</span><span>${esc(r[1])}</span><span>${esc(r[2] || '')}</span></div>`).join('')}</div>`;
+  if (v.type === 'upgrade') body = `<div class="v-up">${v.pairs.map(([a, b]) => `<div class="v-up-row"><span class="from">${T(a)}</span><span class="arr">→</span><span class="to">${T(b)}</span></div>`).join('')}</div>`;
+  if (v.type === 'table') body = `<div class="v-table">${v.rows.map(r => `<div class="v-row"><span class="e">${r[0]}</span><span>${T(r[1])}</span><span>${T(r[2] || '')}</span></div>`).join('')}</div>`;
   return node(`${head('Схема', t.title)}${body}${v.note ? `<div class="note">${esc(v.note)}</div>` : ''}`);
 }
 
@@ -1020,7 +1049,7 @@ function stepTask(task, n){
     const el = document.createElement('div');
     el.className = 'item';
     el.innerHTML = `<span class="pic">${it.pic || '❔'}</span>
-      <div class="q">${esc(it.q).replace(/___/g, '<span class="gap">?</span>')}</div>
+      <div class="q">${esc(it.q).replace(/___/g, '<span class="gap">?</span>')}${trOf(it.q) ? `<span class="ru ru-after">${esc(trOf(it.q))}</span>` : ''}</div>
       <div class="opts"></div>`;
     const opts = el.querySelector('.opts');
     shuffle(it.options.map((o, i) => ({ o, i }))).forEach(({ o, i }) => {
@@ -1046,7 +1075,7 @@ function stepTask(task, n){
     for (let k = 0; k < 5 && words.length > 1 && order.join(' ') === sentence; k++) order = shuffle(words);
     const el = document.createElement('div');
     el.className = 'build';
-    el.innerHTML = `<div class="line"></div><div class="build-row"><div class="bank"></div><button class="linkbtn">показать ответ</button></div>`;
+    el.innerHTML = `${trOf(sentence) ? `<div class="ru ru-prompt">${esc(trOf(sentence))}</div>` : ''}<div class="line"></div><div class="build-row"><div class="bank"></div><button class="linkbtn">показать ответ</button></div>`;
     const line = el.querySelector('.line'), bank = el.querySelector('.bank');
     let solved = false;
     const check = () => {
@@ -1079,7 +1108,7 @@ function stepTask(task, n){
     let sel = { l: null, r: null };
     const mk = (text, idx, side) => {
       const b = document.createElement('button');
-      b.className = 'm'; b.textContent = text; b.dataset.idx = idx;
+      b.className = 'm'; b.innerHTML = T(text); b.dataset.idx = idx;
       b.onclick = () => {
         if (b.classList.contains('done')) return;
         (side === 'l' ? L : R).querySelectorAll('.sel').forEach(x => x.classList.remove('sel'));
@@ -1102,7 +1131,7 @@ function stepTask(task, n){
   if (task.type === 'reveal') task.items.forEach(it => {
     const el = document.createElement('div');
     el.className = 'reveal';
-    el.innerHTML = `<span class="q">${esc(it.q)}</span><button class="opt">Ответ</button><div class="a">${esc(it.a)}</div>`;
+    el.innerHTML = `<span class="q">${T(it.q)}</span><button class="opt">Ответ</button><div class="a">${T(it.a)}</div>`;
     const b = el.querySelector('button');
     let counted = false;
     b.onclick = () => {
@@ -1117,7 +1146,7 @@ function stepTask(task, n){
 
 function stepSpeak(list){
   const d = node(`${head('Говорим', 'Your turn!')}<div class="speak">${list.map(s => `<div class="speak-card">
-      <div class="q">${esc(s.q)}</div><div class="h">${esc(s.hint || '')}</div></div>`).join('')}</div>`);
+      <div class="q">${T(s.q)}</div><div class="h">${esc(s.hint || '')}${ru(s.hint)}</div></div>`).join('')}</div>`);
   d.querySelectorAll('.speak-card').forEach(c => c.appendChild(makeTimer(60)));
   return d;
 }
@@ -1126,7 +1155,7 @@ function stepResult(t){
   return node(`${head('Итог', '')}<div class="result-big">${esc(t.outcome)}</div>
     <div class="exit-mini"><b>🎟️ Exit ticket</b> Назови: 3 новых слова · 1 новую конструкцию · 1 предложение о себе</div>
     <p class="kicker">Продолжаем говорить</p>
-    <div class="chips">${DB.meta.universalTopics.map(u => `<span class="chip" style="font-size:1em;padding:8px 16px">${esc(u)}</span>`).join('')}</div>`);
+    <div class="chips">${DB.meta.universalTopics.map(u => `<span class="chip" style="font-size:1em;padding:8px 16px">${esc(u)}${ruI(u)}</span>`).join('')}</div>`);
 }
 
 /* ---------- разговорные активности ---------- */
@@ -1169,9 +1198,9 @@ const helper = list => list && list.length ? `<div class="helper">💬 ${list.ma
 function btn(text, cls, onclick){ const b = document.createElement('button'); b.className = cls || 'btn'; b.textContent = text; b.onclick = onclick; return b; }
 
 function actSteps(a){
-  const intro = node(`<div class="show-ic">${a.icon}</div><h2>${esc(a.title)}</h2>
-    <p class="show-idea">${esc(a.rules)}</p>
-    ${a.phrases.length ? `<p class="kicker">Фразы в помощь</p><ul class="show-phrases">${a.phrases.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}`);
+  const intro = node(`<div class="show-ic">${a.icon}</div><h2>${esc(a.title)}${ru(a.title)}</h2>
+    <p class="show-idea">${T(a.rules)}</p>
+    ${a.phrases.length ? `<p class="kicker">Фразы в помощь</p><ul class="show-phrases">${a.phrases.map(p => `<li>${T(p)}</li>`).join('')}</ul>` : ''}`);
   const play = node(`${head(a.icon + ' ' + esc(a.title), '')}`);
   PLAY[a.play.type](a, play);
   return [{ label: 'Правила', node: intro }, { label: 'Играем', node: play }];
@@ -1183,7 +1212,7 @@ const PLAY = {
     const draw = i => {
       area.innerHTML = '';
       if (i === a.play.sets.length) {   // «Твоя очередь» — три пустые карточки
-        area.innerHTML = `<p class="big-q">Your turn! Tell me 2 truths and 1 lie.</p>`;
+        area.innerHTML = `<p class="big-q">Your turn! Tell me 2 truths and 1 lie.<span class="ru">Твоя очередь! Назови 2 правдивых факта и 1 ложный.</span></p>`;
         const g = document.createElement('div'); g.className = 'facts';
         const states = ['?', '🤔 My guess', '✓ Truth', '✗ Lie'], cls = ['', 'guess', 'truth', 'lie'];
         [1, 2, 3].forEach(n => {
@@ -1198,11 +1227,11 @@ const PLAY = {
         return;
       }
       const set = a.play.sets[i];
-      area.innerHTML = `<p class="big-q">${esc(set.intro)} Which one is a lie?</p>`;
+      area.innerHTML = `<p class="big-q">${esc(set.intro)} Which one is a lie?<span class="ru">Познакомься с Томом. Какой факт — ложь?</span></p>`;
       const g = document.createElement('div'); g.className = 'facts';
       set.facts.forEach(([text, isLie], n) => {
         const c = document.createElement('button'); c.className = 'fact';
-        c.innerHTML = `<span class="n">${n + 1}</span><span class="t">${esc(text)}</span><span class="verdict"></span>`;
+        c.innerHTML = `<span class="n">${n + 1}</span><span class="t">${T(text)}</span><span class="verdict"></span>`;
         c.onclick = () => { c.classList.add(isLie ? 'lie' : 'truth'); c.querySelector('.verdict').textContent = isLie ? '✗ LIE!' : '✓ True'; };
         g.appendChild(c);
       });
@@ -1218,10 +1247,11 @@ const PLAY = {
     let set = 0, qi = 0;
     const draw = () => {
       const [x, y] = a.play.sets[set].qs[qi];
-      area.innerHTML = `<p class="big-q">Would you rather…</p>`;
+      area.innerHTML = `<p class="big-q">Would you rather…<span class="ru">Что бы ты выбрал(а)…</span></p>`;
       const vs = document.createElement('div'); vs.className = 'vs';
       const pick = b => { vs.querySelectorAll('.vs-opt').forEach(o => o.classList.toggle('picked', o === b)); };
       const bx = btn(x, 'vs-opt', function(){ pick(this); }), by = btn(y, 'vs-opt', function(){ pick(this); });
+      bx.innerHTML = T(x); by.innerHTML = T(y);
       vs.append(bx, Object.assign(document.createElement('span'), { className: 'vs-or', textContent: 'or' }), by);
       area.appendChild(vs);
       const row = document.createElement('div'); row.className = 'play-row';
@@ -1239,7 +1269,7 @@ const PLAY = {
     const draw = i => {
       const set = a.play.sets[i];
       let ranked = [];
-      area.innerHTML = `<p class="big-q">${esc(set.title)}</p><p class="muted">Нажимайте по порядку: сначала самое важное. Повторное нажатие убирает из рейтинга.</p>`;
+      area.innerHTML = `<p class="big-q">${T(set.title)}</p><p class="muted">Нажимайте по порядку: сначала самое важное. Повторное нажатие убирает из рейтинга.</p>`;
       const list = document.createElement('div'); list.className = 'rank';
       const paint = () => list.querySelectorAll('.rank-item').forEach(b => {
         const pos = ranked.indexOf(b.dataset.v);
@@ -1249,7 +1279,7 @@ const PLAY = {
       });
       set.items.forEach(v => {
         const b = document.createElement('button'); b.className = 'rank-item'; b.dataset.v = v;
-        b.innerHTML = `<span class="pos"></span><span>${esc(v)}</span>`;
+        b.innerHTML = `<span class="pos"></span><span>${T(v)}</span>`;
         b.onclick = () => { ranked = ranked.includes(v) ? ranked.filter(x => x !== v) : [...ranked, v]; paint(); };
         list.appendChild(b);
       });
@@ -1267,8 +1297,8 @@ const PLAY = {
     let cat = 0, ci = 0;
     const draw = () => {
       const c = a.play.cats[cat].cards[ci];
-      area.innerHTML = `<div class="sit-card"><div class="sit-lbl">${esc(a.play.cats[cat].label)}</div><p>${esc(c.s)}</p>
-        <div class="sit-role">🎭 Teacher plays: ${esc(c.role)}</div></div>`;
+      area.innerHTML = `<div class="sit-card"><div class="sit-lbl">${esc(a.play.cats[cat].label)}</div><p>${T(c.s)}</p>
+        <div class="sit-role">🎭 Teacher plays: ${esc(c.role)}${ruI(c.role)}</div></div>`;
       const row = document.createElement('div'); row.className = 'play-row';
       row.append(Object.assign(document.createElement('span'), { className: 'muted', textContent: `${ci + 1} / ${a.play.cats[cat].cards.length}` }),
         makeTimer(120), btn('Следующая ситуация →', 'btn primary', () => { ci = (ci + 1) % a.play.cats[cat].cards.length; draw(); }));
@@ -1284,13 +1314,13 @@ const PLAY = {
     let ti = 0;
     const draw = () => {
       const t = a.play.topics[ti];
-      area.innerHTML = `<p class="big-q">${esc(t.t)}</p>
-        <ul class="show-phrases">${t.support.map(s => `<li>${esc(s)}</li>`).join('')}</ul>`;
+      area.innerHTML = `<p class="big-q">${T(t.t)}</p>
+        <ul class="show-phrases">${t.support.map(s => `<li>${T(s)}</li>`).join('')}</ul>`;
       const row = document.createElement('div'); row.className = 'play-row';
       const timer = makeTimer(60, 'big');
       const up = document.createElement('div'); up.className = 'v-up'; up.hidden = true;
       up.innerHTML = `<p class="kicker" style="margin-top:8px">Level up — скажи ещё раз вот так</p>` +
-        t.upgrade.map(([x, y]) => `<div class="v-up-row"><span class="from">${esc(x)}</span><span class="arr">→</span><span class="to">${esc(y)}</span></div>`).join('');
+        t.upgrade.map(([x, y]) => `<div class="v-up-row"><span class="from">${T(x)}</span><span class="arr">→</span><span class="to">${T(y)}</span></div>`).join('');
       timer.addEventListener('timeup', () => { up.hidden = false; });
       row.append(timer, btn('⬆ Level up', 'btn', () => { up.hidden = !up.hidden; }),
         btn('Другая тема →', 'btn primary', () => { ti = (ti + 1) % a.play.topics.length; draw(); }));
@@ -1304,7 +1334,7 @@ const PLAY = {
     const area = document.createElement('div');
     let si = 0, lvl = 0;
     const qs = document.createElement('div');
-    const drawQs = () => { qs.innerHTML = `<div class="bubbles">${a.play.questions[lvl].qs.map(q => `<div class="bubble">${esc(q)}</div>`).join('')}</div>`; };
+    const drawQs = () => { qs.innerHTML = `<div class="bubbles">${a.play.questions[lvl].qs.map(q => `<div class="bubble">${T(q)}</div>`).join('')}</div>`; };
     const draw = () => {
       const sc = a.play.scenes[si];
       area.innerHTML = `<div class="scene" role="img" aria-label="${esc(sc.title)}">${sc.rows.map(r => `<div>${r}</div>`).join('')}</div>`;
@@ -1332,11 +1362,11 @@ const PLAY = {
       c.clues.forEach((cl, i) => {
         const b = document.createElement('button'); b.className = 'clue';
         b.innerHTML = `<span>🔍 Clue ${i + 1}</span>`;
-        b.onclick = () => { b.classList.add('open'); b.innerHTML = `<span>${esc(cl)}</span>`; };
+        b.onclick = () => { b.classList.add('open'); b.innerHTML = `<span>${T(cl)}</span>`; };
         clues.appendChild(b);
       });
       area.append(clues);
-      area.insertAdjacentHTML('beforeend', `<p class="big-q" style="margin-top:20px">❓ ${esc(c.q)}</p>`);
+      area.insertAdjacentHTML('beforeend', `<p class="big-q" style="margin-top:20px">❓ ${T(c.q)}</p>`);
       const row = document.createElement('div'); row.className = 'play-row';
       row.append(Object.assign(document.createElement('span'), { className: 'muted', textContent: `Дело ${ci + 1} / ${a.play.cases.length}` }),
         btn('Следующее дело →', 'btn primary', () => { ci = (ci + 1) % a.play.cases.length; draw(); }));
@@ -1351,7 +1381,7 @@ const PLAY = {
     const area = document.createElement('div');
     let ti = 0;
     const draw = () => {
-      area.innerHTML = `<p class="big-q">«${esc(a.play.topics[ti])}»</p>`;
+      area.innerHTML = `<p class="big-q">«${esc(a.play.topics[ti])}»${ru(a.play.topics[ti])}</p>`;
       const sides = document.createElement('div'); sides.className = 'sides';
       [['👍 For', 'for'], ['👎 Against', 'against']].forEach(([label, cls]) => {
         const s = document.createElement('div'); s.className = 'side ' + cls;
@@ -1466,11 +1496,11 @@ document.addEventListener('keydown', e => {
 
 /* ---------- новые экраны: Find someone who, Opinions ---------- */
 PLAY.findwho = (a, root) => {
-  root.insertAdjacentHTML('beforeend', `<p class="big-q">Find someone who… — is it true about me?</p><p class="muted">Задавай вопросы: Have you ever…? Do you…? Can you…? — и отмечай ответ.</p>`);
+  root.insertAdjacentHTML('beforeend', `<p class="big-q">Find someone who… — is it true about me?<span class="ru">Найди того, кто… — это правда про меня?</span></p><p class="muted">Задавай вопросы: Have you ever…? Do you…? Can you…? — и отмечай ответ.</p>`);
   const list = document.createElement('div'); list.className = 'fw';
   a.play.items.forEach(text => {
     const row = document.createElement('div'); row.className = 'fw-row';
-    row.innerHTML = `<span class="fw-t">…${esc(text)}</span>`;
+    row.innerHTML = `<span class="fw-t">…${esc(text)}${ru(text)}</span>`;
     const yes = btn('Yes ✓', 'opt'), no = btn('No ✗', 'opt');
     yes.onclick = () => { row.classList.remove('no'); row.classList.toggle('yes'); };
     no.onclick = () => { row.classList.remove('yes'); row.classList.toggle('no'); };
@@ -1484,13 +1514,13 @@ PLAY.opinions = (a, root) => {
   const area = document.createElement('div');
   let i = 0;
   const draw = () => {
-    area.innerHTML = `<p class="big-q">«${esc(a.play.items[i])}»</p>`;
+    area.innerHTML = `<p class="big-q">«${esc(a.play.items[i])}»${ru(a.play.items[i])}</p>`;
     const scale = document.createElement('div'); scale.className = 'op-scale';
     [['👎', 'Disagree'], ['🤷', 'Not sure'], ['👍', 'Agree']].forEach(([e, l]) => {
       const b = btn(`${e} ${l}`, 'vs-opt', () => { scale.querySelectorAll('.vs-opt').forEach(x => x.classList.toggle('picked', x === b)); why.hidden = false; });
       scale.appendChild(b);
     });
-    const why = document.createElement('p'); why.className = 'big-q'; why.style.marginTop = '18px'; why.hidden = true; why.textContent = 'Why? 🤔';
+    const why = document.createElement('p'); why.className = 'big-q'; why.style.marginTop = '18px'; why.hidden = true; why.innerHTML = 'Why? 🤔<span class="ru">Почему?</span>';
     const row = document.createElement('div'); row.className = 'play-row';
     row.append(Object.assign(document.createElement('span'), { className: 'muted', textContent: `${i + 1} / ${a.play.items.length}` }),
       btn('Next statement →', 'btn primary', () => { i = (i + 1) % a.play.items.length; draw(); }));
