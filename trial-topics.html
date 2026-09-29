@@ -1,0 +1,2201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YORK! — Микро-темы для пробного урока</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+/* =====================================================================
+   БАНК МИКРО-ТЕМ
+   Чтобы добавить тему — скопируйте любой объект в TOPICS и поменяйте поля.
+   id должен быть уникальным (он используется в SITUATION_GUIDE).
+   level: 'A0-A1' | 'A2' | 'B1' | 'B2' | 'C1'
+   practice — только для преподавателя, в режиме показа не выводится.
+   Поля с пометкой «✎» дописаны при сборке страницы — в исходном банке
+   их не было, можно поправить.
+   ===================================================================== */
+
+const LEVELS = ['A0-A1', 'A2', 'B1', 'B2', 'C1'];
+
+const LEVEL_GOALS = {
+  'A0-A1': { goal: 'Я могу сказать что-то на английском', note: 'Ученик должен уйти с ощущением, что английский не такой сложный, как казалось.' },
+  'A2':    { goal: 'Я могу объяснять свои мысли проще и увереннее' },
+  'B1':    { goal: 'Я знаю английский, но хочу использовать его естественнее' },
+  'B2':    { goal: 'Я могу выражать мысли глубже и звучать естественно' },
+  'C1':    { goal: 'Я могу звучать точнее, гибче и глубже' },
+};
+
+const TOPICS = [
+  /* ---------- A0-A1 ---------- */
+  { id: 'a0-be-have', level: 'A0-A1', section: 'Building basic sentences', icon: '🧍', title: 'Be vs Have',
+    idea: 'Базовая разница между описанием себя и тем, что у тебя есть.',
+    phrases: ['I am 20.', 'I am tired.', 'I have a sister.', 'I have a car.'],
+    practice: 'Расскажи о себе, используя I am / I have.',
+    result: 'Я могу строить базовые предложения о себе.' },
+  { id: 'a0-word-order', level: 'A0-A1', section: 'Building basic sentences', icon: '🧩', title: 'Sentence structure: how to stop translating word by word',
+    idea: 'Порядок слов в английском: кто → что делает → что.',
+    phrases: ['Я люблю кофе. → I love coffee.'],
+    practice: 'Составить 5 предложений о себе.',
+    result: 'Я понимаю, как строятся английские предложения.' },
+  { id: 'a0-longer', level: 'A0-A1', section: 'Building basic sentences', icon: '🔗', title: 'How to make answers longer',
+    idea: 'Переходим от одного слова к нормальной речи — с помощью because, but, and, so.',
+    phrases: ['Было: I like music.', 'Стало: I like music because it helps me relax.', 'because · but · and · so'],
+    practice: 'Ответить на вопросы полными предложениями.',
+    result: 'Я могу говорить не только Yes/No.' },
+  { id: 'a0-intro', level: 'A0-A1', section: 'Talking about yourself', icon: '👋', title: 'Introduce yourself naturally',
+    idea: 'Не заученная презентация, а реальное знакомство.',
+    phrases: ['My name is...', 'I’m from...', 'I study / work...', 'I’m interested in...'],
+    practice: 'Мини-интервью.',
+    result: 'Я могу рассказать о себе.' },
+  { id: 'a0-hobbies', level: 'A0-A1', section: 'Talking about yourself', icon: '🎸', title: 'Hobbies and interests',
+    idea: 'Как говорить о своих интересах.',
+    phrases: ['I like...', 'I enjoy...', 'I’m into...'],
+    practice: 'Обсудить свободное время.',
+    result: 'Я могу поддержать простой разговор.' },
+  { id: 'a0-present-simple', level: 'A0-A1', section: 'Everyday English', icon: '🔁', title: 'Present Simple for real life',
+    idea: 'Говорим о привычках.',
+    phrases: ['I usually...', 'I often...', 'I never...'],
+    practice: 'Рассказать свой обычный день.',
+    result: 'Я могу рассказать о своём обычном дне.' /* ✎ */ },
+  { id: 'a0-survival', level: 'A0-A1', section: 'Everyday English', icon: '🛟', title: 'Survival English',
+    idea: 'Что делать, если не понял.',
+    phrases: ['Could you repeat that?', 'Could you speak slower?', 'How do you say...?'],
+    practice: 'Мини-ситуация «первый разговор с иностранцем».',
+    result: 'Я знаю, что сказать, если не понял собеседника.' /* ✎ */ },
+
+  /* ---------- A2 ---------- */
+  { id: 'a2-simple-cont', level: 'A2', section: 'Talking about time', icon: '⏱️', title: 'Present Simple vs Present Continuous',
+    idea: 'Разница между привычкой и действием прямо сейчас.',
+    phrases: ['I work from home.', 'I’m working from home today.'],
+    practice: 'Рассказать про обычный день и про сегодняшний день.',
+    result: 'Я различаю, что происходит обычно, а что — сейчас.' /* ✎ */ },
+  { id: 'a2-past', level: 'A2', section: 'Talking about time', icon: '📸', title: 'Past experiences',
+    idea: 'Как рассказать, что произошло.',
+    phrases: ['I went...', 'I saw...', 'I tried...'],
+    practice: 'Рассказать про недавнее событие.',
+    result: 'Я могу рассказать, что со мной произошло.' /* ✎ */ },
+  { id: 'a2-future', level: 'A2', section: 'Talking about time', icon: '🗓️', title: 'Plans and future',
+    idea: 'Разные способы говорить о будущем.',
+    phrases: ['I’m going to...', 'I want to...', 'I’d like to...', 'I’m planning to...'],
+    practice: 'Планы на выходные.',
+    result: 'Я могу рассказать о своих планах.' /* ✎ */ },
+  { id: 'a2-questions', level: 'A2', section: 'Conversation skills', icon: '💬', title: 'Questions that start conversations',
+    idea: 'Вместо «Where are you from?» — вопросы, которые правда запускают разговор.',
+    phrases: ['What do you usually do after work?', 'What kind of music do you like?'],
+    practice: 'Small talk.',
+    result: 'Я могу начать разговор и поддержать его.' /* ✎ */ },
+  { id: 'a2-opinions', level: 'A2', section: 'Conversation skills', icon: '🗣️', title: 'Opinions',
+    idea: 'Как выражать мнение.',
+    phrases: ['I think...', 'I believe...', 'In my opinion...'],
+    practice: 'Обсуждение простой темы.',
+    result: 'Я могу высказать своё мнение.' /* ✎ */ },
+
+  /* ---------- B1 ---------- */
+  { id: 'b1-upgrade', level: 'B1', section: 'Sound more natural', icon: '✨', title: 'Upgrade your English',
+    idea: 'Меняем учебниковые фразы на живые.',
+    phrases: ['I like it. → I’m really into it.', 'I think... → I’d say...', 'I don’t know. → I’m not sure.'],
+    practice: 'Переформулировать свои ответы.',
+    result: 'Я звучу естественнее, а не как в учебнике.' /* ✎ */ },
+  { id: 'b1-fillers', level: 'B1', section: 'Sound more natural', icon: '🎙️', title: 'Natural conversation fillers',
+    idea: 'Как звучать более живо.',
+    phrases: ['Actually...', 'Basically...', 'To be honest...', 'It depends...'],
+    practice: 'Ответить на вопросы, используя связки.',
+    result: 'Моя речь звучит живее и увереннее.' /* ✎ */ },
+  { id: 'b1-stop', level: 'B1', section: 'Grammar that changes meaning', icon: '🛑', title: 'Stop doing vs Stop to do',
+    idea: 'Одна форма глагола — и смысл совсем другой.' /* ✎ */,
+    phrases: ['I stopped smoking. → Я перестал курить.', 'I stopped to smoke. → Я остановился, чтобы покурить.'],
+    practice: 'Создать свои примеры.',
+    result: 'Я понимаю, как форма глагола меняет смысл.' /* ✎ */ },
+  { id: 'b1-remember', level: 'B1', section: 'Grammar that changes meaning', icon: '🧠', title: 'Remember doing vs Remember to do',
+    idea: 'Помнить то, что уже было, — или не забыть сделать.' /* ✎ */,
+    phrases: ['I remember meeting her.', 'Remember to call her.'],
+    practice: 'Ситуации из жизни.',
+    result: 'Я не путаю «помню, как…» и «не забудь…».' /* ✎ */ },
+  { id: 'b1-used-to', level: 'B1', section: 'Grammar that changes meaning', icon: '🕰️', title: 'Used to',
+    idea: 'Говорить о прошлом опыте — о том, что было раньше.',
+    phrases: ['I used to play tennis.', 'What did you use to do as a child?'],
+    practice: 'What did you use to do as a child?',
+    result: 'Я могу рассказать, как было раньше.' /* ✎ */ },
+  { id: 'b1-say-tell', level: 'B1', section: 'Grammar that changes meaning', icon: '👂', title: 'Say vs Tell',
+    idea: 'Типичная ошибка: say — что-то, tell — кому-то что-то.',
+    phrases: ['Say something.', 'Tell someone something.'],
+    practice: 'Мини-диалоги.',
+    result: 'Я не путаю say и tell.' /* ✎ */ },
+  { id: 'b1-make-do', level: 'B1', section: 'Grammar that changes meaning', icon: '🛠️', title: 'Make vs Do',
+    idea: 'Коллокации: какие слова «дружат» с make, а какие — с do.',
+    phrases: ['Make a decision.', 'Make a mistake.', 'Do homework.', 'Do exercise.'],
+    practice: 'Составить свои примеры с make и do.' /* ✎ */,
+    result: 'Я знаю, что сказать: make или do.' /* ✎ */ },
+  { id: 'b1-story', level: 'B1', section: 'Storytelling', icon: '📖', title: 'Tell a story',
+    idea: 'Как рассказать историю связно, чтобы её было интересно слушать.' /* ✎ */,
+    phrases: ['At first...', 'Suddenly...', 'Eventually...', 'The thing is...'],
+    practice: 'Рассказать историю из жизни.',
+    result: 'Я могу связно рассказать историю из жизни.' /* ✎ */ },
+
+  /* ---------- B2 ---------- */
+  { id: 'b2-passive', level: 'B2', section: 'Advanced grammar in real speech', icon: '📰', title: 'Passive Voice',
+    idea: 'Как звучать как в фильмах, новостях и рабочих ситуациях.',
+    phrases: ['Active: People speak English worldwide.', 'Passive: English is spoken worldwide.'],
+    practice: 'Переделать предложения.',
+    result: 'Я понимаю и использую пассив в живой речи.' /* ✎ */ },
+  { id: 'b2-conditionals', level: 'B2', section: 'Advanced grammar in real speech', icon: '🔀', title: 'Conditionals without formulas',
+    idea: 'Не правила, а реальные ситуации.',
+    phrases: ['If I have time, I’ll...', 'If I had more money, I would...', 'If I had studied harder, I would have...'],
+    practice: 'Мечты, планы, решения.',
+    result: 'Я могу говорить о планах, мечтах и прошлых решениях.' /* ✎ */ },
+  { id: 'b2-wish', level: 'B2', section: 'Advanced grammar in real speech', icon: '🌠', title: 'Wish / If only',
+    idea: 'Говорить о сожалениях и желаниях.',
+    phrases: ['I wish I had more free time.', 'I wish I hadn’t said that.'],
+    practice: 'Что бы ты изменил(а)?',
+    result: 'Я могу говорить о сожалениях и желаниях.' /* ✎ */ },
+  { id: 'b2-gerund', level: 'B2', section: 'Advanced grammar in real speech', icon: '⚖️', title: 'Gerund vs Infinitive',
+    idea: 'Почему enjoy reading, но want to travel.',
+    phrases: ['I enjoy reading.', 'I want to travel.'],
+    practice: 'Говорить о предпочтениях.',
+    result: 'Я чувствую, когда нужен -ing, а когда to.' /* ✎ */ },
+  { id: 'b2-work', level: 'B2', section: 'Professional English', icon: '💼', title: 'English for work',
+    idea: 'Фразы, на которых держится рабочее обсуждение.' /* ✎ */,
+    phrases: ['Let’s discuss...', 'I suggest...', 'Could you clarify...?'],
+    practice: 'Рабочая ситуация.',
+    result: 'Я могу участвовать в рабочем обсуждении.' /* ✎ */ },
+  { id: 'b2-soft', level: 'B2', section: 'Professional English', icon: '🤝', title: 'Make English less direct',
+    idea: 'Как попросить вежливо, а не приказом.' /* ✎ */,
+    phrases: ['Прямо: Send me the file.', 'Мягче: Could you send me the file?', 'Мягче: Would you mind sending it?'],
+    practice: 'Рабочие сообщения.',
+    result: 'Я могу писать и говорить вежливо, без резкости.' /* ✎ */ },
+
+  /* ---------- C1 ---------- */
+  { id: 'c1-argue', level: 'C1', section: 'Expressing complex ideas', icon: '🏛️', title: 'Argumentation',
+    idea: 'Как аргументировать позицию и признавать другую точку зрения.' /* ✎ */,
+    phrases: ['From my perspective...', 'One could argue that...', 'However...'],
+    practice: 'Мини-дискуссия.',
+    result: 'Я могу аргументировать свою позицию.' /* ✎ */ },
+  { id: 'c1-modals', level: 'C1', section: 'Expressing complex ideas', icon: '🎚️', title: 'Nuance with modal verbs',
+    idea: 'Разница в силе совета: must, should, could.',
+    phrases: ['You must...', 'You should...', 'You could...'],
+    practice: 'Давать советы и оценивать ситуации.',
+    result: 'Я точно передаю, насколько настойчив мой совет.' /* ✎ */ },
+  { id: 'c1-phrasal', level: 'C1', section: 'Natural fluent English', icon: '🧷', title: 'Phrasal verbs',
+    idea: 'Фразовые глаголы, без которых речь звучит книжно.' /* ✎ */,
+    phrases: ['find out', 'figure out', 'give up', 'look forward to'],
+    practice: 'Создать мини-истории.',
+    result: 'Я использую фразовые глаголы в своей речи.' /* ✎ */ },
+  { id: 'c1-idioms', level: 'C1', section: 'Natural fluent English', icon: '☕', title: 'Idioms and natural expressions',
+    idea: 'Выражения, которые делают речь по-настоящему живой.' /* ✎ */,
+    phrases: ['It’s not my cup of tea.', 'I’m on the fence.', 'That rings a bell.'],
+    practice: 'Использовать в разговоре.',
+    result: 'Я могу вставить идиому к месту.' /* ✎ */ },
+];
+
+const UNIVERSAL_TOPICS = [
+  'My job / studies', 'Hobbies', 'Travel', 'Movies and series', 'Technology',
+  'Social media', 'Food', 'Personal goals', 'Future plans', 'Daily life',
+];
+
+const SITUATION_GUIDE = [
+  { key: 'fear',   label: 'Боится говорить',            hint: 'Introduce yourself · Making answers longer · Survival English',
+    topics: ['a0-intro', 'a0-longer', 'a0-survival'] },
+  { key: 'simple', label: 'Говорит, но звучит просто',  hint: 'Sound more natural · Fillers · Phrasal verbs',
+    topics: ['b1-upgrade', 'b1-fillers', 'c1-phrasal'] },
+  { key: 'job',    label: 'Хочет работу',               hint: 'Professional English · Passive Voice · Softening phrases',
+    topics: ['b2-work', 'b2-passive', 'b2-soft'] },
+  { key: 'silent', label: 'Понимает, но не говорит',    hint: 'Storytelling · Conversation skills · Grammar that changes meaning',
+    topics: ['b1-story', 'a2-questions', 'a2-opinions', 'b1-stop', 'b1-remember', 'b1-used-to', 'b1-say-tell', 'b1-make-do'] },
+  { key: 'b2plus', label: 'B2+',                         hint: 'Argumentation · Nuance · Idioms',
+    topics: ['c1-argue', 'c1-modals', 'c1-idioms'] },
+];
+</script>
+<script>
+/* =====================================================================
+   МИНИ-УРОКИ (~15 минут) для режима «Показать ученику»
+   Ключ — id темы из TOPICS. Шаги урока собираются так:
+   Разминка (warmup) → Тема (idea + phrases) → Схема (visual)
+   → Задания (tasks) → Говорим (speak) → Итог (result).
+   Любой блок можно не указывать — шаг просто пропустится.
+
+   visual.type:
+     compare — две колонки:        cols: [{icon, label, sub, examples:[]}, …]
+     formula — цепочка блоков:     parts: [{t, ex}, …]
+     scale   — шкала сверху вниз:  steps: [{w, d}, …]
+     upgrade — было → стало:       pairs: [[было, стало], …]
+     table   — строки-таблица:     rows: [[emoji, текст, текст], …]
+     note — подсказка внизу (необязательно)
+
+   tasks[].type:
+     choose — выбор варианта:      items: [{pic, q (пропуск — ___), options:[…], a: индекс верного}]
+                                   (варианты перемешиваются сами)
+     build  — собрать предложение: items: ['Готовое предложение.', …] (слова перемешиваются сами)
+     match  — найти пару:          pairs: [[слева, справа], …]
+     reveal — сказать и проверить: items: [{q, a}], title — задание
+   ===================================================================== */
+
+const LESSONS = {
+  /* ---------- A0-A1 ---------- */
+  'a0-be-have': {
+    warmup: ['How old are you?', 'Do you have a pet?'],
+    visual: { type: 'compare', cols: [
+      { icon: '🪞', label: 'BE — какой я, кто я', sub: 'am · is · are', examples: ['I am 20.', 'I am tired.', 'She is a teacher.'] },
+      { icon: '🎒', label: 'HAVE — что у меня есть', sub: 'have · has', examples: ['I have a sister.', 'I have a car.', 'He has a dog.'] },
+    ], note: 'Возраст — через BE: I am 20, а не I have 20.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🎂', q: 'I ___ 25 years old.', options: ['am', 'have'], a: 0 },
+        { pic: '🐶', q: 'I ___ a dog.', options: ['am', 'have'], a: 1 },
+        { pic: '😴', q: 'I ___ tired.', options: ['am', 'have'], a: 0 },
+        { pic: '👩‍👧', q: 'She ___ two children.', options: ['is', 'has'], a: 1 },
+        { pic: '🥶', q: 'We ___ cold.', options: ['are', 'have'], a: 0 },
+        { pic: '💡', q: 'I ___ an idea!', options: ['am', 'have'], a: 1 },
+      ]},
+      { type: 'build', items: ['I am from Ufa.', 'I have a big family.', 'My brother is a doctor.'] },
+      { type: 'match', pairs: [['I am hungry.', 'Я голоден.'], ['I have a question.', 'У меня есть вопрос.'], ['I am 30.', 'Мне 30 лет.'], ['I have a cat.', 'У меня есть кошка.']] },
+    ],
+    speak: [
+      { q: 'Tell me 3 things about you.', hint: 'I am… (age, job, feeling)' },
+      { q: 'Tell me 3 things you have.', hint: 'I have… (family, pets, things)' },
+      { q: 'Describe your friend.', hint: 'He / She is… He / She has…' },
+    ],
+  },
+  'a0-word-order': {
+    warmup: ['What do you love?', 'What do you drink in the morning?'],
+    visual: { type: 'formula', parts: [
+      { t: 'Кто?', ex: 'I' }, { t: 'Действие', ex: 'love' }, { t: 'Что?', ex: 'coffee' }, { t: 'Где / когда?', ex: 'in the morning' },
+    ], note: 'В русском порядок свободный: «Кофе я люблю». В английском — всегда по схеме.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '☕', q: 'Как правильно?', options: ['Coffee I love.', 'I love coffee.'], a: 1 },
+        { pic: '⚽', q: 'Как правильно?', options: ['I play football on Sundays.', 'On Sundays football I play.'], a: 0 },
+        { pic: '🏢', q: 'Как правильно?', options: ['Work I in an office.', 'I work in an office.'], a: 1 },
+        { pic: '🍕', q: 'Как правильно?', options: ['My sister likes pizza.', 'Likes my sister pizza.'], a: 0 },
+      ]},
+      { type: 'build', items: ['I love coffee.', 'I work in an office.', 'We watch films at home.', 'My friend lives in Moscow.'] },
+      { type: 'reveal', title: 'Переведи — потом проверь', items: [
+        { q: 'Я люблю музыку.', a: 'I love music.' },
+        { q: 'Мой брат работает в банке.', a: 'My brother works in a bank.' },
+        { q: 'Я читаю книги по вечерам.', a: 'I read books in the evening.' },
+        { q: 'Мы живём в Уфе.', a: 'We live in Ufa.' },
+      ]},
+    ],
+    speak: [
+      { q: 'Make 5 sentences about yourself.', hint: 'Кто → действие → что → где / когда' },
+      { q: 'What do you do every morning?', hint: 'I drink… I eat… I go…' },
+    ],
+  },
+  'a0-longer': {
+    warmup: ['Do you like music?', 'Do you like your city?'],
+    visual: { type: 'upgrade', pairs: [
+      ['I like music.', 'I like music because it helps me relax.'],
+      ['I like my city.', 'I like my city, but it is cold in winter.'],
+      ['I work.', 'I work and I study English.'],
+      ['I was tired.', 'I was tired, so I went to bed.'],
+    ], note: 'because — потому что · but — но · and — и · so — поэтому' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🎧', q: 'I like music ___ it helps me relax.', options: ['because', 'but'], a: 0 },
+        { pic: '☔', q: 'It was raining, ___ I stayed at home.', options: ['so', 'because'], a: 0 },
+        { pic: '🍣', q: 'I like sushi, ___ I don’t like fish.', options: ['and', 'but'], a: 1 },
+        { pic: '📚', q: 'I work ___ I study English.', options: ['and', 'so'], a: 0 },
+      ]},
+      { type: 'build', items: ['I like tea because it is warm.', 'I am busy, but I am happy.', 'I was hungry, so I cooked dinner.'] },
+      { type: 'reveal', title: 'Сделай ответ длиннее', items: [
+        { q: 'I like summer.', a: 'I like summer because it is warm and sunny.' },
+        { q: 'I play tennis.', a: 'I play tennis, but not very well.' },
+        { q: 'I love my job.', a: 'I love my job because my team is great.' },
+      ]},
+    ],
+    speak: [
+      { q: 'Do you like your job or studies?', hint: 'Yes, … because… / but…' },
+      { q: 'What do you do at the weekend?', hint: '… and … so …' },
+      { q: 'Do you like winter?', hint: 'because · but · so' },
+    ],
+  },
+  'a0-intro': {
+    warmup: ['What’s your name?', 'Where are you from?'],
+    visual: { type: 'formula', parts: [
+      { t: 'Имя', ex: 'My name is Anna.' }, { t: 'Откуда', ex: 'I’m from Ufa.' },
+      { t: 'Работа / учёба', ex: 'I work as a designer.' }, { t: 'Интересы', ex: 'I’m interested in travel.' },
+    ], note: 'Четыре предложения — и знакомство уже звучит естественно.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🏙️', q: 'I’m ___ Kazan.', options: ['from', 'in'], a: 0 },
+        { pic: '💻', q: 'I work ___ a programmer.', options: ['as', 'like'], a: 0 },
+        { pic: '🎨', q: 'I’m interested ___ art.', options: ['in', 'on'], a: 0 },
+        { pic: '🎓', q: 'I ___ at university.', options: ['study', 'am study'], a: 0 },
+      ]},
+      { type: 'build', items: ['My name is Anna.', 'I’m from Ufa.', 'I’m interested in music.'] },
+      { type: 'match', pairs: [['Nice to meet you!', 'Приятно познакомиться!'], ['What do you do?', 'Чем ты занимаешься?'], ['Where are you from?', 'Откуда ты?'], ['And you?', 'А ты?']] },
+    ],
+    speak: [
+      { q: 'Introduce yourself in 4 sentences.', hint: 'My name is… I’m from… I work / study… I’m interested in…' },
+      { q: 'Now ask me 3 questions.', hint: 'What… Where… Do you…?' },
+      { q: 'You meet a new colleague. Start the conversation!', hint: 'Hi! Nice to meet you. I’m…' },
+    ],
+  },
+  'a0-hobbies': {
+    warmup: ['What do you do in your free time?', 'Do you like sport?'],
+    visual: { type: 'scale', steps: [
+      { w: 'I like…', d: 'нравится' }, { w: 'I enjoy…', d: 'получаю удовольствие' },
+      { w: 'I’m into…', d: 'увлекаюсь' }, { w: 'I love…', d: 'обожаю' },
+    ], note: 'После like / enjoy / into — глагол с -ing: I enjoy reading.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '📖', q: 'I enjoy ___.', options: ['reading', 'read'], a: 0 },
+        { pic: '🎮', q: 'I’m ___ video games.', options: ['into', 'in'], a: 0 },
+        { pic: '🏊', q: 'I like ___.', options: ['swimming', 'swims'], a: 0 },
+        { pic: '🍳', q: 'My sister ___ cooking.', options: ['enjoys', 'enjoy'], a: 0 },
+      ]},
+      { type: 'match', pairs: [['🎸', 'playing the guitar'], ['🧘', 'doing yoga'], ['📷', 'taking photos'], ['🚴', 'cycling'], ['🎨', 'drawing']] },
+      { type: 'build', items: ['I enjoy cooking.', 'I’m into photography.', 'I like watching films.'] },
+    ],
+    speak: [
+      { q: 'What do you do in your free time?', hint: 'I like… I enjoy… I’m into…' },
+      { q: 'Is there a hobby you want to try?', hint: 'I want to try…' },
+      { q: 'Ask me about my hobbies.', hint: 'What do you… Do you like…?' },
+    ],
+  },
+  'a0-present-simple': {
+    warmup: ['What time do you get up?', 'What do you usually eat for breakfast?'],
+    visual: { type: 'scale', steps: [
+      { w: 'always', d: '100% — всегда' }, { w: 'usually', d: '80% — обычно' }, { w: 'often', d: '60% — часто' },
+      { w: 'sometimes', d: '30% — иногда' }, { w: 'never', d: '0% — никогда' },
+    ], note: 'Слово частоты — перед глаголом: I usually get up at 7. С he / she — глагол + s: she works.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '⏰', q: 'I ___ get up at 7.', options: ['usually', 'am usually'], a: 0 },
+        { pic: '☕', q: 'She ___ coffee every morning.', options: ['drinks', 'drink'], a: 0 },
+        { pic: '🚌', q: 'We ___ go to work by bus.', options: ['often', 'are often'], a: 0 },
+        { pic: '🍔', q: 'I ___ eat fast food. It’s bad!', options: ['never', 'always'], a: 0 },
+        { pic: '🏃', q: 'He ___ in the park.', options: ['runs', 'run'], a: 0 },
+      ]},
+      { type: 'build', items: ['I usually get up at 7.', 'She often works from home.', 'I never drink coffee at night.'] },
+      { type: 'reveal', title: 'Переведи — потом проверь', items: [
+        { q: 'Я обычно завтракаю дома.', a: 'I usually have breakfast at home.' },
+        { q: 'Он часто играет в футбол.', a: 'He often plays football.' },
+        { q: 'Я никогда не опаздываю.', a: 'I am never late.' },
+      ]},
+    ],
+    speak: [
+      { q: 'Describe your usual day.', hint: 'I usually… Then I… In the evening I…' },
+      { q: 'What do you never do?', hint: 'I never…' },
+      { q: 'Ask about my day.', hint: 'What time do you…? Do you often…?' },
+    ],
+  },
+  'a0-survival': {
+    warmup: ['Do you speak English with foreigners?', 'What is difficult for you?'],
+    visual: { type: 'table', rows: [
+      ['🔁', 'Не расслышал', 'Could you repeat that?'],
+      ['🐇', 'Говорят слишком быстро', 'Could you speak slower?'],
+      ['❓', 'Не знаешь слово', 'How do you say … in English?'],
+      ['🤔', 'Не понял смысл', 'What does … mean?'],
+      ['✍️', 'Нужно записать', 'Could you spell that?'],
+    ], note: 'Эти 5 фраз спасают любой разговор — даже на уровне «почти ноль».' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🐇', q: 'Собеседник говорит очень быстро. Что скажешь?', options: ['Could you speak slower?', 'Speak slow!'], a: 0 },
+        { pic: '🔊', q: 'Ты не расслышал. Что скажешь?', options: ['What?!', 'Sorry, could you repeat that?'], a: 1 },
+        { pic: '🍴', q: 'Не знаешь, как сказать «вилка».', options: ['How do you say «вилка» in English?', 'What is say «вилка»?'], a: 0 },
+        { pic: '📝', q: 'Хочешь, чтобы имя продиктовали по буквам.', options: ['Could you spell that?', 'Could you write me?'], a: 0 },
+      ]},
+      { type: 'build', items: ['Could you repeat that?', 'Could you speak slower, please?', 'How do you say it in English?'] },
+      { type: 'match', pairs: [['Could you repeat that?', 'Повторите, пожалуйста'], ['What does it mean?', 'Что это значит?'], ['Could you spell that?', 'Продиктуйте по буквам'], ['I don’t understand.', 'Я не понимаю']] },
+    ],
+    speak: [
+      { q: 'Ролевая игра: я — иностранец в аэропорту и говорю очень быстро. Выживи!', hint: 'Could you repeat… / speak slower… / What does … mean?' },
+      { q: 'Ask me how to say 3 Russian words in English.', hint: 'How do you say … in English?' },
+    ],
+  },
+
+  /* ---------- A2 ---------- */
+  'a2-simple-cont': {
+    warmup: ['What do you usually do on weekdays?', 'What are you doing right now?'],
+    visual: { type: 'compare', cols: [
+      { icon: '🔁', label: 'Present Simple — обычно, всегда', sub: 'I work · she works', examples: ['I work from home.', 'She drinks tea every day.'] },
+      { icon: '⏳', label: 'Present Continuous — сейчас, в этот период', sub: 'am / is / are + -ing', examples: ['I’m working from home today.', 'She is drinking coffee now.'] },
+    ], note: 'usually, every day, often → Simple. now, today, at the moment, this week → Continuous.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '📱', q: 'Look! He ___ on the phone.', options: ['talks', 'is talking'], a: 1 },
+        { pic: '🏫', q: 'I ___ English twice a week.', options: ['study', 'am studying'], a: 0 },
+        { pic: '🌧️', q: 'It ___ right now. Take an umbrella!', options: ['rains', 'is raining'], a: 1 },
+        { pic: '☕', q: 'She usually ___ tea, but today she ___ coffee.', options: ['drinks / is drinking', 'is drinking / drinks'], a: 0 },
+        { pic: '💻', q: 'This week I ___ from home.', options: ['am working', 'work'], a: 0 },
+      ]},
+      { type: 'build', items: ['I usually walk to work.', 'Today I am taking a taxi.', 'What are you doing now?'] },
+      { type: 'reveal', title: 'Найди ошибку', items: [
+        { q: 'I am liking this song.', a: 'I like this song. (like не ставим в -ing)' },
+        { q: 'She work in a bank.', a: 'She works in a bank.' },
+        { q: 'Now I read a book.', a: 'Now I am reading a book.' },
+      ]},
+    ],
+    speak: [
+      { q: 'Describe your usual day.', hint: 'I usually… Every day I…' },
+      { q: 'Now describe today — what is different?', hint: 'Today I’m… This week I’m…' },
+      { q: 'Look out of the window. What is happening?', hint: 'People are… It is…' },
+    ],
+  },
+  'a2-past': {
+    warmup: ['What did you do yesterday?', 'Where did you go last summer?'],
+    visual: { type: 'table', rows: [
+      ['🚶', 'go', 'went'], ['👀', 'see', 'saw'], ['🍽️', 'eat', 'ate'],
+      ['🛒', 'buy', 'bought'], ['✈️', 'fly', 'flew'], ['🧪', 'try', 'tried'],
+    ], note: 'Правильные глаголы — +ed: watched, played. Вопрос и отрицание — через did: Did you go? I didn’t go.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🏖️', q: 'Last summer I ___ to Turkey.', options: ['went', 'go'], a: 0 },
+        { pic: '🎬', q: 'We ___ a great film yesterday.', options: ['saw', 'seed'], a: 0 },
+        { pic: '🍜', q: 'I ___ Thai food for the first time.', options: ['tried', 'try'], a: 0 },
+        { pic: '❓', q: '___ you like the concert?', options: ['Did', 'Were'], a: 0 },
+        { pic: '🙅', q: 'I ___ go out last night.', options: ['didn’t', 'wasn’t'], a: 0 },
+      ]},
+      { type: 'build', items: ['I went to the cinema yesterday.', 'Did you have a good weekend?', 'We didn’t see the sea.'] },
+      { type: 'reveal', title: 'Переведи — потом проверь', items: [
+        { q: 'Я купил новый телефон.', a: 'I bought a new phone.' },
+        { q: 'Ты видел этот фильм?', a: 'Did you see this film?' },
+        { q: 'Мы не пошли на вечеринку.', a: 'We didn’t go to the party.' },
+      ]},
+    ],
+    speak: [
+      { q: 'Tell me about your last weekend.', hint: 'On Saturday I went… I saw… I tried…' },
+      { q: 'Tell me about your best trip.', hint: 'Where did you go? What did you see?' },
+      { q: 'Ask me 3 questions about my weekend.', hint: 'Did you…? Where did you…?' },
+    ],
+  },
+  'a2-future': {
+    warmup: ['What are your plans for the weekend?', 'What do you want to do this year?'],
+    visual: { type: 'scale', steps: [
+      { w: 'I’d like to…', d: 'хотелось бы, мечта' }, { w: 'I want to…', d: 'хочу' },
+      { w: 'I’m planning to…', d: 'планирую' }, { w: 'I’m going to…', d: 'точно собираюсь, решено' },
+    ], note: 'Чем ниже по шкале — тем увереннее план.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🎟️', q: 'I bought tickets. I ___ fly to Sochi.', options: ['’m going to', '’d like to'], a: 0 },
+        { pic: '🌍', q: 'One day I ___ visit Japan. It’s my dream.', options: ['’d like to', '’m going to'], a: 0 },
+        { pic: '🏋️', q: 'I ___ start going to the gym next month.', options: ['’m planning to', 'planning'], a: 0 },
+        { pic: '🍝', q: 'Tonight I ___ cook pasta.', options: ['am going to', 'going to'], a: 0 },
+      ]},
+      { type: 'build', items: ['I’m going to visit my parents.', 'I’d like to learn Spanish.', 'What are you going to do tonight?'] },
+      { type: 'reveal', title: 'Переведи — потом проверь', items: [
+        { q: 'Я собираюсь посмотреть фильм.', a: 'I’m going to watch a film.' },
+        { q: 'Я бы хотел поехать в Италию.', a: 'I’d like to go to Italy.' },
+        { q: 'Я планирую сменить работу.', a: 'I’m planning to change my job.' },
+      ]},
+    ],
+    speak: [
+      { q: 'Your plans for the weekend.', hint: 'I’m going to… I want to…' },
+      { q: 'Your dream for the next 5 years.', hint: 'I’d like to… I’m planning to…' },
+      { q: 'Ask me about my plans.', hint: 'What are you going to…?' },
+    ],
+  },
+  'a2-questions': {
+    warmup: ['Who do you talk to in English?', 'Is small talk easy for you?'],
+    visual: { type: 'upgrade', pairs: [
+      ['Where are you from?', 'What do you like most about your city?'],
+      ['Do you like music?', 'What kind of music do you like?'],
+      ['Do you work?', 'What do you usually do after work?'],
+      ['Do you travel?', 'What’s the best place you’ve been to?'],
+    ], note: 'Закрытый вопрос → «Yes» и тишина. Открытый — запускает разговор.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🎵', q: 'Какой вопрос лучше запустит разговор?', options: ['Do you like music?', 'What kind of music do you listen to?'], a: 1 },
+        { pic: '🍽️', q: 'Какой вопрос лучше?', options: ['What’s your favourite place to eat?', 'Do you eat out?'], a: 0 },
+        { pic: '🌆', q: 'Какой вопрос лучше?', options: ['Is your city big?', 'What do people do for fun in your city?'], a: 1 },
+        { pic: '🎬', q: 'Какой вопрос лучше?', options: ['What have you watched recently?', 'Do you watch TV?'], a: 0 },
+      ]},
+      { type: 'match', title: 'Подбери реакцию', pairs: [['I like jazz.', 'Oh, who is your favourite musician?'], ['I just came back from Sochi.', 'How was it?'], ['I work in IT.', 'What do you like about your job?'], ['I have a dog.', 'What’s its name?']] },
+      { type: 'build', items: ['What do you usually do after work?', 'What kind of films do you like?', 'How do you spend your weekends?'] },
+    ],
+    speak: [
+      { q: 'Small talk: ask me 5 open questions and react to my answers.', hint: 'What… How… What kind of…? Really? That’s cool!' },
+      { q: 'Now I ask — you answer and ask back.', hint: '… And you? / What about you?' },
+    ],
+  },
+  'a2-opinions': {
+    warmup: ['Cats or dogs?', 'Is online learning a good idea?'],
+    visual: { type: 'table', rows: [
+      ['💭', 'I think…', 'я думаю'], ['🗣️', 'In my opinion…', 'по-моему'], ['💪', 'I believe…', 'я убеждён'],
+      ['👍', 'I agree.', 'согласен'], ['👎', 'I don’t agree.', 'не согласен'],
+    ], note: 'Мнение + причина: I think…, because…' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🐱', q: 'I think ___ cats are better than dogs.', options: ['that', 'what'], a: 0 },
+        { pic: '🙅', q: 'I ___ think it’s a good idea.', options: ['don’t', 'not'], a: 0 },
+        { pic: '👍', q: 'I agree ___ you.', options: ['with', 'to'], a: 0 },
+        { pic: '☀️', q: '___ my opinion, summer is the best season.', options: ['In', 'On'], a: 0 },
+      ]},
+      { type: 'build', items: ['I think online lessons are convenient.', 'In my opinion, sport is important.', 'I don’t agree with you.'] },
+      { type: 'reveal', title: 'Скажи мнение — потом посмотри пример', items: [
+        { q: 'Is social media good or bad?', a: 'I think it’s both. It’s good because…, but…' },
+        { q: 'Is it better to live in a big city?', a: 'In my opinion, yes, because…' },
+      ]},
+    ],
+    speak: [
+      { q: 'Coffee or tea — what’s better?', hint: 'I think… because…' },
+      { q: 'Should children have smartphones?', hint: 'In my opinion… I believe…' },
+      { q: 'Is it better to work from home?', hint: 'I agree / I don’t agree, because…' },
+    ],
+  },
+
+  /* ---------- B1 ---------- */
+  'b1-upgrade': {
+    warmup: ['How was your week?', 'What do you do in your free time?'],
+    visual: { type: 'upgrade', pairs: [
+      ['I like it.', 'I’m really into it.'], ['I think…', 'I’d say…'], ['I don’t know.', 'I’m not sure.'],
+      ['It’s very good.', 'It’s amazing.'], ['I am very tired.', 'I’m exhausted.'], ['Yes.', 'Absolutely!'],
+    ]},
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🎧', q: 'Что звучит естественнее?', options: ['I like it very much.', 'I’m really into it.'], a: 1 },
+        { pic: '🤷', q: 'Что звучит естественнее?', options: ['I’m not sure.', 'I don’t know it.'], a: 0 },
+        { pic: '🥱', q: 'Что звучит естественнее?', options: ['I am very very tired.', 'I’m exhausted.'], a: 1 },
+        { pic: '🍰', q: 'Что звучит естественнее?', options: ['It’s delicious!', 'It’s very tasty food.'], a: 0 },
+      ]},
+      { type: 'reveal', title: 'Прокачай фразу', items: [
+        { q: 'It was very interesting.', a: 'It was fascinating.' },
+        { q: 'I like travelling very much.', a: 'I’m really into travelling.' },
+        { q: 'The film was very bad.', a: 'The film was awful.' },
+        { q: 'I think it’s expensive.', a: 'I’d say it’s a bit pricey.' },
+      ]},
+      { type: 'build', items: ['I’m really into cooking.', 'I’d say it’s a good idea.', 'I’m not sure about that.'] },
+    ],
+    speak: [
+      { q: 'Tell me about your hobby — use 3 upgraded phrases.', hint: 'I’m really into… I’d say… It’s amazing…' },
+      { q: 'Describe the last film you saw.', hint: 'fascinating · awful · I’m not sure…' },
+    ],
+  },
+  'b1-fillers': {
+    warmup: ['What do you think about remote work?'],
+    visual: { type: 'table', rows: [
+      ['🎯', 'Actually…', 'вообще-то, на самом деле'], ['📦', 'Basically…', 'короче, по сути'],
+      ['🙌', 'To be honest…', 'если честно'], ['⚖️', 'It depends…', 'смотря…'],
+      ['🤔', 'Well…', 'ну… (время подумать)'], ['💡', 'I mean…', 'то есть'],
+    ], note: 'Связки дают время подумать — и звучат как живая речь, а не ответ у доски.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '😬', q: '___, I didn’t like the film.', options: ['To be honest', 'Basically'], a: 0 },
+        { pic: '⚖️', q: 'Do you like sport? — ___ on the sport.', options: ['It depends', 'Actually'], a: 0 },
+        { pic: '🎯', q: 'You’re from Moscow? — ___, I’m from Ufa.', options: ['Actually', 'It depends'], a: 0 },
+        { pic: '📦', q: '___, the job is simple: you answer emails.', options: ['Basically', 'To be honest'], a: 0 },
+      ]},
+      { type: 'build', items: ['To be honest, I prefer tea.', 'Well, it depends on the weather.', 'Actually, I’ve never been there.'] },
+      { type: 'reveal', title: 'Ответь со связкой — потом сравни', items: [
+        { q: 'Do you like your job?', a: 'To be honest, I love it, but it depends on the day.' },
+        { q: 'Is English difficult?', a: 'Well, basically it depends on practice.' },
+        { q: 'You’re from Moscow, right?', a: 'Actually, I’m from Ufa.' },
+      ]},
+    ],
+    speak: [
+      { q: 'Fast answers — start each with a filler: Do you like mornings? Is money important? Are you a good cook?', hint: 'Well… / To be honest… / It depends…' },
+      { q: 'Tell me about your city in 1 minute.', hint: 'Basically… Actually… I mean…' },
+    ],
+  },
+  'b1-stop': {
+    warmup: ['Is there a habit you stopped?'],
+    visual: { type: 'compare', cols: [
+      { icon: '🚭', label: 'stop + -ing — перестать', sub: 'бросить делать', examples: ['I stopped smoking.', 'Stop talking!'] },
+      { icon: '🚶', label: 'stop + to — остановиться, чтобы', sub: 'прервать одно ради другого', examples: ['I stopped to smoke.', 'We stopped to buy water.'] },
+    ]},
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🍬', q: 'I stopped ___ sugar last year. I feel great!', options: ['eating', 'to eat'], a: 0 },
+        { pic: '⛽', q: 'We stopped ___ petrol on the way.', options: ['to buy', 'buying'], a: 0 },
+        { pic: '🤫', q: 'Please stop ___! I’m trying to work.', options: ['talking', 'to talk'], a: 0 },
+        { pic: '👋', q: 'I saw a friend and stopped ___ hello.', options: ['to say', 'saying'], a: 0 },
+      ]},
+      { type: 'reveal', title: 'Что это значит?', items: [
+        { q: 'He stopped to call his mum.', a: 'Он остановился, чтобы позвонить маме.' },
+        { q: 'He stopped calling his mum.', a: 'Он перестал звонить маме.' },
+        { q: 'She stopped to look at the map.', a: 'Она остановилась, чтобы посмотреть на карту.' },
+      ]},
+      { type: 'build', items: ['I stopped drinking coffee.', 'We stopped to take a photo.'] },
+    ],
+    speak: [
+      { q: 'What did you stop doing? Why?', hint: 'I stopped …-ing because…' },
+      { q: 'Tell me about a road trip: where did you stop and why?', hint: 'We stopped to…' },
+    ],
+  },
+  'b1-remember': {
+    warmup: ['What is your first memory?', 'What do you often forget?'],
+    visual: { type: 'compare', cols: [
+      { icon: '📼', label: 'remember + -ing — помню, как…', sub: 'взгляд назад', examples: ['I remember meeting her.', 'I remember visiting Paris.'] },
+      { icon: '📌', label: 'remember + to — не забыть сделать', sub: 'взгляд вперёд', examples: ['Remember to call her.', 'I remembered to lock the door.'] },
+    ], note: 'То же с forget: I’ll never forget seeing the sea. / Don’t forget to buy milk.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🔑', q: 'Remember ___ the door!', options: ['to lock', 'locking'], a: 0 },
+        { pic: '🎂', q: 'I remember ___ my 10th birthday party.', options: ['having', 'to have'], a: 0 },
+        { pic: '🥛', q: 'Don’t forget ___ milk.', options: ['to buy', 'buying'], a: 0 },
+        { pic: '🌊', q: 'I’ll never forget ___ the ocean for the first time.', options: ['seeing', 'to see'], a: 0 },
+      ]},
+      { type: 'build', items: ['I remember meeting my best friend.', 'Remember to send the email.'] },
+      { type: 'reveal', title: 'Переведи — потом проверь', items: [
+        { q: 'Я помню, как учился плавать.', a: 'I remember learning to swim.' },
+        { q: 'Не забудь позвонить маме.', a: 'Remember to call your mum. / Don’t forget to call your mum.' },
+      ]},
+    ],
+    speak: [
+      { q: 'What do you remember doing as a child?', hint: 'I remember …-ing…' },
+      { q: 'Give me 3 reminders for tomorrow.', hint: 'Remember to… Don’t forget to…' },
+    ],
+  },
+  'b1-used-to': {
+    warmup: ['What did you like as a child?', 'How was your city 10 years ago?'],
+    visual: { type: 'compare', cols: [
+      { icon: '🕰️', label: 'Раньше (а сейчас — нет)', sub: 'used to + глагол', examples: ['I used to play tennis.', 'I used to live in Kazan.'] },
+      { icon: '📍', label: 'Сейчас', sub: 'Present Simple', examples: ['Now I play football.', 'Now I live in Ufa.'] },
+    ], note: 'Вопрос и отрицание — без d: Did you use to…? I didn’t use to…' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🎹', q: 'I ___ play the piano, but I stopped.', options: ['used to', 'use to'], a: 0 },
+        { pic: '🧒', q: 'Did you ___ have long hair?', options: ['use to', 'used to'], a: 0 },
+        { pic: '🥦', q: 'I ___ like vegetables. Now I love them!', options: ['didn’t use to', 'don’t used to'], a: 0 },
+        { pic: '🏠', q: 'We ___ live in a small village.', options: ['used to', 'were used to'], a: 0 },
+      ]},
+      { type: 'build', items: ['I used to be very shy.', 'Did you use to play computer games?'] },
+      { type: 'reveal', title: 'Переведи — потом проверь', items: [
+        { q: 'Раньше я вставал в 6.', a: 'I used to get up at 6.' },
+        { q: 'Раньше у меня не было машины.', a: 'I didn’t use to have a car.' },
+      ]},
+    ],
+    speak: [
+      { q: 'What did you use to do as a child?', hint: 'I used to…' },
+      { q: 'How are you different from 10 years ago?', hint: 'I used to… but now I…' },
+      { q: 'Ask me 3 questions about my childhood.', hint: 'Did you use to…?' },
+    ],
+  },
+  'b1-say-tell': {
+    warmup: ['Who told you about YORK?'],
+    visual: { type: 'compare', cols: [
+      { icon: '💬', label: 'SAY — сказать что-то', sub: 'say something (to someone)', examples: ['She said hello.', 'He said it was late.'] },
+      { icon: '👤', label: 'TELL — сказать кому-то', sub: 'tell someone something', examples: ['She told me a story.', 'Tell me the truth.'] },
+    ], note: 'Устойчивые: tell a story / a lie / the truth / a joke · say sorry / yes / no.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🙋', q: 'Can you ___ me your name?', options: ['tell', 'say'], a: 0 },
+        { pic: '👋', q: 'She ___ goodbye and left.', options: ['said', 'told'], a: 0 },
+        { pic: '📚', q: 'Grandma ___ us a story.', options: ['told', 'said'], a: 0 },
+        { pic: '🙏', q: 'He ___ sorry to me.', options: ['said', 'told'], a: 0 },
+        { pic: '🤥', q: 'Don’t ___ lies!', options: ['tell', 'say'], a: 0 },
+      ]},
+      { type: 'reveal', title: 'Найди ошибку', items: [
+        { q: 'He said me the news.', a: 'He told me the news.' },
+        { q: 'Tell hello to your mum.', a: 'Say hello to your mum.' },
+      ]},
+      { type: 'build', items: ['She told me the truth.', 'He said that he was tired.'] },
+    ],
+    speak: [
+      { q: 'Tell me a short story from your childhood.', hint: 'My mum told me… She said…' },
+      { q: 'What did a friend tell you recently?', hint: 'He / She told me that… He / She said…' },
+    ],
+  },
+  'b1-make-do': {
+    warmup: ['What do you do in the morning?'],
+    visual: { type: 'compare', cols: [
+      { icon: '🛠️', label: 'MAKE — создать, получить результат', sub: '', examples: ['make a decision', 'make a mistake', 'make money', 'make a cake', 'make friends'] },
+      { icon: '✅', label: 'DO — выполнить действие, работу', sub: '', examples: ['do homework', 'do exercise', 'do the shopping', 'do your best', 'do business'] },
+    ]},
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '💰', q: 'He ___ a lot of money.', options: ['makes', 'does'], a: 0 },
+        { pic: '🏋️', q: 'I ___ exercise every morning.', options: ['do', 'make'], a: 0 },
+        { pic: '❌', q: 'Everyone ___ mistakes.', options: ['makes', 'does'], a: 0 },
+        { pic: '🧹', q: 'Who ___ the housework in your family?', options: ['does', 'makes'], a: 0 },
+        { pic: '🤔', q: 'I need to ___ a decision.', options: ['make', 'do'], a: 0 },
+        { pic: '🛒', q: 'Let’s ___ the shopping.', options: ['do', 'make'], a: 0 },
+      ]},
+      { type: 'reveal', title: 'Переведи — потом проверь', items: [
+        { q: 'Я сделал ошибку.', a: 'I made a mistake.' },
+        { q: 'Сделай всё, что можешь.', a: 'Do your best.' },
+        { q: 'Мы легко заводим друзей.', a: 'We make friends easily.' },
+      ]},
+      { type: 'build', items: ['I made a big decision.', 'Did you do your homework?'] },
+    ],
+    speak: [
+      { q: 'What was the best decision you’ve made?', hint: 'I made a decision to…' },
+      { q: 'Who does what at home?', hint: 'I do the… My … makes…' },
+    ],
+  },
+  'b1-story': {
+    warmup: ['What was the most unusual day of your life?'],
+    visual: { type: 'formula', parts: [
+      { t: 'At first…', ex: 'At first, everything was fine.' }, { t: 'Then…', ex: 'Then I lost my passport.' },
+      { t: 'Suddenly…', ex: 'Suddenly, a man ran up to me.' }, { t: 'Eventually…', ex: 'Eventually, I got it back!' },
+      { t: 'The thing is…', ex: 'The thing is, I still don’t know his name.' },
+    ]},
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '✈️', q: '___, the trip was boring, but then it got interesting.', options: ['At first', 'Eventually'], a: 0 },
+        { pic: '⚡', q: 'We were walking and ___ it started raining.', options: ['suddenly', 'eventually'], a: 0 },
+        { pic: '🏁', q: 'We waited for 3 hours and ___ the bus came.', options: ['eventually', 'at first'], a: 0 },
+        { pic: '🤷', q: 'I want to go, but ___, I don’t have time.', options: ['the thing is', 'suddenly'], a: 0 },
+      ]},
+      { type: 'build', items: ['At first, I was nervous.', 'Suddenly, the lights went out.', 'Eventually, we found the hotel.'] },
+    ],
+    speak: [
+      { q: 'Tell me about your worst trip.', hint: 'At first… Suddenly… Eventually… The thing is…' },
+      { q: 'Tell a funny story from school or work.', hint: 'At first… Then… Suddenly…' },
+      { q: 'Story chain: we take turns, one sentence each.', hint: 'Suddenly… / Then… / Eventually…' },
+    ],
+  },
+
+  /* ---------- B2 ---------- */
+  'b2-passive': {
+    warmup: ['Where is your phone made?', 'Is English spoken in your office?'],
+    visual: { type: 'compare', cols: [
+      { icon: '👤', label: 'Active — кто делает', sub: 'важен исполнитель', examples: ['People speak English worldwide.', 'Someone stole my bike.'] },
+      { icon: '📦', label: 'Passive — что происходит', sub: 'be + 3-я форма', examples: ['English is spoken worldwide.', 'My bike was stolen.'] },
+    ], note: 'Пассив — когда неважно или неизвестно, кто сделал: новости, инструкции, работа.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '📱', q: 'iPhones ___ in China.', options: ['are made', 'make'], a: 0 },
+        { pic: '🏛️', q: 'This bridge ___ in 1890.', options: ['was built', 'built'], a: 0 },
+        { pic: '📧', q: 'The email ___ yesterday.', options: ['was sent', 'sent'], a: 0 },
+        { pic: '🧾', q: 'You ___ by our manager tomorrow.', options: ['will be contacted', 'will contact'], a: 0 },
+        { pic: '🚲', q: 'My bike ___! I can’t find it.', options: ['has been stolen', 'has stolen'], a: 0 },
+      ]},
+      { type: 'reveal', title: 'Переделай в пассив', items: [
+        { q: 'They cancelled the meeting.', a: 'The meeting was cancelled.' },
+        { q: 'Someone has fixed the printer.', a: 'The printer has been fixed.' },
+        { q: 'We will send the report tomorrow.', a: 'The report will be sent tomorrow.' },
+        { q: 'People grow tea in India.', a: 'Tea is grown in India.' },
+      ]},
+      { type: 'build', items: ['The meeting was cancelled.', 'English is spoken all over the world.'] },
+    ],
+    speak: [
+      { q: 'Your city: what is it known for? What was built there?', hint: 'It is known for… It was built… It is visited by…' },
+      { q: 'Explain how something is made: coffee, pizza, an app.', hint: 'First, … is… Then it is…' },
+    ],
+  },
+  'b2-conditionals': {
+    warmup: ['What would you do with a million dollars?'],
+    visual: { type: 'table', rows: [
+      ['🎯', 'Реально', 'If I have time, I’ll call you.'],
+      ['💭', 'Мечта, сейчас нереально', 'If I had more money, I would travel.'],
+      ['⏪', 'Прошлое, уже не изменить', 'If I had studied harder, I would have passed.'],
+    ]},
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '☔', q: 'If it rains, we ___ at home.', options: ['will stay', 'would stay'], a: 0 },
+        { pic: '🏝️', q: 'If I ___ rich, I would buy an island.', options: ['were', 'am'], a: 0 },
+        { pic: '⏰', q: 'If I had left earlier, I ___ the train.', options: ['wouldn’t have missed', 'won’t miss'], a: 0 },
+        { pic: '🦸', q: 'What would you do if you ___ invisible?', options: ['were', 'will be'], a: 0 },
+      ]},
+      { type: 'reveal', title: 'Переведи — потом проверь', items: [
+        { q: 'Если у меня будет время, я приду.', a: 'If I have time, I’ll come.' },
+        { q: 'Если бы я жил у моря, я бы плавал каждый день.', a: 'If I lived by the sea, I would swim every day.' },
+        { q: 'Если бы я знал, я бы тебе сказал.', a: 'If I had known, I would have told you.' },
+      ]},
+      { type: 'build', items: ['If I had more time, I would learn Spanish.', 'If you call me, I’ll help you.'] },
+    ],
+    speak: [
+      { q: 'What would you do if you didn’t have to work?', hint: 'If I didn’t…, I would…' },
+      { q: 'A past decision: what if you had done it differently?', hint: 'If I had…, I would have…' },
+      { q: 'What will you do if the weather is good this weekend?', hint: 'If…, I’ll…' },
+    ],
+  },
+  'b2-wish': {
+    warmup: ['Is there anything you’d change about your life?'],
+    visual: { type: 'compare', cols: [
+      { icon: '🌠', label: 'Хочу, чтобы сейчас было иначе', sub: 'wish + Past Simple', examples: ['I wish I had more free time.', 'I wish I lived by the sea.'] },
+      { icon: '😔', label: 'Жалею о прошлом', sub: 'wish + Past Perfect', examples: ['I wish I hadn’t said that.', 'If only I had listened!'] },
+    ]},
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🏖️', q: 'I wish I ___ on holiday now.', options: ['were', 'am'], a: 0 },
+        { pic: '🗣️', q: 'I wish I ___ that. It was rude.', options: ['hadn’t said', 'didn’t say'], a: 0 },
+        { pic: '🎸', q: 'If only I ___ play the guitar!', options: ['could', 'can'], a: 0 },
+        { pic: '📚', q: 'I wish I ___ harder at school.', options: ['had studied', 'studied'], a: 0 },
+      ]},
+      { type: 'reveal', title: 'Переведи — потом проверь', items: [
+        { q: 'Жаль, что я не говорю по-испански.', a: 'I wish I spoke Spanish.' },
+        { q: 'Жаль, что я не купил тот билет.', a: 'I wish I had bought that ticket.' },
+        { q: 'Если бы только у меня было больше времени!', a: 'If only I had more time!' },
+      ]},
+      { type: 'build', items: ['I wish I had more free time.', 'If only I had known earlier!'] },
+    ],
+    speak: [
+      { q: '3 wishes about your life now.', hint: 'I wish I had… I wish I could…' },
+      { q: 'One thing you regret (or don’t!).', hint: 'I wish I had / hadn’t…' },
+      { q: 'What would you change in your city?', hint: 'I wish there were…' },
+    ],
+  },
+  'b2-gerund': {
+    warmup: ['What do you enjoy doing on Sundays?', 'What have you decided to change this year?'],
+    visual: { type: 'compare', cols: [
+      { icon: '🔄', label: '-ing', sub: 'enjoy · avoid · mind · finish · keep · can’t stand', examples: ['I enjoy reading.', 'I can’t stand waiting.'] },
+      { icon: '🎯', label: 'to + глагол', sub: 'want · decide · plan · hope · need · would like', examples: ['I want to travel.', 'I decided to quit.'] },
+    ], note: 'После предлогов — всегда -ing: interested in learning, good at cooking.' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🧘', q: 'I enjoy ___ yoga.', options: ['doing', 'to do'], a: 0 },
+        { pic: '✈️', q: 'We decided ___ to Georgia.', options: ['to go', 'going'], a: 0 },
+        { pic: '⏳', q: 'I can’t stand ___ in queues.', options: ['waiting', 'to wait'], a: 0 },
+        { pic: '🎓', q: 'She’s interested in ___ Italian.', options: ['learning', 'to learn'], a: 0 },
+        { pic: '🍫', q: 'I’m trying to avoid ___ sugar.', options: ['eating', 'to eat'], a: 0 },
+        { pic: '🏠', q: 'I hope ___ a house one day.', options: ['to buy', 'buying'], a: 0 },
+      ]},
+      { type: 'reveal', title: 'Переведи — потом проверь', items: [
+        { q: 'Я не против подождать.', a: 'I don’t mind waiting.' },
+        { q: 'Я планирую переехать.', a: 'I’m planning to move.' },
+        { q: 'Он хорошо готовит.', a: 'He’s good at cooking.' },
+      ]},
+      { type: 'build', items: ['I enjoy cooking for friends.', 'I decided to learn English.'] },
+    ],
+    speak: [
+      { q: 'What do you enjoy — and what can’t you stand?', hint: 'I enjoy… I can’t stand… I don’t mind…' },
+      { q: 'Your plans and hopes for this year.', hint: 'I want to… I hope to… I’ve decided to…' },
+    ],
+  },
+  'b2-work': {
+    warmup: ['What do you do at work?', 'Do you use English at work?'],
+    visual: { type: 'table', rows: [
+      ['📋', 'Начать обсуждение', 'Let’s discuss… / Let’s start with…'],
+      ['💡', 'Предложить', 'I suggest… / What if we…?'],
+      ['❓', 'Уточнить', 'Could you clarify…?'],
+      ['👍', 'Согласиться', 'That makes sense. / Good point.'],
+      ['🤚', 'Мягко возразить', 'I see your point, but…'],
+      ['✅', 'Подвести итог', 'So, to sum up…'],
+    ]},
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '💡', q: 'I suggest ___ the deadline.', options: ['moving', 'to move'], a: 0 },
+        { pic: '❓', q: 'Could you ___ what you mean?', options: ['clarify', 'clear'], a: 0 },
+        { pic: '🤚', q: 'I see your point, ___ I think we need more time.', options: ['but', 'so'], a: 0 },
+        { pic: '✅', q: 'So, ___, we launch on Monday.', options: ['to sum up', 'in the end of'], a: 0 },
+      ]},
+      { type: 'match', pairs: [['That makes sense.', 'Логично.'], ['Let’s get started.', 'Давайте начнём.'], ['Could you clarify?', 'Можете уточнить?'], ['Good point.', 'Хорошее замечание.']] },
+      { type: 'build', items: ['Let’s discuss the budget.', 'Could you clarify the deadline?'] },
+    ],
+    speak: [
+      { q: 'Meeting role play: suggest a new idea to your team.', hint: 'Let’s discuss… I suggest… What if we…?' },
+      { q: 'I disagree with your idea — defend it politely.', hint: 'I see your point, but… That makes sense, however…' },
+      { q: 'Describe your job to a new foreign colleague.', hint: 'I’m responsible for… I work on…' },
+    ],
+  },
+  'b2-soft': {
+    warmup: ['How do you ask your manager for something?'],
+    visual: { type: 'upgrade', pairs: [
+      ['Send me the file.', 'Could you send me the file?'],
+      ['Do it today.', 'Would you mind doing it today?'],
+      ['You’re wrong.', 'I’m not sure that’s right.'],
+      ['I want a discount.', 'I was wondering if you could offer a discount.'],
+      ['Answer quickly.', 'I’d appreciate a quick reply.'],
+    ]},
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '📎', q: 'Что вежливее?', options: ['Would you mind sending the file?', 'Send the file now.'], a: 0 },
+        { pic: '🙅', q: 'Что вежливее?', options: ['This is a bad idea.', 'I’m not sure that’s the best idea.'], a: 1 },
+        { pic: '📅', q: 'Would you mind ___ the meeting?', options: ['moving', 'to move'], a: 0 },
+        { pic: '💬', q: 'I was wondering if you ___ help me.', options: ['could', 'can to'], a: 0 },
+      ]},
+      { type: 'reveal', title: 'Смягчи фразу', items: [
+        { q: 'Call me back.', a: 'Could you call me back when you have a moment?' },
+        { q: 'Your report is late.', a: 'I was wondering when the report might be ready.' },
+        { q: 'I need it now.', a: 'I’d appreciate it if I could get it today.' },
+      ]},
+      { type: 'build', items: ['Would you mind helping me?', 'I’d appreciate a quick reply.'] },
+    ],
+    speak: [
+      { q: 'Ask a colleague to fix a mistake — politely.', hint: 'Could you… / Would you mind… / I’d appreciate…' },
+      { q: 'Ask your manager for a day off.', hint: 'I was wondering if…' },
+    ],
+  },
+
+  /* ---------- C1 ---------- */
+  'c1-argue': {
+    warmup: ['Should university education be free?'],
+    visual: { type: 'formula', parts: [
+      { t: 'Позиция', ex: 'From my perspective, remote work is the future.' },
+      { t: 'Аргумент', ex: 'The main reason is that…' },
+      { t: 'Контраргумент', ex: 'One could argue that… However,…' },
+      { t: 'Вывод', ex: 'All things considered,…' },
+    ]},
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '⚖️', q: 'One could argue that AI is dangerous. ___, it also saves lives.', options: ['However', 'Therefore'], a: 0 },
+        { pic: '🎯', q: '___, the benefits outweigh the risks.', options: ['All things considered', 'On the one side'], a: 0 },
+        { pic: '🧭', q: 'From my ___, it’s a mistake.', options: ['perspective', 'opinion view'], a: 0 },
+        { pic: '📉', q: 'Prices rose; ___, demand fell.', options: ['as a result', 'however'], a: 0 },
+      ]},
+      { type: 'match', pairs: [['Having said that…', 'Тем не менее…'], ['That’s a fair point, but…', 'Справедливо, но…'], ['It’s worth mentioning that…', 'Стоит отметить, что…'], ['On balance…', 'В целом…']] },
+    ],
+    speak: [
+      { q: 'Debate: should social media be banned for under-16s? 2 minutes.', hint: 'From my perspective… One could argue… However… On balance…' },
+      { q: 'Switch sides — argue the opposite.', hint: 'That’s a fair point, but… Having said that…' },
+    ],
+  },
+  'c1-modals': {
+    warmup: ['What advice would you give to a new student?'],
+    visual: { type: 'scale', steps: [
+      { w: 'You must…', d: 'обязательно, без вариантов' }, { w: 'You’d better…', d: 'иначе будут проблемы' },
+      { w: 'You should…', d: 'советую' }, { w: 'You could…', d: 'как вариант' },
+      { w: 'You might want to…', d: 'очень мягкое предложение' },
+    ], note: 'Для догадок та же логика: must be (уверен) → might be (возможно) → can’t be (исключено).' },
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🪪', q: 'You ___ have a passport to fly abroad.', options: ['must', 'could'], a: 0 },
+        { pic: '🧥', q: 'It’s cold. You ___ take a jacket.', options: ['should', 'must not'], a: 0 },
+        { pic: '💡', q: 'The lights are on. They ___ be at home.', options: ['must', 'can’t'], a: 0 },
+        { pic: '📵', q: 'She’s not answering. She ___ be busy.', options: ['might', 'must not'], a: 0 },
+        { pic: '🚆', q: 'He was in Moscow yesterday. It ___ have been him in Ufa.', options: ['can’t', 'must'], a: 0 },
+      ]},
+      { type: 'reveal', title: 'Оцени ситуацию — потом сравни', items: [
+        { q: 'Your friend’s phone is off. Why?', a: 'Her battery might be dead. / She must be on a plane.' },
+        { q: 'A colleague is always late.', a: 'He should set an alarm. / He might want to leave earlier.' },
+      ]},
+    ],
+    speak: [
+      { q: 'A friend wants to quit their job. Advise — from strong to soft.', hint: 'You must… You should… You could… You might want to…' },
+      { q: 'Guess what happened: 🧳 🏖️ 😎', hint: 'He must… She might… They can’t…' },
+    ],
+  },
+  'c1-phrasal': {
+    warmup: ['What are you looking forward to this month?'],
+    visual: { type: 'table', rows: [
+      ['🔎', 'find out', 'узнать'], ['🧩', 'figure out', 'разобраться'], ['🏳️', 'give up', 'сдаться, бросить'],
+      ['🎁', 'look forward to', 'ждать с нетерпением'], ['💡', 'come up with', 'придумать'], ['🥛', 'run out of', 'закончиться (о запасах)'],
+    ]},
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '🧩', q: 'I can’t ___ how this app works.', options: ['figure out', 'give up'], a: 0 },
+        { pic: '🥛', q: 'We’ve ___ milk. Can you buy some?', options: ['run out of', 'found out'], a: 0 },
+        { pic: '🏳️', q: 'Don’t ___! You’re almost there.', options: ['give up', 'look forward'], a: 0 },
+        { pic: '🎉', q: 'I’m looking forward to ___ you.', options: ['seeing', 'see'], a: 0 },
+        { pic: '💡', q: 'She ___ a brilliant idea.', options: ['came up with', 'ran out of'], a: 0 },
+      ]},
+      { type: 'reveal', title: 'Переведи — потом проверь', items: [
+        { q: 'Я узнал правду.', a: 'I found out the truth.' },
+        { q: 'У нас закончилось время.', a: 'We ran out of time.' },
+        { q: 'Кто придумал этот план?', a: 'Who came up with this plan?' },
+      ]},
+    ],
+    speak: [
+      { q: 'Mini-story: use all 6 phrasal verbs.', hint: 'find out · figure out · give up · look forward to · come up with · run out of' },
+      { q: 'What have you given up? What will you never give up?', hint: 'I gave up… I’ll never give up…' },
+    ],
+  },
+  'c1-idioms': {
+    warmup: ['Do you have a favourite Russian idiom?'],
+    visual: { type: 'table', rows: [
+      ['☕', 'It’s not my cup of tea.', 'не моё'], ['🤺', 'I’m on the fence.', 'не могу решить'],
+      ['🔔', 'That rings a bell.', 'что-то знакомое'], ['🍰', 'It’s a piece of cake.', 'проще простого'],
+      ['🤒', 'under the weather', 'неважно себя чувствую'], ['🧊', 'break the ice', 'растопить лёд'],
+    ]},
+    tasks: [
+      { type: 'choose', items: [
+        { pic: '☕', q: 'Opera is not my cup of tea. Это значит…', options: ['Мне не нравится опера', 'Я не пью чай в опере'], a: 0 },
+        { pic: '🤺', q: 'I’m on the fence about moving. Это значит…', options: ['Я не могу решить', 'Я уже переехал'], a: 0 },
+        { pic: '🔔', q: 'Her name rings a bell. Это значит…', options: ['Имя кажется знакомым', 'Она мне звонила'], a: 0 },
+        { pic: '🍰', q: 'The test was a piece of cake. Это значит…', options: ['Тест был очень лёгким', 'На тесте дали торт'], a: 0 },
+      ]},
+      { type: 'match', pairs: [['under the weather', 'приболел'], ['break the ice', 'растопить лёд'], ['a piece of cake', 'проще простого'], ['on the fence', 'в раздумьях']] },
+    ],
+    speak: [
+      { q: 'Answer with an idiom: Do you like horror films? Is English easy? Will you move abroad?', hint: 'not my cup of tea · a piece of cake · on the fence' },
+      { q: 'Tell a story with at least 3 idioms.', hint: 'break the ice · rings a bell · under the weather' },
+    ],
+  },
+};
+</script>
+<script>
+/* =====================================================================
+   РАЗГОВОРНЫЕ АКТИВНОСТИ — можно вставить в любой пробный урок
+   goal / how — для преподавателя (только в карточке списка).
+   rules / phrases — показываются ученику.
+   play — интерактивный экран (типы: truths, rather, ranking,
+   situations, minute, picture, detective, debate, exit).
+   В truths факт записан как [текст, ложь?] — true означает «это ложь».
+   ===================================================================== */
+
+const ACTIVITIES = [
+  { id: 'act-truths', num: 6, icon: '🕵️', title: 'Two truths and a lie',
+    levels: ['A0-A1', 'A2', 'B1', 'B2', 'C1'],
+    goal: 'Разговорная практика.',
+    how: 'Ученик говорит 3 факта о себе, один — ложь. Преподаватель угадывает. Сначала покажите пример на «Томе». A1 — простые предложения, B2 — истории и детали.',
+    rules: 'Two facts are true, one is a lie. Can you guess which one?',
+    phrases: ['I think number … is a lie.', 'It can’t be true!', 'I’m sure it’s true, because…'],
+    play: { type: 'truths', sets: [
+      { label: 'A1', intro: 'Meet Tom.', facts: [['Tom has three sisters.', false], ['Tom can play the piano.', true], ['Tom is from London.', false]] },
+      { label: 'A2', intro: 'Meet Tom.', facts: [['Tom went to Japan last year.', true], ['Tom doesn’t like coffee.', false], ['Tom can ride a horse.', false]] },
+      { label: 'B1', intro: 'Meet Tom.', facts: [['Tom used to be a football player.', false], ['Tom has never been on a plane.', true], ['Tom is afraid of dogs.', false]] },
+      { label: 'B2', intro: 'Meet Tom.', facts: [
+        ['Tom once missed a flight because he fell asleep at the gate.', false],
+        ['Tom got stuck in a lift with a famous actor.', true],
+        ['Tom has lived in three different countries.', false]] },
+    ]},
+  },
+  { id: 'act-rather', num: 7, icon: '🤔', title: 'Would you rather?',
+    levels: ['A2', 'B1', 'B2', 'C1'],
+    goal: 'Быстро разговорить ученика.',
+    how: 'Задайте вопрос, ученик выбирает и объясняет почему. Можно вводить opinions, conditionals, argumentation.',
+    rules: 'Choose one — and explain why!',
+    phrases: ['I’d rather… because…', 'If I had to choose, I’d…', 'Personally, I’d prefer…', 'If I…, I would…'],
+    play: { type: 'rather', sets: [
+      { label: 'A2', qs: [['live in a city', 'live in the countryside'], ['have a cat', 'have a dog'], ['go to the beach', 'go to the mountains'], ['cook at home', 'eat out'], ['watch a film', 'read a book']] },
+      { label: 'B1', qs: [['have more money', 'have more free time'], ['travel alone', 'travel with friends'], ['work from home', 'work in an office'], ['speak every language', 'play every instrument'], ['never use social media again', 'never watch TV again']] },
+      { label: 'B2', qs: [['work for passion', 'work for money'], ['be famous', 'be rich but unknown'], ['live in the past', 'live in the future'], ['have a job you love with a low salary', 'have a boring job with a high salary'], ['be able to fly', 'be able to read minds']] },
+    ]},
+  },
+  { id: 'act-ranking', num: 8, icon: '🏆', title: 'Ranking task',
+    levels: ['A2', 'B1', 'B2', 'C1'],
+    goal: 'Заставить объяснять мнение.',
+    how: 'Ученик расставляет пункты по важности (нажимает по порядку) и объясняет каждое место.',
+    rules: 'Rank these from most important (1) to least important.',
+    phrases: ['I think…', 'For me…', 'The most important thing is…', '… is more important than … because…'],
+    play: { type: 'ranking', sets: [
+      { label: 'Life', title: 'What matters most in life?', items: ['money', 'friends', 'career', 'hobbies', 'health'] },
+      { label: 'Job', title: 'What matters most in a job?', items: ['salary', 'team', 'interesting tasks', 'free time', 'location'] },
+      { label: 'Holiday', title: 'What makes a perfect holiday?', items: ['weather', 'food', 'people', 'price', 'activities'] },
+    ]},
+  },
+  { id: 'act-situations', num: 9, icon: '🎭', title: 'Situation cards',
+    levels: ['A2', 'B1', 'B2', 'C1'],
+    goal: 'Симуляция реальной жизни.',
+    how: 'Вытяните карточку — ученик должен решить ситуацию. Вы играете вторую роль.',
+    rules: 'Read the situation. Solve it in English!',
+    phrases: ['Excuse me, …', 'Could you…?', 'I’m afraid…', 'What can I do?', 'Would it be possible to…?'],
+    play: { type: 'situations', cats: [
+      { label: '✈️ Travel', cards: [
+        { s: 'You are at the airport. Your flight is cancelled.', role: 'airline staff' },
+        { s: 'Your hotel room is dirty and noisy.', role: 'hotel receptionist' },
+        { s: 'You are lost in a foreign city and your phone is dead.', role: 'a local person' } ] },
+      { label: '💼 Work', cards: [
+        { s: 'You disagree with your colleague about a project.', role: 'your colleague' },
+        { s: 'You need to ask your boss for a day off.', role: 'your boss' },
+        { s: 'You are 15 minutes late for an important online meeting.', role: 'your manager' } ] },
+      { label: '🎉 Social', cards: [
+        { s: 'You meet someone new at a party.', role: 'a new person' },
+        { s: 'A friend invites you to a party, but you don’t want to go.', role: 'your friend' },
+        { s: 'You forgot your best friend’s birthday.', role: 'your friend' } ] },
+      { label: '🍽️ Café & shop', cards: [
+        { s: 'The waiter brought you the wrong dish.', role: 'the waiter' },
+        { s: 'You want to return a jacket, but you lost the receipt.', role: 'shop assistant' } ] },
+    ]},
+  },
+  { id: 'act-minute', num: 11, icon: '⏱️', title: 'One minute challenge',
+    levels: ['A0-A1', 'A2', 'B1', 'B2', 'C1'],
+    goal: 'Показать ученику, что он способен говорить.',
+    how: 'Ученик говорит одну минуту по опорам. После этого покажите новые конструкции (кнопка «Level up») и попросите повторить с ними.',
+    rules: 'Talk for one minute. Don’t stop!',
+    phrases: [],
+    play: { type: 'minute', topics: [
+      { t: 'Talk about your favourite movie.', support: ['What is it about?', 'Why do you like it?', 'Would you recommend it?'],
+        upgrade: [['It’s about…', 'The story follows…'], ['I like it because…', 'What I love about it is…'], ['You should watch it.', 'I’d highly recommend it.']] },
+      { t: 'Talk about your favourite place.', support: ['Where is it?', 'What can you do there?', 'Why is it special for you?'],
+        upgrade: [['It’s very beautiful.', 'It’s absolutely stunning.'], ['I go there often.', 'I try to go there whenever I can.'], ['I like it.', 'It means a lot to me.']] },
+      { t: 'Talk about a person you admire.', support: ['Who is this person?', 'What do they do?', 'Why do you admire them?'],
+        upgrade: [['He is a good person.', 'He’s incredibly kind and generous.'], ['I like him because…', 'What I admire most is…'], ['He helped me.', 'He’s had a huge influence on me.']] },
+      { t: 'Talk about your perfect weekend.', support: ['Where are you?', 'Who are you with?', 'What do you do?'],
+        upgrade: [['I sleep a lot.', 'I have a long lie-in.'], ['I meet friends.', 'I catch up with friends.'], ['It’s good.', 'It’s exactly what I need.']] },
+      { t: 'Talk about your job or studies.', support: ['What do you do?', 'What do you like about it?', 'What is difficult?'],
+        upgrade: [['I work in…', 'I’m responsible for…'], ['It’s interesting.', 'It’s really rewarding.'], ['It’s difficult.', 'It can be quite challenging.']] },
+    ]},
+  },
+  { id: 'act-picture', num: 15, icon: '🖼️', title: 'Picture description',
+    levels: ['A0-A1', 'A2', 'B1', 'B2', 'C1'],
+    goal: 'Много речи без сложной темы.',
+    how: 'Покажите картинку, задайте вопросы своего уровня. Используйте Present Continuous, Past, Modal verbs.',
+    rules: 'Look at the picture. Tell me everything!',
+    phrases: ['I can see…', 'He / She is …-ing.', 'I think they…', 'She might be…', 'He must be…'],
+    play: { type: 'picture',
+      scenes: [
+        { title: 'At the beach', rows: ['☀️ 🕊️ ☁️', '⛱️ 👨‍👩‍👧 🏐', '🌊 🏄 🌊 🚤'] },
+        { title: 'In a café', rows: ['☕ 🥐 🍰', '👩‍💻 💬 👫', '🎶 📱 😴'] },
+        { title: 'At the airport', rows: ['✈️ 🕐 ❌', '🧳 😩 🧍‍♂️ 📞', '🍔 🛋️ 😤'] },
+        { title: 'A party', rows: ['🎈 🎉 🎂', '🕺 💃 🥤', '🎁 😮 📸'] },
+        { title: 'A rainy day', rows: ['🌧️ ☂️ ⚡', '🏃‍♀️ 🐕 🚕', '🌳 📰 😂'] },
+      ],
+      questions: [
+        { label: 'A1-A2', qs: ['What can you see?', 'What are the people doing?', 'What is the weather like?'] },
+        { label: 'B1', qs: ['What do you think happened before?', 'What will happen next?', 'Would you like to be there? Why?'] },
+        { label: 'B2', qs: ['What might the people be thinking?', 'How do they feel — and why?', 'What story could this picture tell?'] },
+      ] },
+  },
+  { id: 'act-detective', num: 16, icon: '🔍', title: 'Detective task',
+    levels: ['B1', 'B2', 'C1'],
+    goal: 'Грамматика через игру: догадки и модальные глаголы.',
+    how: 'Открывайте улики по одной. Ученик строит гипотезы: She might have gone to… She must have…',
+    rules: 'Read the clues. What happened? Make guesses!',
+    phrases: ['She might have gone to…', 'She must have…', 'She can’t have…', 'Maybe she…', 'I bet she…'],
+    play: { type: 'detective', cases: [
+      { clues: ['Yesterday Sarah went somewhere.', 'She bought a ticket.', 'She met someone.'], q: 'Where did she go?' },
+      { clues: ['Tom came home very late.', 'His clothes were wet.', 'He was smiling.'], q: 'What happened to Tom?' },
+      { clues: ['The office was empty on Monday morning.', 'There was a big cake on the table.', 'Everyone’s phones were switched off.'], q: 'What was going on?' },
+      { clues: ['Anna didn’t answer her phone all day.', 'Her car was not in the garage.', 'In the evening she posted a photo of mountains.'], q: 'Where was Anna?' },
+    ]},
+  },
+  { id: 'act-debate', num: 17, icon: '⚖️', title: 'Mini debate',
+    levels: ['B1', 'B2', 'C1'],
+    goal: 'Аргументация и мнение для B1+.',
+    how: 'Ученик выбирает сторону и говорит минуту, вы — за противоположную. Потом можно поменяться.',
+    rules: 'Agree or disagree? Defend your position!',
+    phrases: ['I agree because…', 'I see your point, but…', 'On the other hand…', 'That’s true, however…'],
+    play: { type: 'debate', topics: [
+      'Online learning is better than offline learning.',
+      'Social media does more harm than good.',
+      'Money can buy happiness.',
+      'Everyone should learn a second language.',
+      'Working from home is better than working in an office.',
+    ]},
+  },
+  { id: 'act-exit', num: 19, icon: '🎟️', title: 'Exit ticket',
+    levels: ['A0-A1', 'A2', 'B1', 'B2', 'C1'],
+    goal: 'Последние 2 минуты урока — ощущение результата.',
+    how: 'Ученик сам называет 3 новых слова, 1 новую конструкцию и 1 предложение о себе. Можно вписать прямо на экране.',
+    rules: 'Сегодня ты научился говорить…',
+    phrases: [],
+    play: { type: 'exit' },
+  },
+];
+</script>
+<style>
+/* Оформление повторяет кабинет учителя (teacher.html): белый фон, Golos Text + Unbounded,
+   узкий сайдбар с иконками, тёмная hero-карточка, серые stat-плитки. */
+:root{
+  --accent:#D7EF42; --accent-soft:#F1F8C6; --ink:#1C1C1C; --ink-2:rgba(28,28,28,.72); --ink-3:rgba(28,28,28,.55);
+  --panel:#F7F8EF; --card:#FFFFFF; --line:rgba(28,28,28,.12); --r:18px; --red:#D14B3F; --dark:#090A09;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#fff;color:var(--ink);font:15px/1.5 'Golos Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+h1,h2,h3,.unb{font-family:Unbounded,sans-serif;letter-spacing:-.01em}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+
+/* каркас как в кабинете */
+.shell{min-height:100vh;display:flex;max-width:1500px;margin:0 auto}
+.app-sidebar{width:64px;flex-shrink:0;margin:16px 0 16px 16px;background:#fff;border:1px solid var(--line);border-radius:18px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;position:sticky;top:16px;align-self:flex-start;max-height:calc(100vh - 32px)}
+.sb-logo{font-family:Unbounded,sans-serif;font-weight:900;font-size:14px;color:#8a9f1f;margin-bottom:6px;text-decoration:none}
+.tab-btn{width:36px;height:36px;border-radius:11px;border:none;background:none;display:flex;align-items:center;justify-content:center;color:var(--ink-3);flex-shrink:0}
+.tab-btn svg{width:17px;height:17px;stroke:currentColor}
+.tab-btn.active{background:var(--accent);color:var(--dark)}
+.tab-btn:hover:not(.active){background:var(--panel)}
+.sb-bottom{margin-top:auto}
+.main-col{flex:1;min-width:0}
+main.page{padding:24px 28px 60px;max-width:1300px;margin:0 auto}
+@media (min-width:1300px){ main.page{padding:28px 40px 70px} }
+.panel-title{font-family:Unbounded,sans-serif;font-size:24px;font-weight:700;margin:0 0 4px}
+.section-sub{color:var(--ink-3);margin:0 0 18px;font-size:14px}
+
+nav.tabs-mobile{display:none}
+@media (max-width:760px){
+  .app-sidebar{display:none}
+  main.page{padding:18px 16px 96px}
+  .panel-title{font-size:20px}
+  nav.tabs-mobile{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(9,10,9,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-top:1px solid rgba(255,255,255,.1);padding:7px 4px calc(7px + env(safe-area-inset-bottom));justify-content:space-around}
+  nav.tabs-mobile button, nav.tabs-mobile a{background:none;border:none;flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;
+    font-weight:600;font-size:10px;color:rgba(255,255,255,.55);padding:6px 1px;text-decoration:none;white-space:nowrap}
+  nav.tabs-mobile svg{width:19px;height:19px;stroke:currentColor}
+  nav.tabs-mobile .active{color:var(--accent)}
+}
+
+/* hero-карточки как «Ближайший урок / На проверке» */
+.hero-cards{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;margin-bottom:16px}
+@media (max-width:620px){ .hero-cards{grid-template-columns:1fr} }
+.hero-card{border-radius:16px;padding:20px;min-height:104px;display:flex;flex-direction:column}
+.hc-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;opacity:.7}
+.hc-value{font-family:Unbounded,sans-serif;font-weight:800;font-size:17px;margin-top:auto;padding-top:16px;line-height:1.3}
+.hc-note{font-size:13px;margin-top:6px;opacity:.7}
+.hc-dark{background:var(--dark);color:#fff}
+.hc-dark .hc-value{color:var(--accent)}
+.hc-light{background:#fff;border:1px solid var(--line)}
+.hc-lime{background:var(--accent)}
+.hc-lime .hc-label{opacity:.8}
+.hero-card .reset{align-self:flex-start;margin-top:12px}
+
+/* фильтры */
+.filters{border:1.5px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;gap:14px;background:#fff}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.lbl{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);width:100%;margin-bottom:-2px}
+.pill{border:1.5px solid var(--line);background:#fff;border-radius:100px;padding:8px 15px;font-weight:600;font-size:13.5px;transition:.15s}
+.pill:hover{border-color:var(--ink)}
+.pill.level{font-family:Unbounded,sans-serif;font-weight:700;font-size:12.5px}
+.pill[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--dark)}
+.pill.level[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.search{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:15px;background:#fff}
+.search:focus{outline:none;border-color:var(--ink)}
+
+/* раскладка */
+.layout{display:grid;gap:18px;margin-top:18px}
+@media (min-width:1080px){ .layout{grid-template-columns:1fr 280px;align-items:start} .aside{position:sticky;top:16px} }
+.muted{color:var(--ink-3);font-size:13px}
+
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px;transition:border-color .15s}
+.card:hover{border-color:rgba(28,28,28,.3)}
+.meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.badge{display:inline-block;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:100px;background:var(--panel);color:var(--ink-2)}
+.lv-A0A1{background:#EAF3FF;color:#1D5FA5}
+.lv-A2{background:#EAF7E5;color:#3B7A1E}
+.lv-B1{background:#FFF4DE;color:#96650B}
+.lv-B2{background:#F1EAFB;color:#6B3FA0}
+.lv-C1{background:#FBEAEA;color:var(--red)}
+.sect{font-size:12px;color:var(--ink-3)}
+.card h3{margin:0;font-family:Unbounded,sans-serif;font-size:15px;font-weight:700;line-height:1.35;display:flex;gap:10px;align-items:flex-start}
+.card h3 .ic{font-size:22px;line-height:1}
+.idea{margin:0;color:var(--ink-2);font-size:14px}
+.phrases{margin:0;padding:12px 14px;list-style:none;background:var(--panel);border-radius:12px;display:grid;gap:4px;font-weight:500;font-size:14px}
+.phrases li::before{content:"› ";color:var(--ink-3)}
+.practice{font-size:13.5px;border-left:3px solid var(--accent);padding-left:10px}
+.practice b,.result b{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);display:block}
+.result{font-size:13.5px;font-style:italic}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:6px}
+.btn{font-family:Unbounded,sans-serif;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:100px;padding:9px 16px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);transition:transform .15s ease,background .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--dark)}
+.btn.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.empty{text-align:center;padding:36px 20px;color:var(--ink-3);font-size:14px;border:1.5px dashed var(--line);border-radius:var(--r)}
+
+/* универсальные темы — как stat-card */
+.aside{background:var(--panel);border-radius:16px;padding:18px}
+.aside h2{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);margin:0 0 4px;font-family:'Golos Text',sans-serif;font-weight:700}
+.aside p{margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:#fff;border:1px solid var(--line);border-radius:100px;padding:5px 12px;font-size:13px;font-weight:500}
+
+/* show mode — мини-урок */
+.show{position:fixed;inset:0;background:var(--panel);z-index:50;display:none;flex-direction:column}
+.show.open{display:flex}
+.show-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--card);flex-wrap:wrap}
+.show-bar .grow{flex:1}
+.clock{font-family:Unbounded,sans-serif;font-size:13px;font-weight:600;background:var(--panel);border-radius:999px;padding:6px 12px}
+.steps{display:flex;gap:6px;overflow-x:auto;padding:8px 16px;scrollbar-width:none;background:var(--card);border-bottom:1px solid var(--line)}
+.steps::-webkit-scrollbar{display:none}
+.stp{flex:none;border:1.5px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;color:var(--ink-2)}
+.stp.done{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.stp.cur{background:var(--ink);color:var(--accent);border-color:var(--ink)}
+.show-scroll{flex:1;overflow:auto}
+.show-body{max-width:1100px;margin:0 auto;padding:clamp(18px,4vw,40px) 20px 32px;font-size:clamp(17px,1.9vw,22px)}
+.step{display:none}
+.step.cur{display:block;animation:fadein .25s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kicker{font-family:Unbounded,sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:0 0 8px}
+.show h2{font-size:clamp(26px,4.4vw,52px);line-height:1.1;margin:0 0 16px;font-weight:700}
+.show-ic{font-size:clamp(52px,8vw,96px);line-height:1;margin-bottom:10px}
+.show-idea{font-size:clamp(18px,2.3vw,28px);color:var(--ink-2);margin:0 0 24px;max-width:42ch}
+.show-phrases{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.show-phrases li{font-size:clamp(20px,3vw,38px);font-weight:600;background:var(--card);border-left:8px solid var(--accent);border-radius:14px;padding:10px 20px;line-height:1.25}
+.show-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid var(--line);background:var(--card)}
+.show-foot .btn{padding:10px 20px;font-size:15px}
+
+/* разминка / говорим */
+.bubbles{display:grid;gap:14px}
+.bubble{background:var(--card);border-radius:22px 22px 22px 6px;padding:18px 24px;font-size:clamp(22px,3.2vw,40px);font-weight:600;border:1.5px solid var(--line);max-width:900px}
+.bubble:nth-child(even){justify-self:end;border-radius:22px 22px 6px 22px;background:var(--accent-soft);border-color:var(--accent)}
+.speak{display:grid;gap:14px}
+.speak-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:18px 20px;display:grid;grid-template-columns:1fr auto;gap:6px 16px;align-items:center}
+.speak-card .q{font-size:clamp(19px,2.4vw,28px);font-weight:600}
+.speak-card .h{color:var(--ink-2);grid-column:1}
+.speak-card .h::before{content:"💡 "}
+.timer{grid-row:1 / span 2;grid-column:2;font-family:Unbounded,sans-serif;font-weight:600;border:1.5px solid var(--ink);border-radius:999px;padding:10px 16px;background:transparent;min-width:96px}
+.timer.run{background:var(--accent)}
+.timer.over{background:var(--ink);color:var(--accent)}
+@media (max-width:600px){ .speak-card{grid-template-columns:1fr} .timer{grid-row:auto;grid-column:1;justify-self:start} }
+
+/* схемы */
+.note{margin-top:18px;background:var(--ink);color:#fff;border-radius:14px;padding:12px 18px;font-size:.92em}
+.note::before{content:"💡 "}
+.v-compare{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.v-col{background:var(--card);border-radius:var(--r);padding:18px 20px;border-top:8px solid var(--accent)}
+.v-col:nth-child(2){border-top-color:var(--ink)}
+.v-col .ic{font-size:2.2em;line-height:1}
+.v-col h4{font-family:Unbounded,sans-serif;font-size:1em;margin:8px 0 2px}
+.v-col .sub{color:var(--ink-3);font-size:.85em;margin-bottom:10px}
+.v-col ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.v-col li{background:var(--panel);border-radius:10px;padding:6px 12px;font-weight:600}
+.v-formula{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+.v-part{flex:1 1 160px;background:var(--card);border-radius:var(--r);padding:14px 16px;position:relative;border:1.5px solid var(--line)}
+.v-part:nth-child(odd){background:var(--accent-soft);border-color:var(--accent)}
+.v-part b{font-family:Unbounded,sans-serif;font-size:.8em;display:block;color:var(--ink-2);margin-bottom:4px}
+.v-part span{font-weight:600;font-size:1.1em}
+.v-scale{display:grid;gap:8px;border-left:10px solid;border-image:linear-gradient(var(--accent-soft),var(--ink)) 1;padding-left:16px}
+.v-step{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;background:var(--card);border-radius:12px;padding:10px 16px}
+.v-step b{font-size:1.15em;min-width:9em}
+.v-step span{color:var(--ink-2)}
+.v-up{display:grid;gap:10px}
+.v-up-row{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.v-up-row .from{color:var(--ink-3);text-decoration:line-through;text-decoration-color:rgba(0,0,0,.25)}
+.v-up-row .arr{font-size:1.3em}
+.v-up-row .to{background:var(--accent);border-radius:12px;padding:8px 14px;font-weight:600}
+@media (max-width:600px){ .v-up-row{grid-template-columns:1fr} .v-up-row .arr{display:none} }
+.v-table{display:grid;gap:8px}
+.v-row{display:grid;grid-template-columns:2.2em 1fr 1fr;gap:12px;align-items:center;background:var(--card);border-radius:12px;padding:10px 16px}
+.v-row .e{font-size:1.5em}
+.v-row :nth-child(2){font-weight:600}
+.v-row :nth-child(3){color:var(--ink-2)}
+@media (max-width:600px){ .v-row{grid-template-columns:2em 1fr} .v-row :nth-child(3){grid-column:2} }
+
+/* задания */
+.task-score{display:inline-block;margin-left:10px;font-family:'Golos Text',sans-serif;text-transform:none;letter-spacing:0;background:var(--accent);color:var(--ink);border-radius:999px;padding:2px 10px}
+.items{display:grid;gap:12px}
+.item{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:14px 18px;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;transition:border-color .2s}
+.item.ok{border-color:#7FB800}
+.item .pic{font-size:1.9em;grid-row:span 2}
+.item .q{font-weight:600}
+.gap{display:inline-block;min-width:3.5em;border-bottom:3px solid var(--ink-3);text-align:center;color:var(--ink-3)}
+.gap.filled{border-color:#7FB800;color:var(--ink);background:var(--accent-soft);border-radius:6px 6px 0 0;padding:0 6px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{border:1.5px solid var(--ink);background:var(--panel);border-radius:999px;padding:8px 16px;font-weight:600;font-size:.95em}
+.opt:hover:not(:disabled){background:var(--accent-soft)}
+.opt.right{background:#C8EA7A;border-color:#7FB800}
+.opt.wrong{background:#FBD9D5;border-color:#D9534F;animation:shake .35s}
+.opt:disabled{cursor:default}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.build{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:14px 18px;display:grid;gap:10px}
+.build.ok{border-color:#7FB800}
+.build.bad{border-color:#D9534F}
+.line{min-height:52px;border-bottom:3px dashed var(--line);display:flex;flex-wrap:wrap;gap:8px;padding-bottom:8px;align-items:center}
+.build.ok .line{border-bottom-color:#7FB800}
+.bank{display:flex;flex-wrap:wrap;gap:8px}
+.w{border:1.5px solid var(--ink);background:var(--accent-soft);border-radius:10px;padding:6px 12px;font-weight:600;font-size:.95em}
+.line .w{background:var(--card)}
+.build.ok .w{background:#C8EA7A;border-color:#7FB800;cursor:default}
+.build-row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.linkbtn{border:0;background:none;color:var(--ink-3);text-decoration:underline;font-size:.8em;padding:0}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.match-col{display:grid;gap:10px;align-content:start}
+.m{border:1.5px solid var(--ink);background:var(--card);border-radius:14px;padding:12px 16px;font-weight:600;text-align:left;font-size:.95em}
+.m.sel{background:var(--accent);}
+.m.done{background:#C8EA7A;border-color:#7FB800;opacity:.75;cursor:default}
+.m.wrong{background:#FBD9D5;border-color:#D9534F;animation:shake .35s}
+.reveal{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap}
+.reveal .q{font-weight:600}
+.reveal .a{width:100%;background:var(--accent-soft);border-radius:10px;padding:8px 14px;font-weight:600;display:none}
+.reveal.open .a{display:block;animation:fadein .25s}
+.result-big{font-family:Unbounded,sans-serif;font-size:clamp(24px,4vw,46px);line-height:1.2;background:var(--accent);border-radius:var(--r);padding:clamp(18px,3vw,32px);margin:0 0 20px}
+.result-big::before{content:"✓ ";}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:500;opacity:0;pointer-events:none;transition:.2s;z-index:60;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.err{background:#B3261E}
+/* активности */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.big-q{font-size:clamp(22px,3.2vw,38px);font-weight:600;margin:0 0 16px;line-height:1.25}
+.helper{margin-top:22px;background:var(--card);border:1.5px dashed var(--line);border-radius:14px;padding:10px 16px;color:var(--ink-2);font-size:.9em}
+.play-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end;margin-top:16px}
+.play-row .muted{margin-right:auto}
+.timer.big{font-size:1.2em;padding:14px 24px}
+.facts{display:grid;gap:12px}
+.fact{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:16px 20px;text-align:left;font-size:clamp(18px,2.4vw,28px);font-weight:600}
+.fact .n{font-family:Unbounded,sans-serif;background:var(--ink);color:var(--accent);border-radius:50%;width:1.8em;height:1.8em;display:grid;place-items:center;font-size:.7em}
+.fact .t[contenteditable]{min-height:1.4em;outline:none;border-bottom:2px dashed var(--line)}
+.fact .t[contenteditable]:empty::before{content:attr(data-ph);color:var(--ink-3)}
+.fact .verdict{font-family:Unbounded,sans-serif;font-size:.7em}
+.fact.truth{border-color:#7FB800;background:#EEF8D8}
+.fact.lie{border-color:#D9534F;background:#FBE3E0}
+.fact.guess{border-color:var(--ink);background:var(--accent-soft)}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch}
+.vs-opt{border:2px solid var(--ink);background:var(--card);border-radius:var(--r);padding:clamp(18px,3vw,36px);font-size:clamp(20px,2.8vw,34px);font-weight:600;line-height:1.2}
+.vs-opt:hover{background:var(--accent-soft)}
+.vs-opt.picked{background:var(--accent)}
+.vs-or{align-self:center;font-family:Unbounded,sans-serif;font-weight:700;font-size:1.2em}
+@media (max-width:600px){ .vs{grid-template-columns:1fr} .vs-or{justify-self:center} }
+.rank{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.rank-item{display:flex;gap:14px;align-items:center;border:1.5px solid var(--ink);background:var(--card);border-radius:14px;padding:12px 18px;font-size:clamp(19px,2.4vw,28px);font-weight:600;text-align:left}
+.rank-item .pos{font-family:Unbounded,sans-serif;width:1.7em;height:1.7em;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;font-size:.8em}
+.rank-item.on{background:var(--accent-soft)}
+.rank-item.on .pos{background:var(--ink);color:var(--accent);border:0}
+.sit-card{background:var(--ink);color:#fff;border-radius:var(--r);padding:clamp(20px,4vw,40px)}
+.sit-card p{font-size:clamp(22px,3.4vw,42px);font-weight:600;margin:10px 0 18px;line-height:1.2}
+.sit-lbl{color:var(--accent);font-family:Unbounded,sans-serif;font-size:.9em}
+.sit-role{display:inline-block;background:var(--accent);color:var(--ink);border-radius:999px;padding:6px 14px;font-weight:600;font-size:.85em}
+.pic-grid{display:grid;gap:20px}
+@media (min-width:900px){ .pic-grid{grid-template-columns:1.2fr 1fr;align-items:start} }
+.scene{background:linear-gradient(#E8F4FF,#FFF8E6);border-radius:var(--r);border:1.5px solid var(--line);padding:clamp(16px,3vw,32px);text-align:center;font-size:clamp(40px,7vw,78px);line-height:1.35;display:grid;gap:4px}
+.scene div{letter-spacing:.12em}
+.pic-grid .bubble{font-size:clamp(18px,2.2vw,26px)}
+.clues{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.clue{border:2px dashed var(--ink);background:var(--card);border-radius:var(--r);padding:22px;font-size:clamp(18px,2.2vw,26px);font-weight:600;min-height:110px}
+.clue:not(.open){color:var(--ink-3)}
+.clue.open{border-style:solid;background:var(--accent-soft);cursor:default;animation:fadein .3s}
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.side{border-radius:var(--r);padding:18px;display:grid;gap:12px;justify-items:start}
+.side h4{margin:0;font-family:Unbounded,sans-serif;font-size:1.1em}
+.side.for{background:#EEF8D8;border:1.5px solid #7FB800}
+.side.against{background:#FBE3E0;border:1.5px solid #D9534F}
+.side .timer{grid-row:auto;grid-column:auto}
+@media (max-width:600px){ .sides{grid-template-columns:1fr} }
+.exit{display:grid;gap:14px;margin-bottom:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.exit-box{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:8px;align-content:start}
+.exit-box input{font:inherit;border:0;border-bottom:2px solid var(--line);padding:6px 2px;background:transparent;min-width:0}
+.exit-box input:focus{outline:none;border-color:var(--accent)}
+.exit-mini{background:var(--card);border:1.5px dashed var(--ink);border-radius:14px;padding:12px 16px;margin-bottom:18px}
+.exit-mini b{margin-right:8px}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="app-sidebar" aria-label="Разделы">
+    <a class="sb-logo" href="teacher.html" title="Кабинет учителя">Y!</a>
+    <button class="tab-btn" data-mode="topics" title="Микро-темы"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></button>
+    <button class="tab-btn" data-mode="acts" title="Разговорные активности"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg></button>
+    <a class="tab-btn sb-bottom" href="teacher.html" title="Вернуться в кабинет"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
+  </aside>
+
+  <div class="main-col">
+    <main class="page">
+      <h1 class="panel-title" id="pageTitle">Микро-темы</h1>
+      <p class="section-sub" id="pageSub"></p>
+
+      <div id="banners"></div>
+
+      <section class="filters">
+        <div class="row" id="levels"><span class="lbl">Уровень</span></div>
+        <div class="row" id="situations"><span class="lbl">Ситуация ученика</span></div>
+        <input class="search" id="search" type="search" placeholder="Поиск по названию и фразам…" autocomplete="off">
+      </section>
+
+      <div class="layout">
+        <div>
+          <div class="grid" id="grid"></div>
+        </div>
+        <aside class="aside">
+          <h2>Универсальные темы для практики</h2>
+          <p class="muted">Подходят после любой микро-темы</p>
+          <div class="chips" id="universal"></div>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+
+<nav class="tabs-mobile" aria-label="Разделы">
+  <button data-mode="topics"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Микро-темы</button>
+  <button data-mode="acts"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg>Активности</button>
+  <a href="teacher.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Кабинет</a>
+</nav>
+
+<div class="show" id="show" role="dialog" aria-modal="true" aria-label="Урок">
+  <div class="show-bar">
+    <button class="btn" id="showBack">✕ К списку</button>
+    <span class="grow"></span>
+    <span class="clock" id="clock" title="Время урока">⏱ 00:00</span>
+    <button class="btn" id="showLink" title="Скопировать ссылку, чтобы ученик открыл урок у себя">🔗 Ссылка ученику</button>
+    <button class="btn" id="showFs">⛶ Во весь экран</button>
+  </div>
+  <nav class="steps" id="steps"></nav>
+  <div class="show-scroll" id="showScroll"><div class="show-body" id="showBody"></div></div>
+  <div class="show-foot">
+    <button class="btn" id="stepPrev">← Назад</button>
+    <span class="muted" id="stepCount"></span>
+    <button class="btn primary" id="stepNext">Дальше →</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const byId = Object.fromEntries([...TOPICS, ...ACTIVITIES].map(t => [t.id, t]));   // темы и активности
+
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} },
+};
+
+const savedLevel = store.get('york-topics-level');
+const state = {
+  level: (savedLevel === 'all' || LEVELS.includes(savedLevel)) ? savedLevel : 'A0-A1',
+  situation: null,
+  query: '',
+  mode: store.get('york-topics-mode') === 'acts' ? 'acts' : 'topics',   // topics — микро-темы, acts — активности
+};
+let visible = [];   // темы, показанные сейчас в списке
+
+/* ---------- фильтры ---------- */
+function renderFilters(){
+  document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === state.mode));
+  $('#pageTitle').textContent = state.mode === 'acts' ? 'Разговорные активности' : 'Микро-темы';
+  $('#pageSub').textContent = state.mode === 'acts'
+    ? 'Игры и задания для разговора — вставляются в любой пробный урок.'
+    : 'Найдите тему по уровню или ситуации ученика и покажите её на экране — это готовый урок на 15 минут.';
+
+  const lv = $('#levels');
+  lv.querySelectorAll('.pill').forEach(n => n.remove());
+  [['all','Все'], ...LEVELS.map(l => [l,l])].forEach(([val,label]) => {
+    const b = document.createElement('button');
+    b.className = 'pill level';
+    b.textContent = label;
+    b.setAttribute('aria-pressed', state.level === val);
+    b.onclick = () => { state.level = val; store.set('york-topics-level', val); render(); };
+    lv.appendChild(b);
+  });
+
+  const st = $('#situations');
+  st.style.display = state.mode === 'acts' ? 'none' : '';   // ситуации относятся только к микро-темам
+  st.querySelectorAll('.pill').forEach(n => n.remove());
+  SITUATION_GUIDE.forEach(s => {
+    const b = document.createElement('button');
+    b.className = 'pill sit';
+    b.textContent = s.label;
+    b.setAttribute('aria-pressed', state.situation === s.key);
+    b.onclick = () => {
+      if (state.situation === s.key) { state.situation = null; }
+      else { state.situation = s.key; state.level = 'all'; } // ситуация — сразу все подходящие темы, минуя уровень
+      render();
+    };
+    st.appendChild(b);
+  });
+}
+
+function computeVisible(){
+  const q = state.query.trim().toLowerCase();
+  if (state.mode === 'acts') {
+    let list = ACTIVITIES;
+    if (q) return list.filter(a => (a.title + ' ' + a.goal + ' ' + a.how + ' ' + a.phrases.join(' ')).toLowerCase().includes(q));
+    if (state.level !== 'all') list = list.filter(a => a.levels.includes(state.level));
+    return list;
+  }
+  if (q) {
+    // поиск — по всем темам, независимо от фильтров
+    return TOPICS.filter(t => (t.title + ' ' + t.phrases.join(' ') + ' ' + t.section).toLowerCase().includes(q));
+  }
+  let list = state.situation
+    ? SITUATION_GUIDE.find(s => s.key === state.situation).topics.map(id => byId[id]).filter(Boolean)
+    : TOPICS;
+  if (state.level !== 'all') list = list.filter(t => t.level === state.level);
+  return list;
+}
+
+function renderBanners(){
+  const box = $('#banners');
+  const q = state.query.trim();
+  const count = computeVisible().length;
+  const noun = state.mode === 'acts' ? 'активностей' : 'тем';
+  let main = '';
+  if (q) {
+    main = `<div class="hero-card hc-lime"><div class="hc-label">Поиск по всем ${state.mode === 'acts' ? 'активностям' : 'уровням'}</div>
+      <div class="hc-value">«${esc(q)}»</div><button class="btn dark reset" data-reset="search">Очистить</button></div>`;
+  } else if (state.situation) {
+    const s = SITUATION_GUIDE.find(x => x.key === state.situation);
+    main = `<div class="hero-card hc-lime"><div class="hc-label">Ситуация ученика</div>
+      <div class="hc-value">${esc(s.label)}</div><div class="hc-note">${esc(s.hint)}</div>
+      <button class="btn dark reset" data-reset="sit">Сбросить</button></div>`;
+  } else if (state.level !== 'all' && state.mode === 'topics') {
+    const g = LEVEL_GOALS[state.level];
+    main = `<div class="hero-card hc-dark"><div class="hc-label">Цель уровня ${esc(state.level)}</div>
+      <div class="hc-value">«${esc(g.goal)}»</div>${g.note ? `<div class="hc-note">${esc(g.note)}</div>` : ''}</div>`;
+  } else {
+    main = `<div class="hero-card hc-dark"><div class="hc-label">${state.mode === 'acts' ? 'Разговорные активности' : 'Все уровни'}</div>
+      <div class="hc-value">${state.mode === 'acts' ? 'Разговорить ученика за пару минут' : 'A0-A1 → C1: выберите уровень ученика'}</div></div>`;
+  }
+  const side = `<div class="hero-card hc-light"><div class="hc-label">${q ? 'Нашлось' : 'Сейчас на экране'}</div>
+    <div class="hc-value">${count} ${noun}</div><div class="hc-note">${state.mode === 'acts' ? 'правила + интерактивный экран' : 'каждая — урок ≈15 минут'}</div></div>`;
+  box.innerHTML = `<div class="hero-cards">${main}${side}</div>`;
+  box.querySelectorAll('[data-reset]').forEach(b => b.onclick = () => {
+    if (b.dataset.reset === 'search') { state.query = ''; $('#search').value = ''; }
+    else state.situation = null;
+    render();
+  });
+}
+
+const levelRange = lv => lv.length === LEVELS.length ? 'Любой уровень' : lv.length > 1 ? `${lv[0]} – ${lv[lv.length - 1]}` : lv[0];
+
+function actCardHTML(a){
+  return `<article class="card">
+    <div class="meta"><span class="badge">${esc(levelRange(a.levels))}</span><span class="sect">Активность №${a.num}</span></div>
+    <h3><span class="ic">${a.icon}</span><span>${esc(a.title)}</span></h3>
+    <p class="idea"><b>Цель:</b> ${esc(a.goal)}</p>
+    <div class="practice"><b>Как проводить</b>${esc(a.how)}</div>
+    ${a.phrases.length ? `<ul class="phrases">${a.phrases.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+    <div class="actions">
+      <button class="btn primary" data-show="${a.id}">▶ Показать ученику</button>
+      ${a.phrases.length ? `<button class="btn" data-copy="${a.id}">Скопировать фразы</button>` : ''}
+    </div>
+  </article>`;
+}
+
+function cardHTML(t){
+  if (t.play) return actCardHTML(t);
+  return `<article class="card">
+    <div class="meta"><span class="badge lv-${t.level.replace(/[^A-Z0-9]/gi, '')}">${esc(t.level)}</span><span class="sect">${esc(t.section)}</span></div>
+    <h3><span class="ic">${t.icon}</span><span>${esc(t.title)}</span></h3>
+    <p class="idea">${esc(t.idea)}</p>
+    <ul class="phrases">${t.phrases.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+    <div class="practice"><b>Практика</b>${esc(t.practice)}</div>
+    <div class="result"><b>Результат</b>«${esc(t.result)}»</div>
+    <div class="actions">
+      <button class="btn primary" data-show="${t.id}">▶ Показать ученику</button>
+      <span class="muted" style="align-self:center">урок ≈15 мин · ${stepCount(t)} шагов</span>
+      <button class="btn" data-copy="${t.id}">Скопировать фразы</button>
+    </div>
+  </article>`;
+}
+
+function renderGrid(){
+  visible = computeVisible();
+  const grid = $('#grid');
+  if (!visible.length) {
+    const combo = state.mode === 'topics' && state.situation && state.level !== 'all' && !state.query.trim();
+    grid.innerHTML = `<div class="empty">${combo
+      ? 'Для этой ситуации на выбранном уровне тем нет. Выберите «Все» или другой уровень.'
+      : state.mode === 'acts' && !state.query.trim() ? 'Для этого уровня активностей нет — выберите «Все».' : 'Ничего не нашлось.'}</div>`;
+    return;
+  }
+  grid.innerHTML = visible.map(cardHTML).join('');
+}
+
+function render(){ renderFilters(); renderBanners(); renderGrid(); }
+
+$('#grid').addEventListener('click', e => {
+  const s = e.target.closest('[data-show]');
+  if (s) return openShow(byId[s.dataset.show]);
+  const c = e.target.closest('[data-copy]');
+  if (c) copyPhrases(byId[c.dataset.copy]);
+});
+
+document.querySelectorAll('[data-mode]').forEach(b => b.onclick = () => {
+  state.mode = b.dataset.mode; state.situation = null; store.set('york-topics-mode', state.mode); render();
+});
+
+$('#search').addEventListener('input', e => { state.query = e.target.value; renderBanners(); renderGrid(); });
+
+$('#universal').innerHTML = UNIVERSAL_TOPICS.map(u => `<span class="chip">${esc(u)}</span>`).join('');
+
+/* ---------- копирование ---------- */
+let toastTimer;
+function toast(msg, isErr){
+  const el = $('#toast');
+  el.textContent = msg;
+  el.classList.toggle('err', !!isErr);
+  el.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('on'), isErr ? 4000 : 1800);
+}
+
+function fallbackCopy(text){
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.setAttribute('readonly',''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch(e){}
+  ta.remove();
+  return ok;
+}
+
+async function copyPhrases(t){
+  const text = t.phrases.join('\n');
+  let ok = false;
+  try { await navigator.clipboard.writeText(text); ok = true; }
+  catch(e){ ok = fallbackCopy(text); }
+  if (ok) toast(`Скопировано фраз: ${t.phrases.length}`);
+  else toast('Не получилось скопировать — выделите фразы в карточке вручную', true);
+}
+
+/* ---------- мини-урок (режим показа) ---------- */
+const show = $('#show');
+const TASK_TITLES = { choose: 'Выбери правильный вариант', build: 'Собери предложение', match: 'Найди пару', reveal: 'Скажи сам — потом проверь' };
+let lesson = null;   // { topic, steps: [{label, node}], cur, started, clockTimer }
+
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+function node(html){ const d = document.createElement('div'); d.className = 'step'; d.innerHTML = html; return d; }
+const head = (kicker, title) => `<p class="kicker">${kicker}</p>${title ? `<h2>${esc(title)}</h2>` : ''}`;
+
+function lessonSteps(t){
+  if (t.play) return actSteps(t);
+  const L = LESSONS[t.id] || {};
+  const steps = [];
+  if (L.warmup) steps.push({ label: 'Разминка', node: stepWarmup(L.warmup) });
+  steps.push({ label: 'Тема', node: stepIntro(t) });
+  if (L.visual) steps.push({ label: 'Схема', node: stepVisual(t, L.visual) });
+  (L.tasks || []).forEach((task, i) => steps.push({ label: `Задание ${i + 1}`, node: stepTask(task, i + 1) }));
+  if (L.speak) steps.push({ label: 'Говорим', node: stepSpeak(L.speak) });
+  steps.push({ label: 'Итог', node: stepResult(t) });
+  return steps;
+}
+const stepCount = t => { if (t.play) return 2; const L = LESSONS[t.id] || {}; return (L.warmup ? 1 : 0) + 1 + (L.visual ? 1 : 0) + (L.tasks || []).length + (L.speak ? 1 : 0) + 1; };
+
+function stepWarmup(qs){
+  return node(`${head('Разминка', 'Let’s talk!')}<div class="bubbles">${qs.map(q => `<div class="bubble">${esc(q)}</div>`).join('')}</div>`);
+}
+
+function stepIntro(t){
+  return node(`<div class="show-ic">${t.icon}</div><h2>${esc(t.title)}</h2>
+    <p class="show-idea">${esc(t.idea)}</p>
+    <ul class="show-phrases">${t.phrases.map(p => `<li>${esc(p)}</li>`).join('')}</ul>`);
+}
+
+function stepVisual(t, v){
+  let body = '';
+  if (v.type === 'compare') body = `<div class="v-compare">${v.cols.map(c => `<div class="v-col">
+      <div class="ic">${c.icon || ''}</div><h4>${esc(c.label)}</h4>${c.sub ? `<div class="sub">${esc(c.sub)}</div>` : ''}
+      <ul>${c.examples.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>`;
+  if (v.type === 'formula') body = `<div class="v-formula">${v.parts.map(p => `<div class="v-part"><b>${esc(p.t)}</b><span>${esc(p.ex)}</span></div>`).join('')}</div>`;
+  if (v.type === 'scale') body = `<div class="v-scale">${v.steps.map(s => `<div class="v-step"><b>${esc(s.w)}</b><span>${esc(s.d)}</span></div>`).join('')}</div>`;
+  if (v.type === 'upgrade') body = `<div class="v-up">${v.pairs.map(([a, b]) => `<div class="v-up-row"><span class="from">${esc(a)}</span><span class="arr">→</span><span class="to">${esc(b)}</span></div>`).join('')}</div>`;
+  if (v.type === 'table') body = `<div class="v-table">${v.rows.map(r => `<div class="v-row"><span class="e">${r[0]}</span><span>${esc(r[1])}</span><span>${esc(r[2] || '')}</span></div>`).join('')}</div>`;
+  return node(`${head('Схема', t.title)}${body}${v.note ? `<div class="note">${esc(v.note)}</div>` : ''}`);
+}
+
+function stepTask(task, n){
+  const d = node(`${head(`Задание ${n}<span class="task-score" hidden></span>`, task.title || TASK_TITLES[task.type])}<div class="items"></div>`);
+  const box = d.querySelector('.items');
+  const score = d.querySelector('.task-score');
+  const total = task.type === 'match' ? task.pairs.length : task.items.length;
+  let doneCount = 0;
+  const done = () => { doneCount++; score.hidden = false; score.textContent = `${doneCount} / ${total}` + (doneCount === total ? ' 🎉' : ''); };
+
+  if (task.type === 'choose') task.items.forEach(it => {
+    const el = document.createElement('div');
+    el.className = 'item';
+    el.innerHTML = `<span class="pic">${it.pic || '❔'}</span>
+      <div class="q">${esc(it.q).replace(/___/g, '<span class="gap">?</span>')}</div>
+      <div class="opts"></div>`;
+    const opts = el.querySelector('.opts');
+    shuffle(it.options.map((o, i) => ({ o, i }))).forEach(({ o, i }) => {
+      const b = document.createElement('button');
+      b.className = 'opt'; b.textContent = o;
+      b.onclick = () => {
+        if (i !== it.a) { b.classList.add('wrong'); b.disabled = true; return; }
+        b.classList.add('right'); el.classList.add('ok');
+        opts.querySelectorAll('.opt').forEach(x => x.disabled = true);
+        const gaps = el.querySelectorAll('.gap');
+        const parts = o.split(' / ');   // «drinks / is drinking» → в два пропуска
+        gaps.forEach((g, k) => { g.textContent = gaps.length > 1 ? (parts[k] || o) : o; g.classList.add('filled'); });
+        done();
+      };
+      opts.appendChild(b);
+    });
+    box.appendChild(el);
+  });
+
+  if (task.type === 'build') task.items.forEach(sentence => {
+    const words = sentence.split(' ');
+    let order = shuffle(words);
+    for (let k = 0; k < 5 && words.length > 1 && order.join(' ') === sentence; k++) order = shuffle(words);
+    const el = document.createElement('div');
+    el.className = 'build';
+    el.innerHTML = `<div class="line"></div><div class="build-row"><div class="bank"></div><button class="linkbtn">показать ответ</button></div>`;
+    const line = el.querySelector('.line'), bank = el.querySelector('.bank');
+    let solved = false;
+    const check = () => {
+      el.classList.remove('bad');
+      if (bank.children.length) return;
+      const got = [...line.children].map(w => w.textContent).join(' ');
+      if (got === sentence) { solved = true; el.classList.add('ok'); done(); }
+      else el.classList.add('bad');
+    };
+    order.forEach(w => {
+      const b = document.createElement('button');
+      b.className = 'w'; b.textContent = w;
+      b.onclick = () => { if (solved) return; (b.parentNode === bank ? line : bank).appendChild(b); check(); };
+      bank.appendChild(b);
+    });
+    el.querySelector('.linkbtn').onclick = () => {
+      if (solved) return;
+      const btns = [...line.children, ...bank.children];
+      words.forEach(w => { const b = btns.find(x => x.textContent === w && !x.dataset.used); b.dataset.used = 1; line.appendChild(b); });
+      check();
+    };
+    box.appendChild(el);
+  });
+
+  if (task.type === 'match') {
+    const wrap = document.createElement('div');
+    wrap.className = 'match';
+    const L = document.createElement('div'), R = document.createElement('div');
+    L.className = R.className = 'match-col';
+    let sel = { l: null, r: null };
+    const mk = (text, idx, side) => {
+      const b = document.createElement('button');
+      b.className = 'm'; b.textContent = text; b.dataset.idx = idx;
+      b.onclick = () => {
+        if (b.classList.contains('done')) return;
+        (side === 'l' ? L : R).querySelectorAll('.sel').forEach(x => x.classList.remove('sel'));
+        b.classList.add('sel'); sel[side] = b;
+        if (sel.l && sel.r) {
+          const a = sel.l, c = sel.r;
+          if (a.dataset.idx === c.dataset.idx) { a.className = c.className = 'm done'; done(); }
+          else [a, c].forEach(x => { x.classList.remove('sel'); x.classList.add('wrong'); setTimeout(() => x.classList.remove('wrong'), 450); });
+          sel = { l: null, r: null };
+        }
+      };
+      return b;
+    };
+    task.pairs.forEach(([a], i) => L.appendChild(mk(a, i, 'l')));
+    shuffle(task.pairs.map(([, b], i) => ({ b, i }))).forEach(({ b, i }) => R.appendChild(mk(b, i, 'r')));
+    wrap.append(L, R);
+    box.appendChild(wrap);
+  }
+
+  if (task.type === 'reveal') task.items.forEach(it => {
+    const el = document.createElement('div');
+    el.className = 'reveal';
+    el.innerHTML = `<span class="q">${esc(it.q)}</span><button class="opt">Ответ</button><div class="a">${esc(it.a)}</div>`;
+    const b = el.querySelector('button');
+    let counted = false;
+    b.onclick = () => {
+      const open = el.classList.toggle('open');
+      b.textContent = open ? 'Скрыть' : 'Ответ';
+      if (open && !counted) { counted = true; done(); }
+    };
+    box.appendChild(el);
+  });
+  return d;
+}
+
+function stepSpeak(list){
+  const d = node(`${head('Говорим', 'Your turn!')}<div class="speak">${list.map(s => `<div class="speak-card">
+      <div class="q">${esc(s.q)}</div><div class="h">${esc(s.hint || '')}</div></div>`).join('')}</div>`);
+  d.querySelectorAll('.speak-card').forEach(c => c.appendChild(makeTimer(60)));
+  return d;
+}
+
+function stepResult(t){
+  return node(`${head('Итог', '')}<div class="result-big">${esc(t.result)}</div>
+    <div class="exit-mini"><b>🎟️ Exit ticket</b> Назови: 3 новых слова · 1 новую конструкцию · 1 предложение о себе</div>
+    <p class="kicker">Продолжаем говорить</p>
+    <div class="chips">${UNIVERSAL_TOPICS.map(u => `<span class="chip" style="font-size:1em;padding:8px 16px">${esc(u)}</span>`).join('')}</div>`);
+}
+
+/* ---------- разговорные активности ---------- */
+let runningTimers = [];   // останавливаем при закрытии урока
+
+// кнопка-таймер: клик — старт, ещё клик — пауза, после «Время!» — заново
+function makeTimer(sec, cls){
+  const b = document.createElement('button');
+  b.className = 'timer' + (cls ? ' ' + cls : '');
+  let left = sec, id = null;
+  const fmt = n => `${Math.floor(n / 60)}:${String(n % 60).padStart(2, '0')}`;
+  const draw = () => { b.textContent = left > 0 ? `⏱ ${fmt(left)}` : 'Время! ✓'; };
+  const stop = () => { clearInterval(id); runningTimers = runningTimers.filter(x => x !== id); id = null; b.classList.remove('run'); };
+  b.onclick = () => {
+    if (id) return stop();
+    if (left <= 0) { left = sec; b.classList.remove('over'); draw(); }
+    b.classList.add('run');
+    id = setInterval(() => { left--; draw(); if (left <= 0) { stop(); b.classList.add('over'); b.dispatchEvent(new Event('timeup')); } }, 1000);
+    runningTimers.push(id);
+  };
+  draw();
+  return b;
+}
+
+// вкладки внутри экрана (уровни, категории)
+function makeTabs(labels, onPick){
+  const w = document.createElement('div');
+  w.className = 'tabs';
+  labels.forEach((l, i) => {
+    const b = document.createElement('button');
+    b.className = 'stp' + (i ? '' : ' cur');
+    b.textContent = l;
+    b.onclick = () => { w.querySelectorAll('.stp').forEach(x => x.classList.remove('cur')); b.classList.add('cur'); onPick(i); };
+    w.appendChild(b);
+  });
+  return w;
+}
+
+const helper = list => list && list.length ? `<div class="helper">💬 ${list.map(esc).join(' · ')}</div>` : '';
+function btn(text, cls, onclick){ const b = document.createElement('button'); b.className = cls || 'btn'; b.textContent = text; b.onclick = onclick; return b; }
+
+function actSteps(a){
+  const intro = node(`<div class="show-ic">${a.icon}</div><h2>${esc(a.title)}</h2>
+    <p class="show-idea">${esc(a.rules)}</p>
+    ${a.phrases.length ? `<p class="kicker">Фразы в помощь</p><ul class="show-phrases">${a.phrases.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}`);
+  const play = node(`${head(a.icon + ' ' + esc(a.title), '')}`);
+  PLAY[a.play.type](a, play);
+  return [{ label: 'Правила', node: intro }, { label: 'Играем', node: play }];
+}
+
+const PLAY = {
+  truths(a, root){
+    const area = document.createElement('div');
+    const draw = i => {
+      area.innerHTML = '';
+      if (i === a.play.sets.length) {   // «Твоя очередь» — три пустые карточки
+        area.innerHTML = `<p class="big-q">Your turn! Tell me 2 truths and 1 lie.</p>`;
+        const g = document.createElement('div'); g.className = 'facts';
+        const states = ['?', '🤔 My guess', '✓ Truth', '✗ Lie'], cls = ['', 'guess', 'truth', 'lie'];
+        [1, 2, 3].forEach(n => {
+          const c = document.createElement('div'); c.className = 'fact';
+          c.innerHTML = `<span class="n">${n}</span><div class="t" contenteditable="true" data-ph="Fact ${n}…"></div>`;
+          let k = 0;
+          c.appendChild(btn(states[0], 'opt', function(){ k = (k + 1) % states.length; this.textContent = states[k]; c.className = 'fact ' + cls[k]; }));
+          g.appendChild(c);
+        });
+        area.appendChild(g);
+        area.insertAdjacentHTML('beforeend', `<p class="muted" style="margin-top:12px">Факты можно вписать прямо в карточки. Кнопка под фактом: догадка → правда → ложь.</p>`);
+        return;
+      }
+      const set = a.play.sets[i];
+      area.innerHTML = `<p class="big-q">${esc(set.intro)} Which one is a lie?</p>`;
+      const g = document.createElement('div'); g.className = 'facts';
+      set.facts.forEach(([text, isLie], n) => {
+        const c = document.createElement('button'); c.className = 'fact';
+        c.innerHTML = `<span class="n">${n + 1}</span><span class="t">${esc(text)}</span><span class="verdict"></span>`;
+        c.onclick = () => { c.classList.add(isLie ? 'lie' : 'truth'); c.querySelector('.verdict').textContent = isLie ? '✗ LIE!' : '✓ True'; };
+        g.appendChild(c);
+      });
+      area.appendChild(g);
+    };
+    root.append(makeTabs([...a.play.sets.map(s => 'Tom · ' + s.label), '🙋 Your turn'], draw), area);
+    root.insertAdjacentHTML('beforeend', helper(a.phrases));
+    draw(0);
+  },
+
+  rather(a, root){
+    const area = document.createElement('div');
+    let set = 0, qi = 0;
+    const draw = () => {
+      const [x, y] = a.play.sets[set].qs[qi];
+      area.innerHTML = `<p class="big-q">Would you rather…</p>`;
+      const vs = document.createElement('div'); vs.className = 'vs';
+      const pick = b => { vs.querySelectorAll('.vs-opt').forEach(o => o.classList.toggle('picked', o === b)); };
+      const bx = btn(x, 'vs-opt', function(){ pick(this); }), by = btn(y, 'vs-opt', function(){ pick(this); });
+      vs.append(bx, Object.assign(document.createElement('span'), { className: 'vs-or', textContent: 'or' }), by);
+      area.appendChild(vs);
+      const row = document.createElement('div'); row.className = 'play-row';
+      row.append(Object.assign(document.createElement('span'), { className: 'muted', textContent: `${qi + 1} / ${a.play.sets[set].qs.length}` }),
+        btn('Другой вопрос →', 'btn primary', () => { qi = (qi + 1) % a.play.sets[set].qs.length; draw(); }));
+      area.appendChild(row);
+    };
+    root.append(makeTabs(a.play.sets.map(s => s.label), i => { set = i; qi = 0; draw(); }), area);
+    root.insertAdjacentHTML('beforeend', helper(a.phrases));
+    draw();
+  },
+
+  ranking(a, root){
+    const area = document.createElement('div');
+    const draw = i => {
+      const set = a.play.sets[i];
+      let ranked = [];
+      area.innerHTML = `<p class="big-q">${esc(set.title)}</p><p class="muted">Нажимайте по порядку: сначала самое важное. Повторное нажатие убирает из рейтинга.</p>`;
+      const list = document.createElement('div'); list.className = 'rank';
+      const paint = () => list.querySelectorAll('.rank-item').forEach(b => {
+        const pos = ranked.indexOf(b.dataset.v);
+        b.querySelector('.pos').textContent = pos >= 0 ? pos + 1 : '';
+        b.classList.toggle('on', pos >= 0);
+        b.style.order = pos >= 0 ? pos : 99;
+      });
+      set.items.forEach(v => {
+        const b = document.createElement('button'); b.className = 'rank-item'; b.dataset.v = v;
+        b.innerHTML = `<span class="pos"></span><span>${esc(v)}</span>`;
+        b.onclick = () => { ranked = ranked.includes(v) ? ranked.filter(x => x !== v) : [...ranked, v]; paint(); };
+        list.appendChild(b);
+      });
+      area.appendChild(list);
+      area.appendChild(btn('Сбросить', 'btn', () => { ranked = []; paint(); }));
+      paint();
+    };
+    root.append(makeTabs(a.play.sets.map(s => s.label), draw), area);
+    root.insertAdjacentHTML('beforeend', helper(a.phrases));
+    draw(0);
+  },
+
+  situations(a, root){
+    const area = document.createElement('div');
+    let cat = 0, ci = 0;
+    const draw = () => {
+      const c = a.play.cats[cat].cards[ci];
+      area.innerHTML = `<div class="sit-card"><div class="sit-lbl">${esc(a.play.cats[cat].label)}</div><p>${esc(c.s)}</p>
+        <div class="sit-role">🎭 Teacher plays: ${esc(c.role)}</div></div>`;
+      const row = document.createElement('div'); row.className = 'play-row';
+      row.append(Object.assign(document.createElement('span'), { className: 'muted', textContent: `${ci + 1} / ${a.play.cats[cat].cards.length}` }),
+        makeTimer(120), btn('Следующая ситуация →', 'btn primary', () => { ci = (ci + 1) % a.play.cats[cat].cards.length; draw(); }));
+      area.appendChild(row);
+    };
+    root.append(makeTabs(a.play.cats.map(c => c.label), i => { cat = i; ci = 0; draw(); }), area);
+    root.insertAdjacentHTML('beforeend', helper(a.phrases));
+    draw();
+  },
+
+  minute(a, root){
+    const area = document.createElement('div');
+    let ti = 0;
+    const draw = () => {
+      const t = a.play.topics[ti];
+      area.innerHTML = `<p class="big-q">${esc(t.t)}</p>
+        <ul class="show-phrases">${t.support.map(s => `<li>${esc(s)}</li>`).join('')}</ul>`;
+      const row = document.createElement('div'); row.className = 'play-row';
+      const timer = makeTimer(60, 'big');
+      const up = document.createElement('div'); up.className = 'v-up'; up.hidden = true;
+      up.innerHTML = `<p class="kicker" style="margin-top:8px">Level up — скажи ещё раз вот так</p>` +
+        t.upgrade.map(([x, y]) => `<div class="v-up-row"><span class="from">${esc(x)}</span><span class="arr">→</span><span class="to">${esc(y)}</span></div>`).join('');
+      timer.addEventListener('timeup', () => { up.hidden = false; });
+      row.append(timer, btn('⬆ Level up', 'btn', () => { up.hidden = !up.hidden; }),
+        btn('Другая тема →', 'btn primary', () => { ti = (ti + 1) % a.play.topics.length; draw(); }));
+      area.append(row, up);
+    };
+    root.appendChild(area);
+    draw();
+  },
+
+  picture(a, root){
+    const area = document.createElement('div');
+    let si = 0, lvl = 0;
+    const qs = document.createElement('div');
+    const drawQs = () => { qs.innerHTML = `<div class="bubbles">${a.play.questions[lvl].qs.map(q => `<div class="bubble">${esc(q)}</div>`).join('')}</div>`; };
+    const draw = () => {
+      const sc = a.play.scenes[si];
+      area.innerHTML = `<div class="scene" role="img" aria-label="${esc(sc.title)}">${sc.rows.map(r => `<div>${r}</div>`).join('')}</div>`;
+      const row = document.createElement('div'); row.className = 'play-row';
+      row.append(Object.assign(document.createElement('span'), { className: 'muted', textContent: `${si + 1} / ${a.play.scenes.length}` }),
+        btn('Другая картинка →', 'btn primary', () => { si = (si + 1) % a.play.scenes.length; draw(); }));
+      area.appendChild(row);
+    };
+    const grid = document.createElement('div'); grid.className = 'pic-grid';
+    const right = document.createElement('div');
+    right.append(makeTabs(a.play.questions.map(q => q.label), i => { lvl = i; drawQs(); }), qs);
+    grid.append(area, right);
+    root.appendChild(grid);
+    root.insertAdjacentHTML('beforeend', helper(a.phrases));
+    draw(); drawQs();
+  },
+
+  detective(a, root){
+    const area = document.createElement('div');
+    let ci = 0;
+    const draw = () => {
+      const c = a.play.cases[ci];
+      area.innerHTML = '';
+      const clues = document.createElement('div'); clues.className = 'clues';
+      c.clues.forEach((cl, i) => {
+        const b = document.createElement('button'); b.className = 'clue';
+        b.innerHTML = `<span>🔍 Clue ${i + 1}</span>`;
+        b.onclick = () => { b.classList.add('open'); b.innerHTML = `<span>${esc(cl)}</span>`; };
+        clues.appendChild(b);
+      });
+      area.append(clues);
+      area.insertAdjacentHTML('beforeend', `<p class="big-q" style="margin-top:20px">❓ ${esc(c.q)}</p>`);
+      const row = document.createElement('div'); row.className = 'play-row';
+      row.append(Object.assign(document.createElement('span'), { className: 'muted', textContent: `Дело ${ci + 1} / ${a.play.cases.length}` }),
+        btn('Следующее дело →', 'btn primary', () => { ci = (ci + 1) % a.play.cases.length; draw(); }));
+      area.appendChild(row);
+    };
+    root.appendChild(area);
+    root.insertAdjacentHTML('beforeend', helper(a.phrases));
+    draw();
+  },
+
+  debate(a, root){
+    const area = document.createElement('div');
+    let ti = 0;
+    const draw = () => {
+      area.innerHTML = `<p class="big-q">«${esc(a.play.topics[ti])}»</p>`;
+      const sides = document.createElement('div'); sides.className = 'sides';
+      [['👍 For', 'for'], ['👎 Against', 'against']].forEach(([label, cls]) => {
+        const s = document.createElement('div'); s.className = 'side ' + cls;
+        s.innerHTML = `<h4>${label}</h4>`;
+        s.appendChild(makeTimer(60));
+        sides.appendChild(s);
+      });
+      area.appendChild(sides);
+      const row = document.createElement('div'); row.className = 'play-row';
+      row.append(Object.assign(document.createElement('span'), { className: 'muted', textContent: `${ti + 1} / ${a.play.topics.length}` }),
+        btn('Другая тема →', 'btn primary', () => { ti = (ti + 1) % a.play.topics.length; draw(); }));
+      area.appendChild(row);
+    };
+    root.appendChild(area);
+    root.insertAdjacentHTML('beforeend', helper(a.phrases));
+    draw();
+  },
+
+  exit(a, root){
+    root.insertAdjacentHTML('beforeend', `<h2>Сегодня ты научился говорить…</h2>
+      <div class="exit">
+        <div class="exit-box"><b>🆕 3 новых слова</b>
+          <input placeholder="1." aria-label="Новое слово 1"><input placeholder="2." aria-label="Новое слово 2"><input placeholder="3." aria-label="Новое слово 3"></div>
+        <div class="exit-box"><b>🧩 1 новая конструкция</b><input placeholder="например, I’m really into…" aria-label="Новая конструкция"></div>
+        <div class="exit-box"><b>🙋 1 предложение о себе</b><input placeholder="…" aria-label="Предложение о себе"></div>
+      </div>`);
+    const done = btn('✓ Готово', 'btn primary', () => {
+      const vals = [...root.querySelectorAll('input')].map(i => i.value.trim());
+      if (!vals.some(Boolean)) return toast('Сначала впишите хотя бы одно слово или фразу', true);
+      out.innerHTML = `<div class="result-big">Сегодня ты научился говорить: ${vals.filter(Boolean).map(esc).join(' · ')}</div>`;
+    });
+    const out = document.createElement('div');
+    out.style.marginTop = '16px';
+    root.append(done, out);
+  },
+};
+
+function goStep(i){
+  if (!lesson) return;
+  lesson.cur = Math.max(0, Math.min(i, lesson.steps.length - 1));
+  lesson.steps.forEach((s, k) => s.node.classList.toggle('cur', k === lesson.cur));
+  const pills = [...$('#steps').children];
+  pills.forEach((p, k) => { p.classList.toggle('cur', k === lesson.cur); p.classList.toggle('done', k < lesson.cur); });
+  pills[lesson.cur].scrollIntoView({ block: 'nearest', inline: 'center' });
+  $('#stepCount').textContent = `${lesson.cur + 1} / ${lesson.steps.length}`;
+  $('#stepPrev').style.visibility = lesson.cur === 0 ? 'hidden' : '';
+  $('#stepNext').textContent = lesson.cur === lesson.steps.length - 1 ? 'Завершить ✓' : 'Дальше →';
+  $('#showScroll').scrollTop = 0;
+}
+
+function openShow(t){
+  if (!t) return;
+  const steps = lessonSteps(t);
+  const body = $('#showBody'); body.innerHTML = '';
+  steps.forEach(s => body.appendChild(s.node));
+  const nav = $('#steps'); nav.innerHTML = '';
+  steps.forEach((s, k) => { const b = document.createElement('button'); b.className = 'stp'; b.textContent = s.label; b.onclick = () => goStep(k); nav.appendChild(b); });
+  if (lesson) clearInterval(lesson.clockTimer);
+  lesson = { topic: t, steps, cur: 0, started: Date.now() };
+  const tick = () => { const s = Math.floor((Date.now() - lesson.started) / 1000); $('#clock').textContent = `⏱ ${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
+  tick(); lesson.clockTimer = setInterval(tick, 1000);
+  show.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  goStep(0);
+  safeHistory('pushState', { show: true }, '#lesson=' + t.id);   // «Назад» на телефоне закрывает урок
+  $('#stepNext').focus();
+}
+
+// изменение адреса — только удобство (кнопка «Назад», ссылка); если браузер запрещает, урок всё равно работает
+function safeHistory(method, state, hash){
+  try { history[method](state, '', hash || (location.pathname + location.search)); } catch(e){}
+}
+
+function closeShowUI(){
+  show.classList.remove('open');
+  document.body.style.overflow = '';
+  if (lesson) clearInterval(lesson.clockTimer);
+  runningTimers.forEach(clearInterval); runningTimers = [];
+  lesson = null;
+  if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  if (location.hash) safeHistory('replaceState', null);
+}
+
+function closeShow(){
+  if (history.state && history.state.show) history.back(); // закроется через popstate
+  else closeShowUI();
+}
+
+window.addEventListener('popstate', () => { if (show.classList.contains('open')) closeShowUI(); });
+$('#showBack').onclick = closeShow;
+$('#stepPrev').onclick = () => goStep(lesson.cur - 1);
+$('#stepNext').onclick = () => { if (lesson.cur === lesson.steps.length - 1) closeShow(); else goStep(lesson.cur + 1); };
+$('#showFs').onclick = () => {
+  if (document.fullscreenElement) return document.exitFullscreen().catch(() => {});
+  if (!show.requestFullscreen) return toast('Этот браузер не поддерживает полноэкранный режим', true);
+  show.requestFullscreen().catch(() => toast('Не удалось включить полноэкранный режим', true));
+};
+$('#showLink').onclick = async () => {
+  const url = location.href.split('#')[0] + '#lesson=' + lesson.topic.id;
+  let ok = false;
+  try { await navigator.clipboard.writeText(url); ok = true; } catch(e){ ok = fallbackCopy(url); }
+  if (ok) toast('Ссылка на урок скопирована — отправьте ученику');
+  else toast('Не получилось скопировать ссылку: ' + url, true);
+};
+document.addEventListener('keydown', e => {
+  if (!show.classList.contains('open')) return;
+  if (e.key === 'Escape' && !document.fullscreenElement) closeShow();
+  if (e.key === 'ArrowRight') goStep(lesson.cur + 1);
+  if (e.key === 'ArrowLeft' && lesson.cur > 0) goStep(lesson.cur - 1);
+});
+
+render();
+
+// ссылка вида trial-topics.html#lesson=a0-be-have сразу открывает урок
+const linked = (location.hash.match(/lesson=([\w-]+)/) || [])[1];
+if (linked && byId[linked]) { safeHistory('replaceState', null); openShow(byId[linked]); }
+</script>
+</body>
+</html>
