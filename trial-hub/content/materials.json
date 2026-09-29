@@ -2,16 +2,6 @@
   "note": "Пока примеры. Чтобы добавить материал, впишите ссылку в поле url.",
   "categories": [
     {
-      "id": "miro",
-      "label": "Miro boards",
-      "icon": "🟨"
-    },
-    {
-      "id": "figma",
-      "label": "Figma boards",
-      "icon": "🎨"
-    },
-    {
       "id": "worksheets",
       "label": "Worksheets",
       "icon": "📄"
@@ -23,30 +13,6 @@
     }
   ],
   "items": [
-    {
-      "category": "miro",
-      "title": "Trial lesson board — template",
-      "description": "Шаблон доски для 30-минутного пробного урока.",
-      "url": null
-    },
-    {
-      "category": "miro",
-      "title": "Speaking games board",
-      "description": "Карточки для Would you rather, Ranking, Situations.",
-      "url": null
-    },
-    {
-      "category": "figma",
-      "title": "Grammar visuals A1–B1",
-      "description": "Схемы и инфографика для объяснений.",
-      "url": null
-    },
-    {
-      "category": "figma",
-      "title": "Level progress card",
-      "description": "Карточка «что ты уже умеешь» для конца урока.",
-      "url": null
-    },
     {
       "category": "worksheets",
       "title": "Present Simple vs Continuous",

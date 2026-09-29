@@ -20,7 +20,7 @@
      activities.json  — разговорные активности и их категории
      structure.json   — цель, принципы, таймлайн 30-минутного урока, опыт ученика
      checklist.json   — чек-лист преподавателя
-     materials.json   — материалы (Miro, Figma, листы, домашки)
+     materials.json   — материалы (рабочие листы, домашки)
    Чтобы добавить тему или активность — добавьте объект в нужный JSON,
    код страницы менять не нужно. Схема полей — trial-hub/content/README.md.
    ===================================================================== */
@@ -680,7 +680,7 @@ const Pages = {
         { route: 'lessons', icon: '📚', title: 'Micro Lesson Bank', text: 'Темы по уровням и категориям — каждая с уроком для ученика.', cnt: `${DB.lessons.length} topics` },
         { route: 'activities', icon: '🎲', title: 'Speaking Activities', text: 'Icebreakers, discussions, role plays.', cnt: `${DB.activities.items.length} activities` },
         { route: 'grammar', icon: '🧩', title: 'Grammar Topics', text: 'Объяснение, примеры, типичные ошибки, задание на речь.', cnt: `${grammarLessons().length} topics` },
-        { route: 'materials', icon: '📁', title: 'Materials', text: 'Доски Miro и Figma, рабочие листы, примеры домашек.', cnt: `${DB.materials.items.length} files` },
+        { route: 'materials', icon: '📁', title: 'Materials', text: 'Рабочие листы и примеры домашних заданий.', cnt: `${DB.materials.items.length} files` },
         { route: 'checklist', icon: '✅', title: 'Teacher Checklist', text: 'До, во время и после урока.', cnt: `${DB.checklist.reduce((n, g) => n + g.items.length, 0)} items` },
       ];
       const saved = [...Saved.ids].map(id => byId[id]).filter(Boolean);
@@ -799,7 +799,7 @@ const Pages = {
     render(root){
       const M = DB.materials;
       root.innerHTML = `<h1 class="page-title">Materials</h1>
-        <p class="page-sub">Доски, рабочие листы и примеры домашних заданий.</p>
+        <p class="page-sub">Рабочие листы и примеры домашних заданий.</p>
         ${M.note ? `<div class="notice">${esc(M.note)}</div>` : ''}
         ${M.categories.map(c => {
           const items = M.items.filter(i => i.category === c.id);
