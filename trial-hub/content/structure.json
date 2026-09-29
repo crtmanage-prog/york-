@@ -1,0 +1,132 @@
+{
+  "goal": "Your goal is not to test a student. Your goal is to show them progress.",
+  "principles": [
+    {
+      "icon": "🚫",
+      "title": "Trial lesson ≠ test",
+      "text": "Не проверяем уровень ради оценки — даём почувствовать настоящий урок."
+    },
+    {
+      "icon": "🎯",
+      "title": "One clear outcome",
+      "text": "Одна маленькая тема, один результат «Я могу…» за 30 минут."
+    },
+    {
+      "icon": "🗣️",
+      "title": "Student talks more",
+      "text": "Ученик говорит больше, чем преподаватель."
+    },
+    {
+      "icon": "📈",
+      "title": "Show progress",
+      "text": "В конце ученик видит, что уже может больше, чем в начале."
+    }
+  ],
+  "timeline": [
+    {
+      "from": 0,
+      "to": 3,
+      "title": "Warm-up & Small Talk",
+      "text": "Начать разговор естественно, без ощущения интервью.",
+      "groups": [
+        {
+          "label": "A1",
+          "items": [
+            "How are you today?",
+            "Where are you from?",
+            "What do you do?"
+          ]
+        },
+        {
+          "label": "B1",
+          "items": [
+            "How was your week?",
+            "What have you been working on lately?"
+          ]
+        }
+      ]
+    },
+    {
+      "from": 3,
+      "to": 8,
+      "title": "Discover Goals",
+      "text": "Понять мотивацию ученика через разговор.",
+      "groups": [
+        {
+          "label": "Questions",
+          "items": [
+            "What made you start learning English?",
+            "Where would you like to use English?",
+            "What feels difficult for you right now?"
+          ]
+        }
+      ]
+    },
+    {
+      "from": 8,
+      "to": 20,
+      "title": "Mini Lesson",
+      "text": "Главный блок урока — одна микро-тема из банка.",
+      "groups": [
+        {
+          "label": "Structure",
+          "items": [
+            "1. Lead-in",
+            "2. Simple explanation",
+            "3. Controlled practice",
+            "4. Personal practice"
+          ]
+        }
+      ],
+      "exampleLesson": "b1-stop"
+    },
+    {
+      "from": 20,
+      "to": 25,
+      "title": "Speaking Practice",
+      "text": "Ученик использует новое в живой речи.",
+      "groups": [
+        {
+          "label": "Types",
+          "items": [
+            "Role play",
+            "Discussion",
+            "Storytelling",
+            "Game"
+          ]
+        }
+      ],
+      "link": "activities"
+    },
+    {
+      "from": 25,
+      "to": 30,
+      "title": "Wrap-up",
+      "text": "Показать прогресс и следующий шаг.",
+      "groups": [
+        {
+          "label": "Checklist",
+          "items": [
+            "Highlight progress",
+            "Recommend learning format",
+            "Transfer student to manager"
+          ]
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "at": "After 5 minutes",
+      "feel": "I feel comfortable speaking."
+    },
+    {
+      "at": "After 20 minutes",
+      "feel": "I can already use something new."
+    },
+    {
+      "at": "After 30 minutes",
+      "feel": "I understand my next step."
+    }
+  ]
+}

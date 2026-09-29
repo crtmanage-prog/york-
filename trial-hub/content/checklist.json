@@ -1,0 +1,30 @@
+[
+  {
+    "id": "before",
+    "title": "Before lesson",
+    "items": [
+      "Check student’s level",
+      "Choose one clear outcome",
+      "Prepare speaking activity"
+    ]
+  },
+  {
+    "id": "during",
+    "title": "During",
+    "items": [
+      "Student speaks more than teacher",
+      "Correct selectively",
+      "Praise attempts",
+      "Show progress"
+    ]
+  },
+  {
+    "id": "after",
+    "title": "After",
+    "items": [
+      "Add CRM notes",
+      "Mention strengths",
+      "Recommend format"
+    ]
+  }
+]

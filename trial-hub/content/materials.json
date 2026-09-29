@@ -1,0 +1,75 @@
+{
+  "note": "Пока примеры. Чтобы добавить материал, впишите ссылку в поле url.",
+  "categories": [
+    {
+      "id": "miro",
+      "label": "Miro boards",
+      "icon": "🟨"
+    },
+    {
+      "id": "figma",
+      "label": "Figma boards",
+      "icon": "🎨"
+    },
+    {
+      "id": "worksheets",
+      "label": "Worksheets",
+      "icon": "📄"
+    },
+    {
+      "id": "homework",
+      "label": "Homework examples",
+      "icon": "🏠"
+    }
+  ],
+  "items": [
+    {
+      "category": "miro",
+      "title": "Trial lesson board — template",
+      "description": "Шаблон доски для 30-минутного пробного урока.",
+      "url": null
+    },
+    {
+      "category": "miro",
+      "title": "Speaking games board",
+      "description": "Карточки для Would you rather, Ranking, Situations.",
+      "url": null
+    },
+    {
+      "category": "figma",
+      "title": "Grammar visuals A1–B1",
+      "description": "Схемы и инфографика для объяснений.",
+      "url": null
+    },
+    {
+      "category": "figma",
+      "title": "Level progress card",
+      "description": "Карточка «что ты уже умеешь» для конца урока.",
+      "url": null
+    },
+    {
+      "category": "worksheets",
+      "title": "Present Simple vs Continuous",
+      "description": "Одна страница: правило + 8 заданий.",
+      "url": null
+    },
+    {
+      "category": "worksheets",
+      "title": "Storytelling linkers",
+      "description": "At first, suddenly, eventually — с примерами.",
+      "url": null
+    },
+    {
+      "category": "homework",
+      "title": "After-trial homework A2",
+      "description": "Короткое задание после пробного, 15 минут.",
+      "url": null
+    },
+    {
+      "category": "homework",
+      "title": "After-trial homework B1+",
+      "description": "Голосовое сообщение на 1 минуту по теме урока.",
+      "url": null
+    }
+  ]
+}

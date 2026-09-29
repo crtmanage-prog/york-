@@ -1,0 +1,135 @@
+{
+  "levels": [
+    "A0-A1",
+    "A2",
+    "B1",
+    "B2",
+    "C1"
+  ],
+  "levelNames": {
+    "A0-A1": "Beginner",
+    "A2": "Elementary",
+    "B1": "Intermediate",
+    "B2": "Upper Intermediate",
+    "C1": "Advanced"
+  },
+  "levelGoals": {
+    "A0-A1": {
+      "goal": "Я могу сказать что-то на английском",
+      "note": "Ученик должен уйти с ощущением, что английский не такой сложный, как казалось."
+    },
+    "A2": {
+      "goal": "Я могу объяснять свои мысли проще и увереннее"
+    },
+    "B1": {
+      "goal": "Я знаю английский, но хочу использовать его естественнее"
+    },
+    "B2": {
+      "goal": "Я могу выражать мысли глубже и звучать естественно"
+    },
+    "C1": {
+      "goal": "Я могу звучать точнее, гибче и глубже"
+    }
+  },
+  "categories": [
+    {
+      "id": "grammar",
+      "label": "Grammar",
+      "icon": "🧩"
+    },
+    {
+      "id": "natural",
+      "label": "Natural English",
+      "icon": "✨"
+    },
+    {
+      "id": "speaking",
+      "label": "Speaking",
+      "icon": "💬"
+    },
+    {
+      "id": "work",
+      "label": "Work English",
+      "icon": "💼"
+    },
+    {
+      "id": "vocabulary",
+      "label": "Vocabulary",
+      "icon": "📚"
+    },
+    {
+      "id": "fluency",
+      "label": "Fluency",
+      "icon": "🌊"
+    }
+  ],
+  "universalTopics": [
+    "My job / studies",
+    "Hobbies",
+    "Travel",
+    "Movies and series",
+    "Technology",
+    "Social media",
+    "Food",
+    "Personal goals",
+    "Future plans",
+    "Daily life"
+  ],
+  "situations": [
+    {
+      "key": "fear",
+      "label": "Боится говорить",
+      "hint": "Introduce yourself · Making answers longer · Survival English",
+      "topics": [
+        "a0-intro",
+        "a0-longer",
+        "a0-survival"
+      ]
+    },
+    {
+      "key": "simple",
+      "label": "Говорит, но звучит просто",
+      "hint": "Sound more natural · Fillers · Phrasal verbs",
+      "topics": [
+        "b1-upgrade",
+        "b1-fillers",
+        "c1-phrasal"
+      ]
+    },
+    {
+      "key": "job",
+      "label": "Хочет работу",
+      "hint": "Professional English · Passive Voice · Softening phrases",
+      "topics": [
+        "b2-work",
+        "b2-passive",
+        "b2-soft"
+      ]
+    },
+    {
+      "key": "silent",
+      "label": "Понимает, но не говорит",
+      "hint": "Storytelling · Conversation skills · Grammar that changes meaning",
+      "topics": [
+        "b1-story",
+        "a2-questions",
+        "a2-opinions",
+        "b1-stop",
+        "b1-remember",
+        "b1-used-to",
+        "b1-say-tell",
+        "b1-make-do"
+      ]
+    },
+    {
+      "key": "b2plus",
+      "label": "B2+",
+      "hint": "Argumentation · Nuance · Idioms",
+      "topics": [
+        "c1-argue",
+        "c1-modals",
+        "c1-idioms"
+      ]
+    }
+  ]
+}

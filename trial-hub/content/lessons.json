@@ -1,0 +1,4453 @@
+[
+  {
+    "id": "a0-be-have",
+    "level": "A0-A1",
+    "category": "grammar",
+    "section": "Building basic sentences",
+    "icon": "🧍",
+    "title": "Be vs Have",
+    "outcome": "Я могу строить базовые предложения о себе.",
+    "idea": "Базовая разница между описанием себя и тем, что у тебя есть.",
+    "leadIn": "How old are you?",
+    "explanation": [
+      "I am 20.",
+      "I am tired.",
+      "I have a sister.",
+      "I have a car."
+    ],
+    "practice": "Расскажи о себе, используя I am / I have.",
+    "speaking": "Tell me 3 things about you.",
+    "mistakes": [
+      [
+        "I have 20 years.",
+        "I am 20."
+      ],
+      [
+        "I am agree.",
+        "I agree."
+      ],
+      [
+        "She have a car.",
+        "She has a car."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "How old are you?",
+        "Do you have a pet?"
+      ],
+      "visual": {
+        "type": "compare",
+        "cols": [
+          {
+            "icon": "🪞",
+            "label": "BE — какой я, кто я",
+            "sub": "am · is · are",
+            "examples": [
+              "I am 20.",
+              "I am tired.",
+              "She is a teacher."
+            ]
+          },
+          {
+            "icon": "🎒",
+            "label": "HAVE — что у меня есть",
+            "sub": "have · has",
+            "examples": [
+              "I have a sister.",
+              "I have a car.",
+              "He has a dog."
+            ]
+          }
+        ],
+        "note": "Возраст — через BE: I am 20, а не I have 20."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🎂",
+              "q": "I ___ 25 years old.",
+              "options": [
+                "am",
+                "have"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🐶",
+              "q": "I ___ a dog.",
+              "options": [
+                "am",
+                "have"
+              ],
+              "a": 1
+            },
+            {
+              "pic": "😴",
+              "q": "I ___ tired.",
+              "options": [
+                "am",
+                "have"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "👩‍👧",
+              "q": "She ___ two children.",
+              "options": [
+                "is",
+                "has"
+              ],
+              "a": 1
+            },
+            {
+              "pic": "🥶",
+              "q": "We ___ cold.",
+              "options": [
+                "are",
+                "have"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "💡",
+              "q": "I ___ an idea!",
+              "options": [
+                "am",
+                "have"
+              ],
+              "a": 1
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I am from Ufa.",
+            "I have a big family.",
+            "My brother is a doctor."
+          ]
+        },
+        {
+          "type": "match",
+          "pairs": [
+            [
+              "I am hungry.",
+              "Я голоден."
+            ],
+            [
+              "I have a question.",
+              "У меня есть вопрос."
+            ],
+            [
+              "I am 30.",
+              "Мне 30 лет."
+            ],
+            [
+              "I have a cat.",
+              "У меня есть кошка."
+            ]
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Tell me 3 things about you.",
+          "hint": "I am… (age, job, feeling)"
+        },
+        {
+          "q": "Tell me 3 things you have.",
+          "hint": "I have… (family, pets, things)"
+        },
+        {
+          "q": "Describe your friend.",
+          "hint": "He / She is… He / She has…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a0-word-order",
+    "level": "A0-A1",
+    "category": "grammar",
+    "section": "Building basic sentences",
+    "icon": "🧩",
+    "title": "Sentence structure: how to stop translating word by word",
+    "outcome": "Я понимаю, как строятся английские предложения.",
+    "idea": "Порядок слов в английском: кто → что делает → что.",
+    "leadIn": "What do you love?",
+    "explanation": [
+      "Я люблю кофе. → I love coffee."
+    ],
+    "practice": "Составить 5 предложений о себе.",
+    "speaking": "Make 5 sentences about yourself.",
+    "mistakes": [
+      [
+        "Coffee I love.",
+        "I love coffee."
+      ],
+      [
+        "Very I like it.",
+        "I like it very much."
+      ],
+      [
+        "In Ufa I live.",
+        "I live in Ufa."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "What do you love?",
+        "What do you drink in the morning?"
+      ],
+      "visual": {
+        "type": "formula",
+        "parts": [
+          {
+            "t": "Кто?",
+            "ex": "I"
+          },
+          {
+            "t": "Действие",
+            "ex": "love"
+          },
+          {
+            "t": "Что?",
+            "ex": "coffee"
+          },
+          {
+            "t": "Где / когда?",
+            "ex": "in the morning"
+          }
+        ],
+        "note": "В русском порядок свободный: «Кофе я люблю». В английском — всегда по схеме."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "☕",
+              "q": "Как правильно?",
+              "options": [
+                "Coffee I love.",
+                "I love coffee."
+              ],
+              "a": 1
+            },
+            {
+              "pic": "⚽",
+              "q": "Как правильно?",
+              "options": [
+                "I play football on Sundays.",
+                "On Sundays football I play."
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏢",
+              "q": "Как правильно?",
+              "options": [
+                "Work I in an office.",
+                "I work in an office."
+              ],
+              "a": 1
+            },
+            {
+              "pic": "🍕",
+              "q": "Как правильно?",
+              "options": [
+                "My sister likes pizza.",
+                "Likes my sister pizza."
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I love coffee.",
+            "I work in an office.",
+            "We watch films at home.",
+            "My friend lives in Moscow."
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Я люблю музыку.",
+              "a": "I love music."
+            },
+            {
+              "q": "Мой брат работает в банке.",
+              "a": "My brother works in a bank."
+            },
+            {
+              "q": "Я читаю книги по вечерам.",
+              "a": "I read books in the evening."
+            },
+            {
+              "q": "Мы живём в Уфе.",
+              "a": "We live in Ufa."
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Make 5 sentences about yourself.",
+          "hint": "Кто → действие → что → где / когда"
+        },
+        {
+          "q": "What do you do every morning?",
+          "hint": "I drink… I eat… I go…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a0-longer",
+    "level": "A0-A1",
+    "category": "fluency",
+    "section": "Building basic sentences",
+    "icon": "🔗",
+    "title": "How to make answers longer",
+    "outcome": "Я могу говорить не только Yes/No.",
+    "idea": "Переходим от одного слова к нормальной речи — с помощью because, but, and, so.",
+    "leadIn": "Do you like music?",
+    "explanation": [
+      "Было: I like music.",
+      "Стало: I like music because it helps me relax.",
+      "because · but · and · so"
+    ],
+    "practice": "Ответить на вопросы полными предложениями.",
+    "speaking": "Do you like your job or studies?",
+    "lesson": {
+      "warmup": [
+        "Do you like music?",
+        "Do you like your city?"
+      ],
+      "visual": {
+        "type": "upgrade",
+        "pairs": [
+          [
+            "I like music.",
+            "I like music because it helps me relax."
+          ],
+          [
+            "I like my city.",
+            "I like my city, but it is cold in winter."
+          ],
+          [
+            "I work.",
+            "I work and I study English."
+          ],
+          [
+            "I was tired.",
+            "I was tired, so I went to bed."
+          ]
+        ],
+        "note": "because — потому что · but — но · and — и · so — поэтому"
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🎧",
+              "q": "I like music ___ it helps me relax.",
+              "options": [
+                "because",
+                "but"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "☔",
+              "q": "It was raining, ___ I stayed at home.",
+              "options": [
+                "so",
+                "because"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🍣",
+              "q": "I like sushi, ___ I don’t like fish.",
+              "options": [
+                "and",
+                "but"
+              ],
+              "a": 1
+            },
+            {
+              "pic": "📚",
+              "q": "I work ___ I study English.",
+              "options": [
+                "and",
+                "so"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I like tea because it is warm.",
+            "I am busy, but I am happy.",
+            "I was hungry, so I cooked dinner."
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Сделай ответ длиннее",
+          "items": [
+            {
+              "q": "I like summer.",
+              "a": "I like summer because it is warm and sunny."
+            },
+            {
+              "q": "I play tennis.",
+              "a": "I play tennis, but not very well."
+            },
+            {
+              "q": "I love my job.",
+              "a": "I love my job because my team is great."
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Do you like your job or studies?",
+          "hint": "Yes, … because… / but…"
+        },
+        {
+          "q": "What do you do at the weekend?",
+          "hint": "… and … so …"
+        },
+        {
+          "q": "Do you like winter?",
+          "hint": "because · but · so"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a0-intro",
+    "level": "A0-A1",
+    "category": "speaking",
+    "section": "Talking about yourself",
+    "icon": "👋",
+    "title": "Introduce yourself naturally",
+    "outcome": "Я могу рассказать о себе.",
+    "idea": "Не заученная презентация, а реальное знакомство.",
+    "leadIn": "What’s your name?",
+    "explanation": [
+      "My name is...",
+      "I’m from...",
+      "I study / work...",
+      "I’m interested in..."
+    ],
+    "practice": "Мини-интервью.",
+    "speaking": "Introduce yourself in 4 sentences.",
+    "lesson": {
+      "warmup": [
+        "What’s your name?",
+        "Where are you from?"
+      ],
+      "visual": {
+        "type": "formula",
+        "parts": [
+          {
+            "t": "Имя",
+            "ex": "My name is Anna."
+          },
+          {
+            "t": "Откуда",
+            "ex": "I’m from Ufa."
+          },
+          {
+            "t": "Работа / учёба",
+            "ex": "I work as a designer."
+          },
+          {
+            "t": "Интересы",
+            "ex": "I’m interested in travel."
+          }
+        ],
+        "note": "Четыре предложения — и знакомство уже звучит естественно."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🏙️",
+              "q": "I’m ___ Kazan.",
+              "options": [
+                "from",
+                "in"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "💻",
+              "q": "I work ___ a programmer.",
+              "options": [
+                "as",
+                "like"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🎨",
+              "q": "I’m interested ___ art.",
+              "options": [
+                "in",
+                "on"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🎓",
+              "q": "I ___ at university.",
+              "options": [
+                "study",
+                "am study"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "My name is Anna.",
+            "I’m from Ufa.",
+            "I’m interested in music."
+          ]
+        },
+        {
+          "type": "match",
+          "pairs": [
+            [
+              "Nice to meet you!",
+              "Приятно познакомиться!"
+            ],
+            [
+              "What do you do?",
+              "Чем ты занимаешься?"
+            ],
+            [
+              "Where are you from?",
+              "Откуда ты?"
+            ],
+            [
+              "And you?",
+              "А ты?"
+            ]
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Introduce yourself in 4 sentences.",
+          "hint": "My name is… I’m from… I work / study… I’m interested in…"
+        },
+        {
+          "q": "Now ask me 3 questions.",
+          "hint": "What… Where… Do you…?"
+        },
+        {
+          "q": "You meet a new colleague. Start the conversation!",
+          "hint": "Hi! Nice to meet you. I’m…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a0-hobbies",
+    "level": "A0-A1",
+    "category": "vocabulary",
+    "section": "Talking about yourself",
+    "icon": "🎸",
+    "title": "Hobbies and interests",
+    "outcome": "Я могу поддержать простой разговор.",
+    "idea": "Как говорить о своих интересах.",
+    "leadIn": "What do you do in your free time?",
+    "explanation": [
+      "I like...",
+      "I enjoy...",
+      "I’m into..."
+    ],
+    "practice": "Обсудить свободное время.",
+    "speaking": "What do you do in your free time?",
+    "lesson": {
+      "warmup": [
+        "What do you do in your free time?",
+        "Do you like sport?"
+      ],
+      "visual": {
+        "type": "scale",
+        "steps": [
+          {
+            "w": "I like…",
+            "d": "нравится"
+          },
+          {
+            "w": "I enjoy…",
+            "d": "получаю удовольствие"
+          },
+          {
+            "w": "I’m into…",
+            "d": "увлекаюсь"
+          },
+          {
+            "w": "I love…",
+            "d": "обожаю"
+          }
+        ],
+        "note": "После like / enjoy / into — глагол с -ing: I enjoy reading."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "📖",
+              "q": "I enjoy ___.",
+              "options": [
+                "reading",
+                "read"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🎮",
+              "q": "I’m ___ video games.",
+              "options": [
+                "into",
+                "in"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏊",
+              "q": "I like ___.",
+              "options": [
+                "swimming",
+                "swims"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🍳",
+              "q": "My sister ___ cooking.",
+              "options": [
+                "enjoys",
+                "enjoy"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "match",
+          "pairs": [
+            [
+              "🎸",
+              "playing the guitar"
+            ],
+            [
+              "🧘",
+              "doing yoga"
+            ],
+            [
+              "📷",
+              "taking photos"
+            ],
+            [
+              "🚴",
+              "cycling"
+            ],
+            [
+              "🎨",
+              "drawing"
+            ]
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I enjoy cooking.",
+            "I’m into photography.",
+            "I like watching films."
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "What do you do in your free time?",
+          "hint": "I like… I enjoy… I’m into…"
+        },
+        {
+          "q": "Is there a hobby you want to try?",
+          "hint": "I want to try…"
+        },
+        {
+          "q": "Ask me about my hobbies.",
+          "hint": "What do you… Do you like…?"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a0-present-simple",
+    "level": "A0-A1",
+    "category": "grammar",
+    "section": "Everyday English",
+    "icon": "🔁",
+    "title": "Present Simple for real life",
+    "outcome": "Я могу рассказать о своём обычном дне.",
+    "idea": "Говорим о привычках.",
+    "leadIn": "What time do you get up?",
+    "explanation": [
+      "I usually...",
+      "I often...",
+      "I never..."
+    ],
+    "practice": "Рассказать свой обычный день.",
+    "speaking": "Describe your usual day.",
+    "mistakes": [
+      [
+        "She work in a bank.",
+        "She works in a bank."
+      ],
+      [
+        "I usually am tired.",
+        "I am usually tired."
+      ],
+      [
+        "He don’t like tea.",
+        "He doesn’t like tea."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "What time do you get up?",
+        "What do you usually eat for breakfast?"
+      ],
+      "visual": {
+        "type": "scale",
+        "steps": [
+          {
+            "w": "always",
+            "d": "100% — всегда"
+          },
+          {
+            "w": "usually",
+            "d": "80% — обычно"
+          },
+          {
+            "w": "often",
+            "d": "60% — часто"
+          },
+          {
+            "w": "sometimes",
+            "d": "30% — иногда"
+          },
+          {
+            "w": "never",
+            "d": "0% — никогда"
+          }
+        ],
+        "note": "Слово частоты — перед глаголом: I usually get up at 7. С he / she — глагол + s: she works."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "⏰",
+              "q": "I ___ get up at 7.",
+              "options": [
+                "usually",
+                "am usually"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "☕",
+              "q": "She ___ coffee every morning.",
+              "options": [
+                "drinks",
+                "drink"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🚌",
+              "q": "We ___ go to work by bus.",
+              "options": [
+                "often",
+                "are often"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🍔",
+              "q": "I ___ eat fast food. It’s bad!",
+              "options": [
+                "never",
+                "always"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏃",
+              "q": "He ___ in the park.",
+              "options": [
+                "runs",
+                "run"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I usually get up at 7.",
+            "She often works from home.",
+            "I never drink coffee at night."
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Я обычно завтракаю дома.",
+              "a": "I usually have breakfast at home."
+            },
+            {
+              "q": "Он часто играет в футбол.",
+              "a": "He often plays football."
+            },
+            {
+              "q": "Я никогда не опаздываю.",
+              "a": "I am never late."
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Describe your usual day.",
+          "hint": "I usually… Then I… In the evening I…"
+        },
+        {
+          "q": "What do you never do?",
+          "hint": "I never…"
+        },
+        {
+          "q": "Ask about my day.",
+          "hint": "What time do you…? Do you often…?"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a0-survival",
+    "level": "A0-A1",
+    "category": "speaking",
+    "section": "Everyday English",
+    "icon": "🛟",
+    "title": "Survival English",
+    "outcome": "Я знаю, что сказать, если не понял собеседника.",
+    "idea": "Что делать, если не понял.",
+    "leadIn": "Do you speak English with foreigners?",
+    "explanation": [
+      "Could you repeat that?",
+      "Could you speak slower?",
+      "How do you say...?"
+    ],
+    "practice": "Мини-ситуация «первый разговор с иностранцем».",
+    "speaking": "Ролевая игра: я — иностранец в аэропорту и говорю очень быстро. Выживи!",
+    "lesson": {
+      "warmup": [
+        "Do you speak English with foreigners?",
+        "What is difficult for you?"
+      ],
+      "visual": {
+        "type": "table",
+        "rows": [
+          [
+            "🔁",
+            "Не расслышал",
+            "Could you repeat that?"
+          ],
+          [
+            "🐇",
+            "Говорят слишком быстро",
+            "Could you speak slower?"
+          ],
+          [
+            "❓",
+            "Не знаешь слово",
+            "How do you say … in English?"
+          ],
+          [
+            "🤔",
+            "Не понял смысл",
+            "What does … mean?"
+          ],
+          [
+            "✍️",
+            "Нужно записать",
+            "Could you spell that?"
+          ]
+        ],
+        "note": "Эти 5 фраз спасают любой разговор — даже на уровне «почти ноль»."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🐇",
+              "q": "Собеседник говорит очень быстро. Что скажешь?",
+              "options": [
+                "Could you speak slower?",
+                "Speak slow!"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🔊",
+              "q": "Ты не расслышал. Что скажешь?",
+              "options": [
+                "What?!",
+                "Sorry, could you repeat that?"
+              ],
+              "a": 1
+            },
+            {
+              "pic": "🍴",
+              "q": "Не знаешь, как сказать «вилка».",
+              "options": [
+                "How do you say «вилка» in English?",
+                "What is say «вилка»?"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "📝",
+              "q": "Хочешь, чтобы имя продиктовали по буквам.",
+              "options": [
+                "Could you spell that?",
+                "Could you write me?"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "Could you repeat that?",
+            "Could you speak slower, please?",
+            "How do you say it in English?"
+          ]
+        },
+        {
+          "type": "match",
+          "pairs": [
+            [
+              "Could you repeat that?",
+              "Повторите, пожалуйста"
+            ],
+            [
+              "What does it mean?",
+              "Что это значит?"
+            ],
+            [
+              "Could you spell that?",
+              "Продиктуйте по буквам"
+            ],
+            [
+              "I don’t understand.",
+              "Я не понимаю"
+            ]
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Ролевая игра: я — иностранец в аэропорту и говорю очень быстро. Выживи!",
+          "hint": "Could you repeat… / speak slower… / What does … mean?"
+        },
+        {
+          "q": "Ask me how to say 3 Russian words in English.",
+          "hint": "How do you say … in English?"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a2-simple-cont",
+    "level": "A2",
+    "category": "grammar",
+    "section": "Talking about time",
+    "icon": "⏱️",
+    "title": "Present Simple vs Present Continuous",
+    "outcome": "Я различаю, что происходит обычно, а что — сейчас.",
+    "idea": "Разница между привычкой и действием прямо сейчас.",
+    "leadIn": "What do you usually do on weekdays?",
+    "explanation": [
+      "I work from home.",
+      "I’m working from home today."
+    ],
+    "practice": "Рассказать про обычный день и про сегодняшний день.",
+    "speaking": "Describe your usual day.",
+    "mistakes": [
+      [
+        "I am liking it.",
+        "I like it."
+      ],
+      [
+        "Now I read.",
+        "Now I’m reading."
+      ],
+      [
+        "She is work today.",
+        "She is working today."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "What do you usually do on weekdays?",
+        "What are you doing right now?"
+      ],
+      "visual": {
+        "type": "compare",
+        "cols": [
+          {
+            "icon": "🔁",
+            "label": "Present Simple — обычно, всегда",
+            "sub": "I work · she works",
+            "examples": [
+              "I work from home.",
+              "She drinks tea every day."
+            ]
+          },
+          {
+            "icon": "⏳",
+            "label": "Present Continuous — сейчас, в этот период",
+            "sub": "am / is / are + -ing",
+            "examples": [
+              "I’m working from home today.",
+              "She is drinking coffee now."
+            ]
+          }
+        ],
+        "note": "usually, every day, often → Simple. now, today, at the moment, this week → Continuous."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "📱",
+              "q": "Look! He ___ on the phone.",
+              "options": [
+                "talks",
+                "is talking"
+              ],
+              "a": 1
+            },
+            {
+              "pic": "🏫",
+              "q": "I ___ English twice a week.",
+              "options": [
+                "study",
+                "am studying"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🌧️",
+              "q": "It ___ right now. Take an umbrella!",
+              "options": [
+                "rains",
+                "is raining"
+              ],
+              "a": 1
+            },
+            {
+              "pic": "☕",
+              "q": "She usually ___ tea, but today she ___ coffee.",
+              "options": [
+                "drinks / is drinking",
+                "is drinking / drinks"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "💻",
+              "q": "This week I ___ from home.",
+              "options": [
+                "am working",
+                "work"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I usually walk to work.",
+            "Today I am taking a taxi.",
+            "What are you doing now?"
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Найди ошибку",
+          "items": [
+            {
+              "q": "I am liking this song.",
+              "a": "I like this song. (like не ставим в -ing)"
+            },
+            {
+              "q": "She work in a bank.",
+              "a": "She works in a bank."
+            },
+            {
+              "q": "Now I read a book.",
+              "a": "Now I am reading a book."
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Describe your usual day.",
+          "hint": "I usually… Every day I…"
+        },
+        {
+          "q": "Now describe today — what is different?",
+          "hint": "Today I’m… This week I’m…"
+        },
+        {
+          "q": "Look out of the window. What is happening?",
+          "hint": "People are… It is…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a2-past",
+    "level": "A2",
+    "category": "grammar",
+    "section": "Talking about time",
+    "icon": "📸",
+    "title": "Past experiences",
+    "outcome": "Я могу рассказать, что со мной произошло.",
+    "idea": "Как рассказать, что произошло.",
+    "leadIn": "What did you do yesterday?",
+    "explanation": [
+      "I went...",
+      "I saw...",
+      "I tried..."
+    ],
+    "practice": "Рассказать про недавнее событие.",
+    "speaking": "Tell me about your last weekend.",
+    "mistakes": [
+      [
+        "I goed to Sochi.",
+        "I went to Sochi."
+      ],
+      [
+        "Did you went?",
+        "Did you go?"
+      ],
+      [
+        "I didn’t saw it.",
+        "I didn’t see it."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "What did you do yesterday?",
+        "Where did you go last summer?"
+      ],
+      "visual": {
+        "type": "table",
+        "rows": [
+          [
+            "🚶",
+            "go",
+            "went"
+          ],
+          [
+            "👀",
+            "see",
+            "saw"
+          ],
+          [
+            "🍽️",
+            "eat",
+            "ate"
+          ],
+          [
+            "🛒",
+            "buy",
+            "bought"
+          ],
+          [
+            "✈️",
+            "fly",
+            "flew"
+          ],
+          [
+            "🧪",
+            "try",
+            "tried"
+          ]
+        ],
+        "note": "Правильные глаголы — +ed: watched, played. Вопрос и отрицание — через did: Did you go? I didn’t go."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🏖️",
+              "q": "Last summer I ___ to Turkey.",
+              "options": [
+                "went",
+                "go"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🎬",
+              "q": "We ___ a great film yesterday.",
+              "options": [
+                "saw",
+                "seed"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🍜",
+              "q": "I ___ Thai food for the first time.",
+              "options": [
+                "tried",
+                "try"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "❓",
+              "q": "___ you like the concert?",
+              "options": [
+                "Did",
+                "Were"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🙅",
+              "q": "I ___ go out last night.",
+              "options": [
+                "didn’t",
+                "wasn’t"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I went to the cinema yesterday.",
+            "Did you have a good weekend?",
+            "We didn’t see the sea."
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Я купил новый телефон.",
+              "a": "I bought a new phone."
+            },
+            {
+              "q": "Ты видел этот фильм?",
+              "a": "Did you see this film?"
+            },
+            {
+              "q": "Мы не пошли на вечеринку.",
+              "a": "We didn’t go to the party."
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Tell me about your last weekend.",
+          "hint": "On Saturday I went… I saw… I tried…"
+        },
+        {
+          "q": "Tell me about your best trip.",
+          "hint": "Where did you go? What did you see?"
+        },
+        {
+          "q": "Ask me 3 questions about my weekend.",
+          "hint": "Did you…? Where did you…?"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a2-future",
+    "level": "A2",
+    "category": "grammar",
+    "section": "Talking about time",
+    "icon": "🗓️",
+    "title": "Plans and future",
+    "outcome": "Я могу рассказать о своих планах.",
+    "idea": "Разные способы говорить о будущем.",
+    "leadIn": "What are your plans for the weekend?",
+    "explanation": [
+      "I’m going to...",
+      "I want to...",
+      "I’d like to...",
+      "I’m planning to..."
+    ],
+    "practice": "Планы на выходные.",
+    "speaking": "Your plans for the weekend.",
+    "mistakes": [
+      [
+        "I going to travel.",
+        "I’m going to travel."
+      ],
+      [
+        "I want travel.",
+        "I want to travel."
+      ],
+      [
+        "I would like go.",
+        "I’d like to go."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "What are your plans for the weekend?",
+        "What do you want to do this year?"
+      ],
+      "visual": {
+        "type": "scale",
+        "steps": [
+          {
+            "w": "I’d like to…",
+            "d": "хотелось бы, мечта"
+          },
+          {
+            "w": "I want to…",
+            "d": "хочу"
+          },
+          {
+            "w": "I’m planning to…",
+            "d": "планирую"
+          },
+          {
+            "w": "I’m going to…",
+            "d": "точно собираюсь, решено"
+          }
+        ],
+        "note": "Чем ниже по шкале — тем увереннее план."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🎟️",
+              "q": "I bought tickets. I ___ fly to Sochi.",
+              "options": [
+                "’m going to",
+                "’d like to"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🌍",
+              "q": "One day I ___ visit Japan. It’s my dream.",
+              "options": [
+                "’d like to",
+                "’m going to"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏋️",
+              "q": "I ___ start going to the gym next month.",
+              "options": [
+                "’m planning to",
+                "planning"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🍝",
+              "q": "Tonight I ___ cook pasta.",
+              "options": [
+                "am going to",
+                "going to"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I’m going to visit my parents.",
+            "I’d like to learn Spanish.",
+            "What are you going to do tonight?"
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Я собираюсь посмотреть фильм.",
+              "a": "I’m going to watch a film."
+            },
+            {
+              "q": "Я бы хотел поехать в Италию.",
+              "a": "I’d like to go to Italy."
+            },
+            {
+              "q": "Я планирую сменить работу.",
+              "a": "I’m planning to change my job."
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Your plans for the weekend.",
+          "hint": "I’m going to… I want to…"
+        },
+        {
+          "q": "Your dream for the next 5 years.",
+          "hint": "I’d like to… I’m planning to…"
+        },
+        {
+          "q": "Ask me about my plans.",
+          "hint": "What are you going to…?"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a2-questions",
+    "level": "A2",
+    "category": "speaking",
+    "section": "Conversation skills",
+    "icon": "💬",
+    "title": "Questions that start conversations",
+    "outcome": "Я могу начать разговор и поддержать его.",
+    "idea": "Вместо «Where are you from?» — вопросы, которые правда запускают разговор.",
+    "leadIn": "Who do you talk to in English?",
+    "explanation": [
+      "What do you usually do after work?",
+      "What kind of music do you like?"
+    ],
+    "practice": "Small talk.",
+    "speaking": "Small talk: ask me 5 open questions and react to my answers.",
+    "lesson": {
+      "warmup": [
+        "Who do you talk to in English?",
+        "Is small talk easy for you?"
+      ],
+      "visual": {
+        "type": "upgrade",
+        "pairs": [
+          [
+            "Where are you from?",
+            "What do you like most about your city?"
+          ],
+          [
+            "Do you like music?",
+            "What kind of music do you like?"
+          ],
+          [
+            "Do you work?",
+            "What do you usually do after work?"
+          ],
+          [
+            "Do you travel?",
+            "What’s the best place you’ve been to?"
+          ]
+        ],
+        "note": "Закрытый вопрос → «Yes» и тишина. Открытый — запускает разговор."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🎵",
+              "q": "Какой вопрос лучше запустит разговор?",
+              "options": [
+                "Do you like music?",
+                "What kind of music do you listen to?"
+              ],
+              "a": 1
+            },
+            {
+              "pic": "🍽️",
+              "q": "Какой вопрос лучше?",
+              "options": [
+                "What’s your favourite place to eat?",
+                "Do you eat out?"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🌆",
+              "q": "Какой вопрос лучше?",
+              "options": [
+                "Is your city big?",
+                "What do people do for fun in your city?"
+              ],
+              "a": 1
+            },
+            {
+              "pic": "🎬",
+              "q": "Какой вопрос лучше?",
+              "options": [
+                "What have you watched recently?",
+                "Do you watch TV?"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "match",
+          "title": "Подбери реакцию",
+          "pairs": [
+            [
+              "I like jazz.",
+              "Oh, who is your favourite musician?"
+            ],
+            [
+              "I just came back from Sochi.",
+              "How was it?"
+            ],
+            [
+              "I work in IT.",
+              "What do you like about your job?"
+            ],
+            [
+              "I have a dog.",
+              "What’s its name?"
+            ]
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "What do you usually do after work?",
+            "What kind of films do you like?",
+            "How do you spend your weekends?"
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Small talk: ask me 5 open questions and react to my answers.",
+          "hint": "What… How… What kind of…? Really? That’s cool!"
+        },
+        {
+          "q": "Now I ask — you answer and ask back.",
+          "hint": "… And you? / What about you?"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a2-opinions",
+    "level": "A2",
+    "category": "speaking",
+    "section": "Conversation skills",
+    "icon": "🗣️",
+    "title": "Opinions",
+    "outcome": "Я могу высказать своё мнение.",
+    "idea": "Как выражать мнение.",
+    "leadIn": "Cats or dogs?",
+    "explanation": [
+      "I think...",
+      "I believe...",
+      "In my opinion..."
+    ],
+    "practice": "Обсуждение простой темы.",
+    "speaking": "Coffee or tea — what’s better?",
+    "lesson": {
+      "warmup": [
+        "Cats or dogs?",
+        "Is online learning a good idea?"
+      ],
+      "visual": {
+        "type": "table",
+        "rows": [
+          [
+            "💭",
+            "I think…",
+            "я думаю"
+          ],
+          [
+            "🗣️",
+            "In my opinion…",
+            "по-моему"
+          ],
+          [
+            "💪",
+            "I believe…",
+            "я убеждён"
+          ],
+          [
+            "👍",
+            "I agree.",
+            "согласен"
+          ],
+          [
+            "👎",
+            "I don’t agree.",
+            "не согласен"
+          ]
+        ],
+        "note": "Мнение + причина: I think…, because…"
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🐱",
+              "q": "I think ___ cats are better than dogs.",
+              "options": [
+                "that",
+                "what"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🙅",
+              "q": "I ___ think it’s a good idea.",
+              "options": [
+                "don’t",
+                "not"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "👍",
+              "q": "I agree ___ you.",
+              "options": [
+                "with",
+                "to"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "☀️",
+              "q": "___ my opinion, summer is the best season.",
+              "options": [
+                "In",
+                "On"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I think online lessons are convenient.",
+            "In my opinion, sport is important.",
+            "I don’t agree with you."
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Скажи мнение — потом посмотри пример",
+          "items": [
+            {
+              "q": "Is social media good or bad?",
+              "a": "I think it’s both. It’s good because…, but…"
+            },
+            {
+              "q": "Is it better to live in a big city?",
+              "a": "In my opinion, yes, because…"
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Coffee or tea — what’s better?",
+          "hint": "I think… because…"
+        },
+        {
+          "q": "Should children have smartphones?",
+          "hint": "In my opinion… I believe…"
+        },
+        {
+          "q": "Is it better to work from home?",
+          "hint": "I agree / I don’t agree, because…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b1-upgrade",
+    "level": "B1",
+    "category": "natural",
+    "section": "Sound more natural",
+    "icon": "✨",
+    "title": "Upgrade your English",
+    "outcome": "Я звучу естественнее, а не как в учебнике.",
+    "idea": "Меняем учебниковые фразы на живые.",
+    "leadIn": "How was your week?",
+    "explanation": [
+      "I like it. → I’m really into it.",
+      "I think... → I’d say...",
+      "I don’t know. → I’m not sure."
+    ],
+    "practice": "Переформулировать свои ответы.",
+    "speaking": "Tell me about your hobby — use 3 upgraded phrases.",
+    "lesson": {
+      "warmup": [
+        "How was your week?",
+        "What do you do in your free time?"
+      ],
+      "visual": {
+        "type": "upgrade",
+        "pairs": [
+          [
+            "I like it.",
+            "I’m really into it."
+          ],
+          [
+            "I think…",
+            "I’d say…"
+          ],
+          [
+            "I don’t know.",
+            "I’m not sure."
+          ],
+          [
+            "It’s very good.",
+            "It’s amazing."
+          ],
+          [
+            "I am very tired.",
+            "I’m exhausted."
+          ],
+          [
+            "Yes.",
+            "Absolutely!"
+          ]
+        ]
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🎧",
+              "q": "Что звучит естественнее?",
+              "options": [
+                "I like it very much.",
+                "I’m really into it."
+              ],
+              "a": 1
+            },
+            {
+              "pic": "🤷",
+              "q": "Что звучит естественнее?",
+              "options": [
+                "I’m not sure.",
+                "I don’t know it."
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🥱",
+              "q": "Что звучит естественнее?",
+              "options": [
+                "I am very very tired.",
+                "I’m exhausted."
+              ],
+              "a": 1
+            },
+            {
+              "pic": "🍰",
+              "q": "Что звучит естественнее?",
+              "options": [
+                "It’s delicious!",
+                "It’s very tasty food."
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Прокачай фразу",
+          "items": [
+            {
+              "q": "It was very interesting.",
+              "a": "It was fascinating."
+            },
+            {
+              "q": "I like travelling very much.",
+              "a": "I’m really into travelling."
+            },
+            {
+              "q": "The film was very bad.",
+              "a": "The film was awful."
+            },
+            {
+              "q": "I think it’s expensive.",
+              "a": "I’d say it’s a bit pricey."
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I’m really into cooking.",
+            "I’d say it’s a good idea.",
+            "I’m not sure about that."
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Tell me about your hobby — use 3 upgraded phrases.",
+          "hint": "I’m really into… I’d say… It’s amazing…"
+        },
+        {
+          "q": "Describe the last film you saw.",
+          "hint": "fascinating · awful · I’m not sure…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b1-fillers",
+    "level": "B1",
+    "category": "natural",
+    "section": "Sound more natural",
+    "icon": "🎙️",
+    "title": "Natural conversation fillers",
+    "outcome": "Моя речь звучит живее и увереннее.",
+    "idea": "Как звучать более живо.",
+    "leadIn": "What do you think about remote work?",
+    "explanation": [
+      "Actually...",
+      "Basically...",
+      "To be honest...",
+      "It depends..."
+    ],
+    "practice": "Ответить на вопросы, используя связки.",
+    "speaking": "Fast answers — start each with a filler: Do you like mornings? Is money important? Are you a good cook?",
+    "lesson": {
+      "warmup": [
+        "What do you think about remote work?"
+      ],
+      "visual": {
+        "type": "table",
+        "rows": [
+          [
+            "🎯",
+            "Actually…",
+            "вообще-то, на самом деле"
+          ],
+          [
+            "📦",
+            "Basically…",
+            "короче, по сути"
+          ],
+          [
+            "🙌",
+            "To be honest…",
+            "если честно"
+          ],
+          [
+            "⚖️",
+            "It depends…",
+            "смотря…"
+          ],
+          [
+            "🤔",
+            "Well…",
+            "ну… (время подумать)"
+          ],
+          [
+            "💡",
+            "I mean…",
+            "то есть"
+          ]
+        ],
+        "note": "Связки дают время подумать — и звучат как живая речь, а не ответ у доски."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "😬",
+              "q": "___, I didn’t like the film.",
+              "options": [
+                "To be honest",
+                "Basically"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "⚖️",
+              "q": "Do you like sport? — ___ on the sport.",
+              "options": [
+                "It depends",
+                "Actually"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🎯",
+              "q": "You’re from Moscow? — ___, I’m from Ufa.",
+              "options": [
+                "Actually",
+                "It depends"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "📦",
+              "q": "___, the job is simple: you answer emails.",
+              "options": [
+                "Basically",
+                "To be honest"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "To be honest, I prefer tea.",
+            "Well, it depends on the weather.",
+            "Actually, I’ve never been there."
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Ответь со связкой — потом сравни",
+          "items": [
+            {
+              "q": "Do you like your job?",
+              "a": "To be honest, I love it, but it depends on the day."
+            },
+            {
+              "q": "Is English difficult?",
+              "a": "Well, basically it depends on practice."
+            },
+            {
+              "q": "You’re from Moscow, right?",
+              "a": "Actually, I’m from Ufa."
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Fast answers — start each with a filler: Do you like mornings? Is money important? Are you a good cook?",
+          "hint": "Well… / To be honest… / It depends…"
+        },
+        {
+          "q": "Tell me about your city in 1 minute.",
+          "hint": "Basically… Actually… I mean…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b1-stop",
+    "level": "B1",
+    "category": "grammar",
+    "section": "Grammar that changes meaning",
+    "icon": "🛑",
+    "title": "Stop doing vs Stop to do",
+    "outcome": "Я понимаю, как форма глагола меняет смысл.",
+    "idea": "Одна форма глагола — и смысл совсем другой.",
+    "leadIn": "Is there a habit you stopped?",
+    "explanation": [
+      "I stopped smoking. → Я перестал курить.",
+      "I stopped to smoke. → Я остановился, чтобы покурить."
+    ],
+    "practice": "Создать свои примеры.",
+    "speaking": "What did you stop doing? Why?",
+    "mistakes": [
+      [
+        "I stopped to smoke. (= бросил курить)",
+        "I stopped smoking."
+      ],
+      [
+        "Stop to talk!",
+        "Stop talking!"
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "Is there a habit you stopped?"
+      ],
+      "visual": {
+        "type": "compare",
+        "cols": [
+          {
+            "icon": "🚭",
+            "label": "stop + -ing — перестать",
+            "sub": "бросить делать",
+            "examples": [
+              "I stopped smoking.",
+              "Stop talking!"
+            ]
+          },
+          {
+            "icon": "🚶",
+            "label": "stop + to — остановиться, чтобы",
+            "sub": "прервать одно ради другого",
+            "examples": [
+              "I stopped to smoke.",
+              "We stopped to buy water."
+            ]
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🍬",
+              "q": "I stopped ___ sugar last year. I feel great!",
+              "options": [
+                "eating",
+                "to eat"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "⛽",
+              "q": "We stopped ___ petrol on the way.",
+              "options": [
+                "to buy",
+                "buying"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🤫",
+              "q": "Please stop ___! I’m trying to work.",
+              "options": [
+                "talking",
+                "to talk"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "👋",
+              "q": "I saw a friend and stopped ___ hello.",
+              "options": [
+                "to say",
+                "saying"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Что это значит?",
+          "items": [
+            {
+              "q": "He stopped to call his mum.",
+              "a": "Он остановился, чтобы позвонить маме."
+            },
+            {
+              "q": "He stopped calling his mum.",
+              "a": "Он перестал звонить маме."
+            },
+            {
+              "q": "She stopped to look at the map.",
+              "a": "Она остановилась, чтобы посмотреть на карту."
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I stopped drinking coffee.",
+            "We stopped to take a photo."
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "What did you stop doing? Why?",
+          "hint": "I stopped …-ing because…"
+        },
+        {
+          "q": "Tell me about a road trip: where did you stop and why?",
+          "hint": "We stopped to…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b1-remember",
+    "level": "B1",
+    "category": "grammar",
+    "section": "Grammar that changes meaning",
+    "icon": "🧠",
+    "title": "Remember doing vs Remember to do",
+    "outcome": "Я не путаю «помню, как…» и «не забудь…».",
+    "idea": "Помнить то, что уже было, — или не забыть сделать.",
+    "leadIn": "What is your first memory?",
+    "explanation": [
+      "I remember meeting her.",
+      "Remember to call her."
+    ],
+    "practice": "Ситуации из жизни.",
+    "speaking": "What do you remember doing as a child?",
+    "mistakes": [
+      [
+        "Remember locking the door!",
+        "Remember to lock the door!"
+      ],
+      [
+        "I remember to meet her last year.",
+        "I remember meeting her last year."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "What is your first memory?",
+        "What do you often forget?"
+      ],
+      "visual": {
+        "type": "compare",
+        "cols": [
+          {
+            "icon": "📼",
+            "label": "remember + -ing — помню, как…",
+            "sub": "взгляд назад",
+            "examples": [
+              "I remember meeting her.",
+              "I remember visiting Paris."
+            ]
+          },
+          {
+            "icon": "📌",
+            "label": "remember + to — не забыть сделать",
+            "sub": "взгляд вперёд",
+            "examples": [
+              "Remember to call her.",
+              "I remembered to lock the door."
+            ]
+          }
+        ],
+        "note": "То же с forget: I’ll never forget seeing the sea. / Don’t forget to buy milk."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🔑",
+              "q": "Remember ___ the door!",
+              "options": [
+                "to lock",
+                "locking"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🎂",
+              "q": "I remember ___ my 10th birthday party.",
+              "options": [
+                "having",
+                "to have"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🥛",
+              "q": "Don’t forget ___ milk.",
+              "options": [
+                "to buy",
+                "buying"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🌊",
+              "q": "I’ll never forget ___ the ocean for the first time.",
+              "options": [
+                "seeing",
+                "to see"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I remember meeting my best friend.",
+            "Remember to send the email."
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Я помню, как учился плавать.",
+              "a": "I remember learning to swim."
+            },
+            {
+              "q": "Не забудь позвонить маме.",
+              "a": "Remember to call your mum. / Don’t forget to call your mum."
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "What do you remember doing as a child?",
+          "hint": "I remember …-ing…"
+        },
+        {
+          "q": "Give me 3 reminders for tomorrow.",
+          "hint": "Remember to… Don’t forget to…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b1-used-to",
+    "level": "B1",
+    "category": "grammar",
+    "section": "Grammar that changes meaning",
+    "icon": "🕰️",
+    "title": "Used to",
+    "outcome": "Я могу рассказать, как было раньше.",
+    "idea": "Говорить о прошлом опыте — о том, что было раньше.",
+    "leadIn": "What did you like as a child?",
+    "explanation": [
+      "I used to play tennis.",
+      "What did you use to do as a child?"
+    ],
+    "practice": "What did you use to do as a child?",
+    "speaking": "What did you use to do as a child?",
+    "mistakes": [
+      [
+        "I use to play tennis.",
+        "I used to play tennis."
+      ],
+      [
+        "Did you used to…?",
+        "Did you use to…?"
+      ],
+      [
+        "I used to go to the gym now.",
+        "I go to the gym now."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "What did you like as a child?",
+        "How was your city 10 years ago?"
+      ],
+      "visual": {
+        "type": "compare",
+        "cols": [
+          {
+            "icon": "🕰️",
+            "label": "Раньше (а сейчас — нет)",
+            "sub": "used to + глагол",
+            "examples": [
+              "I used to play tennis.",
+              "I used to live in Kazan."
+            ]
+          },
+          {
+            "icon": "📍",
+            "label": "Сейчас",
+            "sub": "Present Simple",
+            "examples": [
+              "Now I play football.",
+              "Now I live in Ufa."
+            ]
+          }
+        ],
+        "note": "Вопрос и отрицание — без d: Did you use to…? I didn’t use to…"
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🎹",
+              "q": "I ___ play the piano, but I stopped.",
+              "options": [
+                "used to",
+                "use to"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🧒",
+              "q": "Did you ___ have long hair?",
+              "options": [
+                "use to",
+                "used to"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🥦",
+              "q": "I ___ like vegetables. Now I love them!",
+              "options": [
+                "didn’t use to",
+                "don’t used to"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏠",
+              "q": "We ___ live in a small village.",
+              "options": [
+                "used to",
+                "were used to"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I used to be very shy.",
+            "Did you use to play computer games?"
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Раньше я вставал в 6.",
+              "a": "I used to get up at 6."
+            },
+            {
+              "q": "Раньше у меня не было машины.",
+              "a": "I didn’t use to have a car."
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "What did you use to do as a child?",
+          "hint": "I used to…"
+        },
+        {
+          "q": "How are you different from 10 years ago?",
+          "hint": "I used to… but now I…"
+        },
+        {
+          "q": "Ask me 3 questions about my childhood.",
+          "hint": "Did you use to…?"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b1-say-tell",
+    "level": "B1",
+    "category": "vocabulary",
+    "section": "Grammar that changes meaning",
+    "icon": "👂",
+    "title": "Say vs Tell",
+    "outcome": "Я не путаю say и tell.",
+    "idea": "Типичная ошибка: say — что-то, tell — кому-то что-то.",
+    "leadIn": "Who told you about YORK?",
+    "explanation": [
+      "Say something.",
+      "Tell someone something."
+    ],
+    "practice": "Мини-диалоги.",
+    "speaking": "Tell me a short story from your childhood.",
+    "lesson": {
+      "warmup": [
+        "Who told you about YORK?"
+      ],
+      "visual": {
+        "type": "compare",
+        "cols": [
+          {
+            "icon": "💬",
+            "label": "SAY — сказать что-то",
+            "sub": "say something (to someone)",
+            "examples": [
+              "She said hello.",
+              "He said it was late."
+            ]
+          },
+          {
+            "icon": "👤",
+            "label": "TELL — сказать кому-то",
+            "sub": "tell someone something",
+            "examples": [
+              "She told me a story.",
+              "Tell me the truth."
+            ]
+          }
+        ],
+        "note": "Устойчивые: tell a story / a lie / the truth / a joke · say sorry / yes / no."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🙋",
+              "q": "Can you ___ me your name?",
+              "options": [
+                "tell",
+                "say"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "👋",
+              "q": "She ___ goodbye and left.",
+              "options": [
+                "said",
+                "told"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "📚",
+              "q": "Grandma ___ us a story.",
+              "options": [
+                "told",
+                "said"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🙏",
+              "q": "He ___ sorry to me.",
+              "options": [
+                "said",
+                "told"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🤥",
+              "q": "Don’t ___ lies!",
+              "options": [
+                "tell",
+                "say"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Найди ошибку",
+          "items": [
+            {
+              "q": "He said me the news.",
+              "a": "He told me the news."
+            },
+            {
+              "q": "Tell hello to your mum.",
+              "a": "Say hello to your mum."
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "She told me the truth.",
+            "He said that he was tired."
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Tell me a short story from your childhood.",
+          "hint": "My mum told me… She said…"
+        },
+        {
+          "q": "What did a friend tell you recently?",
+          "hint": "He / She told me that… He / She said…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b1-make-do",
+    "level": "B1",
+    "category": "vocabulary",
+    "section": "Grammar that changes meaning",
+    "icon": "🛠️",
+    "title": "Make vs Do",
+    "outcome": "Я знаю, что сказать: make или do.",
+    "idea": "Коллокации: какие слова «дружат» с make, а какие — с do.",
+    "leadIn": "What do you do in the morning?",
+    "explanation": [
+      "Make a decision.",
+      "Make a mistake.",
+      "Do homework.",
+      "Do exercise."
+    ],
+    "practice": "Составить свои примеры с make и do.",
+    "speaking": "What was the best decision you’ve made?",
+    "lesson": {
+      "warmup": [
+        "What do you do in the morning?"
+      ],
+      "visual": {
+        "type": "compare",
+        "cols": [
+          {
+            "icon": "🛠️",
+            "label": "MAKE — создать, получить результат",
+            "sub": "",
+            "examples": [
+              "make a decision",
+              "make a mistake",
+              "make money",
+              "make a cake",
+              "make friends"
+            ]
+          },
+          {
+            "icon": "✅",
+            "label": "DO — выполнить действие, работу",
+            "sub": "",
+            "examples": [
+              "do homework",
+              "do exercise",
+              "do the shopping",
+              "do your best",
+              "do business"
+            ]
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "💰",
+              "q": "He ___ a lot of money.",
+              "options": [
+                "makes",
+                "does"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏋️",
+              "q": "I ___ exercise every morning.",
+              "options": [
+                "do",
+                "make"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "❌",
+              "q": "Everyone ___ mistakes.",
+              "options": [
+                "makes",
+                "does"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🧹",
+              "q": "Who ___ the housework in your family?",
+              "options": [
+                "does",
+                "makes"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🤔",
+              "q": "I need to ___ a decision.",
+              "options": [
+                "make",
+                "do"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🛒",
+              "q": "Let’s ___ the shopping.",
+              "options": [
+                "do",
+                "make"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Я сделал ошибку.",
+              "a": "I made a mistake."
+            },
+            {
+              "q": "Сделай всё, что можешь.",
+              "a": "Do your best."
+            },
+            {
+              "q": "Мы легко заводим друзей.",
+              "a": "We make friends easily."
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I made a big decision.",
+            "Did you do your homework?"
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "What was the best decision you’ve made?",
+          "hint": "I made a decision to…"
+        },
+        {
+          "q": "Who does what at home?",
+          "hint": "I do the… My … makes…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b1-story",
+    "level": "B1",
+    "category": "fluency",
+    "section": "Storytelling",
+    "icon": "📖",
+    "title": "Tell a story",
+    "outcome": "Я могу связно рассказать историю из жизни.",
+    "idea": "Как рассказать историю связно, чтобы её было интересно слушать.",
+    "leadIn": "What was the most unusual day of your life?",
+    "explanation": [
+      "At first...",
+      "Suddenly...",
+      "Eventually...",
+      "The thing is..."
+    ],
+    "practice": "Рассказать историю из жизни.",
+    "speaking": "Tell me about your worst trip.",
+    "lesson": {
+      "warmup": [
+        "What was the most unusual day of your life?"
+      ],
+      "visual": {
+        "type": "formula",
+        "parts": [
+          {
+            "t": "At first…",
+            "ex": "At first, everything was fine."
+          },
+          {
+            "t": "Then…",
+            "ex": "Then I lost my passport."
+          },
+          {
+            "t": "Suddenly…",
+            "ex": "Suddenly, a man ran up to me."
+          },
+          {
+            "t": "Eventually…",
+            "ex": "Eventually, I got it back!"
+          },
+          {
+            "t": "The thing is…",
+            "ex": "The thing is, I still don’t know his name."
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "✈️",
+              "q": "___, the trip was boring, but then it got interesting.",
+              "options": [
+                "At first",
+                "Eventually"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "⚡",
+              "q": "We were walking and ___ it started raining.",
+              "options": [
+                "suddenly",
+                "eventually"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏁",
+              "q": "We waited for 3 hours and ___ the bus came.",
+              "options": [
+                "eventually",
+                "at first"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🤷",
+              "q": "I want to go, but ___, I don’t have time.",
+              "options": [
+                "the thing is",
+                "suddenly"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "At first, I was nervous.",
+            "Suddenly, the lights went out.",
+            "Eventually, we found the hotel."
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Tell me about your worst trip.",
+          "hint": "At first… Suddenly… Eventually… The thing is…"
+        },
+        {
+          "q": "Tell a funny story from school or work.",
+          "hint": "At first… Then… Suddenly…"
+        },
+        {
+          "q": "Story chain: we take turns, one sentence each.",
+          "hint": "Suddenly… / Then… / Eventually…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b2-passive",
+    "level": "B2",
+    "category": "grammar",
+    "section": "Advanced grammar in real speech",
+    "icon": "📰",
+    "title": "Passive Voice",
+    "outcome": "Я понимаю и использую пассив в живой речи.",
+    "idea": "Как звучать как в фильмах, новостях и рабочих ситуациях.",
+    "leadIn": "Where is your phone made?",
+    "explanation": [
+      "Active: People speak English worldwide.",
+      "Passive: English is spoken worldwide."
+    ],
+    "practice": "Переделать предложения.",
+    "speaking": "Your city: what is it known for? What was built there?",
+    "mistakes": [
+      [
+        "The bridge built in 1890.",
+        "The bridge was built in 1890."
+      ],
+      [
+        "English is speak here.",
+        "English is spoken here."
+      ],
+      [
+        "It was send yesterday.",
+        "It was sent yesterday."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "Where is your phone made?",
+        "Is English spoken in your office?"
+      ],
+      "visual": {
+        "type": "compare",
+        "cols": [
+          {
+            "icon": "👤",
+            "label": "Active — кто делает",
+            "sub": "важен исполнитель",
+            "examples": [
+              "People speak English worldwide.",
+              "Someone stole my bike."
+            ]
+          },
+          {
+            "icon": "📦",
+            "label": "Passive — что происходит",
+            "sub": "be + 3-я форма",
+            "examples": [
+              "English is spoken worldwide.",
+              "My bike was stolen."
+            ]
+          }
+        ],
+        "note": "Пассив — когда неважно или неизвестно, кто сделал: новости, инструкции, работа."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "📱",
+              "q": "iPhones ___ in China.",
+              "options": [
+                "are made",
+                "make"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏛️",
+              "q": "This bridge ___ in 1890.",
+              "options": [
+                "was built",
+                "built"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "📧",
+              "q": "The email ___ yesterday.",
+              "options": [
+                "was sent",
+                "sent"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🧾",
+              "q": "You ___ by our manager tomorrow.",
+              "options": [
+                "will be contacted",
+                "will contact"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🚲",
+              "q": "My bike ___! I can’t find it.",
+              "options": [
+                "has been stolen",
+                "has stolen"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переделай в пассив",
+          "items": [
+            {
+              "q": "They cancelled the meeting.",
+              "a": "The meeting was cancelled."
+            },
+            {
+              "q": "Someone has fixed the printer.",
+              "a": "The printer has been fixed."
+            },
+            {
+              "q": "We will send the report tomorrow.",
+              "a": "The report will be sent tomorrow."
+            },
+            {
+              "q": "People grow tea in India.",
+              "a": "Tea is grown in India."
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "The meeting was cancelled.",
+            "English is spoken all over the world."
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Your city: what is it known for? What was built there?",
+          "hint": "It is known for… It was built… It is visited by…"
+        },
+        {
+          "q": "Explain how something is made: coffee, pizza, an app.",
+          "hint": "First, … is… Then it is…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b2-conditionals",
+    "level": "B2",
+    "category": "grammar",
+    "section": "Advanced grammar in real speech",
+    "icon": "🔀",
+    "title": "Conditionals without formulas",
+    "outcome": "Я могу говорить о планах, мечтах и прошлых решениях.",
+    "idea": "Не правила, а реальные ситуации.",
+    "leadIn": "What would you do with a million dollars?",
+    "explanation": [
+      "If I have time, I’ll...",
+      "If I had more money, I would...",
+      "If I had studied harder, I would have..."
+    ],
+    "practice": "Мечты, планы, решения.",
+    "speaking": "What would you do if you didn’t have to work?",
+    "mistakes": [
+      [
+        "If I will have time, I’ll call.",
+        "If I have time, I’ll call."
+      ],
+      [
+        "If I would be rich…",
+        "If I were rich…"
+      ],
+      [
+        "If I knew, I would told you.",
+        "If I had known, I would have told you."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "What would you do with a million dollars?"
+      ],
+      "visual": {
+        "type": "table",
+        "rows": [
+          [
+            "🎯",
+            "Реально",
+            "If I have time, I’ll call you."
+          ],
+          [
+            "💭",
+            "Мечта, сейчас нереально",
+            "If I had more money, I would travel."
+          ],
+          [
+            "⏪",
+            "Прошлое, уже не изменить",
+            "If I had studied harder, I would have passed."
+          ]
+        ]
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "☔",
+              "q": "If it rains, we ___ at home.",
+              "options": [
+                "will stay",
+                "would stay"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏝️",
+              "q": "If I ___ rich, I would buy an island.",
+              "options": [
+                "were",
+                "am"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "⏰",
+              "q": "If I had left earlier, I ___ the train.",
+              "options": [
+                "wouldn’t have missed",
+                "won’t miss"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🦸",
+              "q": "What would you do if you ___ invisible?",
+              "options": [
+                "were",
+                "will be"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Если у меня будет время, я приду.",
+              "a": "If I have time, I’ll come."
+            },
+            {
+              "q": "Если бы я жил у моря, я бы плавал каждый день.",
+              "a": "If I lived by the sea, I would swim every day."
+            },
+            {
+              "q": "Если бы я знал, я бы тебе сказал.",
+              "a": "If I had known, I would have told you."
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "If I had more time, I would learn Spanish.",
+            "If you call me, I’ll help you."
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "What would you do if you didn’t have to work?",
+          "hint": "If I didn’t…, I would…"
+        },
+        {
+          "q": "A past decision: what if you had done it differently?",
+          "hint": "If I had…, I would have…"
+        },
+        {
+          "q": "What will you do if the weather is good this weekend?",
+          "hint": "If…, I’ll…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b2-wish",
+    "level": "B2",
+    "category": "grammar",
+    "section": "Advanced grammar in real speech",
+    "icon": "🌠",
+    "title": "Wish / If only",
+    "outcome": "Я могу говорить о сожалениях и желаниях.",
+    "idea": "Говорить о сожалениях и желаниях.",
+    "leadIn": "Is there anything you’d change about your life?",
+    "explanation": [
+      "I wish I had more free time.",
+      "I wish I hadn’t said that."
+    ],
+    "practice": "Что бы ты изменил(а)?",
+    "speaking": "3 wishes about your life now.",
+    "mistakes": [
+      [
+        "I wish I have more time.",
+        "I wish I had more time."
+      ],
+      [
+        "I wish I didn’t say that. (о прошлом)",
+        "I wish I hadn’t said that."
+      ],
+      [
+        "I wish I can swim.",
+        "I wish I could swim."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "Is there anything you’d change about your life?"
+      ],
+      "visual": {
+        "type": "compare",
+        "cols": [
+          {
+            "icon": "🌠",
+            "label": "Хочу, чтобы сейчас было иначе",
+            "sub": "wish + Past Simple",
+            "examples": [
+              "I wish I had more free time.",
+              "I wish I lived by the sea."
+            ]
+          },
+          {
+            "icon": "😔",
+            "label": "Жалею о прошлом",
+            "sub": "wish + Past Perfect",
+            "examples": [
+              "I wish I hadn’t said that.",
+              "If only I had listened!"
+            ]
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🏖️",
+              "q": "I wish I ___ on holiday now.",
+              "options": [
+                "were",
+                "am"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🗣️",
+              "q": "I wish I ___ that. It was rude.",
+              "options": [
+                "hadn’t said",
+                "didn’t say"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🎸",
+              "q": "If only I ___ play the guitar!",
+              "options": [
+                "could",
+                "can"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "📚",
+              "q": "I wish I ___ harder at school.",
+              "options": [
+                "had studied",
+                "studied"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Жаль, что я не говорю по-испански.",
+              "a": "I wish I spoke Spanish."
+            },
+            {
+              "q": "Жаль, что я не купил тот билет.",
+              "a": "I wish I had bought that ticket."
+            },
+            {
+              "q": "Если бы только у меня было больше времени!",
+              "a": "If only I had more time!"
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I wish I had more free time.",
+            "If only I had known earlier!"
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "3 wishes about your life now.",
+          "hint": "I wish I had… I wish I could…"
+        },
+        {
+          "q": "One thing you regret (or don’t!).",
+          "hint": "I wish I had / hadn’t…"
+        },
+        {
+          "q": "What would you change in your city?",
+          "hint": "I wish there were…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b2-gerund",
+    "level": "B2",
+    "category": "grammar",
+    "section": "Advanced grammar in real speech",
+    "icon": "⚖️",
+    "title": "Gerund vs Infinitive",
+    "outcome": "Я чувствую, когда нужен -ing, а когда to.",
+    "idea": "Почему enjoy reading, но want to travel.",
+    "leadIn": "What do you enjoy doing on Sundays?",
+    "explanation": [
+      "I enjoy reading.",
+      "I want to travel."
+    ],
+    "practice": "Говорить о предпочтениях.",
+    "speaking": "What do you enjoy — and what can’t you stand?",
+    "mistakes": [
+      [
+        "I enjoy to read.",
+        "I enjoy reading."
+      ],
+      [
+        "I want going.",
+        "I want to go."
+      ],
+      [
+        "I’m interested in learn.",
+        "I’m interested in learning."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "What do you enjoy doing on Sundays?",
+        "What have you decided to change this year?"
+      ],
+      "visual": {
+        "type": "compare",
+        "cols": [
+          {
+            "icon": "🔄",
+            "label": "-ing",
+            "sub": "enjoy · avoid · mind · finish · keep · can’t stand",
+            "examples": [
+              "I enjoy reading.",
+              "I can’t stand waiting."
+            ]
+          },
+          {
+            "icon": "🎯",
+            "label": "to + глагол",
+            "sub": "want · decide · plan · hope · need · would like",
+            "examples": [
+              "I want to travel.",
+              "I decided to quit."
+            ]
+          }
+        ],
+        "note": "После предлогов — всегда -ing: interested in learning, good at cooking."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🧘",
+              "q": "I enjoy ___ yoga.",
+              "options": [
+                "doing",
+                "to do"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "✈️",
+              "q": "We decided ___ to Georgia.",
+              "options": [
+                "to go",
+                "going"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "⏳",
+              "q": "I can’t stand ___ in queues.",
+              "options": [
+                "waiting",
+                "to wait"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🎓",
+              "q": "She’s interested in ___ Italian.",
+              "options": [
+                "learning",
+                "to learn"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🍫",
+              "q": "I’m trying to avoid ___ sugar.",
+              "options": [
+                "eating",
+                "to eat"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏠",
+              "q": "I hope ___ a house one day.",
+              "options": [
+                "to buy",
+                "buying"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Я не против подождать.",
+              "a": "I don’t mind waiting."
+            },
+            {
+              "q": "Я планирую переехать.",
+              "a": "I’m planning to move."
+            },
+            {
+              "q": "Он хорошо готовит.",
+              "a": "He’s good at cooking."
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "I enjoy cooking for friends.",
+            "I decided to learn English."
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "What do you enjoy — and what can’t you stand?",
+          "hint": "I enjoy… I can’t stand… I don’t mind…"
+        },
+        {
+          "q": "Your plans and hopes for this year.",
+          "hint": "I want to… I hope to… I’ve decided to…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b2-work",
+    "level": "B2",
+    "category": "work",
+    "section": "Professional English",
+    "icon": "💼",
+    "title": "English for work",
+    "outcome": "Я могу участвовать в рабочем обсуждении.",
+    "idea": "Фразы, на которых держится рабочее обсуждение.",
+    "leadIn": "What do you do at work?",
+    "explanation": [
+      "Let’s discuss...",
+      "I suggest...",
+      "Could you clarify...?"
+    ],
+    "practice": "Рабочая ситуация.",
+    "speaking": "Meeting role play: suggest a new idea to your team.",
+    "lesson": {
+      "warmup": [
+        "What do you do at work?",
+        "Do you use English at work?"
+      ],
+      "visual": {
+        "type": "table",
+        "rows": [
+          [
+            "📋",
+            "Начать обсуждение",
+            "Let’s discuss… / Let’s start with…"
+          ],
+          [
+            "💡",
+            "Предложить",
+            "I suggest… / What if we…?"
+          ],
+          [
+            "❓",
+            "Уточнить",
+            "Could you clarify…?"
+          ],
+          [
+            "👍",
+            "Согласиться",
+            "That makes sense. / Good point."
+          ],
+          [
+            "🤚",
+            "Мягко возразить",
+            "I see your point, but…"
+          ],
+          [
+            "✅",
+            "Подвести итог",
+            "So, to sum up…"
+          ]
+        ]
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "💡",
+              "q": "I suggest ___ the deadline.",
+              "options": [
+                "moving",
+                "to move"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "❓",
+              "q": "Could you ___ what you mean?",
+              "options": [
+                "clarify",
+                "clear"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🤚",
+              "q": "I see your point, ___ I think we need more time.",
+              "options": [
+                "but",
+                "so"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "✅",
+              "q": "So, ___, we launch on Monday.",
+              "options": [
+                "to sum up",
+                "in the end of"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "match",
+          "pairs": [
+            [
+              "That makes sense.",
+              "Логично."
+            ],
+            [
+              "Let’s get started.",
+              "Давайте начнём."
+            ],
+            [
+              "Could you clarify?",
+              "Можете уточнить?"
+            ],
+            [
+              "Good point.",
+              "Хорошее замечание."
+            ]
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "Let’s discuss the budget.",
+            "Could you clarify the deadline?"
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Meeting role play: suggest a new idea to your team.",
+          "hint": "Let’s discuss… I suggest… What if we…?"
+        },
+        {
+          "q": "I disagree with your idea — defend it politely.",
+          "hint": "I see your point, but… That makes sense, however…"
+        },
+        {
+          "q": "Describe your job to a new foreign colleague.",
+          "hint": "I’m responsible for… I work on…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b2-soft",
+    "level": "B2",
+    "category": "work",
+    "section": "Professional English",
+    "icon": "🤝",
+    "title": "Make English less direct",
+    "outcome": "Я могу писать и говорить вежливо, без резкости.",
+    "idea": "Как попросить вежливо, а не приказом.",
+    "leadIn": "How do you ask your manager for something?",
+    "explanation": [
+      "Прямо: Send me the file.",
+      "Мягче: Could you send me the file?",
+      "Мягче: Would you mind sending it?"
+    ],
+    "practice": "Рабочие сообщения.",
+    "speaking": "Ask a colleague to fix a mistake — politely.",
+    "lesson": {
+      "warmup": [
+        "How do you ask your manager for something?"
+      ],
+      "visual": {
+        "type": "upgrade",
+        "pairs": [
+          [
+            "Send me the file.",
+            "Could you send me the file?"
+          ],
+          [
+            "Do it today.",
+            "Would you mind doing it today?"
+          ],
+          [
+            "You’re wrong.",
+            "I’m not sure that’s right."
+          ],
+          [
+            "I want a discount.",
+            "I was wondering if you could offer a discount."
+          ],
+          [
+            "Answer quickly.",
+            "I’d appreciate a quick reply."
+          ]
+        ]
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "📎",
+              "q": "Что вежливее?",
+              "options": [
+                "Would you mind sending the file?",
+                "Send the file now."
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🙅",
+              "q": "Что вежливее?",
+              "options": [
+                "This is a bad idea.",
+                "I’m not sure that’s the best idea."
+              ],
+              "a": 1
+            },
+            {
+              "pic": "📅",
+              "q": "Would you mind ___ the meeting?",
+              "options": [
+                "moving",
+                "to move"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "💬",
+              "q": "I was wondering if you ___ help me.",
+              "options": [
+                "could",
+                "can to"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Смягчи фразу",
+          "items": [
+            {
+              "q": "Call me back.",
+              "a": "Could you call me back when you have a moment?"
+            },
+            {
+              "q": "Your report is late.",
+              "a": "I was wondering when the report might be ready."
+            },
+            {
+              "q": "I need it now.",
+              "a": "I’d appreciate it if I could get it today."
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "Would you mind helping me?",
+            "I’d appreciate a quick reply."
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Ask a colleague to fix a mistake — politely.",
+          "hint": "Could you… / Would you mind… / I’d appreciate…"
+        },
+        {
+          "q": "Ask your manager for a day off.",
+          "hint": "I was wondering if…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "b2-modals",
+    "level": "B2",
+    "category": "grammar",
+    "section": "Advanced grammar in real speech",
+    "icon": "📏",
+    "title": "Modal verbs",
+    "outcome": "Я могу говорить о правилах, обязанностях и советах.",
+    "idea": "Обязанность, совет и «не обязательно»: must, have to, should, don’t have to.",
+    "leadIn": "What rules do you have at work?",
+    "explanation": [
+      "You must wear a seatbelt.",
+      "I have to get up early.",
+      "You should try it.",
+      "You don’t have to come."
+    ],
+    "practice": "Правила на работе и советы другу.",
+    "speaking": "Rules at your work or at home.",
+    "mistakes": [
+      [
+        "You must to go.",
+        "You must go."
+      ],
+      [
+        "You don’t must do it.",
+        "You don’t have to do it."
+      ],
+      [
+        "I should to call.",
+        "I should call."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "What rules do you have at work?",
+        "What do you have to do every day?"
+      ],
+      "visual": {
+        "type": "compare",
+        "cols": [
+          {
+            "icon": "🚦",
+            "label": "must / have to — надо",
+            "sub": "правило, обязанность",
+            "examples": [
+              "You must wear a seatbelt.",
+              "I have to work on Saturday."
+            ]
+          },
+          {
+            "icon": "🛋️",
+            "label": "don’t have to — не обязательно",
+            "sub": "можно не делать",
+            "examples": [
+              "You don’t have to come.",
+              "I don’t have to get up early on Sunday."
+            ]
+          }
+        ],
+        "note": "mustn’t = нельзя: You mustn’t smoke here. А don’t have to = можно не делать."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🚭",
+              "q": "You ___ smoke here. It’s forbidden.",
+              "options": [
+                "mustn’t",
+                "don’t have to"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "😴",
+              "q": "It’s Sunday! You ___ get up early.",
+              "options": [
+                "don’t have to",
+                "mustn’t"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🦷",
+              "q": "Your tooth hurts. You ___ see a dentist.",
+              "options": [
+                "should",
+                "shouldn’t"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🪪",
+              "q": "Visitors ___ show their ID at the entrance.",
+              "options": [
+                "must",
+                "don’t have to"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "👔",
+              "q": "I ___ wear a suit at work — it’s the dress code.",
+              "options": [
+                "have to",
+                "don’t have to"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Тебе не обязательно отвечать.",
+              "a": "You don’t have to answer."
+            },
+            {
+              "q": "Здесь нельзя парковаться.",
+              "a": "You mustn’t park here."
+            },
+            {
+              "q": "Тебе стоит отдохнуть.",
+              "a": "You should have a rest."
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "items": [
+            "You don’t have to pay.",
+            "You should call her."
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Rules at your work or at home.",
+          "hint": "We have to… We don’t have to… We mustn’t…"
+        },
+        {
+          "q": "Give advice to someone who wants to learn English fast.",
+          "hint": "You should… You don’t have to…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "c1-argue",
+    "level": "C1",
+    "category": "fluency",
+    "section": "Expressing complex ideas",
+    "icon": "🏛️",
+    "title": "Argumentation",
+    "outcome": "Я могу аргументировать свою позицию.",
+    "idea": "Как аргументировать позицию и признавать другую точку зрения.",
+    "leadIn": "Should university education be free?",
+    "explanation": [
+      "From my perspective...",
+      "One could argue that...",
+      "However..."
+    ],
+    "practice": "Мини-дискуссия.",
+    "speaking": "Debate: should social media be banned for under-16s? 2 minutes.",
+    "lesson": {
+      "warmup": [
+        "Should university education be free?"
+      ],
+      "visual": {
+        "type": "formula",
+        "parts": [
+          {
+            "t": "Позиция",
+            "ex": "From my perspective, remote work is the future."
+          },
+          {
+            "t": "Аргумент",
+            "ex": "The main reason is that…"
+          },
+          {
+            "t": "Контраргумент",
+            "ex": "One could argue that… However,…"
+          },
+          {
+            "t": "Вывод",
+            "ex": "All things considered,…"
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "⚖️",
+              "q": "One could argue that AI is dangerous. ___, it also saves lives.",
+              "options": [
+                "However",
+                "Therefore"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🎯",
+              "q": "___, the benefits outweigh the risks.",
+              "options": [
+                "All things considered",
+                "On the one side"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🧭",
+              "q": "From my ___, it’s a mistake.",
+              "options": [
+                "perspective",
+                "opinion view"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "📉",
+              "q": "Prices rose; ___, demand fell.",
+              "options": [
+                "as a result",
+                "however"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "match",
+          "pairs": [
+            [
+              "Having said that…",
+              "Тем не менее…"
+            ],
+            [
+              "That’s a fair point, but…",
+              "Справедливо, но…"
+            ],
+            [
+              "It’s worth mentioning that…",
+              "Стоит отметить, что…"
+            ],
+            [
+              "On balance…",
+              "В целом…"
+            ]
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Debate: should social media be banned for under-16s? 2 minutes.",
+          "hint": "From my perspective… One could argue… However… On balance…"
+        },
+        {
+          "q": "Switch sides — argue the opposite.",
+          "hint": "That’s a fair point, but… Having said that…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "c1-modals",
+    "level": "C1",
+    "category": "grammar",
+    "section": "Expressing complex ideas",
+    "icon": "🎚️",
+    "title": "Nuance with modal verbs",
+    "outcome": "Я точно передаю, насколько настойчив мой совет.",
+    "idea": "Разница в силе совета: must, should, could.",
+    "leadIn": "What advice would you give to a new student?",
+    "explanation": [
+      "You must...",
+      "You should...",
+      "You could..."
+    ],
+    "practice": "Давать советы и оценивать ситуации.",
+    "speaking": "A friend wants to quit their job. Advise — from strong to soft.",
+    "mistakes": [
+      [
+        "He must have forgot.",
+        "He must have forgotten."
+      ],
+      [
+        "She can be at home — the lights are on.",
+        "She must be at home — the lights are on."
+      ],
+      [
+        "You should to see a doctor.",
+        "You should see a doctor."
+      ]
+    ],
+    "lesson": {
+      "warmup": [
+        "What advice would you give to a new student?"
+      ],
+      "visual": {
+        "type": "scale",
+        "steps": [
+          {
+            "w": "You must…",
+            "d": "обязательно, без вариантов"
+          },
+          {
+            "w": "You’d better…",
+            "d": "иначе будут проблемы"
+          },
+          {
+            "w": "You should…",
+            "d": "советую"
+          },
+          {
+            "w": "You could…",
+            "d": "как вариант"
+          },
+          {
+            "w": "You might want to…",
+            "d": "очень мягкое предложение"
+          }
+        ],
+        "note": "Для догадок та же логика: must be (уверен) → might be (возможно) → can’t be (исключено)."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🪪",
+              "q": "You ___ have a passport to fly abroad.",
+              "options": [
+                "must",
+                "could"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🧥",
+              "q": "It’s cold. You ___ take a jacket.",
+              "options": [
+                "should",
+                "must not"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "💡",
+              "q": "The lights are on. They ___ be at home.",
+              "options": [
+                "must",
+                "can’t"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "📵",
+              "q": "She’s not answering. She ___ be busy.",
+              "options": [
+                "might",
+                "must not"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🚆",
+              "q": "He was in Moscow yesterday. It ___ have been him in Ufa.",
+              "options": [
+                "can’t",
+                "must"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Оцени ситуацию — потом сравни",
+          "items": [
+            {
+              "q": "Your friend’s phone is off. Why?",
+              "a": "Her battery might be dead. / She must be on a plane."
+            },
+            {
+              "q": "A colleague is always late.",
+              "a": "He should set an alarm. / He might want to leave earlier."
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "A friend wants to quit their job. Advise — from strong to soft.",
+          "hint": "You must… You should… You could… You might want to…"
+        },
+        {
+          "q": "Guess what happened: 🧳 🏖️ 😎",
+          "hint": "He must… She might… They can’t…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "c1-phrasal",
+    "level": "C1",
+    "category": "vocabulary",
+    "section": "Natural fluent English",
+    "icon": "🧷",
+    "title": "Phrasal verbs",
+    "outcome": "Я использую фразовые глаголы в своей речи.",
+    "idea": "Фразовые глаголы, без которых речь звучит книжно.",
+    "leadIn": "What are you looking forward to this month?",
+    "explanation": [
+      "find out",
+      "figure out",
+      "give up",
+      "look forward to"
+    ],
+    "practice": "Создать мини-истории.",
+    "speaking": "Mini-story: use all 6 phrasal verbs.",
+    "lesson": {
+      "warmup": [
+        "What are you looking forward to this month?"
+      ],
+      "visual": {
+        "type": "table",
+        "rows": [
+          [
+            "🔎",
+            "find out",
+            "узнать"
+          ],
+          [
+            "🧩",
+            "figure out",
+            "разобраться"
+          ],
+          [
+            "🏳️",
+            "give up",
+            "сдаться, бросить"
+          ],
+          [
+            "🎁",
+            "look forward to",
+            "ждать с нетерпением"
+          ],
+          [
+            "💡",
+            "come up with",
+            "придумать"
+          ],
+          [
+            "🥛",
+            "run out of",
+            "закончиться (о запасах)"
+          ]
+        ]
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🧩",
+              "q": "I can’t ___ how this app works.",
+              "options": [
+                "figure out",
+                "give up"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🥛",
+              "q": "We’ve ___ milk. Can you buy some?",
+              "options": [
+                "run out of",
+                "found out"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏳️",
+              "q": "Don’t ___! You’re almost there.",
+              "options": [
+                "give up",
+                "look forward"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🎉",
+              "q": "I’m looking forward to ___ you.",
+              "options": [
+                "seeing",
+                "see"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "💡",
+              "q": "She ___ a brilliant idea.",
+              "options": [
+                "came up with",
+                "ran out of"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Переведи — потом проверь",
+          "items": [
+            {
+              "q": "Я узнал правду.",
+              "a": "I found out the truth."
+            },
+            {
+              "q": "У нас закончилось время.",
+              "a": "We ran out of time."
+            },
+            {
+              "q": "Кто придумал этот план?",
+              "a": "Who came up with this plan?"
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Mini-story: use all 6 phrasal verbs.",
+          "hint": "find out · figure out · give up · look forward to · come up with · run out of"
+        },
+        {
+          "q": "What have you given up? What will you never give up?",
+          "hint": "I gave up… I’ll never give up…"
+        }
+      ]
+    }
+  },
+  {
+    "id": "c1-idioms",
+    "level": "C1",
+    "category": "natural",
+    "section": "Natural fluent English",
+    "icon": "☕",
+    "title": "Idioms and natural expressions",
+    "outcome": "Я могу вставить идиому к месту.",
+    "idea": "Выражения, которые делают речь по-настоящему живой.",
+    "leadIn": "Do you have a favourite Russian idiom?",
+    "explanation": [
+      "It’s not my cup of tea.",
+      "I’m on the fence.",
+      "That rings a bell."
+    ],
+    "practice": "Использовать в разговоре.",
+    "speaking": "Answer with an idiom: Do you like horror films? Is English easy? Will you move abroad?",
+    "lesson": {
+      "warmup": [
+        "Do you have a favourite Russian idiom?"
+      ],
+      "visual": {
+        "type": "table",
+        "rows": [
+          [
+            "☕",
+            "It’s not my cup of tea.",
+            "не моё"
+          ],
+          [
+            "🤺",
+            "I’m on the fence.",
+            "не могу решить"
+          ],
+          [
+            "🔔",
+            "That rings a bell.",
+            "что-то знакомое"
+          ],
+          [
+            "🍰",
+            "It’s a piece of cake.",
+            "проще простого"
+          ],
+          [
+            "🤒",
+            "under the weather",
+            "неважно себя чувствую"
+          ],
+          [
+            "🧊",
+            "break the ice",
+            "растопить лёд"
+          ]
+        ]
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "☕",
+              "q": "Opera is not my cup of tea. Это значит…",
+              "options": [
+                "Мне не нравится опера",
+                "Я не пью чай в опере"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🤺",
+              "q": "I’m on the fence about moving. Это значит…",
+              "options": [
+                "Я не могу решить",
+                "Я уже переехал"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🔔",
+              "q": "Her name rings a bell. Это значит…",
+              "options": [
+                "Имя кажется знакомым",
+                "Она мне звонила"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🍰",
+              "q": "The test was a piece of cake. Это значит…",
+              "options": [
+                "Тест был очень лёгким",
+                "На тесте дали торт"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "match",
+          "pairs": [
+            [
+              "under the weather",
+              "приболел"
+            ],
+            [
+              "break the ice",
+              "растопить лёд"
+            ],
+            [
+              "a piece of cake",
+              "проще простого"
+            ],
+            [
+              "on the fence",
+              "в раздумьях"
+            ]
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Answer with an idiom: Do you like horror films? Is English easy? Will you move abroad?",
+          "hint": "not my cup of tea · a piece of cake · on the fence"
+        },
+        {
+          "q": "Tell a story with at least 3 idioms.",
+          "hint": "break the ice · rings a bell · under the weather"
+        }
+      ]
+    }
+  },
+  {
+    "id": "c1-complex",
+    "level": "C1",
+    "category": "fluency",
+    "section": "Expressing complex ideas",
+    "icon": "🧠",
+    "title": "Expressing complex ideas",
+    "outcome": "Я могу связно объяснять сложные мысли.",
+    "idea": "Как связывать мысли в длинные точные предложения вместо коротких фраз.",
+    "leadIn": "What is something complex that you understand well?",
+    "explanation": [
+      "Not only… but also…",
+      "…, whereas…",
+      "…, which means that…",
+      "The reason why… is that…"
+    ],
+    "practice": "Объяснить сложную тему из своей жизни или работы.",
+    "speaking": "Explain a complex topic from your work in 2 minutes.",
+    "lesson": {
+      "warmup": [
+        "What is something complex that you understand well?"
+      ],
+      "visual": {
+        "type": "upgrade",
+        "pairs": [
+          [
+            "It’s cheap. It’s fast.",
+            "It’s not only cheap but also fast."
+          ],
+          [
+            "I like cities. My sister likes villages.",
+            "I like cities, whereas my sister prefers villages."
+          ],
+          [
+            "Prices went up. People buy less.",
+            "Prices went up, which means that people buy less."
+          ],
+          [
+            "I moved. I wanted a change.",
+            "The reason why I moved is that I wanted a change."
+          ]
+        ],
+        "note": "Одна длинная связная мысль звучит увереннее, чем три коротких."
+      },
+      "tasks": [
+        {
+          "type": "choose",
+          "items": [
+            {
+              "pic": "🚆",
+              "q": "The train is ___ faster ___ cheaper.",
+              "options": [
+                "not only / but also",
+                "either / or"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🏙️",
+              "q": "I love the city, ___ my husband prefers the countryside.",
+              "options": [
+                "whereas",
+                "because"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "📈",
+              "q": "Demand grew, ___ prices went up.",
+              "options": [
+                "which means that",
+                "whereas"
+              ],
+              "a": 0
+            },
+            {
+              "pic": "🤔",
+              "q": "The reason ___ I left is that I needed a challenge.",
+              "options": [
+                "why",
+                "because"
+              ],
+              "a": 0
+            }
+          ]
+        },
+        {
+          "type": "reveal",
+          "title": "Соедини в одно предложение",
+          "items": [
+            {
+              "q": "Remote work saves time. It can feel lonely.",
+              "a": "Remote work saves time, whereas it can feel lonely."
+            },
+            {
+              "q": "AI is fast. It is accurate.",
+              "a": "AI is not only fast but also accurate."
+            },
+            {
+              "q": "I changed jobs. I wanted more freedom.",
+              "a": "The reason why I changed jobs is that I wanted more freedom."
+            }
+          ]
+        }
+      ],
+      "speak": [
+        {
+          "q": "Explain a complex topic from your work in 2 minutes.",
+          "hint": "The reason why… which means that… whereas…"
+        },
+        {
+          "q": "Compare two cities, jobs or ideas.",
+          "hint": "not only… but also… · whereas…"
+        }
+      ]
+    }
+  }
+]

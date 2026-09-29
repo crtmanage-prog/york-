@@ -1,0 +1,1032 @@
+{
+  "categories": [
+    {
+      "id": "icebreakers",
+      "label": "Icebreakers",
+      "icon": "🧊",
+      "description": "Разговорить ученика в первые минуты."
+    },
+    {
+      "id": "discussions",
+      "label": "Discussions",
+      "icon": "🗣️",
+      "description": "Заставить объяснять мнение."
+    },
+    {
+      "id": "roleplays",
+      "label": "Role plays",
+      "icon": "🎭",
+      "description": "Симуляция реальной жизни: быт, работа, путешествия."
+    },
+    {
+      "id": "games",
+      "label": "Speaking games",
+      "icon": "🎲",
+      "description": "Говорить много — без сложной темы."
+    }
+  ],
+  "items": [
+    {
+      "id": "act-truths",
+      "icon": "🕵️",
+      "title": "Two truths and a lie",
+      "levels": [
+        "A0-A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Разговорная практика.",
+      "how": "Ученик говорит 3 факта о себе, один — ложь. Преподаватель угадывает. Сначала покажите пример на «Томе». A1 — простые предложения, B2 — истории и детали.",
+      "rules": "Two facts are true, one is a lie. Can you guess which one?",
+      "phrases": [
+        "I think number … is a lie.",
+        "It can’t be true!",
+        "I’m sure it’s true, because…"
+      ],
+      "play": {
+        "type": "truths",
+        "sets": [
+          {
+            "label": "A1",
+            "intro": "Meet Tom.",
+            "facts": [
+              [
+                "Tom has three sisters.",
+                false
+              ],
+              [
+                "Tom can play the piano.",
+                true
+              ],
+              [
+                "Tom is from London.",
+                false
+              ]
+            ]
+          },
+          {
+            "label": "A2",
+            "intro": "Meet Tom.",
+            "facts": [
+              [
+                "Tom went to Japan last year.",
+                true
+              ],
+              [
+                "Tom doesn’t like coffee.",
+                false
+              ],
+              [
+                "Tom can ride a horse.",
+                false
+              ]
+            ]
+          },
+          {
+            "label": "B1",
+            "intro": "Meet Tom.",
+            "facts": [
+              [
+                "Tom used to be a football player.",
+                false
+              ],
+              [
+                "Tom has never been on a plane.",
+                true
+              ],
+              [
+                "Tom is afraid of dogs.",
+                false
+              ]
+            ]
+          },
+          {
+            "label": "B2",
+            "intro": "Meet Tom.",
+            "facts": [
+              [
+                "Tom once missed a flight because he fell asleep at the gate.",
+                false
+              ],
+              [
+                "Tom got stuck in a lift with a famous actor.",
+                true
+              ],
+              [
+                "Tom has lived in three different countries.",
+                false
+              ]
+            ]
+          }
+        ]
+      },
+      "category": "icebreakers"
+    },
+    {
+      "id": "act-rather",
+      "icon": "🤔",
+      "title": "Would you rather?",
+      "levels": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Быстро разговорить ученика.",
+      "how": "Задайте вопрос, ученик выбирает и объясняет почему. Можно вводить opinions, conditionals, argumentation.",
+      "rules": "Choose one — and explain why!",
+      "phrases": [
+        "I’d rather… because…",
+        "If I had to choose, I’d…",
+        "Personally, I’d prefer…",
+        "If I…, I would…"
+      ],
+      "play": {
+        "type": "rather",
+        "sets": [
+          {
+            "label": "A2",
+            "qs": [
+              [
+                "live in a city",
+                "live in the countryside"
+              ],
+              [
+                "have a cat",
+                "have a dog"
+              ],
+              [
+                "go to the beach",
+                "go to the mountains"
+              ],
+              [
+                "cook at home",
+                "eat out"
+              ],
+              [
+                "watch a film",
+                "read a book"
+              ]
+            ]
+          },
+          {
+            "label": "B1",
+            "qs": [
+              [
+                "have more money",
+                "have more free time"
+              ],
+              [
+                "travel alone",
+                "travel with friends"
+              ],
+              [
+                "work from home",
+                "work in an office"
+              ],
+              [
+                "speak every language",
+                "play every instrument"
+              ],
+              [
+                "never use social media again",
+                "never watch TV again"
+              ]
+            ]
+          },
+          {
+            "label": "B2",
+            "qs": [
+              [
+                "work for passion",
+                "work for money"
+              ],
+              [
+                "be famous",
+                "be rich but unknown"
+              ],
+              [
+                "live in the past",
+                "live in the future"
+              ],
+              [
+                "have a job you love with a low salary",
+                "have a boring job with a high salary"
+              ],
+              [
+                "be able to fly",
+                "be able to read minds"
+              ]
+            ]
+          }
+        ]
+      },
+      "category": "icebreakers"
+    },
+    {
+      "id": "act-findwho",
+      "category": "icebreakers",
+      "icon": "🔎",
+      "title": "Find someone who",
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "goal": "Вопросы Have you ever / Do you / Can you — в формате один на один.",
+      "how": "Ученик задаёт вам вопросы, чтобы узнать, про вас ли фраза, и отмечает Yes / No. Потом меняетесь ролями.",
+      "rules": "Ask me questions! Is it true about me?",
+      "phrases": [
+        "Have you ever…?",
+        "Do you…?",
+        "Can you…?",
+        "Did you… last…?"
+      ],
+      "play": {
+        "type": "findwho",
+        "items": [
+          "has been to another country",
+          "can cook something delicious",
+          "has a pet",
+          "gets up before 7 a.m.",
+          "has met a famous person",
+          "can play a musical instrument",
+          "watched a film last weekend",
+          "speaks three languages"
+        ]
+      }
+    },
+    {
+      "id": "act-opinions",
+      "category": "discussions",
+      "icon": "💭",
+      "title": "Opinions",
+      "levels": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Научить высказывать и объяснять мнение.",
+      "how": "Ученик отмечает Agree / Not sure / Disagree и объясняет почему. Спорьте с ним, чтобы он защищал позицию.",
+      "rules": "Agree or disagree? Tell me why!",
+      "phrases": [
+        "I think… because…",
+        "In my opinion…",
+        "I totally agree.",
+        "I’m not so sure about that."
+      ],
+      "play": {
+        "type": "opinions",
+        "items": [
+          "Cats are better than dogs.",
+          "Summer is the best season.",
+          "Everyone should learn to cook.",
+          "Social media makes people less happy.",
+          "It’s better to live in a big city.",
+          "Children should start learning English at 3."
+        ]
+      }
+    },
+    {
+      "id": "act-ranking",
+      "icon": "🏆",
+      "title": "Ranking task",
+      "levels": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Заставить объяснять мнение.",
+      "how": "Ученик расставляет пункты по важности (нажимает по порядку) и объясняет каждое место.",
+      "rules": "Rank these from most important (1) to least important.",
+      "phrases": [
+        "I think…",
+        "For me…",
+        "The most important thing is…",
+        "… is more important than … because…"
+      ],
+      "play": {
+        "type": "ranking",
+        "sets": [
+          {
+            "label": "Life",
+            "title": "What matters most in life?",
+            "items": [
+              "money",
+              "friends",
+              "career",
+              "hobbies",
+              "health"
+            ]
+          },
+          {
+            "label": "Job",
+            "title": "What matters most in a job?",
+            "items": [
+              "salary",
+              "team",
+              "interesting tasks",
+              "free time",
+              "location"
+            ]
+          },
+          {
+            "label": "Holiday",
+            "title": "What makes a perfect holiday?",
+            "items": [
+              "weather",
+              "food",
+              "people",
+              "price",
+              "activities"
+            ]
+          }
+        ]
+      },
+      "category": "discussions"
+    },
+    {
+      "id": "act-debate",
+      "icon": "⚖️",
+      "title": "Mini debate",
+      "levels": [
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Аргументация и мнение для B1+.",
+      "how": "Ученик выбирает сторону и говорит минуту, вы — за противоположную. Потом можно поменяться.",
+      "rules": "Agree or disagree? Defend your position!",
+      "phrases": [
+        "I agree because…",
+        "I see your point, but…",
+        "On the other hand…",
+        "That’s true, however…"
+      ],
+      "play": {
+        "type": "debate",
+        "topics": [
+          "Online learning is better than offline learning.",
+          "Social media does more harm than good.",
+          "Money can buy happiness.",
+          "Everyone should learn a second language.",
+          "Working from home is better than working in an office."
+        ]
+      },
+      "category": "discussions"
+    },
+    {
+      "id": "rp-food",
+      "category": "roleplays",
+      "sub": "Everyday",
+      "icon": "🍽️",
+      "title": "Ordering food",
+      "levels": [
+        "A0-A1",
+        "A2",
+        "B1"
+      ],
+      "goal": "Симуляция реальной жизни.",
+      "how": "Вытяните карточку — ученик решает ситуацию, вы играете вторую роль. Таймер — 2 минуты на сцену.",
+      "rules": "Read the situation. Solve it in English!",
+      "phrases": [
+        "Could I have…?",
+        "I’d like…",
+        "Does it contain…?",
+        "Could we have the bill, please?"
+      ],
+      "play": {
+        "type": "situations",
+        "cats": [
+          {
+            "label": "🍽️ Ordering food",
+            "cards": [
+              {
+                "s": "You are in a café. Order breakfast for two.",
+                "role": "the waiter"
+              },
+              {
+                "s": "Your soup is cold. Ask the waiter to change it.",
+                "role": "the waiter"
+              },
+              {
+                "s": "You have a food allergy. Ask about the menu.",
+                "role": "the waiter"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "rp-meet",
+      "category": "roleplays",
+      "sub": "Everyday",
+      "icon": "🤝",
+      "title": "Meeting someone new",
+      "levels": [
+        "A0-A1",
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "goal": "Симуляция реальной жизни.",
+      "how": "Вытяните карточку — ученик решает ситуацию, вы играете вторую роль. Таймер — 2 минуты на сцену.",
+      "rules": "Read the situation. Solve it in English!",
+      "phrases": [
+        "Hi, I’m…",
+        "How do you know…?",
+        "What do you do?",
+        "Nice talking to you!"
+      ],
+      "play": {
+        "type": "situations",
+        "cats": [
+          {
+            "label": "🤝 Meeting someone new",
+            "cards": [
+              {
+                "s": "You meet someone new at a party.",
+                "role": "a guest"
+              },
+              {
+                "s": "First day at a new job: meet a colleague.",
+                "role": "your colleague"
+              },
+              {
+                "s": "You sit next to a friendly stranger on a plane.",
+                "role": "a passenger"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "rp-plans",
+      "category": "roleplays",
+      "sub": "Everyday",
+      "icon": "📅",
+      "title": "Making plans",
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "goal": "Симуляция реальной жизни.",
+      "how": "Вытяните карточку — ученик решает ситуацию, вы играете вторую роль. Таймер — 2 минуты на сцену.",
+      "rules": "Read the situation. Solve it in English!",
+      "phrases": [
+        "Are you free on…?",
+        "How about…?",
+        "Let’s…",
+        "That works for me."
+      ],
+      "play": {
+        "type": "situations",
+        "cats": [
+          {
+            "label": "📅 Making plans",
+            "cards": [
+              {
+                "s": "Plan a weekend with a friend.",
+                "role": "your friend"
+              },
+              {
+                "s": "Your friend wants to go to the cinema, you want to go bowling. Agree on a plan.",
+                "role": "your friend"
+              },
+              {
+                "s": "Invite a colleague for lunch this week.",
+                "role": "your colleague"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "rp-feedback",
+      "category": "roleplays",
+      "sub": "Work",
+      "icon": "📝",
+      "title": "Giving feedback",
+      "levels": [
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Симуляция реальной жизни.",
+      "how": "Вытяните карточку — ученик решает ситуацию, вы играете вторую роль. Таймер — 2 минуты на сцену.",
+      "rules": "Read the situation. Solve it in English!",
+      "phrases": [
+        "I really liked…",
+        "One thing you could improve is…",
+        "Have you thought about…?",
+        "Overall, …"
+      ],
+      "play": {
+        "type": "situations",
+        "cats": [
+          {
+            "label": "📝 Giving feedback",
+            "cards": [
+              {
+                "s": "Your colleague’s presentation had some mistakes. Give feedback.",
+                "role": "your colleague"
+              },
+              {
+                "s": "A new team member is often late. Talk to them.",
+                "role": "the team member"
+              },
+              {
+                "s": "Your manager asks what you think of a new process.",
+                "role": "your manager"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "rp-negotiate",
+      "category": "roleplays",
+      "sub": "Work",
+      "icon": "🤝",
+      "title": "Negotiating",
+      "levels": [
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Симуляция реальной жизни.",
+      "how": "Вытяните карточку — ученик решает ситуацию, вы играете вторую роль. Таймер — 2 минуты на сцену.",
+      "rules": "Read the situation. Solve it in English!",
+      "phrases": [
+        "Would you consider…?",
+        "What if we…?",
+        "I can agree to that if…",
+        "That’s the best I can do."
+      ],
+      "play": {
+        "type": "situations",
+        "cats": [
+          {
+            "label": "🤝 Negotiating",
+            "cards": [
+              {
+                "s": "Ask your manager for a salary raise.",
+                "role": "your manager"
+              },
+              {
+                "s": "A client wants the project tomorrow. Agree on a realistic deadline.",
+                "role": "the client"
+              },
+              {
+                "s": "You are buying a used car. Get a better price.",
+                "role": "the seller"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "rp-present",
+      "category": "roleplays",
+      "sub": "Work",
+      "icon": "📊",
+      "title": "Presenting ideas",
+      "levels": [
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Симуляция реальной жизни.",
+      "how": "Вытяните карточку — ученик решает ситуацию, вы играете вторую роль. Таймер — 2 минуты на сцену.",
+      "rules": "Read the situation. Solve it in English!",
+      "phrases": [
+        "I’d like to talk about…",
+        "The main idea is…",
+        "This will help us…",
+        "Any questions?"
+      ],
+      "play": {
+        "type": "situations",
+        "cats": [
+          {
+            "label": "📊 Presenting ideas",
+            "cards": [
+              {
+                "s": "Present an idea to improve your office.",
+                "role": "your team"
+              },
+              {
+                "s": "Pitch your favourite app to an investor in 1 minute.",
+                "role": "an investor"
+              },
+              {
+                "s": "Explain your project to someone from another department.",
+                "role": "a colleague"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "rp-airport",
+      "category": "roleplays",
+      "sub": "Travel",
+      "icon": "✈️",
+      "title": "Airport problems",
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "goal": "Симуляция реальной жизни.",
+      "how": "Вытяните карточку — ученик решает ситуацию, вы играете вторую роль. Таймер — 2 минуты на сцену.",
+      "rules": "Read the situation. Solve it in English!",
+      "phrases": [
+        "Excuse me, …",
+        "What are my options?",
+        "Could you help me…?",
+        "I’m afraid…"
+      ],
+      "play": {
+        "type": "situations",
+        "cats": [
+          {
+            "label": "✈️ Airport problems",
+            "cards": [
+              {
+                "s": "Your flight is cancelled.",
+                "role": "airline staff"
+              },
+              {
+                "s": "Your luggage didn’t arrive.",
+                "role": "the lost luggage desk"
+              },
+              {
+                "s": "You are late for boarding and the queue is very long.",
+                "role": "a security officer"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "rp-hotel",
+      "category": "roleplays",
+      "sub": "Travel",
+      "icon": "🏨",
+      "title": "Hotel situations",
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "goal": "Симуляция реальной жизни.",
+      "how": "Вытяните карточку — ученик решает ситуацию, вы играете вторую роль. Таймер — 2 минуты на сцену.",
+      "rules": "Read the situation. Solve it in English!",
+      "phrases": [
+        "I booked a room…",
+        "Would it be possible to…?",
+        "There’s a problem with…",
+        "Could you send someone?"
+      ],
+      "play": {
+        "type": "situations",
+        "cats": [
+          {
+            "label": "🏨 Hotel situations",
+            "cards": [
+              {
+                "s": "Your room is dirty and noisy.",
+                "role": "the receptionist"
+              },
+              {
+                "s": "You want a late check-out.",
+                "role": "the receptionist"
+              },
+              {
+                "s": "The Wi-Fi doesn’t work and you need to work.",
+                "role": "the receptionist"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "act-minute",
+      "icon": "⏱️",
+      "title": "One minute challenge",
+      "levels": [
+        "A0-A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Показать ученику, что он способен говорить.",
+      "how": "Ученик говорит одну минуту по опорам. После этого покажите новые конструкции (кнопка «Level up») и попросите повторить с ними.",
+      "rules": "Talk for one minute. Don’t stop!",
+      "phrases": [],
+      "play": {
+        "type": "minute",
+        "topics": [
+          {
+            "t": "Talk about your favourite movie.",
+            "support": [
+              "What is it about?",
+              "Why do you like it?",
+              "Would you recommend it?"
+            ],
+            "upgrade": [
+              [
+                "It’s about…",
+                "The story follows…"
+              ],
+              [
+                "I like it because…",
+                "What I love about it is…"
+              ],
+              [
+                "You should watch it.",
+                "I’d highly recommend it."
+              ]
+            ]
+          },
+          {
+            "t": "Talk about your favourite place.",
+            "support": [
+              "Where is it?",
+              "What can you do there?",
+              "Why is it special for you?"
+            ],
+            "upgrade": [
+              [
+                "It’s very beautiful.",
+                "It’s absolutely stunning."
+              ],
+              [
+                "I go there often.",
+                "I try to go there whenever I can."
+              ],
+              [
+                "I like it.",
+                "It means a lot to me."
+              ]
+            ]
+          },
+          {
+            "t": "Talk about a person you admire.",
+            "support": [
+              "Who is this person?",
+              "What do they do?",
+              "Why do you admire them?"
+            ],
+            "upgrade": [
+              [
+                "He is a good person.",
+                "He’s incredibly kind and generous."
+              ],
+              [
+                "I like him because…",
+                "What I admire most is…"
+              ],
+              [
+                "He helped me.",
+                "He’s had a huge influence on me."
+              ]
+            ]
+          },
+          {
+            "t": "Talk about your perfect weekend.",
+            "support": [
+              "Where are you?",
+              "Who are you with?",
+              "What do you do?"
+            ],
+            "upgrade": [
+              [
+                "I sleep a lot.",
+                "I have a long lie-in."
+              ],
+              [
+                "I meet friends.",
+                "I catch up with friends."
+              ],
+              [
+                "It’s good.",
+                "It’s exactly what I need."
+              ]
+            ]
+          },
+          {
+            "t": "Talk about your job or studies.",
+            "support": [
+              "What do you do?",
+              "What do you like about it?",
+              "What is difficult?"
+            ],
+            "upgrade": [
+              [
+                "I work in…",
+                "I’m responsible for…"
+              ],
+              [
+                "It’s interesting.",
+                "It’s really rewarding."
+              ],
+              [
+                "It’s difficult.",
+                "It can be quite challenging."
+              ]
+            ]
+          }
+        ]
+      },
+      "category": "games"
+    },
+    {
+      "id": "act-picture",
+      "icon": "🖼️",
+      "title": "Picture description",
+      "levels": [
+        "A0-A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Много речи без сложной темы.",
+      "how": "Покажите картинку, задайте вопросы своего уровня. Используйте Present Continuous, Past, Modal verbs.",
+      "rules": "Look at the picture. Tell me everything!",
+      "phrases": [
+        "I can see…",
+        "He / She is …-ing.",
+        "I think they…",
+        "She might be…",
+        "He must be…"
+      ],
+      "play": {
+        "type": "picture",
+        "scenes": [
+          {
+            "title": "At the beach",
+            "rows": [
+              "☀️ 🕊️ ☁️",
+              "⛱️ 👨‍👩‍👧 🏐",
+              "🌊 🏄 🌊 🚤"
+            ]
+          },
+          {
+            "title": "In a café",
+            "rows": [
+              "☕ 🥐 🍰",
+              "👩‍💻 💬 👫",
+              "🎶 📱 😴"
+            ]
+          },
+          {
+            "title": "At the airport",
+            "rows": [
+              "✈️ 🕐 ❌",
+              "🧳 😩 🧍‍♂️ 📞",
+              "🍔 🛋️ 😤"
+            ]
+          },
+          {
+            "title": "A party",
+            "rows": [
+              "🎈 🎉 🎂",
+              "🕺 💃 🥤",
+              "🎁 😮 📸"
+            ]
+          },
+          {
+            "title": "A rainy day",
+            "rows": [
+              "🌧️ ☂️ ⚡",
+              "🏃‍♀️ 🐕 🚕",
+              "🌳 📰 😂"
+            ]
+          }
+        ],
+        "questions": [
+          {
+            "label": "A1-A2",
+            "qs": [
+              "What can you see?",
+              "What are the people doing?",
+              "What is the weather like?"
+            ]
+          },
+          {
+            "label": "B1",
+            "qs": [
+              "What do you think happened before?",
+              "What will happen next?",
+              "Would you like to be there? Why?"
+            ]
+          },
+          {
+            "label": "B2",
+            "qs": [
+              "What might the people be thinking?",
+              "How do they feel — and why?",
+              "What story could this picture tell?"
+            ]
+          }
+        ]
+      },
+      "category": "games"
+    },
+    {
+      "id": "act-detective",
+      "icon": "🔍",
+      "title": "Detective task",
+      "levels": [
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Грамматика через игру: догадки и модальные глаголы.",
+      "how": "Открывайте улики по одной. Ученик строит гипотезы: She might have gone to… She must have…",
+      "rules": "Read the clues. What happened? Make guesses!",
+      "phrases": [
+        "She might have gone to…",
+        "She must have…",
+        "She can’t have…",
+        "Maybe she…",
+        "I bet she…"
+      ],
+      "play": {
+        "type": "detective",
+        "cases": [
+          {
+            "clues": [
+              "Yesterday Sarah went somewhere.",
+              "She bought a ticket.",
+              "She met someone."
+            ],
+            "q": "Where did she go?"
+          },
+          {
+            "clues": [
+              "Tom came home very late.",
+              "His clothes were wet.",
+              "He was smiling."
+            ],
+            "q": "What happened to Tom?"
+          },
+          {
+            "clues": [
+              "The office was empty on Monday morning.",
+              "There was a big cake on the table.",
+              "Everyone’s phones were switched off."
+            ],
+            "q": "What was going on?"
+          },
+          {
+            "clues": [
+              "Anna didn’t answer her phone all day.",
+              "Her car was not in the garage.",
+              "In the evening she posted a photo of mountains."
+            ],
+            "q": "Where was Anna?"
+          }
+        ]
+      },
+      "category": "games"
+    },
+    {
+      "id": "act-exit",
+      "icon": "🎟️",
+      "title": "Exit ticket",
+      "levels": [
+        "A0-A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Последние 2 минуты урока — ощущение результата.",
+      "how": "Ученик сам называет 3 новых слова, 1 новую конструкцию и 1 предложение о себе. Можно вписать прямо на экране.",
+      "rules": "Сегодня ты научился говорить…",
+      "phrases": [],
+      "play": {
+        "type": "exit"
+      },
+      "category": "games"
+    }
+  ]
+}
