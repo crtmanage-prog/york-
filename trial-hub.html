@@ -512,7 +512,7 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
 .yb-pick .s{font-size:11.5px;color:var(--yb-ink3)}
 
 /* --- Live Lesson Mode: полноэкранный тёмный режим --- */
-.live{position:fixed;inset:0;z-index:52;display:none;flex-direction:row}
+.live{position:fixed;inset:0;z-index:52;display:none;flex-direction:row;border-radius:0}
 .live.open{display:flex}
 .live-side{width:280px;flex:none;overflow:auto;padding:18px 14px;display:flex;flex-direction:column;gap:14px;border-right:1px solid var(--yb-line)}
 .live-main{flex:1;min-width:0;overflow:auto;display:flex;flex-direction:column}
@@ -522,7 +522,7 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
 .live-body{flex:1;max-width:980px;width:100%;margin:0 auto;padding:clamp(18px,3vw,36px) 24px 40px}
 .live-foot{display:flex;gap:8px;align-items:center;padding:14px 22px;border-top:1px solid var(--yb-line);flex-wrap:wrap}
 .live-foot .grow{flex:1}
-.lv-step{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;cursor:pointer;text-align:left}
+.lv-step{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;cursor:pointer;text-align:left;background:transparent;border:0;width:100%}
 .lv-step:hover{background:var(--yb-card-hov)}
 .lv-step.cur{background:rgba(215,239,66,.14);box-shadow:inset 0 0 0 1.5px rgba(215,239,66,.5)}
 .lv-step.skipped{opacity:.42}
