@@ -705,6 +705,17 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
   <div class="yb-modal-body" id="pickerBody"></div>
 </div>
 
+<div class="yb-modal-bg" id="newLessonBg"></div>
+<div class="yb-modal yb yb-card" id="newLessonModal" role="dialog" aria-modal="true" aria-label="Новый пробный урок" style="top:8vh">
+  <div class="yb-modal-head">
+    <b style="font-family:Unbounded,sans-serif;font-size:14px">Новый пробный урок</b>
+    <span style="flex:1"></span>
+    <button class="yb-btn" id="newLessonClose">✕</button>
+  </div>
+  <div class="yb-modal-tabs" id="newLessonTabs"></div>
+  <div class="yb-modal-body" id="newLessonBody"></div>
+</div>
+
 <div class="live yb" id="live" role="dialog" aria-modal="true" aria-label="Режим урока">
   <aside class="live-side">
     <div style="display:flex;align-items:center;justify-content:space-between">
@@ -964,6 +975,7 @@ const filters = {
   lessons: store.get('york-hub-lessons-filters', { level: null, category: null, situation: null, q: '', saved: false }),
   activities: { category: null, level: null, q: '', saved: false },
   grammar: { level: null, q: '' },
+  library: { type: 'all', level: null, q: '', saved: false },
 };
 const saveLessonFilters = () => store.set('york-hub-lessons-filters', { ...filters.lessons, q: '' });
 
@@ -1046,12 +1058,12 @@ const Pages = {
           </div>` : ''}
 
           <div class="gl-glass gl-card">
-            <div class="gl-card-head"><div class="lft">${svgIcon(NAV_ICONS.favorite)}<b>Избранные задания</b></div><a href="#/lessons">Вся библиотека</a></div>
+            <div class="gl-card-head"><div class="lft">${svgIcon(NAV_ICONS.favorite)}<b>Избранные задания</b></div><a href="#/library">Вся библиотека</a></div>
             ${favs.length ? favs.map(favRow).join('') : `<div class="gl-empty-row">Нажмите ☆ на любой теме или активности — она появится здесь.</div>`}
           </div>
         </div>`;
 
-      root.querySelector('#ctaNewPlan').onclick = () => { const p = Plans.create(); location.hash = '#/builder=' + p.id; };
+      root.querySelector('#ctaNewPlan').onclick = openNewLessonModal;
       root.querySelectorAll('[data-quickadd]').forEach(b => b.onclick = e => { e.preventDefault(); e.stopPropagation(); quickAddToLesson(byId[b.dataset.quickadd]); });
       root.querySelectorAll('[data-quickplan]').forEach(b => b.onclick = () => {
         const p = Plans.create();
@@ -1063,8 +1075,42 @@ const Pages = {
   },
 
   builder: {
-    title: 'Конструктор урока', icon: '🪄',
+    title: 'Пробные уроки', icon: '🪄',
     render(root){ renderBuilder(root); },
+  },
+
+  library: {
+    title: 'Библиотека', icon: '📚',
+    render(root){
+      const F = filters.library;
+      const rerender = () => Pages.library.render(root);
+      root.innerHTML = `<h1 class="page-title">Библиотека</h1>
+        <p class="page-sub">Темы, активности, грамматика и материалы — в одном месте. Карточку можно открыть, добавить в избранное или сразу в урок.</p>
+        <div class="actions" style="margin-bottom:16px"><a class="btn ghost" href="#/structure">⏱ Структура урока</a><a class="btn ghost" href="#/checklist">✅ Чек-лист учителя</a></div>
+        <div id="libFilters"></div>
+        <div id="libResult"></div>`;
+      root.querySelector('#libFilters').appendChild(Components.FilterBar({
+        rows: [
+          { label: 'Тип', value: F.type, toggle: false, options: [
+            { value: 'all', label: 'Всё' }, { value: 'lessons', label: '📚 Мини-уроки' }, { value: 'activities', label: '🎲 Активности' },
+            { value: 'grammar', label: '🧩 Грамматика' }, { value: 'materials', label: '📁 Материалы' },
+          ], onChange: v => { F.type = v || 'all'; rerender(); } },
+          { label: 'Level', cls: 'lv', value: F.level, toggle: true, options: DB.meta.levels.map(l => ({ value: l, label: l })), onChange: v => { F.level = v; rerender(); } },
+        ],
+        search: { placeholder: 'Искать по библиотеке…', value: F.q, onChange: v => { F.q = v; rerender(); } },
+        saved: { value: F.saved, onChange: v => { F.saved = v; rerender(); } },
+      }));
+      const { lessons, grammar, activities, materials } = libraryItems(F);
+      const total = lessons.length + grammar.length + activities.length + materials.length;
+      const resEl = root.querySelector('#libResult');
+      if (!total) { resEl.innerHTML = '<div class="empty">Ничего не нашлось — сбросьте фильтры.</div>'; return; }
+      let html = '';
+      if (lessons.length) html += `<h2 class="h-sec">📚 Мини-уроки</h2><div class="grid">${lessons.map(Components.LessonCard).join('')}</div>`;
+      if (activities.length) html += `<h2 class="h-sec">🎲 Активности</h2><div class="grid">${activities.map(Components.ActivityCard).join('')}</div>`;
+      if (grammar.length) html += `<h2 class="h-sec">🧩 Грамматика</h2><div class="grid">${grammar.map(Components.GrammarCard).join('')}</div>`;
+      if (materials.length) html += `<h2 class="h-sec">📁 Материалы</h2><div class="grid">${materials.map(m => Components.ResourceCard(m, DB.materials.categories.find(c => c.id === m.category))).join('')}</div>`;
+      resEl.innerHTML = html;
+    },
   },
 
   structure: {
@@ -1215,6 +1261,31 @@ function filterGrammar(){
   const f = filters.grammar;
   return grammarLessons().filter(l => (!f.level || l.level === f.level) && matches(f.q, l.title, l.idea, l.explanation));
 }
+function libraryItems(F){
+  const type = F.type || 'all';
+  let lessons = (type === 'all' || type === 'lessons') ? DB.lessons.filter(l => l.category !== 'grammar') : [];
+  let grammar = (type === 'all' || type === 'grammar') ? grammarLessons() : [];
+  let activities = (type === 'all' || type === 'activities') ? DB.activities.items : [];
+  let materials = (type === 'all' || type === 'materials') ? DB.materials.items : [];
+  if (F.level) {
+    lessons = lessons.filter(l => l.level === F.level);
+    grammar = grammar.filter(l => l.level === F.level);
+    activities = activities.filter(a => a.levels.includes(F.level));
+  }
+  if (F.saved) {
+    lessons = lessons.filter(l => Saved.has(l.id));
+    grammar = grammar.filter(l => Saved.has(l.id));
+    activities = activities.filter(a => Saved.has(a.id));
+    materials = [];
+  }
+  if (F.q && F.q.trim()) {
+    lessons = lessons.filter(l => matches(F.q, l.title, l.idea, l.outcome));
+    grammar = grammar.filter(l => matches(F.q, l.title, l.idea, l.explanation));
+    activities = activities.filter(a => matches(F.q, a.title, a.goal, a.how, a.phrases));
+    materials = materials.filter(m => matches(F.q, m.title, m.description));
+  }
+  return { lessons, grammar, activities, materials };
+}
 function refreshGrid(root, cards, total, noun){
   root.querySelector('.grid').innerHTML = cards.join('') || '<div class="empty">Ничего не нашлось — сбросьте фильтры.</div>';
   root.querySelector('.result-line .muted').textContent = `${cards.length} of ${total} ${noun}`;
@@ -1255,6 +1326,7 @@ const NAV_ICONS = {
   grammar: '<path d="M10 3h4v3a2 2 0 1 0 4 0V3h3v7h-3a2 2 0 1 0 0 4h3v7h-7v-3a2 2 0 1 0-4 0v3H3v-7h3a2 2 0 1 0 0-4H3V3z"></path>',
   materials: '<path d="M3 6h6l2 2h10v11H3z"></path>',
   checklist: '<path d="M9 6h12M9 12h12M9 18h12"></path><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"></path>',
+  library: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>',
   favorite: '<path d="m12 3 2.8 5.8 6.2.9-4.5 4.4 1 6.3L12 17.5 6.5 20.4l1-6.3L3 9.7l6.2-.9z"></path>',
   translate: '<circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"></path>',
   back: '<path d="M15 6l-6 6 6 6"></path>',
@@ -1266,25 +1338,20 @@ function renderNav(){
     lessons: DB.lessons.length, activities: DB.activities.items.length, grammar: grammarLessons().length,
     materials: DB.materials.items.length, builder: Plans.list().length || null,
     checklist: DB.checklist.reduce((n, g) => n + g.items.length, 0),
+    library: DB.lessons.length + DB.activities.items.length + DB.materials.items.length,
   };
   const isActive = route => currentRoute === route || (route === 'builder' && currentRoute.indexOf('builder=') === 0);
   const glItem = (route, key, label) => `<a class="gl-nav${isActive(route) ? ' active' : ''}" href="#/${route}">${svgIcon(NAV_ICONS[key])}<span class="grow">${esc(label)}</span>${counts[key] ? `<span class="cnt">${counts[key]}</span>` : ''}</a>`;
   $('#nav').innerHTML = `
     <a class="gl-logo" href="#/"><span class="gl-brand">YORK<span class="gl-bang">!</span></span><span class="gl-sub">Хаб пробных уроков</span></a>
     ${glItem('', 'home', 'Главная')}
-    ${glItem('builder', 'builder', 'Конструктор урока')}
-    <span class="gl-sect">Библиотека</span>
-    ${glItem('structure', 'structure', 'Структура урока')}
-    ${glItem('lessons', 'lessons', 'Банк мини-уроков')}
-    ${glItem('activities', 'activities', 'Разговорные активности')}
-    ${glItem('grammar', 'grammar', 'Грамматика')}
-    ${glItem('materials', 'materials', 'Материалы')}
-    ${glItem('checklist', 'checklist', 'Чек-лист учителя')}
+    ${glItem('builder', 'builder', 'Пробные уроки')}
+    ${glItem('library', 'library', 'Библиотека')}
     <div class="gl-div"></div>
     <a class="gl-nav" href="#" id="navFav">${svgIcon(NAV_ICONS.favorite)}<span class="grow">Избранное</span></a>
     <a class="gl-nav ru-toggle" href="#" data-ru-toggle>${svgIcon(NAV_ICONS.translate)}<span class="grow">Перевод</span><span class="gl-ru rt-short">RU вкл</span></a>
     <a class="gl-nav muted2" href="teacher.html">${svgIcon(NAV_ICONS.back)}Кабинет учителя</a>`;
-  $('#navFav').onclick = e => { e.preventDefault(); filters.lessons.saved = true; filters.activities.saved = true; location.hash = '#/lessons'; };
+  $('#navFav').onclick = e => { e.preventDefault(); filters.library.saved = true; location.hash = '#/library'; };
   setRu(ruOn());
 
   const mobHtml = Object.entries(Pages).map(([key, p]) => {
@@ -1949,11 +2016,12 @@ const Plans = {
   list(){ return store.get('york-hub-plans', []).slice().sort((a, b) => b.updatedAt - a.updatedAt); },
   get(id){ return this.list().find(p => p.id === id); },
   saveAll(list){ store.set('york-hub-plans', list); },
-  create(){
+  create(prefill){
     const p = {
       id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
       createdAt: Date.now(), updatedAt: Date.now(),
-      student: { name: '', age: '', level: '', goal: '', interests: '', notes: '' },
+      student: { name: '', age: '', level: '', goal: '', interests: '', notes: '', ...(prefill || {}) },
+      trialRequestId: (prefill && prefill.trialRequestId) || null,
       blocks: [
         mkBlock('warmup', { title: 'Разминка', questions: ['How are you today?', 'What have you been up to lately?'] }),
         mkBlock('discovery', { title: 'Цели и интересы', questions: ['Why do you want to learn English?', 'What do you enjoy doing in your free time?'] }),
@@ -1961,6 +2029,7 @@ const Plans = {
       ],
       status: 'draft', report: null,
     };
+    delete p.student.trialRequestId;
     const list = this.list(); list.unshift(p); this.saveAll(list);
     return p;
   },
@@ -2014,18 +2083,25 @@ function renderBuilder(root){
 
   if (!plan) {
     const plans = Plans.list();
-    root.innerHTML = `<h1 class="page-title">Конструктор урока</h1>
+    root.innerHTML = `<h1 class="page-title">Пробные уроки</h1>
       <p class="page-sub">Собери урок под ученика и веди пробный с одного экрана — без Miro, без лишних вкладок.</p>
       <div class="actions" style="margin-bottom:18px"><button class="btn primary" id="newPlanBtn">✨ Создать урок</button></div>
       ${plans.length ? `<div class="yb yb-recent" id="planList"></div>` : `<div class="empty">Пока нет сохранённых уроков — нажмите «Создать урок».</div>`}`;
-    root.querySelector('#newPlanBtn').onclick = () => { const p = Plans.create(); location.hash = '#/builder=' + p.id; };
+    root.querySelector('#newPlanBtn').onclick = openNewLessonModal;
     if (plans.length) {
-      root.querySelector('#planList').innerHTML = plans.map(p => `
-        <button class="yb-card yb-rc" data-plan="${esc(p.id)}">
-          <span class="st ${p.status === 'done' ? 'done' : 'draft'}">${p.status === 'done' ? 'Проведён' : 'Черновик'}</span>
+      root.querySelector('#planList').innerHTML = plans.map(p => {
+        const total = p.blocks.length || 1;
+        const doneBlocks = p.blocks.filter(b => b.visited).length;
+        const pct = Math.round(doneBlocks / total * 100);
+        const started = p.blocks.some(b => b.visited);
+        const label = p.status === 'done' ? 'Проведён' : (started ? 'Продолжить' : 'Черновик');
+        const cls = p.status === 'done' ? 'done' : 'draft';
+        return `<button class="yb-card yb-rc" data-plan="${esc(p.id)}">
+          <span class="st ${cls}">${label}</span>
           <span class="nm">${esc(p.student.name || 'Без имени')}</span>
-          <span class="meta">${esc(p.student.level || '—')} · ${p.blocks.length} блок(ов) · ${new Date(p.updatedAt).toLocaleDateString('ru-RU')}</span>
-        </button>`).join('');
+          <span class="meta">${esc(p.student.level || '—')} · ${p.blocks.length} блок(ов) · ${new Date(p.updatedAt).toLocaleDateString('ru-RU')}${p.status !== 'done' && started ? ` · ${pct}%` : ''}</span>
+        </button>`;
+      }).join('');
       root.querySelectorAll('[data-plan]').forEach(b => b.onclick = () => { location.hash = '#/builder=' + b.dataset.plan; });
     }
     return;
@@ -2173,6 +2249,50 @@ function closePicker(){ $('#pickerBg').classList.remove('open'); $('#picker').cl
 $('#pickerClose').onclick = closePicker;
 $('#pickerBg').onclick = closePicker;
 
+/* ---------- модалка "Новый пробный урок": из заявки / вручную ---------- */
+function openNewLessonModal(){
+  const bg = $('#newLessonBg'), modal = $('#newLessonModal'), tabsEl = $('#newLessonTabs'), bodyEl = $('#newLessonBody');
+  const usedRequestIds = new Set(Plans.list().map(p => p.trialRequestId).filter(Boolean));
+  const requests = ((CurrentTeacher && CurrentTeacher.trialRequests) || []).filter(r => !usedRequestIds.has(r.id));
+  let tab = requests.length ? 'request' : 'manual';
+  const draw = () => {
+    tabsEl.innerHTML = [['request', '📋 Из заявки'], ['manual', '✍️ Вручную']].map(([k, l]) => `<button class="yb-btn${tab === k ? ' on' : ''}" data-nltab="${k}">${l}</button>`).join('');
+    tabsEl.querySelectorAll('[data-nltab]').forEach(b => b.onclick = () => { tab = b.dataset.nltab; draw(); });
+    if (tab === 'request') {
+      if (!CurrentTeacher) {
+        bodyEl.innerHTML = `<div class="empty">Чтобы видеть заявки на пробный, войдите в кабинет учителя в этом браузере (teacher.html) — страница сама узнает вас здесь.</div>`;
+      } else if (!requests.length) {
+        bodyEl.innerHTML = `<div class="empty">Нет новых подтверждённых заявок, ещё не оформленных в урок.</div>`;
+      } else {
+        bodyEl.innerHTML = requests.map(r => `<div class="yb-pick" data-reqid="${esc(r.id)}">
+            <span class="ic">🎓</span>
+            <span class="grow"><span class="t">${esc(r.full_name)}</span><br><span class="s">${esc(r.current_level || 'уровень не указан')}${r.age ? ' · ' + esc(r.age) + ' лет' : ''}${r.goal ? ' · ' + esc(r.goal) : ''}</span></span>
+            <button class="yb-btn on" data-reqadd="${esc(r.id)}">Выбрать</button>
+          </div>`).join('');
+        bodyEl.querySelectorAll('[data-reqadd]').forEach(b => b.onclick = () => {
+          const r = requests.find(x => x.id === b.dataset.reqadd);
+          const p = Plans.create({ name: r.full_name, age: r.age ? String(r.age) : '', level: r.current_level || '', goal: r.goal || '', trialRequestId: r.id });
+          closeNewLessonModal();
+          location.hash = '#/builder=' + p.id;
+        });
+      }
+    } else {
+      bodyEl.innerHTML = `<p class="muted" style="margin:0 0 14px">Создать урок с чистого листа — имя и детали ученика впишете в конструкторе.</p>
+        <button class="yb-btn on" id="nlManualBtn" style="width:100%;justify-content:center;padding:12px">+ Создать пустой урок</button>`;
+      $('#nlManualBtn').onclick = () => {
+        const p = Plans.create();
+        closeNewLessonModal();
+        location.hash = '#/builder=' + p.id;
+      };
+    }
+  };
+  draw();
+  bg.classList.add('open'); modal.classList.add('open');
+}
+function closeNewLessonModal(){ $('#newLessonBg').classList.remove('open'); $('#newLessonModal').classList.remove('open'); }
+$('#newLessonClose').onclick = closeNewLessonModal;
+$('#newLessonBg').onclick = closeNewLessonModal;
+
 /* ---------- Live Lesson Mode ---------- */
 const live = $('#live');
 let liveState = null;   // { plan, cur, started, clockTimer }
@@ -2274,7 +2394,7 @@ $('#liveAdd').onclick = () => openPicker(item => {
 function openReport(){
   const { plan } = liveState;
   const topics = plan.blocks.filter(b => !b.skipped && b.type === 'item').map(b => (byId[b.refId] || {}).title).filter(Boolean);
-  const r = plan.report || { topics, strengths: '', challenges: '', format: 'SOLO', notes: '' };
+  const r = plan.report || { topics, good: '', bad: '', level: plan.student.level || '', goal: plan.student.goal || '' };
   $('.live-side').style.display = 'none';
   $('.live-foot').style.display = 'none';
   $('#liveBody').innerHTML = `<div class="yb-report">
@@ -2282,12 +2402,12 @@ function openReport(){
     <h2 class="lv-block-ttl yb-glow">${esc(plan.student.name || 'Ученик')}</h2>
     <label style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--yb-ink3)">Темы урока</label>
     <div class="yb-chips" id="repTopics"></div>
-    <div class="yb-field"><label>Сильные стороны</label><textarea id="repStrengths">${esc(r.strengths)}</textarea></div>
-    <div class="yb-field"><label>Что даётся сложнее</label><textarea id="repChallenges">${esc(r.challenges)}</textarea></div>
-    <div class="yb-field"><label>Рекомендуемый формат</label><div class="yb-fmt"><button class="yb-btn${r.format === 'SOLO' ? ' on' : ''}" data-fmt="SOLO">SOLO</button><button class="yb-btn${r.format === 'CREW' ? ' on' : ''}" data-fmt="CREW">CREW</button></div></div>
-    <div class="yb-field"><label>Заметки</label><textarea id="repNotes">${esc(r.notes)}</textarea></div>
+    <div class="yb-field"><label>Что получилось</label><textarea id="repGood">${esc(r.good)}</textarea></div>
+    <div class="yb-field"><label>Что не очень</label><textarea id="repBad">${esc(r.bad)}</textarea></div>
+    <div class="yb-field"><label>Текущий уровень</label><select id="repLevel">${['', 'A0-A1', 'A2', 'B1', 'B2', 'C1'].map(l => `<option value="${l}" ${r.level === l ? 'selected' : ''}>${l || '—'}</option>`).join('')}</select></div>
+    <div class="yb-field"><label>Цель</label><input id="repGoal" value="${esc(r.goal)}" placeholder="Зачем учит английский"></div>
     <div class="actions">
-      <button class="yb-btn on" id="repSave">✓ Сохранить отчёт</button>
+      <button class="yb-btn on" id="repSave">✓ Сохранить и отправить администратору</button>
       <button class="yb-btn" id="repCopy">Скопировать как текст</button>
     </div>
   </div>`;
@@ -2297,16 +2417,21 @@ function openReport(){
     chipsEl.querySelectorAll('[data-rmv]').forEach(b => b.onclick = () => { r.topics.splice(+b.dataset.rmv, 1); drawChips(); });
   };
   drawChips();
-  $('#liveBody').querySelectorAll('[data-fmt]').forEach(b => b.onclick = () => { r.format = b.dataset.fmt; $('#liveBody').querySelectorAll('[data-fmt]').forEach(x => x.classList.toggle('on', x === b)); });
-  $('#repSave').onclick = () => {
-    r.strengths = $('#repStrengths').value; r.challenges = $('#repChallenges').value; r.notes = $('#repNotes').value; r.savedAt = Date.now();
-    plan.report = r; plan.status = 'done'; Plans.save(plan);
-    toast('Отчёт сохранён');
+  const reportText = () => `💬 <b>Отчёт о пробном — ${esc(plan.student.name || '-')}</b>\nТемы: ${esc(r.topics.join(', ') || '-')}\nЧто получилось: ${esc($('#repGood').value || '-')}\nЧто не очень: ${esc($('#repBad').value || '-')}\nУровень: ${esc($('#repLevel').value || '-')}\nЦель: ${esc($('#repGoal').value || '-')}`;
+  $('#repSave').onclick = async () => {
+    r.good = $('#repGood').value; r.bad = $('#repBad').value; r.level = $('#repLevel').value; r.goal = $('#repGoal').value; r.savedAt = Date.now();
+    plan.report = r; plan.status = 'done'; plan.student.level = r.level || plan.student.level; plan.student.goal = r.goal || plan.student.goal;
+    Plans.save(plan);
+    try {
+      const sb = window.supabase && window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      if (sb) await sb.rpc('tg_send', { msg: reportText(), target_chat_id: null, reply_markup: null });
+      toast('Отчёт сохранён и отправлен администратору');
+    } catch(e){ toast('Отчёт сохранён, но отправить администратору не получилось — скопируйте текст вручную', true); }
     closeLive();
     location.hash = '#/builder';
   };
   $('#repCopy').onclick = async () => {
-    const text = `Пробный урок — ${plan.student.name || '-'}\nТемы: ${r.topics.join(', ') || '-'}\nСильные стороны: ${$('#repStrengths').value || '-'}\nСложнее даётся: ${$('#repChallenges').value || '-'}\nФормат: ${r.format}\nЗаметки: ${$('#repNotes').value || '-'}`;
+    const text = reportText().replace(/<\/?b>/g, '');
     let ok = false;
     try { await navigator.clipboard.writeText(text); ok = true; } catch(e){ ok = fallbackCopy(text); }
     toast(ok ? 'Отчёт скопирован' : 'Не получилось скопировать', !ok);
@@ -2345,7 +2470,11 @@ async function loadTodayWidget(){
       .eq('teacher_id', profile.id).eq('is_trial', true).order('lesson_date', { ascending: true });
     const todayKey = fmtDateKey(new Date());
     const todaysTrials = (lessons || []).filter(l => l.status === 'upcoming' && fmtDateKey(l.lesson_date) === todayKey);
-    CurrentTeacher = { profile, todaysTrials };
+    const { data: trialRequests } = await sb.from('trial_requests')
+      .select('id, full_name, age, current_level, goal')
+      .eq('assigned_teacher_id', profile.id).eq('status', 'confirmed')
+      .order('created_at', { ascending: false }).limit(30);
+    CurrentTeacher = { profile, todaysTrials, trialRequests: trialRequests || [] };
     if ((currentRoute || 'home') === 'home') renderPage();
   } catch(e){ /* тихо: виджет необязателен, страница и так работает */ }
 }
