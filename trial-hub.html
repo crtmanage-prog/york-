@@ -533,8 +533,10 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
 .lv-step .ttl{font-size:13px;font-weight:600;line-height:1.3}
 .lv-block-kind{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--yb-accent);margin:0 0 6px}
 .lv-block-ttl{font-family:Unbounded,sans-serif;font-size:clamp(22px,3vw,32px);margin:0 0 16px;line-height:1.2}
-.lv-qs{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:10px}
-.lv-qs li{background:rgba(255,255,255,.05);border-left:4px solid var(--yb-accent);border-radius:10px;padding:10px 16px;font-size:16px}
+.lv-qs{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:10px}
+.lv-qs li{background:rgba(255,255,255,.05);border-left:4px solid var(--yb-accent);border-radius:10px;padding:10px 40px 10px 16px;font-size:16px;position:relative}
+.lv-qs li button{all:unset;cursor:pointer;position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--yb-ink3);font-size:13px;padding:4px}
+.lv-qs li button:hover{color:var(--yb-ink)}
 .lv-note{width:100%;font:inherit;font-size:14px;background:rgba(255,255,255,.05);border:1.5px solid var(--yb-line);border-radius:12px;padding:12px 14px;color:var(--yb-ink);min-height:70px;margin-top:6px}
 .lv-explain{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
 .lv-explain li{background:rgba(255,255,255,.05);border-radius:10px;padding:9px 14px;font-weight:600;font-size:14.5px}
@@ -1746,6 +1748,39 @@ function itemBlock(kind, item){
 }
 const BLOCK_KIND_LABEL = { warmup: 'Разминка', discovery: 'Знакомство', topic: 'Тема', activity: 'Активность', speaking: 'Говорим', wrapup: 'Итог' };
 
+// банк идей для генератора вопросов в блоках "Разминка" и "Знакомство" — teacher.html / admin.html не используют,
+// он только для режима ведения урока в этом файле
+const QUESTION_BANK = {
+  warmup: [
+    'What\'s your favourite day of the week and why?', 'If you could have any superpower, what would it be?',
+    'What\'s something fun you did this week?', 'Do you prefer summer or winter? Why?',
+    'What was the last movie or show you watched?', 'If you could travel anywhere right now, where would you go?',
+    'What\'s your favourite food?', 'Tell me about a pet you have or would like to have.',
+    'What do you usually do on weekends?', 'What\'s one thing that made you smile today?',
+    'Do you have a favourite game you like to play?', 'What\'s the weather like today where you are?',
+    'What\'s your favourite colour and why?', 'If you could meet anyone famous, who would it be?',
+    'What did you have for breakfast today?', 'What\'s a sound you really like?',
+    'If today was a movie, what would its title be?', 'What\'s the best thing that happened to you this month?',
+    'Do you like mornings or evenings more?', 'What\'s a word in your language that\'s hard to translate?',
+  ],
+  discovery: [
+    'Why do you want to learn English?', 'What do you enjoy doing in your free time?',
+    'Where do you want to use English — travel, work, games, movies?', 'What\'s a hobby you could talk about for hours?',
+    'Do you watch movies or shows in English?', 'What subjects do you like at school?',
+    'Do you play any sports or instruments?', 'What\'s a goal you have for this year?',
+    'Who do you talk to in English, if anyone?', 'What kind of music do you like?',
+    'Do you read books? What kind?', 'What\'s your dream job?',
+    'Have you ever used English outside of class?', 'What app or game do you spend the most time on?',
+    'What\'s something you\'re really good at?', 'If you had an extra hour every day, what would you do with it?',
+    'What\'s a place you\'d love to visit someday?', 'What does a perfect day look like for you?',
+  ],
+};
+function moreQuestions(kind, exclude){
+  const pool = QUESTION_BANK[kind] || [];
+  const fresh = shuffle(pool.filter(q => !exclude.includes(q)));
+  return fresh.slice(0, 3);
+}
+
 function renderBuilder(root){
   const id = (currentRoute.split('=')[1]) || '';
   const plan = id && Plans.get(id);
@@ -1965,12 +2000,22 @@ function renderLiveStep(){
       };
     }
   } else {
+    const hasBank = !!QUESTION_BANK[b.kind];
     body.innerHTML = `<p class="lv-block-kind">${esc(BLOCK_KIND_LABEL[b.kind] || b.kind)}</p>
       <h2 class="lv-block-ttl yb-glow">${esc(b.title || '')}</h2>
-      ${(b.questions && b.questions.length) ? `<ul class="lv-qs">${b.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>` : ''}
+      <ul class="lv-qs" id="liveQs">${(b.questions || []).map(q => `<li>${esc(q)}<button data-rmq="${esc(q)}" title="Убрать вопрос">✕</button></li>`).join('')}</ul>
+      ${hasBank ? `<button class="yb-btn" id="liveMoreQ" style="display:block;width:max-content;margin-bottom:18px">🎲 Ещё идеи и вопросы</button>` : ''}
       <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--yb-ink3)">Заметки</label>
       <textarea class="lv-note" id="liveNote" placeholder="Что сказал ученик, на что обратить внимание…">${esc(b.note || '')}</textarea>`;
     body.querySelector('#liveNote').oninput = e => { b.note = e.target.value; Plans.save(plan); };
+    body.querySelectorAll('[data-rmq]').forEach(btn => btn.onclick = () => { b.questions = (b.questions || []).filter(q => q !== btn.dataset.rmq); Plans.save(plan); renderLiveStep(); });
+    if (hasBank) body.querySelector('#liveMoreQ').onclick = () => {
+      const fresh = moreQuestions(b.kind, b.questions || []);
+      if (!fresh.length) { toast('Больше новых идей в банке нет для этого блока'); return; }
+      b.questions = [...(b.questions || []), ...fresh];
+      Plans.save(plan);
+      renderLiveStep();
+    };
   }
   $('#livePrev').disabled = cur === 0;
   $('#liveNext').textContent = cur === plan.blocks.length - 1 ? 'Завершить урок ✓' : 'Дальше →';
