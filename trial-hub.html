@@ -1896,8 +1896,9 @@ function openPicker(onPick){
     const list = tab === 'lessons' ? DB.lessons.filter(l => matches(q, l.title, l.idea, l.outcome)) : DB.activities.items.filter(a => matches(q, a.title, a.goal, a.how));
     bodyEl.innerHTML = list.map(x => `<div class="yb-pick" data-id="${esc(x.id)}">
         <span class="ic">${x.icon || (x.play ? '🎲' : '📘')}</span>
-        <button class="grow" style="all:unset;cursor:pointer;min-width:0" data-preview="${esc(x.id)}"><span class="t">${esc(x.title)}</span><br><span class="s">${esc(x.level || (x.levels || []).join(', '))} · ${esc(x.outcome || x.goal || '')}</span></button>
-        <button class="yb-btn" data-add="${esc(x.id)}">+ Добавить</button>
+        <button class="grow" style="all:unset;cursor:pointer;min-width:0" data-preview="${esc(x.id)}" title="Посмотреть, что внутри"><span class="t">${esc(x.title)}</span><br><span class="s">${esc(x.level || (x.levels || []).join(', '))} · ${esc(x.outcome || x.goal || '')}</span></button>
+        <button class="yb-btn" data-preview="${esc(x.id)}">👁 Просмотр</button>
+        <button class="yb-btn on" data-add="${esc(x.id)}">+ Добавить</button>
       </div>`).join('') || '<div class="empty">Ничего не нашлось.</div>';
     bodyEl.querySelectorAll('[data-preview]').forEach(b => b.onclick = () => drawPreview(byId[b.dataset.preview]));
     bodyEl.querySelectorAll('[data-add]').forEach(b => b.onclick = () => { onPick(byId[b.dataset.add]); closePicker(); });
