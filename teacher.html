@@ -1169,7 +1169,7 @@ async function enterApp(user){
     return;
   }
 
-  document.getElementById('teacherName').textContent = currentProfile.full_name || user.email;
+  document.getElementById('teacherName').textContent = firstName(currentProfile.full_name) || user.email;
   const tzIndicatorEl = document.getElementById('tzIndicator');
   if (tzIndicatorEl) tzIndicatorEl.textContent = teacherShowsDualTz() ? '🕐 Время: Уфа + МСК' : '🕐 Время: МСК';
   document.getElementById('greetingTitle').textContent = `${timeGreetingWord(firstName(currentProfile.full_name))} 👋`;
@@ -2428,7 +2428,7 @@ function renderSalary(){
   document.getElementById('salaryLessonsList').innerHTML = rows || '<div class="empty-state">Нет уроков за этот период.</div>';
 
   const periodLabel = document.getElementById('salaryPeriod').selectedOptions[0].textContent;
-  const teacherLabel = (currentProfile && currentProfile.full_name) || '';
+  const teacherLabel = (currentProfile && firstName(currentProfile.full_name)) || '';
   const header = `Зарплата — ${teacherLabel}${teacherLabel ? ', ' : ''}${periodLabel}\nСтавка: ${rateSolo}₽ SOLO / ${rateCrew}₽ CREW\nЧасов: ${totalHours.toFixed(1)} · Итого: ${total.toLocaleString('ru-RU')} ₽\n`;
   const tableHeader = 'Дата и время\tУченик\tТема\tФормат\tЧасов\tСумма';
   window.__salarySummaryText = summaryLines.length

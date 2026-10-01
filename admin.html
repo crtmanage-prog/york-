@@ -3361,12 +3361,16 @@ function computeRevenueInRange(start, end){
     .reduce((s,p) => s + (p.amount || 0), 0);
 }
 
+// технический профиль для тестов бота — не настоящий учитель, не должен попадать
+// ни в расчёт выплат, ни в финансовую статистику (см. CLAUDE.md)
+const TEST_TEACHER_ID = 'd492122c-5d5b-41ad-aae9-e01c044fd77f';
+
 function computeTeacherPayoutInRange(start, end){
   const lessons = (window.__lessonsList || []).filter(l =>
-    !l.is_trial && l.student_id && l.status !== 'cancelled' && l.status !== 'rescheduled'
+    !l.is_trial && l.student_id && l.teacher_id !== TEST_TEACHER_ID && l.status !== 'cancelled' && l.status !== 'rescheduled'
     && isLessonPast(l) && (!start || inStatsRange(l.lesson_date, start, end)));
   const trials = (window.__lessonsList || []).filter(l =>
-    l.is_trial && l.status !== 'cancelled' && l.status !== 'rescheduled'
+    l.is_trial && l.teacher_id !== TEST_TEACHER_ID && l.status !== 'cancelled' && l.status !== 'rescheduled'
     && isLessonPast(l) && (!start || inStatsRange(l.lesson_date, start, end)));
   const rateSoloDefault = Number((document.getElementById('rateSolo') || {}).value) || 500;
   const rateCrewDefault = Number((document.getElementById('rateCrew') || {}).value) || 600;
@@ -3611,8 +3615,9 @@ function renderStats(){
   let pastLessons = lessons.filter(l => isLessonPast(l) && (noFilter || inStatsRange(l.lesson_date, start, end)));
   if (teacherFilter) pastLessons = pastLessons.filter(l => l.teacher_id === teacherFilter);
 
-  // отменённые и перенесённые не считаются ни проведённым уроком, ни оплачиваемым учителю
-  const countedLessons = pastLessons.filter(l => l.status !== 'cancelled' && l.status !== 'rescheduled');
+  // отменённые и перенесённые не считаются ни проведённым уроком, ни оплачиваемым учителю;
+  // тестовый профиль учителя тоже не в счёт
+  const countedLessons = pastLessons.filter(l => l.status !== 'cancelled' && l.status !== 'rescheduled' && l.teacher_id !== TEST_TEACHER_ID);
 
   const trialsCount = pastLessons.filter(l => l.is_trial).length;
   const realLessonsCount = countedLessons.filter(l => !l.is_trial).length;
