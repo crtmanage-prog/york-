@@ -429,6 +429,125 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
 .op-scale{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media (max-width:600px){ .op-scale{grid-template-columns:1fr} }
 
+/* =====================================================================
+   КОНСТРУКТОР УРОКА + РЕЖИМ УРОКА + ОТЧЁТ — тёмная неоновая тема
+   поверх общей светлой библиотеки (намеренный контраст: это "кабина
+   пилота" для учителя, а не то, что видит ученик при показе экрана).
+   ===================================================================== */
+.yb{
+  --yb-accent:var(--accent); --yb-accent2:#8FE000;
+  --yb-ink:#F6F8EC; --yb-ink2:rgba(246,248,236,.74); --yb-ink3:rgba(246,248,236,.52);
+  --yb-card:rgba(255,255,255,.055); --yb-card-hov:rgba(255,255,255,.09); --yb-line:rgba(255,255,255,.14);
+  background:
+    radial-gradient(1100px circle at 12% -12%, rgba(215,239,66,.20), transparent 58%),
+    radial-gradient(800px circle at 102% 4%, rgba(143,224,0,.14), transparent 55%),
+    linear-gradient(180deg,#0A0C06 0%,#10120A 100%);
+  color:var(--yb-ink);
+  border-radius:24px;
+}
+.yb h1,.yb h2,.yb h3,.yb h4{color:var(--yb-ink)}
+.yb .muted,.yb p{color:var(--yb-ink2)}
+.yb-glow{text-shadow:0 0 22px rgba(215,239,66,.45)}
+.yb-card{background:var(--yb-card);border:1.5px solid var(--yb-line);border-radius:18px;backdrop-filter:blur(2px)}
+.yb-btn{font-family:Unbounded,sans-serif;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:100px;padding:10px 18px;border:1.5px solid var(--yb-line);background:rgba(255,255,255,.04);color:var(--yb-ink);transition:transform .15s,background .15s,box-shadow .15s;text-decoration:none;white-space:nowrap}
+.yb-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+.yb-btn.on{background:var(--yb-accent);border-color:var(--yb-accent);color:#0A0C06;box-shadow:0 0 24px rgba(215,239,66,.45)}
+.yb-btn.on:hover{box-shadow:0 0 32px rgba(215,239,66,.6)}
+.yb-btn.danger{border-color:rgba(255,107,91,.5);color:#FF9D8F}
+.yb-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* --- Dashboard: CTA + недавние уроки --- */
+.yb-hero{padding:clamp(24px,4vw,42px);margin-bottom:18px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+.yb-hero-txt{max-width:46ch}
+.yb-hero-txt .tag{color:var(--yb-accent);font-family:Unbounded,sans-serif;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.yb-hero-txt h2{font-size:clamp(22px,3vw,32px);margin:8px 0 6px;line-height:1.2}
+.yb-recent{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));margin-bottom:8px}
+.yb-rc{padding:16px 18px;display:flex;flex-direction:column;gap:8px;text-align:left;cursor:pointer}
+.yb-rc:hover{background:var(--yb-card-hov)}
+.yb-rc .nm{font-family:Unbounded,sans-serif;font-size:14px}
+.yb-rc .meta{font-size:12px;color:var(--yb-ink3)}
+.yb-rc .st{align-self:flex-start;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px}
+.yb-rc .st.draft{background:rgba(255,255,255,.1);color:var(--yb-ink2)}
+.yb-rc .st.done{background:var(--yb-accent);color:#0A0C06}
+
+/* --- Builder: форма ученика + таймлайн блоков --- */
+.yb-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:18px;align-items:start}
+@media (max-width:900px){ .yb-grid{grid-template-columns:1fr} }
+.yb-field{display:grid;gap:5px;margin-bottom:12px}
+.yb-field label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--yb-ink3)}
+.yb-field input,.yb-field select,.yb-field textarea{font:inherit;font-size:14.5px;background:rgba(255,255,255,.06);border:1.5px solid var(--yb-line);border-radius:12px;padding:10px 13px;color:var(--yb-ink);min-width:0}
+.yb-field textarea{resize:vertical;min-height:60px}
+.yb-field input::placeholder,.yb-field textarea::placeholder{color:var(--yb-ink3)}
+.yb-field input:focus,.yb-field select:focus,.yb-field textarea:focus{outline:none;border-color:var(--yb-accent)}
+.yb-blocks{display:grid;gap:10px}
+.yb-block{padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;cursor:grab}
+.yb-block.dragging{opacity:.4}
+.yb-block .gh{color:var(--yb-ink3);font-size:16px;cursor:grab;user-select:none}
+.yb-block .kind{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--yb-accent)}
+.yb-block .ttl{font-family:Unbounded,sans-serif;font-size:14px;margin-top:2px}
+.yb-block .dur{font-size:12px;color:var(--yb-ink3);margin-top:2px}
+.yb-block .acts{display:flex;gap:4px}
+.yb-block .acts button{all:unset;cursor:pointer;width:26px;height:26px;display:grid;place-items:center;border-radius:8px;color:var(--yb-ink2);font-size:13px}
+.yb-block .acts button:hover{background:rgba(255,255,255,.1)}
+.yb-add-row{display:flex;justify-content:center;padding:4px 0}
+.yb-empty{border:1.5px dashed var(--yb-line);border-radius:16px;padding:24px;text-align:center;color:var(--yb-ink3);font-size:13.5px}
+
+/* --- модалка выбора материала --- */
+.yb-modal-bg{position:fixed;inset:0;background:rgba(5,6,3,.6);z-index:55;display:none}
+.yb-modal-bg.open{display:block}
+.yb-modal{position:fixed;top:4vh;left:50%;transform:translateX(-50%);width:min(760px,92vw);max-height:92vh;z-index:56;display:none;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.yb-modal.open{display:flex}
+.yb-modal.yb{background:radial-gradient(900px circle at 10% -10%, rgba(215,239,66,.18), transparent 58%),linear-gradient(165deg,#0E1009 0%,#12140A 100%)}
+.yb-modal-head{display:flex;gap:10px;align-items:center;padding:16px 18px;border-bottom:1px solid var(--yb-line)}
+.yb-modal-head input{flex:1;font:inherit;font-size:14.5px;background:rgba(255,255,255,.06);border:1.5px solid var(--yb-line);border-radius:12px;padding:9px 13px;color:var(--yb-ink)}
+.yb-modal-tabs{display:flex;gap:6px;padding:10px 18px 0}
+.yb-modal-body{overflow:auto;padding:14px 18px 20px;display:grid;gap:8px}
+.yb-pick{padding:11px 14px;display:flex;align-items:center;gap:10px;text-align:left;cursor:pointer;background:rgba(255,255,255,.03)}
+.yb-pick:hover{background:var(--yb-card-hov)}
+.yb-pick .ic{font-size:19px}
+.yb-pick .grow{flex:1;min-width:0}
+.yb-pick .t{font-weight:600;font-size:13.5px}
+.yb-pick .s{font-size:11.5px;color:var(--yb-ink3)}
+
+/* --- Live Lesson Mode: полноэкранный тёмный режим --- */
+.live{position:fixed;inset:0;z-index:52;display:none;flex-direction:row}
+.live.open{display:flex}
+.live-side{width:280px;flex:none;overflow:auto;padding:18px 14px;display:flex;flex-direction:column;gap:14px;border-right:1px solid var(--yb-line)}
+.live-main{flex:1;min-width:0;overflow:auto;display:flex;flex-direction:column}
+.live-top{display:flex;align-items:center;gap:10px;padding:14px 22px;border-bottom:1px solid var(--yb-line)}
+.live-top .grow{flex:1}
+.live-stu{font-family:Unbounded,sans-serif;font-size:13px}
+.live-body{flex:1;max-width:980px;width:100%;margin:0 auto;padding:clamp(18px,3vw,36px) 24px 40px}
+.live-foot{display:flex;gap:8px;align-items:center;padding:14px 22px;border-top:1px solid var(--yb-line);flex-wrap:wrap}
+.live-foot .grow{flex:1}
+.lv-step{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;cursor:pointer;text-align:left}
+.lv-step:hover{background:var(--yb-card-hov)}
+.lv-step.cur{background:rgba(215,239,66,.14);box-shadow:inset 0 0 0 1.5px rgba(215,239,66,.5)}
+.lv-step.skipped{opacity:.42}
+.lv-step .dot{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--yb-line);display:grid;place-items:center;flex:none;font-size:11px;margin-top:1px}
+.lv-step.cur .dot{background:var(--yb-accent);border-color:var(--yb-accent);color:#0A0C06}
+.lv-step.done .dot{background:rgba(255,255,255,.18);border-color:transparent}
+.lv-step .kind{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--yb-ink3)}
+.lv-step .ttl{font-size:13px;font-weight:600;line-height:1.3}
+.lv-block-kind{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--yb-accent);margin:0 0 6px}
+.lv-block-ttl{font-family:Unbounded,sans-serif;font-size:clamp(22px,3vw,32px);margin:0 0 16px;line-height:1.2}
+.lv-qs{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:10px}
+.lv-qs li{background:rgba(255,255,255,.05);border-left:4px solid var(--yb-accent);border-radius:10px;padding:10px 16px;font-size:16px}
+.lv-note{width:100%;font:inherit;font-size:14px;background:rgba(255,255,255,.05);border:1.5px solid var(--yb-line);border-radius:12px;padding:12px 14px;color:var(--yb-ink);min-height:70px;margin-top:6px}
+.lv-explain{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
+.lv-explain li{background:rgba(255,255,255,.05);border-radius:10px;padding:9px 14px;font-weight:600;font-size:14.5px}
+.lv-item-card{padding:18px 20px;margin-bottom:16px}
+.lv-item-card .outcome{color:var(--yb-ink2);font-style:italic;margin:0 0 12px}
+
+/* --- отчёт о пробном --- */
+.yb-report{max-width:640px;margin:0 auto;width:100%}
+.yb-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.yb-chip{background:rgba(255,255,255,.07);border:1px solid var(--yb-line);border-radius:100px;padding:6px 14px;font-size:13px;display:flex;align-items:center;gap:6px}
+.yb-chip button{all:unset;cursor:pointer;color:var(--yb-ink3);font-size:12px}
+.yb-fmt{display:flex;gap:8px}
+.yb-fmt button{flex:1}
+
 </style>
 </head>
 <body>
@@ -475,6 +594,39 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
   </div>
 </div>
 
+<div class="yb-modal-bg" id="pickerBg"></div>
+<div class="yb-modal yb yb-card" id="picker" role="dialog" aria-modal="true" aria-label="Добавить материал">
+  <div class="yb-modal-head">
+    <input type="search" id="pickerSearch" placeholder="Искать тему или активность…" autocomplete="off">
+    <button class="yb-btn" id="pickerClose">✕</button>
+  </div>
+  <div class="yb-modal-tabs" id="pickerTabs"></div>
+  <div class="yb-modal-body" id="pickerBody"></div>
+</div>
+
+<div class="live yb" id="live" role="dialog" aria-modal="true" aria-label="Режим урока">
+  <aside class="live-side">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <span class="live-stu yb-glow" id="liveStu">Урок</span>
+    </div>
+    <div id="liveSteps" style="display:grid;gap:2px"></div>
+  </aside>
+  <div class="live-main">
+    <div class="live-top">
+      <button class="yb-btn" id="liveClose">✕ Выйти</button>
+      <span class="grow"></span>
+      <span class="clock yb-card" style="background:rgba(255,255,255,.06);color:var(--yb-ink)" id="liveClock">⏱ 00:00</span>
+    </div>
+    <div class="live-body" id="liveBody"></div>
+    <div class="live-foot">
+      <button class="yb-btn" id="livePrev">← Назад</button>
+      <button class="yb-btn" id="liveSkip">Пропустить</button>
+      <button class="yb-btn" id="liveAdd">+ Добавить</button>
+      <span class="grow"></span>
+      <button class="yb-btn on" id="liveNext">Дальше →</button>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -711,9 +863,18 @@ const Pages = {
         { route: 'checklist', icon: '✅', title: 'Teacher Checklist', text: 'До, во время и после урока.', cnt: `${DB.checklist.reduce((n, g) => n + g.items.length, 0)} items` },
       ];
       const saved = [...Saved.ids].map(id => byId[id]).filter(Boolean);
+      const plans = Plans.list();
       root.innerHTML = `
         <h1 class="page-title">Trial Lesson Hub</h1>
-        <p class="page-sub">Подготовиться к пробному, выбрать тему и активность, собрать урок за пару минут.</p>
+        <p class="page-sub">Собери урок под конкретного ученика и веди весь пробный с одного экрана.</p>
+        <div class="yb yb-hero">
+          <div class="yb-hero-txt"><span class="tag">Конструктор урока</span>
+            <h2 class="yb-glow">Создай пробный урок под ученика</h2>
+            <p>Выбери темы и активности, собери таймлайн, веди урок прямо отсюда — без Miro, без вкладок.</p>
+          </div>
+          <button class="yb-btn on" id="ctaNewPlan" style="font-size:14px;padding:14px 26px">✨ Создать урок</button>
+        </div>
+        ${plans.length ? `<h2 class="h-sec">Недавние уроки</h2><div class="yb yb-recent" id="recentPlans"></div>` : ''}
         <div class="goal-hero"><div class="hc-label">Главная идея пробного урока</div><blockquote>${esc(S.goal)}</blockquote>${ru(S.goal)}</div>
         <div class="stats">${S.principles.map(p => `<div class="stat"><div class="si">${p.icon}</div><b>${T(p.title)}</b><p>${esc(p.text)}</p></div>`).join('')}</div>
         <h2 class="h-sec">Sections</h2>
@@ -723,7 +884,22 @@ const Pages = {
         <h2 class="h-sec">★ Saved</h2>
         ${saved.length ? `<div class="grid">${saved.map(x => x.play ? Components.ActivityCard(x) : Components.LessonCard(x)).join('')}</div>`
                        : `<div class="empty">Нажмите ☆ на любой теме или активности — она появится здесь.</div>`}`;
+      root.querySelector('#ctaNewPlan').onclick = () => { const p = Plans.create(); location.hash = '#/builder=' + p.id; };
+      if (plans.length) {
+        root.querySelector('#recentPlans').innerHTML = plans.slice(0, 6).map(p => `
+          <button class="yb-card yb-rc" data-plan="${esc(p.id)}">
+            <span class="st ${p.status === 'done' ? 'done' : 'draft'}">${p.status === 'done' ? 'Проведён' : 'Черновик'}</span>
+            <span class="nm">${esc(p.student.name || 'Без имени')}</span>
+            <span class="meta">${esc(p.student.level || '—')} · ${p.blocks.length} блок(ов) · ${new Date(p.updatedAt).toLocaleDateString('ru-RU')}</span>
+          </button>`).join('');
+        root.querySelectorAll('[data-plan]').forEach(b => b.onclick = () => { location.hash = '#/builder=' + b.dataset.plan; });
+      }
     },
+  },
+
+  builder: {
+    title: 'Конструктор урока', icon: '🪄',
+    render(root){ renderBuilder(root); },
   },
 
   structure: {
@@ -906,10 +1082,11 @@ $('#drawerBg').onclick = closeDrawer;
 
 /* ======================= навигация (hash-роутер) ======================= */
 function renderNav(){
-  const counts = { lessons: DB.lessons.length, activities: DB.activities.items.length, grammar: grammarLessons().length, materials: DB.materials.items.length };
+  const counts = { lessons: DB.lessons.length, activities: DB.activities.items.length, grammar: grammarLessons().length, materials: DB.materials.items.length, builder: Plans.list().length || null };
   const html = Object.entries(Pages).map(([key, p]) => {
     const route = key === 'home' ? '' : key;
-    return `<a class="nav-btn${currentRoute === route ? ' active' : ''}" href="#/${route}"><span class="ni">${p.icon}</span>${esc(p.title)}${counts[key] ? `<span class="nc">${counts[key]}</span>` : ''}</a>`;
+    const active = currentRoute === route || (key === 'builder' && currentRoute.indexOf('builder=') === 0);
+    return `<a class="nav-btn${active ? ' active' : ''}" href="#/${route}"><span class="ni">${p.icon}</span>${esc(p.title)}${counts[key] ? `<span class="nc">${counts[key]}</span>` : ''}</a>`;
   }).join('');
   $('#nav').innerHTML = html;
   $('#navMobile').innerHTML = html;
@@ -928,8 +1105,9 @@ function route(){
     return;
   }
   const r = h.replace(/^#\/?/, '');
-  const target = Pages[r] ? r : '';
+  const target = Pages[r] ? r : (r.indexOf('builder=') === 0 ? r : '');
   if (show.classList.contains('open')) { closeShowUI(); if ($('#page').dataset.route === target) return; }
+  if (live.classList.contains('open') && r.indexOf('builder=') !== 0) closeLive();
   currentRoute = target;
   renderPage();
 }
@@ -937,8 +1115,10 @@ function renderPage(){
   closeDrawer();
   const page = $('#page');
   page.dataset.route = currentRoute;
-  Pages[currentRoute || 'home'].render(page);
-  document.title = `YORK! — ${Pages[currentRoute || 'home'].title === 'Dashboard' ? 'Trial Lesson Hub' : Pages[currentRoute || 'home'].title}`;
+  const key = (currentRoute || 'home').split('=')[0] || 'home';
+  const def = Pages[key] || Pages.home;
+  def.render(page);
+  document.title = `YORK! — ${def.title === 'Dashboard' ? 'Trial Lesson Hub' : def.title}`;
   renderNav();
   window.scrollTo(0, 0);
 }
@@ -996,6 +1176,7 @@ async function copyPhrases(t){
 const show = $('#show');
 const TASK_TITLES = { choose: 'Выбери правильный вариант', build: 'Собери предложение', match: 'Найди пару', reveal: 'Скажи сам — потом проверь' };
 let lesson = null;   // { topic, steps: [{label, node}], cur, started, clockTimer }
+let liveOnShowClose = null;   // колбэк: вернуться в Live mode после показа темы ученику
 
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 function node(html){ const d = document.createElement('div'); d.className = 'step'; d.innerHTML = html; return d; }
@@ -1457,12 +1638,13 @@ function safeHistory(method, state, hash){
 
 function closeShowUI(){
   show.classList.remove('open');
-  document.body.style.overflow = '';
+  document.body.style.overflow = liveState ? 'hidden' : '';   // если показ открыт поверх Live mode — блокировку скролла не снимаем
   if (lesson) clearInterval(lesson.clockTimer);
   runningTimers.forEach(clearInterval); runningTimers = [];
   lesson = null;
   if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
   if (location.hash.startsWith('#lesson=')) safeHistory('replaceState', null);   // не перетираем раздел, куда человек уже перешёл
+  if (typeof liveOnShowClose === 'function') { const cb = liveOnShowClose; liveOnShowClose = null; cb(); }
 }
 
 function closeShow(){
@@ -1531,6 +1713,294 @@ PLAY.opinions = (a, root) => {
   draw();
 };
 
+
+/* ======================= Конструктор урока ======================= */
+const Plans = {
+  list(){ return store.get('york-hub-plans', []).slice().sort((a, b) => b.updatedAt - a.updatedAt); },
+  get(id){ return this.list().find(p => p.id === id); },
+  saveAll(list){ store.set('york-hub-plans', list); },
+  create(){
+    const p = {
+      id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      createdAt: Date.now(), updatedAt: Date.now(),
+      student: { name: '', age: '', level: '', goal: '', interests: '', notes: '' },
+      blocks: [
+        mkBlock('warmup', { title: 'Разминка', questions: ['How are you today?', 'What have you been up to lately?'] }),
+        mkBlock('discovery', { title: 'Цели и интересы', questions: ['Why do you want to learn English?', 'What do you enjoy doing in your free time?'] }),
+        mkBlock('wrapup', { title: 'Итог и следующий шаг', questions: ['What’s one new thing you learned today?'] }),
+      ],
+      status: 'draft', report: null,
+    };
+    const list = this.list(); list.unshift(p); this.saveAll(list);
+    return p;
+  },
+  save(p){ p.updatedAt = Date.now(); const list = this.list().filter(x => x.id !== p.id); list.unshift(p); this.saveAll(list); },
+  remove(id){ this.saveAll(this.list().filter(p => p.id !== id)); },
+};
+function mkBlock(kind, extra){
+  return Object.assign({ id: 'b' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), kind, type: 'custom', title: '', duration: 5, questions: [], note: '', skipped: false }, extra);
+}
+function itemBlock(kind, item){
+  return { id: 'b' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), kind, type: 'item', refId: item.id, title: item.title, duration: item.play ? 8 : 12, skipped: false };
+}
+const BLOCK_KIND_LABEL = { warmup: 'Разминка', discovery: 'Знакомство', topic: 'Тема', activity: 'Активность', speaking: 'Говорим', wrapup: 'Итог' };
+
+function renderBuilder(root){
+  const id = (currentRoute.split('=')[1]) || '';
+  const plan = id && Plans.get(id);
+
+  if (!plan) {
+    const plans = Plans.list();
+    root.innerHTML = `<h1 class="page-title">Конструктор урока</h1>
+      <p class="page-sub">Собери урок под ученика и веди пробный с одного экрана — без Miro, без лишних вкладок.</p>
+      <div class="actions" style="margin-bottom:18px"><button class="btn primary" id="newPlanBtn">✨ Создать урок</button></div>
+      ${plans.length ? `<div class="yb yb-recent" id="planList"></div>` : `<div class="empty">Пока нет сохранённых уроков — нажмите «Создать урок».</div>`}`;
+    root.querySelector('#newPlanBtn').onclick = () => { const p = Plans.create(); location.hash = '#/builder=' + p.id; };
+    if (plans.length) {
+      root.querySelector('#planList').innerHTML = plans.map(p => `
+        <button class="yb-card yb-rc" data-plan="${esc(p.id)}">
+          <span class="st ${p.status === 'done' ? 'done' : 'draft'}">${p.status === 'done' ? 'Проведён' : 'Черновик'}</span>
+          <span class="nm">${esc(p.student.name || 'Без имени')}</span>
+          <span class="meta">${esc(p.student.level || '—')} · ${p.blocks.length} блок(ов) · ${new Date(p.updatedAt).toLocaleDateString('ru-RU')}</span>
+        </button>`).join('');
+      root.querySelectorAll('[data-plan]').forEach(b => b.onclick = () => { location.hash = '#/builder=' + b.dataset.plan; });
+    }
+    return;
+  }
+
+  const save = () => Plans.save(plan);
+
+  root.innerHTML = `<div class="result-line"><h1 class="page-title" style="margin:0">Конструктор урока</h1>
+      <button class="btn ghost" id="toDashboard">← Все уроки</button></div>
+    <div class="yb" style="padding:clamp(16px,2.5vw,26px)">
+    <div class="yb-grid">
+      <div class="yb-card" style="padding:20px 22px">
+        <h2 class="h-sec" style="margin-top:0">Ученик</h2>
+        <div class="yb-field"><label>Имя</label><input id="fName" value="${esc(plan.student.name)}" placeholder="Имя ученика"></div>
+        <div class="yb-field"><label>Возраст</label><input id="fAge" value="${esc(plan.student.age)}" placeholder="например, 12"></div>
+        <div class="yb-field"><label>Уровень</label><select id="fLevel">${['', 'A0-A1', 'A2', 'B1', 'B2', 'C1'].map(l => `<option value="${l}" ${plan.student.level === l ? 'selected' : ''}>${l || '—'}</option>`).join('')}</select></div>
+        <div class="yb-field"><label>Цель</label><input id="fGoal" value="${esc(plan.student.goal)}" placeholder="Зачем учит английский"></div>
+        <div class="yb-field"><label>Интересы</label><input id="fInterests" value="${esc(plan.student.interests)}" placeholder="Игры, аниме, футбол…"></div>
+        <div class="yb-field"><label>Заметки</label><textarea id="fNotes" placeholder="Что важно учесть">${esc(plan.student.notes)}</textarea></div>
+        <button class="yb-btn on" id="startLive" style="width:100%;justify-content:center;font-size:13.5px;padding:13px">▶ Начать урок</button>
+        <button class="yb-btn danger" id="delPlan" style="width:100%;justify-content:center;margin-top:8px">Удалить урок</button>
+      </div>
+      <div class="yb-card" style="padding:20px 22px">
+        <h2 class="h-sec" style="margin-top:0">Таймлайн урока</h2>
+        <div class="yb-blocks" id="blocksEl"></div>
+        <div class="yb-add-row"><button class="yb-btn" id="addBlockBtn">+ Добавить материал</button></div>
+      </div>
+    </div>
+    </div>`;
+
+  root.querySelector('#toDashboard').onclick = () => { location.hash = '#/builder'; };
+  const fieldMap = { fName: 'name', fAge: 'age', fLevel: 'level', fGoal: 'goal', fInterests: 'interests', fNotes: 'notes' };
+  Object.keys(fieldMap).forEach(k => root.querySelector('#' + k).addEventListener('input', e => { plan.student[fieldMap[k]] = e.target.value; save(); }));
+  root.querySelector('#delPlan').onclick = () => { if (confirm('Удалить этот урок?')) { Plans.remove(plan.id); location.hash = '#/builder'; } };
+  root.querySelector('#startLive').onclick = () => openLive(plan);
+
+  const blocksEl = root.querySelector('#blocksEl');
+  function rerenderBlocks(){ blocksEl.innerHTML = renderBlocksList(plan); wireBlocks(); }
+  function wireBlocks(){
+    blocksEl.querySelectorAll('[data-up]').forEach(b => b.onclick = () => { moveBlock(plan, b.dataset.up, -1); save(); rerenderBlocks(); });
+    blocksEl.querySelectorAll('[data-down]').forEach(b => b.onclick = () => { moveBlock(plan, b.dataset.down, 1); save(); rerenderBlocks(); });
+    blocksEl.querySelectorAll('[data-del]').forEach(b => b.onclick = () => { plan.blocks = plan.blocks.filter(x => x.id !== b.dataset.del); save(); rerenderBlocks(); });
+    let dragId = null;
+    blocksEl.querySelectorAll('.yb-block').forEach(el => {
+      el.draggable = true;
+      el.ondragstart = () => { dragId = el.dataset.id; el.classList.add('dragging'); };
+      el.ondragend = () => el.classList.remove('dragging');
+      el.ondragover = e => e.preventDefault();
+      el.ondrop = e => {
+        e.preventDefault();
+        if (!dragId || dragId === el.dataset.id) return;
+        const from = plan.blocks.findIndex(b => b.id === dragId), to = plan.blocks.findIndex(b => b.id === el.dataset.id);
+        const [m] = plan.blocks.splice(from, 1);
+        plan.blocks.splice(to, 0, m);
+        save(); rerenderBlocks();
+      };
+    });
+  }
+  rerenderBlocks();
+  root.querySelector('#addBlockBtn').onclick = () => openPicker(item => {
+    plan.blocks.push(itemBlock(item.play ? 'activity' : 'topic', item));
+    save(); rerenderBlocks();
+  });
+}
+
+function renderBlocksList(plan){
+  if (!plan.blocks.length) return '<div class="yb-empty">Пока пусто — добавьте тему или активность.</div>';
+  return plan.blocks.map((b, i) => `
+    <div class="yb-card yb-block" data-id="${esc(b.id)}">
+      <span class="gh">⠿</span>
+      <div><div class="kind">${esc(BLOCK_KIND_LABEL[b.kind] || b.kind)}</div><div class="ttl">${esc(b.title || '—')}</div><div class="dur">${b.duration || 5} мин</div></div>
+      <div class="acts">
+        ${i > 0 ? `<button data-up="${esc(b.id)}" title="Выше">↑</button>` : ''}
+        ${i < plan.blocks.length - 1 ? `<button data-down="${esc(b.id)}" title="Ниже">↓</button>` : ''}
+        <button data-del="${esc(b.id)}" title="Удалить">✕</button>
+      </div>
+    </div>`).join('');
+}
+function moveBlock(plan, id, dir){
+  const i = plan.blocks.findIndex(b => b.id === id), j = i + dir;
+  if (i < 0 || j < 0 || j >= plan.blocks.length) return;
+  [plan.blocks[i], plan.blocks[j]] = [plan.blocks[j], plan.blocks[i]];
+}
+
+/* ---------- модалка выбора материала (темы / активности) ---------- */
+function openPicker(onPick){
+  const bg = $('#pickerBg'), modal = $('#picker'), tabsEl = $('#pickerTabs'), bodyEl = $('#pickerBody'), searchEl = $('#pickerSearch');
+  let tab = 'lessons';
+  searchEl.value = '';
+  const draw = () => {
+    tabsEl.innerHTML = [['lessons', '📚 Темы'], ['activities', '🎲 Активности']].map(([k, l]) => `<button class="yb-btn${tab === k ? ' on' : ''}" data-tab="${k}">${l}</button>`).join('');
+    tabsEl.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tab = b.dataset.tab; draw(); });
+    const q = searchEl.value;
+    const list = tab === 'lessons' ? DB.lessons.filter(l => matches(q, l.title, l.idea, l.outcome)) : DB.activities.items.filter(a => matches(q, a.title, a.goal, a.how));
+    bodyEl.innerHTML = list.map(x => `<button class="yb-pick" data-id="${esc(x.id)}">
+        <span class="ic">${x.icon || (x.play ? '🎲' : '📘')}</span>
+        <span class="grow"><span class="t">${esc(x.title)}</span><br><span class="s">${esc(x.level || (x.levels || []).join(', '))} · ${esc(x.outcome || x.goal || '')}</span></span>
+        <span class="yb-btn" style="pointer-events:none">+ Добавить</span>
+      </button>`).join('') || '<div class="empty">Ничего не нашлось.</div>';
+    bodyEl.querySelectorAll('[data-id]').forEach(b => b.onclick = () => { onPick(byId[b.dataset.id]); closePicker(); });
+  };
+  searchEl.oninput = draw;
+  draw();
+  bg.classList.add('open'); modal.classList.add('open');
+  searchEl.focus();
+}
+function closePicker(){ $('#pickerBg').classList.remove('open'); $('#picker').classList.remove('open'); }
+$('#pickerClose').onclick = closePicker;
+$('#pickerBg').onclick = closePicker;
+
+/* ---------- Live Lesson Mode ---------- */
+const live = $('#live');
+let liveState = null;   // { plan, cur, started, clockTimer }
+
+function openLive(plan){
+  liveState = { plan, cur: 0, started: Date.now() };
+  $('.live-foot').style.display = '';
+  $('.live-side').style.display = '';
+  $('#liveStu').textContent = (plan.student.name || 'Урок') + (plan.student.level ? ' · ' + plan.student.level : '');
+  live.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  const tick = () => { const s = Math.floor((Date.now() - liveState.started) / 1000); $('#liveClock').textContent = `⏱ ${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
+  tick(); liveState.clockTimer = setInterval(tick, 1000);
+  renderLiveStep();
+}
+function closeLive(){
+  if (!liveState) return;
+  clearInterval(liveState.clockTimer);
+  live.classList.remove('open');
+  document.body.style.overflow = '';
+  liveState = null;
+}
+$('#liveClose').onclick = () => { if (confirm('Выйти из режима урока? Прогресс и заметки уже сохранены.')) closeLive(); };
+
+function renderLiveSidebar(){
+  const { plan, cur } = liveState;
+  $('#liveSteps').innerHTML = plan.blocks.map((b, i) => `
+    <button class="lv-step${i === cur ? ' cur' : ''}${b.skipped ? ' skipped' : ''}${b.visited && i !== cur ? ' done' : ''}" data-i="${i}">
+      <span class="dot">${b.skipped ? '–' : (i + 1)}</span>
+      <span><div class="kind">${esc(BLOCK_KIND_LABEL[b.kind] || b.kind)}</div><div class="ttl">${esc(b.title || '—')}</div></span>
+    </button>`).join('');
+  $('#liveSteps').querySelectorAll('[data-i]').forEach(b => b.onclick = () => { liveState.cur = +b.dataset.i; renderLiveStep(); });
+}
+
+function renderLiveStep(){
+  const { plan, cur } = liveState;
+  if (cur >= plan.blocks.length) return openReport();
+  const b = plan.blocks[cur];
+  b.visited = true;
+  renderLiveSidebar();
+  const body = $('#liveBody');
+  if (b.type === 'item') {
+    const item = byId[b.refId];
+    if (!item) {
+      body.innerHTML = `<div class="empty">Материал не найден — возможно, его переименовали в банке.</div>`;
+    } else {
+      body.innerHTML = `<p class="lv-block-kind">${esc(BLOCK_KIND_LABEL[b.kind] || b.kind)}</p>
+        <h2 class="lv-block-ttl yb-glow">${esc(item.icon || '')} ${esc(item.title)}</h2>
+        <div class="yb-card lv-item-card">
+          ${item.outcome ? `<p class="outcome">«${esc(item.outcome)}»</p>` : ''}
+          ${item.idea ? `<p>${esc(item.idea)}</p>` : ''}
+          ${item.goal ? `<p>${esc(item.goal)}</p>` : ''}
+          ${item.how ? `<p>${esc(item.how)}</p>` : ''}
+          <ul class="lv-explain">${(item.explanation || item.phrases || []).map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+          ${item.mistakes ? `<div class="kv" style="color:var(--yb-ink2)"><b style="color:var(--yb-ink3)">Типичные ошибки</b></div>${Components.Mistakes(item.mistakes)}` : ''}
+          ${item.speaking ? `<p><b style="color:var(--yb-accent)">Speaking:</b> ${esc(item.speaking)}</p>` : ''}
+        </div>
+        <button class="yb-btn on" id="liveOpenShow">▶ Открыть интерактивный урок для ученика</button>`;
+      body.querySelector('#liveOpenShow').onclick = () => {
+        live.style.visibility = 'hidden';
+        liveOnShowClose = () => { live.style.visibility = ''; };
+        openShow(item);
+      };
+    }
+  } else {
+    body.innerHTML = `<p class="lv-block-kind">${esc(BLOCK_KIND_LABEL[b.kind] || b.kind)}</p>
+      <h2 class="lv-block-ttl yb-glow">${esc(b.title || '')}</h2>
+      ${(b.questions && b.questions.length) ? `<ul class="lv-qs">${b.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>` : ''}
+      <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--yb-ink3)">Заметки</label>
+      <textarea class="lv-note" id="liveNote" placeholder="Что сказал ученик, на что обратить внимание…">${esc(b.note || '')}</textarea>`;
+    body.querySelector('#liveNote').oninput = e => { b.note = e.target.value; Plans.save(plan); };
+  }
+  $('#livePrev').disabled = cur === 0;
+  $('#liveNext').textContent = cur === plan.blocks.length - 1 ? 'Завершить урок ✓' : 'Дальше →';
+}
+
+$('#livePrev').onclick = () => { if (liveState.cur > 0) { liveState.cur--; renderLiveStep(); } };
+$('#liveNext').onclick = () => { liveState.cur++; renderLiveStep(); };
+$('#liveSkip').onclick = () => { liveState.plan.blocks[liveState.cur].skipped = true; Plans.save(liveState.plan); liveState.cur++; renderLiveStep(); };
+$('#liveAdd').onclick = () => openPicker(item => {
+  const b = itemBlock(item.play ? 'activity' : 'topic', item);
+  liveState.plan.blocks.splice(liveState.cur + 1, 0, b);
+  Plans.save(liveState.plan);
+  renderLiveSidebar();
+});
+
+/* ---------- Отчёт о пробном ---------- */
+function openReport(){
+  const { plan } = liveState;
+  const topics = plan.blocks.filter(b => !b.skipped && b.type === 'item').map(b => (byId[b.refId] || {}).title).filter(Boolean);
+  const r = plan.report || { topics, strengths: '', challenges: '', format: 'SOLO', notes: '' };
+  $('.live-side').style.display = 'none';
+  $('.live-foot').style.display = 'none';
+  $('#liveBody').innerHTML = `<div class="yb-report">
+    <p class="lv-block-kind">Отчёт о пробном</p>
+    <h2 class="lv-block-ttl yb-glow">${esc(plan.student.name || 'Ученик')}</h2>
+    <label style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--yb-ink3)">Темы урока</label>
+    <div class="yb-chips" id="repTopics"></div>
+    <div class="yb-field"><label>Сильные стороны</label><textarea id="repStrengths">${esc(r.strengths)}</textarea></div>
+    <div class="yb-field"><label>Что даётся сложнее</label><textarea id="repChallenges">${esc(r.challenges)}</textarea></div>
+    <div class="yb-field"><label>Рекомендуемый формат</label><div class="yb-fmt"><button class="yb-btn${r.format === 'SOLO' ? ' on' : ''}" data-fmt="SOLO">SOLO</button><button class="yb-btn${r.format === 'CREW' ? ' on' : ''}" data-fmt="CREW">CREW</button></div></div>
+    <div class="yb-field"><label>Заметки</label><textarea id="repNotes">${esc(r.notes)}</textarea></div>
+    <div class="actions">
+      <button class="yb-btn on" id="repSave">✓ Сохранить отчёт</button>
+      <button class="yb-btn" id="repCopy">Скопировать как текст</button>
+    </div>
+  </div>`;
+  const chipsEl = $('#repTopics');
+  const drawChips = () => {
+    chipsEl.innerHTML = r.topics.map((t, i) => `<span class="yb-chip">${esc(t)}<button data-rmv="${i}">✕</button></span>`).join('') || '<span class="muted">—</span>';
+    chipsEl.querySelectorAll('[data-rmv]').forEach(b => b.onclick = () => { r.topics.splice(+b.dataset.rmv, 1); drawChips(); });
+  };
+  drawChips();
+  $('#liveBody').querySelectorAll('[data-fmt]').forEach(b => b.onclick = () => { r.format = b.dataset.fmt; $('#liveBody').querySelectorAll('[data-fmt]').forEach(x => x.classList.toggle('on', x === b)); });
+  $('#repSave').onclick = () => {
+    r.strengths = $('#repStrengths').value; r.challenges = $('#repChallenges').value; r.notes = $('#repNotes').value; r.savedAt = Date.now();
+    plan.report = r; plan.status = 'done'; Plans.save(plan);
+    toast('Отчёт сохранён');
+    closeLive();
+    location.hash = '#/builder';
+  };
+  $('#repCopy').onclick = async () => {
+    const text = `Пробный урок — ${plan.student.name || '-'}\nТемы: ${r.topics.join(', ') || '-'}\nСильные стороны: ${$('#repStrengths').value || '-'}\nСложнее даётся: ${$('#repChallenges').value || '-'}\nФормат: ${r.format}\nЗаметки: ${$('#repNotes').value || '-'}`;
+    let ok = false;
+    try { await navigator.clipboard.writeText(text); ok = true; } catch(e){ ok = fallbackCopy(text); }
+    toast(ok ? 'Отчёт скопирован' : 'Не получилось скопировать', !ok);
+  };
+}
 
 /* ======================= старт ======================= */
 (async () => {
