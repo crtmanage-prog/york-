@@ -3365,12 +3365,22 @@ function computeRevenueInRange(start, end){
 // ни в расчёт выплат, ни в финансовую статистику (см. CLAUDE.md)
 const TEST_TEACHER_ID = 'd492122c-5d5b-41ad-aae9-e01c044fd77f';
 
+// единое правило "оплачивается ли учителю это занятие" — одно и то же здесь,
+// в кабинете учителя и в рассылке бота, чтобы цифры нигде не расходились.
+// Перенесённые — никогда (платится новый урок). Отменённые — только если
+// явно помечено pay_despite_cancel (разовое исключение вроде позднего отказа ученика).
+function lessonCountsForPay(l){
+  if (l.status === 'rescheduled') return false;
+  if (l.status === 'cancelled') return !!l.pay_despite_cancel;
+  return true;
+}
+
 function computeTeacherPayoutInRange(start, end){
   const lessons = (window.__lessonsList || []).filter(l =>
-    !l.is_trial && l.student_id && l.teacher_id !== TEST_TEACHER_ID && l.status !== 'cancelled' && l.status !== 'rescheduled'
+    !l.is_trial && l.student_id && l.teacher_id !== TEST_TEACHER_ID && lessonCountsForPay(l)
     && isLessonPast(l) && (!start || inStatsRange(l.lesson_date, start, end)));
   const trials = (window.__lessonsList || []).filter(l =>
-    l.is_trial && l.teacher_id !== TEST_TEACHER_ID && l.status !== 'cancelled' && l.status !== 'rescheduled'
+    l.is_trial && l.teacher_id !== TEST_TEACHER_ID && lessonCountsForPay(l)
     && isLessonPast(l) && (!start || inStatsRange(l.lesson_date, start, end)));
   const rateSoloDefault = Number((document.getElementById('rateSolo') || {}).value) || 500;
   const rateCrewDefault = Number((document.getElementById('rateCrew') || {}).value) || 600;
@@ -3617,7 +3627,7 @@ function renderStats(){
 
   // отменённые и перенесённые не считаются ни проведённым уроком, ни оплачиваемым учителю;
   // тестовый профиль учителя тоже не в счёт
-  const countedLessons = pastLessons.filter(l => l.status !== 'cancelled' && l.status !== 'rescheduled' && l.teacher_id !== TEST_TEACHER_ID);
+  const countedLessons = pastLessons.filter(l => lessonCountsForPay(l) && l.teacher_id !== TEST_TEACHER_ID);
 
   const trialsCount = pastLessons.filter(l => l.is_trial).length;
   const realLessonsCount = countedLessons.filter(l => !l.is_trial).length;

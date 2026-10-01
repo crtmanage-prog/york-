@@ -2382,6 +2382,16 @@ function getSalaryPeriodRange(sel){
   return { start, end };
 }
 
+// единое правило "оплачивается ли учителю это занятие" — то же самое, что в
+// админке и в рассылке бота, чтобы цифры нигде не расходились. Перенесённые —
+// никогда (платится новый урок). Отменённые — только если явно помечено
+// pay_despite_cancel (разовое исключение вроде позднего отказа ученика).
+function lessonCountsForPay(l){
+  if (l.status === 'rescheduled') return false;
+  if (l.status === 'cancelled') return !!l.pay_despite_cancel;
+  return true;
+}
+
 function renderSalary(){
   const sel = document.getElementById('salaryPeriod').value;
   const { start, end } = getSalaryPeriodRange(sel);
@@ -2391,7 +2401,7 @@ function renderSalary(){
   const rateCrew = (currentProfile && currentProfile.rate_crew) ? Number(currentProfile.rate_crew) : 600;
   document.getElementById('salary-rate').textContent = `${rateSolo}₽ SOLO / ${rateCrew}₽ CREW`;
 
-  const lessons = (window.__lessonsList || []).filter(l => (l.is_trial || l.student_id) && isLessonPast(l));
+  const lessons = (window.__lessonsList || []).filter(l => (l.is_trial || l.student_id) && lessonCountsForPay(l) && isLessonPast(l));
   const inRange = lessons.filter(l => {
     if (noFilter) return true;
     const d = new Date(l.lesson_date);
