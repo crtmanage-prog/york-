@@ -693,6 +693,19 @@ const Saved = {
 };
 const starBtn = id => `<button class="star${Saved.has(id) ? ' on' : ''}" data-star="${esc(id)}" title="${Saved.has(id) ? 'Убрать из избранного' : 'В избранное'}" aria-pressed="${Saved.has(id)}">${Saved.has(id) ? '★' : '☆'}</button>`;
 
+/* ======================= частота использования («часто используете») ======================= */
+const Usage = {
+  counts: store.get('york-hub-usage', {}),
+  bump(id){ if (!id) return; this.counts[id] = (this.counts[id] || 0) + 1; store.set('york-hub-usage', this.counts); },
+  top(n, filterFn){
+    return Object.entries(this.counts)
+      .filter(([id, c]) => c > 0 && byId[id] && (!filterFn || filterFn(byId[id])))
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, n)
+      .map(([id]) => byId[id]);
+  },
+};
+
 /* ======================= загрузка контента ======================= */
 async function loadContent(){
   const entries = await Promise.all(Object.entries(CONTENT_FILES).map(async ([key, url]) => {
@@ -892,11 +905,13 @@ const Pages = {
         { route: 'checklist', icon: '✅', title: 'Teacher Checklist', text: 'До, во время и после урока.', cnt: `${DB.checklist.reduce((n, g) => n + g.items.length, 0)} items` },
       ];
       const saved = [...Saved.ids].map(id => byId[id]).filter(Boolean);
+      const frequent = Usage.top(6);
       const plans = Plans.list();
       root.innerHTML = `
         <h1 class="page-title">Trial Lesson Hub</h1>
         <p class="page-sub">Собери урок под конкретного ученика и веди весь пробный с одного экрана.</p>
         ${renderTodayWidget()}
+        ${frequent.length ? `<h2 class="h-sec">🔥 Часто используете</h2><div class="grid">${frequent.map(x => x.play ? Components.ActivityCard(x) : Components.LessonCard(x)).join('')}</div>` : ''}
         <div class="yb yb-hero">
           <div class="yb-hero-txt"><span class="tag">Конструктор урока</span>
             <h2 class="yb-glow">Создай пробный урок под ученика</h2>
@@ -1163,7 +1178,7 @@ function renderPage(){
 document.addEventListener('click', e => {
   const t = e.target.closest('[data-show],[data-open],[data-copy],[data-star]');
   if (!t) return;
-  if (t.dataset.show) { closeDrawer(); return openShow(byId[t.dataset.show]); }
+  if (t.dataset.show) { closeDrawer(); Usage.bump(t.dataset.show); return openShow(byId[t.dataset.show]); }
   if (t.dataset.open) return openDrawer(byId[t.dataset.open]);
   if (t.dataset.copy) return copyPhrases(byId[t.dataset.copy]);
   if (t.dataset.star) {
@@ -1948,20 +1963,30 @@ function openPicker(onPick){
   const bg = $('#pickerBg'), modal = $('#picker'), tabsEl = $('#pickerTabs'), bodyEl = $('#pickerBody'), searchEl = $('#pickerSearch');
   let tab = 'lessons';
   searchEl.value = '';
+  const rowHTML = x => `<div class="yb-pick" data-id="${esc(x.id)}">
+        <span class="ic">${x.icon || (x.play ? '🎲' : '📘')}</span>
+        <button class="grow" style="all:unset;cursor:pointer;min-width:0" data-preview="${esc(x.id)}" title="Посмотреть, что внутри"><span class="t">${esc(x.title)}</span><br><span class="s">${esc(x.level || (x.levels || []).join(', '))} · ${esc(x.outcome || x.goal || '')}</span></button>
+        <button class="yb-btn" data-preview="${esc(x.id)}">👁 Просмотр</button>
+        <button class="yb-btn on" data-add="${esc(x.id)}">+ Добавить</button>
+      </div>`;
+  const wireRows = () => {
+    bodyEl.querySelectorAll('[data-preview]').forEach(b => b.onclick = () => drawPreview(byId[b.dataset.preview]));
+    bodyEl.querySelectorAll('[data-add]').forEach(b => b.onclick = () => { Usage.bump(b.dataset.add); onPick(byId[b.dataset.add]); closePicker(); });
+  };
   const drawList = () => {
     searchEl.hidden = false; tabsEl.hidden = false;
     tabsEl.innerHTML = [['lessons', '📚 Темы'], ['activities', '🎲 Активности']].map(([k, l]) => `<button class="yb-btn${tab === k ? ' on' : ''}" data-tab="${k}">${l}</button>`).join('');
     tabsEl.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tab = b.dataset.tab; drawList(); });
     const q = searchEl.value;
-    const list = tab === 'lessons' ? DB.lessons.filter(l => matches(q, l.title, l.idea, l.outcome)) : DB.activities.items.filter(a => matches(q, a.title, a.goal, a.how));
-    bodyEl.innerHTML = list.map(x => `<div class="yb-pick" data-id="${esc(x.id)}">
-        <span class="ic">${x.icon || (x.play ? '🎲' : '📘')}</span>
-        <button class="grow" style="all:unset;cursor:pointer;min-width:0" data-preview="${esc(x.id)}" title="Посмотреть, что внутри"><span class="t">${esc(x.title)}</span><br><span class="s">${esc(x.level || (x.levels || []).join(', '))} · ${esc(x.outcome || x.goal || '')}</span></button>
-        <button class="yb-btn" data-preview="${esc(x.id)}">👁 Просмотр</button>
-        <button class="yb-btn on" data-add="${esc(x.id)}">+ Добавить</button>
-      </div>`).join('') || '<div class="empty">Ничего не нашлось.</div>';
-    bodyEl.querySelectorAll('[data-preview]').forEach(b => b.onclick = () => drawPreview(byId[b.dataset.preview]));
-    bodyEl.querySelectorAll('[data-add]').forEach(b => b.onclick = () => { onPick(byId[b.dataset.add]); closePicker(); });
+    const filterFn = tab === 'lessons' ? l => !l.play : a => !!a.play;
+    const list0 = tab === 'lessons' ? DB.lessons.filter(l => matches(q, l.title, l.idea, l.outcome)) : DB.activities.items.filter(a => matches(q, a.title, a.goal, a.how));
+    const frequent = !q.trim() ? Usage.top(3, filterFn) : [];
+    const frequentIds = new Set(frequent.map(x => x.id));
+    const list = list0.filter(x => !frequentIds.has(x.id));
+    bodyEl.innerHTML =
+      (frequent.length ? `<div class="yb-today-lbl" style="margin:2px 0 8px">🔥 Часто используете</div>${frequent.map(rowHTML).join('')}<div style="height:8px"></div>` : '') +
+      (list.map(rowHTML).join('') || '<div class="empty">Ничего не нашлось.</div>');
+    wireRows();
   };
   const drawPreview = x => {
     searchEl.hidden = true; tabsEl.hidden = true;
@@ -1985,7 +2010,7 @@ function openPicker(onPick){
       </div>
       <button class="yb-btn on" id="pvAdd" style="width:100%;justify-content:center;margin-top:14px;padding:12px">+ Добавить в урок</button>`;
     $('#pvBack').onclick = drawList;
-    $('#pvAdd').onclick = () => { onPick(x); closePicker(); };
+    $('#pvAdd').onclick = () => { Usage.bump(x.id); onPick(x); closePicker(); };
   };
   searchEl.oninput = drawList;
   drawList();
@@ -2055,6 +2080,7 @@ function renderLiveStep(){
         </div>
         <button class="yb-btn on" id="liveOpenShow">▶ Открыть интерактивный урок для ученика</button>`;
       body.querySelector('#liveOpenShow').onclick = () => {
+        Usage.bump(item.id);
         live.style.visibility = 'hidden';
         liveOnShowClose = () => { live.style.visibility = ''; };
         openShow(item);
