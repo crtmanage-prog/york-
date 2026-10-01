@@ -951,6 +951,78 @@
       "category": "games"
     },
     {
+      "id": "act-describe-photo",
+      "icon": "📸",
+      "title": "Describe the photo",
+      "levels": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "goal": "Детальное описание реальной фотографии: где что находится и как это выглядит.",
+      "how": "Покажите фото. Сначала попросите описать общую сцену, потом — детали по плану: где находятся предметы/люди (foreground/background/left/right), как они выглядят и что, по мнению ученика, происходит. Жмите «🎲 Ещё фразы», чтобы подсказать новые обороты по ходу разговора.",
+      "rules": "Look at the photo. Describe everything you can see!",
+      "phrases": [
+        "In the foreground / background…",
+        "On the left / right…",
+        "This person is wearing…",
+        "He / She seems to be…",
+        "I suppose (that)…"
+      ],
+      "play": {
+        "type": "describePhoto",
+        "images": [
+          "trial-hub/content/images/describe-01.jpg",
+          "trial-hub/content/images/describe-02.jpg",
+          "trial-hub/content/images/describe-03.jpg",
+          "trial-hub/content/images/describe-04.jpg",
+          "trial-hub/content/images/describe-05.jpg",
+          "trial-hub/content/images/describe-06.jpg",
+          "trial-hub/content/images/describe-07.jpg",
+          "trial-hub/content/images/describe-08.jpg",
+          "trial-hub/content/images/describe-09.jpg",
+          "trial-hub/content/images/describe-10.jpg",
+          "trial-hub/content/images/describe-11.jpg",
+          "trial-hub/content/images/describe-12.jpg"
+        ],
+        "locationPhrases": [
+          "in the foreground",
+          "in the background",
+          "on the left",
+          "on the right",
+          "in the middle / in the centre",
+          "at the top",
+          "at the bottom",
+          "in the corner",
+          "next to…",
+          "behind…",
+          "in front of…",
+          "between… and…",
+          "close to…",
+          "in the distance"
+        ],
+        "descriptionPhrases": [
+          "This girl / boy is wearing…",
+          "He / She seems to be…-ing",
+          "I suppose (that)…",
+          "It looks like…",
+          "I can see…",
+          "There is / are…",
+          "He / She might be…-ing",
+          "In my opinion, …",
+          "I guess…",
+          "It seems that…",
+          "He / She is probably…-ing",
+          "What stands out to me is…",
+          "I'm not sure, but I think…",
+          "This reminds me of…",
+          "On the whole, the picture shows…"
+        ]
+      },
+      "category": "games"
+    },
+    {
       "id": "act-detective",
       "icon": "🔍",
       "title": "Detective task",
