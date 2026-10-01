@@ -1853,20 +1853,46 @@ function openPicker(onPick){
   const bg = $('#pickerBg'), modal = $('#picker'), tabsEl = $('#pickerTabs'), bodyEl = $('#pickerBody'), searchEl = $('#pickerSearch');
   let tab = 'lessons';
   searchEl.value = '';
-  const draw = () => {
+  const drawList = () => {
+    searchEl.hidden = false; tabsEl.hidden = false;
     tabsEl.innerHTML = [['lessons', '📚 Темы'], ['activities', '🎲 Активности']].map(([k, l]) => `<button class="yb-btn${tab === k ? ' on' : ''}" data-tab="${k}">${l}</button>`).join('');
-    tabsEl.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tab = b.dataset.tab; draw(); });
+    tabsEl.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tab = b.dataset.tab; drawList(); });
     const q = searchEl.value;
     const list = tab === 'lessons' ? DB.lessons.filter(l => matches(q, l.title, l.idea, l.outcome)) : DB.activities.items.filter(a => matches(q, a.title, a.goal, a.how));
-    bodyEl.innerHTML = list.map(x => `<button class="yb-pick" data-id="${esc(x.id)}">
+    bodyEl.innerHTML = list.map(x => `<div class="yb-pick" data-id="${esc(x.id)}">
         <span class="ic">${x.icon || (x.play ? '🎲' : '📘')}</span>
-        <span class="grow"><span class="t">${esc(x.title)}</span><br><span class="s">${esc(x.level || (x.levels || []).join(', '))} · ${esc(x.outcome || x.goal || '')}</span></span>
-        <span class="yb-btn" style="pointer-events:none">+ Добавить</span>
-      </button>`).join('') || '<div class="empty">Ничего не нашлось.</div>';
-    bodyEl.querySelectorAll('[data-id]').forEach(b => b.onclick = () => { onPick(byId[b.dataset.id]); closePicker(); });
+        <button class="grow" style="all:unset;cursor:pointer;min-width:0" data-preview="${esc(x.id)}"><span class="t">${esc(x.title)}</span><br><span class="s">${esc(x.level || (x.levels || []).join(', '))} · ${esc(x.outcome || x.goal || '')}</span></button>
+        <button class="yb-btn" data-add="${esc(x.id)}">+ Добавить</button>
+      </div>`).join('') || '<div class="empty">Ничего не нашлось.</div>';
+    bodyEl.querySelectorAll('[data-preview]').forEach(b => b.onclick = () => drawPreview(byId[b.dataset.preview]));
+    bodyEl.querySelectorAll('[data-add]').forEach(b => b.onclick = () => { onPick(byId[b.dataset.add]); closePicker(); });
   };
-  searchEl.oninput = draw;
-  draw();
+  const drawPreview = x => {
+    searchEl.hidden = true; tabsEl.hidden = true;
+    const isAct = !!x.play;
+    bodyEl.innerHTML = `
+      <button class="yb-btn" id="pvBack">← Назад к списку</button>
+      <div class="yb-card" style="padding:18px 20px;margin-top:10px">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px">
+          <span style="font-size:26px">${x.icon || (isAct ? '🎲' : '📘')}</span>
+          <div><div style="font-family:Unbounded,sans-serif;font-size:16px">${esc(x.title)}</div>
+          <div class="muted" style="font-size:12.5px">${esc(x.level || (x.levels || []).join(', '))}</div></div>
+        </div>
+        ${x.outcome ? `<p style="color:var(--yb-ink2);font-style:italic;margin:0 0 10px">«${esc(x.outcome)}»</p>` : ''}
+        ${x.leadIn ? `<p style="margin:0 0 10px"><b style="color:var(--yb-accent)">Lead-in:</b> ${esc(x.leadIn)}</p>` : ''}
+        ${x.idea ? `<p style="margin:0 0 10px">${esc(x.idea)}</p>` : ''}
+        ${x.goal ? `<p style="margin:0 0 10px"><b style="color:var(--yb-accent)">Goal:</b> ${esc(x.goal)}</p>` : ''}
+        ${x.how ? `<p style="margin:0 0 10px"><b style="color:var(--yb-accent)">How to run:</b> ${esc(x.how)}</p>` : ''}
+        ${(x.explanation || x.phrases || []).length ? `<ul class="lv-explain">${(x.explanation || x.phrases).map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+        ${x.mistakes ? `<div style="margin:10px 0 4px"><b style="color:var(--yb-ink3);font-size:11px;text-transform:uppercase">Типичные ошибки</b></div>${Components.Mistakes(x.mistakes)}` : ''}
+        ${x.speaking ? `<p style="margin:10px 0 0"><b style="color:var(--yb-accent)">Speaking:</b> ${esc(x.speaking)}</p>` : ''}
+      </div>
+      <button class="yb-btn on" id="pvAdd" style="width:100%;justify-content:center;margin-top:14px;padding:12px">+ Добавить в урок</button>`;
+    $('#pvBack').onclick = drawList;
+    $('#pvAdd').onclick = () => { onPick(x); closePicker(); };
+  };
+  searchEl.oninput = drawList;
+  drawList();
   bg.classList.add('open'); modal.classList.add('open');
   searchEl.focus();
 }
