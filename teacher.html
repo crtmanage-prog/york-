@@ -345,6 +345,25 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .hero-card.hc-check{background:#fff; border:1px solid var(--line); color:var(--ink);}
   .hero-card.hc-check .hc-label{color:var(--ink-soft);}
 
+  /* промо-плашка: конструктор пробного урока */
+  .promo-card{
+    position:relative; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;
+    border-radius:18px; padding:16px 20px; margin:14px 0; overflow:hidden;
+    background:
+      radial-gradient(500px circle at 10% 0%, rgba(215,239,66,.22), transparent 60%),
+      linear-gradient(135deg,#0A0C06 0%,#12140A 100%);
+    border:1px solid rgba(215,239,66,.25); transition:transform .15s, box-shadow .15s;
+  }
+  .promo-card:hover{transform:translateY(-2px); box-shadow:0 8px 28px rgba(215,239,66,.18);}
+  .promo-badge{position:absolute; top:10px; right:14px; font-family:'Unbounded',sans-serif; font-size:10px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+    color:#0A0C06; background:var(--accent); border-radius:100px; padding:4px 10px;}
+  .promo-ic{font-size:28px; flex:none;}
+  .promo-txt{display:flex; flex-direction:column; gap:3px; min-width:0;}
+  .promo-txt b{font-family:'Unbounded',sans-serif; font-size:14.5px;}
+  .promo-txt span{font-size:12.5px; color:rgba(255,255,255,.65);}
+  .promo-arrow{margin-left:auto; font-size:18px; color:var(--accent); flex:none;}
+  @media (max-width:520px){ .promo-txt span{display:none;} }
+
   /* list rows */
   .row-card{
     border:1.5px solid var(--line); border-radius:14px; padding:16px 18px;
@@ -679,6 +698,16 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <div class="hc-value" id="heroToCheck">—</div>
         </div>
       </div>
+
+      <a class="promo-card" href="trial-hub-soon.html">
+        <span class="promo-badge">Новое</span>
+        <span class="promo-ic">🪄</span>
+        <span class="promo-txt">
+          <b>Конструктор пробного урока</b>
+          <span>Собери урок под ученика и веди весь пробный с одного экрана</span>
+        </span>
+        <span class="promo-arrow">→</span>
+      </a>
 
       <div class="overview-grid">
         <div class="stat-card">
