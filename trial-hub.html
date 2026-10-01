@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
   // Supabase JS library embedded directly (works without VPN / CDN access)
   (function(){
@@ -61,7 +61,11 @@ const CONTENT_FILES = {
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:#fff;color:var(--ink);font:15px/1.5 'Golos Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+body{background:
+    radial-gradient(circle at 60% -5%, rgba(215,239,66,.45), transparent 38%),
+    radial-gradient(circle at 100% 70%, rgba(215,239,66,.18), transparent 35%),
+    #F3F2ED;
+  color:var(--ink);font:15px/1.5 'Golos Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
 h1,h2,h3,h4{font-family:Unbounded,sans-serif;letter-spacing:-.01em}
 button{font:inherit;color:inherit;cursor:pointer}
 a{color:inherit}
@@ -80,8 +84,8 @@ body.no-ru .ru{display:none !important}
 
 /* ---------- каркас: сайдбар как в кабинете, но с подписями (Notion-стиль) ---------- */
 .shell{min-height:100vh;display:flex;max-width:1500px;margin:0 auto}
-.sidebar{width:232px;flex-shrink:0;margin:16px 0 16px 16px;background:#fff;border:1px solid var(--line);border-radius:18px;
-  display:flex;flex-direction:column;gap:2px;padding:18px 12px;position:sticky;top:16px;align-self:flex-start;max-height:calc(100vh - 32px);overflow:auto}
+.sidebar{width:248px;flex-shrink:0;margin:20px 0 20px 20px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.9);box-shadow:0 14px 34px rgba(17,18,14,.08);border-radius:22px;
+  display:flex;flex-direction:column;gap:2px;padding:18px 12px;position:sticky;top:20px;align-self:flex-start;max-height:calc(100vh - 40px);overflow:auto}
 .sb-logo{font-family:Unbounded,sans-serif;font-weight:900;font-size:15px;padding:0 10px 4px;text-decoration:none}
 .sb-logo span{background:var(--accent);padding:0 4px;border-radius:6px}
 .sb-sub{font-size:12px;color:var(--ink-3);padding:0 10px 14px}
@@ -93,6 +97,79 @@ body.no-ru .ru{display:none !important}
 .nav-btn.active .nc{color:var(--dark)}
 .sb-sep{height:1px;background:var(--line);margin:10px 6px}
 .main-col{flex:1;min-width:0}
+
+/* ---------- новый дизайн сайдбара и Dashboard (мокап) ---------- */
+.gl-logo{padding:0 12px 14px;display:flex;flex-direction:column;gap:2px;text-decoration:none}
+.gl-brand{font-family:Unbounded,sans-serif;font-size:16px;font-weight:800;color:#0A0A09}
+.gl-bang{background:#D7EF42;padding:0 3px;border-radius:4px;margin-left:2px}
+.gl-sub{font-size:12px;color:#6B6C64}
+.gl-nav{display:flex;align-items:center;gap:10px;height:40px;padding:0 12px;border-radius:12px;color:#0A0A09;text-decoration:none;font-size:14px;font-weight:500}
+.gl-nav svg{flex:none;stroke:#0A0A09}
+.gl-nav .grow{flex-grow:1}
+.gl-nav .cnt{font-size:12px;color:#6B6C64;font-weight:600}
+.gl-nav:hover{background:rgba(10,10,9,.05)}
+.gl-nav.active{background:#D7EF42;font-weight:600}
+.gl-nav.muted2{color:#6B6C64}
+.gl-nav.muted2 svg{stroke:#6B6C64}
+.gl-sect{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#A8AAA4;padding:14px 12px 6px;display:block}
+.gl-div{height:1px;background:rgba(0,0,0,.08);margin:12px 4px}
+.gl-ru{padding:2px 8px;border-radius:999px;background:#0A0A09;color:#D7EF42;font-size:11px;font-weight:700}
+
+.gl-page{width:100%;max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.gl-head{display:flex;flex-direction:column;gap:12px;text-align:center;align-items:center;padding:10px 0 6px}
+.gl-eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6C64}
+.gl-h1{font-family:Unbounded,sans-serif;font-size:clamp(24px,3.4vw,34px);font-weight:700;line-height:1.18;color:#0A0A09;margin:0}
+.gl-h1 mark{background:#D7EF42;color:#0A0A09;padding:0 10px;border-radius:10px;font:inherit}
+.gl-sub2{font-size:14px;color:#6B6C64}
+
+.gl-hero{border-radius:30px;background:radial-gradient(circle at 90% 0%, rgba(255,255,255,.7), transparent 45%), linear-gradient(135deg, #D7EF42 0%, #E8F68F 55%, #F3F9CF 100%);box-shadow:0 20px 44px rgba(157,178,26,.25);padding:26px 28px;display:flex;flex-direction:column;gap:18px}
+.gl-hero-top{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.gl-hero-ic{width:52px;height:52px;flex-shrink:0;border-radius:16px;background:#0A0A09;display:flex;align-items:center;justify-content:center}
+.gl-hero-ic svg{stroke:#D7EF42}
+.gl-hero-txt{display:flex;flex-direction:column;gap:3px;flex-grow:1;min-width:160px}
+.gl-hero-txt b{font-family:Unbounded,sans-serif;font-size:20px;font-weight:700}
+.gl-hero-txt a{font-size:13px;color:#3A3B33}
+.gl-hero-btn{height:48px;padding:0 26px;border-radius:999px;border:none;background:#0A0A09;color:#D7EF42;display:flex;align-items:center;gap:8px;font-family:Unbounded,sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:transform .15s}
+.gl-hero-btn:hover{transform:translateY(-2px)}
+.gl-steps{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
+.gl-step{flex:1 1 180px;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.9)}
+.gl-step b{width:28px;height:28px;flex-shrink:0;border-radius:999px;background:#0A0A09;color:#D7EF42;display:flex;align-items:center;justify-content:center;font-family:Unbounded,sans-serif;font-size:12px;font-weight:700}
+.gl-step span{font-size:13px;font-weight:600;line-height:1.3}
+
+.gl-glass{background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.9);box-shadow:0 14px 34px rgba(17,18,14,.08)}
+.gl-check{text-decoration:none;color:#0A0A09;border-radius:22px;padding:18px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.gl-check-ic{width:40px;height:40px;flex-shrink:0;border-radius:12px;background:#F3F2ED;display:flex;align-items:center;justify-content:center}
+.gl-check b{font-family:Unbounded,sans-serif;font-size:15px;font-weight:700;white-space:nowrap}
+.gl-check-bars{flex-grow:1;display:flex;gap:4px;padding-top:16px;min-width:140px}
+.gl-check-seg{flex:1;display:flex;flex-direction:column;gap:6px}
+.gl-check-bar{height:8px;border-radius:999px;background:rgba(17,18,14,.08);overflow:hidden}
+.gl-check-bar i{display:block;height:100%;background:linear-gradient(90deg,#9DB21A,#D7EF42);font-style:normal}
+.gl-check-seg small{font-size:11px;color:#6B6C64}
+.gl-check-count{font-family:Unbounded,sans-serif;font-size:16px;font-weight:700;white-space:nowrap}
+.gl-check-count i{color:#A8AAA4;font-style:normal}
+
+.gl-card{border-radius:24px;padding:18px 22px 8px;display:flex;flex-direction:column}
+.gl-card-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;gap:10px;flex-wrap:wrap}
+.gl-card-head .lft{display:flex;align-items:center;gap:8px}
+.gl-card-head b{font-family:Unbounded,sans-serif;font-size:17px;font-weight:700}
+.gl-card-head a{font-size:13px;font-weight:600;color:#0A0A09;text-decoration:none}
+.gl-row{text-decoration:none;color:#0A0A09;display:flex;align-items:center;gap:14px;padding:12px 0;border-top:1px solid rgba(17,18,14,.07)}
+.gl-row-ic{width:36px;height:36px;flex-shrink:0;border-radius:10px}
+.gl-row-txt{display:flex;flex-direction:column;gap:2px;flex-grow:1;min-width:0}
+.gl-row-txt b{font-size:15px;font-weight:600}
+.gl-row-txt span{font-size:12px;color:#6B6C64}
+.gl-row-lv{padding:2px 8px;border-radius:6px;background:#0A0A09;color:#D7EF42;font-family:Unbounded,sans-serif;font-size:11px;font-weight:700;white-space:nowrap}
+.gl-row-add{width:34px;height:34px;border-radius:999px;border:1.5px solid #0A0A09;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+.gl-row-add:hover{background:#D7EF42}
+.gl-empty-row{padding:16px 0;color:#6B6C64;font-size:13.5px}
+.gl-today{border-radius:20px;padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.gl-today-lbl{font-family:Unbounded,sans-serif;font-size:11px;color:#6B6C64;text-transform:uppercase;letter-spacing:.04em;flex:none}
+.gl-today-list{display:flex;flex-wrap:wrap;gap:10px;flex:1}
+.gl-today-item{display:flex;align-items:center;gap:10px;background:rgba(215,239,66,.25);border:1px solid rgba(157,178,26,.3);border-radius:100px;padding:6px 8px 6px 16px}
+.gl-today-item .t{font-family:Unbounded,sans-serif;font-size:13px;font-weight:700}
+.gl-today-item .n{font-size:13px;color:#3A3B33}
+.gl-today-add{border:0;background:#0A0A09;color:#D7EF42;border-radius:100px;padding:6px 14px;font-family:Unbounded,sans-serif;font-size:11.5px;font-weight:700;cursor:pointer}
+@media (max-width:760px){ .gl-steps{flex-direction:column;align-items:stretch} .gl-step{flex:none} .gl-hero-btn{width:100%;justify-content:center} }
 main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
 @media (min-width:1300px){ main.page{padding:30px 40px 80px} }
 .page-title{font-family:Unbounded,sans-serif;font-size:26px;font-weight:700;margin:0 0 4px}
@@ -582,12 +659,7 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
 <body>
 <div class="shell">
   <aside class="sidebar" aria-label="Разделы">
-    <a class="sb-logo" href="#/">YORK<span>!</span></a>
-    <div class="sb-sub">Trial Lesson Hub</div>
     <nav id="nav"></nav>
-    <div class="sb-sep"></div>
-    <button class="nav-btn ru-toggle" data-ru-toggle><span class="ni">🇷🇺</span><span class="rt">Перевод: вкл</span></button>
-    <a class="nav-btn" href="teacher.html"><span class="ni">↩</span>Кабинет учителя</a>
   </aside>
 
   <div class="main-col">
@@ -678,7 +750,11 @@ const ruOn = () => store.get('york-hub-ru', true);
 function setRu(on){
   store.set('york-hub-ru', on);
   document.body.classList.toggle('no-ru', !on);
-  document.querySelectorAll('[data-ru-toggle]').forEach(b => { b.setAttribute('aria-pressed', on); b.querySelector('.rt').textContent = on ? 'Перевод: вкл' : 'Перевод: выкл'; });
+  document.querySelectorAll('[data-ru-toggle]').forEach(b => {
+    b.setAttribute('aria-pressed', on);
+    const rt = b.querySelector('.rt'); if (rt) rt.textContent = on ? 'Перевод: вкл' : 'Перевод: выкл';
+    const rts = b.querySelector('.rt-short'); if (rts) rts.textContent = on ? 'RU вкл' : 'RU выкл';
+  });
 }
 
 let DB = null;            // загруженный контент
@@ -891,60 +967,98 @@ const filters = {
 };
 const saveLessonFilters = () => store.set('york-hub-lessons-filters', { ...filters.lessons, q: '' });
 
+// карточка задания в "Избранные задания" на Dashboard — цвет иконки по типу, как в мокапе
+function favRow(x){
+  const kind = x.play ? 'Активность' : (x.category === 'grammar' ? 'Грамматика' : 'Мини-урок');
+  const color = x.play ? '#EFE7FB' : (x.category === 'grammar' ? '#CDB8F0' : '#D7EF42');
+  const lvl = x.play ? (x.levels.length > 1 ? `${x.levels[0]}–${x.levels[x.levels.length - 1]}` : x.levels[0]) : x.level;
+  return `<a href="#" class="gl-row" data-show="${esc(x.id)}">
+      <span class="gl-row-ic" style="background:${color}"></span>
+      <span class="gl-row-txt"><b>${esc(x.title)}</b><span>${esc(kind)}</span></span>
+      <span class="gl-row-lv">${esc(lvl)}</span>
+      <button class="gl-row-add" data-quickadd="${esc(x.id)}" aria-label="В урок">${svgIcon('<path d="M12 5v14M5 12h14"></path>')}</button>
+    </a>`;
+}
+// "+" у задания — добавляет в черновик урока, который уже собирается, иначе создаёт новый
+function quickAddToLesson(x){
+  const draft = Plans.list().find(p => p.status !== 'done');
+  const plan = draft || Plans.create();
+  plan.blocks.push(itemBlock(x.play ? 'activity' : 'topic', x));
+  Plans.save(plan);
+  toast(`«${x.title}» добавлено в урок «${plan.student.name || 'без имени'}»`);
+}
+
 const Pages = {
   home: {
     title: 'Dashboard', icon: '🏠',
     render(root){
-      const S = DB.structure;
-      const sections = [
-        { route: 'structure', icon: '⏱️', title: 'Lesson Structure', text: 'Тайминг 30-минутного урока по шагам.', cnt: `${S.timeline.length} steps · 30 min` },
-        { route: 'lessons', icon: '📚', title: 'Micro Lesson Bank', text: 'Темы по уровням и категориям — каждая с уроком для ученика.', cnt: `${DB.lessons.length} topics` },
-        { route: 'activities', icon: '🎲', title: 'Speaking Activities', text: 'Icebreakers, discussions, role plays.', cnt: `${DB.activities.items.length} activities` },
-        { route: 'grammar', icon: '🧩', title: 'Grammar Topics', text: 'Объяснение, примеры, типичные ошибки, задание на речь.', cnt: `${grammarLessons().length} topics` },
-        { route: 'materials', icon: '📁', title: 'Materials', text: 'Рабочие листы и примеры домашних заданий.', cnt: `${DB.materials.items.length} files` },
-        { route: 'checklist', icon: '✅', title: 'Teacher Checklist', text: 'До, во время и после урока.', cnt: `${DB.checklist.reduce((n, g) => n + g.items.length, 0)} items` },
-      ];
-      const saved = [...Saved.ids].map(id => byId[id]).filter(Boolean);
-      const frequent = Usage.top(6);
       const plans = Plans.list();
+      const draft = plans.find(p => p.status !== 'done');
+      const favs = [...Saved.ids].map(id => byId[id]).filter(Boolean).slice(0, 6);
+      const frequent = Usage.top(6);
+      const clState = store.get('york-hub-checklist', {});
+      const clLabels = { before: 'До урока', during: 'Во время', after: 'После' };
+      const clGroups = DB.checklist.map(g => {
+        const total = g.items.length;
+        const done = g.items.reduce((n, _, i) => n + (clState[g.id + ':' + i] ? 1 : 0), 0);
+        return { label: clLabels[g.id] || g.title, total, done };
+      });
+      const clTotal = clGroups.reduce((n, g) => n + g.total, 0);
+      const clDone = clGroups.reduce((n, g) => n + g.done, 0);
+
       root.innerHTML = `
-        <h1 class="page-title">Trial Lesson Hub</h1>
-        <p class="page-sub">Собери урок под конкретного ученика и веди весь пробный с одного экрана.</p>
-        ${renderTodayWidget()}
-        ${frequent.length ? `<h2 class="h-sec">🔥 Часто используете</h2><div class="grid">${frequent.map(x => x.play ? Components.ActivityCard(x) : Components.LessonCard(x)).join('')}</div>` : ''}
-        <div class="yb yb-hero">
-          <div class="yb-hero-txt"><span class="tag">Конструктор урока</span>
-            <h2 class="yb-glow">Создай пробный урок под ученика</h2>
-            <p>Выбери темы и активности, собери таймлайн, веди урок прямо отсюда — без Miro, без вкладок.</p>
+        <div class="gl-page">
+          <div class="gl-head">
+            <span class="gl-eyebrow">Хаб пробных уроков YORK!</span>
+            <h1 class="gl-h1">Your goal is not to test a student.<br><mark>Show them progress.</mark></h1>
+            <span class="gl-sub2">Не проверить, а показать прогресс.</span>
           </div>
-          <button class="yb-btn on" id="ctaNewPlan" style="font-size:14px;padding:14px 26px">✨ Создать урок</button>
-        </div>
-        ${plans.length ? `<h2 class="h-sec">Недавние уроки</h2><div class="yb yb-recent" id="recentPlans"></div>` : ''}
-        <div class="goal-hero"><div class="hc-label">Главная идея пробного урока</div><blockquote>${esc(S.goal)}</blockquote>${ru(S.goal)}</div>
-        <div class="stats">${S.principles.map(p => `<div class="stat"><div class="si">${p.icon}</div><b>${T(p.title)}</b><p>${esc(p.text)}</p></div>`).join('')}</div>
-        <h2 class="h-sec">Sections</h2>
-        <div class="grid">${sections.map(s => `<a class="sec-card" href="#/${s.route}"><span class="si">${s.icon}</span><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p><span class="cnt">${esc(s.cnt)}</span></a>`).join('')}</div>
-        <h2 class="h-sec">What should a student feel?</h2>
-        ${studentJourney()}
-        <h2 class="h-sec">★ Saved</h2>
-        ${saved.length ? `<div class="grid">${saved.map(x => x.play ? Components.ActivityCard(x) : Components.LessonCard(x)).join('')}</div>`
-                       : `<div class="empty">Нажмите ☆ на любой теме или активности — она появится здесь.</div>`}`;
+
+          ${renderTodayWidget()}
+
+          <div class="gl-hero">
+            <div class="gl-hero-top">
+              <span class="gl-hero-ic">${svgIcon(NAV_ICONS.builder)}</span>
+              <div class="gl-hero-txt">
+                <b>Конструктор пробного</b>
+                ${draft ? `<a href="#/builder=${esc(draft.id)}">Продолжить черновик «${esc(draft.student.name || 'без имени')}»</a>` : ''}
+              </div>
+              <button class="gl-hero-btn" id="ctaNewPlan">${svgIcon('<path d="M12 5v14M5 12h14"></path>')}Создать урок</button>
+            </div>
+            <div class="gl-steps">
+              <div class="gl-step"><b>1</b><span>Уровень и цель ученика</span></div>
+              <div class="gl-step"><b>2</b><span>Темы и активности</span></div>
+              <div class="gl-step"><b>3</b><span>Урок на 30 минут</span></div>
+            </div>
+          </div>
+
+          <a href="#/checklist" class="gl-glass gl-check">
+            <span class="gl-check-ic">${svgIcon(NAV_ICONS.checklist)}</span>
+            <b>Чек-лист</b>
+            <div class="gl-check-bars">${clGroups.map(g => `<div class="gl-check-seg" style="flex:${g.total || 1}"><div class="gl-check-bar"><i style="width:${g.total ? Math.round(g.done / g.total * 100) : 0}%"></i></div><small>${esc(g.label)}</small></div>`).join('')}</div>
+            <span class="gl-check-count">${clDone}<i>/${clTotal}</i></span>
+            ${svgIcon('<path d="M5 12h14M13 6l6 6-6 6"></path>')}
+          </a>
+
+          ${frequent.length ? `<div class="gl-glass gl-card">
+            <div class="gl-card-head"><div class="lft">🔥<b>Часто используете</b></div></div>
+            ${frequent.map(favRow).join('')}
+          </div>` : ''}
+
+          <div class="gl-glass gl-card">
+            <div class="gl-card-head"><div class="lft">${svgIcon(NAV_ICONS.favorite)}<b>Избранные задания</b></div><a href="#/lessons">Вся библиотека</a></div>
+            ${favs.length ? favs.map(favRow).join('') : `<div class="gl-empty-row">Нажмите ☆ на любой теме или активности — она появится здесь.</div>`}
+          </div>
+        </div>`;
+
       root.querySelector('#ctaNewPlan').onclick = () => { const p = Plans.create(); location.hash = '#/builder=' + p.id; };
+      root.querySelectorAll('[data-quickadd]').forEach(b => b.onclick = e => { e.preventDefault(); e.stopPropagation(); quickAddToLesson(byId[b.dataset.quickadd]); });
       root.querySelectorAll('[data-quickplan]').forEach(b => b.onclick = () => {
         const p = Plans.create();
         p.student.name = b.dataset.qname;
         Plans.save(p);
         location.hash = '#/builder=' + p.id;
       });
-      if (plans.length) {
-        root.querySelector('#recentPlans').innerHTML = plans.slice(0, 6).map(p => `
-          <button class="yb-card yb-rc" data-plan="${esc(p.id)}">
-            <span class="st ${p.status === 'done' ? 'done' : 'draft'}">${p.status === 'done' ? 'Проведён' : 'Черновик'}</span>
-            <span class="nm">${esc(p.student.name || 'Без имени')}</span>
-            <span class="meta">${esc(p.student.level || '—')} · ${p.blocks.length} блок(ов) · ${new Date(p.updatedAt).toLocaleDateString('ru-RU')}</span>
-          </button>`).join('');
-        root.querySelectorAll('[data-plan]').forEach(b => b.onclick = () => { location.hash = '#/builder=' + b.dataset.plan; });
-      }
     },
   },
 
@@ -1132,15 +1246,53 @@ $('#drawerClose').onclick = closeDrawer;
 $('#drawerBg').onclick = closeDrawer;
 
 /* ======================= навигация (hash-роутер) ======================= */
+const NAV_ICONS = {
+  home: '<path d="M3 11 12 4l9 7"></path><path d="M5 10v10h14V10"></path>',
+  builder: '<path d="M15 4V2M15 10V8M11 6h2M17 6h2M4 20 14 10"></path>',
+  structure: '<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path>',
+  lessons: '<path d="m12 3 9 5-9 5-9-5z"></path><path d="m3 13 9 5 9-5"></path>',
+  activities: '<path d="M4 5h16v11H9l-5 4z"></path>',
+  grammar: '<path d="M10 3h4v3a2 2 0 1 0 4 0V3h3v7h-3a2 2 0 1 0 0 4h3v7h-7v-3a2 2 0 1 0-4 0v3H3v-7h3a2 2 0 1 0 0-4H3V3z"></path>',
+  materials: '<path d="M3 6h6l2 2h10v11H3z"></path>',
+  checklist: '<path d="M9 6h12M9 12h12M9 18h12"></path><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"></path>',
+  favorite: '<path d="m12 3 2.8 5.8 6.2.9-4.5 4.4 1 6.3L12 17.5 6.5 20.4l1-6.3L3 9.7l6.2-.9z"></path>',
+  translate: '<circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"></path>',
+  back: '<path d="M15 6l-6 6 6 6"></path>',
+};
+const svgIcon = (d, cls) => `<svg${cls ? ` class="${cls}"` : ''} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+
 function renderNav(){
-  const counts = { lessons: DB.lessons.length, activities: DB.activities.items.length, grammar: grammarLessons().length, materials: DB.materials.items.length, builder: Plans.list().length || null };
-  const html = Object.entries(Pages).map(([key, p]) => {
+  const counts = {
+    lessons: DB.lessons.length, activities: DB.activities.items.length, grammar: grammarLessons().length,
+    materials: DB.materials.items.length, builder: Plans.list().length || null,
+    checklist: DB.checklist.reduce((n, g) => n + g.items.length, 0),
+  };
+  const isActive = route => currentRoute === route || (route === 'builder' && currentRoute.indexOf('builder=') === 0);
+  const glItem = (route, key, label) => `<a class="gl-nav${isActive(route) ? ' active' : ''}" href="#/${route}">${svgIcon(NAV_ICONS[key])}<span class="grow">${esc(label)}</span>${counts[key] ? `<span class="cnt">${counts[key]}</span>` : ''}</a>`;
+  $('#nav').innerHTML = `
+    <a class="gl-logo" href="#/"><span class="gl-brand">YORK<span class="gl-bang">!</span></span><span class="gl-sub">Хаб пробных уроков</span></a>
+    ${glItem('', 'home', 'Главная')}
+    ${glItem('builder', 'builder', 'Конструктор урока')}
+    <span class="gl-sect">Библиотека</span>
+    ${glItem('structure', 'structure', 'Структура урока')}
+    ${glItem('lessons', 'lessons', 'Банк мини-уроков')}
+    ${glItem('activities', 'activities', 'Разговорные активности')}
+    ${glItem('grammar', 'grammar', 'Грамматика')}
+    ${glItem('materials', 'materials', 'Материалы')}
+    ${glItem('checklist', 'checklist', 'Чек-лист учителя')}
+    <div class="gl-div"></div>
+    <a class="gl-nav" href="#" id="navFav">${svgIcon(NAV_ICONS.favorite)}<span class="grow">Избранное</span></a>
+    <a class="gl-nav ru-toggle" href="#" data-ru-toggle>${svgIcon(NAV_ICONS.translate)}<span class="grow">Перевод</span><span class="gl-ru rt-short">RU вкл</span></a>
+    <a class="gl-nav muted2" href="teacher.html">${svgIcon(NAV_ICONS.back)}Кабинет учителя</a>`;
+  $('#navFav').onclick = e => { e.preventDefault(); filters.lessons.saved = true; filters.activities.saved = true; location.hash = '#/lessons'; };
+  setRu(ruOn());
+
+  const mobHtml = Object.entries(Pages).map(([key, p]) => {
     const route = key === 'home' ? '' : key;
     const active = currentRoute === route || (key === 'builder' && currentRoute.indexOf('builder=') === 0);
     return `<a class="nav-btn${active ? ' active' : ''}" href="#/${route}"><span class="ni">${p.icon}</span>${esc(p.title)}${counts[key] ? `<span class="nc">${counts[key]}</span>` : ''}</a>`;
   }).join('');
-  $('#nav').innerHTML = html;
-  $('#navMobile').innerHTML = html;
+  $('#navMobile').innerHTML = mobHtml;
   const act = $('#navMobile .active'); if (act) act.scrollIntoView({ block: 'nearest', inline: 'center' });
 }
 function route(){
@@ -1189,7 +1341,7 @@ document.addEventListener('click', e => {
     if (currentRoute === '' || filters.lessons.saved || filters.activities.saved) renderPage();
   }
 });
-document.querySelectorAll('[data-ru-toggle]').forEach(b => b.onclick = () => setRu(!ruOn()));
+document.addEventListener('click', e => { if (e.target.closest('[data-ru-toggle]')) { e.preventDefault(); setRu(!ruOn()); } });
 setRu(ruOn());
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#drawer').classList.contains('open')) closeDrawer(); });
 
@@ -2204,10 +2356,10 @@ function renderTodayWidget(){
   const items = CurrentTeacher.todaysTrials.map(l => {
     const time = new Date(l.lesson_date).toLocaleTimeString('ru-RU', { timeZone: tz, hour: '2-digit', minute: '2-digit' });
     const name = l.guest_name || (l.profiles && l.profiles.full_name) || 'Ученик';
-    return `<div class="yb-today-item"><span class="t">${esc(time)}</span><span class="n">🌱 ${esc(name)}</span>
-      <button class="yb-btn" data-quickplan="${esc(l.id)}" data-qname="${esc(name)}">+ Урок</button></div>`;
+    return `<div class="gl-today-item"><span class="t">${esc(time)}</span><span class="n">🌱 ${esc(name)}</span>
+      <button class="gl-today-add" data-quickplan="${esc(l.id)}" data-qname="${esc(name)}">+ Урок</button></div>`;
   }).join('');
-  return `<div class="yb yb-today" id="todayWidget"><span class="yb-today-lbl">Сегодня у вас</span><div class="yb-today-list">${items}</div></div>`;
+  return `<div class="gl-glass gl-today" id="todayWidget"><span class="gl-today-lbl">Сегодня у вас</span><div class="gl-today-list">${items}</div></div>`;
 }
 
 /* ======================= старт ======================= */
