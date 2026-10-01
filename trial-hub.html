@@ -1770,7 +1770,7 @@ PLAY.describePhoto = (a, root) => {
   let imgIdx = Math.floor(Math.random() * Math.max(imgs.length, 1));
   root.insertAdjacentHTML('beforeend', `<p class="big-q">Look at the photo. Describe everything you can see!<span class="ru">Посмотри на фото. Опиши всё, что видишь!</span></p>`);
   const img = document.createElement('img');
-  img.style.cssText = 'width:100%;max-height:420px;object-fit:cover;border-radius:18px;border:1.5px solid var(--line);display:block;margin-bottom:10px';
+  img.style.cssText = 'width:100%;max-height:70vh;object-fit:contain;background:var(--panel);border-radius:18px;border:1.5px solid var(--line);display:block;margin-bottom:10px';
   if (imgs.length) img.src = imgs[imgIdx];
   root.appendChild(img);
   const row = document.createElement('div'); row.className = 'play-row';
