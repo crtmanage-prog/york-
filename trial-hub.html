@@ -1046,6 +1046,8 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
 .live .lv-in{height:34px;border-radius:10px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);padding:0 10px;font:inherit;font-size:13px}
 .live .lv-pnav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;position:sticky;top:-28px;background:#fff;padding:6px 0;z-index:2}
 .live .lv-pslide{max-width:1000px}
+.show.embed{position:static;inset:auto;display:block;background:transparent;z-index:auto}
+.show.embed .show-body{padding:0;margin:0;max-width:none}
 .live .lv-pslide .bk-h2{font-family:Unbounded,sans-serif;font-size:clamp(26px,3.4vw,40px);margin:0 0 16px;line-height:1.15}
 .live .lv-pslide .bk-deco{max-width:none}
 .bk-url{display:block;font-size:.6em;font-weight:400;color:#5B6B0A;margin-top:4px;font-family:'Golos Text',sans-serif}
@@ -1122,7 +1124,6 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
       <span style="flex:1"></span>
       <span class="lv-time" id="liveClock">00:00</span>
       <span class="lv-total" id="liveTotal">/ 30:00</span>
-      <label class="lv-auto" title="Интерактивные активности (например, Describing pictures) сразу открывать на весь экран"><input type="checkbox" id="liveAuto"> Интерактив на весь экран</label>
       <button class="lv-end ru-toggle" data-ru-toggle><span class="rt">Перевод: вкл</span></button>
       <button class="lv-end" id="liveClose">Завершить урок</button>
     </div>
@@ -3372,7 +3373,6 @@ function openLive(plan){
   document.body.style.overflow = 'hidden';
   liveState.timer = setInterval(liveTick, 1000);
   liveTick();
-  const au = $('#liveAuto'); au.checked = autoShowOn(); au.onchange = () => store.set('york-hub-autoshow', au.checked);
   renderLive();
   liveAutoShow();
 }
@@ -3413,6 +3413,7 @@ function liveOpenShow(plan, b, item){
 }
 // при входе в блок с материалом сразу показываем экран ученика (учительская панель — под ним, по кнопке «К списку»)
 function liveAutoShow(){
+  return;   // интерактивы теперь встроены в сцену Live
   if (!liveState || !autoShowOn()) return;
   const b = liveState.plan.blocks[liveState.cur];
   const item = b && b.mode === 'slot' && b.itemId && byId[b.itemId];
@@ -3485,6 +3486,12 @@ function liveSlides(plan, b){
   }
   const item = b.itemId && byId[b.itemId];
   if (item && item.bank) { const it = itemAt(item, b.lvl || plan.student.level); return [{ label: 'Start', html: blockIntroHtml(b, it) }, ...it.sections.map((sc, i) => ({ label: sc.title, html: bankSlideHtml(it, sc, i) }))]; }
+  if (item && item.play) {   // интерактив старого формата (например, Describing pictures) встраиваем в сцену
+    liveState.nodes = liveState.nodes || {};
+    const key = b.id + ':' + item.id;
+    if (!liveState.nodes[key]) liveState.nodes[key] = lessonSteps(item);
+    return [{ label: 'Start', html: blockIntroHtml(b, { type: 'activity', title: item.title }) }, ...liveState.nodes[key].map(st => ({ label: st.label, node: st.node }))];
+  }
   return [];
 }
 
@@ -3499,7 +3506,7 @@ function renderLiveAside(plan, b, slides, sub){
   }
   const lvItem = item && item.bank ? itemAt(item, b.lvl || plan.student.level) : null;
   if (lvItem && item.adapt && !lvItem.atLevel) parts.push(`<span class="k">Адаптация по уровню</span><div class="bk-html">${item.adapt}</div>`);
-  if (item && item.bank) {
+  if (item && (item.bank || item.play)) {
     const d = INTRO_DEFAULTS[item.type] || INTRO_DEFAULTS.activity;
     parts.push(`<span class="k">Стартовый слайд</span><input id="liveIntroT" class="lv-in" placeholder="${esc(d[0])}" value="${esc(b.introTitle || '')}"><textarea id="liveIntroX" rows="2" placeholder="${esc(d[1])}">${esc(b.introText || '')}</textarea>`);
   }
@@ -3564,7 +3571,14 @@ function renderLive(){
   liveState.sub = Math.max(0, Math.min(liveState.sub || 0, Math.max(0, slides.length - 1)));
   const sub = liveState.sub;
   if (slides.length) {
-    body.innerHTML = `${slides.length > 1 ? `<div class="lv-pnav">${slides.map((x, i) => `<button class="stp${i === sub ? ' cur' : (i < sub ? ' done' : '')}" data-sub="${i}">${esc(x.label)}</button>`).join('')}</div>` : ''}<div class="lv-pslide">${slides[sub].html}</div>`;
+    const navHtml = slides.length > 1 ? `<div class="lv-pnav">${slides.map((x, i) => `<button class="stp${i === sub ? ' cur' : (i < sub ? ' done' : '')}" data-sub="${i}">${esc(x.label)}</button>`).join('')}</div>` : '';
+    if (slides[sub].node) {
+      body.innerHTML = `${navHtml}<div class="lv-pslide"><div class="show embed"><div class="show-body"></div></div></div>`;
+      const nd = slides[sub].node; nd.classList.add('cur');
+      body.querySelector('.show-body').appendChild(nd);
+    } else {
+      body.innerHTML = `${navHtml}<div class="lv-pslide">${slides[sub].html}</div>`;
+    }
     body.querySelectorAll('[data-sub]').forEach(x => x.onclick = () => { liveState.sub = +x.dataset.sub; renderLive(); });
     body.scrollTop = 0;
   } else {
