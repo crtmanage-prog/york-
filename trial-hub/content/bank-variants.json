@@ -1534,5 +1534,941 @@
     }
    ]
   }
+ },
+ "bk-s-introduce-yourself-naturally": {
+  "A2": {
+   "outcome": "Today I can introduce myself in a natural way.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Introducing yourself</b><br>originally · move · work as · study · be interested in · in my free time · a bit about me · look forward to · used to · these days</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Tell me about you</b></p><p>Расскажи о себе так, как рассказал бы новому знакомому.</p><p><b>Questions:</b></p><ul><li>Where are you from originally?</li><li>What do you do?</li><li>What are you interested in?</li><li>What do you do in your free time?</li></ul><p><b>Vocabulary:</b><br>originally · move · work as · study · be interested in · in my free time · a bit about me</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>A natural introduction has 4 parts</b></p><ul><li>Name and place: I'm Anna. I'm from Kazan, but I live in Ufa now.</li><li>Work or study: I work as a designer.</li><li>Interests: I'm interested in photography.</li><li>Something extra: In my free time I go hiking.</li></ul><p><b>Vocabulary:</b><br>originally · move · work as · study · be interested in · in my free time · a bit about me · look forward to</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Name → Place → Work / Study → Interests → Extra</b></p><p>I'm ... , I'm from ... .</p><p>I work as ... / I study ... .</p><p>I'm interested in ... . In my free time I ... .</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Put the parts in order</b></p><ol><li>I work as a teacher.</li><li>Hi, I'm Max.</li><li>In my free time I play guitar.</li><li>I'm from Samara, but I live in Moscow now.</li><li>I'm interested in music.</li></ol><p><b>Vocabulary:</b><br>originally · work as · be interested in · in my free time</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the introduction</b></p><ol><li>Hi, I'm ______ and I'm ______ Kazan. <i>(from)</i></li><li>I ______ as a manager. <i>(work)</i></li><li>I'm ______ in history. <i>(interested)</i></li><li>In my ______ time I go running. <i>(free)</i></li><li>I ______ in Ufa now, but I'm from Perm. <i>(live)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Introduce yourself in 40 seconds</b></p><p>Say who you are, where you are from, what you do and one interesting thing about you.</p><p>Use: <b>originally, work as, be interested in, these days</b>.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Make it natural</b></p><p>Tell me:<br>A bit about me: ______.<br>These days I ______.<br>I used to ______, but now I ______.</p><p>Then ask me: <b>What about you?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can introduce myself in a natural way.</b></p><p>say where I am from and where I live<br>talk about my work or studies<br>add one interesting detail</p><p><b>One last question:</b></p><p>What is one thing people don't know about you?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-finding-a-compromise": {
+  "A2": {
+   "outcome": "Today I can suggest a compromise and agree on a plan.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Agreeing together</b><br>compromise · prefer · suggest · instead · both · agree · choice · maybe · fair · together</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Different ideas</b></p><p>Поговорим о том, как договориться, если вы хотите разное.</p><p><b>Questions:</b></p><ul><li>Do you often agree with your friends?</li><li>Who chooses the film in your family?</li><li>What do you do when you want different things?</li><li>Is it easy for you to compromise?</li></ul><p><b>Vocabulary:</b><br>compromise · prefer · suggest · instead · both · agree · choice</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Ways to find a compromise</b></p><ul><li>I prefer the cinema, but we can go to a cafe first.</li><li>Why don't we do both?</li><li>How about Saturday instead?</li><li>That sounds fair.</li><li>OK, let's do it your way this time.</li></ul><p><b>Vocabulary:</b><br>compromise · prefer · suggest · instead · both · agree · choice · maybe</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>My idea → Your idea → Our idea</b></p><p>I'd like to ... / I prefer ... </p><p>How about ... ? / Why don't we ... ?</p><p>OK, that works for me. / That sounds fair.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best answer</b></p><ol><li>A: I want to go to the cinema. B: <b>Why don't we go to a cafe first? / I don't care.</b></li><li>A: Let's meet on Friday. B: I'm busy. <b>How about Saturday? / Never.</b></li><li>A: You choose this time. B: <b>That sounds fair. / No way.</b></li><li>A: I prefer pizza. B: I prefer sushi. A: <b>Maybe we can have both. / You are wrong.</b></li></ol><p><b>Vocabulary:</b><br>compromise · prefer · suggest · fair · instead</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the dialogue</b></p><ol><li>I ______ the sea, but you prefer the mountains. <i>(like)</i></li><li>How ______ a trip to a lake? <i>(about)</i></li><li>______ don't we choose together? <i>(Why)</i></li><li>That sounds ______. <i>(fair)</i></li><li>OK, let's do it ______ way this time. <i>(your)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: planning a weekend</b></p><p>You want to stay at home. Your partner wants to go out. Find a compromise.</p><ul><li>Say what you prefer.</li><li>Suggest something in the middle.</li><li>Agree on a plan.</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Our plan</b></p><p>Tell me about a time you compromised:<br>We wanted ______, but ______.<br>In the end, we ______.</p><p>Then ask: <b>What would you do?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can suggest a compromise and agree on a plan.</b></p><p>say what I prefer<br>suggest a middle way<br>agree politely</p><p><b>One last question:</b></p><p>When did you last compromise with someone?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-mini-debate": {
+  "A2": {
+   "outcome": "Today I can give an opinion with reasons and listen to another view.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Opinions</b><br>agree · disagree · opinion · reason · because · however · advantage · disadvantage · in my view · on the other hand</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Two sides</b></p><p>Поговорим и выскажем мнение, приведя причины.</p><p><b>Questions:</b></p><ul><li>Is it better to live in a city or a village?</li><li>Is it good to study online?</li><li>Do you prefer working at home or in an office?</li><li>Do you think children should have phones?</li></ul><p><b>Vocabulary:</b><br>agree · disagree · opinion · reason · because · however · advantage</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Give an opinion and a reason</b></p><ul><li>I think living in a city is better because there are more jobs.</li><li>In my opinion, online lessons are comfortable.</li><li>I agree, but ... / I disagree because ...</li><li>On the other hand, it can be expensive.</li><li>However, I prefer to study with a teacher.</li></ul><p><b>Vocabulary:</b><br>agree · disagree · opinion · reason · because · however · advantage · disadvantage</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Opinion → Reason → Other side</b></p><p>I think ... because ... .</p><p>On the other hand, ... .</p><p>I agree / I disagree because ... .</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct word</b></p><ol><li>I think cities are good <b>because / so</b> there are more jobs.</li><li>Villages are quiet. <b>However / Because</b>, there are fewer shops.</li><li>I <b>agree / opinion</b> with you.</li><li>In my <b>view / agree</b>, online lessons are good.</li><li>On the <b>other / second</b> hand, it is expensive.</li></ol><p><b>Vocabulary:</b><br>opinion · reason · however · advantage · disadvantage</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the opinion</b></p><ol><li>I ______ cities are noisy. <i>(think)</i></li><li>In my ______, books are better than films. <i>(opinion)</i></li><li>I disagree ______ it is expensive. <i>(because)</i></li><li>On the other ______, it is comfortable. <i>(hand)</i></li><li>I ______ with you. <i>(agree)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Mini-debate</b></p><p>Choose a side and give 2 reasons:</p><ul><li>Cats are better than dogs.</li><li>Summer is better than winter.</li><li>Learning online is better than learning in a classroom.</li></ul><p>Then listen to the other side and answer.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My view</b></p><p>Tell me:<br>I think ______ because ______.<br>On the other hand, ______.<br>In my opinion, ______.</p><p>Then ask: <b>Do you agree?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can give an opinion with reasons and listen to another view.</b></p><p>say what I think and why<br>agree and disagree politely<br>mention the other side</p><p><b>One last question:</b></p><p>What opinion did you change recently?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-simple-feedback": {
+  "A2": {
+   "outcome": "Today I can give simple and polite feedback.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Giving feedback</b><br>feedback · useful · clear · improve · mistake · good point · suggestion · confusing · better · try</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Good and better</b></p><p>Поговорим о том, как дать простой, вежливый отзыв.</p><p><b>Questions:</b></p><ul><li>Do you like getting feedback?</li><li>Who gives you feedback at work or school?</li><li>How do you feel when someone corrects you?</li><li>Do you give feedback to friends?</li></ul><p><b>Vocabulary:</b><br>feedback · useful · clear · improve · mistake · good point · suggestion</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Feedback: positive + suggestion</b></p><ul><li>I liked your presentation. It was clear and useful.</li><li>The first part was a bit confusing.</li><li>Next time, you could add an example.</li><li>It would be better if you spoke more slowly.</li><li>Good point!</li></ul><p><b>Vocabulary:</b><br>feedback · useful · clear · improve · mistake · good point · suggestion · confusing</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Positive → Problem → Suggestion</b></p><p>I liked ... because ... .</p><p>One thing that was a bit ... is ... .</p><p>Next time, you could ... .</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the polite sentence</b></p><ol><li><b>I liked your idea. / Your idea is bad.</b></li><li><b>Next time, you could add a photo. / You are wrong.</b></li><li><b>The end was a bit confusing. / It was terrible.</b></li><li><b>It would be better if you spoke slowly. / Speak slowly!</b></li></ol><p><b>Vocabulary:</b><br>feedback · clear · useful · confusing · suggestion</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the feedback</b></p><ol><li>I ______ your story. It was clear. <i>(like)</i></li><li>The beginning was a bit ______. <i>(confusing)</i></li><li>Next time, you ______ add an example. <i>(could)</i></li><li>It would be ______ if you spoke slowly. <i>(better)</i></li><li>That was a very ______ idea. <i>(useful)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Give feedback</b></p><p>Listen to a short talk by your teacher or friend (30 seconds) and give feedback:</p><ul><li>One thing you liked.</li><li>One thing that was unclear.</li><li>One suggestion.</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Feedback for me</b></p><p>Tell me about your work or lesson:<br>I liked ______.<br>A bit confusing was ______.<br>Next time, I could ______.</p><p>Then ask: <b>What do you think?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can give simple and polite feedback.</b></p><p>say what I liked<br>say what was unclear<br>give a suggestion</p><p><b>One last question:</b></p><p>What feedback was useful for you recently?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-would-you-rather": {
+  "A2": {
+   "outcome": "Today I can talk about choices and preferences.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Choices</b><br>would rather · prefer · choose · either · neither · dangerous · boring · expensive · adventure · comfortable</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Which one?</b></p><p>Поговорим о выборе: что ты предпочёл бы и почему.</p><p><b>Questions:</b></p><ul><li>Would you rather live in a big city or a small town?</li><li>Would you rather travel by plane or by train?</li><li>Would you rather have more time or more money?</li><li>Would you rather cook or eat in a cafe?</li></ul><p><b>Vocabulary:</b><br>would rather · prefer · choose · either · neither · dangerous · boring</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Would you rather ... or ... ?</b></p><ul><li>Would you rather stay at home or go out?</li><li>I'd rather stay at home because I'm tired.</li><li>I'd rather not travel by plane.</li><li>Neither. I'd rather ride a bike.</li><li>Either is fine for me.</li></ul><p><b>Vocabulary:</b><br>would rather · prefer · choose · either · neither · dangerous · boring · expensive</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>I'd rather + verb (+ than + verb)</b></p><p>I'd rather read than watch TV.</p><p><b>I'd rather not + verb</b></p><p>I'd rather not go out tonight.</p><p><b>Question</b></p><p>Would you rather ... or ... ?</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I'd rather <b>stay / to stay</b> at home.</li><li>Would you rather <b>go / going</b> by train or by bus?</li><li>I'd rather <b>not / no</b> go out tonight.</li><li>I'd rather read <b>than / that</b> watch TV.</li><li><b>Neither / Either</b>. I don't like both.</li></ol><p><b>Vocabulary:</b><br>would rather · prefer · choose · either · neither</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I'd ______ stay at home. <i>(rather)</i></li><li>Would you ______ cook or eat out? <i>(rather)</i></li><li>I'd rather ______ go out tonight. <i>(not)</i></li><li>I'd rather swim ______ run. <i>(than)</i></li><li>______ is OK. I don't mind. <i>(Either)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Would you rather?</b></p><p>Ask and answer. Give a reason:</p><ul><li>a big flat in the city or a small house in the country</li><li>a long holiday once a year or short trips often</li><li>a job you love or a job with a big salary</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My choices</b></p><p>Tell me:<br>I'd rather ______ than ______.<br>I'd rather not ______.<br>I'd choose ______ because ______.</p><p>Then ask: <b>Would you rather ... or ... ?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can talk about choices and preferences.</b></p><p>use would rather<br>give a reason for my choice<br>ask Would you rather...?</p><p><b>One last question:</b></p><p>Would you rather have more time or more money?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-ranking-things": {
+  "A2": {
+   "outcome": "Today I can put things in order and explain my choice.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Ranking</b><br>most · least · first · last · important · useful · number one · top · rank · because</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Top 3</b></p><p>Поговорим о том, что для тебя важнее, а что менее важно.</p><p><b>Questions:</b></p><ul><li>What is the most important thing in your life?</li><li>What is the most useful app on your phone?</li><li>What is the least interesting school subject?</li><li>What is your favourite season?</li></ul><p><b>Vocabulary:</b><br>most · least · first · last · important · useful · number one</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Ranking language</b></p><ul><li>For me, health is the most important thing.</li><li>Money is less important than family.</li><li>My number one is travelling.</li><li>In second place, I would put friends.</li><li>The least important is fame.</li></ul><p><b>Vocabulary:</b><br>most · least · first · last · important · useful · number one · top</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>the most / the least + adjective</b></p><p>the most important · the least useful</p><p><b>first / second / third / last</b></p><p>In first place ... , in second place ... .</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>Health is <b>the most / most</b> important thing.</li><li>Fame is <b>the least / least the</b> important.</li><li><b>In / On</b> first place I would put family.</li><li>Money is <b>less / least</b> important than friends.</li><li>My number <b>one / first</b> is travelling.</li></ol><p><b>Vocabulary:</b><br>most · least · important · useful · rank</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>Family is the ______ important thing for me. <i>(most)</i></li><li>Fame is the ______ important. <i>(least)</i></li><li>In ______ place, I would put health. <i>(first)</i></li><li>Money is ______ important than love. <i>(less)</i></li><li>My number ______ is travel. <i>(one)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Make a top 3</b></p><p>Put these in order and explain why:</p><ul><li>health · money · friends · free time · family</li><li>cooking · sport · music · reading · travelling</li></ul><p>Use <b>the most, the least, in first place</b>.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My ranking</b></p><p>Tell me:<br>For me, the most important is ______.<br>In second place I would put ______.<br>The least important is ______.</p><p>Then ask: <b>What is your number one?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can put things in order and explain my choice.</b></p><p>use the most and the least<br>use first, second, third<br>give a reason</p><p><b>One last question:</b></p><p>What is your number one in life now?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-getting-to-know-someone": {
+  "A2": {
+   "outcome": "Today I can ask and answer questions to know someone better.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Getting to know you</b><br>hometown · neighbourhood · job · hobby · favourite · how long · moved · grow up · siblings · since</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Ask me!</b></p><p>Поговорим и узнаем друг друга лучше.</p><p><b>Questions:</b></p><ul><li>Where did you grow up?</li><li>How long have you lived here?</li><li>Do you have brothers or sisters?</li><li>What do you do at the weekend?</li></ul><p><b>Vocabulary:</b><br>hometown · neighbourhood · job · hobby · favourite · how long · moved</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Questions to know someone</b></p><ul><li>Where are you from?</li><li>How long have you lived here?</li><li>What do you do?</li><li>What do you do in your free time?</li><li>Do you have any brothers or sisters?</li><li>What's your favourite ... ?</li></ul><p><b>Vocabulary:</b><br>hometown · neighbourhood · job · hobby · favourite · how long · moved · grow up</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Ask → Answer → Ask back</b></p><p>Where did you grow up? — I grew up in ... . And you?</p><p>How long have you lived here? — For ... years.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Match the question and the answer</b></p><ol><li>Where did you grow up?</li><li>How long have you lived here?</li><li>What do you do?</li><li>Do you have any siblings?</li><li>What's your favourite film?</li></ol><p><b>Answers:</b> I'm an engineer. · In a small town. · For five years. · Yes, a younger sister. · Titanic.</p><p><b>Vocabulary:</b><br>hometown · siblings · favourite · grow up · how long</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the questions</b></p><ol><li>Where ______ you grow up? <i>(did)</i></li><li>How ______ have you lived here? <i>(long)</i></li><li>What ______ you do in your free time? <i>(do)</i></li><li>______ you have any siblings? <i>(Do)</i></li><li>What's your ______ place in the city? <i>(favourite)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Interview</b></p><p>Ask your partner 6 questions. Follow up each answer with one more question:</p><ul><li>hometown</li><li>work or study</li><li>hobbies</li><li>family</li></ul><p><b>Follow up:</b> Really? / Why? / What was it like?</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My story</b></p><p>Tell me:<br>I grew up in ______.<br>I've lived here for ______.<br>In my free time I ______.</p><p>Then ask: <b>And you?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can ask and answer questions to know someone better.</b></p><p>ask about hometown and work<br>use How long...?<br>ask follow-up questions</p><p><b>One last question:</b></p><p>What would you like to ask me?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-everyday-opinions": {
+  "A2": {
+   "outcome": "Today I can say what I think about everyday topics.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Everyday opinions</b><br>think · believe · agree · probably · definitely · not sure · popular · useful · waste of time · overrated</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>What do you think?</b></p><p>Поговорим о повседневных вещах и выскажем мнение.</p><p><b>Questions:</b></p><ul><li>What do you think about social media?</li><li>Do you think public transport is good in your city?</li><li>Is it a good idea to learn English online?</li><li>What do you think about fast food?</li></ul><p><b>Vocabulary:</b><br>think · believe · agree · probably · definitely · not sure · popular</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Saying what you think</b></p><ul><li>I think social media is useful, but I use it too much.</li><li>I'm not sure, but I believe it is good.</li><li>It's definitely worth it.</li><li>I don't think it is a good idea.</li><li>Probably yes.</li></ul><p><b>Vocabulary:</b><br>think · believe · agree · probably · definitely · not sure · popular · useful</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>I think / I don't think + opinion</b></p><p>I think it's popular. · I don't think it's expensive.</p><p><b>Strength: definitely · probably · I'm not sure</b></p><p>It is definitely useful. · It is probably cheap.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best word</b></p><ol><li>I <b>think / thinking</b> it is useful.</li><li>I don't <b>think / believe not</b> it is a good idea.</li><li>It is <b>definitely / sure</b> worth it.</li><li>I'm not <b>sure / sorry</b>.</li><li>It is <b>probably / possible</b> expensive.</li></ol><p><b>Vocabulary:</b><br>think · believe · definitely · probably · useful</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the opinions</b></p><ol><li>I ______ cities are noisy. <i>(think)</i></li><li>I don't think it ______ expensive. <i>(is)</i></li><li>It is ______ useful. <i>(definitely)</i></li><li>I'm not ______. <i>(sure)</i></li><li>It is ______ a good idea. <i>(probably)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Say what you think</b></p><p>Give your opinion and one reason:</p><ul><li>social media</li><li>online lessons</li><li>fast food</li><li>public transport</li></ul><p>Use: <b>I think / I don't think / definitely / probably</b>.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My opinions</b></p><p>Tell me:<br>I think ______ is ______.<br>I don't think ______.<br>______ is definitely ______.</p><p>Then ask: <b>What do you think?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can say what I think about everyday topics.</b></p><p>say what I think and don't think<br>show how sure I am<br>give a short reason</p><p><b>One last question:</b></p><p>What do you think about learning English?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-first-meeting": {
+  "A2": {
+   "outcome": "Today I can meet someone new and introduce people.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Meeting for the first time</b><br>nice to meet you · pleasure · introduce · colleague · friend of mine · join · by the way · sounds great · we have met · welcome</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>First meeting</b></p><p>Поговорим о том, как вести себя при первой встрече.</p><p><b>Questions:</b></p><ul><li>How do you greet new people?</li><li>What do you say when you meet a colleague for the first time?</li><li>What questions do you ask?</li><li>Are you nervous when you meet new people?</li></ul><p><b>Vocabulary:</b><br>nice to meet you · pleasure · introduce · colleague · friend of mine · join · by the way</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Meeting someone new</b></p><ul><li>Hi, I'm Anna. Nice to meet you.</li><li>Let me introduce you to my colleague, Max.</li><li>Pleasure to meet you.</li><li>This is a friend of mine, Tom.</li><li>By the way, how do you know Anna?</li><li>Welcome! Please come in.</li></ul><p><b>Vocabulary:</b><br>nice to meet you · pleasure · introduce · colleague · friend of mine · join · by the way · sounds great</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Greet → Introduce → Small talk</b></p><p>Nice to meet you. / Pleasure to meet you.</p><p>Let me introduce you to ... / This is ... .</p><p>How do you know ... ? / By the way, ... .</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the right phrase</b></p><ol><li>Meeting someone: <b>Nice to meet you. / See you.</b></li><li>Introducing a friend: <b>This is my friend, Tom. / Who is it?</b></li><li>Welcoming a guest: <b>Welcome! / Goodbye.</b></li><li>Changing topic: <b>By the way, ... / Stop.</b></li></ol><p><b>Vocabulary:</b><br>introduce · colleague · pleasure · welcome · by the way</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the dialogue</b></p><ol><li>Hi, I'm Anna. Nice to ______ you. <i>(meet)</i></li><li>Let me ______ you to my colleague. <i>(introduce)</i></li><li>This is a ______ of mine, Tom. <i>(friend)</i></li><li>______ the way, how do you know her? <i>(By)</i></li><li>______ to our office! <i>(Welcome)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: a party</b></p><p>You are at a party. You know only one person. Introduce yourself, meet a new person and use small talk.</p><ul><li>Greet.</li><li>Introduce your friend.</li><li>Ask two questions.</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Meeting people</b></p><p>Tell me:<br>When I meet someone new, I usually ______.<br>The first question I ask is ______.<br>I feel ______ because ______.</p><p>Then ask: <b>How do you meet new people?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can meet someone new and introduce people.</b></p><p>greet and introduce myself<br>introduce someone else<br>start small talk</p><p><b>One last question:</b></p><p>How do you feel when you meet new people?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-plans-free-time": {
+  "A2": {
+   "outcome": "Today I can talk about my plans and invite someone.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Free time plans</b><br>plan · free time · weekend · going to · meet up · book · invite · relax · outdoors · at the moment</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>My weekend</b></p><p>Поговорим о планах на свободное время.</p><p><b>Questions:</b></p><ul><li>What are you going to do this weekend?</li><li>Do you plan your free time?</li><li>Who do you usually meet at the weekend?</li><li>What would you like to do next month?</li></ul><p><b>Vocabulary:</b><br>plan · free time · weekend · going to · meet up · book · invite</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Talking about plans</b></p><ul><li>I'm going to visit my parents on Saturday.</li><li>I'm meeting a friend at 5.</li><li>I want to relax and watch films.</li><li>Would you like to join me?</li><li>We're going to book a table.</li></ul><p><b>Vocabulary:</b><br>plan · free time · weekend · going to · meet up · book · invite · relax</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>going to + verb = plan</b></p><p>I'm going to cook dinner.</p><p><b>Present Continuous = fixed arrangement</b></p><p>I'm meeting Anna at 6.</p><p><b>invite</b></p><p>Would you like to ... ? / Do you want to ... ?</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I <b>am going to / go to</b> visit my parents on Saturday.</li><li>I <b>am meeting / meet</b> a friend at 5 tomorrow.</li><li>Would you like <b>to join / joining</b> me?</li><li>We <b>are going to book / going book</b> a table.</li><li>What <b>are you going / you are going</b> to do?</li></ol><p><b>Vocabulary:</b><br>plan · weekend · meet up · book · invite</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the plans</b></p><ol><li>I ______ going to relax on Sunday. <i>(am)</i></li><li>We're ______ at the cinema at 7. <i>(meeting)</i></li><li>Would you ______ to join us? <i>(like)</i></li><li>She is going ______ a book. <i>(to read)</i></li><li>What are you ______ to do tomorrow? <i>(going)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Make a plan together</b></p><p>Plan a free Saturday together:</p><ul><li>Where will you go?</li><li>What time will you meet?</li><li>What will you do?</li></ul><p>Use <b>going to, would you like to, how about</b>.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My free time</b></p><p>Tell me:<br>This weekend I'm going to ______.<br>On Sunday I'm meeting ______.<br>Next month I'd like to ______.</p><p>Then ask: <b>What are you going to do?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can talk about my plans and invite someone.</b></p><p>use going to for plans<br>use Present Continuous for arrangements<br>invite someone politely</p><p><b>One last question:</b></p><p>What are you going to do next weekend?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-at-the-hotel": {
+  "A2": {
+   "outcome": "Today I can check in and solve a simple problem at a hotel.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>At the hotel</b><br>reservation · check in · check out · double room · reception · available · extra · broken · air conditioning · noisy</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Hotel talk</b></p><p>Поговорим о том, что нужно сказать в отеле.</p><p><b>Questions:</b></p><ul><li>Have you stayed in a hotel recently?</li><li>What do you need when you check in?</li><li>What problems can happen in a hotel?</li><li>Do you prefer hotels or apartments?</li></ul><p><b>Vocabulary:</b><br>reservation · check in · check out · double room · reception · available · extra</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>At the hotel</b></p><ul><li>I have a reservation under the name Ivanova.</li><li>I'd like to check in, please.</li><li>Is breakfast included?</li><li>The air conditioning is broken.</li><li>Could we have an extra towel?</li><li>What time is check-out?</li></ul><p><b>Vocabulary:</b><br>reservation · check in · check out · double room · reception · available · extra · broken</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Check in → Ask → Problem → Check out</b></p><p>I have a reservation. / I'd like a double room.</p><p>Is ... included? / What time is ... ?</p><p>There is a problem with ... . It's broken / noisy.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best phrase</b></p><ol><li>At arrival: <b>I have a reservation. / I want a room now.</b></li><li>A broken thing: <b>The TV is broken. / The TV is break.</b></li><li>Politely: <b>Could we have an extra towel? / Give me a towel.</b></li><li>Time: <b>What time is check-out? / When you go?</b></li></ol><p><b>Vocabulary:</b><br>reservation · check in · double room · broken · extra</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the dialogue</b></p><ol><li>I have a ______ under the name Ivanova. <i>(reservation)</i></li><li>I'd like to ______ in, please. <i>(check)</i></li><li>Is breakfast ______? <i>(included)</i></li><li>The shower is ______. <i>(broken)</i></li><li>Could we have an ______ pillow? <i>(extra)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: hotel problems</b></p><p>You are at the hotel. Your room is noisy and the Wi-Fi does not work. Talk to reception.</p><ul><li>Explain the problem.</li><li>Ask for a solution.</li><li>Thank the receptionist.</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My hotel experience</b></p><p>Tell me:<br>The last time I stayed in a hotel, ______.<br>I like hotels with ______.<br>A problem I had was ______.</p><p>Then ask: <b>Do you like hotels?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can check in and solve a simple problem at a hotel.</b></p><p>check in and ask about services<br>describe a problem<br>ask politely for help</p><p><b>One last question:</b></p><p>What is the best hotel you have stayed in?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-about-people": {
+  "A2": {
+   "outcome": "Today I can describe a person: how they look and what they are like.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Describing people</b><br>appearance · personality · friendly · shy · funny · tall · slim · curly · looks like · reminds me of</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Who is it?</b></p><p>Поговорим и опишем людей: внешность и характер.</p><p><b>Questions:</b></p><ul><li>Who is the most interesting person you know?</li><li>What does your best friend look like?</li><li>Are you more like your mum or your dad?</li><li>What kind of people do you like?</li></ul><p><b>Vocabulary:</b><br>appearance · personality · friendly · shy · funny · tall · slim</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Describing a person</b></p><ul><li>She is tall and slim with curly hair.</li><li>He looks friendly.</li><li>She is a very funny person.</li><li>He is a bit shy, but kind.</li><li>She looks like her mother.</li><li>He reminds me of my brother.</li></ul><p><b>Vocabulary:</b><br>appearance · personality · friendly · shy · funny · tall · slim · curly</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Appearance: He / She is ... , has ... , looks ...</b></p><p>tall · slim · has curly hair · looks young</p><p><b>Personality: He / She is ...</b></p><p>friendly · shy · funny · kind</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct word</b></p><ol><li>She <b>is / has</b> tall.</li><li>He <b>has / is</b> curly hair.</li><li>She looks <b>like / as</b> her mother.</li><li>He is a bit <b>shy / shyly</b>.</li><li>He <b>reminds / remembers</b> me of my brother.</li></ol><p><b>Vocabulary:</b><br>appearance · personality · friendly · shy · funny</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the description</b></p><ol><li>My friend is ______ and slim. <i>(tall)</i></li><li>She ______ long dark hair. <i>(has)</i></li><li>He is very ______. We laugh a lot. <i>(funny)</i></li><li>She ______ like her mother. <i>(looks)</i></li><li>He is a bit ______, but he is kind. <i>(shy)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Describe a person</b></p><p>Describe someone to your partner. Your partner guesses who it is:</p><ul><li>a family member</li><li>a famous person</li><li>a colleague</li></ul><p>Say 5 sentences: appearance + personality.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Someone important to me</b></p><p>Tell me:<br>My ______ is tall / short and has ______ hair.<br>He / She is very ______.<br>He / She reminds me of ______.</p><p>Then ask: <b>Who is your favourite person?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can describe a person: how they look and what they are like.</b></p><p>describe appearance<br>describe personality<br>say who someone looks like</p><p><b>One last question:</b></p><p>Who is the most important person in your life?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-at-the-airport": {
+  "A2": {
+   "outcome": "Today I can manage the main situations at an airport.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>At the airport</b><br>check-in · boarding pass · gate · luggage · delay · departure · security · window seat · flight · passport control</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Airport</b></p><p>Поговорим о том, что нужно сказать и сделать в аэропорту.</p><p><b>Questions:</b></p><ul><li>Do you like flying?</li><li>What do you take in your hand luggage?</li><li>Have you ever missed a flight?</li><li>What do you do while you wait for a flight?</li></ul><p><b>Vocabulary:</b><br>check-in · boarding pass · gate · luggage · delay · departure · security</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>At the airport</b></p><ul><li>Where is the check-in desk?</li><li>Can I have a window seat, please?</li><li>Here is my passport and boarding pass.</li><li>My flight is delayed.</li><li>Which gate is it?</li><li>Is this my luggage?</li></ul><p><b>Vocabulary:</b><br>check-in · boarding pass · gate · luggage · delay · departure · security · window seat</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Check in → Security → Gate → Board</b></p><p>I'd like to check in. / Can I have a window seat?</p><p>Which gate is it? / What time is boarding?</p><p>My flight is delayed. / I've lost my luggage.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the right phrase</b></p><ol><li>At check-in: <b>Can I have a window seat? / Give me a seat.</b></li><li>Asking for the gate: <b>Which gate is it? / Where gate?</b></li><li>A problem: <b>My flight is delayed. / My flight is slow.</b></li><li>Documents: <b>Here is my passport. / Take your passport.</b></li></ol><p><b>Vocabulary:</b><br>check-in · boarding pass · gate · delay · luggage</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the dialogue</b></p><ol><li>Where is the ______ desk? <i>(check-in)</i></li><li>Here is my passport and ______ pass. <i>(boarding)</i></li><li>Which ______ is it? <i>(gate)</i></li><li>My flight is ______ for two hours. <i>(delayed)</i></li><li>Can I have a ______ seat, please? <i>(window)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: check-in</b></p><p>You are at the airport. Talk to the check-in agent. Then ask about a delayed flight.</p><ul><li>Show your documents.</li><li>Choose your seat.</li><li>Ask about the gate and the time.</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My flights</b></p><p>Tell me:<br>The last time I flew, I went to ______.<br>At the airport I always ______.<br>I prefer a ______ seat.</p><p>Then ask: <b>Do you like flying?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can manage the main situations at an airport.</b></p><p>check in and ask for a seat<br>ask about the gate and time<br>explain a simple problem</p><p><b>One last question:</b></p><p>What is your best airport memory?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-about-me": {
+  "A2": {
+   "outcome": "Today I can talk about my life: past, present and future.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>About me</b><br>routine · background · strength · goal · daily life · family · free time · used to · proud of · dream</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Tell about yourself</b></p><p>Расскажи о себе подробнее: жизнь, привычки, цели.</p><p><b>Questions:</b></p><ul><li>What is your daily routine?</li><li>What are you proud of?</li><li>What is your biggest goal?</li><li>What did you use to do as a child?</li></ul><p><b>Vocabulary:</b><br>routine · background · strength · goal · daily life · family · free time</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Talking about yourself</b></p><ul><li>I usually get up at 7 and go to work by bus.</li><li>I'm proud of my family.</li><li>My goal is to speak English fluently.</li><li>I used to play the piano.</li><li>My dream is to travel around the world.</li></ul><p><b>Vocabulary:</b><br>routine · background · strength · goal · daily life · family · free time · used to</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Present → Past → Future</b></p><p>Now: I work / live / study ... .</p><p>Past: I used to ... / I moved ... in 2019.</p><p>Future: I'm going to ... / My goal is ... .</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I usually <b>get up / getting up</b> at 7.</li><li>I <b>used to / use to</b> play the piano.</li><li>I'm proud <b>of / for</b> my family.</li><li>My goal <b>is / are</b> to speak English well.</li><li>My dream <b>is to / is</b> travel around the world.</li></ol><p><b>Vocabulary:</b><br>routine · proud of · goal · dream · used to</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I usually ______ up at 7. <i>(get)</i></li><li>I used ______ play football. <i>(to)</i></li><li>I'm ______ of my work. <i>(proud)</i></li><li>My ______ is to learn English. <i>(goal)</i></li><li>My ______ is to live by the sea. <i>(dream)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Talk about you for one minute</b></p><p>Say something about:</p><ul><li>your daily routine</li><li>your past</li><li>your goals</li></ul><p>Use <b>usually, used to, going to</b>.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My life</b></p><p>Tell me:<br>In the morning I usually ______.<br>As a child I used to ______.<br>In the future I'm going to ______.</p><p>Then ask: <b>What about you?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can talk about my life: past, present and future.</b></p><p>describe my routine<br>say what I used to do<br>talk about my goals</p><p><b>One last question:</b></p><p>What is your biggest dream?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-when-you-don-t-understand": {
+  "A2": {
+   "outcome": "Today I can ask for help when I don't understand.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Clarifying</b><br>repeat · slowly · mean · spell · explain · example · sorry · pardon · understand · again</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>I don't understand</b></p><p>Поговорим о том, что делать, если ты что-то не понял.</p><p><b>Questions:</b></p><ul><li>What do you do when you don't understand a word?</li><li>Do you ask people to repeat?</li><li>What is difficult for you in English?</li><li>Do you use a dictionary?</li></ul><p><b>Vocabulary:</b><br>repeat · slowly · mean · spell · explain · example · sorry</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>When you don't understand</b></p><ul><li>Sorry, could you repeat that, please?</li><li>Could you speak more slowly?</li><li>What does ... mean?</li><li>How do you spell it?</li><li>Could you give me an example?</li><li>Do you mean ... ?</li></ul><p><b>Vocabulary:</b><br>repeat · slowly · mean · spell · explain · example · sorry · pardon</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Say → Ask → Check</b></p><p>Sorry, I didn't catch that. / Could you repeat?</p><p>What does ... mean? / Could you explain?</p><p>Do you mean ... ? / Is that right?</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the polite phrase</b></p><ol><li><b>Could you repeat that, please? / What?</b></li><li><b>Could you speak more slowly? / Slowly!</b></li><li><b>What does this word mean? / I don't know it.</b></li><li><b>Do you mean tomorrow? / Tomorrow?</b></li></ol><p><b>Vocabulary:</b><br>repeat · slowly · mean · spell · explain</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>Could you ______ that, please? <i>(repeat)</i></li><li>Could you speak more ______? <i>(slowly)</i></li><li>What does \"deadline\" ______? <i>(mean)</i></li><li>How do you ______ it? <i>(spell)</i></li><li>Do you ______ next week? <i>(mean)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: a phone call</b></p><p>Your partner gives you an address and a time, quickly. You do not understand. Use clarifying phrases.</p><ul><li>Ask to repeat.</li><li>Ask to spell the street.</li><li>Check the time.</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My strategies</b></p><p>Tell me:<br>When I don't understand, I ______.<br>A difficult word for me is ______.<br>I usually ask ______.</p><p>Then ask: <b>What do you do?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can ask for help when I don't understand.</b></p><p>ask to repeat and slow down<br>ask what a word means<br>check that I understood</p><p><b>One last question:</b></p><p>What is the hardest thing to understand in English?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-ordering-food": {
+  "A2": {
+   "outcome": "Today I can order food and ask for the bill.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>In a restaurant</b><br>menu · starter · main course · dessert · bill · order · allergic · vegetarian · tip · recommend</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>At the restaurant</b></p><p>Поговорим о том, как заказывать еду в ресторане.</p><p><b>Questions:</b></p><ul><li>Do you often eat in restaurants?</li><li>What is your favourite dish?</li><li>Are you allergic to anything?</li><li>Do you leave a tip?</li></ul><p><b>Vocabulary:</b><br>menu · starter · main course · dessert · bill · order · allergic</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Ordering food</b></p><ul><li>Could we see the menu, please?</li><li>I'd like the soup for a starter.</li><li>What do you recommend?</li><li>I'm allergic to nuts.</li><li>Could we have the bill, please?</li><li>Is the tip included?</li></ul><p><b>Vocabulary:</b><br>menu · starter · main course · dessert · bill · order · allergic · vegetarian</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Table → Order → Problem → Bill</b></p><p>A table for two, please. / Could we see the menu?</p><p>I'd like ... . / What do you recommend?</p><p>Excuse me, this isn't what I ordered. / The bill, please.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best phrase</b></p><ol><li><b>I'd like the soup. / Give me soup.</b></li><li><b>Could we have the bill? / Money!</b></li><li><b>I'm allergic to nuts. / I hate nuts.</b></li><li><b>What do you recommend? / What is it?</b></li></ol><p><b>Vocabulary:</b><br>menu · starter · dessert · allergic · recommend</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the dialogue</b></p><ol><li>Could we see the ______, please? <i>(menu)</i></li><li>I'd ______ the chicken, please. <i>(like)</i></li><li>What do you ______? <i>(recommend)</i></li><li>I'm ______ to nuts. <i>(allergic)</i></li><li>Could we have the ______? <i>(bill)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: restaurant</b></p><p>You are at a restaurant with a friend. One of you is vegetarian. Order a starter, a main course and a dessert.</p><ul><li>Ask for recommendations.</li><li>Order.</li><li>Ask for the bill.</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My food</b></p><p>Tell me:<br>In a restaurant I usually order ______.<br>My favourite dish is ______.<br>I don't like ______ because ______.</p><p>Then ask: <b>What do you recommend?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can order food and ask for the bill.</b></p><p>order a starter, main course and dessert<br>ask for a recommendation<br>mention an allergy</p><p><b>One last question:</b></p><p>What is the best restaurant you know?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-meeting-someone-new": {
+  "A2": {
+   "outcome": "Today I can start a conversation with someone new.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>New people</b><br>introduce · where are you from · how long · job · live · visit · interesting · really · me too · in common</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>New people</b></p><p>Поговорим о том, как познакомиться и найти общие темы.</p><p><b>Questions:</b></p><ul><li>Do you like meeting new people?</li><li>What do you talk about with strangers?</li><li>Do you have friends from other countries?</li><li>What do you have in common with your friends?</li></ul><p><b>Vocabulary:</b><br>introduce · where are you from · how long · job · live · visit · interesting</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Starting a conversation</b></p><ul><li>Hi, I'm Max. I don't think we've met.</li><li>Are you here on holiday or for work?</li><li>How long are you staying?</li><li>Really? That's interesting!</li><li>Me too! We have a lot in common.</li></ul><p><b>Vocabulary:</b><br>introduce · where are you from · how long · job · live · visit · interesting · really</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Introduce → Ask → React → Share</b></p><p>Hi, I'm ... . / Where are you from?</p><p>Really? / That's interesting! / Me too!</p><p>I'm from ... . We have ... in common.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best reaction</b></p><ol><li>A: I love hiking. B: <b>Me too! / I don't know.</b></li><li>A: I'm from Italy. B: <b>Really? That's interesting! / OK.</b></li><li>A: I work in IT. B: <b>What do you do exactly? / Bye.</b></li><li>A: I'm here on holiday. B: <b>How long are you staying? / Why?</b></li></ol><p><b>Vocabulary:</b><br>introduce · in common · interesting · really · visit</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the conversation</b></p><ol><li>Hi, I'm Max. I don't think we've ______. <i>(met)</i></li><li>Where are you ______? <i>(from)</i></li><li>How ______ are you staying? <i>(long)</i></li><li>Really? That's ______! <i>(interesting)</i></li><li>Me ______! I love music too. <i>(too)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: a conference</b></p><p>You meet a new person at a conference. Start a conversation and find 2 things you have in common.</p><ul><li>Introduce yourself.</li><li>Ask 3 questions.</li><li>Find what you have in common.</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>New people in my life</b></p><p>Tell me:<br>The last person I met was ______.<br>We talked about ______.<br>We have ______ in common.</p><p>Then ask: <b>Who did you meet recently?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can start a conversation with someone new.</b></p><p>introduce myself<br>ask and react to answers<br>find things in common</p><p><b>One last question:</b></p><p>Who was the last interesting person you met?</p>"
+    }
+   ]
+  }
+ },
+ "bk-s-hobbies-interests": {
+  "A2": {
+   "outcome": "Today I can talk about my hobbies in detail.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Hobbies</b><br>hobby · interested in · keen on · collect · take up · join a club · how often · for years · relax · skill</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>My hobbies</b></p><p>Поговорим о хобби: что ты делаешь, как часто и почему.</p><p><b>Questions:</b></p><ul><li>What are your hobbies?</li><li>How often do you do it?</li><li>When did you take it up?</li><li>Would you like to try a new hobby?</li></ul><p><b>Vocabulary:</b><br>hobby · interested in · keen on · collect · take up · join a club · how often</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Talking about hobbies</b></p><ul><li>I'm keen on photography.</li><li>I take photos every weekend.</li><li>I took up running two years ago.</li><li>I've been collecting stamps for years.</li><li>It helps me relax.</li><li>I'd like to join a club.</li></ul><p><b>Vocabulary:</b><br>hobby · interested in · keen on · collect · take up · join a club · how often · for years</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Hobby → How often → How long → Why</b></p><p>I'm interested in / keen on ... .</p><p>I ... every week. / I took it up ... ago.</p><p>I like it because it helps me ... .</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I'm keen <b>on / in</b> photography.</li><li>I <b>took up / take up</b> running two years ago.</li><li>I've been collecting stamps <b>for / since</b> years.</li><li>I do yoga <b>every / each</b> morning.</li><li>It helps me <b>relax / to relaxing</b>.</li></ol><p><b>Vocabulary:</b><br>hobby · keen on · take up · collect · relax</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I'm ______ on cooking. <i>(keen)</i></li><li>I ______ up yoga last year. <i>(took)</i></li><li>I've been painting ______ three years. <i>(for)</i></li><li>How ______ do you play tennis? <i>(often)</i></li><li>It helps me ______. <i>(relax)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Interview about hobbies</b></p><p>Ask your partner:</p><ul><li>What's your hobby?</li><li>How often do you do it?</li><li>How long have you done it?</li><li>Why do you like it?</li></ul><p>Then swap roles.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My hobby</b></p><p>Tell me:<br>My hobby is ______.<br>I took it up ______ ago.<br>I like it because ______.</p><p>Then ask: <b>Would you like to try it?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can talk about my hobbies in detail.</b></p><p>say how often and how long<br>explain why I like it<br>ask about someone's hobby</p><p><b>One last question:</b></p><p>What new hobby would you like to try?</p>"
+    }
+   ]
+  }
  }
 }
