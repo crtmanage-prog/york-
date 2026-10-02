@@ -200,5 +200,525 @@
     }
    ]
   }
+ },
+ "bk-g-conditionals-without-formulas": {
+  "A0-A1": {
+   "outcome": "Today I can say what I do in different situations.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>If... then</b><br>rain · sun · umbrella · home · walk · park · tired · sleep · money · buy</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>What do you do?</b></p><p>Поговорим о том, что ты делаешь в разных ситуациях.</p><p><b>Questions:</b></p><ul><li>What do you do when it rains?</li><li>What do you do when you are tired?</li><li>Do you walk in the park when it is sunny?</li><li>What do you buy when you have money?</li></ul><p><b>Vocabulary:</b><br>rain · sun · umbrella · home · walk · park · tired</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>If + situation, I + action</b></p><p>Как сказать: если что-то случается, я делаю что-то:</p><ul><li>If it rains, I stay at home.</li><li>If it is sunny, I walk in the park.</li><li>If I am tired, I sleep.</li><li>If I have money, I buy a book.</li></ul><p><b>Vocabulary:</b><br>rain · sun · umbrella · home · walk · park · tired · sleep</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>If + situation, + I + verb</b></p><p>If it rains, I stay at home.<br>If I am tired, I sleep.</p><p><b>Question:</b></p><p>What do you do if it rains?</p><p><b>Remember:</b></p><p>If it rains, I stay at home. = I stay at home if it rains.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the ending</b></p><ol><li>If it rains, I <b>take an umbrella / take a sun</b>.</li><li>If I am tired, I <b>sleep / run</b>.</li><li>If it is sunny, I <b>walk / stay in bed</b> in the park.</li><li>If I have money, I <b>buy / sell</b> a book.</li></ol><p><b>Vocabulary:</b><br>rain · umbrella · tired · sleep · buy</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><p><b>Remember:</b><br><b>If + situation, I + action</b></p><ol><li>If it rains, I ______. <i>(stay)</i></li><li>If I am tired, I ______. <i>(sleep)</i></li><li>If it is sunny, I ______. <i>(walk)</i></li><li>If I have money, I ______. <i>(buy)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Ask and answer</b></p><p>Ask your partner:</p><ul><li>What do you do if it rains?</li><li>What do you do if you are tired?</li><li>What do you do if it is sunny?</li></ul><p>Answer: <b>If ______, I ______.</b></p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>If...</b></p><p>Tell me what you do:</p><p>If it rains, I ______.<br>If I am tired, I ______.<br>If it is sunny, I ______.</p><p>Then ask me: <b>What do you do if ______?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can say what I do in different situations.</b></p><p>say what I do if it rains<br>say what I do if I am tired<br>ask someone what they do</p><p><b>One last question:</b></p><p>What do you do if it is sunny?</p>"
+    }
+   ]
+  }
+ },
+ "bk-g-used-to": {
+  "A0-A1": {
+   "outcome": "Today I can talk about my past and now.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Before and now</b><br>child · small · school · toy · cartoon · play · live · friend · now · before</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Then or now?</b></p><p>Поговорим о том, что было раньше и что сейчас.</p><p><b>Questions:</b></p><ul><li>Where did you live when you were small?</li><li>What toys did you have?</li><li>What cartoons did you watch?</li><li>Do you watch them now?</li></ul><p><b>Vocabulary:</b><br>child · small · school · toy · cartoon · play · live</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>I used to + verb</b></p><p>Раньше я делал, а сейчас нет:</p><ul><li>I used to play with toys.</li><li>I used to watch cartoons.</li><li>I used to live in a small town.</li><li>I used to have a small bike.</li></ul><p><b>Vocabulary:</b><br>child · small · school · toy · cartoon · play · live · friend</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Before: I used to + verb</b></p><p>I used to play with toys.</p><p><b>Now: I + verb</b></p><p>Now I play games on my phone.</p><p><b>Remember:</b></p><p>used to + verb<br>Not: used to played</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Before or now?</b></p><ol><li>I <b>used to watch / watch</b> cartoons when I was small. (before)</li><li>I <b>play / used to play</b> games on my phone now. (now)</li><li>I <b>used to live / live</b> in a small town. (before)</li><li>Now I <b>work / used to work</b> in an office. (now)</li></ol><p><b>Vocabulary:</b><br>child · cartoon · toy · now · before</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><p><b>I used to + verb</b></p><ol><li>I used to ______ with toys. <i>(play)</i></li><li>I used to ______ cartoons. <i>(watch)</i></li><li>I used to ______ in a small town. <i>(live)</i></li><li>I used to ______ my friend every day. <i>(see)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Then → Now</b></p><p>Complete about you:<br>I used to ______, but now I ______.<br>I used to ______, but now I ______.</p><p><b>Extra:</b> ask your partner: Did you use to ______?</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My childhood</b></p><p>Tell me about 3 things.</p><p>Use:<br>I used to ______.<br>But now I ______.</p><p><b>Possible topics:</b></p><ul><li>toys</li><li>cartoons</li><li>school</li><li>friends</li></ul>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can talk about my past and now.</b></p><p>say what I used to do<br>say what I do now<br>compare before and now</p><p><b>One last question:</b></p><p>What did you use to do when you were small?</p>"
+    }
+   ]
+  }
+ },
+ "bk-g-modal-verbs": {
+  "A0-A1": {
+   "outcome": "Today I can say what I can and can’t do.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Can and must</b><br>swim · drive · cook · sing · speak · open · park · smoke · run · help</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>What can you do?</b></p><p>Поговорим о том, что ты умеешь и что нельзя.</p><p><b>Questions:</b></p><ul><li>Can you swim?</li><li>Can you cook?</li><li>Can you drive a car?</li><li>Can you speak English?</li></ul><p><b>Vocabulary:</b><br>swim · drive · cook · sing · speak · open · park</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>can / can’t</b></p><p>Умеешь или не умеешь:</p><ul><li>I can swim.</li><li>I can’t drive.</li><li>Can you cook?</li><li>Can I open the window?</li></ul><p><b>Signs:</b></p><ul><li>You must wear a seatbelt.</li><li>You mustn’t smoke here.</li></ul><p><b>Vocabulary:</b><br>swim · drive · cook · sing · speak · open · park · smoke</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>I can + verb</b></p><p>I can swim.<br>I can’t drive.</p><p><b>Can I + verb?</b></p><p>Can I open the window?</p><p><b>must / mustn’t</b></p><p>You must wear a seatbelt.<br>You mustn’t smoke.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Can or can’t?</b></p><ol><li>I <b>can / can’t</b> swim. (I swim every week)</li><li>I <b>can / can’t</b> drive. (I have no car)</li><li><b>Can / Must</b> you cook?</li><li>You <b>mustn’t / can</b> smoke here. (No smoking sign)</li></ol><p><b>Vocabulary:</b><br>swim · drive · cook · smoke</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><p><b>can / can’t / must / mustn’t</b></p><ol><li>I ______ speak English. <i>(yes)</i></li><li>I ______ drive a car. <i>(no)</i></li><li>You ______ park here. <i>(sign: No parking)</i></li><li>You ______ wear a seatbelt. <i>(sign)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Ask and answer</b></p><p>Choose a question:</p><ul><li>Can you swim?</li><li>Can you sing?</li><li>Can you cook pasta?</li><li>Can you speak two languages?</li></ul><p>Answer: <b>Yes, I can. / No, I can’t.</b></p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My can and can’t</b></p><p>Tell me:<br>I can ______.<br>I can’t ______.</p><p>Then ask: <b>Can you ______?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can say what I can and can’t do.</b></p><p>say what I can do<br>say what I can’t do<br>read simple signs: must / mustn’t</p><p><b>One last question:</b></p><p>What can you do very well?</p>"
+    }
+   ]
+  }
+ },
+ "bk-g-gerund-vs-infinitive": {
+  "A0-A1": {
+   "outcome": "Today I can say what I like and want.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Like and want</b><br>like · love · want · need · read · swim · dance · cook · watch · learn</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>What do you like?</b></p><p>Поговорим о том, что ты любишь делать и что хочешь.</p><p><b>Questions:</b></p><ul><li>What do you like doing?</li><li>Do you like reading?</li><li>What do you want to learn?</li><li>Do you want to travel?</li></ul><p><b>Vocabulary:</b><br>like · love · want · need · read · swim · dance</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>like + -ing / want + to + verb</b></p><ul><li>I like reading.</li><li>I love dancing.</li><li>I want to learn English.</li><li>I need to buy milk.</li></ul><p><b>Vocabulary:</b><br>like · love · want · need · read · swim · dance · cook</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>like / love + verb-ing</b></p><p>I like cooking.<br>I love swimming.</p><p><b>want / need + to + verb</b></p><p>I want to cook.<br>I need to study.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I like <b>reading / to read</b> books.</li><li>I want <b>to learn / learning</b> English.</li><li>I love <b>dancing / to dance</b>.</li><li>I need <b>to buy / buying</b> milk.</li></ol><p><b>Vocabulary:</b><br>like · want · read · learn · dance</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><p><b>like + -ing, want + to</b></p><ol><li>I like ______. <i>(watch) TV</i></li><li>I want ______. <i>(learn) English</i></li><li>I love ______. <i>(swim)</i></li><li>I need ______. <i>(buy) bread</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Ask and answer</b></p><ul><li>What do you like doing?</li><li>What do you want to learn?</li><li>What do you love doing?</li><li>What do you need to do today?</li></ul><p>Answer with: <b>I like ______. / I want to ______.</b></p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>About me</b></p><p>Tell me:<br>I like ______.<br>I love ______.<br>I want to ______.<br>I need to ______.</p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can say what I like and want.</b></p><p>say what I like doing<br>say what I want to do<br>ask someone about it</p><p><b>One last question:</b></p><p>What do you want to do this weekend?</p>"
+    }
+   ]
+  }
+ },
+ "bk-g-passive-voice": {
+  "A0-A1": {
+   "outcome": "Today I can say facts about things and places.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Things and places</b><br>make · speak · sell · open · close · coffee · car · phone · country · shop</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Where is it from?</b></p><p>Поговорим о вещах и местах: где что делают и где на каком языке говорят.</p><p><b>Questions:</b></p><ul><li>Where is coffee made?</li><li>What language is spoken in your country?</li><li>Where are cars made?</li><li>Is the shop open at 9?</li></ul><p><b>Vocabulary:</b><br>make · speak · sell · open · close · coffee · car</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>thing + is / are + V3</b></p><p>Действие не важно, важна вещь:</p><ul><li>Coffee is made in Brazil.</li><li>English is spoken in many countries.</li><li>Phones are sold in this shop.</li><li>The shop is open at 9.</li></ul><p><b>Vocabulary:</b><br>make · speak · sell · open · close · coffee · car · phone</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>thing + is / are + made / spoken / sold</b></p><p>Coffee is made in Brazil.<br>Phones are sold here.</p><p><b>Question:</b></p><p>Where is coffee made?</p><p><b>Remember:</b></p><p>is + one thing<br>are + many things</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Is or are?</b></p><ol><li>Coffee <b>is / are</b> made in Brazil.</li><li>Phones <b>is / are</b> sold in this shop.</li><li>English <b>is / are</b> spoken in many countries.</li><li>The shop <b>is / are</b> open at 9.</li></ol><p><b>Vocabulary:</b><br>coffee · phone · shop · country · open</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><p><b>is / are + made / spoken / sold</b></p><ol><li>Coffee ______ in Brazil. <i>(made)</i></li><li>English ______ in many countries. <i>(spoken)</i></li><li>Phones ______ in the shop. <i>(sold)</i></li><li>Cars ______ in Germany. <i>(made)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Facts about places</b></p><p>Choose a place and say 3 facts:</p><ul><li>My city</li><li>My country</li><li>A shop</li><li>A cafe</li></ul><p>Use: <b>______ is / are ______.</b></p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Facts about my city</b></p><p>Tell me:<br>English is spoken in ______.<br>Coffee is made in ______.<br>My city is ______.</p><p>Then ask: <b>Where is ______ made?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can say facts about things and places.</b></p><p>say where things are made<br>say what languages are spoken<br>ask a simple question</p><p><b>One last question:</b></p><p>Where is your phone made?</p>"
+    }
+   ]
+  }
+ },
+ "bk-g-stop-doing-vs-stop-to-do": {
+  "A0-A1": {
+   "outcome": "Today I can use stop in two simple ways.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Stop and rest</b><br>stop · talk · run · drink · look · eat · rest · phone · water · bus</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Do you stop?</b></p><p>Поговорим о том, когда ты останавливаешься.</p><p><b>Questions:</b></p><ul><li>Do you stop when you are tired?</li><li>Do you stop to drink water?</li><li>Do you stop talking in class?</li><li>Do you stop to look at your phone?</li></ul><p><b>Vocabulary:</b><br>stop · talk · run · drink · look · eat · rest</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>stop + -ing  /  stop to + verb</b></p><ul><li>She stops talking. (no more talking)</li><li>He stops running. (he rests)</li><li>He stops to drink water. (he drinks, then runs again)</li><li>I stop to look at my phone.</li></ul><p><b>Vocabulary:</b><br>stop · talk · run · drink · look · eat · rest · phone</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>stop + verb-ing</b></p><p>She stops talking.<br>= she doesn’t talk now</p><p><b>stop to + verb</b></p><p>He stops to drink water.<br>= he stops, then drinks</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the meaning</b></p><ol><li>She stops <b>talking / to talk</b>. (She is quiet now.)</li><li>He stops <b>running / to run</b>. (He rests.)</li><li>He stops <b>drinking / to drink</b> water. (He wants water.)</li><li>I stop <b>looking / to look</b> at my phone. (I read a message.)</li></ol><p><b>Vocabulary:</b><br>stop · talk · run · drink · look</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><p><b>stop + -ing / stop to + verb</b></p><ol><li>She stops ______. <i>(talk) She is quiet now.</i></li><li>He stops ______ water. <i>(drink) He is thirsty.</i></li><li>I stop ______ at the bus stop. <i>(wait)</i></li><li>They stop ______. <i>(run) They rest.</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>What happens?</b></p><p>Look at the situations and say one sentence:</p><ul><li>You are running. You are thirsty.</li><li>The teacher comes in. You are talking.</li><li>You are walking. You see a friend.</li></ul><p>Use <b>stop</b>.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My day</b></p><p>Tell me two things:<br>I stop ______-ing.<br>I stop to ______.</p><p>Then ask: <b>Do you stop to ______?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can use stop in two simple ways.</b></p><p>say I stop an action<br>say I stop to do something<br>ask a simple question</p><p><b>One last question:</b></p><p>What do you stop to do every day?</p>"
+    }
+   ]
+  }
+ },
+ "bk-g-nuance-with-modal-verbs": {
+  "A0-A1": {
+   "outcome": "Today I can ask politely and give simple advice.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Polite words</b><br>please · help · open · window · pen · borrow · sit · ask · advice · doctor</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Polite or not?</b></p><p>Поговорим о том, как вежливо просить и давать совет.</p><p><b>Questions:</b></p><ul><li>How do you ask for a pen?</li><li>How do you ask for help?</li><li>What do you say to a person who is ill?</li><li>Do you say please?</li></ul><p><b>Vocabulary:</b><br>please · help · open · window · pen · borrow · sit</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Asking politely</b></p><ul><li>Can I borrow your pen, please?</li><li>Could you help me, please?</li><li>May I sit here?</li><li>You should see a doctor.</li></ul><p><b>Vocabulary:</b><br>please · help · open · window · pen · borrow · sit · ask</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Can I...? → normal</b></p><p>Can I open the window?</p><p><b>Could you...? / May I...? → more polite</b></p><p>Could you help me, please?<br>May I sit here?</p><p><b>You should... → advice</b></p><p>You should drink water.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the polite phrase</b></p><ol><li>You want a pen: <b>Can I borrow a pen, please? / Give me a pen.</b></li><li>You need help: <b>Help! / Could you help me, please?</b></li><li>You want to sit: <b>May I sit here? / I sit here.</b></li><li>Your friend is ill: <b>You should see a doctor. / Doctor.</b></li></ol><p><b>Vocabulary:</b><br>please · help · borrow · sit · doctor</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the phrases</b></p><ol><li>______ I open the window, please?</li><li>______ you help me, please?</li><li>______ I sit here?</li><li>You ______ drink more water. <i>(advice)</i></li></ol><p><b>Words:</b> Can · Could · May · should</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play</b></p><p>Choose a situation:</p><ul><li>In class: you need a pen.</li><li>In a shop: you need help.</li><li>In a cafe: you want a seat.</li></ul><p>Ask politely and answer.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Polite me</b></p><p>Ask me three polite questions:<br>Can I ______?<br>Could you ______?<br>May I ______?</p><p>Then give me one piece of advice: <b>You should ______.</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can ask politely and give simple advice.</b></p><p>ask for things politely<br>ask for help<br>give simple advice</p><p><b>One last question:</b></p><p>How do you ask for help politely?</p>"
+    }
+   ]
+  }
+ },
+ "bk-g-remember-doing-or-remember-to-do": {
+  "A0-A1": {
+   "outcome": "Today I can remind someone and say what I remember.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Remember and forget</b><br>remember · forget · call · buy · homework · key · phone · milk · message · mother</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Do you remember?</b></p><p>Поговорим о том, что ты помнишь и о чём нужно не забыть.</p><p><b>Questions:</b></p><ul><li>Do you remember your first teacher?</li><li>Do you remember your keys every morning?</li><li>Do you remember to do homework?</li><li>Do you remember to call your mother?</li></ul><p><b>Vocabulary:</b><br>remember · forget · call · buy · homework · key · phone</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Remember to + verb</b></p><p>Не забудь сделать:</p><ul><li>Remember to call me.</li><li>Remember to buy milk.</li><li>Remember to take your keys.</li></ul><p><b>I remember + thing</b></p><ul><li>I remember my first teacher.</li><li>I remember my school.</li></ul><p><b>Vocabulary:</b><br>remember · forget · call · buy · homework · key · phone · milk</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Remember to + verb → do it later</b></p><p>Remember to buy milk.</p><p><b>I remember + thing → a memory</b></p><p>I remember my first school.</p><p><b>Don’t forget to + verb</b></p><p>Don’t forget to call me.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct phrase</b></p><ol><li><b>Remember to call / Remember calling</b> your mother.</li><li><b>I remember / I remember to</b> my first school.</li><li><b>Don’t forget to buy / Don’t forget buying</b> milk.</li><li><b>Remember to take / Remember taking</b> your keys.</li></ol><p><b>Vocabulary:</b><br>remember · forget · call · buy · keys</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>Remember ______ me. <i>(call)</i></li><li>Remember ______ milk. <i>(buy)</i></li><li>Don’t forget ______ your homework. <i>(do)</i></li><li>I remember my ______. <i>(first teacher)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Reminders</b></p><p>Give your partner three reminders:<br>Remember to ______.<br>Remember to ______.<br>Don’t forget to ______.</p><p>Then say one memory: <b>I remember ______.</b></p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Remember me</b></p><p>Tell me:<br>I remember ______.<br>Remember to ______ tomorrow.</p><p>Then ask: <b>Do you remember to ______?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can remind someone and say what I remember.</b></p><p>say remember to + verb<br>say don’t forget to + verb<br>say a simple memory</p><p><b>One last question:</b></p><p>What do you need to remember to do tomorrow?</p>"
+    }
+   ]
+  }
+ },
+ "bk-g-wish-if-only": {
+  "A0-A1": {
+   "outcome": "Today I can say what I wish I had.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Dreams and wishes</b><br>dog · car · house · time · money · bigger · different · want · have · wish</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>What do you want?</b></p><p>Поговорим о том, чего у тебя нет, но ты хотел бы.</p><p><b>Questions:</b></p><ul><li>Do you have a dog?</li><li>Do you want a bigger house?</li><li>Do you have a car?</li><li>What do you want but don’t have?</li></ul><p><b>Vocabulary:</b><br>dog · car · house · time · money · bigger · different</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>I wish I had...</b></p><p>У меня нет — я хотел бы, чтобы было:</p><ul><li>I don’t have a dog. → I wish I had a dog.</li><li>I don’t have a car. → I wish I had a car.</li><li>I don’t have much time. → I wish I had more time.</li></ul><p><b>Vocabulary:</b><br>dog · car · house · time · money · bigger · different · want</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>I don’t have + thing</b></p><p>I don’t have a dog.</p><p><b>→ I wish I had + thing</b></p><p>I wish I had a dog.</p><p><b>Remember:</b></p><p>I wish I had (not: I wish I have)</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I don’t have a dog. → I wish I <b>had / have</b> a dog.</li><li>I don’t have a car. → I wish I <b>had / have</b> a car.</li><li>I don’t have time. → I wish I <b>had / have</b> more time.</li><li>I don’t have money. → I wish I <b>had / have</b> more money.</li></ol><p><b>Vocabulary:</b><br>dog · car · time · money · wish</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the wishes</b></p><ol><li>I don’t have a dog. → I wish I ______ a dog.</li><li>I don’t have a car. → I wish I ______ a car.</li><li>I have a small house. → I wish I ______ a bigger house.</li><li>I don’t have free time. → I wish I ______ more free time.</li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>My wishes</b></p><p>Think of 3 things you don’t have.<br>Say:<br>I don’t have ______. I wish I had ______.</p><p>Then ask your partner: <b>What do you wish you had?</b></p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Wish</b></p><p>Tell me three wishes:<br>I wish I had ______.<br>I wish I had ______.<br>I wish I had ______.</p><p>Why do you want it?</p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can say what I wish I had.</b></p><p>say what I don’t have<br>say I wish I had...<br>ask someone about wishes</p><p><b>One last question:</b></p><p>What do you wish you had?</p>"
+    }
+   ]
+  }
+ },
+ "bk-g-remember-doing-vs-remember-to-do": {
+  "A0-A1": {
+   "outcome": "Today I can talk about memories and reminders.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Birthday and reminders</b><br>birthday · present · party · friend · school · first · message · card · call · visit</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Memories and reminders</b></p><p>Поговорим о праздниках и важных делах.</p><p><b>Questions:</b></p><ul><li>Do you remember your last birthday?</li><li>Do you remember to send birthday cards?</li><li>Do you remember your first day at school?</li><li>What do you remember to do every day?</li></ul><p><b>Vocabulary:</b><br>birthday · present · party · friend · school · first · message</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>I remember + thing / Remember to + verb</b></p><ul><li>I remember my last birthday.</li><li>I remember my first day at school.</li><li>Remember to send a card.</li><li>Remember to call your friend.</li></ul><p><b>Vocabulary:</b><br>birthday · present · party · friend · school · first · message · card</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>I remember + thing</b></p><p>I remember my birthday party.</p><p><b>Remember to + verb</b></p><p>Remember to send a card.</p><p><b>Remember:</b></p><p>thing → memory<br>to + verb → don’t forget</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Memory or reminder?</b></p><ol><li>I remember my <b>birthday party / to send a card</b>. (a memory)</li><li>Remember <b>to call / calling</b> your friend. (a reminder)</li><li>I remember my <b>first day at school / to go</b>. (a memory)</li><li>Remember <b>to buy / buying</b> a present. (a reminder)</li></ol><p><b>Vocabulary:</b><br>birthday · present · party · card · call</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I remember my ______. <i>(birthday party)</i></li><li>Remember ______ a card. <i>(send)</i></li><li>Remember ______ a present. <i>(buy)</i></li><li>I remember my ______. <i>(first day at school)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Two ideas</b></p><p>Say one memory and one reminder:<br>I remember ______.<br>Remember to ______.</p><p>Then ask your partner: <b>What do you remember?</b></p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Birthday talk</b></p><p>Tell me about a birthday:<br>I remember ______.<br>I remember my ______.</p><p>Then give me one reminder: <b>Remember to ______.</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can talk about memories and reminders.</b></p><p>say a simple memory<br>give a simple reminder<br>ask what someone remembers</p><p><b>One last question:</b></p><p>What do you remember about your last birthday?</p>"
+    }
+   ]
+  }
  }
 }
