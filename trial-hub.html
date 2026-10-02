@@ -3430,6 +3430,9 @@ function gotoBlock(i){
 }
 
 /* ---------- Сцена урока = то, что видит ученик ---------- */
+// показывать ли живой тестовый кабинет в Cabinet Preview: по умолчанию — да, если в этом браузере уже выполнен вход для предпросмотра
+const cabinetPreviewHasLogin = () => { try { return !!localStorage.getItem('york-cabinet-preview'); } catch(e){ return false; } };
+const cabinetLiveOn = () => { const v = store.get('york-hub-cabinet-live', null); return v === null ? cabinetPreviewHasLogin() : !!v; };
 const ruSp = t => `<span class="ru">${esc(t)}</span>`;
 const firstWord = n => String(n || '').trim().split(/\s+/)[0] || '';
 function presCards(items){
@@ -3482,7 +3485,7 @@ function liveSlides(plan, b){
     return [{ label: 'Next Steps', html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">What’s next?${ruSp('Что дальше?')}</h3><div class="bk-cards">${NEXT_LINKS.map((l, i) => `<div class="bk-card"><span class="bk-ct">${esc(en[i] || l.label)}${ruSp(ruT[i] || l.hint)}<span class="bk-url">${esc(l.url.replace('https://', ''))}</span></span></div>`).join('')}</div></div>` }];
   }
   if (b.mode === 'text') {
-    if (b.key === 'cabinet' && store.get('york-hub-cabinet-live', false)) {
+    if (b.key === 'cabinet' && cabinetLiveOn()) {
       return [{ label: 'Cabinet', html: slideKick(b.title, 'тестовый кабинет') + `<iframe class="cab-frame" src="cabinet.html?preview=1" title="Личный кабинет ученика"></iframe>` }];
     }
     if (b.key === 'cabinet') return [{ label: 'Cabinet', html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">Your personal cabinet${ruSp('Твой личный кабинет')}</h3>${presCards([['Your lessons schedule', 'Расписание твоих занятий'], ['Homework', 'Домашнее задание'], ['Materials', 'Материалы'], ['Your progress', 'Твой прогресс'], ['Chat with your teacher', 'Связь с преподавателем']])}</div>` }];
@@ -3515,7 +3518,7 @@ function renderLiveAside(plan, b, slides, sub){
     parts.push(`<span class="k">Стартовый слайд</span><input id="liveIntroT" class="lv-in" placeholder="${esc(d[0])}" value="${esc(b.introTitle || '')}"><textarea id="liveIntroX" rows="2" placeholder="${esc(d[1])}">${esc(b.introText || '')}</textarea>`);
   }
   if (b.key === 'cabinet') {
-    const on = store.get('york-hub-cabinet-live', false);
+    const on = cabinetLiveOn();
     parts.push(`<span class="k">Реальный кабинет</span><label class="lv-auto" style="font-size:13px"><input type="checkbox" id="liveCabLive" ${on ? 'checked' : ''}> Показывать тестовый кабинет</label>
       <p class="ws-hint" style="margin:0">Войдите один раз под тестовым учеником (например, «Екатерина Тест»), и вход сохранится только для предпросмотра.</p>
       <button class="ws-ghost" id="liveCabOpen" style="height:34px">Войти / открыть в окне</button>
