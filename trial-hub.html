@@ -3462,7 +3462,7 @@ function demoCabinetCard(){
     <summary>
       <span class="ttl">Демо-кабинет</span>
       <span class="st ${ok ? 'ok' : 'warn'}">${ok ? 'Вход выполнен' : 'Нужен вход'}</span>
-      <a class="ws-cta sm" href="cabinet.html?preview=1" target="_blank" rel="noopener">Войти</a>
+      ${ok ? '' : '<a class="ws-cta sm" href="cabinet.html?preview=1" target="_blank" rel="noopener">Войти</a>'}
       <span class="chev">${ic('arrow', 14)}</span>
     </summary>
     <p class="ws-hint">В блоке Cabinet Preview ученик увидит настоящий кабинет под демо-аккаунтом (только просмотр). Войдите один раз по кнопке «Войти», дальше кабинет откроется сразу.</p>
@@ -3478,7 +3478,7 @@ function bindDemoCabinetCard(root, redraw){
   const login = root.querySelector('#cabLogin'); if (!login) return;
   const card = root.querySelector('#cabCard');
   card.addEventListener('toggle', () => store.set('york-hub-cabcard-open', card.open));
-  card.querySelector('summary a').onclick = e => e.stopPropagation();
+  const lg = card.querySelector('summary a'); if (lg) lg.onclick = e => e.stopPropagation();
   const pass = root.querySelector('#cabPass'), auto = root.querySelector('#cabAuto');
   const save = () => store.set(DEMO_CRED_KEY, { login: login.value.trim(), pass: pass.value, auto: auto.checked });
   login.oninput = save; pass.oninput = save; auto.onchange = save;
