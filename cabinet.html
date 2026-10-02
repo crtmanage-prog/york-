@@ -1384,6 +1384,14 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
       <h2 class="panel-title">Мы на связи</h2>
       <div class="contact-list">
+        <a class="contact-row" id="supportTeacherRow" href="https://t.me/thearbeiter01" target="_blank" rel="noopener" style="display:none;">
+          <span class="contact-ic">👩‍🏫</span>
+          <span class="contact-text">
+            <span class="contact-title">Написать преподавателю</span>
+            <span class="contact-sub" id="supportTeacherSub">Вопросы по урокам и домашке</span>
+          </span>
+          <span class="contact-arrow">→</span>
+        </a>
         <a class="contact-row" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">
           <span class="contact-ic">🎓</span>
           <span class="contact-text">
@@ -1988,6 +1996,18 @@ async function loadTeacherContact(){
     if (sideSub) sideSub.textContent = 'написать в Telegram';
   } else if (sideSub){
     sideSub.textContent = 'связь через менеджера';
+  }
+  const supRow = document.getElementById('supportTeacherRow');
+  if (supRow){
+    supRow.style.display = '';
+    const first = (teacherFullName || '').trim().split(/\s+/)[0];
+    const supSub = document.getElementById('supportTeacherSub');
+    if (teacherContactTelegram){
+      supRow.href = `https://t.me/${String(teacherContactTelegram).replace('@', '')}`;
+      if (supSub) supSub.textContent = (first ? first + ' · ' : '') + 'вопросы по урокам и домашке';
+    } else if (supSub){
+      supSub.textContent = (first ? first + ' · ' : '') + 'через менеджера';
+    }
   }
   const sideNameEl = document.getElementById('sideTeacherName');
   if (sideNameEl && teacherFullName) sideNameEl.textContent = teacherFullName;
