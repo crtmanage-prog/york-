@@ -1060,6 +1060,12 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
 .ws-cabcard .ws-check-line{display:flex;gap:8px;align-items:center;font-size:13px}
 .ws-cabcard .acts{display:flex;gap:10px;flex-wrap:wrap}
 /* --- сцена Live: слайды для ученика --- */
+.live .lv-pslide.full{max-width:none}
+.cab-top{display:flex;align-items:center;gap:10px}
+.cab-top .bk-kicker{margin:0 0 12px}
+.live.wide aside.lv-side{display:none}
+.live.wide .lv-pnav{display:none}
+.live.wide .cab-frame{height:calc(100vh - 260px)}
 .cab-frame{width:100%;height:calc(100vh - 330px);min-height:420px;border:1px solid rgba(17,18,14,.12);border-radius:16px;background:#fff}
 .intro-slide .bk-title.big{font-size:clamp(40px,6vw,76px);line-height:1.1}
 .intro-slide .bk-text{font-size:clamp(20px,2.6vw,32px)}
@@ -3444,6 +3450,7 @@ function gotoBlock(i){
   const { plan } = liveState;
   if (i < 0) return;
   if (i >= plan.blocks.length) { endLive(); return; }
+  live.classList.remove('wide');
   liveState.cur = i; liveState.sub = 0; liveState.blockStart = Date.now();
   renderLive();
   liveAutoShow();
@@ -3544,7 +3551,7 @@ function liveSlides(plan, b){
   }
   if (b.mode === 'text') {
     if (b.key === 'cabinet' && cabinetLiveOn()) {
-      return [{ label: 'Cabinet', html: slideKick(b.title, 'тестовый кабинет') + `<iframe class="cab-frame" src="cabinet.html?preview=1" title="Личный кабинет ученика"></iframe>` }];
+      return [{ label: 'Cabinet', full: true, html: `<div class="cab-top">${slideKick(b.title, 'тестовый кабинет')}<button class="ws-ghost" id="cabWide" type="button" style="height:32px;margin-left:auto">Развернуть на весь экран</button></div><iframe class="cab-frame" src="cabinet.html?preview=1" title="Личный кабинет ученика"></iframe>` }];
     }
     if (b.key === 'cabinet') return [{ label: 'Cabinet', html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">Your personal cabinet${ruSp('Твой личный кабинет')}</h3>${presCards([['Your lessons schedule', 'Расписание твоих занятий'], ['Homework', 'Домашнее задание'], ['Materials', 'Материалы'], ['Your progress', 'Твой прогресс'], ['Chat with your teacher', 'Связь с преподавателем']])}</div>` }];
     return [{ label: b.title, html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">${esc(b.title)}</h3>${presCards((b.questions || []).map(q => [q, (DB.translations && DB.translations[normTxt(q)]) || '']))}</div>` }];
@@ -3661,7 +3668,9 @@ function renderLive(){
       const nd = slides[sub].node; nd.classList.add('cur');
       body.querySelector('.show-body').appendChild(nd);
     } else {
-      body.innerHTML = `${navHtml}<div class="lv-pslide">${slides[sub].html}</div>`;
+      body.innerHTML = `${navHtml}<div class="lv-pslide${slides[sub].full ? ' full' : ''}">${slides[sub].html}</div>`;
+      const cw = body.querySelector('#cabWide');
+      if (cw) cw.onclick = () => { const w = live.classList.toggle('wide'); cw.textContent = w ? 'Свернуть' : 'Развернуть на весь экран'; };
     }
     body.querySelectorAll('[data-sub]').forEach(x => x.onclick = () => { liveState.sub = +x.dataset.sub; renderLive(); });
     body.scrollTop = 0;
