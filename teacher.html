@@ -1305,10 +1305,52 @@ function setupTabs(){
 }
 
 /* ---------- STUDENTS ---------- */
+/* ---------- связь с учеником: Telegram + телефон за «глазом» ---------- */
+function attrEsc(v){ return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function tgHandle(v){
+  const s = String(v || '').trim();
+  if (!s || /^\+?\d[\d\s()\-]{6,}$/.test(s)) return null;
+  const m = s.match(/(?:t\.me\/|@)([A-Za-z0-9_]{4,32})/) || s.match(/^([A-Za-z0-9_]{4,32})$/);
+  return m ? m[1] : null;
+}
+function phoneOf(v){
+  const m = String(v || '').match(/\+?\d[\d\s()\-]{6,}\d/);
+  return m ? { text: m[0].trim(), tel: m[0].replace(/[^\d+]/g, '') } : null;
+}
+function contactOf(l){
+  if (l.is_trial) {
+    const raw = l.guest_contact || '';
+    return { tg: tgHandle(l.contact_telegram) || tgHandle(raw), phone: phoneOf(l.contact_phone) || phoneOf(raw) };
+  }
+  const p = l.profiles || {};
+  return { tg: tgHandle(p.contact_telegram), phone: phoneOf(p.contact_phone) };
+}
+function phoneWrapHtml(phone, shown){
+  if (!phone) return '';
+  const inner = shown
+    ? `<a class="btn btn-ghost btn-sm" href="tel:${attrEsc(phone.tel)}">📞 ${attrEsc(phone.text)}</a><button class="btn btn-ghost btn-sm" onclick="togglePhone(this)" title="Скрыть номер">🙈</button>`
+    : `<button class="btn btn-ghost btn-sm" onclick="togglePhone(this)" title="Показать номер телефона">👁 Телефон</button>`;
+  return `<span class="phone-wrap" data-tel="${attrEsc(phone.tel)}" data-text="${attrEsc(phone.text)}" style="display:inline-flex; gap:6px; align-items:center;">${inner}</span>`;
+}
+function togglePhone(btn){
+  const wrap = btn.closest('.phone-wrap');
+  const phone = { tel: wrap.dataset.tel, text: wrap.dataset.text };
+  const willShow = !wrap.querySelector('a');
+  wrap.innerHTML = phoneWrapHtml(phone, willShow).replace(/^<span[^>]*>|<\/span>$/g, '');
+  clearTimeout(wrap._hideTimer);
+  if (willShow) wrap._hideTimer = setTimeout(() => { wrap.innerHTML = phoneWrapHtml(phone, false).replace(/^<span[^>]*>|<\/span>$/g, ''); }, 20000);
+}
+function contactButtonsHtml(c){
+  const out = [];
+  if (c.tg) out.push(`<a class="btn btn-ghost btn-sm" href="https://t.me/${attrEsc(c.tg)}" target="_blank" rel="noopener">Telegram</a>`);
+  const ph = phoneWrapHtml(c.phone, false);
+  if (ph) out.push(ph);
+  return out.join(' ');
+}
+function lessonContactButtons(l){ return contactButtonsHtml(contactOf(l)); }
+
 function studentContactButtons(s){
-  const btns = [];
-  if (s.contact_telegram) btns.push(`<a class="btn btn-ghost btn-sm" href="https://t.me/${String(s.contact_telegram).replace('@','')}" target="_blank" rel="noopener">Telegram</a>`);
-  return btns.join(' ');
+  return contactButtonsHtml({ tg: tgHandle(s.contact_telegram), phone: phoneOf(s.contact_phone) });
 }
 
 function renderStudentsList(filterText){
@@ -1990,7 +2032,7 @@ async function saveStudentProfile(){
 
 /* ---------- LESSONS ---------- */
 async function loadLessons(){
-  const { data: lessons } = await supabase.from('lessons').select('*, profiles!lessons_student_id_fkey(full_name)')
+  const { data: lessons } = await supabase.from('lessons').select('*, profiles!lessons_student_id_fkey(full_name, contact_telegram, contact_phone)')
     .eq('teacher_id', currentUser.id).order('lesson_date', { ascending:true });
 
   const list = lessons || [];
@@ -2256,7 +2298,8 @@ function renderTodayAgenda(todaysAllLessons){
         <div class="agenda-sub">${l.topic || (l.is_trial ? 'Пробный урок' : 'Занятие')}</div>
         ${l.admin_note ? `<div class="note-box" style="margin-top:6px; padding:8px 10px; font-size:12.5px;">${l.admin_note}</div>` : ''}
       </div>
-      <div style="display:flex; align-items:center; gap:8px;">
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
+        ${lessonContactButtons(l)}
         ${teacherJoinButton(l)}
         ${lessonBadge(l)}
       </div>
@@ -2343,12 +2386,13 @@ function renderLessonsList(){
       <div class="row-card ${l.is_trial ? 'row-trial' : ''}" style="margin-bottom:10px;">
         <div class="row-main">
           <div class="row-title">${l.is_trial ? `🎓 ${l.guest_name || 'Пробный'}` : ((l.profiles && l.profiles.full_name) || 'Ученик')} — ${l.topic || 'Занятие'}</div>
-          <div class="row-sub">${fmtDateTime(l.lesson_date)}${l.is_trial && l.guest_contact ? ' · ' + l.guest_contact : ''}</div>
+          <div class="row-sub">${fmtDateTime(l.lesson_date)}</div>
           ${l.rescheduled_from_date ? `<div class="row-sub" style="color:#6B3FA0; font-weight:600;">↪ Перенос с ${fmtDate(l.rescheduled_from_date)}</div>` : ''}
           ${l.status === 'cancelled' ? `<div class="row-sub" style="color:var(--ink-soft);">Отменён — ученик не придёт</div>` : ''}
           ${l.admin_note ? `<div class="note-box" style="margin-top:8px; padding:10px 12px;">📝 ${l.admin_note}</div>` : ''}
         </div>
-        <div style="display:flex; align-items:center; gap:10px;">
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          ${lessonContactButtons(l)}
           ${teacherJoinButton(l)}
           <a class="btn btn-ghost btn-sm" href="${googleCalendarUrl(
             (l.is_trial ? `Пробный: ${l.guest_name || ''}` : (l.profiles && l.profiles.full_name) || 'Урок') + (l.topic ? ' — ' + l.topic : ''),
