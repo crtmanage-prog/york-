@@ -699,7 +699,7 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
 .speak-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:18px 20px;display:grid;grid-template-columns:1fr auto;gap:6px 16px;align-items:center}
 .speak-card .q{font-size:clamp(19px,2.4vw,28px);font-weight:600}
 .speak-card .h{color:var(--ink-2);grid-column:1}
-.speak-card .h::before{content:"💡 "}
+.speak-card .h::before{content:""}
 .timer{grid-row:1 / span 2;grid-column:2;font-family:Unbounded,sans-serif;font-weight:600;border:1.5px solid var(--ink);border-radius:999px;padding:10px 16px;background:transparent;min-width:96px}
 .timer.run{background:var(--accent)}
 .timer.over{background:var(--ink);color:var(--accent)}
@@ -707,7 +707,7 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
 
 /* схемы */
 .note{margin-top:18px;background:var(--ink);color:#fff;border-radius:14px;padding:12px 18px;font-size:.92em}
-.note::before{content:"💡 "}
+.note::before{content:""}
 .v-compare{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .v-col{background:var(--card);border-radius:var(--r);padding:18px 20px;border-top:8px solid var(--accent)}
 .v-col:nth-child(2){border-top-color:var(--ink)}
@@ -950,7 +950,7 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
 .ws-menu hr{border:0;height:1px;background:rgba(17,18,14,.09);margin:4px 0}
 .ws-blk .x{font-size:18px;line-height:1;width:28px;height:28px;align-items:center;justify-content:center;border-radius:8px}
 .ws-blk .x:hover{background:rgba(17,18,14,.06)}
-.reqb{font-style:normal;font-size:10.5px;font-weight:600;color:#6B6C64;margin-left:8px;padding:2px 8px;border-radius:999px;background:rgba(17,18,14,.06);white-space:nowrap}
+.reqb{display:inline-flex;align-items:center;gap:4px;vertical-align:middle;font-style:normal;font-size:10.5px;font-weight:600;color:#6B6C64;margin-left:8px;padding:2px 8px;border-radius:999px;background:rgba(17,18,14,.06);white-space:nowrap}
 .ws-blk .eyeb,.ws-li button.eye{all:unset;cursor:pointer;width:30px;height:30px;border-radius:999px;border:1px solid rgba(17,18,14,.09);display:flex;align-items:center;justify-content:center;flex:none;color:#3A3B33}
 .ws-blk .eyeb:hover,.ws-li button.eye:hover{background:rgba(17,18,14,.06)}
 .pv-blk{border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
@@ -996,10 +996,10 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
   <div class="show-bar">
     <button class="btn" id="showBack">✕ К списку</button>
     <span class="grow"></span>
-    <span class="clock" id="clock" title="Время урока">⏱ 00:00</span>
-    <button class="btn" id="showLink" title="Скопировать ссылку, чтобы ученик открыл урок у себя">🔗 Ссылка ученику</button>
+    <span class="clock" id="clock" title="Время урока">00:00</span>
+    <button class="btn" id="showLink" title="Скопировать ссылку, чтобы ученик открыл урок у себя">Ссылка ученику</button>
     <button class="btn ru-toggle" data-ru-toggle title="Показать или скрыть перевод на русский">🇷🇺 <span class="rt">Перевод: вкл</span></button>
-    <button class="btn" id="showFs">⛶ Во весь экран</button>
+    <button class="btn" id="showFs">Во весь экран</button>
   </div>
   <nav class="steps" id="steps"></nav>
   <div class="show-scroll" id="showScroll"><div class="show-body" id="showBody"></div></div>
@@ -1112,6 +1112,18 @@ const Usage = {
 };
 
 /* ======================= загрузка контента ======================= */
+const EMOJI_RE = /[\u{1F300}-\u{1FAFF}✅❌❓❔⏱⬆⛶✏⚠⚙✨❗⭐❤⌚⏰☑✔](?:️|‍)* ?/gu;
+// эмодзи-иконки больше не используем: чистим icon/label/how (содержимое заданий — картинки-эмодзи — не трогаем)
+function stripUiEmoji(o){
+  if (Array.isArray(o)) { o.forEach(stripUiEmoji); return; }
+  if (o && typeof o === 'object') {
+    for (const k of Object.keys(o)) {
+      if (k === 'icon') o[k] = '';
+      else if ((k === 'label' || k === 'how') && typeof o[k] === 'string') o[k] = o[k].replace(EMOJI_RE, '');
+      else stripUiEmoji(o[k]);
+    }
+  }
+}
 async function loadContent(){
   const entries = await Promise.all(Object.entries(CONTENT_FILES).map(async ([key, url]) => {
     let res;
@@ -1122,7 +1134,9 @@ async function loadContent(){
     try { return [key, JSON.parse(text)]; }
     catch(e){ throw new Error(`Ошибка в файле ${url}: ${e.message}. Скорее всего, лишняя или пропущенная запятая/кавычка.`); }
   }));
-  return Object.fromEntries(entries);
+  const out = Object.fromEntries(entries);
+  stripUiEmoji(out);
+  return out;
 }
 
 // Проверяем обязательные поля: кривую запись показываем списком, а не ломаем всю страницу
@@ -1166,7 +1180,7 @@ const Components = {
   LessonCard(l){
     return `<article class="card">
       <div class="card-top"><div class="grow">${Components.LevelBadge(l.level)}${Components.CategoryTag(l.category)}</div>${starBtn(l.id)}</div>
-      <h3><span class="ic">${l.icon || '📘'}</span><span><button data-open="${esc(l.id)}">${esc(l.title)}</button>${ru(l.title)}</span></h3>
+      <h3><span class="ic">${l.icon || ''}</span><span><button data-open="${esc(l.id)}">${esc(l.title)}</button>${ru(l.title)}</span></h3>
       <p class="outcome">«${esc(l.outcome)}»</p>
       ${l.leadIn ? `<div class="lead"><b>Lead-in question</b>${T(l.leadIn)}</div>` : ''}
       <div class="actions">
@@ -1180,7 +1194,7 @@ const Components = {
     const cat = DB.activities.categories.find(c => c.id === a.category);
     return `<article class="card">
       <div class="card-top"><div class="grow">${Components.LevelRange(a.levels)}<span class="tag">${cat ? cat.icon + ' ' + esc(cat.label) : ''}${a.sub ? ' · ' + esc(a.sub) : ''}</span></div>${starBtn(a.id)}</div>
-      <h3><span class="ic">${a.icon || '🎲'}</span><span>${T(a.title)}</span></h3>
+      <h3><span class="ic">${a.icon || ''}</span><span>${T(a.title)}</span></h3>
       <div class="kv"><b>Goal</b>${esc(a.goal)}</div>
       <div class="kv"><b>How to run</b>${esc(a.how)}</div>
       ${a.phrases.length ? `<ul class="phrases">${a.phrases.map(p => `<li>${T(p)}</li>`).join('')}</ul>` : ''}
@@ -1195,7 +1209,7 @@ const Components = {
     const note = l.lesson && l.lesson.visual && l.lesson.visual.note;
     return `<article class="card">
       <div class="card-top"><div class="grow">${Components.LevelBadge(l.level)}<span class="tag">${esc(l.section || '')}</span></div>${starBtn(l.id)}</div>
-      <h3><span class="ic">${l.icon || '🧩'}</span><span><button data-open="${esc(l.id)}">${esc(l.title)}</button>${ru(l.title)}</span></h3>
+      <h3><span class="ic">${l.icon || ''}</span><span><button data-open="${esc(l.id)}">${esc(l.title)}</button>${ru(l.title)}</span></h3>
       <div class="kv"><b>Explanation</b>${esc(l.idea)}${note ? ' ' + esc(note) : ''}</div>
       <div class="kv"><b>Examples</b></div><ul class="phrases">${l.explanation.map(p => `<li>${T(p)}</li>`).join('')}</ul>
       ${l.mistakes ? `<div class="kv"><b>Common mistakes</b></div>${Components.Mistakes(l.mistakes)}` : ''}
@@ -1280,7 +1294,7 @@ const Components = {
   },
 
   ResourceCard(r, cat){
-    return `<div class="res"><span class="ri">${cat ? cat.icon : '📎'}</span><div>
+    return `<div class="res"><span class="ri">${cat ? cat.icon : ''}</span><div>
       <h3>${T(r.title)}</h3><p>${esc(r.description || '')}</p>
       ${r.url ? `<a class="btn primary" href="${esc(r.url)}" target="_blank" rel="noopener">Open →</a>`
               : `<button class="btn ghost" disabled title="Ссылку ещё не добавили в materials.json">Link coming soon</button>`}
@@ -1329,7 +1343,7 @@ function quickAddToLesson(x){
 
 const Pages = {
   home: {
-    title: 'Dashboard', icon: '🏠',
+    title: 'Dashboard', icon: '',
     render(root){
       const plans = Plans.list();
       const draft = plans.find(p => p.status !== 'done');
@@ -1380,7 +1394,7 @@ const Pages = {
           </a>
 
           ${frequent.length ? `<div class="gl-glass gl-card">
-            <div class="gl-card-head"><div class="lft">🔥<b>Часто используете</b></div></div>
+            <div class="gl-card-head"><div class="lft"><b>Часто используете</b></div></div>
             ${frequent.map(favRow).join('')}
           </div>` : ''}
 
@@ -1402,25 +1416,25 @@ const Pages = {
   },
 
   builder: {
-    title: 'Пробные уроки', icon: '🪄',
+    title: 'Пробные уроки', icon: '',
     render(root){ renderBuilder(root); },
   },
 
   library: {
-    title: 'Библиотека', icon: '📚',
+    title: 'Библиотека', icon: '',
     render(root){
       const F = filters.library;
       const rerender = () => Pages.library.render(root);
       root.innerHTML = `<h1 class="page-title">Библиотека</h1>
         <p class="page-sub">Темы, активности, грамматика и материалы — в одном месте. Карточку можно открыть, добавить в избранное или сразу в урок.</p>
-        <div class="actions" style="margin-bottom:16px"><a class="btn ghost" href="#/structure">⏱ Структура урока</a><a class="btn ghost" href="#/checklist">✅ Чек-лист учителя</a></div>
+        <div class="actions" style="margin-bottom:16px"><a class="btn ghost" href="#/structure">Структура урока</a><a class="btn ghost" href="#/checklist">Чек-лист учителя</a></div>
         <div id="libFilters"></div>
         <div id="libResult"></div>`;
       root.querySelector('#libFilters').appendChild(Components.FilterBar({
         rows: [
           { label: 'Тип', value: F.type, toggle: false, options: [
-            { value: 'all', label: 'Всё' }, { value: 'lessons', label: '📚 Мини-уроки' }, { value: 'activities', label: '🎲 Активности' },
-            { value: 'grammar', label: '🧩 Грамматика' }, { value: 'materials', label: '📁 Материалы' },
+            { value: 'all', label: 'Всё' }, { value: 'lessons', label: 'Мини-уроки' }, { value: 'activities', label: 'Активности' },
+            { value: 'grammar', label: 'Грамматика' }, { value: 'materials', label: 'Материалы' },
           ], onChange: v => { F.type = v || 'all'; rerender(); } },
           { label: 'Level', cls: 'lv', value: F.level, toggle: true, options: DB.meta.levels.map(l => ({ value: l, label: l })), onChange: v => { F.level = v; rerender(); } },
         ],
@@ -1432,16 +1446,16 @@ const Pages = {
       const resEl = root.querySelector('#libResult');
       if (!total) { resEl.innerHTML = '<div class="empty">Ничего не нашлось — сбросьте фильтры.</div>'; return; }
       let html = '';
-      if (lessons.length) html += `<h2 class="h-sec">📚 Мини-уроки</h2><div class="grid">${lessons.map(Components.LessonCard).join('')}</div>`;
-      if (activities.length) html += `<h2 class="h-sec">🎲 Активности</h2><div class="grid">${activities.map(Components.ActivityCard).join('')}</div>`;
-      if (grammar.length) html += `<h2 class="h-sec">🧩 Грамматика</h2><div class="grid">${grammar.map(Components.GrammarCard).join('')}</div>`;
-      if (materials.length) html += `<h2 class="h-sec">📁 Материалы</h2><div class="grid">${materials.map(m => Components.ResourceCard(m, DB.materials.categories.find(c => c.id === m.category))).join('')}</div>`;
+      if (lessons.length) html += `<h2 class="h-sec">Мини-уроки</h2><div class="grid">${lessons.map(Components.LessonCard).join('')}</div>`;
+      if (activities.length) html += `<h2 class="h-sec">Активности</h2><div class="grid">${activities.map(Components.ActivityCard).join('')}</div>`;
+      if (grammar.length) html += `<h2 class="h-sec">Грамматика</h2><div class="grid">${grammar.map(Components.GrammarCard).join('')}</div>`;
+      if (materials.length) html += `<h2 class="h-sec">Материалы</h2><div class="grid">${materials.map(m => Components.ResourceCard(m, DB.materials.categories.find(c => c.id === m.category))).join('')}</div>`;
       resEl.innerHTML = html;
     },
   },
 
   reports: {
-    title: 'Отчёты', icon: '📝',
+    title: 'Отчёты', icon: '',
     render(root){
       const done = Plans.list().filter(p => p.status === 'done' && p.report);
       root.innerHTML = `<h1 class="page-title">Отчёты</h1>
@@ -1464,7 +1478,7 @@ const Pages = {
   },
 
   structure: {
-    title: 'Lesson Structure', icon: '⏱️',
+    title: 'Lesson Structure', icon: '',
     render(root){
       const T = DB.structure.timeline, total = T[T.length - 1].to;
       root.innerHTML = `<h1 class="page-title">Trial Lesson Structure</h1>
@@ -1475,7 +1489,7 @@ const Pages = {
   },
 
   lessons: {
-    title: 'Micro Lesson Bank', icon: '📚',
+    title: 'Micro Lesson Bank', icon: '',
     render(root){
       const f = filters.lessons, M = DB.meta;
       const rerender = () => { saveLessonFilters(); Pages.lessons.render(root); };
@@ -1509,7 +1523,7 @@ const Pages = {
   },
 
   activities: {
-    title: 'Speaking Activities', icon: '🎲',
+    title: 'Speaking Activities', icon: '',
     render(root){
       const f = filters.activities, A = DB.activities;
       const rerender = () => Pages.activities.render(root);
@@ -1541,7 +1555,7 @@ const Pages = {
   },
 
   grammar: {
-    title: 'Grammar Topics', icon: '🧩',
+    title: 'Grammar Topics', icon: '',
     render(root){
       const f = filters.grammar;
       const rerender = () => Pages.grammar.render(root);
@@ -1559,7 +1573,7 @@ const Pages = {
   },
 
   materials: {
-    title: 'Materials', icon: '📁',
+    title: 'Materials', icon: '',
     render(root){
       const M = DB.materials;
       root.innerHTML = `<h1 class="page-title">Materials</h1>
@@ -1574,7 +1588,7 @@ const Pages = {
   },
 
   checklist: {
-    title: 'Teacher Checklist', icon: '✅',
+    title: 'Teacher Checklist', icon: '',
     render(root){
       root.innerHTML = `<h1 class="page-title">Teacher Checklist</h1>
         <p class="page-sub">Отметки сохраняются в этом браузере. Перед следующим уроком нажмите «New lesson».</p>`;
@@ -1646,7 +1660,7 @@ const studentJourney = () => `<div class="journey">${DB.structure.experience.map
 function openDrawer(l){
   $('#drawerTags').innerHTML = `${Components.LevelBadge(l.level)} ${Components.CategoryTag(l.category)}`;
   $('#drawerBody').innerHTML = `
-    <div class="ic">${l.icon || '📘'}</div>
+    <div class="ic">${l.icon || ''}</div>
     <h2>${esc(l.title)}</h2>${ru(l.title)}
     <div class="field-row"><b>Student outcome</b><p class="outcome" style="font-size:16px">«${esc(l.outcome)}»</p></div>
     ${l.leadIn ? `<div class="field-row"><b>Lead-in question</b><div class="lead" style="font-size:15px">${T(l.leadIn)}</div></div>` : ''}
@@ -1846,12 +1860,12 @@ function stepTask(task, n){
   const score = d.querySelector('.task-score');
   const total = task.type === 'match' ? task.pairs.length : task.items.length;
   let doneCount = 0;
-  const done = () => { doneCount++; score.hidden = false; score.textContent = `${doneCount} / ${total}` + (doneCount === total ? ' 🎉' : ''); };
+  const done = () => { doneCount++; score.hidden = false; score.textContent = `${doneCount} / ${total}` + (doneCount === total ? ' ' : ''); };
 
   if (task.type === 'choose') task.items.forEach(it => {
     const el = document.createElement('div');
     el.className = 'item';
-    el.innerHTML = `<span class="pic">${it.pic || '❔'}</span>
+    el.innerHTML = `<span class="pic">${it.pic || ''}</span>
       <div class="q">${esc(it.q).replace(/___/g, '<span class="gap">?</span>')}${trOf(it.q) ? `<span class="ru ru-after">${esc(trOf(it.q))}</span>` : ''}</div>
       <div class="opts"></div>`;
     const opts = el.querySelector('.opts');
@@ -1956,7 +1970,7 @@ function stepSpeak(list){
 
 function stepResult(t){
   return node(`${head('Итог', '')}<div class="result-big">${esc(t.outcome)}</div>
-    <div class="exit-mini"><b>🎟️ Exit ticket</b> Назови: 3 новых слова · 1 новую конструкцию · 1 предложение о себе</div>
+    <div class="exit-mini"><b>Exit ticket</b> Назови: 3 новых слова · 1 новую конструкцию · 1 предложение о себе</div>
     <p class="kicker">Продолжаем говорить</p>
     <div class="chips">${DB.meta.universalTopics.map(u => `<span class="chip" style="font-size:1em;padding:8px 16px">${esc(u)}${ruI(u)}</span>`).join('')}</div>`);
 }
@@ -1970,7 +1984,7 @@ function makeTimer(sec, cls){
   b.className = 'timer' + (cls ? ' ' + cls : '');
   let left = sec, id = null;
   const fmt = n => `${Math.floor(n / 60)}:${String(n % 60).padStart(2, '0')}`;
-  const draw = () => { b.textContent = left > 0 ? `⏱ ${fmt(left)}` : 'Время! ✓'; };
+  const draw = () => { b.textContent = left > 0 ? `${fmt(left)}` : 'Время! ✓'; };
   const stop = () => { clearInterval(id); runningTimers = runningTimers.filter(x => x !== id); id = null; b.classList.remove('run'); };
   b.onclick = () => {
     if (id) return stop();
@@ -1997,7 +2011,7 @@ function makeTabs(labels, onPick){
   return w;
 }
 
-const helper = list => list && list.length ? `<div class="helper">💬 ${list.map(esc).join(' · ')}</div>` : '';
+const helper = list => list && list.length ? `<div class="helper">${list.map(esc).join(' · ')}</div>` : '';
 function btn(text, cls, onclick){ const b = document.createElement('button'); b.className = cls || 'btn'; b.textContent = text; b.onclick = onclick; return b; }
 
 function actSteps(a){
@@ -2017,7 +2031,7 @@ const PLAY = {
       if (i === a.play.sets.length) {   // «Твоя очередь» — три пустые карточки
         area.innerHTML = `<p class="big-q">Your turn! Tell me 2 truths and 1 lie.<span class="ru">Твоя очередь! Назови 2 правдивых факта и 1 ложный.</span></p>`;
         const g = document.createElement('div'); g.className = 'facts';
-        const states = ['?', '🤔 My guess', '✓ Truth', '✗ Lie'], cls = ['', 'guess', 'truth', 'lie'];
+        const states = ['?', 'My guess', '✓ Truth', '✗ Lie'], cls = ['', 'guess', 'truth', 'lie'];
         [1, 2, 3].forEach(n => {
           const c = document.createElement('div'); c.className = 'fact';
           c.innerHTML = `<span class="n">${n}</span><div class="t" contenteditable="true" data-ph="Fact ${n}…"></div>`;
@@ -2040,7 +2054,7 @@ const PLAY = {
       });
       area.appendChild(g);
     };
-    root.append(makeTabs([...a.play.sets.map(s => 'Tom · ' + s.label), '🙋 Your turn'], draw), area);
+    root.append(makeTabs([...a.play.sets.map(s => 'Tom · ' + s.label), 'Your turn'], draw), area);
     root.insertAdjacentHTML('beforeend', helper(a.phrases));
     draw(0);
   },
@@ -2101,7 +2115,7 @@ const PLAY = {
     const draw = () => {
       const c = a.play.cats[cat].cards[ci];
       area.innerHTML = `<div class="sit-card"><div class="sit-lbl">${esc(a.play.cats[cat].label)}</div><p>${T(c.s)}</p>
-        <div class="sit-role">🎭 Teacher plays: ${esc(c.role)}${ruI(c.role)}</div></div>`;
+        <div class="sit-role">Teacher plays: ${esc(c.role)}${ruI(c.role)}</div></div>`;
       const row = document.createElement('div'); row.className = 'play-row';
       row.append(Object.assign(document.createElement('span'), { className: 'muted', textContent: `${ci + 1} / ${a.play.cats[cat].cards.length}` }),
         makeTimer(120), btn('Следующая ситуация →', 'btn primary', () => { ci = (ci + 1) % a.play.cats[cat].cards.length; draw(); }));
@@ -2125,7 +2139,7 @@ const PLAY = {
       up.innerHTML = `<p class="kicker" style="margin-top:8px">Level up — скажи ещё раз вот так</p>` +
         t.upgrade.map(([x, y]) => `<div class="v-up-row"><span class="from">${T(x)}</span><span class="arr">→</span><span class="to">${T(y)}</span></div>`).join('');
       timer.addEventListener('timeup', () => { up.hidden = false; });
-      row.append(timer, btn('⬆ Level up', 'btn', () => { up.hidden = !up.hidden; }),
+      row.append(timer, btn('Level up', 'btn', () => { up.hidden = !up.hidden; }),
         btn('Другая тема →', 'btn primary', () => { ti = (ti + 1) % a.play.topics.length; draw(); }));
       area.append(row, up);
     };
@@ -2164,12 +2178,12 @@ const PLAY = {
       const clues = document.createElement('div'); clues.className = 'clues';
       c.clues.forEach((cl, i) => {
         const b = document.createElement('button'); b.className = 'clue';
-        b.innerHTML = `<span>🔍 Clue ${i + 1}</span>`;
+        b.innerHTML = `<span>Clue ${i + 1}</span>`;
         b.onclick = () => { b.classList.add('open'); b.innerHTML = `<span>${T(cl)}</span>`; };
         clues.appendChild(b);
       });
       area.append(clues);
-      area.insertAdjacentHTML('beforeend', `<p class="big-q" style="margin-top:20px">❓ ${T(c.q)}</p>`);
+      area.insertAdjacentHTML('beforeend', `<p class="big-q" style="margin-top:20px">${T(c.q)}</p>`);
       const row = document.createElement('div'); row.className = 'play-row';
       row.append(Object.assign(document.createElement('span'), { className: 'muted', textContent: `Дело ${ci + 1} / ${a.play.cases.length}` }),
         btn('Следующее дело →', 'btn primary', () => { ci = (ci + 1) % a.play.cases.length; draw(); }));
@@ -2186,7 +2200,7 @@ const PLAY = {
     const draw = () => {
       area.innerHTML = `<p class="big-q">«${esc(a.play.topics[ti])}»${ru(a.play.topics[ti])}</p>`;
       const sides = document.createElement('div'); sides.className = 'sides';
-      [['👍 For', 'for'], ['👎 Against', 'against']].forEach(([label, cls]) => {
+      [['For', 'for'], ['Against', 'against']].forEach(([label, cls]) => {
         const s = document.createElement('div'); s.className = 'side ' + cls;
         s.innerHTML = `<h4>${label}</h4>`;
         s.appendChild(makeTimer(60));
@@ -2208,8 +2222,8 @@ const PLAY = {
       <div class="exit">
         <div class="exit-box"><b>🆕 3 новых слова</b>
           <input placeholder="1." aria-label="Новое слово 1"><input placeholder="2." aria-label="Новое слово 2"><input placeholder="3." aria-label="Новое слово 3"></div>
-        <div class="exit-box"><b>🧩 1 новая конструкция</b><input placeholder="например, I’m really into…" aria-label="Новая конструкция"></div>
-        <div class="exit-box"><b>🙋 1 предложение о себе</b><input placeholder="…" aria-label="Предложение о себе"></div>
+        <div class="exit-box"><b>1 новая конструкция</b><input placeholder="например, I’m really into…" aria-label="Новая конструкция"></div>
+        <div class="exit-box"><b>1 предложение о себе</b><input placeholder="…" aria-label="Предложение о себе"></div>
       </div>`);
     const done = btn('✓ Готово', 'btn primary', () => {
       const vals = [...root.querySelectorAll('input')].map(i => i.value.trim());
@@ -2244,7 +2258,7 @@ function openShow(t){
   steps.forEach((s, k) => { const b = document.createElement('button'); b.className = 'stp'; b.textContent = s.label; b.onclick = () => goStep(k); nav.appendChild(b); });
   if (lesson) clearInterval(lesson.clockTimer);
   lesson = { topic: t, steps, cur: 0, started: Date.now() };
-  const tick = () => { const s = Math.floor((Date.now() - lesson.started) / 1000); $('#clock').textContent = `⏱ ${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
+  const tick = () => { const s = Math.floor((Date.now() - lesson.started) / 1000); $('#clock').textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
   tick(); lesson.clockTimer = setInterval(tick, 1000);
   show.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -2320,11 +2334,11 @@ PLAY.opinions = (a, root) => {
   const draw = () => {
     area.innerHTML = `<p class="big-q">«${esc(a.play.items[i])}»${ru(a.play.items[i])}</p>`;
     const scale = document.createElement('div'); scale.className = 'op-scale';
-    [['👎', 'Disagree'], ['🤷', 'Not sure'], ['👍', 'Agree']].forEach(([e, l]) => {
+    [['', 'Disagree'], ['', 'Not sure'], ['', 'Agree']].forEach(([e, l]) => {
       const b = btn(`${e} ${l}`, 'vs-opt', () => { scale.querySelectorAll('.vs-opt').forEach(x => x.classList.toggle('picked', x === b)); why.hidden = false; });
       scale.appendChild(b);
     });
-    const why = document.createElement('p'); why.className = 'big-q'; why.style.marginTop = '18px'; why.hidden = true; why.innerHTML = 'Why? 🤔<span class="ru">Почему?</span>';
+    const why = document.createElement('p'); why.className = 'big-q'; why.style.marginTop = '18px'; why.hidden = true; why.innerHTML = 'Why? <span class="ru">Почему?</span>';
     const row = document.createElement('div'); row.className = 'play-row';
     row.append(Object.assign(document.createElement('span'), { className: 'muted', textContent: `${i + 1} / ${a.play.items.length}` }),
       btn('Next statement →', 'btn primary', () => { i = (i + 1) % a.play.items.length; draw(); }));
@@ -2345,7 +2359,7 @@ PLAY.describePhoto = (a, root) => {
   if (imgs.length) img.src = imgs[imgIdx];
   root.appendChild(img);
   const row = document.createElement('div'); row.className = 'play-row';
-  row.appendChild(btn('🔄 Другое фото', 'btn', () => { imgIdx = (imgIdx + 1) % imgs.length; img.src = imgs[imgIdx]; }));
+  row.appendChild(btn('Другое фото', 'btn', () => { imgIdx = (imgIdx + 1) % imgs.length; img.src = imgs[imgIdx]; }));
   root.appendChild(row);
 
   const section = (label, pool) => {
@@ -2355,11 +2369,11 @@ PLAY.describePhoto = (a, root) => {
     const list = document.createElement('ul'); list.className = 'phrases';
     const draw = () => { list.innerHTML = shuffle(pool).slice(0, 4).map(p => `<li>${T(p)}</li>`).join(''); };
     draw();
-    box.append(h, list, btn('🎲 Ещё фразы', 'btn', draw));
+    box.append(h, list, btn('Ещё фразы', 'btn', draw));
     return box;
   };
-  root.appendChild(section('📍 Где что находится', a.play.locationPhrases || []));
-  root.appendChild(section('🗣️ Как описать', a.play.descriptionPhrases || []));
+  root.appendChild(section('Где что находится', a.play.locationPhrases || []));
+  root.appendChild(section('Как описать', a.play.descriptionPhrases || []));
 };
 
 
@@ -2378,6 +2392,7 @@ const ICONS = {
   skip: '<path d="M5 4v16l10-8zM19 5v14"></path>',
   note: '<path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5M10 13h6M10 17h4"></path>',
   edit: '<path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path>',
+  lock: '<rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path>',
   eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle>',
 };
 const ic = (name, size) => `<svg width="${size || 16}" height="${size || 16}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]}</svg>`;
@@ -2425,13 +2440,13 @@ function moreQuestions(kind, exclude){
 const REQ = (title, min, mode, extra) => Object.assign({ title, min, mode, durEdit: false }, extra || {});
 function reqBlocks(mins, kids){
   return [
-    REQ('👋 Warm-up & Connection', mins[0], 'text', { key: 'warmup', qkind: 'warmup', seed: kids ? ['Hello! What\'s your name?', 'How are you today?'] : ['How are you today?', 'What have you been up to lately?'] }),
-    REQ('🎯 Goal Discovery', mins[1], 'text', { key: 'discovery', qkind: 'discovery', seed: kids ? ['What do you like to play?', 'Do you like English?'] : ['Why do you want to learn English?', 'What do you enjoy doing in your free time?'] }),
-    REQ('📚 Mini Lesson', mins[2], 'slot', { key: 'topic', accept: 'topic', durEdit: true }),
-    REQ('✏️ Practice', mins[3], 'slot', { key: 'practice', accept: 'activity', durEdit: true }),
-    REQ('🗣 Speaking Application', mins[4], 'slot', { key: 'speaking', accept: 'activity', durEdit: true }),
-    REQ('🖥 Cabinet Preview', mins[5], 'text', { key: 'cabinet', seed: ['Покажите личный кабинет: расписание, домашка, прогресс.', 'Покажите, где найти материалы и как написать преподавателю.'] }),
-    REQ('👋 Wrap-up', mins[6], 'text', { key: 'wrapup', qkind: 'wrapup', seed: kids ? ['What did you like most today?'] : ['What’s one new thing you learned today?'] }),
+    REQ('Warm-up & Connection', mins[0], 'text', { key: 'warmup', qkind: 'warmup', seed: kids ? ['Hello! What\'s your name?', 'How are you today?'] : ['How are you today?', 'What have you been up to lately?'] }),
+    REQ('Goal Discovery', mins[1], 'text', { key: 'discovery', qkind: 'discovery', seed: kids ? ['What do you like to play?', 'Do you like English?'] : ['Why do you want to learn English?', 'What do you enjoy doing in your free time?'] }),
+    REQ('Mini Lesson', mins[2], 'slot', { key: 'topic', accept: 'topic', durEdit: true }),
+    REQ('Practice', mins[3], 'slot', { key: 'practice', accept: 'activity', durEdit: true }),
+    REQ('Speaking Application', mins[4], 'slot', { key: 'speaking', accept: 'activity', durEdit: true }),
+    REQ('Cabinet Preview', mins[5], 'text', { key: 'cabinet', seed: ['Покажите личный кабинет: расписание, домашка, прогресс.', 'Покажите, где найти материалы и как написать преподавателю.'] }),
+    REQ('Wrap-up', mins[6], 'text', { key: 'wrapup', qkind: 'wrapup', seed: kids ? ['What did you like most today?'] : ['What’s one new thing you learned today?'] }),
   ];
 }
 const TEMPLATES = {
@@ -2467,7 +2482,7 @@ const canMoveBlock = (plan, b) => !(b.req && tplLocked(plan));
 
 /* ---------- планы (localStorage) ---------- */
 function normPlan(p){
-  if (p.v2) { if (p.template && !TEMPLATES[p.template]) p.template = 'custom'; return p; }
+  if (p.v2) { if (p.template && !TEMPLATES[p.template]) p.template = 'custom'; (p.blocks || []).forEach(b => { b.title = String(b.title || '').replace(EMOJI_RE, '').trim(); }); return p; }
   p.v2 = true;
   const old = p.blocks || [];
   p.template = old.length ? 'standard' : null;
@@ -2820,7 +2835,7 @@ function renderPrepareStep(body, plan, root){
         <span class="grab" style="${movable ? '' : 'opacity:.25;cursor:default'}">${ic('grab', 16)}</span>
         <span class="ck">${isEmpty ? ic('circle', 18) : ic('check', 18)}</span>
         <span class="no">${i + 1}</span>
-        <div class="tx"><b>${esc(b.title)}${b.req ? '<em class="reqb">🔒 Required</em>' : ''}</b><span>${esc(sub)}</span></div>
+        <div class="tx"><b>${esc(b.title)}${b.req ? `<em class="reqb">${ic('lock', 11)}Required</em>` : ''}</b><span>${esc(sub)}</span></div>
         ${item ? `<button class="eyeb" data-eye="${esc(b.id)}" title="Посмотреть материал">${ic('eye', 15)}</button>` : ''}
         ${b.mode === 'slot' ? `<button class="addlib" data-open="${esc(b.id)}">${ic(item ? 'search' : 'plus', 13)}${item ? 'Заменить' : 'Из библиотеки'}</button>` : ''}
         <span class="min">${b.duration || 5} мин</span>
@@ -2911,7 +2926,7 @@ function planTopics(plan){
   return plan.blocks.filter(b => !b.skipped && b.itemId && byId[b.itemId]).map(b => byId[b.itemId].title);
 }
 function reportText(plan, r){
-  return `💬 <b>Отчёт о пробном — ${esc(plan.student.name || '-')}</b>\nШаблон: ${esc(tplName(plan))}\nТемы: ${esc((r.topics || []).join(', ') || '-')}\nЧто получилось: ${esc(r.good || '-')}\nЧто не очень: ${esc(r.bad || '-')}\nУровень: ${esc(r.level || '-')}\nЦель: ${esc(r.goal || '-')}${r.notes ? `\nЗаметки: ${esc(r.notes)}` : ''}`;
+  return `<b>Отчёт о пробном — ${esc(plan.student.name || '-')}</b>\nШаблон: ${esc(tplName(plan))}\nТемы: ${esc((r.topics || []).join(', ') || '-')}\nЧто получилось: ${esc(r.good || '-')}\nЧто не очень: ${esc(r.bad || '-')}\nУровень: ${esc(r.level || '-')}\nЦель: ${esc(r.goal || '-')}${r.notes ? `\nЗаметки: ${esc(r.notes)}` : ''}`;
 }
 async function sendReportToAdmin(plan, r){
   r.savedAt = Date.now(); r.sentAt = Date.now();
@@ -2989,7 +3004,7 @@ function openPicker(onPick, title){
       <div class="ws-seg"><button data-pt="activities" class="${tab === 'activities' ? 'on' : ''}">Активности</button><button data-pt="lessons" class="${tab === 'lessons' ? 'on' : ''}">Мини-уроки</button></div>
       <div class="ws-search" style="margin-top:12px">${ic('search', 14)}<input id="pkQ" placeholder="Поиск…" value="${esc(q)}"></div>
       <div style="margin-top:8px;max-height:46vh;overflow:auto">${rows.map(x => `<div class="ws-li">
-          <div class="tx" data-pkprev="${esc(x.id)}"><b>${freq.includes(x) ? '🔥 ' : ''}${esc(x.title)}</b><span>${esc(itemKind(x))} · ${esc(itemLevel(x))} · ${itemMin(x)} мин</span></div>
+          <div class="tx" data-pkprev="${esc(x.id)}"><b>${freq.includes(x) ? '' : ''}${esc(x.title)}</b><span>${esc(itemKind(x))} · ${esc(itemLevel(x))} · ${itemMin(x)} мин</span></div>
           <button class="add" data-pkadd="${esc(x.id)}" title="Добавить">${ic('plus', 14)}</button>
         </div>`).join('') || '<div class="ws-hint" style="padding:12px 0">Ничего не нашлось.</div>'}</div>`;
     box.querySelectorAll('[data-pt]').forEach(b => b.onclick = () => { tab = b.dataset.pt; draw(); });
@@ -3131,7 +3146,7 @@ function renderLive(){
   if (b.mode === 'text') {
     const hasBank = !!QUESTION_BANK[b.qkind];
     body.innerHTML = `<ul class="lv-qs" id="liveQs">${(b.questions || []).map(q => `<li>${esc(q)}<button data-rmq="${esc(q)}" title="Убрать вопрос">✕</button></li>`).join('') || '<li style="color:#6B6C64">Вопросов пока нет</li>'}</ul>
-      ${hasBank ? `<button class="ws-ghost" id="liveMoreQ">🎲 Ещё идеи и вопросы</button>` : ''}`;
+      ${hasBank ? `<button class="ws-ghost" id="liveMoreQ">Ещё идеи и вопросы</button>` : ''}`;
     body.querySelectorAll('[data-rmq]').forEach(btn => btn.onclick = () => { b.questions = (b.questions || []).filter(q => q !== btn.dataset.rmq); Plans.save(plan); renderLive(); });
     const mq = body.querySelector('#liveMoreQ');
     if (mq) mq.onclick = () => {
@@ -3146,7 +3161,7 @@ function renderLive(){
       body.querySelector('#livePickHere').onclick = () => openPicker(x => { b.itemId = x.id; Plans.save(plan); renderLive(); }, 'Выбрать материал');
     } else {
       body.innerHTML = `<div class="lv-it">
-        <h2>${esc(item.icon || '')} ${esc(item.title)}</h2>
+        <h2>${esc(item.title)}</h2>
         ${item.outcome ? `<p class="oc">«${esc(item.outcome)}»</p>` : ''}
         ${item.idea ? `<p>${esc(item.idea)}</p>` : ''}
         ${item.goal ? `<p>${esc(item.goal)}</p>` : ''}
@@ -3243,7 +3258,7 @@ function renderLibraryPage(root){
       const grad = isMat ? 'linear-gradient(135deg,#FFF1D6,#F8D9A0)' : itemGradient(x);
       const label = isMat ? 'Материал' : itemKind(x);
       return `<article class="ws-glass ws-card" data-lprev="${esc(x.id)}">
-        <div class="top" style="background:${grad}"><span class="ic">${esc(x.icon || (isMat ? '📁' : (x.play ? '🎲' : '📘')))}</span>${isMat ? '' : starBtn(x.id)}</div>
+        <div class="top" style="background:${grad}"><span class="ic">${ic(isMat ? 'note' : (x.play ? 'play' : 'search'), 15)}</span>${isMat ? '' : starBtn(x.id)}</div>
         <div class="bd"><span class="ty">${esc(label)}</span><span class="nm">${esc(x.title)}</span>
           <div class="mt">${isMat ? '' : `<b>${esc(itemLevel(x))}</b><span>${itemMin(x)} мин</span>`}<span class="sp"></span>${isMat ? '' : `<button class="addb" data-ladd="${esc(x.id)}">${ic('plus', 13)}В урок</button>`}</div>
         </div></article>`;
@@ -3302,7 +3317,7 @@ function openLibDrawer(x, opts){
   }
   el.innerHTML = `
     <div class="hdr"><span class="pill">${esc(label)}</span><span class="sp"></span>${isMat ? '' : starBtn(x.id)}<button id="ldClose" aria-label="Закрыть">${ic('x', 18)}</button></div>
-    <h2>${esc(x.icon || '')} ${esc(x.title)}</h2>
+    <h2>${esc(x.title)}</h2>
     <div class="muted">${isMat ? '' : `${esc(itemLevel(x))} · ${itemMin(x)} мин`}</div>
     <div class="prev"><span class="lb">Что внутри</span>${lines.join('') || '<span>—</span>'}</div>
     ${!isMat ? `<button class="ws-ghost" id="ldShow">${ic('play', 13)}Показать как ученику</button>` : ''}
@@ -3432,7 +3447,7 @@ function renderTodayWidget(){
   const items = CurrentTeacher.todaysTrials.map(l => {
     const time = new Date(l.lesson_date).toLocaleTimeString('ru-RU', { timeZone: tz, hour: '2-digit', minute: '2-digit' });
     const name = l.guest_name || (l.profiles && l.profiles.full_name) || 'Ученик';
-    return `<div class="gl-today-item"><span class="t">${esc(time)}</span><span class="n">🌱 ${esc(name)}</span>
+    return `<div class="gl-today-item"><span class="t">${esc(time)}</span><span class="n">${esc(name)}</span>
       <button class="gl-today-add" data-quickplan="${esc(l.id)}" data-qname="${esc(name)}">+ Урок</button></div>`;
   }).join('');
   return `<div class="gl-glass gl-today" id="todayWidget"><span class="gl-today-lbl">Сегодня у вас</span><div class="gl-today-list">${items}</div></div>`;
