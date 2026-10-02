@@ -1113,6 +1113,29 @@ const Pages = {
     },
   },
 
+  reports: {
+    title: 'Отчёты', icon: '📝',
+    render(root){
+      const done = Plans.list().filter(p => p.status === 'done' && p.report);
+      root.innerHTML = `<h1 class="page-title">Отчёты</h1>
+        <p class="page-sub">Отчёты по проведённым пробным — что получилось, что не очень, уровень и цель ученика.</p>
+        ${done.length ? `<div id="repList" class="grid"></div>` : `<div class="empty">Пока нет ни одного проведённого пробного — отчёт появится здесь после того, как доведёте урок до конца в live-режиме.</div>`}`;
+      if (!done.length) return;
+      root.querySelector('#repList').innerHTML = done.map(p => {
+        const r = p.report;
+        return `<article class="card" data-plan="${esc(p.id)}" style="cursor:pointer">
+          <div class="card-top"><div class="grow"><span class="badge">${esc(r.level || p.student.level || '—')}</span><span class="tag">${new Date(r.savedAt || p.updatedAt).toLocaleDateString('ru-RU')}</span></div></div>
+          <h3>${esc(p.student.name || 'Ученик')}</h3>
+          ${r.topics && r.topics.length ? `<p class="outcome">${esc(r.topics.join(', '))}</p>` : ''}
+          ${r.good ? `<div class="lead"><b>Что получилось</b>${esc(r.good)}</div>` : ''}
+          ${r.bad ? `<div class="kv"><b>Что не очень</b>${esc(r.bad)}</div>` : ''}
+          ${r.goal ? `<div class="kv"><b>Цель</b>${esc(r.goal)}</div>` : ''}
+        </article>`;
+      }).join('');
+      root.querySelectorAll('[data-plan]').forEach(el => el.onclick = () => { location.hash = '#/builder=' + el.dataset.plan; });
+    },
+  },
+
   structure: {
     title: 'Lesson Structure', icon: '⏱️',
     render(root){
@@ -1327,6 +1350,7 @@ const NAV_ICONS = {
   materials: '<path d="M3 6h6l2 2h10v11H3z"></path>',
   checklist: '<path d="M9 6h12M9 12h12M9 18h12"></path><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"></path>',
   library: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>',
+  reports: '<path d="M9 2h6l5 5v13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"></path><path d="M14 2v6h6"></path><path d="M9 13h6M9 17h6"></path>',
   favorite: '<path d="m12 3 2.8 5.8 6.2.9-4.5 4.4 1 6.3L12 17.5 6.5 20.4l1-6.3L3 9.7l6.2-.9z"></path>',
   translate: '<circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"></path>',
   back: '<path d="M15 6l-6 6 6 6"></path>',
@@ -1339,6 +1363,7 @@ function renderNav(){
     materials: DB.materials.items.length, builder: Plans.list().length || null,
     checklist: DB.checklist.reduce((n, g) => n + g.items.length, 0),
     library: DB.lessons.length + DB.activities.items.length + DB.materials.items.length,
+    reports: Plans.list().filter(p => p.status === 'done').length || null,
   };
   const isActive = route => currentRoute === route || (route === 'builder' && currentRoute.indexOf('builder=') === 0);
   const glItem = (route, key, label) => `<a class="gl-nav${isActive(route) ? ' active' : ''}" href="#/${route}">${svgIcon(NAV_ICONS[key])}<span class="grow">${esc(label)}</span>${counts[key] ? `<span class="cnt">${counts[key]}</span>` : ''}</a>`;
@@ -1347,6 +1372,7 @@ function renderNav(){
     ${glItem('', 'home', 'Главная')}
     ${glItem('builder', 'builder', 'Пробные уроки')}
     ${glItem('library', 'library', 'Библиотека')}
+    ${glItem('reports', 'reports', 'Отчёты')}
     <div class="gl-div"></div>
     <a class="gl-nav" href="#" id="navFav">${svgIcon(NAV_ICONS.favorite)}<span class="grow">Избранное</span></a>
     <a class="gl-nav ru-toggle" href="#" data-ru-toggle>${svgIcon(NAV_ICONS.translate)}<span class="grow">Перевод</span><span class="gl-ru rt-short">RU вкл</span></a>
