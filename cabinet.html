@@ -2056,9 +2056,9 @@ async function loadTeacherContact(){
     }
   }
   const sideNameEl = document.getElementById('sideTeacherName');
-  if (sideNameEl && teacherFullName) sideNameEl.textContent = teacherFullName;
+  if (sideNameEl && teacherFullName) sideNameEl.textContent = firstName(teacherFullName);
   const sideAvatarEl = document.getElementById('sideTeacherAvatar');
-  if (sideAvatarEl) sideAvatarEl.textContent = initials(teacherFullName);
+  if (sideAvatarEl) sideAvatarEl.textContent = initials(firstName(teacherFullName));
 }
 
 function meetingWindowStatus(lesson){
