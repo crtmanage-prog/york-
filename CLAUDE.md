@@ -45,12 +45,16 @@
   SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co'
   SUPABASE_ANON_KEY = 'sb_publishable_jlcvNafksQ0WhrYCY08anw_ju194-I9'
   ```
-- **Часовой пояс школы — `Asia/Yekaterinburg`** (константа `SCHOOL_TZ`
+- **Часовой пояс школы — `Europe/Moscow` (МСК)** (константа `SCHOOL_TZ`
   почти везде). Все данные о времени уроков и доступности хранятся в
   этом поясе в базе — это внутренний «единый язык» всей платформы.
   Отображение в личном поясе конкретного человека (ученика) — это
   ТОЛЬКО слой поверх, при отображении, а не то, как хранятся данные.
   Не путай эти две вещи при работе с датами.
+  Раньше школа жила по Уфе/Екатеринбургу (UTC+5); в октябре 2026 всё
+  переведено на МСК: часы доступности/пожеланий сдвинуты на −2, cron и
+  тексты уведомлений пересчитаны, везде подпись «МСК». Слово «Уфа» как
+  время школы больше не используем.
 - **Telegram-бот (@weyorkonlinebot) разрабатывается ОТДЕЛЬНО**, другим
   Claude-инстансом/сессией, через Supabase Edge Functions
   (`telegram-webhook`). Если работаешь в Claude Code над сайтом — не
@@ -109,7 +113,7 @@
 
 `profiles` (роли: student/teacher/admin, `timezone` — IANA-строка типа
 `Asia/Krasnoyarsk`, часто пустая у старых записей — код должен откатываться
-на `Asia/Yekaterinburg`, если пусто или невалидно), `lessons`
+на `Europe/Moscow`, если пусто или невалидно), `lessons`
 (`status`: upcoming/completed/cancelled/rescheduled), `homework`
 (submission через текст/файл/ссылку, поле `submission_links` для ссылок
 ученика), `payments` (`lessons_included`, `lessons_used`, `valid_until`),

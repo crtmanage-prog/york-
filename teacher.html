@@ -1043,25 +1043,14 @@ function firstName(fullName){
   return fullName.trim().split(/\s+/)[0];
 }
 
-const SCHOOL_TZ = 'Asia/Yekaterinburg'; // Уфа (тот же часовой пояс, что Екатеринбург)
+const SCHOOL_TZ = 'Europe/Moscow'; // школа целиком работает по Москве (МСК)
 
-// эти учителя физически в Уфе — им время показываем как раньше, Уфа+МСК.
-// у всех остальных учителей по умолчанию только МСК (проще ориентироваться
-// с учениками, у которых МСК-привязанные часовые пояса)
-const TEACHER_DUAL_TZ_EXCEPTIONS = new Set([
-  '5fe5ee21-388b-4bf4-a245-a43bd6306c1d', // Софья
-  'a6b11228-6886-4e17-ada5-2e8593986410'  // Дарья П
-]);
-function teacherShowsDualTz(){
-  return !!(currentUser && TEACHER_DUAL_TZ_EXCEPTIONS.has(currentUser.id));
-}
-// в каком часовом поясе учитель видит и вводит время: по умолчанию МСК,
-// у исключений (Софья, Дарья П) — Уфа. В базе всё хранится по Уфе (SCHOOL_TZ).
-function teacherViewTz(){ return teacherShowsDualTz() ? SCHOOL_TZ : 'Europe/Moscow'; }
-// на сколько часов Уфа впереди часового пояса учителя (для доступности)
-function availOffset(){ return teacherViewTz() === 'Europe/Moscow' ? 2 : 0; }
-// часы, как они лежат в базе (по Уфе)
-function availStored(){ const off = availOffset(); return AVAIL_HOURS.map(h => h + off); }
+// вся школа работает по МСК: время везде показывается и вводится по Москве
+function teacherShowsDualTz(){ return false; }
+function teacherViewTz(){ return SCHOOL_TZ; }
+// в базе часы доступности тоже по МСК — смещения нет
+function availOffset(){ return 0; }
+function availStored(){ return AVAIL_HOURS.slice(); }
 
 const TIMEZONES = [
   { tz:'Europe/Kaliningrad', label:'Калининград (МСК-1)' },
@@ -1445,7 +1434,7 @@ document.querySelectorAll('input[name="hwTarget"]').forEach(el => {
 });
 
 /* ================= ДОСТУПНОСТЬ ПРЕПОДАВАТЕЛЯ ================= */
-const AVAIL_HOURS = [8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+const AVAIL_HOURS = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
 let availabilitySet = new Set(); // ключи вида "2026-08-20|18"
 
 function availKey(dateStr, hour){ return dateStr + '|' + hour; }
@@ -1529,9 +1518,7 @@ function renderAvailabilityGrid(){
   const el = document.getElementById('availabilityGrid');
   if (!el) return;
   const noteEl = document.getElementById('availTzNote');
-  if (noteEl) noteEl.textContent = availOffset()
-    ? '🕐 Время указывается по Москве (МСК): отмечай часы так, как они у тебя на часах — пересчитывать не нужно.'
-    : '🕐 Время указывается по Уфе (МСК+2).';
+  if (noteEl) noteEl.textContent = '🕐 Время указывается по Москве (МСК): отмечай часы по московскому времени.';
   const days = nextTwoWeeks();
   const busy = busyHoursMap();
   const dayNames = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];

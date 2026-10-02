@@ -390,7 +390,7 @@ let realTeacherIds = []; // доступно и внутри loadSlotsForTeacher
 })();
 
 /* ---------- часовые пояса: показываем время так, как его видит ученик ---------- */
-const SCHOOL_TZ = 'Asia/Yekaterinburg';
+const SCHOOL_TZ = 'Europe/Moscow';
 const TZ_MAP = {
   'Калининград (МСК-1)': 'Europe/Kaliningrad',
   'Москва (МСК)': 'Europe/Moscow',
@@ -473,7 +473,7 @@ function instantInStudentTz(instant){
 }
 
 /* ---------- свободные окна выбранного преподавателя ---------- */
-const SCHOOL_TZ_LABEL = 'Уфа';
+const SCHOOL_TZ_LABEL = 'МСК';
 const DAY_NAMES = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
 const MONTHS_SHORT = ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
 let selectedSlots = [];

@@ -127,7 +127,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <option value="Asia/Yakutsk">Якутск (МСК+6)</option>
       <option value="Asia/Vladivostok">Владивосток (МСК+7)</option>
     </select>
-    <div class="tz-fallback" id="tzFallbackNote">⚠️ Не удалось точно определить ваш часовой пояс, выбрали по умолчанию Екатеринбург/Уфа. Если это не так, поправьте вручную.</div>
+    <div class="tz-fallback" id="tzFallbackNote">⚠️ Не удалось точно определить ваш часовой пояс, выбрали по умолчанию Москву (МСК). Если это не так, поправьте вручную.</div>
   </div>
 
   <div class="field">
@@ -233,7 +233,7 @@ document.querySelectorAll('#isStudentGroup input').forEach(el => {
 });
 
 /* ---------- часовой пояс: пробуем определить автоматически ---------- */
-const SCHOOL_TZ = 'Asia/Yekaterinburg';
+const SCHOOL_TZ = 'Europe/Moscow';
 const tzSelect = document.getElementById('timezoneSelect');
 const tzFallbackNote = document.getElementById('tzFallbackNote');
 

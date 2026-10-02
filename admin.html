@@ -1597,7 +1597,7 @@ function timeGreetingWord(name){
   return line.replace('{name}', name || 'there');
 }
 
-const SCHOOL_TZ = 'Asia/Yekaterinburg'; // Уфа
+const SCHOOL_TZ = 'Europe/Moscow'; // школа целиком работает по Москве (МСК)
 
 const TIMEZONES = [
   { tz:'Europe/Kaliningrad', label:'Калининград (МСК-1)' },
@@ -1657,9 +1657,8 @@ function fmtDateTime(d){
   if (!d) return '—';
   const date = new Date(d);
   const dayStr = date.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:SCHOOL_TZ });
-  const ufaTime = date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:SCHOOL_TZ });
   const mskTime = date.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:'Europe/Moscow' });
-  return `${dayStr}, ${ufaTime} (Уфа) · ${mskTime} (МСК)`;
+  return `${dayStr}, ${mskTime} (МСК)`;
 }
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
@@ -4472,8 +4471,8 @@ function fmtSlotRu(s){
 
 // метки часовых поясов на trial-form.html — вида "Москва (МСК)" / "Иркутск (МСК+5)" —
 // офсет от МСК зашит прямо в тексте, парсим его, чтобы пересчитать время ученика.
-// Школа (Уфа/Екатеринбург) = МСК+2 — preferred_slots.hour хранится именно в этом поясе.
-const SCHOOL_MSK_OFFSET = 2;
+// Школа работает по МСК — preferred_slots.hour хранится именно в этом поясе.
+const SCHOOL_MSK_OFFSET = 0;
 function parseMskOffset(label){
   if (!label) return null;
   const m = label.match(/МСК([+-]\d+)?\)/);
@@ -4488,9 +4487,9 @@ function tzCityName(label){
 function fmtSlotBothRu(s, timezoneLabel){
   const schoolStr = fmtSlotRu(s);
   const offset = parseMskOffset(timezoneLabel);
-  if (offset === null) return `${schoolStr} (Уфа)${timezoneLabel ? ' · ' + timezoneLabel : ''}`;
+  if (offset === null) return `${schoolStr} (МСК)${timezoneLabel ? ' · ' + timezoneLabel : ''}`;
   const delta = offset - SCHOOL_MSK_OFFSET;
-  if (delta === 0) return `${schoolStr} (Уфа)`;
+  if (delta === 0) return `${schoolStr} (МСК)`;
 
   const days = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
   const studentDate = new Date(s.date + 'T00:00:00');
@@ -4501,7 +4500,7 @@ function fmtSlotBothRu(s, timezoneLabel){
   const studentTimeStr = sameDay
     ? `${String(studentHour).padStart(2,'0')}:00`
     : `${days[studentDate.getDay()]}, ${studentDate.getDate()} ${MONTH_NAMES[studentDate.getMonth()].slice(0,3)} в ${String(studentHour).padStart(2,'0')}:00`;
-  return `${schoolStr} Уфа · ${studentTimeStr} ${tzCityName(timezoneLabel)}`;
+  return `${schoolStr} МСК · ${studentTimeStr} ${tzCityName(timezoneLabel)}`;
 }
 
 function preferredSlotsHtml(r){
@@ -5017,7 +5016,7 @@ document.getElementById('reqCalNext').addEventListener('click', () => {
 });
 
 /* ---------- РАСПИСАНИЕ УЧИТЕЛЕЙ (полный вид) ---------- */
-const AVAIL_HOURS = [8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+const AVAIL_HOURS = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
 
 async function loadAllAvailability(){
   const today = new Date(); today.setHours(0,0,0,0);
