@@ -1072,6 +1072,7 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
 .live .lv-in{height:34px;border-radius:10px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);padding:0 10px;font:inherit;font-size:13px}
 .live .lv-pnav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;position:sticky;top:-28px;background:#fff;padding:6px 0;z-index:2}
 .live .lv-pslide{max-width:1000px}
+.live .lv-pslide:has(.sl-dark,.pl-wrap,.ab-wrap,.en-wrap){max-width:none}
 .show.embed{position:static;inset:auto;display:block;background:transparent;z-index:auto}
 .show.embed .show-body{padding:0;margin:0;max-width:none}
 .live .lv-pslide .bk-h2{font-family:Unbounded,sans-serif;font-size:clamp(26px,3.4vw,40px);margin:0 0 16px;line-height:1.15}
@@ -1081,6 +1082,56 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
 .live .lv-sc li{position:relative;background:#F7F7F2;border-left:3px solid #D2E739;border-radius:8px;padding:8px 28px 8px 10px;font-size:13px}
 .live .lv-sc li button{all:unset;cursor:pointer;position:absolute;right:8px;top:8px;color:#A8AAA4;font-size:12px}
 .live .lv-card textarea{border-radius:10px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);padding:8px 10px;font:inherit;font-size:13px;resize:vertical;color:#0A0A09}
+
+/* --- слайды по черновику презентации --- */
+.sl-dark{position:relative;overflow:hidden;border-radius:22px;background:radial-gradient(circle at 80% 15%,rgba(210,231,57,.30),transparent 46%),#0A0A09;color:#fff;padding:32px 40px 84px;min-height:440px;display:flex;flex-direction:column;gap:16px}
+.sl-dark .brand{font-family:Unbounded,sans-serif;font-weight:800;font-size:20px}
+.sl-dark .brand i{color:#D2E739;font-style:normal}
+.sl-dark .tag{color:#D2E739;font-family:Unbounded,sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:28px}
+.sl-dark h1{font-family:Unbounded,sans-serif;font-size:clamp(44px,7vw,92px);line-height:1.05;margin:0;color:#fff}
+.sl-dark p{font-size:clamp(17px,2vw,24px);color:rgba(255,255,255,.72);max-width:34ch;margin:0;line-height:1.4}
+.sl-dark .chips{display:flex;gap:10px;flex-wrap:wrap}
+.sl-dark .chips span{border:1px solid #D2E739;color:#D2E739;border-radius:999px;padding:8px 18px;font-size:15px;font-weight:600}
+.sl-tape{position:absolute;left:-20px;right:-20px;bottom:14px;transform:rotate(-1.6deg);background:#D2E739;overflow:hidden;white-space:nowrap}
+.sl-tape div{display:inline-flex;gap:0;padding:11px 0;animation:tape 40s linear infinite}
+.sl-tape span{color:#0A0A09;font-weight:700;font-size:15px;padding:0 14px}
+.sl-tape span::after{content:" · ";padding-left:14px}
+@keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.pl-wrap .bk-title{margin-bottom:14px}
+.pl-bar{display:flex;gap:4px;height:12px;margin-bottom:22px}
+.pl-bar i{display:block;border-radius:999px}
+.pl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.pl-card{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid rgba(17,18,14,.09);border-radius:18px;padding:16px 18px;box-shadow:0 10px 26px rgba(17,18,14,.05)}
+.pl-card .n{flex:none;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Unbounded,sans-serif;font-weight:700;font-size:16px;color:#0A0A09}
+.pl-card .pl-min{font-size:12px;font-weight:700;color:#5B6B0A;letter-spacing:.04em;text-transform:uppercase}
+.pl-card b{display:block;font-family:Unbounded,sans-serif;font-size:clamp(16px,1.8vw,21px)}
+.pl-card span:not(.n){display:block;font-size:14px;color:#6B6C64;margin-top:2px}
+.ab-wrap{display:flex;gap:28px;align-items:stretch;flex-wrap:wrap}
+.ab-photo{flex:0 0 min(300px,100%);min-height:360px;border-radius:26px;background:radial-gradient(circle at 30% 20%,#EAF59A,#D2E739 55%,#B9D126);display:flex;align-items:center;justify-content:center}
+.ab-photo span{font-size:clamp(110px,14vw,170px);line-height:1}
+.ab-body{flex:1;min-width:260px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.ab-body .bk-kicker{margin:0}
+.ab-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.ab-card{background:#fff;border:1px solid rgba(17,18,14,.09);border-radius:18px;padding:16px 20px;box-shadow:0 10px 26px rgba(17,18,14,.05)}
+.ab-card small{display:block;font-size:13px;color:#6B6C64;margin-bottom:4px}
+.ab-card b{font-size:clamp(18px,2vw,26px);line-height:1.25}
+.ab-lime{background:#D2E739;border-radius:18px;padding:18px 24px;font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(18px,2.2vw,28px)}
+.en-wrap{display:flex;gap:20px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+.en-left{flex:1 1 560px;min-width:300px;display:flex;flex-direction:column;gap:12px}
+.en-left .bk-kicker{margin:0}
+.en-sub{font-size:clamp(16px,1.8vw,22px);color:#3A3B33;margin:0;line-height:1.4;max-width:46ch}
+.en-cards{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.en-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px;background:#fff;border:1px solid rgba(17,18,14,.09);border-radius:18px;padding:14px 16px}
+.en-card.hot{background:#D2E739;border-color:#D2E739}
+.en-card img{width:112px;height:112px;flex:none;border-radius:10px;background:#fff;padding:4px}
+.en-card small{display:block;font-size:13px;color:#6B6C64}
+.en-card.hot small{color:#3A3B33}
+.en-card b{display:block;font-family:Unbounded,sans-serif;font-size:clamp(13px,1.35vw,17px);margin:2px 0;word-break:break-all}
+.en-card span{font-size:13px;color:#6B6C64}
+.en-card.hot span{color:#3A3B33}
+.en-foot{font-size:14px;color:#6B6C64;margin:4px 0 0}
+.en-img{flex:0 1 380px;width:380px;max-width:36%;align-self:flex-end;object-fit:contain}
+@media (max-width:1100px){.en-img{display:none}.en-cards{grid-template-columns:1fr}}
 
 </style>
 </head>
@@ -3460,6 +3511,74 @@ function gotoBlock(i){
   liveAutoShow();
 }
 
+/* ---------- Оформленные слайды пробного (по черновику презентации) ---------- */
+const SEG_STOPS = [[210, 231, 57], [127, 160, 44], [30, 84, 28]];
+const segColor = t => {
+  const k = t * (SEG_STOPS.length - 1), i = Math.min(SEG_STOPS.length - 2, Math.floor(k)), f = k - i;
+  const a = SEG_STOPS[i], c = SEG_STOPS[i + 1];
+  return `rgb(${a.map((v, j) => Math.round(v + (c[j] - v) * f)).join(',')})`;
+};
+const teacherFirst = () => (typeof CurrentTeacher !== 'undefined' && CurrentTeacher && CurrentTeacher.profile) ? firstWord(CurrentTeacher.profile.full_name) : '';
+const SL_TAPE = ['Работа', 'Путешествия', 'Сериалы', 'Новые люди', 'Свободный английский'];
+const PLAN_SUB = {
+  intro: 'Знакомство: ты, я и твои цели', grammar: 'Короткая тема и полезные фразы', speaking: 'Говоришь ты', activity: 'Играем и закрепляем',
+  cabinet: 'Где всё будет лежать', recap: 'Что получилось', next: 'Как продолжить', topic: 'Короткая тема', practice: 'Закрепляем новое',
+};
+function helloSlideHtml(plan){
+  const name = (plan.student.name || '').trim();
+  const tape = [...SL_TAPE, ...SL_TAPE].map(x => `<span>${esc(x)}</span>`).join('');
+  return `<div class="sl-dark">
+    <span class="brand">YORK<i>!</i></span>
+    <span class="tag">Free trial · 30 минут</span>
+    <h1>Hello${name ? ', ' + esc(name) : ''}!</h1>
+    <p>Добро пожаловать на пробный урок. За 30 минут ты почувствуешь, что английский у тебя уже получается.</p>
+    <div class="chips"><span>Слышно меня?</span><span>Видно экран?</span><span>Удобно говорить?</span></div>
+    <div class="sl-tape"><div>${tape}</div></div>
+  </div>`;
+}
+function planSlideHtml(plan){
+  const blocks = plan.blocks.filter(b => !b.skipped);
+  const total = blocks.reduce((n, b) => n + (b.duration || 0), 0);
+  const bar = blocks.map((b, i) => `<i style="flex:${Math.max(1, b.duration || 1)};background:${segColor(blocks.length > 1 ? i / (blocks.length - 1) : 0)}"></i>`).join('');
+  const cards = blocks.map((b, i) => `<div class="pl-card"><span class="n" style="background:${segColor(blocks.length > 1 ? i / (blocks.length - 1) : 0)}">${i + 1}</span>
+      <div><div class="pl-min">${b.duration || 0} мин</div><b>${esc(b.title)}</b><span>${esc(PLAN_SUB[b.key] || '')}</span></div></div>`).join('');
+  return `<div class="pl-wrap"><p class="bk-kicker"><span class="bk-pill">Today</span></p>
+    <h3 class="bk-title">План на ${total} минут</h3>
+    <div class="pl-bar">${bar}</div>
+    <div class="pl-grid">${cards}</div></div>`;
+}
+const ABOUT_DIFF_DEFAULT = 'Больше говорим, меньше теории: каждый урок заканчивается живой речью.';
+function aboutSlideHtml(plan, b){
+  const name = teacherFirst();
+  return `<div class="ab-wrap">
+    <div class="ab-photo"><span>😊</span></div>
+    <div class="ab-body"><p class="bk-kicker"><span class="bk-pill">About the teacher</span></p>
+      <h3 class="bk-title">Hi, I’m ${esc(name || 'your teacher')}!</h3>
+      <div class="ab-cards">
+        <div class="ab-card"><small>На моих уроках</small><b>${esc(b.aboutDiff || ABOUT_DIFF_DEFAULT)}</b></div>
+        <div class="ab-card"><small>Задавай вопросы</small><b>Ask me anything!</b></div>
+      </div>
+      <div class="ab-lime">Знаете, почему я люблю английский?</div></div>
+  </div>`;
+}
+function endSlideHtml(){
+  const cards = [
+    ['manager', 'Записаться и вопросы', 't.me/thearbeiter01', 'менеджер в Telegram', true],
+    ['channel', 'Наш канал', 't.me/weyorkonline', 'новости и полезное', false],
+    ['site', 'Сайт', 'weyork.online', 'цены и запись онлайн', false],
+  ];
+  return `<div class="en-wrap">
+    <div class="en-left">
+      <p class="bk-kicker"><span class="bk-pill">Ready?</span></p>
+      <h3 class="bk-title">Как ваши первые впечатления от урока?</h3>
+      <p class="en-sub">Остались ли вопросы по занятию? Напиши менеджеру: подберём преподавателя, время и формат. Первый месяц со скидкой 15%.</p>
+      <div class="en-cards">${cards.map(([k, t, url, hint, hot]) => `<div class="en-card${hot ? ' hot' : ''}"><img src="trial-hub/images/qr-${k}.svg" alt="QR: ${esc(t)}"><div><small>${esc(t)}</small><b>${esc(url)}</b><span>${esc(hint)}</span></div></div>`).join('')}</div>
+      <p class="en-foot">Приведи друга: −15% на следующий месяц вам обоим</p>
+    </div>
+    <img class="en-img" src="trial-hub/images/student-desk.webp" alt="">
+  </div>`;
+}
+
 /* ---------- Сцена урока = то, что видит ученик ---------- */
 // показывать ли живой тестовый кабинет в Cabinet Preview: по умолчанию — да, если в этом браузере уже выполнен вход для предпросмотра
 const cabinetPreviewHasLogin = () => { try { return !!localStorage.getItem('york-cabinet-preview'); } catch(e){ return false; } };
@@ -3529,30 +3648,25 @@ function introSlideHtml(plan, b, sc){
   const t = sc.title;
   const kick = slideKick(b.title);
   const tchr = (typeof CurrentTeacher !== 'undefined' && CurrentTeacher && CurrentTeacher.profile) ? firstWord(CurrentTeacher.profile.full_name) : '';
-  if (t === 'Welcome') {
-    return kick + `<div class="bk-deco"><h3 class="bk-title">Hello!${ruSp('Привет!')}</h3>
-      <p class="bk-text">Welcome to your first lesson at YORK!${ruSp('Добро пожаловать на твой первый урок в YORK!')}</p>
-      ${tchr ? `<p class="bk-text">I’m ${esc(tchr)}, your English teacher.${ruSp('Я ' + tchr + ', твой учитель английского.')}</p>` : ''}</div>`;
-  }
-  if (t === 'About the teacher') {
-    return kick + `<div class="bk-deco"><h3 class="bk-title">About your teacher${ruSp('О твоём учителе')}</h3>${presCards([['My name', 'Моё имя'], ['Where I live', 'Где я живу'], ['Why I love English', 'Почему я люблю английский'], ['What I like to do', 'Что я люблю делать']])}</div>`;
-  }
+  if (t === 'Welcome') return helloSlideHtml(plan);
+  if (t === 'About the teacher') return aboutSlideHtml(plan, b);
   const qs = (sc.questions || []).map(q => [q, (DB.translations && DB.translations[normTxt(q)]) || '']);
   const isKnow = t === 'Getting to know you';
   return kick + `<div class="bk-deco"><h3 class="bk-title">${esc(isKnow ? 'Let’s get to know you' : t)}${isKnow ? ruSp('Давай познакомимся') : ''}</h3>${presCards(qs)}</div>`;
 }
 // слайды блока: [{ label, html }]. Пустой массив — нет материала или интерактив старого формата
 function liveSlides(plan, b){
-  if (b.mode === 'sections') return (b.sections || []).map(sc => ({ label: sc.title, html: introSlideHtml(plan, b, sc) }));
+  if (b.mode === 'sections') {
+    const arr = (b.sections || []).map(sc => ({ label: sc.title, html: introSlideHtml(plan, b, sc) }));
+    if (b.key === 'intro') { const wi = arr.findIndex(x => x.label === 'Welcome'); arr.splice(wi >= 0 ? wi + 1 : 0, 0, { label: 'Plan', html: planSlideHtml(plan) }); }
+    return arr;
+  }
   if (b.mode === 'recap') {
     if (b.recap == null) b.recap = recapDraft(plan);
     const lines = String(b.recap).split('\n').map(x => x.trim()).filter(Boolean);
     return [{ label: 'Recap', html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">What we did today${ruSp('Что мы сегодня сделали')}</h3><div class="bk-lines check">${lines.map(x => `<div class="bk-line">${esc(x)}</div>`).join('')}</div></div>` }];
   }
-  if (b.mode === 'next') {
-    const en = ['Message your manager', 'Our Telegram channel', 'Our website'], ruT = ['Напиши менеджеру', 'Наш Telegram-канал', 'Наш сайт'];
-    return [{ label: 'Next Steps', html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">What’s next?${ruSp('Что дальше?')}</h3><div class="bk-cards">${NEXT_LINKS.map((l, i) => `<div class="bk-card"><span class="bk-ct">${esc(en[i] || l.label)}${ruSp(ruT[i] || l.hint)}<span class="bk-url">${esc(l.url.replace('https://', ''))}</span></span></div>`).join('')}</div></div>` }];
-  }
+  if (b.mode === 'next') return [{ label: 'Next Steps', html: endSlideHtml() }];
   if (b.mode === 'text') {
     if (b.key === 'cabinet' && cabinetLiveOn()) {
       return [{ label: 'Cabinet', full: true, html: `<div class="cab-top">${slideKick(b.title, 'тестовый кабинет')}<button class="ws-ghost" id="cabWide" type="button" style="height:32px;margin-left:auto">Развернуть на весь экран</button></div><iframe class="cab-frame" src="cabinet.html?preview=1" title="Личный кабинет ученика"></iframe>` }];
@@ -3593,6 +3707,9 @@ function renderLiveAside(plan, b, slides, sub){
       <button class="ws-ghost" id="liveCabOpen" style="height:34px">Войти / открыть в окне</button>
       <button class="ws-ghost" id="liveCabOut" style="height:34px">Выйти из тестового кабинета</button>`);
   }
+  if (b.mode === 'sections' && b.sections[Math.min(sub, b.sections.length - 1)] && slides[sub] && slides[sub].label === 'About the teacher') {
+    parts.push(`<span class="k">«На моих уроках»</span><textarea id="liveAbout" rows="3" placeholder="${esc(ABOUT_DIFF_DEFAULT)}">${esc(b.aboutDiff || '')}</textarea>`);
+  }
   let qsOwner = null, qsBank = null;
   if (b.mode === 'sections') { qsOwner = b.sections[Math.min(sub, b.sections.length - 1)]; qsBank = qsOwner.qkind; }
   else if (b.mode === 'text') { qsOwner = b; qsBank = b.qkind; }
@@ -3621,6 +3738,8 @@ function renderLiveAside(plan, b, slides, sub){
     el.querySelector('#liveCabOpen').onclick = () => window.open('cabinet.html?preview=1', 'york-cabinet-preview', 'width=1100,height=800');
     el.querySelector('#liveCabOut').onclick = () => { try { localStorage.removeItem('york-cabinet-preview'); } catch(e){} toast('Вы вышли из тестового кабинета'); renderLive(); };
   }
+  const ab = el.querySelector('#liveAbout');
+  if (ab) ab.onchange = () => { b.aboutDiff = ab.value.trim(); Plans.save(plan); renderLive(); };
   const it1 = el.querySelector('#liveIntroT'), it2 = el.querySelector('#liveIntroX');
   if (it1) { it1.onchange = () => { b.introTitle = it1.value.trim(); Plans.save(plan); renderLive(); }; it2.onchange = () => { b.introText = it2.value.trim(); Plans.save(plan); renderLive(); }; }
   const rc = el.querySelector('#liveRecap');
@@ -3639,12 +3758,6 @@ function renderLive(){
   const total = plan.blocks.length;
 
   // сегменты прогресса: цвет каждого — по градиенту от лаймового к тёмно-зелёному вдоль всей полосы
-  const SEG_STOPS = [[210, 231, 57], [127, 160, 44], [30, 84, 28]];
-  const segColor = t => {
-    const k = t * (SEG_STOPS.length - 1), i = Math.min(SEG_STOPS.length - 2, Math.floor(k)), f = k - i;
-    const a = SEG_STOPS[i], c = SEG_STOPS[i + 1];
-    return `rgb(${a.map((v, j) => Math.round(v + (c[j] - v) * f)).join(',')})`;
-  };
   $('#liveSeg').innerHTML = plan.blocks.map((x, i) => `<button class="s${i === cur ? ' cur' : (x.skipped ? ' skip' : (i < cur || x.visited ? ' done' : ''))}" style="flex:${Math.max(1, x.duration || 1)};--c:${segColor(plan.blocks.length > 1 ? i / (plan.blocks.length - 1) : 0)}" data-seg="${i}"><i></i><span>${esc(x.title)}</span></button>`).join('');
   $('#liveSeg').querySelectorAll('[data-seg]').forEach(s => s.onclick = () => gotoBlock(+s.dataset.seg));
 
