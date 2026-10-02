@@ -1083,55 +1083,58 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
 .live .lv-sc li button{all:unset;cursor:pointer;position:absolute;right:8px;top:8px;color:#A8AAA4;font-size:12px}
 .live .lv-card textarea{border-radius:10px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);padding:8px 10px;font:inherit;font-size:13px;resize:vertical;color:#0A0A09}
 
-/* --- слайды по черновику презентации --- */
-.sl-dark{position:relative;overflow:hidden;border-radius:22px;background:radial-gradient(circle at 80% 15%,rgba(210,231,57,.30),transparent 46%),#0A0A09;color:#fff;padding:32px 40px 84px;min-height:440px;display:flex;flex-direction:column;gap:16px}
-.sl-dark .brand{font-family:Unbounded,sans-serif;font-weight:800;font-size:20px}
-.sl-dark .brand i{color:#D2E739;font-style:normal}
-.sl-dark .tag{color:#D2E739;font-family:Unbounded,sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:28px}
-.sl-dark h1{font-family:Unbounded,sans-serif;font-size:clamp(44px,7vw,92px);line-height:1.05;margin:0;color:#fff}
-.sl-dark p{font-size:clamp(17px,2vw,24px);color:rgba(255,255,255,.72);max-width:34ch;margin:0;line-height:1.4}
-.sl-dark .chips{display:flex;gap:10px;flex-wrap:wrap}
-.sl-dark .chips span{border:1px solid #D2E739;color:#D2E739;border-radius:999px;padding:8px 18px;font-size:15px;font-weight:600}
-.sl-tape{position:absolute;left:-20px;right:-20px;bottom:14px;transform:rotate(-1.6deg);background:#D2E739;overflow:hidden;white-space:nowrap}
-.sl-tape div{display:inline-flex;gap:0;padding:11px 0;animation:tape 40s linear infinite}
-.sl-tape span{color:#0A0A09;font-weight:700;font-size:15px;padding:0 14px}
-.sl-tape span::after{content:" · ";padding-left:14px}
-@keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.pl-wrap .bk-title{margin-bottom:14px}
-.pl-bar{display:flex;gap:4px;height:12px;margin-bottom:22px}
-.pl-bar i{display:block;border-radius:999px}
-.pl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
-.pl-card{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid rgba(17,18,14,.09);border-radius:18px;padding:16px 18px;box-shadow:0 10px 26px rgba(17,18,14,.05)}
-.pl-card .n{flex:none;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Unbounded,sans-serif;font-weight:700;font-size:16px;color:#0A0A09}
-.pl-card .pl-min{font-size:12px;font-weight:700;color:#5B6B0A;letter-spacing:.04em;text-transform:uppercase}
-.pl-card b{display:block;font-family:Unbounded,sans-serif;font-size:clamp(16px,1.8vw,21px)}
-.pl-card span:not(.n){display:block;font-size:14px;color:#6B6C64;margin-top:2px}
-.ab-wrap{display:flex;gap:28px;align-items:stretch;flex-wrap:wrap}
-.ab-photo{flex:0 0 min(300px,100%);min-height:360px;border-radius:26px;background:radial-gradient(circle at 30% 20%,#EAF59A,#D2E739 55%,#B9D126);display:flex;align-items:center;justify-content:center}
-.ab-photo span{font-size:clamp(110px,14vw,170px);line-height:1}
-.ab-body{flex:1;min-width:260px;display:flex;flex-direction:column;gap:14px;justify-content:center}
-.ab-body .bk-kicker{margin:0}
-.ab-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.ab-card{background:#fff;border:1px solid rgba(17,18,14,.09);border-radius:18px;padding:16px 20px;box-shadow:0 10px 26px rgba(17,18,14,.05)}
-.ab-card small{display:block;font-size:13px;color:#6B6C64;margin-bottom:4px}
-.ab-card b{font-size:clamp(18px,2vw,26px);line-height:1.25}
-.ab-lime{background:#D2E739;border-radius:18px;padding:18px 24px;font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(18px,2.2vw,28px)}
-.en-wrap{display:flex;gap:20px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
-.en-left{flex:1 1 560px;min-width:300px;display:flex;flex-direction:column;gap:12px}
-.en-left .bk-kicker{margin:0}
-.en-sub{font-size:clamp(16px,1.8vw,22px);color:#3A3B33;margin:0;line-height:1.4;max-width:46ch}
-.en-cards{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}
-.en-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px;background:#fff;border:1px solid rgba(17,18,14,.09);border-radius:18px;padding:14px 16px}
-.en-card.hot{background:#D2E739;border-color:#D2E739}
-.en-card img{width:112px;height:112px;flex:none;border-radius:10px;background:#fff;padding:4px}
-.en-card small{display:block;font-size:13px;color:#6B6C64}
-.en-card.hot small{color:#3A3B33}
-.en-card b{display:block;font-family:Unbounded,sans-serif;font-size:clamp(13px,1.35vw,17px);margin:2px 0;word-break:break-all}
-.en-card span{font-size:13px;color:#6B6C64}
-.en-card.hot span{color:#3A3B33}
-.en-foot{font-size:14px;color:#6B6C64;margin:4px 0 0}
-.en-img{flex:0 1 380px;width:380px;max-width:36%;align-self:flex-end;object-fit:contain}
-@media (max-width:1100px){.en-img{display:none}.en-cards{grid-template-columns:1fr}}
+/* --- слайды 960×540 по черновику презентации --- */
+.live .lv-pslide:has(.slide-fit){max-width:none}
+.slide-fit{position:relative;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px rgba(17,18,14,.16)}
+.slide16{position:absolute;left:0;top:0;width:960px;height:540px;transform-origin:top left;background:#F3F2ED;color:#0A0A09;box-sizing:border-box;padding:44px;overflow:hidden;font-family:'Golos Text',sans-serif}
+.slide16.dark{background:radial-gradient(circle at 78% 14%,rgba(210,231,57,.26),transparent 42%),#0A0A09;color:#fff}
+.slide16 .sf{position:absolute;left:44px;right:44px;bottom:26px;display:flex;justify-content:space-between;font-size:13px;color:#6B6C64}
+.slide16 .lab{display:block;font-family:Unbounded,sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5B6B0A}
+.slide16 h2{font-family:Unbounded,sans-serif;font-weight:700;font-size:46px;line-height:1.1;margin:10px 0 0}
+.slide16.dark .brand{font-family:Unbounded,sans-serif;font-weight:800;font-size:19px;color:#fff}
+.slide16.dark .brand i{color:#D2E739;font-style:normal}
+.slide16 .hello{position:absolute;left:44px;top:150px;right:44px}
+.slide16 .hello .tag{font-family:Unbounded,sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#D2E739}
+.slide16 .hello h1{font-family:Unbounded,sans-serif;font-weight:700;font-size:70px;line-height:1.05;margin:14px 0 18px;color:#fff}
+.slide16 .hello p{font-size:21px;line-height:1.45;color:rgba(255,255,255,.75);max-width:560px;margin:0 0 26px}
+.slide16 .hello .chips{display:flex;gap:12px}
+.slide16 .hello .chips span{border:1.5px solid #D2E739;color:#D2E739;border-radius:999px;padding:9px 20px;font-size:15px;font-weight:600}
+.slide16 .tape{position:absolute;left:-30px;right:-30px;bottom:38px;transform:rotate(-1.8deg);background:#D2E739;overflow:hidden;white-space:nowrap}
+.slide16 .tape div{display:inline-flex;padding:13px 0;animation:tape 50s linear infinite}
+.slide16 .tape span{color:#0A0A09;font-weight:700;font-size:16px;padding:0 16px}
+.slide16 .tape span::after{content:" \00B7 ";padding-left:16px}
+@keyframes tape{from{transform:translateX(0)}to{transform:translateX(-33.33%)}}
+.slide16 .pl-bar{display:flex;gap:4px;height:12px;margin:22px 0 22px}
+.slide16 .pl-bar i{display:block;border-radius:999px}
+.slide16 .pl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.slide16 .pl-grid.dense{grid-template-columns:repeat(4,1fr);gap:9px}
+.slide16 .pl-card{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid rgba(17,18,14,.09);border-radius:16px;padding:14px 16px;box-shadow:0 8px 22px rgba(17,18,14,.05)}
+.slide16 .pl-card .n{flex:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Unbounded,sans-serif;font-weight:700;font-size:15px}
+.slide16 .pl-card em{display:block;font-style:normal;font-size:12px;font-weight:700;color:#5B6B0A;letter-spacing:.04em;text-transform:uppercase}
+.slide16 .pl-card b{display:block;font-family:Unbounded,sans-serif;font-size:18px;line-height:1.2}
+.slide16 .pl-card span:not(.n){display:block;font-size:13.5px;color:#6B6C64;margin-top:2px}
+.slide16 .pl-grid.dense .pl-card{padding:10px 12px;gap:10px}
+.slide16 .pl-grid.dense .pl-card b{font-size:15px}
+.slide16 .ab-photo{position:absolute;left:44px;top:44px;width:272px;height:420px;border-radius:24px;background:radial-gradient(circle at 30% 20%,#EAF59A,#D2E739 55%,#B9D126);display:flex;align-items:center;justify-content:center}
+.slide16 .ab-photo span{font-size:150px;line-height:1}
+.slide16 .ab-body{position:absolute;left:348px;right:44px;top:92px}
+.slide16 .ab-body h2{font-size:46px;margin:12px 0 22px}
+.slide16 .ab-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.slide16 .ab-card{background:#fff;border:1px solid rgba(17,18,14,.09);border-radius:16px;padding:16px 20px}
+.slide16 .ab-card small{display:block;font-size:13px;color:#6B6C64;margin-bottom:6px}
+.slide16 .ab-card b{font-size:19px;line-height:1.25}
+.slide16 .ab-lime{background:#D2E739;border-radius:16px;padding:20px 24px;font-family:Unbounded,sans-serif;font-weight:700;font-size:22px}
+.slide16 .en-h{font-size:35px;max-width:600px}
+.slide16 .en-sub{font-size:16px;line-height:1.45;color:#3A3B33;max-width:560px;margin:10px 0 16px}
+.slide16 .en-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:580px}
+.slide16 .en-card{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid rgba(17,18,14,.09);border-radius:16px;padding:12px 14px}
+.slide16 .en-card.hot{background:#D2E739;border-color:#D2E739}
+.slide16 .en-card img{width:96px;height:96px;border-radius:8px;background:#fff;padding:3px}
+.slide16 .en-card small{display:block;font-size:12px;color:#6B6C64}
+.slide16 .en-card.hot small,.slide16 .en-card.hot span{color:#3A3B33}
+.slide16 .en-card b{display:block;font-family:Unbounded,sans-serif;font-size:13px;margin:1px 0;word-break:break-all}
+.slide16 .en-card span{font-size:12px;color:#6B6C64}
+.slide16 .en-img{position:absolute;right:16px;bottom:44px;width:290px;height:auto;object-fit:contain}
 
 </style>
 </head>
@@ -3524,42 +3527,52 @@ const PLAN_SUB = {
   intro: 'Знакомство: ты, я и твои цели', grammar: 'Короткая тема и полезные фразы', speaking: 'Говоришь ты', activity: 'Играем и закрепляем',
   cabinet: 'Где всё будет лежать', recap: 'Что получилось', next: 'Как продолжить', topic: 'Короткая тема', practice: 'Закрепляем новое',
 };
+// каждый слайд — холст 960×540 (как в PDF), масштабируется под экран
+const slideFrame = (inner, opts) => {
+  opts = opts || {};
+  const foot = opts.foot === false ? '' : `<div class="sf"><span>${opts.footL || 'YORK! · пробный урок'}</span><span>${esc(opts.footR || '')}</span></div>`;
+  return `<div class="slide-fit"><div class="slide16${opts.dark ? ' dark' : ''}">${inner}${foot}</div></div>`;
+};
 function helloSlideHtml(plan){
   const name = (plan.student.name || '').trim();
-  const tape = [...SL_TAPE, ...SL_TAPE].map(x => `<span>${esc(x)}</span>`).join('');
-  return `<div class="sl-dark">
+  const tape = [...SL_TAPE, ...SL_TAPE, ...SL_TAPE].map(x => `<span>${esc(x)}</span>`).join('');
+  return slideFrame(`
     <span class="brand">YORK<i>!</i></span>
-    <span class="tag">Free trial · 30 минут</span>
-    <h1>Hello${name ? ', ' + esc(name) : ''}!</h1>
-    <p>Добро пожаловать на пробный урок. За 30 минут ты почувствуешь, что английский у тебя уже получается.</p>
-    <div class="chips"><span>Слышно меня?</span><span>Видно экран?</span><span>Удобно говорить?</span></div>
-    <div class="sl-tape"><div>${tape}</div></div>
-  </div>`;
+    <div class="hello">
+      <span class="tag">Free trial · 30 минут</span>
+      <h1>Hello${name ? ', ' + esc(name) : ''}!</h1>
+      <p>Добро пожаловать на пробный урок. За 30 минут ты почувствуешь, что английский у тебя уже получается.</p>
+      <div class="chips"><span>Слышно меня?</span><span>Видно экран?</span><span>Удобно говорить?</span></div>
+    </div>
+    <div class="tape"><div>${tape}</div></div>`, { dark: true, foot: false });
 }
 function planSlideHtml(plan){
   const blocks = plan.blocks.filter(b => !b.skipped);
   const total = blocks.reduce((n, b) => n + (b.duration || 0), 0);
-  const bar = blocks.map((b, i) => `<i style="flex:${Math.max(1, b.duration || 1)};background:${segColor(blocks.length > 1 ? i / (blocks.length - 1) : 0)}"></i>`).join('');
-  const cards = blocks.map((b, i) => `<div class="pl-card"><span class="n" style="background:${segColor(blocks.length > 1 ? i / (blocks.length - 1) : 0)}">${i + 1}</span>
-      <div><div class="pl-min">${b.duration || 0} мин</div><b>${esc(b.title)}</b><span>${esc(PLAN_SUB[b.key] || '')}</span></div></div>`).join('');
-  return `<div class="pl-wrap"><p class="bk-kicker"><span class="bk-pill">Today</span></p>
-    <h3 class="bk-title">План на ${total} минут</h3>
+  const col = i => segColor(blocks.length > 1 ? i / (blocks.length - 1) : 0);
+  const bar = blocks.map((b, i) => `<i style="flex:${Math.max(1, b.duration || 1)};background:${col(i)}"></i>`).join('');
+  const cards = blocks.map((b, i) => `<div class="pl-card"><span class="n" style="background:${col(i)}">${i + 1}</span>
+      <div><em>${b.duration || 0} мин</em><b>${esc(b.title)}</b><span>${esc(PLAN_SUB[b.key] || '')}</span></div></div>`).join('');
+  return slideFrame(`
+    <span class="lab">Today</span>
+    <h2>План на ${total} минут</h2>
     <div class="pl-bar">${bar}</div>
-    <div class="pl-grid">${cards}</div></div>`;
+    <div class="pl-grid${blocks.length > 9 ? ' dense' : ''}">${cards}</div>`, { footR: '01 / Plan' });
 }
 const ABOUT_DIFF_DEFAULT = 'Больше говорим, меньше теории: каждый урок заканчивается живой речью.';
 function aboutSlideHtml(plan, b){
   const name = teacherFirst();
-  return `<div class="ab-wrap">
+  return slideFrame(`
     <div class="ab-photo"><span>😊</span></div>
-    <div class="ab-body"><p class="bk-kicker"><span class="bk-pill">About the teacher</span></p>
-      <h3 class="bk-title">Hi, I’m ${esc(name || 'your teacher')}!</h3>
+    <div class="ab-body">
+      <span class="lab">02 / About the teacher</span>
+      <h2>Hi, I’m ${esc(name || 'your teacher')}!</h2>
       <div class="ab-cards">
         <div class="ab-card"><small>На моих уроках</small><b>${esc(b.aboutDiff || ABOUT_DIFF_DEFAULT)}</b></div>
         <div class="ab-card"><small>Задавай вопросы</small><b>Ask me anything!</b></div>
       </div>
-      <div class="ab-lime">Знаете, почему я люблю английский?</div></div>
-  </div>`;
+      <div class="ab-lime">Знаете, почему я люблю английский?</div>
+    </div>`, { footR: '02 / About the teacher' });
 }
 function endSlideHtml(){
   const cards = [
@@ -3567,17 +3580,29 @@ function endSlideHtml(){
     ['channel', 'Наш канал', 't.me/weyorkonline', 'новости и полезное', false],
     ['site', 'Сайт', 'weyork.online', 'цены и запись онлайн', false],
   ];
-  return `<div class="en-wrap">
-    <div class="en-left">
-      <p class="bk-kicker"><span class="bk-pill">Ready?</span></p>
-      <h3 class="bk-title">Как ваши первые впечатления от урока?</h3>
-      <p class="en-sub">Остались ли вопросы по занятию? Напиши менеджеру: подберём преподавателя, время и формат. Первый месяц со скидкой 15%.</p>
-      <div class="en-cards">${cards.map(([k, t, url, hint, hot]) => `<div class="en-card${hot ? ' hot' : ''}"><img src="trial-hub/images/qr-${k}.svg" alt="QR: ${esc(t)}"><div><small>${esc(t)}</small><b>${esc(url)}</b><span>${esc(hint)}</span></div></div>`).join('')}</div>
-      <p class="en-foot">Приведи друга: −15% на следующий месяц вам обоим</p>
-    </div>
-    <img class="en-img" src="trial-hub/images/student-desk.webp" alt="">
-  </div>`;
+  return slideFrame(`
+    <span class="lab">Ready?</span>
+    <h2 class="en-h">Как ваши первые впечатления от урока?</h2>
+    <p class="en-sub">Остались ли вопросы по занятию? Напиши менеджеру: подберём преподавателя, время и формат. Первый месяц со скидкой 15%.</p>
+    <div class="en-cards">${cards.map(([k, t, url, hint, hot]) => `<div class="en-card${hot ? ' hot' : ''}"><img src="trial-hub/images/qr-${k}.svg" alt="QR: ${esc(t)}"><div><small>${esc(t)}</small><b>${esc(url)}</b><span>${esc(hint)}</span></div></div>`).join('')}</div>
+    <img class="en-img" src="trial-hub/images/student-desk.webp" alt="">`, { footL: 'Приведи друга: −15% на следующий месяц вам обоим', footR: 'YORK! English' });
 }
+// подгоняем холст 960×540 под доступное место (по ширине и по высоте экрана)
+function fitSlides(root){
+  (root || document).querySelectorAll('.slide-fit').forEach(f => {
+    const host = f.parentElement;
+    const w = host.clientWidth || 960;
+    const stage = $('#liveBody');
+    const nav = stage.querySelector('.lv-pnav');
+    const maxH = Math.max(260, (stage.clientHeight || window.innerHeight - 200) - 64 - (nav ? nav.offsetHeight + 18 : 0));
+    const k = Math.min(w / 960, maxH / 540, 1.6);
+    const inner = f.firstElementChild;
+    inner.style.transform = `scale(${k})`;
+    f.style.width = Math.round(960 * k) + 'px';
+    f.style.height = Math.round(540 * k) + 'px';
+  });
+}
+window.addEventListener('resize', () => { if (typeof live !== 'undefined' && live.classList.contains('open')) fitSlides($('#liveBody')); });
 
 /* ---------- Сцена урока = то, что видит ученик ---------- */
 // показывать ли живой тестовый кабинет в Cabinet Preview: по умолчанию — да, если в этом браузере уже выполнен вход для предпросмотра
@@ -3791,6 +3816,7 @@ function renderLive(){
     }
     body.querySelectorAll('[data-sub]').forEach(x => x.onclick = () => { liveState.sub = +x.dataset.sub; renderLive(); });
     body.scrollTop = 0;
+    fitSlides(body);
   } else {
     const item = b.itemId && byId[b.itemId];
     if (!item) {
