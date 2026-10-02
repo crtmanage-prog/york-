@@ -206,6 +206,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   .side-badge.show{display:inline-block;}
 
+  .tg-banner{display:flex; align-items:center; gap:14px; flex-wrap:wrap; background:#F3F8DC; border:1.5px solid var(--accent); border-radius:16px; padding:14px 16px; margin-bottom:20px;}
+  .tg-banner.hidden{display:none;}
+  .tg-banner-ic{font-size:24px; flex-shrink:0;}
+  .tg-banner-text{flex:1; min-width:220px; font-size:13px; line-height:1.5; color:var(--ink-soft);}
+  .tg-banner-text b{display:block; font-size:14.5px; color:var(--ink); margin-bottom:2px;}
+  .tg-banner-actions{display:flex; align-items:center; gap:8px; margin-left:auto;}
+  .tg-banner-close{background:none; border:none; font-size:22px; line-height:1; cursor:pointer; color:var(--ink-soft); padding:4px 8px;}
   .side-plate{border-radius:22px; overflow:hidden; background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.1);}
   .side-teacher-card{
     display:flex; align-items:center; gap:14px; padding:16px;
@@ -1271,6 +1278,17 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
   <main>
 
     <section class="panel active" id="panel-overview" style="position:relative;">
+      <div id="tgBanner" class="hidden tg-banner">
+        <div class="tg-banner-ic">🤖</div>
+        <div class="tg-banner-text">
+          <b>Подключи Telegram-бота YORK!</b>
+          <span>Напоминания о занятиях, статус абонемента, уведомления о новой домашке и комментариях преподавателя. Связь с преподавателем и менеджером — во вкладке «Поддержка».</span>
+        </div>
+        <div class="tg-banner-actions">
+          <a class="btn btn-accent btn-sm" id="tgBannerBtn" href="#" target="_blank" rel="noopener">Подключить бота</a>
+          <button type="button" class="tg-banner-close" id="tgBannerClose" aria-label="Скрыть на сегодня" title="Скрыть на сегодня">×</button>
+        </div>
+      </div>
       <div id="lowLessonsReminder" class="hidden" style="background:#FFF4DE; border:1.5px solid #E8C888; border-radius:14px; padding:14px 16px; margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
         <div style="font-size:13.5px; font-weight:600; color:#7A4E00;" id="lowLessonsText"></div>
         <a class="btn btn-dark btn-sm" href="#" onclick="document.querySelector('.tab-btn[data-tab=&quot;payment&quot;]').click(); return false;">Продлить</a>
@@ -1374,8 +1392,9 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <div class="card" style="margin-bottom:24px;">
         <div id="tgNotLinked">
           <p style="margin:0 0 14px; font-size:14px; line-height:1.6;">
-            Подключи Telegram — утром в день занятия придёт напоминание с временем и преподавателем.
-            А ещё сообщим, когда в абонементе останется мало занятий или подойдёт срок продления.
+            Подключи Telegram-бота — и ты ничего не пропустишь:
+            напоминания о занятиях, статус абонемента, уведомление, когда преподаватель задал домашку,
+            и когда появился комментарий к твоей домашке.
           </p>
           <a class="btn btn-accent" id="tgConnectBtn" href="#" target="_blank" rel="noopener">Подключить Telegram</a>
           <p style="font-size:12.5px; color:var(--ink-soft); margin:10px 0 0;">
@@ -3660,6 +3679,18 @@ async function setupTelegramBlock(){
   const linked = document.getElementById('tgLinked');
   if (!notLinked || !linked) return;
 
+  const banner = document.getElementById('tgBanner');
+  if (banner){
+    let hiddenToday = false;
+    try { hiddenToday = localStorage.getItem('tgBannerHidden') === new Date().toDateString(); } catch(e){}
+    if (!hiddenToday && !currentProfile.telegram_chat_id) banner.classList.remove('hidden');
+    const closeBtn = document.getElementById('tgBannerClose');
+    if (closeBtn) closeBtn.onclick = () => {
+      banner.classList.add('hidden');
+      try { localStorage.setItem('tgBannerHidden', new Date().toDateString()); } catch(e){}
+    };
+  }
+
   if (currentProfile.telegram_chat_id){
     notLinked.classList.add('hidden');
     linked.classList.remove('hidden');
@@ -3680,6 +3711,8 @@ async function setupTelegramBlock(){
 
   const btn = document.getElementById('tgConnectBtn');
   if (btn && token) btn.href = `https://t.me/${TG_BOT}?start=${token}`;
+  const bBtn = document.getElementById('tgBannerBtn');
+  if (bBtn && token) bBtn.href = `https://t.me/${TG_BOT}?start=${token}`;
 }
 
 async function loadMyDocuments(){
