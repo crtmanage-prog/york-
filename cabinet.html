@@ -2263,6 +2263,13 @@ function renderWeekPreview(){
   }).join('');
 }
 
+// ключ даты для «календарных» дат из локальных компонентов браузера (неделя, окна доступности):
+// не пересчитываем в МСК, иначе у учеников из других поясов день съезжает
+function fmtLocalKey(d){
+  const dt = new Date(d);
+  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+}
+
 function fmtDateKey(d){
   const dt = new Date(d);
   const parts = new Intl.DateTimeFormat('en-CA', { timeZone:myTimezone(), year:'numeric', month:'2-digit', day:'2-digit' }).formatToParts(dt);
@@ -2315,7 +2322,7 @@ function renderWeekGrid(){
   const todayKey = fmtDateKey(new Date());
   const tz = myTimezone();
   document.getElementById('weekGrid').innerHTML = days.map(d => {
-    const key = fmtDateKey(d);
+    const key = fmtLocalKey(d);
     const lesson = lessonsByDay[key];
     const isToday = key === todayKey;
     const isSelected = key === window.__selectedDate;
@@ -2434,9 +2441,9 @@ async function openCancelForm(lessonId){
   const limitDate = activePayment && activePayment.valid_until ? new Date(activePayment.valid_until) : null;
 
   const today = new Date(); today.setHours(0,0,0,0);
-  const from = fmtDateKey(today);
+  const from = fmtLocalKey(today);
   const horizon = new Date(today); horizon.setDate(horizon.getDate() + 27);
-  const to = fmtDateKey(limitDate && limitDate < horizon ? limitDate : horizon);
+  const to = (limitDate && limitDate < horizon) ? fmtDateKey(limitDate) : fmtLocalKey(horizon);
 
   const { data: slots } = await supabase.from('teacher_availability')
     .select('slot_date, hour').eq('teacher_id', teacherId)
