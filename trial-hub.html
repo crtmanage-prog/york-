@@ -1720,7 +1720,7 @@ function renderNav(){
     lessons: DB.lessons.length, activities: DB.activities.items.length, grammar: grammarLessons().length,
     materials: DB.materials.items.length, builder: Plans.list().length || null,
     checklist: DB.checklist.reduce((n, g) => n + g.items.length, 0),
-    library: DB.bank.length + DB.materials.items.length,
+    library: DB.bank.length + KEEP_OLD_IDS.length + DB.materials.items.length,
     reports: Plans.list().filter(p => p.status === 'done').length || null,
   };
   const isActive = route => currentRoute === route || (route === 'builder' && currentRoute.indexOf('builder=') === 0);
@@ -2580,7 +2580,7 @@ function extraBlockFor(x){
   const key = x.play ? 'activity' : (x.category === 'grammar' ? 'grammar' : 'speaking');
   return { id: uid('b'), key, title: x.play ? 'Activity' : (x.category === 'grammar' ? 'Grammar' : 'Speaking'), duration: itemMin(x), mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: x.id, note: '', skipped: false, visited: false, req: false, durEdit: true };
 }
-function itemLevel(x){ return x.bank ? String(x.level || '').replace(/-/g, '–') : (x.play ? (x.levels.length > 1 ? `${x.levels[0]}–${x.levels[x.levels.length - 1]}` : x.levels[0]) : x.level); }
+function itemLevel(x){ return x.bank ? String(x.level || '').replace(/-/g, '–') : (x.play ? (x.levels.length > 1 ? `${x.levels[0].replace('A0-A1', 'A0')}–${x.levels[x.levels.length - 1]}` : x.levels[0]) : x.level); }
 function itemMin(x){ return x.bank ? (x.min || 8) : (x.play ? 8 : 12); }
 function itemGradient(x){ return x.play ? 'linear-gradient(135deg,#EFE7FB,#DCCBF5)' : (x.category === 'grammar' ? 'linear-gradient(135deg,#DDEFFD,#BFE0F8)' : 'linear-gradient(135deg,#F1FAC8,#D7EF42)'); }
 const LV_ORDER = ['A0', 'A1', 'A2', 'B1', 'B2', 'C1'];
@@ -2595,7 +2595,10 @@ function itemMatchesLevel(x, lvl){
   if (x.bank) { const a = lvTokens(x.level), b = lvTokens(lvl); return a.some(t => b.includes(t)); }
   return x.play ? x.levels.includes(lvl) : x.level === lvl;
 }
-function allItems(){ return DB.bank; }
+// из старого банка оставляем только «Describing pictures» (интерактив с фото) — остальное заменил новый банк
+const KEEP_OLD_IDS = ['act-picture'];
+const oldKept = () => KEEP_OLD_IDS.map(id => byId[id]).filter(Boolean);
+function allItems(){ return [...DB.bank, ...oldKept()]; }
 function acceptFilter(accept){
   switch (accept) {
     case 'grammar': return x => !x.play && x.category === 'grammar';
@@ -3359,7 +3362,7 @@ function libraryList(){
   const items = [];
   if (libF.types.has('lessons')) DB.bank.filter(x => x.type === 'speaking').forEach(x => items.push({ kind: 'lesson', x }));
   if (libF.types.has('grammar')) DB.bank.filter(x => x.type === 'grammar').forEach(x => items.push({ kind: 'grammar', x }));
-  if (libF.types.has('activities')) DB.bank.filter(x => x.type === 'activity').forEach(x => items.push({ kind: 'activity', x }));
+  if (libF.types.has('activities')) [...DB.bank.filter(x => x.type === 'activity'), ...oldKept()].forEach(x => items.push({ kind: 'activity', x }));
   if (libF.types.has('materials')) DB.materials.items.forEach((m, i) => items.push({ kind: 'material', x: Object.assign({ id: 'mat:' + i }, m) }));
   let list = items;
   if (libF.levels.size) list = list.filter(({ kind, x }) => kind === 'material' ? false : [...libF.levels].some(l => itemMatchesLevel(x, l)));
@@ -3374,7 +3377,7 @@ function libraryList(){
 function renderLibraryPage(root){
   const rerender = () => renderLibraryPage(root);
   const typeLabels = [['grammar', 'Грамматика'], ['lessons', 'Speaking'], ['activities', 'Активности'], ['materials', 'Материалы']];
-  const total = DB.bank.length + DB.materials.items.length;
+  const total = DB.bank.length + KEEP_OLD_IDS.length + DB.materials.items.length;
   root.innerHTML = `
     <div class="ws-lib-head">
       <div><h1>Библиотека</h1><p>${total} материалов: темы, активности, грамматика. Откройте карточку, чтобы посмотреть, что внутри.</p></div>
@@ -3622,6 +3625,7 @@ function renderTodayWidget(){
     return it;
   });
   byId = Object.fromEntries([...DB.lessons, ...DB.activities.items, ...DB.bank].map(x => [x.id, x]));
+  if (byId['act-picture']) byId['act-picture'].title = 'Describing pictures';
   window.addEventListener('hashchange', route);
   route();
   loadTodayWidget();
