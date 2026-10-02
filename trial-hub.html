@@ -986,6 +986,36 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
 .bk-sec h4,.bk-h{font-family:Unbounded,sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5B6B0A;margin:0 0 6px;display:block}
 .live .lv-card .bk-html{font-size:13px}
 
+/* --- экран ученика: оформление разделов --- */
+.bk-kicker{display:flex;align-items:center;gap:12px;margin:0 0 18px;font-size:14px;color:#6B6C64;font-weight:600}
+.bk-pill{background:#D2E739;color:#0A0A09;border-radius:999px;padding:6px 16px;font-family:Unbounded,sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.bk-deco{display:flex;flex-direction:column;gap:16px;max-width:980px}
+.bk-title{font-family:Unbounded,sans-serif;font-size:clamp(28px,4vw,48px);line-height:1.15;font-weight:700;margin:0}
+.bk-text{font-size:clamp(18px,2.2vw,26px);line-height:1.45;color:#3A3B33;margin:0}
+.bk-sub{font-family:Unbounded,sans-serif;font-size:clamp(13px,1.5vw,16px);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5B6B0A;margin-top:6px}
+.bk-sub b{font-weight:700}
+.bk-cards{display:grid;gap:12px;grid-template-columns:1fr}
+.bk-cards.two{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))}
+.bk-card{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid rgba(17,18,14,.09);border-radius:20px;padding:16px 22px;box-shadow:0 10px 26px rgba(17,18,14,.05);font-size:clamp(19px,2.4vw,30px);line-height:1.3;font-weight:500}
+.bk-card .bk-ct{flex:1;min-width:0}
+.bk-card .bk-ct b{font-weight:700;background:linear-gradient(transparent 60%,rgba(210,231,57,.7) 60%)}
+.bk-n{flex:none;width:44px;height:44px;border-radius:50%;background:#D2E739;font-family:Unbounded,sans-serif;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center}
+.bk-formula{background:#0A0A09;color:#D2E739;border-radius:22px;padding:18px 26px;font-family:Unbounded,sans-serif;font-size:clamp(20px,2.8vw,34px);font-weight:700;line-height:1.3}
+.bk-formula b{font-weight:700}
+.bk-lines{display:grid;gap:10px}
+.bk-line{background:rgba(255,255,255,.8);border:1px solid rgba(17,18,14,.09);border-left:6px solid #D2E739;border-radius:14px;padding:12px 20px;font-size:clamp(18px,2.2vw,28px);line-height:1.35}
+.bk-lines.check .bk-line{border-left-color:#8FA21C;position:relative;padding-left:52px}
+.bk-lines.check .bk-line::before{content:"\2713";position:absolute;left:18px;top:50%;transform:translateY(-50%);font-weight:700;color:#5B6B0A}
+.bk-remember{background:#EEF6C4;border:2px solid #D2E739;border-radius:22px;padding:16px 24px;display:flex;flex-direction:column;gap:6px;font-size:clamp(18px,2.2vw,26px);line-height:1.4}
+.bk-remember p{margin:0}
+.bk-remember b{font-weight:700}
+.bk-lab{font-family:Unbounded,sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5B6B0A}
+.bk-vocab{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:rgba(210,231,57,.22);border-radius:20px;padding:14px 20px}
+.bk-vocab .bk-lab{margin-right:6px}
+.bk-vocab.big{background:none;padding:0;gap:12px}
+.bk-chip{background:#fff;border:1px solid rgba(17,18,14,.12);border-radius:999px;padding:6px 16px;font-size:clamp(16px,1.9vw,22px);font-weight:600}
+.bk-vocab.big .bk-chip{background:#D2E739;border-color:#D2E739;font-size:clamp(20px,2.6vw,30px);padding:10px 22px}
+
 </style>
 </head>
 <body>
@@ -1834,10 +1864,72 @@ let liveOnShowClose = null;   // колбэк: вернуться в Live mode �
 
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 // шаги показа для материала из нового банка: по одному экрану на раздел
+// оформление раздела материала для экрана ученика: карточки, формулы, чипы слов, выноски
+function bankDecorate(sc){
+  const tpl = document.createElement('template');
+  tpl.innerHTML = sc.html;
+  const kids = [...tpl.content.children];
+  const txt = el => el.textContent.trim();
+  const onlyBold = el => el.tagName === 'P' && el.children.length === 1 && el.firstElementChild.tagName === 'B' && txt(el) === txt(el.firstElementChild);
+  const lines = el => el.innerHTML.split(/<br\s*\/?>/i).map(x => x.trim()).filter(Boolean);
+  const chips = str => str.split('·').map(x => x.trim()).filter(Boolean).map(w => `<span class="bk-chip">${w}</span>`).join('');
+  const labelOf = el => (el.firstElementChild && el.firstElementChild.tagName === 'B') ? txt(el.firstElementChild) : '';
+  let out = '', i = 0;
+  while (i < kids.length) {
+    const el = kids[i];
+    if (i === 0 && sc.key !== 'vocab' && sc.key !== 'scheme' && onlyBold(el) && !/[+→]/.test(txt(el))) { out += `<h3 class="bk-title">${el.innerHTML}</h3>`; i++; continue; }
+    if (el.tagName === 'UL' || el.tagName === 'OL') {
+      const ordered = el.tagName === 'OL';
+      const start = ordered ? (parseInt(el.getAttribute('start'), 10) || 1) : 1;
+      const items = [...el.children];
+      const short = items.every(li => li.textContent.length < 58);
+      out += `<div class="bk-cards${ordered ? ' num' : ''}${(!ordered && short) ? ' two' : ''}">${items.map((li, k) => `<div class="bk-card">${ordered ? `<span class="bk-n">${start + k}</span>` : ''}<span class="bk-ct">${li.innerHTML}</span></div>`).join('')}</div>`;
+      i++; continue;
+    }
+    if (el.tagName === 'P') {
+      const label = labelOf(el);
+      if (/^Vocabulary:?$/i.test(label)) {
+        const rest = lines(el).slice(1).join(' · ');
+        out += `<div class="bk-vocab"><span class="bk-lab">Vocabulary</span>${chips(rest)}</div>`;
+        i++; continue;
+      }
+      if (sc.key === 'vocab' && /·/.test(txt(el))) {
+        const ls = lines(el);
+        const hasTitle = ls.length > 1 && !/·/.test(ls[0].replace(/<[^>]+>/g, ''));
+        out += (hasTitle ? `<h3 class="bk-title">${ls[0]}</h3>` : '') + `<div class="bk-vocab big">${chips(ls.slice(hasTitle ? 1 : 0).join(' · ').replace(/<[^>]+>/g, ''))}</div>`;
+        i++; continue;
+      }
+      if (/^Remember:?$/i.test(label)) {
+        const parts = [el.innerHTML.replace(/^\s*<b>Remember:?<\/b>\s*(<br\s*\/?>)?/i, '')];
+        let j = i + 1;
+        while (j < kids.length && j < i + 4 && kids[j].tagName === 'P') {
+          const lb = labelOf(kids[j]);
+          if (lb && /:$/.test(lb) && !/^Not:?$/i.test(lb)) break;
+          if (txt(kids[j]).length > 120) break;
+          parts.push(kids[j].innerHTML); j++;
+        }
+        out += `<div class="bk-remember"><span class="bk-lab">Remember</span>${parts.filter(x => x.trim()).map(x => `<p>${x}</p>`).join('')}</div>`;
+        i = j; continue;
+      }
+      if (onlyBold(el) && /[+\u2192]/.test(txt(el)) && txt(el).length < 70) { out += `<div class="bk-formula">${el.innerHTML}</div>`; i++; continue; }
+      if (onlyBold(el) && txt(el).length < 40) { out += `<div class="bk-sub">${el.innerHTML}</div>`; i++; continue; }
+      const ls = lines(el);
+      if (ls.length > 1 && ls.every(x => x.replace(/<[^>]+>/g, '').length < 90)) {
+        out += `<div class="bk-lines${sc.key === 'outcome' ? ' check' : ''}">${ls.map(x => `<div class="bk-line">${x}</div>`).join('')}</div>`;
+        i++; continue;
+      }
+      out += `<p class="bk-text">${el.innerHTML}</p>`;
+      i++; continue;
+    }
+    out += el.outerHTML;
+    i++;
+  }
+  return `<div class="bk-deco k-${esc(sc.key)}">${out}</div>`;
+}
 function bankSteps(t){
   return t.sections.map((sc, i) => ({
     label: sc.title,
-    node: node(`<p class="kicker">${esc(t.title)} · ${esc(sc.title)}</p>${i === 0 ? `<h2>${esc(t.title)}</h2>` : ''}<div class="bk-html">${sc.html}</div>`),
+    node: node(`<p class="bk-kicker"><span class="bk-pill">${esc(sc.title)}</span><span>${esc(t.title)}${t.atLevel ? ' · ' + esc(t.atLevel.replace('A0-A1', 'A0–A1')) : ''}</span></p>${bankDecorate(sc)}`),
   }));
 }
 function bankLiveHtml(base, lvl){
