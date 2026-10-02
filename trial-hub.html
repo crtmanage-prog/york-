@@ -44,6 +44,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
    код страницы менять не нужно. Схема полей — trial-hub/content/README.md.
    ===================================================================== */
 const CONTENT_FILES = {
+  bank: 'trial-hub/content/bank.json',   // новый банк материалов: grammar / speaking / activities
   meta: 'trial-hub/content/meta.json',
   lessons: 'trial-hub/content/lessons.json',
   activities: 'trial-hub/content/activities.json',
@@ -972,6 +973,18 @@ button.star.on{background:none;border:0}
 button.star.on svg{fill:#0A0A09}
 button.star:hover{border:0;background:rgba(17,18,14,.06)}
 
+/* --- материалы из нового банка --- */
+.bk-html p{margin:0 0 .6em}
+.bk-html ul,.bk-html ol{margin:.2em 0 .8em;padding-left:1.3em;display:grid;gap:.3em}
+.bk-html b{font-weight:700}
+.show .bk-html{font-size:clamp(20px,2.6vw,34px);line-height:1.4;max-width:46ch}
+.show .bk-html ul,.show .bk-html ol{gap:.45em}
+.live .bk-html{font-size:15px;line-height:1.5}
+.ws-drawer .bk-html{font-size:13px;line-height:1.5}
+.bk-sec{border-top:1px solid rgba(17,18,14,.09);padding:12px 0}
+.bk-sec h4,.bk-h{font-family:Unbounded,sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5B6B0A;margin:0 0 6px;display:block}
+.live .lv-card .bk-html{font-size:13px}
+
 </style>
 </head>
 <body>
@@ -1316,9 +1329,9 @@ const saveLessonFilters = () => store.set('york-hub-lessons-filters', { ...filte
 
 // карточка задания в "Избранные задания" на Dashboard — цвет иконки по типу, как в мокапе
 function favRow(x){
-  const kind = x.play ? 'Активность' : (x.category === 'grammar' ? 'Грамматика' : 'Speaking');
+  const kind = itemKind(x);
   const color = x.play ? '#EFE7FB' : (x.category === 'grammar' ? '#CDB8F0' : '#D7EF42');
-  const lvl = x.play ? (x.levels.length > 1 ? `${x.levels[0]}–${x.levels[x.levels.length - 1]}` : x.levels[0]) : x.level;
+  const lvl = itemLevel(x);
   return `<a href="#" class="gl-row" data-show="${esc(x.id)}">
       <span class="gl-row-ic" style="background:${color}"></span>
       <span class="gl-row-txt"><b>${esc(x.title)}</b><span>${esc(kind)}</span></span>
@@ -1707,7 +1720,7 @@ function renderNav(){
     lessons: DB.lessons.length, activities: DB.activities.items.length, grammar: grammarLessons().length,
     materials: DB.materials.items.length, builder: Plans.list().length || null,
     checklist: DB.checklist.reduce((n, g) => n + g.items.length, 0),
-    library: DB.lessons.length + DB.activities.items.length + DB.materials.items.length,
+    library: DB.bank.length + DB.materials.items.length,
     reports: Plans.list().filter(p => p.status === 'done').length || null,
   };
   const isActive = route => currentRoute === route || (route === 'builder' && currentRoute.indexOf('builder=') === 0);
@@ -1738,7 +1751,7 @@ function route(){
   if (linked) {
     if (!byId[linked]) { toast('Урок по ссылке не найден — возможно, его переименовали', true); location.hash = '#/'; return; }
     if (show.classList.contains('open')) return;
-    currentRoute = byId[linked].play ? 'activities' : 'lessons';
+    currentRoute = byId[linked].bank ? 'library' : (byId[linked].play ? 'activities' : 'lessons');
     renderPage();
     safeHistory('replaceState', null, '#/' + currentRoute);   // «Назад» из урока вернёт в раздел, а не в тот же урок
     openShow(byId[linked]);
@@ -1819,10 +1832,25 @@ let lesson = null;   // { topic, steps: [{label, node}], cur, started, clockTime
 let liveOnShowClose = null;   // колбэк: вернуться в Live mode после показа темы ученику
 
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+// шаги показа для материала из нового банка: по одному экрану на раздел
+function bankSteps(t){
+  return t.sections.map((sc, i) => ({
+    label: sc.title,
+    node: node(`<p class="kicker">${esc(t.title)} · ${esc(sc.title)}</p>${i === 0 ? `<h2>${esc(t.title)}</h2>` : ''}<div class="bk-html">${sc.html}</div>`),
+  }));
+}
+function bankLiveHtml(item){
+  return `<div class="lv-it"><h2>${esc(item.title)}</h2>
+    <p class="oc">${esc(itemKind(item))} · ${esc(itemLevel(item))} · ${itemMin(item)} мин${item.outcome ? ' · «' + esc(item.outcome) + '»' : ''}</p>
+    ${item.sections.map(sc => `<div class="bk-sec"><h4>${esc(sc.title)}</h4><div class="bk-html">${sc.html}</div></div>`).join('')}
+    <button class="ws-cta" id="liveOpenShow" style="margin-top:14px">${ic('play', 14)}Открыть экран для ученика</button></div>`;
+}
+
 function node(html){ const d = document.createElement('div'); d.className = 'step'; d.innerHTML = html; return d; }
 const head = (kicker, title) => `<p class="kicker">${kicker}</p>${title ? `<h2>${esc(title)}${ru(title)}</h2>` : ''}`;
 
 function lessonSteps(t){
+  if (t.bank) return bankSteps(t);
   if (t.play) return actSteps(t);
   const L = t.lesson || {};
   const steps = [];
@@ -2552,11 +2580,22 @@ function extraBlockFor(x){
   const key = x.play ? 'activity' : (x.category === 'grammar' ? 'grammar' : 'speaking');
   return { id: uid('b'), key, title: x.play ? 'Activity' : (x.category === 'grammar' ? 'Grammar' : 'Speaking'), duration: itemMin(x), mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: x.id, note: '', skipped: false, visited: false, req: false, durEdit: true };
 }
-function itemLevel(x){ return x.play ? (x.levels.length > 1 ? `${x.levels[0]}–${x.levels[x.levels.length - 1]}` : x.levels[0]) : x.level; }
-function itemMin(x){ return x.play ? 8 : 12; }
+function itemLevel(x){ return x.bank ? String(x.level || '').replace(/-/g, '–') : (x.play ? (x.levels.length > 1 ? `${x.levels[0]}–${x.levels[x.levels.length - 1]}` : x.levels[0]) : x.level); }
+function itemMin(x){ return x.bank ? (x.min || 8) : (x.play ? 8 : 12); }
 function itemGradient(x){ return x.play ? 'linear-gradient(135deg,#EFE7FB,#DCCBF5)' : (x.category === 'grammar' ? 'linear-gradient(135deg,#DDEFFD,#BFE0F8)' : 'linear-gradient(135deg,#F1FAC8,#D7EF42)'); }
-function itemMatchesLevel(x, lvl){ return !lvl || (x.play ? x.levels.includes(lvl) : x.level === lvl); }
-function allItems(){ return [...DB.lessons, ...DB.activities.items]; }
+const LV_ORDER = ['A0', 'A1', 'A2', 'B1', 'B2', 'C1'];
+function lvTokens(str){
+  const raw = String(str || '').replace(/[\u2013\u2014]/g, '-');
+  const m = raw.match(/[ABC][0-2]/g) || [];
+  if (m.length === 2 && raw.includes('-')) { const a = LV_ORDER.indexOf(m[0]), b = LV_ORDER.indexOf(m[1]); if (a >= 0 && b >= a) return LV_ORDER.slice(a, b + 1); }
+  return m;
+}
+function itemMatchesLevel(x, lvl){
+  if (!lvl) return true;
+  if (x.bank) { const a = lvTokens(x.level), b = lvTokens(lvl); return a.some(t => b.includes(t)); }
+  return x.play ? x.levels.includes(lvl) : x.level === lvl;
+}
+function allItems(){ return DB.bank; }
 function acceptFilter(accept){
   switch (accept) {
     case 'grammar': return x => !x.play && x.category === 'grammar';
@@ -2948,7 +2987,7 @@ function renderPrepareStep(body, plan, root){
       let items = allItems().filter(acceptFilter(typeNow));
       if (panel.lvl && plan.student.level) items = items.filter(x => itemMatchesLevel(x, plan.student.level));
       if (panel.fav) items = items.filter(x => Saved.has(x.id));
-      items = items.filter(x => matches(panel.q, x.title, x.idea, x.goal, x.outcome));
+      items = items.filter(x => matches(panel.q, x.title, x.idea, x.goal, x.outcome, x.kw));
       const use = id => Usage.counts[id] || 0;
       return items.sort((a, b) => use(b.id) - use(a.id)).slice(0, 60);
     };
@@ -3060,7 +3099,7 @@ function openPicker(onPick, title){
   let q = '', tab = 'activity';
   const draw = () => {
     const filterFn = acceptFilter(tab);
-    const items = allItems().filter(filterFn).filter(x => matches(q, x.title, x.idea, x.goal, x.outcome));
+    const items = allItems().filter(filterFn).filter(x => matches(q, x.title, x.idea, x.goal, x.outcome, x.kw));
     const freq = !q.trim() ? Usage.top(3, filterFn) : [];
     const fIds = new Set(freq.map(x => x.id));
     const rows = [...freq, ...items.filter(x => !fIds.has(x.id))];
@@ -3268,7 +3307,7 @@ function renderLive(){
       body.innerHTML = `<div class="lv-it"><h2>Материал не выбран</h2><p class="oc">В этом блоке нет материала. Выберите из библиотеки.</p><button class="ws-cta" id="livePickHere">${ic('plus', 14)}Выбрать материал</button></div>`;
       body.querySelector('#livePickHere').onclick = () => openPicker(x => { b.itemId = x.id; Plans.save(plan); renderLive(); }, 'Выбрать материал');
     } else {
-      body.innerHTML = `<div class="lv-it">
+      body.innerHTML = item.bank ? bankLiveHtml(item) : `<div class="lv-it">
         <h2>${esc(item.title)}</h2>
         ${item.outcome ? `<p class="oc">«${esc(item.outcome)}»</p>` : ''}
         ${item.idea ? `<p>${esc(item.idea)}</p>` : ''}
@@ -3290,7 +3329,9 @@ function renderLive(){
 
   // подсказка
   const next = plan.blocks[cur + 1];
-  $('#liveTip').innerHTML = `<span class="k">Подсказка</span><p>${esc(BLOCK_TIPS[b.key] || 'Держи темп по плану — ученик должен больше говорить, чем слушать.')}</p>`;
+  const curItem = b.itemId && byId[b.itemId];
+  const adaptHtml = curItem && curItem.bank && curItem.adapt ? `<span class="k" style="margin-top:6px">Адаптация по уровню</span><div class="bk-html">${curItem.adapt}</div>` : '';
+  $('#liveTip').innerHTML = adaptHtml + `<span class="k">Подсказка</span><p>${esc(BLOCK_TIPS[b.key] || 'Держи темп по плану — ученик должен больше говорить, чем слушать.')}</p>`;
   // план урока
   $('#livePlan').innerHTML = `<h3>План урока</h3>${plan.blocks.map((x, i) => `<button class="r${i === cur ? ' cur' : (x.skipped ? ' skip' : (i < cur ? ' done' : ''))}" data-plan="${i}"><span class="n">${i < cur && !x.skipped ? ic('check', 13) : i + 1}</span><span class="t">${esc(x.title)}</span><small>${x.duration || 0}м</small></button>`).join('')}`;
   $('#livePlan').querySelectorAll('[data-plan]').forEach(r => r.onclick = () => gotoBlock(+r.dataset.plan));
@@ -3316,14 +3357,14 @@ const libF = { types: new Set(['lessons', 'activities', 'grammar', 'materials'])
 
 function libraryList(){
   const items = [];
-  if (libF.types.has('lessons')) DB.lessons.filter(l => l.category !== 'grammar').forEach(x => items.push({ kind: 'lesson', x }));
-  if (libF.types.has('grammar')) DB.lessons.filter(l => l.category === 'grammar').forEach(x => items.push({ kind: 'grammar', x }));
-  if (libF.types.has('activities')) DB.activities.items.forEach(x => items.push({ kind: 'activity', x }));
+  if (libF.types.has('lessons')) DB.bank.filter(x => x.type === 'speaking').forEach(x => items.push({ kind: 'lesson', x }));
+  if (libF.types.has('grammar')) DB.bank.filter(x => x.type === 'grammar').forEach(x => items.push({ kind: 'grammar', x }));
+  if (libF.types.has('activities')) DB.bank.filter(x => x.type === 'activity').forEach(x => items.push({ kind: 'activity', x }));
   if (libF.types.has('materials')) DB.materials.items.forEach((m, i) => items.push({ kind: 'material', x: Object.assign({ id: 'mat:' + i }, m) }));
   let list = items;
   if (libF.levels.size) list = list.filter(({ kind, x }) => kind === 'material' ? false : [...libF.levels].some(l => itemMatchesLevel(x, l)));
   if (libF.saved) list = list.filter(({ kind, x }) => kind !== 'material' && Saved.has(x.id));
-  if (libF.q.trim()) list = list.filter(({ x }) => matches(libF.q, x.title, x.idea, x.goal, x.outcome, x.description, x.how, x.phrases));
+  if (libF.q.trim()) list = list.filter(({ x }) => matches(libF.q, x.title, x.idea, x.goal, x.outcome, x.kw, x.description, x.how, x.phrases));
   list.sort((a, b) => libF.sort === 'level'
     ? String(a.kind === 'material' ? 'Z' : itemLevel(a.x)).localeCompare(String(b.kind === 'material' ? 'Z' : itemLevel(b.x))) || a.x.title.localeCompare(b.x.title, 'ru')
     : (libF.sort === 'used' ? (Usage.counts[b.x.id] || 0) - (Usage.counts[a.x.id] || 0) : a.x.title.localeCompare(b.x.title, 'ru')));
@@ -3333,7 +3374,7 @@ function libraryList(){
 function renderLibraryPage(root){
   const rerender = () => renderLibraryPage(root);
   const typeLabels = [['grammar', 'Грамматика'], ['lessons', 'Speaking'], ['activities', 'Активности'], ['materials', 'Материалы']];
-  const total = DB.lessons.length + DB.activities.items.length + DB.materials.items.length;
+  const total = DB.bank.length + DB.materials.items.length;
   root.innerHTML = `
     <div class="ws-lib-head">
       <div><h1>Библиотека</h1><p>${total} материалов: темы, активности, грамматика. Откройте карточку, чтобы посмотреть, что внутри.</p></div>
@@ -3410,7 +3451,11 @@ function openLibDrawer(x, opts){
     if (!opts.onPickOnly && !opts.slot) rows += `<button class="addrow${rows ? '' : ' first'}" data-addmode="new-plan"><span>Создать новый урок с этим материалом</span>${ic('plus', 14)}</button>`;
   }
   const lines = [];
-  if (!isMat) {
+  if (x.bank) {
+    if (x.outcome) lines.push(`<i>«${esc(x.outcome)}»</i>`);
+    x.sections.forEach(sc => lines.push(`<span class="bk-h">${esc(sc.title)}</span><div class="bk-html">${sc.html}</div>`));
+    if (x.adapt) lines.push(`<span class="bk-h">Адаптация по уровню</span><div class="bk-html">${x.adapt}</div>`);
+  } else if (!isMat) {
     if (x.outcome) lines.push(`<i>«${esc(x.outcome)}»</i>`);
     if (x.leadIn) lines.push(`<span><b>Lead-in:</b> ${esc(x.leadIn)}</span>`);
     if (x.idea) lines.push(`<span>${esc(x.idea)}</span>`);
@@ -3571,7 +3616,12 @@ function renderTodayWidget(){
     return;
   }
   const problems = validate(DB);
-  byId = Object.fromEntries([...DB.lessons, ...DB.activities.items].map(x => [x.id, x]));
+  DB.bank = ((DB.bank && DB.bank.items) || []).map(x => {
+    const it = Object.assign({}, x, { bank: true, category: x.type });
+    if (x.type === 'activity') it.play = { type: 'bank' };
+    return it;
+  });
+  byId = Object.fromEntries([...DB.lessons, ...DB.activities.items, ...DB.bank].map(x => [x.id, x]));
   window.addEventListener('hashchange', route);
   route();
   loadTodayWidget();
