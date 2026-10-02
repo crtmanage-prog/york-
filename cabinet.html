@@ -1872,7 +1872,17 @@ async function init(){
 
     const sessionPromise = supabase.auth.getSession();
     const timeoutPromise = sleep(10000).then(() => { throw new Error('timeout'); });
-    const { data: { session } } = await Promise.race([sessionPromise, timeoutPromise]);
+    let { data: { session } } = await Promise.race([sessionPromise, timeoutPromise]);
+    // Trial Hub: если в этом браузере сохранены данные демо-аккаунта и включён автовход — входим сами
+    if (!session && __preview){
+      try {
+        const c = JSON.parse(localStorage.getItem('york-hub-demo-cred') || 'null');
+        if (c && c.auto && c.login && c.pass){
+          const r = await supabase.auth.signInWithPassword({ email: c.login, password: c.pass });
+          if (!r.error) session = r.data.session;
+        }
+      } catch(e){}
+    }
 
     document.getElementById('loadingState').classList.add('hidden');
     if (session){
