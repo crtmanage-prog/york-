@@ -3426,14 +3426,26 @@ function closeNewLessonModal(){ $('#newLessonBg').classList.remove('open'); $('#
 $('#newLessonClose').onclick = closeNewLessonModal;
 $('#newLessonBg').onclick = closeNewLessonModal;
 
+// русский перевод строк итоговой сводки (для строк, собранных автоматически; свои правки без перевода)
+function recapRu(line){
+  const t = String(line).trim(); let m;
+  if (/^Today we met and talked about your goals\.?$/.test(t)) return 'Сегодня мы познакомились и поговорили о твоих целях.';
+  const dot = x => /[.!?]$/.test(x) ? x : x + '.';
+  if ((m = t.match(/^We learned: (.+?)\.?$/))) return dot('Мы изучили: ' + m[1]);
+  if ((m = t.match(/^In the speaking part we worked on: (.+?)\.?$/))) return dot('В разговорной части мы работали над: ' + m[1]);
+  if ((m = t.match(/^We also played: (.+?)\.?$/))) return dot('Ещё мы поиграли: ' + m[1]);
+  if (/^You did a great job!?$/.test(t)) return 'У тебя отлично получилось!';
+  return '';
+}
 // черновик итоговой сводки из материалов урока (на английском, чтобы можно было зачитать ученику)
 function recapDraft(plan){
   const titles = k => plan.blocks.filter(x => x.key === k && x.itemId && byId[x.itemId]).map(x => byId[x.itemId].title);
   const g = titles('grammar'), sp = titles('speaking'), ac = titles('activity');
   const lines = ['Today we met and talked about your goals.'];
-  if (g.length) lines.push('We learned: ' + g.join(', ') + '.');
-  if (sp.length) lines.push('In the speaking part we worked on: ' + sp.join(', ') + '.');
-  if (ac.length) lines.push('We also played: ' + ac.join(', ') + '.');
+  const dot = t => /[.!?]$/.test(t) ? t : t + '.';
+  if (g.length) lines.push(dot('We learned: ' + g.join(', ')));
+  if (sp.length) lines.push(dot('In the speaking part we worked on: ' + sp.join(', ')));
+  if (ac.length) lines.push(dot('We also played: ' + ac.join(', ')));
   lines.push('You did a great job!');
   return lines.join('\n');
 }
@@ -3687,7 +3699,7 @@ function liveSlides(plan, b){
   if (b.mode === 'recap') {
     if (b.recap == null) b.recap = recapDraft(plan);
     const lines = String(b.recap).split('\n').map(x => x.trim()).filter(Boolean);
-    return [{ label: 'Recap', html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">What we did today${ruSp('Что мы сегодня сделали')}</h3><div class="bk-lines check">${lines.map(x => `<div class="bk-line">${esc(x)}</div>`).join('')}</div></div>` }];
+    return [{ label: 'Recap', html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">What we did today${ruSp('Что мы сегодня сделали')}</h3><div class="bk-lines check">${lines.map(x => `<div class="bk-line">${esc(x)}${recapRu(x) ? ruSp(recapRu(x)) : ''}</div>`).join('')}</div></div>` }];
   }
   if (b.mode === 'next') return [{ label: 'Next Steps', html: endSlideHtml() }];
   if (b.mode === 'text') {
