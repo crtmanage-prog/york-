@@ -1042,6 +1042,13 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
 
 /* --- карточка демо-кабинета в подготовке --- */
 .ws-cabcard{border-radius:16px;padding:16px 18px;margin:-4px 0 4px 40px;display:flex;flex-direction:column;gap:10px}
+.ws-cabcard summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px}
+.ws-cabcard summary::-webkit-details-marker{display:none}
+.ws-cabcard summary .ttl{font-family:Unbounded,sans-serif;font-size:14px;font-weight:700}
+.ws-cabcard summary .chev{margin-left:auto;display:flex;transition:transform .15s}
+.ws-cabcard[open] summary .chev{transform:rotate(90deg)}
+.ws-cta.sm{height:30px;padding:0 14px;font-size:12px;text-decoration:none;display:inline-flex;align-items:center}
+.ws-cabcard[open] > :not(summary){margin-top:10px}
 .ws-cabcard .hd{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .ws-cabcard .st{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px}
 .ws-cabcard .st.ok{background:rgba(210,231,57,.45)}
@@ -3450,19 +3457,28 @@ const DEMO_CRED_KEY = 'york-hub-demo-cred';
 const demoCred = () => store.get(DEMO_CRED_KEY, { login: '', pass: '', auto: true });
 function demoCabinetCard(){
   const c = demoCred(), ok = cabinetPreviewHasLogin();
-  return `<div class="ws-glass ws-cabcard" data-nodrag>
-    <div class="hd"><b>Демо-кабинет для показа ученику</b><span class="st ${ok ? 'ok' : 'warn'}">${ok ? 'Вход выполнен: всё готово' : 'Нужно один раз войти в демо-кабинет'}</span></div>
-    <p class="ws-hint">В блоке Cabinet Preview ученик увидит настоящий кабинет под демо-аккаунтом (только просмотр). Войдите один раз по ссылке ниже, и дальше кабинет откроется сразу.</p>
+  const open = store.get('york-hub-cabcard-open', false);
+  return `<details class="ws-glass ws-cabcard" id="cabCard" data-nodrag${open ? ' open' : ''}>
+    <summary>
+      <span class="ttl">Демо-кабинет</span>
+      <span class="st ${ok ? 'ok' : 'warn'}">${ok ? 'Вход выполнен' : 'Нужен вход'}</span>
+      <a class="ws-cta sm" href="cabinet.html?preview=1" target="_blank" rel="noopener">Войти</a>
+      <span class="chev">${ic('arrow', 14)}</span>
+    </summary>
+    <p class="ws-hint">В блоке Cabinet Preview ученик увидит настоящий кабинет под демо-аккаунтом (только просмотр). Войдите один раз по кнопке «Войти», дальше кабинет откроется сразу.</p>
     <div class="ws-fields">
       <label>Логин (email)<span class="cb"><input id="cabLogin" value="${esc(c.login)}" placeholder="email демо-аккаунта" autocomplete="off"><button type="button" data-cabcopy="cabLogin">Копировать</button></span></label>
       <label>Пароль<span class="cb"><input id="cabPass" type="password" value="${esc(c.pass)}" placeholder="пароль демо-аккаунта" autocomplete="off"><button type="button" data-cabshow="1">Показать</button><button type="button" data-cabcopy="cabPass">Копировать</button></span></label>
     </div>
-    <label class="ws-check-line"><input type="checkbox" id="cabAuto" ${c.auto !== false ? 'checked' : ''}> Входить автоматически (логин и пароль хранятся только в этом браузере)</label>
-    <div class="acts"><a class="ws-cta" href="cabinet.html?preview=1" target="_blank" rel="noopener" style="height:38px;text-decoration:none">Открыть демо-кабинет для входа</a><button class="ws-ghost" id="cabOut" type="button">Выйти из демо</button></div>
-  </div>`;
+    <label class="ws-check-line"><input type="checkbox" id="cabAuto" ${c.auto !== false ? 'checked' : ''}> Входить автоматически (данные хранятся только в этом браузере)</label>
+    <div class="acts"><button class="ws-ghost" id="cabOut" type="button">Выйти из демо</button></div>
+  </details>`;
 }
 function bindDemoCabinetCard(root, redraw){
   const login = root.querySelector('#cabLogin'); if (!login) return;
+  const card = root.querySelector('#cabCard');
+  card.addEventListener('toggle', () => store.set('york-hub-cabcard-open', card.open));
+  card.querySelector('summary a').onclick = e => e.stopPropagation();
   const pass = root.querySelector('#cabPass'), auto = root.querySelector('#cabAuto');
   const save = () => store.set(DEMO_CRED_KEY, { login: login.value.trim(), pass: pass.value, auto: auto.checked });
   login.oninput = save; pass.oninput = save; auto.onchange = save;
