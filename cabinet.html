@@ -1862,6 +1862,12 @@ async function init(){
     // режим предпросмотра для Trial Hub (cabinet.html?preview=1): отдельное хранилище сессии,
     // чтобы вход под тестовым учеником не выкидывал учителя из его кабинета
     const __preview = new URLSearchParams(location.search).get('preview') === '1';
+    if (__preview) {
+      const tag = document.createElement('div');
+      tag.textContent = 'Демо — только просмотр';
+      tag.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:9999;background:#0A0A09;color:#D2E739;font:600 12px Unbounded,sans-serif;padding:7px 14px;border-radius:999px;opacity:.9;pointer-events:none';
+      document.body.appendChild(tag);
+    }
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, __preview ? { auth: { storageKey: 'york-cabinet-preview' } } : undefined);
 
     const sessionPromise = supabase.auth.getSession();
