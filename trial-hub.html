@@ -1316,7 +1316,7 @@ const saveLessonFilters = () => store.set('york-hub-lessons-filters', { ...filte
 
 // карточка задания в "Избранные задания" на Dashboard — цвет иконки по типу, как в мокапе
 function favRow(x){
-  const kind = x.play ? 'Активность' : (x.category === 'grammar' ? 'Грамматика' : 'Мини-урок');
+  const kind = x.play ? 'Активность' : (x.category === 'grammar' ? 'Грамматика' : 'Speaking');
   const color = x.play ? '#EFE7FB' : (x.category === 'grammar' ? '#CDB8F0' : '#D7EF42');
   const lvl = x.play ? (x.levels.length > 1 ? `${x.levels[0]}–${x.levels[x.levels.length - 1]}` : x.levels[0]) : x.level;
   return `<a href="#" class="gl-row" data-show="${esc(x.id)}">
@@ -1332,14 +1332,15 @@ function quickAddToLesson(x){
   if (!draft) {
     const p = Plans.create();
     p.template = 'standard'; p.blocks = buildBlocks('standard'); p.step = 'prepare';
-    const bl = p.blocks.find(z => z.mode === 'slot' && acceptFilter(z.accept)(x)) || p.blocks.find(z => z.mode === 'slot');
-    bl.itemId = x.id; Plans.save(p);
+    const bl = p.blocks.find(z => z.mode === 'slot' && acceptFilter(z.accept)(x));
+    if (bl) bl.itemId = x.id; else p.blocks.push(extraBlockFor(x));
+    Plans.save(p);
     toast(`«${x.title}» добавлено в новый урок`);
     return;
   }
   const slot = draft.blocks.find(z => z.mode === 'slot' && !z.itemId && acceptFilter(z.accept)(x));
   if (slot) slot.itemId = x.id;
-  else draft.blocks.push({ id: uid('b'), key: x.play ? 'practice' : 'topic', title: x.play ? 'Дополнительная активность' : 'Дополнительный мини-урок', duration: itemMin(x), mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: x.id, note: '', skipped: false, visited: false });
+  else draft.blocks.push(extraBlockFor(x));
   Plans.save(draft);
   toast(`«${x.title}» добавлено в урок «${draft.student.name || 'без имени'}»`);
 }
@@ -1436,7 +1437,7 @@ const Pages = {
       root.querySelector('#libFilters').appendChild(Components.FilterBar({
         rows: [
           { label: 'Тип', value: F.type, toggle: false, options: [
-            { value: 'all', label: 'Всё' }, { value: 'lessons', label: 'Мини-уроки' }, { value: 'activities', label: 'Активности' },
+            { value: 'all', label: 'Всё' }, { value: 'lessons', label: 'Speaking' }, { value: 'activities', label: 'Активности' },
             { value: 'grammar', label: 'Грамматика' }, { value: 'materials', label: 'Материалы' },
           ], onChange: v => { F.type = v || 'all'; rerender(); } },
           { label: 'Level', cls: 'lv', value: F.level, toggle: true, options: DB.meta.levels.map(l => ({ value: l, label: l })), onChange: v => { F.level = v; rerender(); } },
@@ -1449,7 +1450,7 @@ const Pages = {
       const resEl = root.querySelector('#libResult');
       if (!total) { resEl.innerHTML = '<div class="empty">Ничего не нашлось — сбросьте фильтры.</div>'; return; }
       let html = '';
-      if (lessons.length) html += `<h2 class="h-sec">Мини-уроки</h2><div class="grid">${lessons.map(Components.LessonCard).join('')}</div>`;
+      if (lessons.length) html += `<h2 class="h-sec">Speaking</h2><div class="grid">${lessons.map(Components.LessonCard).join('')}</div>`;
       if (activities.length) html += `<h2 class="h-sec">Активности</h2><div class="grid">${activities.map(Components.ActivityCard).join('')}</div>`;
       if (grammar.length) html += `<h2 class="h-sec">Грамматика</h2><div class="grid">${grammar.map(Components.GrammarCard).join('')}</div>`;
       if (materials.length) html += `<h2 class="h-sec">Материалы</h2><div class="grid">${materials.map(m => Components.ResourceCard(m, DB.materials.categories.find(c => c.id === m.category))).join('')}</div>`;
@@ -2438,7 +2439,7 @@ function moreQuestions(kind, exclude){
   return shuffle(pool.filter(q => !exclude.includes(q))).slice(0, 3);
 }
 
-// шаблоны урока (30 минут). Во всех шаблонах 7 обязательных блоков — их нельзя удалить.
+// шаблоны урока (30 минут). Во всех шаблонах 6 обязательных блоков — их нельзя удалить.
 // mode: text — вопросы/идеи, slot — материал из библиотеки. durEdit — можно ли менять длительность в «закрытых» шаблонах.
 const REQ = (title, min, mode, extra) => Object.assign({ title, min, mode, durEdit: false }, extra || {});
 function introSections(kids){
@@ -2455,18 +2456,17 @@ function introSections(kids){
 function reqBlocks(mins, kids){
   return [
     REQ('Introduction', mins[0], 'sections', { key: 'intro', durEdit: true, sections: introSections(kids) }),
-    REQ('Mini Lesson', mins[1], 'slot', { key: 'topic', accept: 'topic', durEdit: true }),
-    REQ('Practice', mins[2], 'slot', { key: 'practice', accept: 'activity', durEdit: true }),
-    REQ('Speaking Application', mins[3], 'slot', { key: 'speaking', accept: 'activity', durEdit: true }),
-    REQ('Cabinet Preview', mins[4], 'text', { key: 'cabinet', seed: ['Покажите личный кабинет: расписание, домашка, прогресс.', 'Покажите, где найти материалы и как написать преподавателю.'] }),
-    REQ('Lesson Recap', mins[5], 'recap', { key: 'recap' }),
-    REQ('Next Steps', mins[6], 'next', { key: 'next' }),
+    REQ('Grammar', mins[1], 'slot', { key: 'grammar', accept: 'grammar', durEdit: true }),
+    REQ('Speaking', mins[2], 'slot', { key: 'speaking', accept: 'speaking', durEdit: true }),
+    REQ('Cabinet Preview', mins[3], 'text', { key: 'cabinet', seed: ['Покажите личный кабинет: расписание, домашка, прогресс.', 'Покажите, где найти материалы и как написать преподавателю.'] }),
+    REQ('Lesson Recap', mins[4], 'recap', { key: 'recap' }),
+    REQ('Next Steps', mins[5], 'next', { key: 'next' }),
   ];
 }
 const TEMPLATES = {
-  standard: { name: 'Standard', desc: 'Для большинства учеников. Mini Lesson, Practice и Speaking можно переставлять.', locked: true, blocks: reqBlocks([8, 7, 6, 5, 2, 1, 1], false) },
-  kids: { name: 'Kids', desc: 'Игры, простые слова, больше активности. Mini Lesson, Practice и Speaking можно переставлять.', locked: true, blocks: reqBlocks([8, 6, 7, 5, 2, 1, 1], true) },
-  custom: { name: 'Custom', desc: 'Те же обязательные блоки, но можно менять порядок и длительность любого.', locked: false, blocks: reqBlocks([8, 7, 6, 5, 2, 1, 1], false) },
+  standard: { name: 'Standard', desc: 'Для большинства учеников. Grammar и Speaking можно переставлять.', locked: true, blocks: reqBlocks([8, 8, 8, 2, 2, 2], false) },
+  kids: { name: 'Kids', desc: 'Игры, простые слова, больше активности. Grammar и Speaking можно переставлять.', locked: true, blocks: reqBlocks([8, 7, 9, 2, 2, 2], true) },
+  custom: { name: 'Custom', desc: 'Те же обязательные блоки, но можно менять порядок и длительность любого.', locked: false, blocks: reqBlocks([8, 8, 8, 2, 2, 2], false) },
 };
 // ссылки для финального блока Next Steps
 const NEXT_LINKS = [
@@ -2477,6 +2477,8 @@ const NEXT_LINKS = [
 const BLOCK_TIPS = {
   warmup: 'Начни с лёгких вопросов — цель: расслабить ученика и услышать его первые фразы.',
   discovery: 'Узнай цель, интересы и где нужен английский. Записывай главное в заметки.',
+  grammar: 'Грамматика без терминов: объясни коротко на примерах и сразу дай ученику составить свою фразу.',
+  activity: 'Дополнительная активность для интерактива — держи темп и дай ученику говорить.',
   topic: 'Одна маленькая победа за блок: объясни коротко и сразу дай ученику сказать фразу.',
   practice: 'Практика устная: ученик отвечает голосом, ты мягко поправляешь.',
   speaking: 'Минимум вмешательства: пусть говорит, ошибки записывай и разбери в конце.',
@@ -2502,7 +2504,7 @@ function buildBlocks(tplKey){
   }));
 }
 // можно ли двигать блок: обязательные блоки в «закрытых» шаблонах стоят на месте
-const FREE_KEYS = ['topic', 'practice', 'speaking'];   // обязательные блоки, которые можно переставлять и в «закрытых» шаблонах
+const FREE_KEYS = ['grammar', 'speaking'];   // обязательные блоки, которые можно переставлять и в «закрытых» шаблонах
 const isFixedBlock = (plan, b) => !!(b.req && tplLocked(plan) && !FREE_KEYS.includes(b.key));
 const canMoveBlock = (plan, b) => !isFixedBlock(plan, b);
 
@@ -2545,13 +2547,25 @@ const STATUS_LABEL = { draft: 'Черновик', ready: 'Готов', done: 'П
 const tplName = p => (p.template && TEMPLATES[p.template]) ? TEMPLATES[p.template].name : 'Шаблон не выбран';
 
 /* ---------- карточки материалов ---------- */
-function itemKind(x){ return x.play ? 'Активность' : (x.category === 'grammar' ? 'Грамматика' : 'Мини-урок'); }
+function itemKind(x){ return x.play ? 'Активность' : (x.category === 'grammar' ? 'Грамматика' : 'Speaking'); }
+function extraBlockFor(x){
+  const key = x.play ? 'activity' : (x.category === 'grammar' ? 'grammar' : 'speaking');
+  return { id: uid('b'), key, title: x.play ? 'Activity' : (x.category === 'grammar' ? 'Grammar' : 'Speaking'), duration: itemMin(x), mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: x.id, note: '', skipped: false, visited: false, req: false, durEdit: true };
+}
 function itemLevel(x){ return x.play ? (x.levels.length > 1 ? `${x.levels[0]}–${x.levels[x.levels.length - 1]}` : x.levels[0]) : x.level; }
 function itemMin(x){ return x.play ? 8 : 12; }
 function itemGradient(x){ return x.play ? 'linear-gradient(135deg,#EFE7FB,#DCCBF5)' : (x.category === 'grammar' ? 'linear-gradient(135deg,#DDEFFD,#BFE0F8)' : 'linear-gradient(135deg,#F1FAC8,#D7EF42)'); }
 function itemMatchesLevel(x, lvl){ return !lvl || (x.play ? x.levels.includes(lvl) : x.level === lvl); }
 function allItems(){ return [...DB.lessons, ...DB.activities.items]; }
-function acceptFilter(accept){ return accept === 'topic' ? (x => !x.play) : (accept === 'activity' ? (x => !!x.play) : (() => true)); }
+function acceptFilter(accept){
+  switch (accept) {
+    case 'grammar': return x => !x.play && x.category === 'grammar';
+    case 'speaking': return x => !x.play && x.category !== 'grammar';
+    case 'activity': return x => !!x.play;
+    case 'topic': return x => !x.play;   // старые планы
+    default: return () => true;
+  }
+}
 
 /* ---------- Список "Пробные уроки" ---------- */
 const tlFilter = { status: 'all', q: '' };
@@ -2820,7 +2834,7 @@ function renderPrepareStep(body, plan, root){
             </div>
           </details>
           <div id="blocksEl" class="ws-blocks${picked ? ' has-sel' : ''}" style="display:flex;flex-direction:column;gap:10px"></div>
-          <div><button class="ws-ghost" id="addBlockBtn">${ic('plus', 14)}Добавить блок</button></div>
+          <div><button class="ws-ghost" id="addBlockBtn">${ic('plus', 14)}Добавить активность</button></div>
         </div>
         <aside class="ws-glass ws-libpanel" id="libPanel"></aside>
       </div>
@@ -2839,7 +2853,7 @@ function renderPrepareStep(body, plan, root){
     body.querySelector('#startLive').onclick = () => startLiveFromPlan(plan);
     const pv = body.querySelector('#prevLesson'); if (pv) pv.onclick = () => openLessonPreview(plan, () => startLiveFromPlan(plan));
     body.querySelector('#addBlockBtn').onclick = () => {
-      const nb = { id: uid('b'), key: 'practice', title: 'Дополнительный блок', duration: 5, mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: null, note: '', skipped: false, visited: false, req: false, durEdit: true };
+      const nb = { id: uid('b'), key: 'activity', title: 'Activity', duration: 5, mode: 'slot', accept: 'activity', qkind: null, questions: [], itemId: null, note: '', skipped: false, visited: false, req: false, durEdit: true };
       plan.blocks.push(nb); slotId = nb.id; save(); draw();
     };
     drawBlocks(); drawPanel(slot);
@@ -2872,7 +2886,7 @@ function renderPrepareStep(body, plan, root){
       const item = b.itemId && byId[b.itemId];
       const isEmpty = !blockReady(b);
       const movable = canMoveBlock(plan, b);
-      const sub = b.mode === 'sections' ? (b.sections || []).map(x => x.title).join(' · ') : b.mode === 'recap' ? 'Сводка соберётся из выбранных материалов' : b.mode === 'next' ? NEXT_LINKS.map(l => l.label).join(' · ') : b.mode === 'text' ? ((b.questions || [])[0] || 'Вопросы и идеи — в режиме урока') : (item ? item.title : `Пусто: добавьте ${b.accept === 'topic' ? 'мини-урок' : (b.accept === 'activity' ? 'активность' : 'материал')}`);
+      const sub = b.mode === 'sections' ? (b.sections || []).map(x => x.title).join(' · ') : b.mode === 'recap' ? 'Сводка соберётся из выбранных материалов' : b.mode === 'next' ? NEXT_LINKS.map(l => l.label).join(' · ') : b.mode === 'text' ? ((b.questions || [])[0] || 'Вопросы и идеи — в режиме урока') : (item ? item.title : `Пусто: добавьте ${b.accept === 'grammar' ? 'грамматику' : (b.accept === 'speaking' ? 'speaking' : (b.accept === 'topic' ? 'мини-урок' : (b.accept === 'activity' ? 'активность' : 'материал')))}`);
       return `<div class="ws-glass ws-blk${isEmpty ? ' is-empty' : ''}${picked && b.id === slotId ? ' sel' : ''}" data-id="${esc(b.id)}"${movable ? ' draggable="true"' : ''}>
         <span class="grab" style="${movable ? '' : 'opacity:.25;cursor:default'}">${ic('grab', 16)}</span>
         <span class="ck">${isEmpty ? ic('circle', 18) : ic('check', 18)}</span>
@@ -2929,7 +2943,7 @@ function renderPrepareStep(body, plan, root){
     const el = body.querySelector('#libPanel');
     if (!slot) { el.innerHTML = `<div class="hd"><b>Библиотека</b></div><div class="foot">В этом уроке нет блоков, куда нужен материал.</div>`; return; }
     const idx = plan.blocks.indexOf(slot) + 1;
-    const typeNow = panel.type || (slot.accept === 'topic' ? 'topic' : (slot.accept === 'activity' ? 'activity' : 'all'));
+    const typeNow = panel.type || (['grammar', 'speaking', 'activity'].includes(slot.accept) ? slot.accept : 'all');
     const list = () => {
       let items = allItems().filter(acceptFilter(typeNow));
       if (panel.lvl && plan.student.level) items = items.filter(x => itemMatchesLevel(x, plan.student.level));
@@ -2942,7 +2956,7 @@ function renderPrepareStep(body, plan, root){
       <div class="hd"><b>Библиотека</b></div>
       <div class="ws-search">${ic('search', 14)}<input id="lpQ" placeholder="Поиск…" value="${esc(panel.q)}"></div>
       <div class="ws-chips">
-        ${[['all', 'Все'], ['topic', 'Мини-уроки'], ['activity', 'Активности']].map(([k, l]) => `<button class="ws-chip${typeNow === k ? ' on' : ''}" data-lptype="${k}">${l}</button>`).join('')}
+        ${[['all', 'Все'], ['grammar', 'Грамматика'], ['speaking', 'Speaking'], ['activity', 'Активности']].map(([k, l]) => `<button class="ws-chip${typeNow === k ? ' on' : ''}" data-lptype="${k}">${l}</button>`).join('')}
         ${plan.student.level ? `<button class="ws-chip${panel.lvl ? ' on' : ''}" id="lpLvl">${esc(plan.student.level)}</button>` : ''}
         <button class="ws-chip${panel.fav ? ' on' : ''}" id="lpFav">★ Избранное</button>
       </div>
@@ -3043,15 +3057,15 @@ function renderReportStep(body, plan, root){
 function openPicker(onPick, title){
   const bg = $('#pickerBg'), modal = $('#picker'), box = $('#pickerBox');
   $('#pickerTitle').textContent = title || 'Добавить активность';
-  let q = '', tab = 'activities';
+  let q = '', tab = 'activity';
   const draw = () => {
-    const filterFn = tab === 'lessons' ? (x => !x.play) : (x => !!x.play);
+    const filterFn = acceptFilter(tab);
     const items = allItems().filter(filterFn).filter(x => matches(q, x.title, x.idea, x.goal, x.outcome));
     const freq = !q.trim() ? Usage.top(3, filterFn) : [];
     const fIds = new Set(freq.map(x => x.id));
     const rows = [...freq, ...items.filter(x => !fIds.has(x.id))];
     box.innerHTML = `
-      <div class="ws-seg"><button data-pt="activities" class="${tab === 'activities' ? 'on' : ''}">Активности</button><button data-pt="lessons" class="${tab === 'lessons' ? 'on' : ''}">Мини-уроки</button></div>
+      <div class="ws-seg">${[['activity', 'Активности'], ['grammar', 'Грамматика'], ['speaking', 'Speaking']].map(([k, l]) => `<button data-pt="${k}" class="${tab === k ? 'on' : ''}">${l}</button>`).join('')}</div>
       <div class="ws-search" style="margin-top:12px">${ic('search', 14)}<input id="pkQ" placeholder="Поиск…" value="${esc(q)}"></div>
       <div style="margin-top:8px;max-height:46vh;overflow:auto">${rows.map(x => `<div class="ws-li">
           <div class="tx" data-pkprev="${esc(x.id)}"><b>${freq.includes(x) ? '' : ''}${esc(x.title)}</b><span>${esc(itemKind(x))} · ${esc(itemLevel(x))} · ${itemMin(x)} мин</span></div>
@@ -3120,12 +3134,12 @@ $('#newLessonBg').onclick = closeNewLessonModal;
 
 // черновик итоговой сводки из материалов урока (на английском, чтобы можно было зачитать ученику)
 function recapDraft(plan){
-  const title = k => { const bl = plan.blocks.find(x => x.key === k && x.itemId && byId[x.itemId]); return bl ? byId[bl.itemId].title : ''; };
-  const t = title('topic'), pr = title('practice'), sp = title('speaking');
+  const titles = k => plan.blocks.filter(x => x.key === k && x.itemId && byId[x.itemId]).map(x => byId[x.itemId].title);
+  const g = titles('grammar'), sp = titles('speaking'), ac = titles('activity');
   const lines = ['Today we met and talked about your goals.'];
-  if (t) lines.push('We learned: ' + t + '.');
-  if (pr) lines.push('We practised: ' + pr + '.');
-  if (sp) lines.push('In the speaking part we worked on: ' + sp + '.');
+  if (g.length) lines.push('We learned: ' + g.join(', ') + '.');
+  if (sp.length) lines.push('In the speaking part we worked on: ' + sp.join(', ') + '.');
+  if (ac.length) lines.push('We also played: ' + ac.join(', ') + '.');
   lines.push('You did a great job!');
   return lines.join('\n');
 }
@@ -3286,7 +3300,7 @@ function renderLive(){
   $('#liveNext').innerHTML = next ? `Дальше: ${esc(next.title)}${ic('arrow', 16)}` : `К отчёту${ic('check', 16)}`;
 
   $('#liveAddAct').onclick = () => openPicker(item => {
-    const nb = { id: uid('b'), key: item.play ? 'practice' : 'topic', title: item.play ? 'Активность' : 'Мини-урок', duration: itemMin(item), mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: item.id, note: '', skipped: false, visited: false };
+    const nb = extraBlockFor(item);
     plan.blocks.splice(cur + 1, 0, nb); Plans.save(plan);
     renderLive();
     toast('Блок добавлен после текущего');
@@ -3318,7 +3332,7 @@ function libraryList(){
 
 function renderLibraryPage(root){
   const rerender = () => renderLibraryPage(root);
-  const typeLabels = [['lessons', 'Мини-уроки'], ['activities', 'Активности'], ['grammar', 'Грамматика'], ['materials', 'Материалы']];
+  const typeLabels = [['grammar', 'Грамматика'], ['lessons', 'Speaking'], ['activities', 'Активности'], ['materials', 'Материалы']];
   const total = DB.lessons.length + DB.activities.items.length + DB.materials.items.length;
   root.innerHTML = `
     <div class="ws-lib-head">
@@ -3428,14 +3442,15 @@ function openLibDrawer(x, opts){
     if (mode === 'slot') { opts.slot.itemId = x.id; Plans.save(opts.plan); close(); toast('Материал добавлен в блок'); if (opts.onAdd) opts.onAdd(); return; }
     if (mode === 'block') { const bl = plan0.blocks.find(z => z.id === b.dataset.bid); bl.itemId = x.id; Plans.save(plan0); close(); toast('Материал добавлен в урок'); return; }
     if (mode === 'new-block') {
-      plan0.blocks.push({ id: uid('b'), key: x.play ? 'practice' : 'topic', title: x.play ? 'Дополнительная активность' : 'Дополнительный мини-урок', duration: itemMin(x), mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: x.id, note: '', skipped: false, visited: false });
+      plan0.blocks.push(extraBlockFor(x));
       Plans.save(plan0); close(); toast('Добавлен новый блок в урок'); return;
     }
     if (mode === 'new-plan') {
       const p = Plans.create();
       p.template = 'standard'; p.blocks = buildBlocks('standard'); p.step = 'prepare';
-      const bl = p.blocks.find(z => z.mode === 'slot' && acceptFilter(z.accept)(x)) || p.blocks.find(z => z.mode === 'slot');
-      bl.itemId = x.id; Plans.save(p); close(); location.hash = '#/builder=' + p.id;
+      const bl = p.blocks.find(z => z.mode === 'slot' && acceptFilter(z.accept)(x));
+      if (bl) bl.itemId = x.id; else p.blocks.push(extraBlockFor(x));
+      Plans.save(p); close(); location.hash = '#/builder=' + p.id;
     }
   });
 }
