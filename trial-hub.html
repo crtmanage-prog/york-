@@ -268,7 +268,10 @@ body.no-ru .ru{display:none !important}
 /* Prepare */
 .ws-student{border-radius:20px;padding:14px 18px}
 .ws-student summary{cursor:pointer;font-weight:600;font-size:14px}
-.ws-blk.sel{border:1px solid #D2E739;box-shadow:inset 0 0 0 1px #D2E739}
+.ws-blk{transition:opacity .15s,filter .15s,border-color .15s}
+.ws-blk.sel{border:2px solid #C5DB1F;background:#F4FAD6}
+.ws-blocks.has-sel .ws-blk:not(.sel){opacity:.5;filter:grayscale(.85)}
+.ws-blocks.has-sel .ws-blk:not(.sel):hover{opacity:.85;filter:none}
 .ws-blk{cursor:pointer}
 .ws-chip{font:inherit;font-size:12px}
 .ws-prep{display:flex;gap:16px;align-items:flex-start}
@@ -2450,8 +2453,8 @@ function reqBlocks(mins, kids){
   ];
 }
 const TEMPLATES = {
-  standard: { name: 'Standard', desc: 'Для большинства учеников. Порядок блоков зафиксирован.', locked: true, blocks: reqBlocks([4, 3, 7, 6, 5, 2, 3], false) },
-  kids: { name: 'Kids', desc: 'Игры, простые слова, больше активности. Порядок зафиксирован.', locked: true, blocks: reqBlocks([4, 3, 6, 7, 5, 2, 3], true) },
+  standard: { name: 'Standard', desc: 'Для большинства учеников. Mini Lesson, Practice и Speaking можно переставлять.', locked: true, blocks: reqBlocks([4, 3, 7, 6, 5, 2, 3], false) },
+  kids: { name: 'Kids', desc: 'Игры, простые слова, больше активности. Mini Lesson, Practice и Speaking можно переставлять.', locked: true, blocks: reqBlocks([4, 3, 6, 7, 5, 2, 3], true) },
   custom: { name: 'Custom', desc: 'Те же обязательные блоки, но можно менять порядок и длительность любого.', locked: false, blocks: reqBlocks([4, 3, 7, 6, 5, 2, 3], false) },
 };
 const BLOCK_TIPS = {
@@ -2478,7 +2481,9 @@ function buildBlocks(tplKey){
   }));
 }
 // можно ли двигать блок: обязательные блоки в «закрытых» шаблонах стоят на месте
-const canMoveBlock = (plan, b) => !(b.req && tplLocked(plan));
+const FREE_KEYS = ['topic', 'practice', 'speaking'];   // обязательные блоки, которые можно переставлять и в «закрытых» шаблонах
+const isFixedBlock = (plan, b) => !!(b.req && tplLocked(plan) && !FREE_KEYS.includes(b.key));
+const canMoveBlock = (plan, b) => !isFixedBlock(plan, b);
 
 /* ---------- планы (localStorage) ---------- */
 function normPlan(p){
@@ -2762,12 +2767,13 @@ function renderPrepareStep(body, plan, root){
   const locked = tplLocked(plan);
   let slotId = (plan.blocks.find(b => b.mode === 'slot' && !blockReady(b)) || plan.blocks.find(b => b.mode === 'slot') || {}).id || null;
   const panel = { q: '', lvl: !!plan.student.level, fav: false, type: null };
+  let picked = false;   // пользователь выбрал блок кликом — остальные слегка затемняем
 
   const draw = () => {
     const ready = plan.blocks.filter(blockReady).length, total = plan.blocks.length;
     const empty = total - ready, pct = total ? Math.round(ready / total * 100) : 0;
     const emptySlots = plan.blocks.filter(b => b.mode === 'slot' && !blockReady(b)).length;
-    const slot = plan.blocks.find(b => b.id === slotId);
+    const slot = plan.blocks.find(b => b.id === slotId && b.mode === 'slot') || plan.blocks.find(b => b.mode === 'slot' && !blockReady(b)) || plan.blocks.find(b => b.mode === 'slot');
     body.innerHTML = `
       <div class="ws-prep">
         <div class="ws-prep-main">
@@ -2787,7 +2793,7 @@ function renderPrepareStep(body, plan, root){
               <label>Заметки<input id="fNotes" value="${esc(plan.student.notes)}" placeholder="Что важно учесть"></label>
             </div>
           </details>
-          <div id="blocksEl" style="display:flex;flex-direction:column;gap:10px"></div>
+          <div id="blocksEl" class="ws-blocks${picked ? ' has-sel' : ''}" style="display:flex;flex-direction:column;gap:10px"></div>
           <div><button class="ws-ghost" id="addBlockBtn">${ic('plus', 14)}Добавить блок</button></div>
         </div>
         <aside class="ws-glass ws-libpanel" id="libPanel"></aside>
@@ -2814,14 +2820,24 @@ function renderPrepareStep(body, plan, root){
   };
 
   const moveBlock = (b, dir) => {
-    const i = plan.blocks.indexOf(b), j = i + dir;
-    if (j < 0 || j >= plan.blocks.length) return;
-    // в «закрытом» шаблоне обязательные блоки не переставляются — меняемся только с необязательными или перепрыгиваем их
-    let k = j;
-    while (k >= 0 && k < plan.blocks.length && locked && plan.blocks[k].req) k += dir;
+    const i = plan.blocks.indexOf(b);
+    let k = i + dir;
+    while (k >= 0 && k < plan.blocks.length) {
+      const t = plan.blocks[k];
+      if (!isFixedBlock(plan, t)) break;
+      if (b.req) return;          // обязательный блок не перепрыгивает через зафиксированные
+      k += dir;                    // дополнительный блок может перепрыгнуть
+    }
     if (k < 0 || k >= plan.blocks.length) return;
     plan.blocks.splice(i, 1); plan.blocks.splice(k, 0, b);
     save(); draw();
+  };
+
+  const b0Req = (pl, from, to) => {
+    const mv = pl.blocks[from];
+    if (!mv.req || !tplLocked(pl)) return false;
+    const lo = Math.min(from, to), hi = Math.max(from, to);
+    return pl.blocks.slice(lo, hi + 1).some((x, idx) => (lo + idx) !== from && isFixedBlock(pl, x));
   };
 
   const drawBlocks = () => {
@@ -2831,7 +2847,7 @@ function renderPrepareStep(body, plan, root){
       const isEmpty = !blockReady(b);
       const movable = canMoveBlock(plan, b);
       const sub = b.mode === 'text' ? ((b.questions || [])[0] || 'Вопросы и идеи — в режиме урока') : (item ? item.title : `Пусто: добавьте ${b.accept === 'topic' ? 'мини-урок' : (b.accept === 'activity' ? 'активность' : 'материал')}`);
-      return `<div class="ws-glass ws-blk${isEmpty ? ' is-empty' : ''}${b.id === slotId ? ' sel' : ''}" data-id="${esc(b.id)}"${movable ? ' draggable="true"' : ''}>
+      return `<div class="ws-glass ws-blk${isEmpty ? ' is-empty' : ''}${picked && b.id === slotId ? ' sel' : ''}" data-id="${esc(b.id)}"${movable ? ' draggable="true"' : ''}>
         <span class="grab" style="${movable ? '' : 'opacity:.25;cursor:default'}">${ic('grab', 16)}</span>
         <span class="ck">${isEmpty ? ic('circle', 18) : ic('check', 18)}</span>
         <span class="no">${i + 1}</span>
@@ -2842,9 +2858,17 @@ function renderPrepareStep(body, plan, root){
         <button class="x" data-menu="${esc(b.id)}" title="Действия">⋯</button>
       </div>`;
     }).join('') || '<div class="empty">Блоков нет — добавьте первый.</div>';
-    el.querySelectorAll('[data-open]').forEach(b => b.onclick = e => { e.stopPropagation(); slotId = b.dataset.open; panel.type = null; draw(); });
+    el.querySelectorAll('[data-open]').forEach(b => b.onclick = e => { e.stopPropagation(); slotId = b.dataset.open; picked = true; panel.type = null; draw(); });
     el.querySelectorAll('[data-eye]').forEach(b => b.onclick = e => { e.stopPropagation(); const blk = plan.blocks.find(x => x.id === b.dataset.eye); openLibDrawer(byId[blk.itemId], { preview: true }); });
-    el.querySelectorAll('.ws-blk').forEach(row => row.onclick = () => { const b = plan.blocks.find(x => x.id === row.dataset.id); if (b && b.mode === 'slot') { slotId = b.id; panel.type = null; draw(); } });
+    el.querySelectorAll('.ws-blk').forEach(row => row.onclick = () => {
+      const b = plan.blocks.find(x => x.id === row.dataset.id);
+      if (!b) return;
+      if (picked && slotId === b.id) { picked = false; draw(); return; }   // повторный клик снимает выделение
+      picked = true;
+      if (b.mode === 'slot') { slotId = b.id; panel.type = null; }
+      else slotId = b.id;
+      draw();
+    });
     el.querySelectorAll('[data-menu]').forEach(btn => btn.onclick = e => {
       e.stopPropagation();
       const b = plan.blocks.find(x => x.id === btn.dataset.menu);
@@ -2868,7 +2892,7 @@ function renderPrepareStep(body, plan, root){
         e.preventDefault();
         if (!dragId || dragId === row.dataset.id) return;
         const from = plan.blocks.findIndex(b => b.id === dragId), to = plan.blocks.findIndex(b => b.id === row.dataset.id);
-        if (locked && plan.blocks[to].req && plan.blocks[from].req) return;
+        if (b0Req(plan, from, to)) return;
         const [m] = plan.blocks.splice(from, 1); plan.blocks.splice(to, 0, m);
         save(); draw();
       };
