@@ -206,23 +206,23 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   .side-badge.show{display:inline-block;}
 
+  .side-plate{border-radius:22px; overflow:hidden; background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.1);}
   .side-teacher-card{
-    display:flex; align-items:center; gap:11px; padding:12px; border-radius:16px;
-    border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.03);
-    text-decoration:none; color:#fff;
+    display:flex; align-items:center; gap:14px; padding:16px;
+    text-decoration:none; color:#fff; background:transparent; transition:background .15s;
   }
+  .side-teacher-card:hover{background:rgba(255,255,255,.05);}
   .side-teacher-avatar{
-    width:32px; height:32px; border-radius:11px; flex-shrink:0;
-    background:linear-gradient(140deg, var(--accent), #7fa02c);
+    width:52px; height:52px; border-radius:16px; flex-shrink:0;
+    background:var(--accent);
     display:flex; align-items:center; justify-content:center;
-    font-family:'Unbounded',sans-serif; font-weight:700; font-size:11px; color:var(--ink);
+    font-family:'Unbounded',sans-serif; font-weight:700; font-size:16px; color:var(--ink);
   }
-  .side-teacher-name{display:block; font-size:12.5px; font-weight:600; line-height:1.3;}
-  .side-teacher-sub{display:block; font-size:11px; color:#8d8e85; margin-top:2px;}
-  .side-teacher-card{transition:background .15s, border-color .15s;}
-  .side-teacher-card:hover{background:rgba(255,255,255,.08); border-color:rgba(215,239,66,.5);}
-  .side-teacher-go{margin-left:auto; flex-shrink:0; width:28px; height:28px; border-radius:50%; background:var(--accent); color:var(--ink); display:flex; align-items:center; justify-content:center;}
-  .side-teacher-go svg{width:14px; height:14px;}
+  .side-teacher-name{display:block; font-family:'Unbounded',sans-serif; font-size:14px; font-weight:600; line-height:1.3;}
+  .side-teacher-sub{display:block; font-size:12px; color:#a3a49b; margin-bottom:3px;}
+  .side-teacher-go{margin-left:auto; flex-shrink:0; width:42px; height:42px; border-radius:50%; background:var(--accent); color:var(--ink); display:flex; align-items:center; justify-content:center; transition:transform .15s;}
+  .side-teacher-card:hover .side-teacher-go{transform:scale(1.07);}
+  .side-teacher-go svg{width:18px; height:18px;}
   .side-logout-link{
     display:flex; align-items:center; gap:13px;
     background:none; border:none; color:#8d8e85; font-size:12.5px; text-align:left;
@@ -233,24 +233,19 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
 
   .invite-card{
-    margin-top:auto; width:100%; min-height:56px; cursor:pointer; position:relative; overflow:hidden;
-    background:var(--accent);
-    color:var(--ink); border:none;
-    border-radius:16px; padding:12px;
-    display:flex; align-items:center; gap:10px; justify-content:flex-start; text-align:left;
-    transition:transform .18s ease, box-shadow .18s ease;
-    box-shadow:0 12px 26px -14px rgba(122,140,30,.9);
+    width:100%; min-height:54px; cursor:pointer; position:relative;
+    background:rgba(215,239,66,.13); color:#fff; border:none; border-top:1px solid rgba(255,255,255,.07);
+    border-radius:0; padding:14px 16px;
+    display:flex; align-items:center; gap:11px; justify-content:flex-start; text-align:left;
+    transition:background .15s;
   }
-  .invite-card:hover{background:#e6fa5a;}
-  .invite-gift{
-    width:32px; height:32px; border-radius:11px; color:var(--accent);
-    background:var(--ink); display:flex; align-items:center; justify-content:center;
-    position:relative; z-index:1; flex-shrink:0;
-  }
-  .invite-gift svg{width:17px; height:17px;}
-  .invite-text{position:relative; z-index:1; display:flex; flex-direction:column;}
-  .invite-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:12px; line-height:1.3;}
-  .invite-sub{font-size:10px; color:rgba(20,21,18,.65); margin-top:3px; line-height:1.35;}
+  .invite-card:hover{background:rgba(215,239,66,.22);}
+  .invite-gift{width:20px; height:20px; color:var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .invite-gift svg{width:20px; height:20px;}
+  .invite-text{flex:1; font-size:13.5px; line-height:1.3;}
+  .invite-title{font-weight:700;}
+  .invite-sub{color:#a3a49b;}
+  .invite-arrow{width:18px; height:18px; color:var(--accent); flex-shrink:0;}
   @keyframes invite-pulse{
     0%, 100%{ box-shadow:0 0 0 0 rgba(215,239,66,0.45); }
     50%{ box-shadow:0 0 0 7px rgba(215,239,66,0); }
@@ -354,10 +349,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     .side-icwrap{width:auto; height:auto; background:none !important;}
     nav.side-nav button svg{width:19px; height:19px;}
     .side-label{display:none;}
+    .side-plate{display:contents;}
     .invite-card{
       margin-top:0; margin-left:4px; width:40px; height:40px; min-height:0; border-radius:13px;
-      padding:0; justify-content:center; flex-shrink:0;
+      padding:0; justify-content:center; flex-shrink:0; background:var(--accent); color:var(--ink); border:none;
     }
+    .invite-gift{color:var(--ink);}
+    .invite-arrow{display:none;}
     .invite-gift{font-size:17px;}
     .invite-text{display:none;}
     .side-teacher-card, .side-logout-link{display:none;}
@@ -1210,21 +1208,23 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       </nav>
 
       <div style="margin-top:auto; display:flex; flex-direction:column; gap:10px;">
+      <div class="side-plate">
+      <a class="side-teacher-card" id="sideTeacherCard" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">
+        <span class="side-teacher-avatar" id="sideTeacherAvatar">—</span>
+        <span>
+          <span class="side-teacher-sub" id="sideTeacherSub">Твой преподаватель</span>
+          <span class="side-teacher-name" id="sideTeacherName">Преподаватель</span>
+        </span>
+        <span class="side-teacher-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 3 10.5l6 2.5 2.5 6L21 3Z"/><path d="m9 13 5-4"/></svg></span>
+      </a>
       <button class="invite-card" onclick="document.querySelector('.tab-btn[data-tab=&quot;payment&quot;]').click(); setTimeout(function(){var e=document.getElementById('referralBlock'); if(e) e.scrollIntoView({behavior:'smooth', block:'center'});}, 100);" title="Пригласи друга и получи бонус" aria-label="Пригласи друга и получи бонус">
         <span class="invite-gift">
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5h13V16a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V8.5ZM2.5 5.5h15v3h-15zM10 5.5V17M10 5.5S9.4 3 7.4 3a1.8 1.8 0 0 0 0 2.5H10Zm0 0s.6-2.5 2.6-2.5a1.8 1.8 0 0 1 0 2.5H10Z"/></svg>
         </span>
-        <span class="invite-text"><span class="invite-title">Приведи друга</span><span class="invite-sub">скидка 15% на след. месяц обоим</span></span>
+        <span class="invite-text"><span class="invite-title">Приведи друга</span><span class="invite-sub"> · −15% обоим</span></span>
+        <svg class="invite-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
       </button>
-
-      <a class="side-teacher-card" id="sideTeacherCard" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">
-        <span class="side-teacher-avatar" id="sideTeacherAvatar">—</span>
-        <span>
-          <span class="side-teacher-name" id="sideTeacherName">Преподаватель</span>
-          <span class="side-teacher-sub" id="sideTeacherSub">твой преподаватель</span>
-        </span>
-        <span class="side-teacher-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 3 10.5l6 2.5 2.5 6L21 3Z"/><path d="m9 13 5-4"/></svg></span>
-      </a>
+      </div>
       <button class="side-logout-link" id="sideLogoutBtn">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 17H4.5A1.5 1.5 0 0 1 3 15.5v-11A1.5 1.5 0 0 1 4.5 3H8M13 13.5 16.5 10 13 6.5M16.5 10H8"/></svg>
         <span>Выйти</span>
@@ -2018,7 +2018,7 @@ async function loadTeacherContact(){
   if (sideCard && teacherContactTelegram){
     sideCard.href = `https://t.me/${String(teacherContactTelegram).replace('@', '')}`;
     sideCard.title = 'Написать преподавателю в Telegram';
-    if (sideSub) sideSub.textContent = 'написать в Telegram';
+    if (sideSub) sideSub.textContent = 'Твой преподаватель';
   } else if (sideSub){
     sideSub.textContent = 'связь через менеджера';
   }
