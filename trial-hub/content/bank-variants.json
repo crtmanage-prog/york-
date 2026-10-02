@@ -351,6 +351,56 @@
      "html": "<p><b>Today I can talk about real and imaginary situations.</b></p><p>use first, second and third conditionals<br>use unless, in case, as long as<br>talk about regrets and plans</p><p><b>One last question:</b></p><p>What would you do if you could change one thing?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can use mixed and formal conditionals.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Advanced conditionals</b><br>provided · supposing · were it not for · had it not been for · should · otherwise · mixed · if it weren't for · but for · what if</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Beyond the formulas</b></p><p>Поговорим об условных конструкциях без шаблона: смешанных, формальных и инверсиях.</p><p><b>Questions:</b></p><ul><li>What would you be doing now if you had chosen a different career?</li><li>What would have happened if you hadn't moved?</li><li>What would you do should you lose your job?</li><li>What would you do if it weren't for your family?</li></ul><p><b>Vocabulary:</b><br>provided · supposing · were it not for · had it not been for · should · otherwise · mixed</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Mixed and inverted conditionals</b></p><ul><li>If I had studied law, I would be a lawyer now. (mixed)</li><li>If I weren't so busy, I would have helped you. (mixed)</li><li>Had I known, I would have called. (inversion)</li><li>Were it not for you, I would have failed.</li><li>Should you need help, call me.</li><li>Provided / Providing that you pay, we will deliver.</li><li>But for his help, we would have lost.</li></ul><p><b>Vocabulary:</b><br>provided · supposing · were it not for · had it not been for · should · otherwise · mixed · if it weren't for</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Mixed: If + past perfect → would + base (now)</b></p><p>If I had taken the job, I would be rich now.</p><p><b>Inversion (formal)</b></p><p>Had I known = If I had known · Were I you = If I were you · Should you need = If you should need</p><p><b>Others</b></p><p>provided that · supposing · as long as · but for · otherwise</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>If I <b>had studied</b> law, I <b>would be</b> a lawyer now.</li><li><b>Had I / If I had</b> known, I would have called. (formal)</li><li><b>Should you / If you</b> need help, call me. (formal)</li><li><b>Were it not for / Without</b> you, I would have failed.</li><li>We will deliver <b>provided that / unless</b> you pay.</li></ol><p><b>Vocabulary:</b><br>provided · supposing · otherwise · but for · inversion</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Rewrite with inversion</b></p><ol><li>If I had known, I would have called. → ______ I known, I would have called.</li><li>If you should need help, call me. → ______ you need help, call me.</li><li>If I were you, I wouldn't go. → ______ I you, I wouldn't go.</li><li>If it hadn't been for her, we'd have lost. → ______ it not been for her, we'd have lost.</li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>What if?</b></p><p>Discuss alternative past and present: what would be different now if you had made a different choice? Use mixed conditionals.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My conditionals</b></p><p>Tell me:<br>If I hadn't ______, I would be ______ now.<br>Had I known ______, I would have ______.<br>Should I ______, I will ______.</p><p>Then ask: <b>What would you be doing now if ... ?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can use mixed and formal conditionals.</b></p><p>use mixed conditionals<br>use inversion in formal style<br>use provided that, but for, otherwise</p><p><b>One last question:</b></p><p>What would be different if you had chosen another path?</p>"
+    }
+   ]
   }
  },
  "bk-g-used-to": {
@@ -555,6 +605,56 @@
      "html": "<p><b>Today I can use modal verbs for rules, ability and guesses.</b></p><p>talk about obligation and prohibition<br>make guesses with must, might, can't<br>distinguish mustn't and don't have to</p><p><b>One last question:</b></p><p>What might change in your life next year?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can use modals for deduction, regret and criticism in the past.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Modals in context</b><br>deduction · speculation · criticism · regret · obligation · permission · ability · prohibition · lack of necessity · advisability</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Modals of deduction</b></p><p>Поговорим о модальных глаголах: предположения о настоящем и прошлом, критика и сожаление.</p><p><b>Questions:</b></p><ul><li>What must have happened if the train is late?</li><li>What might your colleagues be doing now?</li><li>What should you have done differently last week?</li><li>What could you have done better?</li></ul><p><b>Vocabulary:</b><br>deduction · speculation · criticism · regret · obligation · permission · ability</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Modals of deduction and past modals</b></p><ul><li>She must be at work. (sure now)</li><li>He can't have left. (sure he didn't)</li><li>They might have missed the train. (possible past)</li><li>You should have told me. (criticism)</li><li>I could have helped you. (didn't, but I was able to)</li><li>You needn't have come. (it was unnecessary)</li></ul><p><b>Vocabulary:</b><br>deduction · speculation · criticism · regret · obligation · permission · ability · prohibition</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Present deduction: must / might / can't + base</b></p><p>He must be tired. She can't be at home.</p><p><b>Past deduction: must / might / can't + have + V3</b></p><p>He must have forgotten. She can't have known.</p><p><b>Past criticism / regret: should have / shouldn't have / could have / needn't have</b></p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>He's not answering. He <b>must have / must</b> left already.</li><li>She <b>can't have / mustn't have</b> known. She looked surprised.</li><li>You <b>should have / should</b> told me earlier.</li><li>I <b>could have / can have</b> helped, but nobody asked.</li><li>You <b>needn't have / didn't need</b> brought a gift. It was unnecessary.</li></ol><p><b>Vocabulary:</b><br>deduction · speculation · criticism · regret · lack of necessity</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>She's not here. She ______ have left early. <i>(might)</i></li><li>You ______ have told me! <i>(should)</i></li><li>He ______ have done it. He was abroad. <i>(can't)</i></li><li>You ______ have waited. I was late anyway. <i>(needn't)</i></li><li>They ______ have forgotten. They always forget. <i>(must)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Solve the mystery</b></p><p>Look at a situation (an empty office at 2 pm, a late colleague) and make deductions about the past and present using must / might / can't.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Modals and me</b></p><p>Tell me:<br>I should have ______.<br>I could have ______, but I didn't.<br>I needn't have ______.</p><p>Then ask: <b>What should you have done differently?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can use modals for deduction, regret and criticism in the past.</b></p><p>make deductions about the present and past<br>express criticism and regret<br>use needn't have</p><p><b>One last question:</b></p><p>What is one thing you should have done earlier?</p>"
+    }
+   ]
   }
  },
  "bk-g-gerund-vs-infinitive": {
@@ -705,6 +805,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can use common verbs followed by -ing or to.</b></p><p>use avoid, suggest, consider + -ing<br>use manage, refuse, afford + to<br>use look forward to + -ing</p><p><b>One last question:</b></p><p>What are you looking forward to?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can use advanced verb patterns with -ing and to.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Complex verb patterns</b><br>resent · dread · fancy · prevent · object to · be committed to · be accustomed to · look forward to · be capable of · have difficulty</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Patterns</b></p><p>Поговорим о сложных схемах после глаголов: с -ing, to и с изменением смысла.</p><p><b>Questions:</b></p><ul><li>What do you resent doing?</li><li>What are you committed to?</li><li>What do you dread?</li><li>What are you looking forward to?</li></ul><p><b>Vocabulary:</b><br>resent · dread · fancy · prevent · object to · be committed to · be accustomed to</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Verb patterns</b></p><ul><li>I resent being told what to do.</li><li>She dreads speaking in public.</li><li>I'm committed to improving my English.</li><li>He's not used to getting up early.</li><li>The rain prevented us from leaving.</li><li>I wouldn't object to helping.</li><li>They were forced to leave.</li></ul><p><b>Vocabulary:</b><br>resent · dread · fancy · prevent · object to · be committed to · be accustomed to · look forward to</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>+ -ing</b></p><p>resent · dread · fancy · risk · deny · admit · object to · look forward to · be used to · be committed to</p><p><b>+ object + to + verb</b></p><p>force · allow · persuade · remind · expect · advise</p><p><b>+ object + from + -ing</b></p><p>prevent · stop · discourage ... from doing</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I resent <b>being / to be</b> told what to do.</li><li>I'm committed <b>to improving / to improve</b>.</li><li>The rain prevented us <b>from leaving / to leave</b>.</li><li>They forced him <b>to leave / leaving</b>.</li><li>I look forward <b>to hearing / to hear</b> from you.</li></ol><p><b>Vocabulary:</b><br>resent · dread · prevent · committed to · be accustomed to</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>He denied ______ the money. <i>(take)</i></li><li>She advised me ______ a doctor. <i>(see)</i></li><li>The noise prevented me ______ asleep. <i>(fall)</i></li><li>I'm not accustomed ______ so early. <i>(get up)</i></li><li>They were forced ______ the plan. <i>(change)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Commitments and fears</b></p><p>Talk about what you resent, dread, fancy and are committed to. Use the correct pattern each time.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My patterns</b></p><p>Tell me:<br>I resent ______-ing.<br>I'm committed to ______-ing.<br>I was forced to ______.</p><p>Then ask: <b>What are you committed to?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can use advanced verb patterns with -ing and to.</b></p><p>use verbs followed by -ing<br>use verbs with object + to<br>use prevent / stop + from + -ing</p><p><b>One last question:</b></p><p>What are you committed to this year?</p>"
     }
    ]
   }
@@ -859,6 +1009,56 @@
      "html": "<p><b>Today I can use passive forms in different tenses.</b></p><p>use present and past passive<br>use perfect and future passive<br>choose when to use by + agent</p><p><b>One last question:</b></p><p>What was the most important news this year?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can use advanced passive structures in formal contexts.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Advanced passive</b><br>allege · rumour · reportedly · consider · be rumoured · be said to · be believed · be known · be expected · be reported</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Passive in news and reports</b></p><p>Поговорим о страдательном залоге в новостях, отчётах и формальном стиле.</p><p><b>Questions:</b></p><ul><li>What is said about your city in the news?</li><li>What is expected to change in your industry?</li><li>What has been reported recently?</li><li>What do you have done for you?</li></ul><p><b>Vocabulary:</b><br>allege · rumour · reportedly · consider · be rumoured · be said to · be believed</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Advanced passive structures</b></p><ul><li>It is believed that the company will close.</li><li>The company is believed to be in trouble.</li><li>He is said to have left the country.</li><li>The results are expected to be published soon.</li><li>I was given a new laptop. / A new laptop was given to me.</li><li>The house is being renovated. / The house had been sold.</li><li>She hates being interrupted.</li></ul><p><b>Vocabulary:</b><br>allege · rumour · reportedly · consider · be rumoured · be said to · be believed · be known</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>It + passive + that-clause</b></p><p>It is said / believed / reported that ... </p><p><b>Subject + passive + to-infinitive</b></p><p>He is said to be ... / He is said to have gone ... </p><p><b>Passive gerund / infinitive</b></p><p>being + V3 · to be + V3 · to have been + V3</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>It <b>is believed / believes</b> that the company will close.</li><li>He is said <b>to have left / to leave</b> the country. (earlier)</li><li>She hates <b>being interrupted / to interrupt</b>.</li><li>The house <b>is being renovated / is renovating</b> now.</li><li>The results are expected <b>to be published / to publish</b> soon.</li></ol><p><b>Vocabulary:</b><br>allege · rumour · reportedly · be believed · be expected</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Rewrite in the passive</b></p><ol><li>People say he is very rich. → He ______ very rich.</li><li>They believe that she left. → She ______ left.</li><li>Someone is repairing the road. → The road ______.</li><li>I don't like people interrupting me. → I don't like ______.</li><li>They expect prices to rise. → Prices ______.</li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>News report</b></p><p>Prepare a short news report about a recent event. Use at least 5 passive structures, including impersonal ones.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Passive in life</b></p><p>Tell me:<br>It is said that ______.<br>I'm expected to ______.<br>I hate being ______.</p><p>Then ask: <b>What are you expected to do?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can use advanced passive structures in formal contexts.</b></p><p>use impersonal passive reports<br>use passive gerunds and infinitives<br>choose active or passive for style</p><p><b>One last question:</b></p><p>What is rumoured about your field?</p>"
+    }
+   ]
   }
  },
  "bk-g-stop-doing-vs-stop-to-do": {
@@ -1009,6 +1209,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can distinguish stop doing and stop to do.</b></p><p>say I quit a habit<br>say I paused for a reason<br>use give up, carry on, keep</p><p><b>One last question:</b></p><p>What habit are you trying to break?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can use verbs whose meaning changes with -ing and to.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Meaning change</b><br>cease · abandon · refrain from · desist · suspend · halt · relinquish · discontinue · cut out · break off</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Stop and similar verbs</b></p><p>Поговорим о глаголах, значение которых меняется в зависимости от -ing и to.</p><p><b>Questions:</b></p><ul><li>What did you give up that changed your life?</li><li>What do you refrain from doing?</li><li>What should people stop to think about?</li><li>What did you quit recently?</li></ul><p><b>Vocabulary:</b><br>cease · abandon · refrain from · desist · suspend · halt · relinquish</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Meaning change with -ing and to</b></p><ul><li>He stopped talking. / He stopped to talk.</li><li>I'll never forget meeting her. / Don't forget to meet her.</li><li>She tried to open it. / She tried opening it.</li><li>I regret telling him. / I regret to tell you.</li><li>We went on talking. / He went on to say ...</li><li>I meant to call you. / This means losing time.</li></ul><p><b>Vocabulary:</b><br>cease · abandon · refrain from · desist · suspend · halt · relinquish · discontinue</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>stop doing / stop to do</b></p><p>He stopped smoking. He stopped to smoke.</p><p><b>go on doing / go on to do</b></p><p>She went on talking. (continued) / She went on to become a doctor. (next)</p><p><b>mean doing / mean to do</b></p><p>This means waiting. / I meant to call.</p><p><b>try doing / try to do</b></p><p>try restarting (experiment) / try to restart (effort)</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct meaning</b></p><ol><li>He stopped <b>smoking / to smoke</b>. (He quit.)</li><li>She went on <b>to become / becoming</b> a doctor. (next stage)</li><li>This means <b>waiting / to wait</b> longer. (result)</li><li>I meant <b>to call / calling</b> you. (intention)</li><li>Try <b>restarting / to restart</b> the computer. (experiment)</li></ol><p><b>Vocabulary:</b><br>cease · refrain from · abandon · suspend · discontinue</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>She went on ______ about it for hours. <i>(talk)</i></li><li>He went on ______ a famous director. <i>(become)</i></li><li>This will mean ______ earlier. <i>(leave)</i></li><li>We stopped ______ for petrol. <i>(buy)</i></li><li>I tried ______ the window, but it was stuck. <i>(open)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Meaning matters</b></p><p>Explain the difference between the pairs. Say a sentence with each:</p><ul><li>remember doing / remember to do</li><li>stop doing / stop to do</li><li>try doing / try to do</li><li>go on doing / go on to do</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Meaning change in my life</b></p><p>Tell me:<br>I stopped ______ when ______.<br>I went on to ______.<br>I meant to ______ but ______.</p><p>Then ask: <b>What did you mean to do but didn't?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can use verbs whose meaning changes with -ing and to.</b></p><p>distinguish stop, try, go on, mean<br>explain the difference<br>use them naturally</p><p><b>One last question:</b></p><p>What did you mean to do but never did?</p>"
     }
    ]
   }
@@ -1163,6 +1413,56 @@
      "html": "<p><b>Today I can adjust my message with modal verbs.</b></p><p>make polite requests and suggestions<br>use should have / could have<br>show how certain I am</p><p><b>One last question:</b></p><p>What did you regret not doing last year?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can adjust tone with modal verbs and hedging.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Nuance and diplomacy</b><br>tentative · assertive · hedge · diplomatic · tone · imply · soften · tactful · bluntly · insist</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Tone and hedging</b></p><p>Поговорим о тоне, смягчении и точности при помощи модальных глаголов.</p><p><b>Questions:</b></p><ul><li>How do you soften bad news?</li><li>How do you disagree diplomatically?</li><li>How do you make a request sound less direct?</li><li>When should you be blunt?</li></ul><p><b>Vocabulary:</b><br>tentative · assertive · hedge · diplomatic · tone · imply · soften</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Hedging and tone</b></p><ul><li>That might not be the best approach. (soft)</li><li>You may want to reconsider. (diplomatic)</li><li>I would have thought it was obvious. (mild criticism)</li><li>It could be argued that ... </li><li>You might have mentioned it earlier! (annoyance)</li><li>I was wondering if you could ... </li><li>That would be fine.</li></ul><p><b>Vocabulary:</b><br>tentative · assertive · hedge · diplomatic · tone · imply · soften · tactful</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Softening: might · may · could · would</b></p><p>That might not be ideal. / You may wish to ... </p><p><b>Indirectness: I was wondering if ... / Would you mind ... ?</b></p><p><b>Hedging: it could be argued · it seems that · tend to · to some extent</b></p><p><b>Assertive: must · need to · have to · insist</b></p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the most diplomatic form</b></p><ol><li><b>That might not be the best approach. / That is a bad idea.</b></li><li><b>I was wondering if you could help. / Help me.</b></li><li><b>You may want to reconsider. / You must change it.</b></li><li><b>It could be argued that ... / Everybody knows that ...</b></li></ol><p><b>Vocabulary:</b><br>hedge · soften · tactful · tone · diplomatic</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Soften these sentences</b></p><ol><li>That's wrong. → That ______ not be quite right.</li><li>Change the plan. → You ______ want to change the plan.</li><li>Help me. → I was ______ if you could help.</li><li>You are late. → You ______ have mentioned it earlier!</li><li>This is a bad idea. → This ______ not be the best idea.</li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Diplomacy practice</b></p><p>Practise giving bad news, disagreeing and making a request in a diplomatic way. Your partner reacts.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Tone</b></p><p>Tell me:<br>I find it hard to say ______ diplomatically.<br>I usually soften criticism by ______.<br>I would have thought ______.</p><p>Then ask: <b>How do you soften bad news?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can adjust tone with modal verbs and hedging.</b></p><p>soften criticism and requests<br>use hedging language<br>sound assertive when needed</p><p><b>One last question:</b></p><p>When is it better to be direct?</p>"
+    }
+   ]
   }
  },
  "bk-g-remember-doing-or-remember-to-do": {
@@ -1313,6 +1613,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can use remember, forget, regret and try with -ing and to.</b></p><p>talk about memories vs duties<br>express regret<br>use try + -ing and try + to</p><p><b>One last question:</b></p><p>What is your earliest memory?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can talk about memories, intentions and regrets accurately.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Memory, intention and regret</b><br>recollect · reminisce · forgetful · nostalgic · vivid · oversight · mean to · regret · neglect · bear in mind</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Memory and intention</b></p><p>Поговорим о памяти, намерениях и сожалении, и о том, как это отражается в грамматике.</p><p><b>Questions:</b></p><ul><li>What is your most vivid childhood memory?</li><li>What do you regret not doing?</li><li>What did you mean to do but never did?</li><li>What do you always neglect to do?</li></ul><p><b>Vocabulary:</b><br>recollect · reminisce · forgetful · nostalgic · vivid · oversight · mean to</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>remember / forget / regret / mean / try</b></p><ul><li>I clearly remember being given the keys.</li><li>I forgot to renew my passport.</li><li>I'll never forget being told the news.</li><li>I regret not having studied more. / I regret to say that ...</li><li>I meant to ring, but I forgot. / Failure means starting again.</li><li>Bear in mind that it may rain.</li></ul><p><b>Vocabulary:</b><br>recollect · reminisce · forgetful · nostalgic · vivid · oversight · mean to · regret</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Perfect gerund</b></p><p>I regret not having studied. · He denied having seen her.</p><p><b>Passive gerund</b></p><p>I remember being told. · I hate being kept waiting.</p><p><b>Fixed expressions</b></p><p>Bear in mind · Don't forget · I seem to remember · If I remember rightly</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I clearly remember <b>being given / to be given</b> the keys.</li><li>I regret <b>not having studied / to not study</b> more.</li><li>I forgot <b>to renew / renewing</b> my passport.</li><li>He denied <b>having seen / to have seen</b> her.</li><li><b>If I remember rightly / If I remember rightly of</b>, it was on Monday.</li></ol><p><b>Vocabulary:</b><br>recollect · reminisce · neglect · oversight · bear in mind</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I remember ______ the news in the kitchen. <i>(tell)</i></li><li>I regret ______ more time with her. <i>(not spend)</i></li><li>He forgot ______ the form. <i>(sign)</i></li><li>I'll never forget ______ to the sea for the first time. <i>(take)</i></li><li>I meant ______ , but I got busy. <i>(call)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Memories and regrets</b></p><p>Describe a vivid memory and one regret using perfect and passive gerunds.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Memory</b></p><p>Tell me:<br>I vividly remember being ______.<br>I regret not having ______.<br>I seem to remember that ______.</p><p>Then ask: <b>What do you vividly remember?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can talk about memories, intentions and regrets accurately.</b></p><p>use perfect and passive gerunds<br>use remember, forget, regret, mean correctly<br>use fixed memory expressions</p><p><b>One last question:</b></p><p>What memory has stayed with you the longest?</p>"
     }
    ]
   }
@@ -1467,6 +1817,56 @@
      "html": "<p><b>Today I can express wishes and regrets about the present and past.</b></p><p>use wish + Past Simple<br>use wish + Past Perfect<br>use wish + would for complaints</p><p><b>One last question:</b></p><p>What do you wish you had known at 18?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can talk about wishes and unreal situations.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Wishes, regrets and preferences</b><br>it's high time · would rather · as if · as though · suppose · imagine · wish · if only · regret · preferably</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Unreal situations</b></p><p>Поговорим о желаниях, сожалениях и «нереальных» ситуациях.</p><p><b>Questions:</b></p><ul><li>What do you wish your colleagues did differently?</li><li>What do you wish you had known at 18?</li><li>What would you rather people did?</li><li>What is it high time someone did?</li></ul><p><b>Vocabulary:</b><br>it's high time · would rather · as if · as though · suppose · imagine · wish</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Wish, if only, would rather, it's high time</b></p><ul><li>I wish I could take back what I said.</li><li>If only I had listened to my instincts.</li><li>I wish he would stop interrupting.</li><li>It's high time we left.</li><li>I'd rather you didn't smoke here.</li><li>He talks as if he owned the place.</li><li>Suppose you won the lottery — what would you do?</li></ul><p><b>Vocabulary:</b><br>it's high time · would rather · as if · as though · suppose · imagine · wish · if only</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>wish + past (present) / past perfect (past) / would (annoyance)</b></p><p>I wish I were taller. / I wish I had known. / I wish he would listen.</p><p><b>It's (high) time + past</b></p><p>It's time we went.</p><p><b>would rather + person + past</b></p><p>I'd rather you stayed.</p><p><b>as if / as though + past</b></p><p>He acts as if he knew everything.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I wish I <b>had known / knew</b> then. (past)</li><li>It's high time we <b>left / leave</b>.</li><li>I'd rather you <b>didn't / don't</b> smoke here.</li><li>He talks as if he <b>owned / owns</b> the place.</li><li>I wish he <b>would stop / stops</b> interrupting.</li></ol><p><b>Vocabulary:</b><br>regret · high time · as if · preferably · suppose</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>It's high time you ______ up. <i>(grow)</i></li><li>I'd rather you ______ me earlier. <i>(tell)</i></li><li>She behaves as though she ______ the boss. <i>(be)</i></li><li>If only I ______ her advice. <i>(take: past)</i></li><li>I wish they ______ so loud. <i>(not be)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Wishes and regrets</b></p><p>Talk about what you wish were different, what you regret, and what it's high time somebody did.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Unreal</b></p><p>Tell me:<br>I wish I had ______.<br>It's high time ______.<br>I'd rather people ______.</p><p>Then ask: <b>What is it high time someone did?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can talk about wishes and unreal situations.</b></p><p>use wish, if only and would rather<br>use it's high time and as if<br>express regrets and complaints</p><p><b>One last question:</b></p><p>What do you wish you had understood earlier?</p>"
+    }
+   ]
   }
  },
  "bk-g-remember-doing-vs-remember-to-do": {
@@ -1619,6 +2019,56 @@
      "html": "<p><b>Today I can distinguish memories from duties.</b></p><p>say what I remember doing<br>say what I remembered to do<br>express regret about a past action</p><p><b>One last question:</b></p><p>What is your happiest memory?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can use perfect and passive forms with remember and similar verbs.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Perfect and passive infinitive/gerund</b><br>recall · forget · recollect · be reminded · mean · remember · regret · mistake · recognise · overlook</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Doing or to do?</b></p><p>Поговорим о различии между воспоминанием о действии и обязанностью, с более сложными формами.</p><p><b>Questions:</b></p><ul><li>What do you recall being told as a child?</li><li>What have you overlooked recently?</li><li>What are you grateful to have been given?</li><li>What do you hope to have achieved by 40?</li></ul><p><b>Vocabulary:</b><br>recall · forget · recollect · be reminded · mean · remember · regret</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Perfect and passive forms</b></p><ul><li>I remember being taken to the sea. (passive gerund)</li><li>I'm glad to have met her. (perfect infinitive)</li><li>He seems to have forgotten. (perfect infinitive)</li><li>I don't remember having said that. (perfect gerund)</li><li>She was reminded to sign the form. (passive)</li><li>He regrets not having asked.</li></ul><p><b>Vocabulary:</b><br>recall · forget · recollect · be reminded · mean · remember · regret · mistake</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Gerund: doing · having done · being done</b></p><p>I remember seeing · I remember having seen · I remember being seen</p><p><b>Infinitive: to do · to have done · to be done</b></p><p>I'm happy to see · I'm happy to have seen · I'm happy to be seen</p><p><b>Choice</b></p><p>remember + gerund = memory · remember + to = duty</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I remember <b>being taken / to be taken</b> to the sea.</li><li>He seems <b>to have forgotten / to forgot</b>.</li><li>I don't remember <b>having said / to have said</b> that.</li><li>She was reminded <b>to sign / signing</b> the form.</li><li>I'm glad <b>to have met / having meet</b> her.</li></ol><p><b>Vocabulary:</b><br>recall · recollect · overlook · be reminded · mistake</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I'm glad ______ you. <i>(meet: perfect)</i></li><li>He regrets ______ me earlier. <i>(not tell: perfect)</i></li><li>She remembers ______ the news by phone. <i>(tell: passive)</i></li><li>He seems ______ the deadline. <i>(forget: perfect)</i></li><li>Please remember ______ the lights. <i>(turn off)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Recall and reflect</b></p><p>Talk about what you remember being told and what you hope to have achieved in ten years.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Perfect forms</b></p><p>Tell me:<br>I remember having ______.<br>I'm glad to have ______.<br>By 40 I hope to have ______.</p><p>Then ask: <b>What do you hope to have done by 40?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can use perfect and passive forms with remember and similar verbs.</b></p><p>use perfect gerund and infinitive<br>use passive gerund and infinitive<br>distinguish memory and duty</p><p><b>One last question:</b></p><p>What do you hope to have achieved in ten years?</p>"
+    }
+   ]
   }
  },
  "bk-g-say-or-tell": {
@@ -1719,6 +2169,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can use say, tell, speak and talk accurately.</b></p><p>report what people said<br>use fixed phrases with tell and say<br>choose between speak and talk</p><p><b>One last question:</b></p><p>What is the best news someone told you recently?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can report speech accurately with a range of verbs.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Reporting verbs</b><br>assert · insist · point out · imply · confess · murmur · persuade · convince · dismiss · acknowledge</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Reporting what was said</b></p><p>Поговорим о том, как точно передавать чужие слова и их оттенки.</p><p><b>Questions:</b></p><ul><li>How do you report a conversation accurately?</li><li>What is the difference between telling someone and informing them?</li><li>Have you ever been misquoted?</li><li>When is it better to say nothing?</li></ul><p><b>Vocabulary:</b><br>assert · insist · point out · imply · confess · murmur · persuade</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>say / tell / report verbs</b></p><ul><li>She told me that she had been offered a job. / She said she had been offered a job.</li><li>He pointed out that the deadline had passed.</li><li>She insisted on paying for dinner.</li><li>He admitted making a mistake. / He admitted that he was wrong.</li><li>They persuaded me to stay.</li><li>He's said to be the best in the field.</li></ul><p><b>Vocabulary:</b><br>assert · insist · point out · imply · confess · murmur · persuade · convince</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>say + clause · tell + object + clause</b></p><p>He said that ... / He told us that ... </p><p><b>Reporting verbs with patterns</b></p><p>admit + -ing · insist on + -ing · persuade + object + to · point out + that</p><p><b>Impersonal reports</b></p><p>It is said that ... / He is said to ... </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>She <b>told / said</b> me that she had left.</li><li>He <b>admitted / confessed to</b> making a mistake.</li><li>She <b>insisted on / insisted to</b> paying for dinner.</li><li>They <b>persuaded me to stay / persuaded me staying</b>.</li><li>He <b>is said to / says to</b> be the best.</li></ol><p><b>Vocabulary:</b><br>assert · insist · point out · imply · acknowledge</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Report the statements</b></p><ol><li>\"I'll call you tomorrow,\" he said. → He promised ______.</li><li>\"You should see a doctor,\" she said. → She advised me ______.</li><li>\"I didn't take the money,\" he said. → He denied ______.</li><li>\"Let's go to the cinema,\" she said. → She suggested ______.</li><li>\"Don't touch it!\" he said. → He warned me ______.</li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Reporting a conversation</b></p><p>Report a conversation you recently had, using at least 5 different reporting verbs with the correct patterns.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Reported speech in life</b></p><p>Tell me:<br>Recently someone pointed out that ______.<br>I once admitted ______.<br>I was persuaded to ______.</p><p>Then ask: <b>Has anyone persuaded you to do something?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can report speech accurately with a range of verbs.</b></p><p>use reporting verbs with correct patterns<br>change tenses and references in reported speech<br>use impersonal passive reports</p><p><b>One last question:</b></p><p>What was the most surprising thing someone has told you?</p>"
     }
    ]
   }
@@ -1823,6 +2323,56 @@
      "html": "<p><b>Today I can choose between be and have in natural phrases.</b></p><p>use be for states and feelings<br>use have for things, illness and activities<br>use be used to and have trouble</p><p><b>One last question:</b></p><p>What is something you are not used to yet?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can use be, have and get in advanced structures.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Be, have and get</b><br>be supposed to · be about to · have something done · get something done · be bound to · have a go · be likely to · get used to · be to blame · have got to</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Be, have, get</b></p><p>Поговорим о устойчивых конструкциях с be, have и get.</p><p><b>Questions:</b></p><ul><li>What do you have done professionally rather than doing it yourself?</li><li>What are you supposed to do and don't?</li><li>What are you about to do?</li><li>What are you getting used to?</li></ul><p><b>Vocabulary:</b><br>be supposed to · be about to · have something done · get something done · be bound to · have a go · be likely to</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>be / have / get structures</b></p><ul><li>I'm supposed to be at a meeting. (expected)</li><li>I'm about to leave. (very soon)</li><li>I had my car repaired. / I got my hair cut. (causative)</li><li>He is bound to win. (certain)</li><li>She is likely to be late. (probable)</li><li>I'm getting used to living alone.</li></ul><p><b>Vocabulary:</b><br>be supposed to · be about to · have something done · get something done · be bound to · have a go · be likely to · get used to</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>be + to / supposed to / about to / bound to / likely to</b></p><p>She's about to start. He's bound to find out.</p><p><b>have / get + object + V3 (causative)</b></p><p>I had my phone fixed. I got my flat painted.</p><p><b>be used to + -ing vs get used to + -ing vs used to + verb</b></p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I'm <b>supposed to / suppose to</b> be at a meeting.</li><li>I <b>had / did</b> my car repaired.</li><li>He is <b>bound / sure</b> to win.</li><li>I'm <b>getting used to / getting use to</b> living alone.</li><li>She is <b>likely / probably</b> to be late.</li></ol><p><b>Vocabulary:</b><br>be supposed to · be about to · be bound to · be likely to · get used to</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I had my hair ______ yesterday. <i>(cut)</i></li><li>She is ______ to be late. <i>(likely)</i></li><li>I'm ______ to leave. <i>(about)</i></li><li>We're not ______ to park here. <i>(supposed)</i></li><li>He is ______ to find out sooner or later. <i>(bound)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Talk about change</b></p><p>Talk about things you have done for you, things you are getting used to and things you are about to do.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My life</b></p><p>Tell me:<br>I've just had ______ done.<br>I'm getting used to ______-ing.<br>I'm about to ______.</p><p>Then ask: <b>What are you getting used to?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can use be, have and get in advanced structures.</b></p><p>use the causative<br>use be about to, supposed to, bound to<br>distinguish be used to, get used to, used to</p><p><b>One last question:</b></p><p>What are you about to start?</p>"
+    }
+   ]
   }
  },
  "bk-g-make-or-do": {
@@ -1923,6 +2473,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can use make and do in common phrases.</b></p><p>use make for results and decisions<br>use do for activities and tasks<br>use common collocations correctly</p><p><b>One last question:</b></p><p>What was the hardest decision you made this year?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can use idiomatic phrases with make and do.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Collocations</b><br>make allowances · make do with · do justice · make a case · do the trick · make a point of · do away with · make headway · do someone good · make up for</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Make and do in idioms</b></p><p>Поговорим об устойчивых выражениях с make и do.</p><p><b>Questions:</b></p><ul><li>What do you make a point of doing every day?</li><li>What can you not do without?</li><li>What did you do to make up for a mistake?</li><li>What do you think does the trick when you are stressed?</li></ul><p><b>Vocabulary:</b><br>make allowances · make do with · do justice · make a case · do the trick · make a point of · do away with</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Idiomatic make and do</b></p><ul><li>I make a point of reading every day.</li><li>We'll have to make do with what we have.</li><li>This photo doesn't do you justice.</li><li>A short walk will do the trick.</li><li>We're finally making headway.</li><li>I'll make it up to you.</li><li>We should do away with these rules.</li></ul><p><b>Vocabulary:</b><br>make allowances · make do with · do justice · make a case · do the trick · make a point of · do away with · make headway</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>make + abstract noun</b></p><p>make a case · make headway · make allowances · make a point of</p><p><b>do + abstract or general</b></p><p>do justice · do someone good · do the trick · do away with</p><p><b>phrasal verbs</b></p><p>make up for · make do with · do without</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct word</b></p><ol><li>A walk will <b>do / make</b> the trick.</li><li>We must <b>make / do</b> do with what we have.</li><li>The photo doesn't <b>do / make</b> you justice.</li><li>I'll <b>make / do</b> it up to you.</li><li>They're <b>making / doing</b> headway.</li></ol><p><b>Vocabulary:</b><br>make a point of · make do with · do justice · make up for · do away with</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>We'll have to make ______ with this. <i>(do)</i></li><li>A short break will ______ the trick. <i>(do)</i></li><li>I'll ______ it up to you. <i>(make)</i></li><li>She ______ a point of calling every Sunday. <i>(make)</i></li><li>We should ______ away with this rule. <i>(do)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Tell a story</b></p><p>Tell a short story in which you use at least 6 of these collocations.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Make and do for me</b></p><p>Tell me:<br>I make a point of ______.<br>I can't do without ______.<br>To make up for ______, I ______.</p><p>Then ask: <b>What can you not do without?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can use idiomatic phrases with make and do.</b></p><p>use collocations with abstract nouns<br>use phrasal verbs with make and do<br>sound natural in conversation</p><p><b>One last question:</b></p><p>What would you never do without?</p>"
     }
    ]
   }
@@ -2027,6 +2627,56 @@
      "html": "<p><b>Today I can talk about habits and changes in the present.</b></p><p>use Present Simple for habits<br>use Present Continuous for temporary and changing situations<br>use always + Continuous for annoying habits</p><p><b>One last question:</b></p><p>What is changing in your life at the moment?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can use present tenses for nuance.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Aspect in the present</b><br>tend to · be bound to · keep on · be forever · lately · these days · ongoing · at times · habitually · temporary</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Habits, trends and now</b></p><p>Поговорим о привычках, временных ситуациях и тенденциях.</p><p><b>Questions:</b></p><ul><li>What are you doing differently lately?</li><li>What do you tend to do when you are stressed?</li><li>What trends are changing your industry?</li><li>What annoying habit do you have?</li></ul><p><b>Vocabulary:</b><br>tend to · be bound to · keep on · be forever · lately · these days · ongoing</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Present Simple vs Continuous for nuance</b></p><ul><li>He is forever complaining. (annoying)</li><li>I tend to overthink things. (habit)</li><li>I'm seeing a doctor tomorrow. (arrangement)</li><li>The climate is changing rapidly. (trend)</li><li>I'm thinking about moving. (process of thought)</li><li>I think that's a good idea. (opinion)</li></ul><p><b>Vocabulary:</b><br>tend to · be bound to · keep on · be forever · lately · these days · ongoing · at times</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Simple → general truths, habits, states</b></p><p>I live here. Water boils at 100°C.</p><p><b>Continuous → temporary, changing, annoying, arranged</b></p><p>I'm staying with a friend. Prices are rising.</p><p><b>State verbs: usually Simple</b></p><p>I know / believe / own / seem. BUT: I'm seeing a doctor (arrangement). I'm thinking (process).</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>He <b>is always complaining / always complains</b> about everything. (annoying)</li><li>I <b>think / am thinking</b> that's a good idea. (opinion)</li><li>I <b>am thinking / think</b> about moving. (process)</li><li>The climate <b>is changing / changes</b> rapidly.</li><li>I <b>am seeing / see</b> a doctor tomorrow.</li></ol><p><b>Vocabulary:</b><br>tend to · lately · ongoing · habitually · temporary</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>She ______ forever losing her phone. <i>(be)</i></li><li>I ______ you're right. <i>(think: opinion)</i></li><li>We ______ to a new office next month. <i>(move)</i></li><li>Prices ______ rapidly. <i>(rise)</i></li><li>He ______ to be difficult. <i>(tend)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Analyse a trend</b></p><p>Describe a trend in your field and what is changing. Use both Simple and Continuous forms.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Right now</b></p><p>Tell me:<br>I tend to ______.<br>These days I'm ______.<br>My colleague is forever ______.</p><p>Then ask: <b>What is changing in your life?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can use present tenses for nuance.</b></p><p>choose Simple or Continuous by meaning<br>use state verbs correctly<br>express annoyance and trends</p><p><b>One last question:</b></p><p>What change are you noticing in your life?</p>"
+    }
+   ]
   }
  },
  "bk-g-past-experiences": {
@@ -2127,6 +2777,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can talk about experiences and recent events.</b></p><p>use Present Perfect for experience<br>use Past Simple for finished events<br>use ever, never, already, yet, just</p><p><b>One last question:</b></p><p>What is the most unusual thing you have done?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can tell stories using different past forms.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Narrative and perfect forms</b><br>by the time · had been · in the end · all along · it turned out · up until then · as it happened · hindsight · ever since · eventually</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Telling experiences</b></p><p>Поговорим о прошлом опыте, используя разные формы прошедшего времени.</p><p><b>Questions:</b></p><ul><li>What had you done before you started your current job?</li><li>What had been going on in your life when you made a big decision?</li><li>What turned out differently from what you expected?</li><li>How long have you been doing what you do?</li></ul><p><b>Vocabulary:</b><br>by the time · had been · in the end · all along · it turned out · up until then · as it happened</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Past tenses in narrative</b></p><ul><li>By the time I arrived, the film had started.</li><li>I had been waiting for an hour when she called.</li><li>It turned out that he had lied all along.</li><li>I've been working here since 2018.</li><li>Ever since then, I've avoided flying.</li><li>In the end, we decided to stay.</li></ul><p><b>Vocabulary:</b><br>by the time · had been · in the end · all along · it turned out · up until then · as it happened · hindsight</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Past Simple → main events</b></p><p>We arrived, he opened the door.</p><p><b>Past Continuous → background</b></p><p>It was raining when we left.</p><p><b>Past Perfect → before the past</b></p><p>She had already left when I called.</p><p><b>Perfect Continuous → duration</b></p><p>I had been working for hours.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>By the time I arrived, the film <b>had started / started</b>.</li><li>I <b>had been waiting / was waiting</b> for an hour when she called.</li><li>I <b>have worked / worked</b> here since 2018.</li><li>It turned out that he <b>had lied / lied</b> all along.</li><li>Ever since then I <b>have avoided / avoided</b> flying.</li></ol><p><b>Vocabulary:</b><br>by the time · it turned out · ever since · eventually · in the end</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>By the time we arrived, they ______ left. <i>(have)</i></li><li>I ______ for two hours when he called. <i>(wait)</i></li><li>It ______ out that she knew all along. <i>(turn)</i></li><li>I ______ here since 2018. <i>(work)</i></li><li>She ______ already ______ when I called. <i>(leave)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Tell a story</b></p><p>Tell a story about an unexpected event. Structure: background (Continuous), events (Simple), earlier (Perfect), and result (Present Perfect).</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My experiences</b></p><p>Tell me:<br>By the time I was ______, I had ______.<br>It turned out that ______.<br>Ever since then I've ______.</p><p>Then ask: <b>What turned out differently?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can tell stories using different past forms.</b></p><p>combine past tenses in narrative<br>use perfect forms for earlier events<br>link past and present</p><p><b>One last question:</b></p><p>What was the most unexpected thing that happened to you?</p>"
     }
    ]
   }
@@ -2231,6 +2931,56 @@
      "html": "<p><b>Today I can describe my daily life and routine in detail.</b></p><p>talk about commute, work and chores<br>use frequency and time expressions<br>describe a typical and a busy day</p><p><b>One last question:</b></p><p>How do you keep a work-life balance?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can describe my lifestyle with natural phrasal verbs.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Routine and lifestyle</b><br>juggle · keep up with · cut down on · get round to · put off · wind down · burn out · fit in · switch off · stick to</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Lifestyle</b></p><p>Поговорим о распорядке, нагрузках и о том, как поддерживать баланс.</p><p><b>Questions:</b></p><ul><li>What do you keep putting off?</li><li>How do you wind down after work?</li><li>How do you stick to a routine?</li><li>What would you like to cut down on?</li></ul><p><b>Vocabulary:</b><br>juggle · keep up with · cut down on · get round to · put off · wind down · burn out</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Talking about daily life</b></p><ul><li>I'm juggling work and study.</li><li>I keep putting off cleaning the flat.</li><li>I'm trying to cut down on coffee.</li><li>I never get round to answering emails.</li><li>I find it hard to switch off after work.</li><li>I try to stick to a schedule.</li></ul><p><b>Vocabulary:</b><br>juggle · keep up with · cut down on · get round to · put off · wind down · burn out · fit in</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Phrasal verbs for routine</b></p><p>put off · cut down on · get round to · keep up with · stick to · wind down · burn out · fit in</p><p><b>Structures</b></p><p>keep + -ing · find it hard to + verb · try to + verb · manage to + verb</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct phrasal verb</b></p><ol><li>I keep <b>putting off / putting up</b> the work.</li><li>I'm trying to <b>cut down on / cut off</b> sugar.</li><li>I never <b>get round to / get to round</b> emailing.</li><li>It's hard to <b>switch off / turn off</b> after work.</li><li>I try to <b>stick to / stuck on</b> a schedule.</li></ol><p><b>Vocabulary:</b><br>juggle · put off · cut down on · burn out · wind down</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I keep ______ off the dentist. <i>(put)</i></li><li>I'm trying to cut ______ on coffee. <i>(down)</i></li><li>I never get ______ to answering emails. <i>(round)</i></li><li>I can't ______ off after work. <i>(switch)</i></li><li>I try to ______ to a schedule. <i>(stick)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Describe a week</b></p><p>Describe a typical busy week using at least 6 phrasal verbs: how you manage time, what you put off and how you recover.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My routine</b></p><p>Tell me:<br>I keep putting off ______.<br>I'm trying to cut down on ______.<br>To wind down, I ______.</p><p>Then ask: <b>How do you switch off?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can describe my lifestyle with natural phrasal verbs.</b></p><p>use phrasal verbs for routine<br>talk about stress and balance<br>describe habits and plans for change</p><p><b>One last question:</b></p><p>What routine would you like to change?</p>"
+    }
+   ]
   }
  },
  "bk-g-make-your-answers-longer": {
@@ -2331,6 +3081,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can give longer and more developed answers.</b></p><p>give a reason and an example<br>contrast ideas with although and however<br>use fillers naturally</p><p><b>One last question:</b></p><p>Why is it important to give full answers?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can develop an answer in a structured way.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Developing ideas</b><br>on the one hand · what's more · that said · as a result · to put it differently · for one thing · by and large · all in all · for instance · owing to</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Developing an answer</b></p><p>Поговорим и потренируемся строить развёрнутый, логичный ответ.</p><p><b>Questions:</b></p><ul><li>What are the pros and cons of living abroad?</li><li>Why is it important to learn languages?</li><li>How has your life changed in the last five years?</li><li>What would make your city better?</li></ul><p><b>Vocabulary:</b><br>on the one hand · what's more · that said · as a result · to put it differently · for one thing · by and large</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Structuring a longer answer</b></p><ul><li>For one thing, it's cheaper. What's more, it's quicker.</li><li>On the one hand, it's convenient. On the other hand, it's expensive.</li><li>That said, I still prefer it.</li><li>As a result, I changed my plans.</li><li>By and large, I'm satisfied.</li><li>All in all, it was worth it.</li></ul><p><b>Vocabulary:</b><br>on the one hand · what's more · that said · as a result · to put it differently · for one thing · by and large · all in all</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Point → Support → Contrast → Conclusion</b></p><p>For one thing ... / What's more ... </p><p>On the one hand ... on the other hand ... / That said ... </p><p>All in all ... / By and large ... </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best linker</b></p><ol><li>It's cheap. <b>What's more / However</b>, it's quick.</li><li>It's fast. <b>That said / Therefore</b>, it's expensive.</li><li>It rained all day. <b>As a result / In addition</b>, we stayed home.</li><li><b>All in all / For one thing</b>, it was worth it.</li><li><b>By and large / On one hand</b>, I'm satisfied.</li></ol><p><b>Vocabulary:</b><br>what's more · that said · as a result · all in all · by and large</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Develop the answer</b></p><ol><li>I like my city. (+ for one thing, what's more) → ______</li><li>Working remotely is good. (+ on the one hand, on the other hand) → ______</li><li>I'm not sure it's a good idea. (+ that said) → ______</li><li>We lost the contract. (+ as a result) → ______</li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Give a structured answer</b></p><p>Answer in 90 seconds: \"Is it better to live in a big city or a small town?\" Use at least 5 linkers.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Developing my ideas</b></p><p>Tell me:<br>For one thing, ______. What's more, ______.<br>That said, ______.<br>All in all, ______.</p><p>Then ask: <b>What do you think?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can develop an answer in a structured way.</b></p><p>use linkers for addition and contrast<br>structure an answer in four steps<br>conclude naturally</p><p><b>One last question:</b></p><p>What makes an answer convincing?</p>"
     }
    ]
   }
