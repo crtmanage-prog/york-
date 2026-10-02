@@ -1063,7 +1063,7 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
 .live .lv-pslide.full{max-width:none}
 .cab-top{display:flex;align-items:center;gap:10px}
 .cab-top .bk-kicker{margin:0 0 12px}
-.live.wide aside.lv-side{display:none}
+.live.wide aside.lv-side,.live.noside aside.lv-side{display:none}
 .live.wide .lv-pnav{display:none}
 .live.wide .cab-frame{height:calc(100vh - 260px)}
 .cab-frame{width:100%;height:calc(100vh - 330px);min-height:420px;border:1px solid rgba(17,18,14,.12);border-radius:16px;background:#fff}
@@ -1150,6 +1150,7 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
       <span style="flex:1"></span>
       <span class="lv-time" id="liveClock">00:00</span>
       <span class="lv-total" id="liveTotal">/ 30:00</span>
+      <button class="lv-end" id="liveSideToggle" title="Свернуть или показать правую панель (подсказки, план, заметки)">Скрыть панель</button>
       <button class="lv-end ru-toggle" data-ru-toggle><span class="rt">Перевод: вкл</span></button>
       <button class="lv-end" id="liveClose">Завершить урок</button>
     </div>
@@ -3400,6 +3401,9 @@ function openLive(plan){
   document.body.style.overflow = 'hidden';
   liveState.timer = setInterval(liveTick, 1000);
   liveTick();
+  const applySide = () => { const off = store.get('york-hub-live-noside', false); live.classList.toggle('noside', off); $('#liveSideToggle').textContent = off ? 'Показать панель' : 'Скрыть панель'; };
+  $('#liveSideToggle').onclick = () => { store.set('york-hub-live-noside', !store.get('york-hub-live-noside', false)); applySide(); };
+  applySide();
   renderLive();
   liveAutoShow();
 }
