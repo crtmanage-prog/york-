@@ -175,11 +175,12 @@ body.no-ru .ru{display:none !important}
 .gl-tl-pill.on{background:#D2E739;border-color:#D2E739}
 .gl-tl-search{display:flex;align-items:center;gap:10px;height:44px;flex:1;min-width:180px;max-width:300px;padding:0 16px;border-radius:12px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(17,18,14,.06);border:1px solid rgba(17,18,14,.09);box-sizing:border-box}
 .gl-tl-search input{border:0;background:none;font:inherit;font-size:14px;outline:none;flex:1;min-width:0;color:#0A0A09}
-.gl-tl-cols{display:grid;grid-template-columns:minmax(0,1fr) 150px 170px 90px 150px;gap:14px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#6B6C64;margin-bottom:8px}
-.gl-trow{display:grid;grid-template-columns:minmax(0,1fr) 150px 170px 90px 150px;gap:14px;align-items:center;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(17,18,14,.06);border:1px solid rgba(17,18,14,.09);margin-bottom:10px}
+.gl-tl-cols{display:grid;grid-template-columns:minmax(0,1fr) 150px 140px 150px 90px 150px;gap:14px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#6B6C64;margin-bottom:8px}
+.gl-trow{display:grid;grid-template-columns:minmax(0,1fr) 150px 140px 150px 90px 150px;gap:14px;align-items:center;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(17,18,14,.06);border:1px solid rgba(17,18,14,.09);margin-bottom:10px}
 .gl-trow .nm{display:flex;flex-direction:column;gap:2px;min-width:0}
 .gl-trow .nm b{font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .gl-trow .nm span{font-size:12px;color:#6B6C64}
+.gl-trow .tp{font-size:13px;color:#3A3B33}
 .gl-trow .lv{display:flex;gap:6px;align-items:center;min-width:0}
 .gl-trow .lv b{padding:2px 8px;border-radius:6px;border:1px solid rgba(17,18,14,.09);font-size:11px;font-weight:700;color:#0A0A09;flex:none}
 .gl-trow .lv span{font-size:12px;color:#6B6C64;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -209,6 +210,277 @@ body.no-ru .ru{display:none !important}
 .gl-tl-step .ttl{font-size:14px;font-weight:600}
 .gl-tl-step .dsc{font-size:12px;color:#6B6C64;line-height:1.45}
 @media (max-width:860px){ .gl-tl-cols{display:none} .gl-trow{grid-template-columns:1fr;gap:8px} .gl-trow .gl-trow-act{justify-content:flex-start} }
+
+/* =====================================================================
+   Trial Lesson Workspace — финальные макеты (светлое стекло)
+   ===================================================================== */
+.sidebar{width:236px;margin:16px 0 16px 16px;box-shadow:0 14px 34px rgba(17,18,14,.06);border:1px solid rgba(17,18,14,.09);padding:18px 12px 12px;top:16px;max-height:calc(100vh - 32px);min-height:calc(100vh - 32px)}
+.sidebar nav#nav{display:flex;flex-direction:column;gap:2px;flex:1}
+.gl-logo{padding:0 10px 16px}
+.gl-brand{font-size:15px}
+.gl-bang{background:none;padding:0;margin:0;color:#5B6B0A}
+.gl-sub{font-size:11px}
+.gl-newbtn{width:100%;height:40px;border-radius:12px;border:none;background:#D2E739;color:#0A0A09;display:flex;align-items:center;justify-content:center;gap:8px;font-family:Unbounded,sans-serif;font-size:12px;font-weight:700;cursor:pointer;margin:0 0 14px}
+.gl-newbtn:hover{filter:brightness(.97)}
+.gl-nav{position:relative;height:36px;padding:0 10px 0 12px;border-radius:10px;color:#3A3B33}
+.gl-nav svg{stroke:#3A3B33}
+.gl-nav:hover{background:rgba(17,18,14,.04)}
+.gl-nav.active{background:rgba(210,231,57,.38);color:#5B6B0A;font-weight:600}
+.gl-nav.active svg{stroke:#5B6B0A}
+.gl-nav.active::before{content:"";position:absolute;left:0;top:9px;width:3px;height:18px;border-radius:3px;background:#D2E739}
+.gl-nav.cabinet{margin-top:auto;height:auto;padding:12px;border-radius:12px;border:1px solid rgba(17,18,14,.09);color:#0A0A09;font-size:13px;font-weight:600}
+.gl-nav.cabinet svg{stroke:#0A0A09}
+.gl-nav.tiny{height:32px;font-size:13px;margin-top:auto;margin-bottom:6px}
+.gl-nav.tiny + .cabinet{margin-top:0}
+
+.ws-glass{background:rgba(255,255,255,.72);backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(17,18,14,.06);border:1px solid rgba(17,18,14,.09)}
+.ws-stephead{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.ws-stephead .who{flex:1;min-width:200px;display:flex;flex-direction:column;gap:2px}
+.ws-crumb{font-size:12px;color:#6B6C64}
+.ws-crumb a{color:#6B6C64;text-decoration:none}
+.ws-title{font-family:Unbounded,sans-serif;font-size:20px;font-weight:700;margin:0}
+.ws-stepper{display:flex;align-items:center;gap:4px;padding:4px;border-radius:999px;border:1px solid rgba(17,18,14,.09)}
+.ws-stepper button{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:0;background:transparent;color:#6B6C64;font-size:13px;font-weight:600;cursor:pointer}
+.ws-stepper button.on{background:#D2E739;color:#0A0A09}
+.ws-stepper button.done{color:#0A0A09}
+.ws-stepper button:disabled{opacity:.5;cursor:default}
+.ws-stepper .sep{width:18px;height:1px;background:rgba(17,18,14,.09)}
+.ws-lead{font-size:15px;color:#6B6C64;margin:0 0 18px}
+.ws-tpl-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+@media (max-width:1100px){ .ws-tpl-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:600px){ .ws-tpl-grid{grid-template-columns:1fr} }
+.ws-tpl{border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ws-tpl.on{border:2px solid #D2E739}
+.ws-tpl .hd{display:flex;justify-content:space-between;align-items:center}
+.ws-tpl .nm{font-family:Unbounded,sans-serif;font-size:15px;font-weight:700}
+.ws-tpl .ds{font-size:13px;color:#6B6C64}
+.ws-tpl hr{border:0;height:1px;background:rgba(17,18,14,.09);margin:0}
+.ws-tpl .bl{display:flex;align-items:center;gap:8px;font-size:13px;color:#3A3B33}
+.ws-tpl .bl i{width:18px;font-size:11px;color:#6B6C64;font-style:normal}
+.ws-tpl .ft{font-size:12px;color:#6B6C64;margin-top:4px}
+.ws-actions{display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:22px}
+.ws-actions .note{margin-right:auto;font-size:13px;color:#6B6C64}
+.ws-cta{height:46px;padding:0 22px;border-radius:12px;border:none;background:#D2E739;color:#0A0A09;display:inline-flex;align-items:center;gap:8px;font-family:Unbounded,sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.ws-cta:hover{filter:brightness(.97)}
+.ws-ghost{height:44px;padding:0 18px;border-radius:12px;border:1px solid rgba(17,18,14,.09);background:transparent;color:#0A0A09;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.ws-ghost:hover{background:rgba(255,255,255,.7)}
+
+/* Prepare */
+.ws-student{border-radius:20px;padding:14px 18px}
+.ws-student summary{cursor:pointer;font-weight:600;font-size:14px}
+.ws-blk.sel{border:1px solid #D2E739;box-shadow:inset 0 0 0 1px #D2E739}
+.ws-blk{cursor:pointer}
+.ws-chip{font:inherit;font-size:12px}
+.ws-prep{display:flex;gap:16px;align-items:flex-start}
+.ws-prep-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.ws-prog{border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.ws-prog .row{display:flex;justify-content:space-between;align-items:baseline}
+.ws-prog .row b{font-family:Unbounded,sans-serif;font-size:15px;font-weight:700}
+.ws-prog .row em{font-family:Unbounded,sans-serif;font-size:22px;font-weight:700;color:#5B6B0A;font-style:normal}
+.ws-prog .bar{height:10px;border-radius:999px;background:rgba(17,18,14,.09);overflow:hidden}
+.ws-prog .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#8FA21C,#D2E739)}
+.ws-prog small{font-size:13px;color:#6B6C64}
+.ws-blk{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:14px}
+.ws-blk.empty{border:1px dashed rgba(242,184,75,.45)}
+.ws-blk .grab{cursor:grab;color:#A8AAA4;display:flex}
+.ws-blk .ck{display:flex;color:#5B6B0A}
+.ws-blk.empty .ck{color:#B7791F}
+.ws-blk .no{width:22px;font-size:12px;color:#6B6C64}
+.ws-blk .tx{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.ws-blk .tx b{font-size:14px;font-weight:600}
+.ws-blk .tx span{font-size:13px;color:#6B6C64;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ws-blk.empty .tx span{color:#B7791F}
+.ws-blk .min{font-size:12px;color:#6B6C64;width:46px;text-align:right}
+.ws-blk .addlib{height:32px;padding:0 12px;border-radius:999px;border:1px solid #D2E739;background:transparent;color:#5B6B0A;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.ws-blk .x{all:unset;cursor:pointer;color:#A8AAA4;padding:4px;display:flex}
+.ws-blk .x:hover{color:#0A0A09}
+.ws-blk.dragging{opacity:.4}
+.ws-libpanel{width:300px;flex-shrink:0;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px;position:sticky;top:16px}
+.ws-libpanel .hd{display:flex;justify-content:space-between;align-items:center}
+.ws-libpanel .hd b{font-family:Unbounded,sans-serif;font-size:15px;font-weight:700}
+.ws-libpanel .hd button{all:unset;cursor:pointer;color:#6B6C64;display:flex}
+.ws-search{display:flex;align-items:center;gap:8px;height:38px;padding:0 12px;border-radius:10px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09)}
+.ws-search input{border:0;background:none;outline:none;flex:1;min-width:0;font:inherit;font-size:13px}
+.ws-chips{display:flex;gap:6px;flex-wrap:wrap}
+.ws-chip{padding:4px 10px;border-radius:999px;border:1px solid rgba(17,18,14,.09);background:transparent;color:#0A0A09;font-size:12px;font-weight:600;cursor:pointer}
+.ws-chip.on{background:#D2E739}
+.ws-li{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid rgba(17,18,14,.09)}
+.ws-li .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;cursor:pointer}
+.ws-li .tx b{font-size:13px;font-weight:600}
+.ws-li .tx span{font-size:11px;color:#6B6C64}
+.ws-li button.add{width:30px;height:30px;border-radius:999px;border:1px solid #D2E739;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+.ws-li button.add:hover{background:#D2E739}
+.ws-libpanel .foot{font-size:12px;color:#6B6C64}
+@media (max-width:1000px){ .ws-prep{flex-direction:column} .ws-libpanel{width:100%;position:static} }
+
+/* Live (светлый) */
+.live{position:fixed;inset:0;z-index:52;display:none;border-radius:0}
+.live.open{display:flex}
+.live{background:radial-gradient(circle at 60% -5%, rgba(215,239,66,.45), transparent 38%),radial-gradient(circle at 100% 70%, rgba(215,239,66,.18), transparent 35%),#F3F2ED;color:#0A0A09;flex-direction:column;overflow:auto}
+.live .lv-head{padding:16px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid rgba(17,18,14,.09)}
+.live .lv-top{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.live .lv-brand{font-family:Unbounded,sans-serif;font-size:15px;font-weight:800}
+.live .lv-brand i{color:#5B6B0A;font-style:normal}
+.live .lv-who{font-size:13px;color:#6B6C64}
+.live .lv-time{font-family:Unbounded,sans-serif;font-size:22px;font-weight:700;color:#5B6B0A}
+.live .lv-total{font-size:13px;color:#6B6C64}
+.live .lv-end{height:36px;padding:0 14px;border-radius:10px;border:1px solid rgba(17,18,14,.09);background:transparent;color:#0A0A09;font-size:13px;cursor:pointer}
+.live .lv-seg{display:flex;gap:4px}
+.live .lv-seg .s{min-width:0;display:flex;flex-direction:column;gap:6px;cursor:pointer;background:none;border:0;padding:0;text-align:left;font:inherit}
+.live .lv-seg .s i{display:block;height:8px;border-radius:999px;background:rgba(17,18,14,.09)}
+.live .lv-seg .s.done i{background:rgba(210,231,57,.35)}
+.live .lv-seg .s.cur i{background:#D2E739}
+.live .lv-seg .s.skip i{opacity:.4}
+.live .lv-seg .s span{font-size:11px;color:#6B6C64;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.live .lv-seg .s.cur span{color:#5B6B0A}
+.live .lv-body{flex:1;min-height:0;display:flex;gap:16px;padding:18px 24px}
+.live .lv-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:14px}
+.live .lv-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.live .lv-now{padding:4px 10px;border-radius:999px;background:#D2E739;font-size:12px;font-weight:700}
+.live .lv-bt{font-family:Unbounded,sans-serif;font-size:20px;font-weight:700;margin:0}
+.live .lv-left{font-size:13px;color:#6B6C64}
+.live .lv-ib{width:36px;height:36px;border-radius:10px;border:1px solid rgba(17,18,14,.09);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.live .lv-ab{height:36px;padding:0 12px;border-radius:10px;border:1px solid rgba(17,18,14,.09);background:transparent;color:#0A0A09;display:inline-flex;align-items:center;gap:6px;font-size:13px;cursor:pointer}
+.live .lv-stage{flex:1;border-radius:20px;background:#fff;border:1px solid rgba(17,18,14,.08);padding:28px 32px;overflow:auto;min-height:320px}
+.live .lv-foot{display:flex;justify-content:space-between;gap:12px}
+.live aside.lv-side{width:320px;flex-shrink:0;display:flex;flex-direction:column;gap:12px}
+.live .lv-card{border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.live .lv-card .k{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5B6B0A}
+.live .lv-card p{margin:0;font-size:14px;line-height:1.5}
+.live .lv-card h3{font-family:Unbounded,sans-serif;font-size:15px;font-weight:700;margin:0}
+.live .lv-plan .r{display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;background:none;border:0;padding:0;font:inherit;font-size:13px;text-align:left;color:#0A0A09}
+.live .lv-plan .r .n{width:16px}
+.live .lv-plan .r .t{flex:1}
+.live .lv-plan .r small{font-size:11px;color:#6B6C64}
+.live .lv-plan .r.done{color:#6B6C64}
+.live .lv-plan .r.done .t{text-decoration:line-through}
+.live .lv-plan .r.cur{color:#5B6B0A}
+.live .lv-plan .r.skip .t{text-decoration:line-through;opacity:.6}
+.live .lv-notes textarea{min-height:90px;border-radius:10px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);padding:10px;font:inherit;font-size:13px;resize:vertical;color:#0A0A09}
+.live .lv-qs{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:10px}
+.live .lv-qs li{position:relative;background:#F7F7F2;border-left:4px solid #D2E739;border-radius:10px;padding:12px 40px 12px 16px;font-size:18px}
+.live .lv-qs li button{all:unset;cursor:pointer;position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#A8AAA4;font-size:13px}
+.live .lv-it h2{font-family:Unbounded,sans-serif;font-size:24px;margin:0 0 10px}
+.live .lv-it .oc{color:#6B6C64;font-style:italic;margin:0 0 12px}
+.live .lv-it ul{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
+.live .lv-it ul li{background:#F7F7F2;border-radius:10px;padding:9px 14px;font-weight:600}
+@media (max-width:1000px){ .live .lv-body{flex-direction:column} .live aside.lv-side{width:100%} }
+
+/* Модалки (светлые) */
+.ws-bg{position:fixed;inset:0;background:rgba(10,10,9,.28);z-index:55;display:none}
+.ws-bg.open{display:block}
+.ws-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,94vw);max-height:92vh;overflow:auto;z-index:56;display:none;flex-direction:column;gap:14px;border-radius:24px;padding:24px;background:rgba(255,255,255,.96);box-shadow:0 30px 80px rgba(17,18,14,.25);border:1px solid rgba(17,18,14,.09)}
+.ws-modal.open{display:flex}
+.ws-modal h2{font-family:Unbounded,sans-serif;font-size:20px;font-weight:700;margin:0;display:flex;justify-content:space-between;align-items:center}
+.ws-modal h2 button{all:unset;cursor:pointer;color:#6B6C64;display:flex}
+.ws-seg{display:flex;padding:3px;border-radius:12px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);gap:3px}
+.ws-seg button{flex:1;height:34px;border:0;border-radius:9px;background:transparent;font-size:13px;font-weight:600;cursor:pointer}
+.ws-seg button.on{background:#D2E739}
+.ws-hint{font-size:13px;color:#6B6C64;margin:0}
+.ws-radio{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);cursor:pointer;text-align:left;font:inherit;width:100%}
+.ws-radio.on{border-color:#D2E739;background:rgba(210,231,57,.2);box-shadow:inset 0 0 0 1px #D2E739}
+.ws-radio .dot{width:16px;height:16px;border-radius:50%;border:1.5px solid #6B6C64;flex:none;position:relative}
+.ws-radio.on .dot{border-color:#0A0A09}
+.ws-radio.on .dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:#0A0A09}
+.ws-radio b{font-size:13px;font-weight:600;display:block}
+.ws-radio small{font-size:11px;color:#6B6C64}
+.ws-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ws-fields.one{grid-template-columns:1fr}
+.ws-fields label{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#6B6C64}
+.ws-fields input,.ws-fields select,.ws-fields textarea{height:40px;border-radius:10px;border:1px solid rgba(17,18,14,.09);background:#F7F7F2;padding:0 12px;font:inherit;font-size:14px;color:#0A0A09;text-transform:none;letter-spacing:0;font-weight:400;min-width:0}
+.ws-fields textarea{height:auto;min-height:80px;padding:10px 12px;resize:vertical}
+.ws-suggest{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:rgba(210,231,57,.38);font-size:13px}
+.ws-mfoot{display:flex;justify-content:flex-end;gap:10px}
+
+/* Library */
+.ws-lib-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+.ws-lib-head h1{font-family:Unbounded,sans-serif;font-size:26px;font-weight:700;margin:0 0 4px}
+.ws-lib-head p{font-size:14px;color:#6B6C64;margin:0}
+.ws-lib-search{display:flex;align-items:center;gap:10px;height:44px;width:min(420px,100%);padding:0 16px;border-radius:12px;box-sizing:border-box}
+.ws-lib-search input{border:0;background:none;outline:none;flex:1;font:inherit;font-size:14px}
+.ws-lib{display:flex;gap:18px;align-items:flex-start}
+.ws-filters{width:230px;flex-shrink:0;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.ws-filters .lb{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6C64}
+.ws-filters hr{border:0;height:1px;background:rgba(17,18,14,.09);margin:0}
+.ws-check{display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;background:none;border:0;padding:0;font:inherit;font-size:13px;text-align:left}
+.ws-check i{width:18px;height:18px;border-radius:5px;border:1.5px solid #6B6C64;box-sizing:border-box;display:flex;align-items:center;justify-content:center;flex:none}
+.ws-check.on i{border-color:#0A0A09;background:#D2E739}
+.ws-lvgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.ws-pill{height:32px;padding:0 12px;border-radius:999px;border:1px solid rgba(17,18,14,.09);background:rgba(255,255,255,.85);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.ws-pill.on{background:#D2E739}
+.ws-wrap{display:flex;gap:6px;flex-wrap:wrap}
+.ws-reset{font-size:13px;color:#6B6C64;cursor:pointer;background:none;border:0;padding:0;text-align:left;font:inherit;font-size:13px}
+.ws-libmain{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px}
+.ws-sortrow{display:flex;align-items:center;gap:8px;font-size:13px;color:#6B6C64}
+.ws-sortrow .sp{flex:1}
+.ws-sortrow button{background:none;border:0;font:inherit;font-size:13px;font-weight:600;color:#0A0A09;cursor:pointer}
+.ws-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:1200px){ .ws-cards{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:900px){ .ws-lib{flex-direction:column} .ws-filters{width:100%} .ws-cards{grid-template-columns:1fr} }
+.ws-card{border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer}
+.ws-card .top{height:64px;padding:12px 14px;display:flex;justify-content:space-between;align-items:flex-start}
+.ws-card .ic{width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center}
+.ws-card .star{all:unset;cursor:pointer;display:flex;color:#0A0A09}
+.ws-card .bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px}
+.ws-card .ty{font-size:12px;color:#6B6C64}
+.ws-card .nm{font-family:Unbounded,sans-serif;font-size:14px;font-weight:700}
+.ws-card .mt{display:flex;align-items:center;gap:8px;font-size:12px;color:#6B6C64;flex-wrap:wrap}
+.ws-card .mt b{padding:2px 8px;border-radius:6px;border:1px solid rgba(17,18,14,.09);font-size:11px;color:#0A0A09}
+.ws-card .mt .sp{flex:1}
+.ws-card .addb{height:30px;padding:0 12px;border-radius:999px;border:0;background:#D2E739;color:#0A0A09;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.ws-drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);z-index:57;background:rgba(255,255,255,.97);box-shadow:-20px 0 60px rgba(17,18,14,.15);transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column;overflow:auto;padding:22px;gap:14px}
+.ws-drawer.open{transform:none}
+.ws-drawer .pill{align-self:flex-start;padding:3px 10px;border-radius:999px;background:#E9F59E;font-size:11px;font-weight:700}
+.ws-drawer .hdr{display:flex;align-items:center;gap:10px}
+.ws-drawer .hdr .sp{flex:1}
+.ws-drawer .hdr button{all:unset;cursor:pointer;display:flex}
+.ws-drawer h2{font-family:Unbounded,sans-serif;font-size:22px;margin:0}
+.ws-drawer .prev{border-radius:16px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);padding:16px;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.5}
+.ws-drawer .prev ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.ws-drawer .prev li{background:#fff;border-radius:8px;padding:7px 10px;font-weight:600;font-size:13px}
+.ws-drawer .lb{font-size:12px;font-weight:700}
+.ws-drawer .addbox{margin-top:auto;border-radius:16px;border:1px solid rgba(17,18,14,.09);padding:12px;display:flex;flex-direction:column;gap:6px}
+.ws-drawer .addbox .k{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6C64}
+.ws-drawer .addrow{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;border:0;background:transparent;font:inherit;font-size:13px;font-weight:600;cursor:pointer;text-align:left;width:100%}
+.ws-drawer .addrow:hover,.ws-drawer .addrow.first{background:rgba(210,231,57,.38)}
+.ws-drawer .addrow span{flex:1}
+.ws-dbg{position:fixed;inset:0;background:rgba(10,10,9,.2);z-index:56;display:none}
+.ws-dbg.open{display:block}
+
+/* Reports */
+.ws-rep{display:flex;gap:18px;align-items:flex-start}
+.ws-rep-l{flex:1;min-width:0}
+.ws-rep-tbl{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.ws-rep-cols,.ws-rep-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 70px 60px 110px;gap:10px;align-items:center;padding:0 14px}
+.ws-rep-cols{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#6B6C64;margin-top:12px}
+.ws-rep-row{padding:12px 14px;border-radius:14px;cursor:pointer;font-size:13px;text-align:left;font:inherit;font-size:13px;width:100%;color:#0A0A09}
+.ws-rep-row.sel{border:1px solid #D2E739;box-shadow:inset 0 0 0 1px #D2E739}
+.ws-rep-row b{font-size:14px}
+.ws-rep-row .mu{color:#6B6C64}
+.ws-rep-row .lvl{padding:2px 8px;border-radius:6px;border:1px solid rgba(17,18,14,.09);background:#fff;font-size:11px;font-weight:700;justify-self:start}
+.ws-badge{padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap;justify-self:start}
+.ws-badge.draft{background:rgba(242,184,75,.22);color:#B7791F}
+.ws-badge.sent{background:rgba(210,231,57,.38);color:#0A0A09}
+.ws-rep-d{width:360px;flex-shrink:0;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px;position:sticky;top:16px}
+.ws-rep-d .hd{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#6B6C64}
+.ws-rep-d h2{font-family:Unbounded,sans-serif;font-size:20px;margin:0}
+.ws-rep-d .sub{font-size:13px;color:#6B6C64;margin-top:-8px}
+.ws-rep-d .sec{border-top:1px solid rgba(17,18,14,.09);padding-top:12px;display:flex;flex-direction:column;gap:6px}
+.ws-rep-d .sec .lb{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6C64}
+.ws-rep-d .sec div.v{font-size:14px;line-height:1.5}
+.ws-rep-d .btns{display:flex;gap:10px}
+.ws-rep-d .btns>*{flex:1;justify-content:center}
+@media (max-width:1000px){ .ws-rep{flex-direction:column} .ws-rep-d{width:100%;position:static} .ws-rep-cols{display:none} .ws-rep-row{grid-template-columns:1fr 1fr} }
+
+/* Отчёт (шаг Report) */
+.ws-report{display:flex;gap:16px;align-items:flex-start}
+.ws-report-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px}
+.ws-rsec{border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.ws-rsec h3{font-family:Unbounded,sans-serif;font-size:15px;font-weight:700;margin:0;display:flex;align-items:center;gap:10px}
+.ws-rsec h3 i{width:22px;height:22px;border-radius:50%;background:#D2E739;font-size:11px;display:flex;align-items:center;justify-content:center;font-style:normal}
+.ws-rsec textarea{min-height:84px;border-radius:12px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);padding:12px;font:inherit;font-size:14px;resize:vertical}
+.ws-rside{width:300px;flex-shrink:0;display:flex;flex-direction:column;gap:12px}
+@media (max-width:1000px){ .ws-report{flex-direction:column} .ws-rside{width:100%} }
 .gl-today{border-radius:20px;padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .gl-today-lbl{font-family:Unbounded,sans-serif;font-size:11px;color:#6B6C64;text-transform:uppercase;letter-spacing:.04em;flex:none}
 .gl-today-list{display:flex;flex-wrap:wrap;gap:10px;flex:1}
@@ -653,37 +925,6 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
 .yb-pick .t{font-weight:600;font-size:13.5px}
 .yb-pick .s{font-size:11.5px;color:var(--yb-ink3)}
 
-/* --- Live Lesson Mode: полноэкранный тёмный режим --- */
-.live{position:fixed;inset:0;z-index:52;display:none;flex-direction:row;border-radius:0}
-.live.open{display:flex}
-.live-side{width:280px;flex:none;overflow:auto;padding:18px 14px;display:flex;flex-direction:column;gap:14px;border-right:1px solid var(--yb-line)}
-.live-main{flex:1;min-width:0;overflow:auto;display:flex;flex-direction:column}
-.live-top{display:flex;align-items:center;gap:10px;padding:14px 22px;border-bottom:1px solid var(--yb-line)}
-.live-top .grow{flex:1}
-.live-stu{font-family:Unbounded,sans-serif;font-size:13px}
-.live-body{flex:1;max-width:980px;width:100%;margin:0 auto;padding:clamp(18px,3vw,36px) 24px 40px}
-.live-foot{display:flex;gap:8px;align-items:center;padding:14px 22px;border-top:1px solid var(--yb-line);flex-wrap:wrap}
-.live-foot .grow{flex:1}
-.lv-step{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;cursor:pointer;text-align:left;background:transparent;border:0;width:100%}
-.lv-step:hover{background:var(--yb-card-hov)}
-.lv-step.cur{background:rgba(215,239,66,.14);box-shadow:inset 0 0 0 1.5px rgba(215,239,66,.5)}
-.lv-step.skipped{opacity:.42}
-.lv-step .dot{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--yb-line);display:grid;place-items:center;flex:none;font-size:11px;margin-top:1px}
-.lv-step.cur .dot{background:var(--yb-accent);border-color:var(--yb-accent);color:#0A0C06}
-.lv-step.done .dot{background:rgba(255,255,255,.18);border-color:transparent}
-.lv-step .kind{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--yb-ink3)}
-.lv-step .ttl{font-size:13px;font-weight:600;line-height:1.3}
-.lv-block-kind{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--yb-accent);margin:0 0 6px}
-.lv-block-ttl{font-family:Unbounded,sans-serif;font-size:clamp(22px,3vw,32px);margin:0 0 16px;line-height:1.2}
-.lv-qs{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:10px}
-.lv-qs li{background:rgba(255,255,255,.05);border-left:4px solid var(--yb-accent);border-radius:10px;padding:10px 40px 10px 16px;font-size:16px;position:relative}
-.lv-qs li button{all:unset;cursor:pointer;position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--yb-ink3);font-size:13px;padding:4px}
-.lv-qs li button:hover{color:var(--yb-ink)}
-.lv-note{width:100%;font:inherit;font-size:14px;background:rgba(255,255,255,.05);border:1.5px solid var(--yb-line);border-radius:12px;padding:12px 14px;color:var(--yb-ink);min-height:70px;margin-top:6px}
-.lv-explain{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
-.lv-explain li{background:rgba(255,255,255,.05);border-radius:10px;padding:9px 14px;font-weight:600;font-size:14.5px}
-.lv-item-card{padding:18px 20px;margin-bottom:16px}
-.lv-item-card .outcome{color:var(--yb-ink2);font-style:italic;margin:0 0 12px}
 
 /* --- отчёт о пробном --- */
 .yb-report{max-width:640px;margin:0 auto;width:100%}
@@ -742,48 +983,51 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
   </div>
 </div>
 
-<div class="yb-modal-bg" id="pickerBg"></div>
-<div class="yb-modal yb yb-card" id="picker" role="dialog" aria-modal="true" aria-label="Добавить материал">
-  <div class="yb-modal-head">
-    <input type="search" id="pickerSearch" placeholder="Искать тему или активность…" autocomplete="off">
-    <button class="yb-btn" id="pickerClose">✕</button>
-  </div>
-  <div class="yb-modal-tabs" id="pickerTabs"></div>
-  <div class="yb-modal-body" id="pickerBody"></div>
+<!-- Выбор материала (из Live: "+ Добавить активность", замена блока) -->
+<div class="ws-bg" id="pickerBg"></div>
+<div class="ws-modal" id="picker" role="dialog" aria-modal="true" aria-label="Добавить материал">
+  <h2><span id="pickerTitle">Добавить активность</span><button id="pickerClose" aria-label="Закрыть">✕</button></h2>
+  <div id="pickerBox"></div>
 </div>
 
-<div class="yb-modal-bg" id="newLessonBg"></div>
-<div class="yb-modal yb yb-card" id="newLessonModal" role="dialog" aria-modal="true" aria-label="Новый пробный урок" style="top:8vh">
-  <div class="yb-modal-head">
-    <b style="font-family:Unbounded,sans-serif;font-size:14px">Новый пробный урок</b>
-    <span style="flex:1"></span>
-    <button class="yb-btn" id="newLessonClose">✕</button>
-  </div>
-  <div class="yb-modal-tabs" id="newLessonTabs"></div>
-  <div class="yb-modal-body" id="newLessonBody"></div>
+<!-- Новый пробный урок -->
+<div class="ws-bg" id="newLessonBg"></div>
+<div class="ws-modal" id="newLessonModal" role="dialog" aria-modal="true" aria-label="Новый пробный урок">
+  <h2><span>Новый пробный урок</span><button id="newLessonClose" aria-label="Закрыть">✕</button></h2>
+  <div id="newLessonBody" style="display:flex;flex-direction:column;gap:14px"></div>
 </div>
 
-<div class="live yb" id="live" role="dialog" aria-modal="true" aria-label="Режим урока">
-  <aside class="live-side">
-    <div style="display:flex;align-items:center;justify-content:space-between">
-      <span class="live-stu yb-glow" id="liveStu">Урок</span>
+<!-- Превью материала (Библиотека) -->
+<div class="ws-dbg" id="drawerBg2"></div>
+<aside class="ws-drawer" id="libDrawer" role="dialog" aria-modal="true" aria-label="Материал"></aside>
+
+<!-- Live (светлый) -->
+<div class="live" id="live" role="dialog" aria-modal="true" aria-label="Режим урока">
+  <header class="lv-head">
+    <div class="lv-top">
+      <span class="lv-brand">YORK<i>!</i></span>
+      <span class="lv-who" id="liveStu">Урок</span>
+      <span style="flex:1"></span>
+      <span class="lv-time" id="liveClock">00:00</span>
+      <span class="lv-total" id="liveTotal">/ 30:00</span>
+      <button class="lv-end" id="liveClose">Завершить урок</button>
     </div>
-    <div id="liveSteps" style="display:grid;gap:2px"></div>
-  </aside>
-  <div class="live-main">
-    <div class="live-top">
-      <button class="yb-btn" id="liveClose">✕ Выйти</button>
-      <span class="grow"></span>
-      <span class="clock yb-card" style="background:rgba(255,255,255,.06);color:var(--yb-ink)" id="liveClock">⏱ 00:00</span>
-    </div>
-    <div class="live-body" id="liveBody"></div>
-    <div class="live-foot">
-      <button class="yb-btn" id="livePrev">← Назад</button>
-      <button class="yb-btn" id="liveSkip">Пропустить</button>
-      <button class="yb-btn" id="liveAdd">+ Добавить</button>
-      <span class="grow"></span>
-      <button class="yb-btn on" id="liveNext">Дальше →</button>
-    </div>
+    <div class="lv-seg" id="liveSeg"></div>
+  </header>
+  <div class="lv-body">
+    <section class="lv-main">
+      <div class="lv-bar" id="liveBar"></div>
+      <div class="lv-stage" id="liveBody"></div>
+      <div class="lv-foot">
+        <button class="ws-ghost" id="livePrev">← Назад</button>
+        <button class="ws-cta" id="liveNext">Дальше →</button>
+      </div>
+    </section>
+    <aside class="lv-side">
+      <div class="lv-card ws-glass" id="liveTip"></div>
+      <div class="lv-card ws-glass lv-plan" id="livePlan"></div>
+      <div class="lv-card ws-glass lv-notes"><b style="font-size:13px">Заметки для отчёта</b><textarea id="liveNotes" placeholder="Записывайте по ходу урока…"></textarea></div>
+    </aside>
   </div>
 </div>
 
@@ -1040,11 +1284,20 @@ function favRow(x){
 }
 // "+" у задания — добавляет в черновик урока, который уже собирается, иначе создаёт новый
 function quickAddToLesson(x){
-  const draft = Plans.list().find(p => p.status !== 'done');
-  const plan = draft || Plans.create();
-  plan.blocks.push(itemBlock(x.play ? 'activity' : 'topic', x));
-  Plans.save(plan);
-  toast(`«${x.title}» добавлено в урок «${plan.student.name || 'без имени'}»`);
+  const draft = Plans.list().find(p => p.status !== 'done' && p.template);
+  if (!draft) {
+    const p = Plans.create();
+    p.template = 'standard'; p.blocks = buildBlocks('standard'); p.step = 'prepare';
+    const bl = p.blocks.find(z => z.mode === 'slot' && acceptFilter(z.accept)(x)) || p.blocks.find(z => z.mode === 'slot');
+    bl.itemId = x.id; Plans.save(p);
+    toast(`«${x.title}» добавлено в новый урок`);
+    return;
+  }
+  const slot = draft.blocks.find(z => z.mode === 'slot' && !z.itemId && acceptFilter(z.accept)(x));
+  if (slot) slot.itemId = x.id;
+  else draft.blocks.push({ id: uid('b'), key: x.play ? 'practice' : 'topic', title: x.play ? 'Дополнительная активность' : 'Дополнительный мини-урок', duration: itemMin(x), mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: x.id, note: '', skipped: false, visited: false });
+  Plans.save(draft);
+  toast(`«${x.title}» добавлено в урок «${draft.student.name || 'без имени'}»`);
 }
 
 const Pages = {
@@ -1415,16 +1668,15 @@ function renderNav(){
   const isActive = route => currentRoute === route || (route === 'builder' && currentRoute.indexOf('builder=') === 0);
   const glItem = (route, key, label) => `<a class="gl-nav${isActive(route) ? ' active' : ''}" href="#/${route}">${svgIcon(NAV_ICONS[key])}<span class="grow">${esc(label)}</span>${counts[key] ? `<span class="cnt">${counts[key]}</span>` : ''}</a>`;
   $('#nav').innerHTML = `
-    <a class="gl-logo" href="#/"><span class="gl-brand">YORK<span class="gl-bang">!</span></span><span class="gl-sub">Хаб пробных уроков</span></a>
+    <a class="gl-logo" href="#/"><span class="gl-brand">YORK<span class="gl-bang">!</span></span><span class="gl-sub">Trial Lesson Workspace</span></a>
+    <button class="gl-newbtn" id="navNew">${svgIcon('<path d="M12 5v14M5 12h14"></path>')}Новый пробный</button>
     ${glItem('', 'home', 'Главная')}
     ${glItem('builder', 'builder', 'Пробные уроки')}
     ${glItem('library', 'library', 'Библиотека')}
     ${glItem('reports', 'reports', 'Отчёты')}
-    <div class="gl-div"></div>
-    <a class="gl-nav" href="#" id="navFav">${svgIcon(NAV_ICONS.favorite)}<span class="grow">Избранное</span></a>
-    <a class="gl-nav ru-toggle" href="#" data-ru-toggle>${svgIcon(NAV_ICONS.translate)}<span class="grow">Перевод</span><span class="gl-ru rt-short">RU вкл</span></a>
-    <a class="gl-nav muted2" href="teacher.html">${svgIcon(NAV_ICONS.back)}Кабинет учителя</a>`;
-  $('#navFav').onclick = e => { e.preventDefault(); filters.library.saved = true; location.hash = '#/library'; };
+    <a class="gl-nav tiny ru-toggle" href="#" data-ru-toggle>${svgIcon(NAV_ICONS.translate)}<span class="grow">Перевод</span><span class="gl-ru rt-short">RU вкл</span></a>
+    <a class="gl-nav cabinet" href="teacher.html">${svgIcon(NAV_ICONS.back)}<span class="grow">Кабинет учителя</span></a>`;
+  $('#navNew').onclick = openNewLessonModal;
   setRu(ruOn());
 
   const mobHtml = Object.entries(Pages).map(([key, p]) => {
@@ -2084,41 +2336,27 @@ PLAY.describePhoto = (a, root) => {
 };
 
 
-/* ======================= Конструктор урока ======================= */
-const Plans = {
-  list(){ return store.get('york-hub-plans', []).slice().sort((a, b) => b.updatedAt - a.updatedAt); },
-  get(id){ return this.list().find(p => p.id === id); },
-  saveAll(list){ store.set('york-hub-plans', list); },
-  create(prefill){
-    const p = {
-      id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-      createdAt: Date.now(), updatedAt: Date.now(),
-      student: { name: '', age: '', level: '', goal: '', interests: '', notes: '', ...(prefill || {}) },
-      trialRequestId: (prefill && prefill.trialRequestId) || null,
-      blocks: [
-        mkBlock('warmup', { title: 'Разминка', questions: ['How are you today?', 'What have you been up to lately?'] }),
-        mkBlock('discovery', { title: 'Цели и интересы', questions: ['Why do you want to learn English?', 'What do you enjoy doing in your free time?'] }),
-        mkBlock('wrapup', { title: 'Итог и следующий шаг', questions: ['What’s one new thing you learned today?'] }),
-      ],
-      status: 'draft', report: null,
-    };
-    delete p.student.trialRequestId;
-    const list = this.list(); list.unshift(p); this.saveAll(list);
-    return p;
-  },
-  save(p){ p.updatedAt = Date.now(); const list = this.list().filter(x => x.id !== p.id); list.unshift(p); this.saveAll(list); },
-  remove(id){ this.saveAll(this.list().filter(p => p.id !== id)); },
+/* ======================= Trial Lesson Workspace: Шаблон → Подготовка → Урок → Отчёт ======================= */
+const ICONS = {
+  check: '<path d="M20 6 9 17l-5-5"></path>',
+  circle: '<circle cx="12" cy="12" r="9"></circle>',
+  grab: '<circle cx="9" cy="6" r="1.2"></circle><circle cx="15" cy="6" r="1.2"></circle><circle cx="9" cy="12" r="1.2"></circle><circle cx="15" cy="12" r="1.2"></circle><circle cx="9" cy="18" r="1.2"></circle><circle cx="15" cy="18" r="1.2"></circle>',
+  plus: '<path d="M12 5v14M5 12h14"></path>',
+  x: '<path d="M18 6 6 18M6 6l12 12"></path>',
+  search: '<circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path>',
+  star: '<path d="m12 3 2.8 5.8 6.2.9-4.5 4.4 1 6.3L12 17.5 6.5 20.4l1-6.3L3 9.7l6.2-.9z"></path>',
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6"></path>',
+  back: '<path d="M19 12H5M11 6l-6 6 6 6"></path>',
+  play: '<path d="M7 4v16l13-8z"></path>',
+  skip: '<path d="M5 4v16l10-8zM19 5v14"></path>',
+  note: '<path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5M10 13h6M10 17h4"></path>',
+  eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle>',
 };
-function mkBlock(kind, extra){
-  return Object.assign({ id: 'b' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), kind, type: 'custom', title: '', duration: 5, questions: [], note: '', skipped: false }, extra);
-}
-function itemBlock(kind, item){
-  return { id: 'b' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), kind, type: 'item', refId: item.id, title: item.title, duration: item.play ? 8 : 12, skipped: false };
-}
-const BLOCK_KIND_LABEL = { warmup: 'Разминка', discovery: 'Знакомство', topic: 'Тема', activity: 'Активность', speaking: 'Говорим', wrapup: 'Итог' };
+const ic = (name, size) => `<svg width="${size || 16}" height="${size || 16}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]}</svg>`;
+const uid = p => p + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+const LEVELS = ['A0-A1', 'A2', 'B1', 'B2', 'C1'];
 
-// банк идей для генератора вопросов в блоках "Разминка" и "Знакомство" — teacher.html / admin.html не используют,
-// он только для режима ведения урока в этом файле
+// банк идей для генератора вопросов в текстовых блоках
 const QUESTION_BANK = {
   warmup: [
     'What\'s your favourite day of the week and why?', 'If you could have any superpower, what would it be?',
@@ -2143,20 +2381,121 @@ const QUESTION_BANK = {
     'What\'s something you\'re really good at?', 'If you had an extra hour every day, what would you do with it?',
     'What\'s a place you\'d love to visit someday?', 'What does a perfect day look like for you?',
   ],
+  wrapup: [
+    'What\'s one new thing you learned today?', 'What was the easiest part? What was the hardest?',
+    'Which phrase will you use this week?', 'How did you feel speaking English today?',
+    'What would you like to practise next time?', 'Can you say one sentence about today\'s topic?',
+  ],
 };
 function moreQuestions(kind, exclude){
   const pool = QUESTION_BANK[kind] || [];
-  const fresh = shuffle(pool.filter(q => !exclude.includes(q)));
-  return fresh.slice(0, 3);
+  return shuffle(pool.filter(q => !exclude.includes(q))).slice(0, 3);
 }
 
+// шаблоны урока (30 минут). mode: text — вопросы/идеи, slot — материал из библиотеки
+const TEMPLATES = {
+  standard: { name: 'Стандартный пробный', desc: 'Для большинства учеников', blocks: [
+    { key: 'warmup', title: 'Разминка', min: 4, mode: 'text', qkind: 'warmup', seed: ['How are you today?', 'What have you been up to lately?'] },
+    { key: 'discovery', title: 'Цели и интересы', min: 4, mode: 'text', qkind: 'discovery', seed: ['Why do you want to learn English?', 'What do you enjoy doing in your free time?'] },
+    { key: 'topic', title: 'Мини-урок', min: 8, mode: 'slot', accept: 'topic' },
+    { key: 'practice', title: 'Практика', min: 6, mode: 'slot', accept: 'activity' },
+    { key: 'speaking', title: 'Говорим', min: 5, mode: 'slot', accept: 'activity' },
+    { key: 'wrapup', title: 'Итог и следующий шаг', min: 3, mode: 'text', qkind: 'wrapup', seed: ['What’s one new thing you learned today?'] },
+  ] },
+  speaking: { name: 'Разговорный пробный', desc: 'Уверенность в разговоре', blocks: [
+    { key: 'warmup', title: 'Разминка', min: 3, mode: 'text', qkind: 'warmup', seed: ['How are you today?', 'What did you do this week?'] },
+    { key: 'practice', title: 'Разговорное задание', min: 8, mode: 'slot', accept: 'activity' },
+    { key: 'topic', title: 'Прокачка языка', min: 6, mode: 'slot', accept: 'topic' },
+    { key: 'speaking', title: 'Практика речи', min: 8, mode: 'slot', accept: 'activity' },
+    { key: 'wrapup', title: 'Обратная связь', min: 5, mode: 'text', qkind: 'wrapup', seed: ['What was the easiest part? What was the hardest?'] },
+  ] },
+  kids: { name: 'Детский пробный', desc: 'Игры, слова, отзыв для родителей', blocks: [
+    { key: 'warmup', title: 'Игра-разминка', min: 5, mode: 'slot', accept: 'activity' },
+    { key: 'topic', title: 'Слова', min: 7, mode: 'slot', accept: 'topic' },
+    { key: 'practice', title: 'Активность', min: 8, mode: 'slot', accept: 'activity' },
+    { key: 'speaking', title: 'Практика', min: 6, mode: 'slot', accept: 'activity' },
+    { key: 'wrapup', title: 'Отзыв для родителей', min: 4, mode: 'text', qkind: 'wrapup', seed: ['What did you like most today?'] },
+  ] },
+  goal: { name: 'Под цель / экзамен', desc: 'Чёткая цель и следующие шаги', blocks: [
+    { key: 'discovery', title: 'Обсуждение цели', min: 5, mode: 'text', qkind: 'discovery', seed: ['Why do you want to learn English?', 'What\'s a goal you have for this year?'] },
+    { key: 'practice', title: 'Диагностическое задание', min: 8, mode: 'slot', accept: 'activity' },
+    { key: 'topic', title: 'Целевой урок', min: 8, mode: 'slot', accept: 'topic' },
+    { key: 'speaking', title: 'Практика', min: 6, mode: 'slot', accept: 'activity' },
+    { key: 'wrapup', title: 'Следующие шаги', min: 3, mode: 'text', qkind: 'wrapup', seed: ['What would you like to practise next time?'] },
+  ] },
+};
+const BLOCK_TIPS = {
+  warmup: 'Начни с лёгких вопросов — цель: расслабить ученика и услышать его первые фразы.',
+  discovery: 'Узнай цель, интересы и где нужен английский. Записывай главное в заметки.',
+  topic: 'Одна маленькая победа за блок: объясни коротко и сразу дай ученику сказать фразу.',
+  practice: 'Практика устная: ученик отвечает голосом, ты мягко поправляешь.',
+  speaking: 'Минимум вмешательства: пусть говорит, ошибки записывай и разбери в конце.',
+  wrapup: 'Подведи итог: что ученик теперь умеет, и предложи следующий шаг.',
+};
+const tplBlockMin = t => t.blocks.reduce((n, b) => n + b.min, 0);
+function suggestTemplate(s){
+  const goal = String((s && s.goal) || '').toLowerCase();
+  const age = parseInt(s && s.age, 10);
+  if (age && age <= 12) return 'kids';
+  if (/экзамен|exam|ielts|toefl|егэ|огэ|собес|interview/.test(goal)) return 'goal';
+  if (/говор|разговор|speak|fluen|общени|барьер/.test(goal)) return 'speaking';
+  return 'standard';
+}
+function buildBlocks(tplKey){
+  return TEMPLATES[tplKey].blocks.map(b => ({
+    id: uid('b'), key: b.key, title: b.title, duration: b.min, mode: b.mode, accept: b.accept || null, qkind: b.qkind || null,
+    questions: b.seed ? b.seed.slice() : [], itemId: null, note: '', skipped: false, visited: false,
+  }));
+}
+
+/* ---------- планы (localStorage) ---------- */
+function normPlan(p){
+  if (p.v2) return p;
+  p.v2 = true;
+  const old = p.blocks || [];
+  p.template = old.length ? 'standard' : null;
+  p.blocks = old.map(b => b.type === 'item'
+    ? { id: b.id, key: b.kind === 'activity' ? 'practice' : 'topic', title: b.title, duration: b.duration || 8, mode: 'slot', accept: 'any', itemId: b.refId, note: '', skipped: !!b.skipped, visited: !!b.visited }
+    : { id: b.id, key: b.kind === 'warmup' ? 'warmup' : (b.kind === 'discovery' ? 'discovery' : 'wrapup'), title: b.title, duration: b.duration || 5, mode: 'text', qkind: b.kind === 'discovery' ? 'discovery' : (b.kind === 'warmup' ? 'warmup' : 'wrapup'), questions: b.questions || [], itemId: null, note: b.note || '', skipped: !!b.skipped, visited: !!b.visited });
+  p.step = p.status === 'done' ? 'report' : (p.template ? 'prepare' : 'template');
+  return p;
+}
+const Plans = {
+  list(){ return store.get('york-hub-plans', []).map(normPlan).sort((a, b) => b.updatedAt - a.updatedAt); },
+  get(id){ return this.list().find(p => p.id === id); },
+  saveAll(list){ store.set('york-hub-plans', list); },
+  create(prefill){
+    const student = { name: '', age: '', level: '', goal: '', interests: '', notes: '', ...(prefill || {}) };
+    const trialRequestId = student.trialRequestId || null;
+    delete student.trialRequestId;
+    const p = { v2: true, id: uid('p'), createdAt: Date.now(), updatedAt: Date.now(), student, trialRequestId, template: null, blocks: [], step: 'template', status: 'draft', liveNotes: '', report: null };
+    const list = this.list(); list.unshift(p); this.saveAll(list);
+    return p;
+  },
+  save(p){ p.updatedAt = Date.now(); const list = this.list().filter(x => x.id !== p.id); list.unshift(p); this.saveAll(list); },
+  remove(id){ this.saveAll(this.list().filter(p => p.id !== id)); },
+};
+const blockReady = b => b.mode === 'text' || !!(b.itemId && byId[b.itemId]);
+const planProgress = p => { const n = p.blocks.length; return n ? p.blocks.filter(blockReady).length / n : 0; };
+const planTotalMin = p => p.blocks.reduce((n, b) => n + (b.skipped ? 0 : (b.duration || 0)), 0);
 function planStatus(p){
   if (p.status === 'done') return 'done';
-  const started = p.blocks.some(b => b.visited);
-  const hasItems = p.blocks.some(b => b.type === 'item');
-  return (started || !hasItems) ? 'draft' : 'ready';
+  if (!p.template || !p.blocks.length) return 'draft';
+  return p.blocks.every(blockReady) ? 'ready' : 'draft';
 }
 const STATUS_LABEL = { draft: 'Черновик', ready: 'Готов', done: 'Проведён' };
+const tplName = p => (p.template && TEMPLATES[p.template]) ? TEMPLATES[p.template].name : 'Шаблон не выбран';
+
+/* ---------- карточки материалов ---------- */
+function itemKind(x){ return x.play ? 'Активность' : (x.category === 'grammar' ? 'Грамматика' : 'Мини-урок'); }
+function itemLevel(x){ return x.play ? (x.levels.length > 1 ? `${x.levels[0]}–${x.levels[x.levels.length - 1]}` : x.levels[0]) : x.level; }
+function itemMin(x){ return x.play ? 8 : 12; }
+function itemGradient(x){ return x.play ? 'linear-gradient(135deg,#EFE7FB,#DCCBF5)' : (x.category === 'grammar' ? 'linear-gradient(135deg,#DDEFFD,#BFE0F8)' : 'linear-gradient(135deg,#F1FAC8,#D7EF42)'); }
+function itemMatchesLevel(x, lvl){ return !lvl || (x.play ? x.levels.includes(lvl) : x.level === lvl); }
+function allItems(){ return [...DB.lessons, ...DB.activities.items]; }
+function acceptFilter(accept){ return accept === 'topic' ? (x => !x.play) : (accept === 'activity' ? (x => !!x.play) : (() => true)); }
+
+/* ---------- Список "Пробные уроки" ---------- */
 const tlFilter = { status: 'all', q: '' };
 
 function renderTrialLessonsList(root){
@@ -2169,8 +2508,8 @@ function renderTrialLessonsList(root){
 
   root.innerHTML = `
     <div class="gl-tl-head">
-      <div><h1>Пробные уроки</h1><p>Собери урок под ученика и веди пробный с одного экрана — без Miro, без лишних вкладок.</p></div>
-      <button class="gl-tl-new" id="newPlanBtn">${svgIcon('<path d="M12 5v14M5 12h14"></path>')}Создать урок</button>
+      <div><h1>Пробные уроки</h1><p>Каждый урок в одном списке: подготовка, проведение, отчёт.</p></div>
+      <button class="gl-tl-new" id="newPlanBtn">${ic('plus', 15)}Новый пробный</button>
     </div>
     ${all.length ? `<div class="gl-tl-toolbar">
       <div class="gl-tl-filters">
@@ -2180,22 +2519,22 @@ function renderTrialLessonsList(root){
         <button class="gl-tl-pill${tlFilter.status === 'done' ? ' on' : ''}" data-tlf="done">Проведены · ${counts.done}</button>
       </div>
       <span style="flex:1"></span>
-      <div class="gl-tl-search">${svgIcon('<circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path>')}<input id="tlSearch" placeholder="Искать по ученику…" value="${esc(tlFilter.q)}"></div>
+      <div class="gl-tl-search">${ic('search')}<input id="tlSearch" placeholder="Поиск по ученику…" value="${esc(tlFilter.q)}"></div>
     </div>
-    <div class="gl-tl-cols"><span>Ученик</span><span>Уровень · цель</span><span>Прогресс</span><span>Статус</span><span></span></div>
+    <div class="gl-tl-cols"><span>Ученик</span><span>Шаблон</span><span>Уровень · цель</span><span>Прогресс</span><span>Статус</span><span></span></div>
     <div id="tlRows"></div>
-    <div class="gl-tl-hint">${svgIcon('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"></path>')}Черновики сохраняются автоматически. Урок становится <b>Готов</b>, когда в таймлайн добавлена хотя бы одна тема или активность.</div>`
+    <div class="gl-tl-hint">${ic('note')}Черновики сохраняются автоматически. Урок становится <b>Готов</b>, когда в каждом блоке есть материал.</div>`
     : `<div class="gl-tl-empty">
         <div class="gl-tl-empty-hero">
-          <span class="gl-tl-empty-ic">${svgIcon('<circle cx="12" cy="12" r="9"></circle><path d="M10 8.5v7l6-3.5z"></path>', undefined)}</span>
+          <span class="gl-tl-empty-ic">${ic('play', 26)}</span>
           <h2>Пока нет пробных уроков</h2>
           <p>Создайте первый — из подтверждённой заявки (данные ученика подставятся сами) или вручную.</p>
           <button class="gl-tl-new" id="newPlanBtn2">Создать первый урок</button>
         </div>
         <div class="gl-tl-steps">
-          <div class="gl-tl-step"><b class="num">1</b><span class="ttl">Выберите ученика</span><span class="dsc">Из подтверждённой заявки — уровень и цель подставятся сами.</span></div>
-          <div class="gl-tl-step"><b class="num">2</b><span class="ttl">Соберите таймлайн</span><span class="dsc">Разминка, темы и активности из библиотеки — любой блок можно поменять.</span></div>
-          <div class="gl-tl-step"><b class="num">3</b><span class="ttl">Проведите и отправьте отчёт</span><span class="dsc">Ведите урок прямо здесь, в конце — короткий отчёт администратору.</span></div>
+          <div class="gl-tl-step"><b class="num">1</b><span class="ttl">Выберите шаблон</span><span class="dsc">Стандартный, разговорный, детский или под цель — на 30 минут.</span></div>
+          <div class="gl-tl-step"><b class="num">2</b><span class="ttl">Подготовьте блоки</span><span class="dsc">В каждый блок добавьте материал из библиотеки.</span></div>
+          <div class="gl-tl-step"><b class="num">3</b><span class="ttl">Проведите и отправьте отчёт</span><span class="dsc">Ведите урок с одного экрана, в конце — короткий отчёт администратору.</span></div>
         </div>
       </div>`}`;
 
@@ -2203,224 +2542,390 @@ function renderTrialLessonsList(root){
   if (!all.length) return;
 
   root.querySelectorAll('[data-tlf]').forEach(b => b.onclick = () => { tlFilter.status = b.dataset.tlf; rerender(); });
-  root.querySelector('#tlSearch').oninput = e => { tlFilter.q = e.target.value; rerender(); };
+  const sIn = root.querySelector('#tlSearch');
+  sIn.oninput = e => { tlFilter.q = e.target.value; rerender(); const n = root.querySelector('#tlSearch'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
 
   root.querySelector('#tlRows').innerHTML = shown.map(({ p, status }) => {
-    const total = p.blocks.length || 1;
-    const doneBlocks = p.blocks.filter(b => b.visited).length;
-    const pct = Math.round(doneBlocks / total * 100);
+    const pct = Math.round(planProgress(p) * 100);
     const progressHtml = status === 'draft'
       ? `<div class="bar"><i style="width:${pct}%"></i></div><span>${pct}%</span>`
-      : `<span class="txt">${status === 'ready' ? 'Готов к уроку' : 'Отчёт отправлен'}</span>`;
-    const btnLabel = status === 'done' ? 'Открыть отчёт' : (status === 'ready' ? 'Начать урок' : (doneBlocks ? 'Продолжить' : 'Открыть'));
-    const btnOn = status === 'ready';
+      : `<span class="txt">${status === 'ready' ? 'Готов к уроку' : (p.report && p.report.sentAt ? 'Отчёт отправлен' : 'Урок проведён')}</span>`;
+    const btnLabel = status === 'done' ? 'Открыть отчёт' : (status === 'ready' ? 'Начать урок' : 'Продолжить');
     return `<div class="gl-trow">
       <div class="nm"><b>${esc(p.student.name || 'Без имени')}</b><span>${new Date(p.updatedAt).toLocaleDateString('ru-RU')}</span></div>
+      <div class="tp">${esc(tplName(p))}</div>
       <div class="lv"><b>${esc(p.student.level || '—')}</b><span>${esc(p.student.goal || '')}</span></div>
       <div class="pr">${progressHtml}</div>
       <span class="gl-badge ${status}">${STATUS_LABEL[status]}</span>
-      <div class="gl-trow-act"><button class="gl-trow-btn${btnOn ? ' on' : ''}" data-tlgo="${esc(p.id)}" data-tlstatus="${status}">${esc(btnLabel)}</button></div>
+      <div class="gl-trow-act"><button class="gl-trow-btn${status === 'ready' ? ' on' : ''}" data-tlgo="${esc(p.id)}" data-tlstatus="${status}">${esc(btnLabel)}${status === 'ready' ? ic('play', 12) : ''}</button></div>
     </div>`;
   }).join('') || `<div class="empty">Ничего не нашлось.</div>`;
 
   root.querySelectorAll('[data-tlgo]').forEach(b => b.onclick = () => {
     const pl = Plans.get(b.dataset.tlgo);
     if (!pl) return;
-    if (b.dataset.tlstatus === 'ready' || (b.dataset.tlstatus === 'draft' && pl.blocks.some(x => x.visited))) {
-      location.hash = '#/builder=' + pl.id;
-      openLive(pl);
-    } else if (b.dataset.tlstatus === 'done') {
-      location.hash = '#/reports';
-    } else {
-      location.hash = '#/builder=' + pl.id;
-    }
+    const st = b.dataset.tlstatus;
+    if (st === 'done') pl.step = 'report';
+    else if (st === 'ready') pl.step = 'prepare';
+    Plans.save(pl);
+    location.hash = '#/builder=' + pl.id;
+    if (st === 'ready') openLive(pl);
   });
+}
+
+/* ---------- страница урока (workspace) ---------- */
+function curStepOf(plan){
+  if (!plan.template) return 'template';
+  return plan.step === 'report' ? 'report' : (plan.step === 'template' ? 'template' : 'prepare');
 }
 
 function renderBuilder(root){
   const id = (currentRoute.split('=')[1]) || '';
   const plan = id && Plans.get(id);
-
   if (!plan) { renderTrialLessonsList(root); return; }
-
-  const save = () => Plans.save(plan);
-
-  root.innerHTML = `<div class="result-line"><h1 class="page-title" style="margin:0">Конструктор урока</h1>
-      <button class="btn ghost" id="toDashboard">← Все уроки</button></div>
-    <div class="yb" style="padding:clamp(16px,2.5vw,26px)">
-    <div class="yb-grid">
-      <div class="yb-card" style="padding:20px 22px">
-        <h2 class="h-sec" style="margin-top:0">Ученик</h2>
-        <div class="yb-field"><label>Имя</label><input id="fName" value="${esc(plan.student.name)}" placeholder="Имя ученика"></div>
-        <div class="yb-field"><label>Возраст</label><input id="fAge" value="${esc(plan.student.age)}" placeholder="например, 12"></div>
-        <div class="yb-field"><label>Уровень</label><select id="fLevel">${['', 'A0-A1', 'A2', 'B1', 'B2', 'C1'].map(l => `<option value="${l}" ${plan.student.level === l ? 'selected' : ''}>${l || '—'}</option>`).join('')}</select></div>
-        <div class="yb-field"><label>Цель</label><input id="fGoal" value="${esc(plan.student.goal)}" placeholder="Зачем учит английский"></div>
-        <div class="yb-field"><label>Интересы</label><input id="fInterests" value="${esc(plan.student.interests)}" placeholder="Игры, аниме, футбол…"></div>
-        <div class="yb-field"><label>Заметки</label><textarea id="fNotes" placeholder="Что важно учесть">${esc(plan.student.notes)}</textarea></div>
-        <button class="yb-btn on" id="startLive" style="width:100%;justify-content:center;font-size:13.5px;padding:13px">▶ Начать урок</button>
-        <button class="yb-btn danger" id="delPlan" style="width:100%;justify-content:center;margin-top:8px">Удалить урок</button>
+  const step = curStepOf(plan);
+  const head = `
+    <div class="ws-stephead">
+      <div class="who">
+        <span class="ws-crumb"><a href="#/builder">Пробные уроки</a> / ${esc(plan.student.name || 'Без имени')}</span>
+        <h1 class="ws-title">${esc(plan.template ? tplName(plan) : 'Новый пробный урок')}${plan.student.level ? ' · ' + esc(plan.student.level) : ''}${plan.student.goal ? ' · ' + esc(plan.student.goal) : ''}</h1>
       </div>
-      <div class="yb-card" style="padding:20px 22px">
-        <h2 class="h-sec" style="margin-top:0">Таймлайн урока</h2>
-        <div class="yb-blocks" id="blocksEl"></div>
-        <div class="yb-add-row"><button class="yb-btn" id="addBlockBtn">+ Добавить материал</button></div>
+      <div class="ws-stepper" id="wsStepper">
+        ${[['template', 'Шаблон'], ['prepare', 'Подготовка'], ['live', 'Урок'], ['report', 'Отчёт']].map(([k, l], i, arr) => {
+          const order = ['template', 'prepare', 'live', 'report'];
+          const done = order.indexOf(k) < order.indexOf(step);
+          const dis = !plan.template && k !== 'template';
+          return `<button data-wsstep="${k}" class="${k === step ? 'on' : (done ? 'done' : '')}"${dis ? ' disabled' : ''}>${done ? ic('check', 13) : ''}${l}</button>${i < arr.length - 1 ? '<span class="sep"></span>' : ''}`;
+        }).join('')}
       </div>
     </div>
-    </div>`;
+    <div id="wsBody"></div>`;
+  root.innerHTML = head;
+  root.querySelectorAll('[data-wsstep]').forEach(b => b.onclick = () => {
+    const k = b.dataset.wsstep;
+    if (k === 'live') { startLiveFromPlan(plan); return; }
+    plan.step = k; Plans.save(plan); renderBuilder(root);
+  });
+  const body = root.querySelector('#wsBody');
+  if (step === 'template') renderTemplateStep(body, plan, root);
+  else if (step === 'report') renderReportStep(body, plan, root);
+  else renderPrepareStep(body, plan, root);
+}
 
-  root.querySelector('#toDashboard').onclick = () => { location.hash = '#/builder'; };
-  const fieldMap = { fName: 'name', fAge: 'age', fLevel: 'level', fGoal: 'goal', fInterests: 'interests', fNotes: 'notes' };
-  Object.keys(fieldMap).forEach(k => root.querySelector('#' + k).addEventListener('input', e => { plan.student[fieldMap[k]] = e.target.value; save(); }));
-  root.querySelector('#delPlan').onclick = () => { if (confirm('Удалить этот урок?')) { Plans.remove(plan.id); location.hash = '#/builder'; } };
-  root.querySelector('#startLive').onclick = () => openLive(plan);
+function startLiveFromPlan(plan){
+  const missing = plan.blocks.filter(b => !blockReady(b)).length;
+  if (missing && !confirm(`В ${missing} блок(ах) нет материала. Всё равно начать урок?`)) return;
+  openLive(plan);
+}
 
-  const blocksEl = root.querySelector('#blocksEl');
-  function rerenderBlocks(){ blocksEl.innerHTML = renderBlocksList(plan); wireBlocks(); }
-  function wireBlocks(){
-    blocksEl.querySelectorAll('[data-up]').forEach(b => b.onclick = () => { moveBlock(plan, b.dataset.up, -1); save(); rerenderBlocks(); });
-    blocksEl.querySelectorAll('[data-down]').forEach(b => b.onclick = () => { moveBlock(plan, b.dataset.down, 1); save(); rerenderBlocks(); });
-    blocksEl.querySelectorAll('[data-del]').forEach(b => b.onclick = () => { plan.blocks = plan.blocks.filter(x => x.id !== b.dataset.del); save(); rerenderBlocks(); });
+/* ----- шаг 1: шаблон ----- */
+function renderTemplateStep(body, plan, root){
+  let sel = plan.template || suggestTemplate(plan.student);
+  const draw = () => {
+    body.innerHTML = `
+      <p class="ws-lead">Выберите, как пройдёт пробный. Любой блок можно поменять на следующем шаге.</p>
+      <div class="ws-tpl-grid">
+        ${Object.entries(TEMPLATES).map(([k, t]) => `
+          <button class="ws-glass ws-tpl${k === sel ? ' on' : ''}" data-tpl="${k}">
+            <div class="hd"><span class="nm">${esc(t.name)}</span>${k === sel ? `<span style="color:#5B6B0A">${ic('check')}</span>` : ''}</div>
+            <span class="ds">${esc(t.desc)}</span>
+            <hr>
+            ${t.blocks.map((b, i) => `<div class="bl"><i>${i + 1}</i>${esc(b.title)}</div>`).join('')}
+            <span class="ft">${t.blocks.length} блоков · ${tplBlockMin(t)} мин</span>
+          </button>`).join('')}
+      </div>
+      <div class="ws-actions">
+        ${plan.template ? `<button class="ws-ghost" id="tplBack">${ic('back', 14)}К подготовке</button>` : ''}
+        <button class="ws-cta" id="tplGo">Использовать «${esc(TEMPLATES[sel].name)}»${ic('arrow', 16)}</button>
+      </div>`;
+    body.querySelectorAll('[data-tpl]').forEach(b => b.onclick = () => { sel = b.dataset.tpl; draw(); });
+    const back = body.querySelector('#tplBack');
+    if (back) back.onclick = () => { plan.step = 'prepare'; Plans.save(plan); renderBuilder(root); };
+    body.querySelector('#tplGo').onclick = () => {
+      if (plan.template === sel && plan.blocks.length) { plan.step = 'prepare'; Plans.save(plan); renderBuilder(root); return; }
+      if (plan.blocks.some(b => b.itemId) && !confirm('Блоки урока будут пересобраны по новому шаблону, выбранные материалы очистятся. Продолжить?')) return;
+      plan.template = sel; plan.blocks = buildBlocks(sel); plan.step = 'prepare';
+      Plans.save(plan); renderBuilder(root);
+    };
+  };
+  draw();
+}
+
+/* ----- шаг 2: подготовка ----- */
+function renderPrepareStep(body, plan, root){
+  const save = () => Plans.save(plan);
+  let slotId = (plan.blocks.find(b => b.mode === 'slot' && !blockReady(b)) || plan.blocks.find(b => b.mode === 'slot') || {}).id || null;
+  const panel = { q: '', lvl: !!plan.student.level, fav: false };
+
+  const draw = () => {
+    const ready = plan.blocks.filter(blockReady).length, total = plan.blocks.length;
+    const empty = total - ready, pct = total ? Math.round(ready / total * 100) : 0;
+    const slot = plan.blocks.find(b => b.id === slotId);
+    body.innerHTML = `
+      <div class="ws-prep">
+        <div class="ws-prep-main">
+          <div class="ws-glass ws-prog">
+            <div class="row"><b>Готовность урока</b><em>${pct}%</em></div>
+            <div class="bar"><i style="width:${pct}%"></i></div>
+            <small>${ready} из ${total} блоков готово${empty ? ` · ${empty} без материала` : ''} · ${planTotalMin(plan)} мин всего</small>
+          </div>
+          <details class="ws-glass ws-student">
+            <summary>Ученик: ${esc(plan.student.name || 'без имени')}${plan.student.age ? ', ' + esc(plan.student.age) : ''} — изменить данные</summary>
+            <div class="ws-fields" style="margin-top:12px">
+              <label>Имя<input id="fName" value="${esc(plan.student.name)}" placeholder="Имя ученика"></label>
+              <label>Возраст<input id="fAge" value="${esc(plan.student.age)}" placeholder="например, 12"></label>
+              <label>Уровень<select id="fLevel">${['', ...LEVELS].map(l => `<option value="${l}" ${plan.student.level === l ? 'selected' : ''}>${l || '—'}</option>`).join('')}</select></label>
+              <label>Цель<input id="fGoal" value="${esc(plan.student.goal)}" placeholder="Зачем учит английский"></label>
+              <label>Интересы<input id="fInterests" value="${esc(plan.student.interests)}" placeholder="Игры, аниме, футбол…"></label>
+              <label>Заметки<input id="fNotes" value="${esc(plan.student.notes)}" placeholder="Что важно учесть"></label>
+            </div>
+          </details>
+          <div id="blocksEl" style="display:flex;flex-direction:column;gap:10px"></div>
+          <div><button class="ws-ghost" id="addBlockBtn">${ic('plus', 14)}Добавить блок</button></div>
+        </div>
+        <aside class="ws-glass ws-libpanel" id="libPanel"></aside>
+      </div>
+      <div class="ws-actions">
+        <span class="note">Сохраняется автоматически</span>
+        <button class="ws-ghost" id="toTpl">${ic('back', 14)}Шаблон</button>
+        <button class="ws-ghost" id="delPlan">Удалить урок</button>
+        <button class="ws-cta" id="startLive">Начать урок${ic('play', 14)}</button>
+      </div>`;
+
+    const fieldMap = { fName: 'name', fAge: 'age', fLevel: 'level', fGoal: 'goal', fInterests: 'interests', fNotes: 'notes' };
+    Object.keys(fieldMap).forEach(k => body.querySelector('#' + k).addEventListener('input', e => { plan.student[fieldMap[k]] = e.target.value; save(); }));
+    body.querySelector('#toTpl').onclick = () => { plan.step = 'template'; save(); renderBuilder(root); };
+    body.querySelector('#delPlan').onclick = () => { if (confirm('Удалить этот урок?')) { Plans.remove(plan.id); location.hash = '#/builder'; } };
+    body.querySelector('#startLive').onclick = () => startLiveFromPlan(plan);
+    body.querySelector('#addBlockBtn').onclick = () => {
+      const nb = { id: uid('b'), key: 'practice', title: 'Дополнительный блок', duration: 5, mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: null, note: '', skipped: false, visited: false };
+      plan.blocks.push(nb); slotId = nb.id; save(); draw();
+    };
+    drawBlocks(); drawPanel(slot);
+  };
+
+  const drawBlocks = () => {
+    const el = body.querySelector('#blocksEl');
+    el.innerHTML = plan.blocks.map((b, i) => {
+      const item = b.itemId && byId[b.itemId];
+      const isEmpty = !blockReady(b);
+      const sub = b.mode === 'text' ? ((b.questions || [])[0] || 'Вопросы и идеи — в режиме урока') : (item ? item.title : `Пусто: добавьте ${b.accept === 'topic' ? 'мини-урок' : (b.accept === 'activity' ? 'активность' : 'материал')}`);
+      return `<div class="ws-glass ws-blk${isEmpty ? ' empty' : ''}${b.id === slotId ? ' sel' : ''}" data-id="${esc(b.id)}" draggable="true">
+        <span class="grab">${ic('grab', 16)}</span>
+        <span class="ck">${isEmpty ? ic('circle', 18) : ic('check', 18)}</span>
+        <span class="no">${i + 1}</span>
+        <div class="tx"><b>${esc(b.title)}</b><span>${esc(sub)}</span></div>
+        ${b.mode === 'slot' ? `<button class="addlib" data-open="${esc(b.id)}">${ic(item ? 'search' : 'plus', 13)}${item ? 'Заменить' : 'Из библиотеки'}</button>` : ''}
+        <span class="min">${b.duration || 5} мин</span>
+        <button class="x" data-rm="${esc(b.id)}" title="${item ? 'Убрать материал' : 'Убрать блок'}">${ic('x', 16)}</button>
+      </div>`;
+    }).join('') || '<div class="empty">Блоков нет — добавьте первый.</div>';
+    el.querySelectorAll('[data-open]').forEach(b => b.onclick = e => { e.stopPropagation(); slotId = b.dataset.open; draw(); });
+    el.querySelectorAll('.ws-blk').forEach(row => row.onclick = () => { const b = plan.blocks.find(x => x.id === row.dataset.id); if (b && b.mode === 'slot') { slotId = b.id; draw(); } });
+    el.querySelectorAll('[data-rm]').forEach(b => b.onclick = e => {
+      e.stopPropagation();
+      const blk = plan.blocks.find(x => x.id === b.dataset.rm);
+      if (blk.itemId) blk.itemId = null; else plan.blocks = plan.blocks.filter(x => x.id !== blk.id);
+      save(); draw();
+    });
     let dragId = null;
-    blocksEl.querySelectorAll('.yb-block').forEach(el => {
-      el.draggable = true;
-      el.ondragstart = () => { dragId = el.dataset.id; el.classList.add('dragging'); };
-      el.ondragend = () => el.classList.remove('dragging');
-      el.ondragover = e => e.preventDefault();
-      el.ondrop = e => {
+    el.querySelectorAll('.ws-blk').forEach(row => {
+      row.ondragstart = () => { dragId = row.dataset.id; row.classList.add('dragging'); };
+      row.ondragend = () => row.classList.remove('dragging');
+      row.ondragover = e => e.preventDefault();
+      row.ondrop = e => {
         e.preventDefault();
-        if (!dragId || dragId === el.dataset.id) return;
-        const from = plan.blocks.findIndex(b => b.id === dragId), to = plan.blocks.findIndex(b => b.id === el.dataset.id);
-        const [m] = plan.blocks.splice(from, 1);
-        plan.blocks.splice(to, 0, m);
-        save(); rerenderBlocks();
+        if (!dragId || dragId === row.dataset.id) return;
+        const from = plan.blocks.findIndex(b => b.id === dragId), to = plan.blocks.findIndex(b => b.id === row.dataset.id);
+        const [m] = plan.blocks.splice(from, 1); plan.blocks.splice(to, 0, m);
+        save(); draw();
       };
     });
+  };
+
+  const drawPanel = slot => {
+    const el = body.querySelector('#libPanel');
+    if (!slot) { el.innerHTML = `<div class="hd"><b>Библиотека</b></div><div class="foot">В этом уроке нет блоков, куда нужен материал.</div>`; return; }
+    const idx = plan.blocks.indexOf(slot) + 1;
+    const list = () => {
+      const f = acceptFilter(slot.accept);
+      let items = allItems().filter(f);
+      if (panel.lvl && plan.student.level) items = items.filter(x => itemMatchesLevel(x, plan.student.level));
+      if (panel.fav) items = items.filter(x => Saved.has(x.id));
+      items = items.filter(x => matches(panel.q, x.title, x.idea, x.goal, x.outcome));
+      const use = id => Usage.counts[id] || 0;
+      return items.sort((a, b) => use(b.id) - use(a.id)).slice(0, 40);
+    };
+    el.innerHTML = `
+      <div class="hd"><b>Библиотека</b></div>
+      <div class="ws-search">${ic('search', 14)}<input id="lpQ" placeholder="Поиск…" value="${esc(panel.q)}"></div>
+      <div class="ws-chips">
+        <span class="ws-chip on">${slot.accept === 'topic' ? 'Мини-уроки' : (slot.accept === 'activity' ? 'Активности' : 'Всё')}</span>
+        ${plan.student.level ? `<button class="ws-chip${panel.lvl ? ' on' : ''}" id="lpLvl">${esc(plan.student.level)}</button>` : ''}
+        <button class="ws-chip${panel.fav ? ' on' : ''}" id="lpFav">★ Избранное</button>
+      </div>
+      <div id="lpList"></div>
+      <div class="foot">Открыто для блока ${idx} · ${esc(slot.title)}</div>`;
+    const drawList = () => {
+      const items = list();
+      el.querySelector('#lpList').innerHTML = items.map(x => `<div class="ws-li">
+          <div class="tx" data-prev="${esc(x.id)}"><b>${esc(x.title)}</b><span>${esc(itemKind(x))} · ${esc(itemLevel(x))} · ${itemMin(x)} мин</span></div>
+          <button class="add" data-add="${esc(x.id)}" title="Добавить в блок">${ic('plus', 14)}</button>
+        </div>`).join('') || '<div class="foot" style="padding:10px 0">Ничего не нашлось.</div>';
+      el.querySelectorAll('[data-add]').forEach(b => b.onclick = () => {
+        slot.itemId = b.dataset.add; Usage.bump(b.dataset.add); save();
+        slotId = (plan.blocks.find(x => x.mode === 'slot' && !blockReady(x)) || slot).id;
+        toast('Материал добавлен в блок'); draw();
+      });
+      el.querySelectorAll('[data-prev]').forEach(b => b.onclick = () => openLibDrawer(byId[b.dataset.prev], { plan, slot, onAdd: () => { slotId = (plan.blocks.find(x => x.mode === 'slot' && !blockReady(x)) || slot).id; draw(); } }));
+    };
+    el.querySelector('#lpQ').oninput = e => { panel.q = e.target.value; drawList(); };
+    const lv = el.querySelector('#lpLvl'); if (lv) lv.onclick = () => { panel.lvl = !panel.lvl; drawPanel(slot); };
+    el.querySelector('#lpFav').onclick = () => { panel.fav = !panel.fav; drawPanel(slot); };
+    drawList();
+  };
+  draw();
+}
+
+/* ----- шаг 4: отчёт ----- */
+function planTopics(plan){
+  return plan.blocks.filter(b => !b.skipped && b.itemId && byId[b.itemId]).map(b => byId[b.itemId].title);
+}
+function reportText(plan, r){
+  return `💬 <b>Отчёт о пробном — ${esc(plan.student.name || '-')}</b>\nШаблон: ${esc(tplName(plan))}\nТемы: ${esc((r.topics || []).join(', ') || '-')}\nЧто получилось: ${esc(r.good || '-')}\nЧто не очень: ${esc(r.bad || '-')}\nУровень: ${esc(r.level || '-')}\nЦель: ${esc(r.goal || '-')}${r.notes ? `\nЗаметки: ${esc(r.notes)}` : ''}`;
+}
+async function sendReportToAdmin(plan, r){
+  r.savedAt = Date.now(); r.sentAt = Date.now();
+  plan.report = r; plan.status = 'done';
+  plan.student.level = r.level || plan.student.level; plan.student.goal = r.goal || plan.student.goal;
+  Plans.save(plan);
+  try {
+    const sb = window.supabase && window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    if (!sb) throw new Error('no sdk');
+    const { error } = await sb.rpc('tg_send', { msg: reportText(plan, r), target_chat_id: null, reply_markup: null });
+    if (error) throw error;
+    toast('Отчёт сохранён и отправлен администратору');
+    return true;
+  } catch(e){
+    toast('Отчёт сохранён, но отправить администратору не получилось — скопируйте текст вручную', true);
+    return false;
   }
-  rerenderBlocks();
-  root.querySelector('#addBlockBtn').onclick = () => openPicker(item => {
-    plan.blocks.push(itemBlock(item.play ? 'activity' : 'topic', item));
-    save(); rerenderBlocks();
-  });
+}
+async function copyReport(plan, r){
+  const text = reportText(plan, r).replace(/<\/?b>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  let ok = false;
+  try { await navigator.clipboard.writeText(text); ok = true; } catch(e){ ok = fallbackCopy(text); }
+  toast(ok ? 'Отчёт скопирован' : 'Не получилось скопировать', !ok);
 }
 
-function renderBlocksList(plan){
-  if (!plan.blocks.length) return '<div class="yb-empty">Пока пусто — добавьте тему или активность.</div>';
-  return plan.blocks.map((b, i) => `
-    <div class="yb-card yb-block" data-id="${esc(b.id)}">
-      <span class="gh">⠿</span>
-      <div><div class="kind">${esc(BLOCK_KIND_LABEL[b.kind] || b.kind)}</div><div class="ttl">${esc(b.title || '—')}</div><div class="dur">${b.duration || 5} мин</div></div>
-      <div class="acts">
-        ${i > 0 ? `<button data-up="${esc(b.id)}" title="Выше">↑</button>` : ''}
-        ${i < plan.blocks.length - 1 ? `<button data-down="${esc(b.id)}" title="Ниже">↓</button>` : ''}
-        <button data-del="${esc(b.id)}" title="Удалить">✕</button>
-      </div>
-    </div>`).join('');
-}
-function moveBlock(plan, id, dir){
-  const i = plan.blocks.findIndex(b => b.id === id), j = i + dir;
-  if (i < 0 || j < 0 || j >= plan.blocks.length) return;
-  [plan.blocks[i], plan.blocks[j]] = [plan.blocks[j], plan.blocks[i]];
-}
-
-/* ---------- модалка выбора материала (темы / активности) ---------- */
-function openPicker(onPick){
-  const bg = $('#pickerBg'), modal = $('#picker'), tabsEl = $('#pickerTabs'), bodyEl = $('#pickerBody'), searchEl = $('#pickerSearch');
-  let tab = 'lessons';
-  searchEl.value = '';
-  const rowHTML = x => `<div class="yb-pick" data-id="${esc(x.id)}">
-        <span class="ic">${x.icon || (x.play ? '🎲' : '📘')}</span>
-        <button class="grow" style="all:unset;cursor:pointer;min-width:0" data-preview="${esc(x.id)}" title="Посмотреть, что внутри"><span class="t">${esc(x.title)}</span><br><span class="s">${esc(x.level || (x.levels || []).join(', '))} · ${esc(x.outcome || x.goal || '')}</span></button>
-        <button class="yb-btn" data-preview="${esc(x.id)}">👁 Просмотр</button>
-        <button class="yb-btn on" data-add="${esc(x.id)}">+ Добавить</button>
-      </div>`;
-  const wireRows = () => {
-    bodyEl.querySelectorAll('[data-preview]').forEach(b => b.onclick = () => drawPreview(byId[b.dataset.preview]));
-    bodyEl.querySelectorAll('[data-add]').forEach(b => b.onclick = () => { Usage.bump(b.dataset.add); onPick(byId[b.dataset.add]); closePicker(); });
-  };
-  const drawList = () => {
-    searchEl.hidden = false; tabsEl.hidden = false;
-    tabsEl.innerHTML = [['lessons', '📚 Темы'], ['activities', '🎲 Активности']].map(([k, l]) => `<button class="yb-btn${tab === k ? ' on' : ''}" data-tab="${k}">${l}</button>`).join('');
-    tabsEl.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tab = b.dataset.tab; drawList(); });
-    const q = searchEl.value;
-    const filterFn = tab === 'lessons' ? l => !l.play : a => !!a.play;
-    const list0 = tab === 'lessons' ? DB.lessons.filter(l => matches(q, l.title, l.idea, l.outcome)) : DB.activities.items.filter(a => matches(q, a.title, a.goal, a.how));
-    const frequent = !q.trim() ? Usage.top(3, filterFn) : [];
-    const frequentIds = new Set(frequent.map(x => x.id));
-    const list = list0.filter(x => !frequentIds.has(x.id));
-    bodyEl.innerHTML =
-      (frequent.length ? `<div class="yb-today-lbl" style="margin:2px 0 8px">🔥 Часто используете</div>${frequent.map(rowHTML).join('')}<div style="height:8px"></div>` : '') +
-      (list.map(rowHTML).join('') || '<div class="empty">Ничего не нашлось.</div>');
-    wireRows();
-  };
-  const drawPreview = x => {
-    searchEl.hidden = true; tabsEl.hidden = true;
-    const isAct = !!x.play;
-    bodyEl.innerHTML = `
-      <button class="yb-btn" id="pvBack">← Назад к списку</button>
-      <div class="yb-card" style="padding:18px 20px;margin-top:10px">
-        <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px">
-          <span style="font-size:26px">${x.icon || (isAct ? '🎲' : '📘')}</span>
-          <div><div style="font-family:Unbounded,sans-serif;font-size:16px">${esc(x.title)}</div>
-          <div class="muted" style="font-size:12.5px">${esc(x.level || (x.levels || []).join(', '))}</div></div>
+function renderReportStep(body, plan, root){
+  const r = plan.report || { topics: planTopics(plan), good: '', bad: '', level: plan.student.level || '', goal: plan.student.goal || '', notes: plan.liveNotes || '' };
+  if (!r.topics) r.topics = planTopics(plan);
+  body.innerHTML = `
+    <p class="ws-lead">Коротко: что получилось, что не очень, какой сейчас уровень и цель. После отправки отчёт увидит администратор.</p>
+    <div class="ws-report">
+      <div class="ws-report-main">
+        <div class="ws-glass ws-rsec"><h3><i>1</i>Что получилось</h3><textarea id="repGood" placeholder="2–3 сильные стороны ученика">${esc(r.good)}</textarea></div>
+        <div class="ws-glass ws-rsec"><h3><i>2</i>Что не очень</h3><textarea id="repBad" placeholder="1–2 зоны роста на первый месяц">${esc(r.bad)}</textarea></div>
+        <div class="ws-glass ws-rsec"><h3><i>3</i>Уровень и цель</h3>
+          <div class="ws-fields">
+            <label>Текущий уровень<select id="repLevel">${['', ...LEVELS].map(l => `<option value="${l}" ${r.level === l ? 'selected' : ''}>${l || '—'}</option>`).join('')}</select></label>
+            <label>Цель<input id="repGoal" value="${esc(r.goal)}" placeholder="Зачем учит английский"></label>
+          </div>
         </div>
-        ${x.outcome ? `<p style="color:var(--yb-ink2);font-style:italic;margin:0 0 10px">«${esc(x.outcome)}»</p>` : ''}
-        ${x.leadIn ? `<p style="margin:0 0 10px"><b style="color:var(--yb-accent)">Lead-in:</b> ${esc(x.leadIn)}</p>` : ''}
-        ${x.idea ? `<p style="margin:0 0 10px">${esc(x.idea)}</p>` : ''}
-        ${x.goal ? `<p style="margin:0 0 10px"><b style="color:var(--yb-accent)">Goal:</b> ${esc(x.goal)}</p>` : ''}
-        ${x.how ? `<p style="margin:0 0 10px"><b style="color:var(--yb-accent)">How to run:</b> ${esc(x.how)}</p>` : ''}
-        ${(x.explanation || x.phrases || []).length ? `<ul class="lv-explain">${(x.explanation || x.phrases).map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
-        ${x.mistakes ? `<div style="margin:10px 0 4px"><b style="color:var(--yb-ink3);font-size:11px;text-transform:uppercase">Типичные ошибки</b></div>${Components.Mistakes(x.mistakes)}` : ''}
-        ${x.speaking ? `<p style="margin:10px 0 0"><b style="color:var(--yb-accent)">Speaking:</b> ${esc(x.speaking)}</p>` : ''}
       </div>
-      <button class="yb-btn on" id="pvAdd" style="width:100%;justify-content:center;margin-top:14px;padding:12px">+ Добавить в урок</button>`;
-    $('#pvBack').onclick = drawList;
-    $('#pvAdd').onclick = () => { Usage.bump(x.id); onPick(x); closePicker(); };
+      <aside class="ws-rside">
+        <div class="ws-glass ws-rsec"><h3>Темы урока</h3><div class="ws-wrap" id="repTopics"></div></div>
+        <div class="ws-glass ws-rsec"><h3>Заметки с урока</h3><textarea id="repNotes" placeholder="Что сказал ученик, на что обратить внимание…">${esc(r.notes)}</textarea></div>
+        <button class="ws-cta" id="repSend" style="justify-content:center">Отправить администратору${ic('arrow', 16)}</button>
+        <button class="ws-ghost" id="repSave" style="justify-content:center">Сохранить черновик</button>
+        <button class="ws-ghost" id="repCopy" style="justify-content:center">Скопировать как текст</button>
+        ${r.sentAt ? `<span class="muted" style="font-size:12px">Отправлено ${new Date(r.sentAt).toLocaleString('ru-RU')}</span>` : ''}
+      </aside>
+    </div>`;
+  const chipsEl = body.querySelector('#repTopics');
+  const drawChips = () => {
+    chipsEl.innerHTML = r.topics.map((t, i) => `<span class="ws-chip on" style="display:inline-flex;gap:6px;align-items:center">${esc(t)}<button data-rmv="${i}" style="all:unset;cursor:pointer">✕</button></span>`).join('') || '<span class="muted">—</span>';
+    chipsEl.querySelectorAll('[data-rmv]').forEach(b => b.onclick = () => { r.topics.splice(+b.dataset.rmv, 1); drawChips(); });
   };
-  searchEl.oninput = drawList;
-  drawList();
+  drawChips();
+  const collect = () => { r.good = body.querySelector('#repGood').value; r.bad = body.querySelector('#repBad').value; r.level = body.querySelector('#repLevel').value; r.goal = body.querySelector('#repGoal').value; r.notes = body.querySelector('#repNotes').value; return r; };
+  body.querySelector('#repSave').onclick = () => { collect(); plan.report = r; plan.step = 'report'; Plans.save(plan); toast('Черновик отчёта сохранён'); };
+  body.querySelector('#repCopy').onclick = () => copyReport(plan, collect());
+  body.querySelector('#repSend').onclick = async () => { collect(); await sendReportToAdmin(plan, r); location.hash = '#/reports'; };
+}
+
+/* ---------- модалка "Добавить материал" (из Live) ---------- */
+function openPicker(onPick, title){
+  const bg = $('#pickerBg'), modal = $('#picker'), box = $('#pickerBox');
+  $('#pickerTitle').textContent = title || 'Добавить активность';
+  let q = '', tab = 'activities';
+  const draw = () => {
+    const filterFn = tab === 'lessons' ? (x => !x.play) : (x => !!x.play);
+    const items = allItems().filter(filterFn).filter(x => matches(q, x.title, x.idea, x.goal, x.outcome));
+    const freq = !q.trim() ? Usage.top(3, filterFn) : [];
+    const fIds = new Set(freq.map(x => x.id));
+    const rows = [...freq, ...items.filter(x => !fIds.has(x.id))];
+    box.innerHTML = `
+      <div class="ws-seg"><button data-pt="activities" class="${tab === 'activities' ? 'on' : ''}">Активности</button><button data-pt="lessons" class="${tab === 'lessons' ? 'on' : ''}">Мини-уроки</button></div>
+      <div class="ws-search" style="margin-top:12px">${ic('search', 14)}<input id="pkQ" placeholder="Поиск…" value="${esc(q)}"></div>
+      <div style="margin-top:8px;max-height:46vh;overflow:auto">${rows.map(x => `<div class="ws-li">
+          <div class="tx" data-pkprev="${esc(x.id)}"><b>${freq.includes(x) ? '🔥 ' : ''}${esc(x.title)}</b><span>${esc(itemKind(x))} · ${esc(itemLevel(x))} · ${itemMin(x)} мин</span></div>
+          <button class="add" data-pkadd="${esc(x.id)}" title="Добавить">${ic('plus', 14)}</button>
+        </div>`).join('') || '<div class="ws-hint" style="padding:12px 0">Ничего не нашлось.</div>'}</div>`;
+    box.querySelectorAll('[data-pt]').forEach(b => b.onclick = () => { tab = b.dataset.pt; draw(); });
+    const qi = box.querySelector('#pkQ');
+    qi.oninput = e => { q = e.target.value; draw(); const n = box.querySelector('#pkQ'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
+    box.querySelectorAll('[data-pkadd]').forEach(b => b.onclick = () => { Usage.bump(b.dataset.pkadd); onPick(byId[b.dataset.pkadd]); closePicker(); });
+    box.querySelectorAll('[data-pkprev]').forEach(b => b.onclick = () => openLibDrawer(byId[b.dataset.pkprev], { onPickOnly: x => { Usage.bump(x.id); onPick(x); closePicker(); } }));
+  };
+  draw();
   bg.classList.add('open'); modal.classList.add('open');
-  searchEl.focus();
 }
 function closePicker(){ $('#pickerBg').classList.remove('open'); $('#picker').classList.remove('open'); }
 $('#pickerClose').onclick = closePicker;
 $('#pickerBg').onclick = closePicker;
 
-/* ---------- модалка "Новый пробный урок": из заявки / вручную ---------- */
+/* ---------- модалка "Новый пробный урок" ---------- */
 function openNewLessonModal(){
-  const bg = $('#newLessonBg'), modal = $('#newLessonModal'), tabsEl = $('#newLessonTabs'), bodyEl = $('#newLessonBody');
+  const bg = $('#newLessonBg'), modal = $('#newLessonModal'), bodyEl = $('#newLessonBody');
   const usedRequestIds = new Set(Plans.list().map(p => p.trialRequestId).filter(Boolean));
   const requests = ((CurrentTeacher && CurrentTeacher.trialRequests) || []).filter(r => !usedRequestIds.has(r.id));
   let tab = requests.length ? 'request' : 'manual';
+  const form = { name: '', age: '', level: '', goal: '', requestId: null };
   const draw = () => {
-    tabsEl.innerHTML = [['request', '📋 Из заявки'], ['manual', '✍️ Вручную']].map(([k, l]) => `<button class="yb-btn${tab === k ? ' on' : ''}" data-nltab="${k}">${l}</button>`).join('');
-    tabsEl.querySelectorAll('[data-nltab]').forEach(b => b.onclick = () => { tab = b.dataset.nltab; draw(); });
-    if (tab === 'request') {
-      if (!CurrentTeacher) {
-        bodyEl.innerHTML = `<div class="empty">Чтобы видеть заявки на пробный, войдите в кабинет учителя в этом браузере (teacher.html) — страница сама узнает вас здесь.</div>`;
-      } else if (!requests.length) {
-        bodyEl.innerHTML = `<div class="empty">Нет новых подтверждённых заявок, ещё не оформленных в урок.</div>`;
-      } else {
-        bodyEl.innerHTML = requests.map(r => `<div class="yb-pick" data-reqid="${esc(r.id)}">
-            <span class="ic">🎓</span>
-            <span class="grow"><span class="t">${esc(r.full_name)}</span><br><span class="s">${esc(r.current_level || 'уровень не указан')}${r.age ? ' · ' + esc(r.age) + ' лет' : ''}${r.goal ? ' · ' + esc(r.goal) : ''}</span></span>
-            <button class="yb-btn on" data-reqadd="${esc(r.id)}">Выбрать</button>
-          </div>`).join('');
-        bodyEl.querySelectorAll('[data-reqadd]').forEach(b => b.onclick = () => {
-          const r = requests.find(x => x.id === b.dataset.reqadd);
-          const p = Plans.create({ name: r.full_name, age: r.age ? String(r.age) : '', level: r.current_level || '', goal: r.goal || '', trialRequestId: r.id });
-          closeNewLessonModal();
-          location.hash = '#/builder=' + p.id;
-        });
-      }
-    } else {
-      bodyEl.innerHTML = `<p class="muted" style="margin:0 0 14px">Создать урок с чистого листа — имя и детали ученика впишете в конструкторе.</p>
-        <button class="yb-btn on" id="nlManualBtn" style="width:100%;justify-content:center;padding:12px">+ Создать пустой урок</button>`;
-      $('#nlManualBtn').onclick = () => {
-        const p = Plans.create();
-        closeNewLessonModal();
-        location.hash = '#/builder=' + p.id;
-      };
-    }
+    const sug = suggestTemplate(form);
+    bodyEl.innerHTML = `
+      <div class="ws-seg"><button data-nl="request" class="${tab === 'request' ? 'on' : ''}">Из заявки</button><button data-nl="manual" class="${tab === 'manual' ? 'on' : ''}">Вручную</button></div>
+      ${tab === 'request' ? (
+        !CurrentTeacher ? `<p class="ws-hint">Чтобы видеть заявки на пробный, войдите в кабинет учителя в этом браузере (teacher.html) — страница сама узнает вас здесь.</p>`
+        : !requests.length ? `<p class="ws-hint">Нет новых подтверждённых заявок, ещё не оформленных в урок.</p>`
+        : `<p class="ws-hint">Подтверждённые заявки, назначенные вам. Уровень и цель подставятся сами.</p>
+           ${requests.map(r => `<button class="ws-radio${form.requestId === r.id ? ' on' : ''}" data-req="${esc(r.id)}"><span class="dot"></span><span><b>${esc(r.full_name)}</b><small>${esc(r.current_level || 'уровень не указан')}${r.goal ? ' · ' + esc(r.goal) : ''}${r.age ? ' · ' + esc(r.age) + ' лет' : ''}</small></span></button>`).join('')}`
+      ) : ''}
+      <div class="ws-fields">
+        ${tab === 'manual' ? `<label>Имя<input id="nlName" value="${esc(form.name)}" placeholder="Имя ученика"></label><label>Возраст<input id="nlAge" value="${esc(form.age)}" placeholder="например, 12"></label>` : ''}
+        <label>Уровень<select id="nlLevel">${['', ...LEVELS].map(l => `<option value="${l}" ${form.level === l ? 'selected' : ''}>${l || '—'}</option>`).join('')}</select></label>
+        <label>Цель<input id="nlGoal" value="${esc(form.goal)}" placeholder="Например: Travel"></label>
+      </div>
+      <div class="ws-suggest">${ic('star', 15)}<span>Предложенный шаблон: <b>${esc(TEMPLATES[sug].name)}</b>. Его можно поменять на следующем шаге.</span></div>
+      <div class="ws-mfoot"><button class="ws-ghost" id="nlCancel">Отмена</button><button class="ws-cta" id="nlGo">Продолжить к шаблону${ic('arrow', 16)}</button></div>`;
+    bodyEl.querySelectorAll('[data-nl]').forEach(b => b.onclick = () => { tab = b.dataset.nl; draw(); });
+    bodyEl.querySelectorAll('[data-req]').forEach(b => b.onclick = () => {
+      const r = requests.find(x => x.id === b.dataset.req);
+      Object.assign(form, { requestId: r.id, name: r.full_name, age: r.age ? String(r.age) : '', level: r.current_level || '', goal: r.goal || '' });
+      draw();
+    });
+    const bind = (id, k) => { const el = bodyEl.querySelector(id); if (el) el.oninput = e => { form[k] = e.target.value; if (k !== 'name') { const s = TEMPLATES[suggestTemplate(form)].name; const sp = bodyEl.querySelector('.ws-suggest b'); if (sp) sp.textContent = s; } }; };
+    bind('#nlName', 'name'); bind('#nlAge', 'age'); bind('#nlGoal', 'goal');
+    const lv = bodyEl.querySelector('#nlLevel'); if (lv) lv.onchange = e => { form.level = e.target.value; };
+    bodyEl.querySelector('#nlCancel').onclick = closeNewLessonModal;
+    bodyEl.querySelector('#nlGo').onclick = () => {
+      if (tab === 'request' && !form.requestId) { toast('Выберите заявку или перейдите на «Вручную»', true); return; }
+      const p = Plans.create({ name: form.name, age: form.age, level: form.level, goal: form.goal, trialRequestId: form.requestId });
+      closeNewLessonModal();
+      location.hash = '#/builder=' + p.id;
+    };
   };
   draw();
   bg.classList.add('open'); modal.classList.add('open');
@@ -2431,62 +2936,107 @@ $('#newLessonBg').onclick = closeNewLessonModal;
 
 /* ---------- Live Lesson Mode ---------- */
 const live = $('#live');
-let liveState = null;   // { plan, cur, started, clockTimer }
+let liveState = null;   // { plan, cur, started, blockStart, timer }
+const fmtClock = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 
 function openLive(plan){
-  liveState = { plan, cur: 0, started: Date.now() };
-  $('.live-foot').style.display = '';
-  $('.live-side').style.display = '';
-  $('#liveStu').textContent = (plan.student.name || 'Урок') + (plan.student.level ? ' · ' + plan.student.level : '');
+  if (!plan.blocks.length) { toast('В уроке пока нет блоков', true); return; }
+  liveState = { plan, cur: Math.max(0, plan.blocks.findIndex(b => !b.visited && !b.skipped)), started: Date.now(), blockStart: Date.now() };
+  $('#liveStu').textContent = `${plan.student.name || 'Урок'} · ${tplName(plan)}`;
+  $('#liveTotal').textContent = `/ ${fmtClock(planTotalMin(plan) * 60)}`;
+  $('#liveNotes').value = plan.liveNotes || '';
+  $('#liveNotes').oninput = e => { plan.liveNotes = e.target.value; Plans.save(plan); };
   live.classList.add('open');
   document.body.style.overflow = 'hidden';
-  const tick = () => { const s = Math.floor((Date.now() - liveState.started) / 1000); $('#liveClock').textContent = `⏱ ${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
-  tick(); liveState.clockTimer = setInterval(tick, 1000);
-  renderLiveStep();
+  liveState.timer = setInterval(liveTick, 1000);
+  liveTick();
+  renderLive();
+}
+function liveTick(){
+  if (!liveState) return;
+  const s = Math.floor((Date.now() - liveState.started) / 1000);
+  $('#liveClock').textContent = fmtClock(s);
+  const b = liveState.plan.blocks[liveState.cur];
+  const el = $('#liveLeft');
+  if (b && el) {
+    const left = (b.duration || 0) * 60 - Math.floor((Date.now() - liveState.blockStart) / 1000);
+    el.textContent = left >= 0 ? `${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')} осталось` : `+${Math.floor(-left / 60)}:${String(-left % 60).padStart(2, '0')} сверх плана`;
+  }
 }
 function closeLive(){
   if (!liveState) return;
-  clearInterval(liveState.clockTimer);
+  clearInterval(liveState.timer);
   live.classList.remove('open');
   document.body.style.overflow = '';
   liveState = null;
 }
-$('#liveClose').onclick = () => { if (confirm('Выйти из режима урока? Прогресс и заметки уже сохранены.')) closeLive(); };
+function endLive(){
+  const plan = liveState.plan;
+  plan.blocks.forEach((b, i) => { if (i <= liveState.cur) b.visited = true; });
+  plan.step = 'report';
+  Plans.save(plan);
+  closeLive();
+  if (location.hash === '#/builder=' + plan.id) renderPage(); else location.hash = '#/builder=' + plan.id;
+}
+$('#liveClose').onclick = () => { if (confirm('Завершить урок и перейти к отчёту? Заметки уже сохранены.')) endLive(); };
 
-function renderLiveSidebar(){
-  const { plan, cur } = liveState;
-  $('#liveSteps').innerHTML = plan.blocks.map((b, i) => `
-    <button class="lv-step${i === cur ? ' cur' : ''}${b.skipped ? ' skipped' : ''}${b.visited && i !== cur ? ' done' : ''}" data-i="${i}">
-      <span class="dot">${b.skipped ? '–' : (i + 1)}</span>
-      <span><div class="kind">${esc(BLOCK_KIND_LABEL[b.kind] || b.kind)}</div><div class="ttl">${esc(b.title || '—')}</div></span>
-    </button>`).join('');
-  $('#liveSteps').querySelectorAll('[data-i]').forEach(b => b.onclick = () => { liveState.cur = +b.dataset.i; renderLiveStep(); });
+function gotoBlock(i){
+  const { plan } = liveState;
+  if (i < 0) return;
+  if (i >= plan.blocks.length) { endLive(); return; }
+  liveState.cur = i; liveState.blockStart = Date.now();
+  renderLive();
 }
 
-function renderLiveStep(){
+function renderLive(){
   const { plan, cur } = liveState;
-  if (cur >= plan.blocks.length) return openReport();
   const b = plan.blocks[cur];
-  b.visited = true;
-  renderLiveSidebar();
+  b.visited = true; Plans.save(plan);
+  const total = plan.blocks.length;
+
+  // сегменты прогресса
+  $('#liveSeg').innerHTML = plan.blocks.map((x, i) => `<button class="s${i === cur ? ' cur' : (x.skipped ? ' skip' : (i < cur || x.visited ? ' done' : ''))}" style="flex:${Math.max(1, x.duration || 1)}" data-seg="${i}"><i></i><span>${esc(x.title)}</span></button>`).join('');
+  $('#liveSeg').querySelectorAll('[data-seg]').forEach(s => s.onclick = () => gotoBlock(+s.dataset.seg));
+
+  // панель над сценой
+  $('#liveBar').innerHTML = `
+    <span class="lv-now">Сейчас · ${cur + 1} / ${total}</span>
+    <h2 class="lv-bt">${esc(b.title)}</h2>
+    <span class="lv-left" id="liveLeft"></span>
+    <span style="flex:1"></span>
+    <button class="lv-ab" id="liveAddAct">${ic('plus', 14)}Добавить активность</button>
+    <button class="lv-ib" id="liveSkip" title="Пропустить блок">${ic('skip', 16)}</button>`;
+
+  // сцена
   const body = $('#liveBody');
-  if (b.type === 'item') {
-    const item = byId[b.refId];
+  if (b.mode === 'text') {
+    const hasBank = !!QUESTION_BANK[b.qkind];
+    body.innerHTML = `<ul class="lv-qs" id="liveQs">${(b.questions || []).map(q => `<li>${esc(q)}<button data-rmq="${esc(q)}" title="Убрать вопрос">✕</button></li>`).join('') || '<li style="color:#6B6C64">Вопросов пока нет</li>'}</ul>
+      ${hasBank ? `<button class="ws-ghost" id="liveMoreQ">🎲 Ещё идеи и вопросы</button>` : ''}`;
+    body.querySelectorAll('[data-rmq]').forEach(btn => btn.onclick = () => { b.questions = (b.questions || []).filter(q => q !== btn.dataset.rmq); Plans.save(plan); renderLive(); });
+    const mq = body.querySelector('#liveMoreQ');
+    if (mq) mq.onclick = () => {
+      const fresh = moreQuestions(b.qkind, b.questions || []);
+      if (!fresh.length) { toast('Больше новых идей в банке нет для этого блока'); return; }
+      b.questions = [...(b.questions || []), ...fresh]; Plans.save(plan); renderLive();
+    };
+  } else {
+    const item = b.itemId && byId[b.itemId];
     if (!item) {
-      body.innerHTML = `<div class="empty">Материал не найден — возможно, его переименовали в банке.</div>`;
+      body.innerHTML = `<div class="lv-it"><h2>Материал не выбран</h2><p class="oc">В этом блоке нет материала. Выберите из библиотеки.</p><button class="ws-cta" id="livePickHere">${ic('plus', 14)}Выбрать материал</button></div>`;
+      body.querySelector('#livePickHere').onclick = () => openPicker(x => { b.itemId = x.id; Plans.save(plan); renderLive(); }, 'Выбрать материал');
     } else {
-      body.innerHTML = `<p class="lv-block-kind">${esc(BLOCK_KIND_LABEL[b.kind] || b.kind)}</p>
-        <h2 class="lv-block-ttl yb-glow">${esc(item.icon || '')} ${esc(item.title)}</h2>
-        <div class="yb-card lv-item-card">
-          ${item.outcome ? `<p class="outcome">«${esc(item.outcome)}»</p>` : ''}
-          ${item.idea ? `<p>${esc(item.idea)}</p>` : ''}
-          ${item.goal ? `<p>${esc(item.goal)}</p>` : ''}
-          ${item.how ? `<p>${esc(item.how)}</p>` : ''}
-          <ul class="lv-explain">${(item.explanation || item.phrases || []).map(p => `<li>${esc(p)}</li>`).join('')}</ul>
-          ${item.mistakes ? `<div class="kv" style="color:var(--yb-ink2)"><b style="color:var(--yb-ink3)">Типичные ошибки</b></div>${Components.Mistakes(item.mistakes)}` : ''}
-          ${item.speaking ? `<p><b style="color:var(--yb-accent)">Speaking:</b> ${esc(item.speaking)}</p>` : ''}
-        </div>
-        <button class="yb-btn on" id="liveOpenShow">▶ Открыть интерактивный урок для ученика</button>`;
+      body.innerHTML = `<div class="lv-it">
+        <h2>${esc(item.icon || '')} ${esc(item.title)}</h2>
+        ${item.outcome ? `<p class="oc">«${esc(item.outcome)}»</p>` : ''}
+        ${item.idea ? `<p>${esc(item.idea)}</p>` : ''}
+        ${item.goal ? `<p>${esc(item.goal)}</p>` : ''}
+        ${item.how ? `<p>${esc(item.how)}</p>` : ''}
+        ${(item.explanation || item.phrases || []).length ? `<ul>${(item.explanation || item.phrases).map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+        ${item.mistakes ? Components.Mistakes(item.mistakes) : ''}
+        ${item.speaking ? `<p><b>Speaking:</b> ${esc(item.speaking)}</p>` : ''}
+        <button class="ws-cta" id="liveOpenShow">${ic('play', 14)}Открыть экран для ученика</button>
+      </div>`;
       body.querySelector('#liveOpenShow').onclick = () => {
         Usage.bump(item.id);
         live.style.visibility = 'hidden';
@@ -2494,85 +3044,227 @@ function renderLiveStep(){
         openShow(item);
       };
     }
-  } else {
-    const hasBank = !!QUESTION_BANK[b.kind];
-    body.innerHTML = `<p class="lv-block-kind">${esc(BLOCK_KIND_LABEL[b.kind] || b.kind)}</p>
-      <h2 class="lv-block-ttl yb-glow">${esc(b.title || '')}</h2>
-      <ul class="lv-qs" id="liveQs">${(b.questions || []).map(q => `<li>${esc(q)}<button data-rmq="${esc(q)}" title="Убрать вопрос">✕</button></li>`).join('')}</ul>
-      ${hasBank ? `<button class="yb-btn" id="liveMoreQ" style="display:block;width:max-content;margin-bottom:18px">🎲 Ещё идеи и вопросы</button>` : ''}
-      <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--yb-ink3)">Заметки</label>
-      <textarea class="lv-note" id="liveNote" placeholder="Что сказал ученик, на что обратить внимание…">${esc(b.note || '')}</textarea>`;
-    body.querySelector('#liveNote').oninput = e => { b.note = e.target.value; Plans.save(plan); };
-    body.querySelectorAll('[data-rmq]').forEach(btn => btn.onclick = () => { b.questions = (b.questions || []).filter(q => q !== btn.dataset.rmq); Plans.save(plan); renderLiveStep(); });
-    if (hasBank) body.querySelector('#liveMoreQ').onclick = () => {
-      const fresh = moreQuestions(b.kind, b.questions || []);
-      if (!fresh.length) { toast('Больше новых идей в банке нет для этого блока'); return; }
-      b.questions = [...(b.questions || []), ...fresh];
-      Plans.save(plan);
-      renderLiveStep();
-    };
   }
+
+  // подсказка
+  const next = plan.blocks[cur + 1];
+  $('#liveTip').innerHTML = `<span class="k">Подсказка</span><p>${esc(BLOCK_TIPS[b.key] || 'Держи темп по плану — ученик должен больше говорить, чем слушать.')}</p>`;
+  // план урока
+  $('#livePlan').innerHTML = `<h3>План урока</h3>${plan.blocks.map((x, i) => `<button class="r${i === cur ? ' cur' : (x.skipped ? ' skip' : (i < cur ? ' done' : ''))}" data-plan="${i}"><span class="n">${i < cur && !x.skipped ? ic('check', 13) : i + 1}</span><span class="t">${esc(x.title)}</span><small>${x.duration || 0}м</small></button>`).join('')}`;
+  $('#livePlan').querySelectorAll('[data-plan]').forEach(r => r.onclick = () => gotoBlock(+r.dataset.plan));
+
   $('#livePrev').disabled = cur === 0;
-  $('#liveNext').textContent = cur === plan.blocks.length - 1 ? 'Завершить урок ✓' : 'Дальше →';
+  $('#livePrev').innerHTML = cur === 0 ? `${ic('back', 14)}Назад` : `${ic('back', 14)}Назад: ${esc(plan.blocks[cur - 1].title)}`;
+  $('#liveNext').innerHTML = next ? `Дальше: ${esc(next.title)}${ic('arrow', 16)}` : `К отчёту${ic('check', 16)}`;
+
+  $('#liveAddAct').onclick = () => openPicker(item => {
+    const nb = { id: uid('b'), key: item.play ? 'practice' : 'topic', title: item.play ? 'Активность' : 'Мини-урок', duration: itemMin(item), mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: item.id, note: '', skipped: false, visited: false };
+    plan.blocks.splice(cur + 1, 0, nb); Plans.save(plan);
+    renderLive();
+    toast('Блок добавлен после текущего');
+  });
+  $('#liveSkip').onclick = () => { b.skipped = true; Plans.save(plan); gotoBlock(cur + 1); };
+  liveTick();
+}
+$('#livePrev').onclick = () => { if (liveState && liveState.cur > 0) gotoBlock(liveState.cur - 1); };
+$('#liveNext').onclick = () => { if (liveState) gotoBlock(liveState.cur + 1); };
+
+/* ---------- Библиотека (фильтры слева + карточки) и превью ---------- */
+const libF = { types: new Set(['lessons', 'activities', 'grammar', 'materials']), levels: new Set(), saved: false, q: '', sort: 'title' };
+
+function libraryList(){
+  const items = [];
+  if (libF.types.has('lessons')) DB.lessons.filter(l => l.category !== 'grammar').forEach(x => items.push({ kind: 'lesson', x }));
+  if (libF.types.has('grammar')) DB.lessons.filter(l => l.category === 'grammar').forEach(x => items.push({ kind: 'grammar', x }));
+  if (libF.types.has('activities')) DB.activities.items.forEach(x => items.push({ kind: 'activity', x }));
+  if (libF.types.has('materials')) DB.materials.items.forEach((m, i) => items.push({ kind: 'material', x: Object.assign({ id: 'mat:' + i }, m) }));
+  let list = items;
+  if (libF.levels.size) list = list.filter(({ kind, x }) => kind === 'material' ? false : [...libF.levels].some(l => itemMatchesLevel(x, l)));
+  if (libF.saved) list = list.filter(({ kind, x }) => kind !== 'material' && Saved.has(x.id));
+  if (libF.q.trim()) list = list.filter(({ x }) => matches(libF.q, x.title, x.idea, x.goal, x.outcome, x.description, x.how, x.phrases));
+  list.sort((a, b) => libF.sort === 'level'
+    ? String(a.kind === 'material' ? 'Z' : itemLevel(a.x)).localeCompare(String(b.kind === 'material' ? 'Z' : itemLevel(b.x))) || a.x.title.localeCompare(b.x.title, 'ru')
+    : (libF.sort === 'used' ? (Usage.counts[b.x.id] || 0) - (Usage.counts[a.x.id] || 0) : a.x.title.localeCompare(b.x.title, 'ru')));
+  return list;
 }
 
-$('#livePrev').onclick = () => { if (liveState.cur > 0) { liveState.cur--; renderLiveStep(); } };
-$('#liveNext').onclick = () => { liveState.cur++; renderLiveStep(); };
-$('#liveSkip').onclick = () => { liveState.plan.blocks[liveState.cur].skipped = true; Plans.save(liveState.plan); liveState.cur++; renderLiveStep(); };
-$('#liveAdd').onclick = () => openPicker(item => {
-  const b = itemBlock(item.play ? 'activity' : 'topic', item);
-  liveState.plan.blocks.splice(liveState.cur + 1, 0, b);
-  Plans.save(liveState.plan);
-  renderLiveSidebar();
-});
-
-/* ---------- Отчёт о пробном ---------- */
-function openReport(){
-  const { plan } = liveState;
-  const topics = plan.blocks.filter(b => !b.skipped && b.type === 'item').map(b => (byId[b.refId] || {}).title).filter(Boolean);
-  const r = plan.report || { topics, good: '', bad: '', level: plan.student.level || '', goal: plan.student.goal || '' };
-  $('.live-side').style.display = 'none';
-  $('.live-foot').style.display = 'none';
-  $('#liveBody').innerHTML = `<div class="yb-report">
-    <p class="lv-block-kind">Отчёт о пробном</p>
-    <h2 class="lv-block-ttl yb-glow">${esc(plan.student.name || 'Ученик')}</h2>
-    <label style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--yb-ink3)">Темы урока</label>
-    <div class="yb-chips" id="repTopics"></div>
-    <div class="yb-field"><label>Что получилось</label><textarea id="repGood">${esc(r.good)}</textarea></div>
-    <div class="yb-field"><label>Что не очень</label><textarea id="repBad">${esc(r.bad)}</textarea></div>
-    <div class="yb-field"><label>Текущий уровень</label><select id="repLevel">${['', 'A0-A1', 'A2', 'B1', 'B2', 'C1'].map(l => `<option value="${l}" ${r.level === l ? 'selected' : ''}>${l || '—'}</option>`).join('')}</select></div>
-    <div class="yb-field"><label>Цель</label><input id="repGoal" value="${esc(r.goal)}" placeholder="Зачем учит английский"></div>
-    <div class="actions">
-      <button class="yb-btn on" id="repSave">✓ Сохранить и отправить администратору</button>
-      <button class="yb-btn" id="repCopy">Скопировать как текст</button>
+function renderLibraryPage(root){
+  const rerender = () => renderLibraryPage(root);
+  const typeLabels = [['lessons', 'Мини-уроки'], ['activities', 'Активности'], ['grammar', 'Грамматика'], ['materials', 'Материалы']];
+  const total = DB.lessons.length + DB.activities.items.length + DB.materials.items.length;
+  root.innerHTML = `
+    <div class="ws-lib-head">
+      <div><h1>Библиотека</h1><p>${total} материалов: темы, активности, грамматика. Откройте карточку, чтобы посмотреть, что внутри.</p></div>
+      <div class="ws-glass ws-lib-search">${ic('search')}<input id="libQ" placeholder="Искать по библиотеке…" value="${esc(libF.q)}"></div>
     </div>
-  </div>`;
-  const chipsEl = $('#repTopics');
-  const drawChips = () => {
-    chipsEl.innerHTML = r.topics.map((t, i) => `<span class="yb-chip">${esc(t)}<button data-rmv="${i}">✕</button></span>`).join('') || '<span class="muted">—</span>';
-    chipsEl.querySelectorAll('[data-rmv]').forEach(b => b.onclick = () => { r.topics.splice(+b.dataset.rmv, 1); drawChips(); });
+    <div class="ws-lib">
+      <aside class="ws-glass ws-filters">
+        <span class="lb">Тип</span>
+        ${typeLabels.map(([k, l]) => `<button class="ws-check${libF.types.has(k) ? ' on' : ''}" data-ltype="${k}"><i>${libF.types.has(k) ? ic('check', 12) : ''}</i>${l}</button>`).join('')}
+        <hr>
+        <span class="lb">Уровень</span>
+        <div class="ws-lvgrid">${LEVELS.map(l => `<button class="ws-pill${libF.levels.has(l) ? ' on' : ''}" data-llvl="${l}">${l}</button>`).join('')}</div>
+        <hr>
+        <button class="ws-check${libF.saved ? ' on' : ''}" data-lsaved="1"><i>${libF.saved ? ic('check', 12) : ''}</i>Только избранное</button>
+        <button class="ws-reset" id="libReset">Сбросить фильтры</button>
+      </aside>
+      <div class="ws-libmain">
+        <div class="ws-sortrow"><span id="libCount"></span><span class="sp"></span><span>Сортировка:</span>
+          <button data-lsort="title">${libF.sort === 'title' ? '<u>По названию</u>' : 'По названию'}</button>
+          <button data-lsort="level">${libF.sort === 'level' ? '<u>По уровню</u>' : 'По уровню'}</button>
+          <button data-lsort="used">${libF.sort === 'used' ? '<u>Частые</u>' : 'Частые'}</button></div>
+        <div class="ws-cards" id="libCards"></div>
+      </div>
+    </div>`;
+  const drawCards = () => {
+    const list = libraryList();
+    root.querySelector('#libCount').textContent = `${list.length} материалов`;
+    root.querySelector('#libCards').innerHTML = list.map(({ kind, x }) => {
+      const isMat = kind === 'material';
+      const grad = isMat ? 'linear-gradient(135deg,#FFF1D6,#F8D9A0)' : itemGradient(x);
+      const label = isMat ? 'Материал' : itemKind(x);
+      return `<article class="ws-glass ws-card" data-lprev="${esc(x.id)}">
+        <div class="top" style="background:${grad}"><span class="ic">${esc(x.icon || (isMat ? '📁' : (x.play ? '🎲' : '📘')))}</span>${isMat ? '' : `<button class="star" data-star="${esc(x.id)}" title="В избранное">${Saved.has(x.id) ? '★' : '☆'}</button>`}</div>
+        <div class="bd"><span class="ty">${esc(label)}</span><span class="nm">${esc(x.title)}</span>
+          <div class="mt">${isMat ? '' : `<b>${esc(itemLevel(x))}</b><span>${itemMin(x)} мин</span>`}<span class="sp"></span>${isMat ? '' : `<button class="addb" data-ladd="${esc(x.id)}">${ic('plus', 13)}В урок</button>`}</div>
+        </div></article>`;
+    }).join('') || '<div class="empty" style="grid-column:1/-1">Ничего не нашлось — сбросьте фильтры.</div>';
+    root.querySelectorAll('[data-lprev]').forEach(c => c.onclick = e => {
+      if (e.target.closest('[data-star]')) return;
+      const a = e.target.closest('[data-ladd]');
+      const x = byId[c.dataset.lprev] || (list.find(it => it.x.id === c.dataset.lprev) || {}).x;
+      openLibDrawer(x, { focusAdd: !!a });
+    });
   };
-  drawChips();
-  const reportText = () => `💬 <b>Отчёт о пробном — ${esc(plan.student.name || '-')}</b>\nТемы: ${esc(r.topics.join(', ') || '-')}\nЧто получилось: ${esc($('#repGood').value || '-')}\nЧто не очень: ${esc($('#repBad').value || '-')}\nУровень: ${esc($('#repLevel').value || '-')}\nЦель: ${esc($('#repGoal').value || '-')}`;
-  $('#repSave').onclick = async () => {
-    r.good = $('#repGood').value; r.bad = $('#repBad').value; r.level = $('#repLevel').value; r.goal = $('#repGoal').value; r.savedAt = Date.now();
-    plan.report = r; plan.status = 'done'; plan.student.level = r.level || plan.student.level; plan.student.goal = r.goal || plan.student.goal;
-    Plans.save(plan);
-    try {
-      const sb = window.supabase && window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      if (sb) await sb.rpc('tg_send', { msg: reportText(), target_chat_id: null, reply_markup: null });
-      toast('Отчёт сохранён и отправлен администратору');
-    } catch(e){ toast('Отчёт сохранён, но отправить администратору не получилось — скопируйте текст вручную', true); }
-    closeLive();
-    location.hash = '#/builder';
-  };
-  $('#repCopy').onclick = async () => {
-    const text = reportText().replace(/<\/?b>/g, '');
-    let ok = false;
-    try { await navigator.clipboard.writeText(text); ok = true; } catch(e){ ok = fallbackCopy(text); }
-    toast(ok ? 'Отчёт скопирован' : 'Не получилось скопировать', !ok);
-  };
+  root.querySelector('#libQ').oninput = e => { libF.q = e.target.value; drawCards(); };
+  root.querySelectorAll('[data-ltype]').forEach(b => b.onclick = () => { const k = b.dataset.ltype; libF.types.has(k) ? libF.types.delete(k) : libF.types.add(k); if (!libF.types.size) libF.types.add(k); rerender(); });
+  root.querySelectorAll('[data-llvl]').forEach(b => b.onclick = () => { const k = b.dataset.llvl; libF.levels.has(k) ? libF.levels.delete(k) : libF.levels.add(k); rerender(); });
+  root.querySelector('[data-lsaved]').onclick = () => { libF.saved = !libF.saved; rerender(); };
+  root.querySelector('#libReset').onclick = () => { libF.types = new Set(['lessons', 'activities', 'grammar', 'materials']); libF.levels = new Set(); libF.saved = false; libF.q = ''; rerender(); };
+  root.querySelectorAll('[data-lsort]').forEach(b => b.onclick = () => { libF.sort = b.dataset.lsort; rerender(); });
+  drawCards();
 }
+
+// превью материала справа + «Добавить в урок»
+function openLibDrawer(x, opts){
+  opts = opts || {};
+  if (!x) return;
+  const el = $('#libDrawer');
+  const isMat = !byId[x.id];
+  const label = isMat ? 'Материал' : itemKind(x);
+  const plans = Plans.list().filter(p => p.status !== 'done');
+  const plan0 = opts.plan || plans[0];
+  let rows = '';
+  if (!isMat) {
+    if (opts.onPickOnly) {
+      rows = `<button class="addrow first" data-addmode="pick"><span>Добавить в урок</span>${ic('plus', 14)}</button>`;
+    } else if (opts.slot) {
+      rows = `<button class="addrow first" data-addmode="slot"><span>Блок «${esc(opts.slot.title)}»</span>${ic('plus', 14)}</button>`;
+    } else if (plan0 && plan0.template) {
+      const compat = plan0.blocks.filter(b => b.mode === 'slot' && !b.itemId && acceptFilter(b.accept)(x));
+      rows = compat.slice(0, 3).map((b, i) => `<button class="addrow${i === 0 ? ' first' : ''}" data-addmode="block" data-bid="${esc(b.id)}"><span>${esc(plan0.student.name || 'Урок')} · блок «${esc(b.title)}»</span>${ic('plus', 14)}</button>`).join('')
+        + `<button class="addrow${compat.length ? '' : ' first'}" data-addmode="new-block"><span>${esc(plan0.student.name || 'Урок')} · новый блок в конце</span>${ic('plus', 14)}</button>`;
+    }
+    if (!opts.onPickOnly && !opts.slot) rows += `<button class="addrow${rows ? '' : ' first'}" data-addmode="new-plan"><span>Создать новый урок с этим материалом</span>${ic('plus', 14)}</button>`;
+  }
+  const lines = [];
+  if (!isMat) {
+    if (x.outcome) lines.push(`<i>«${esc(x.outcome)}»</i>`);
+    if (x.leadIn) lines.push(`<span><b>Lead-in:</b> ${esc(x.leadIn)}</span>`);
+    if (x.idea) lines.push(`<span>${esc(x.idea)}</span>`);
+    if (x.goal) lines.push(`<span><b>Goal:</b> ${esc(x.goal)}</span>`);
+    if (x.how) lines.push(`<span><b>How:</b> ${esc(x.how)}</span>`);
+    const ex = x.explanation || x.phrases || [];
+    if (ex.length) lines.push(`<ul>${ex.slice(0, 8).map(p => `<li>${esc(p)}</li>`).join('')}</ul>`);
+    if (x.speaking) lines.push(`<span><b>Speaking:</b> ${esc(x.speaking)}</span>`);
+  } else {
+    if (x.description) lines.push(`<span>${esc(x.description)}</span>`);
+    if (x.url) lines.push(`<a href="${esc(x.url)}" target="_blank" rel="noopener">Открыть материал →</a>`);
+  }
+  el.innerHTML = `
+    <div class="hdr"><span class="pill">${esc(label)}</span><span class="sp"></span>${isMat ? '' : `<button data-star="${esc(x.id)}" title="В избранное">${ic('star', 18)}</button>`}<button id="ldClose" aria-label="Закрыть">${ic('x', 18)}</button></div>
+    <h2>${esc(x.icon || '')} ${esc(x.title)}</h2>
+    <div class="muted">${isMat ? '' : `${esc(itemLevel(x))} · ${itemMin(x)} мин`}</div>
+    <div class="prev"><span class="lb">Что внутри</span>${lines.join('') || '<span>—</span>'}</div>
+    ${!isMat ? `<button class="ws-ghost" id="ldShow">${ic('play', 13)}Показать как ученику</button>` : ''}
+    ${rows ? `<div class="addbox"><span class="k">Добавить в урок</span>${rows}</div>` : ''}`;
+  $('#libDrawer').classList.add('open'); $('#drawerBg2').classList.add('open');
+  const close = () => { $('#libDrawer').classList.remove('open'); $('#drawerBg2').classList.remove('open'); };
+  el.querySelector('#ldClose').onclick = close;
+  $('#drawerBg2').onclick = close;
+  const sh = el.querySelector('#ldShow'); if (sh) sh.onclick = () => { close(); Usage.bump(x.id); openShow(x); };
+  el.querySelectorAll('[data-addmode]').forEach(b => b.onclick = () => {
+    const mode = b.dataset.addmode;
+    Usage.bump(x.id);
+    if (mode === 'pick') { opts.onPickOnly(x); close(); return; }
+    if (mode === 'slot') { opts.slot.itemId = x.id; Plans.save(opts.plan); close(); toast('Материал добавлен в блок'); if (opts.onAdd) opts.onAdd(); return; }
+    if (mode === 'block') { const bl = plan0.blocks.find(z => z.id === b.dataset.bid); bl.itemId = x.id; Plans.save(plan0); close(); toast('Материал добавлен в урок'); return; }
+    if (mode === 'new-block') {
+      plan0.blocks.push({ id: uid('b'), key: x.play ? 'practice' : 'topic', title: x.play ? 'Дополнительная активность' : 'Дополнительный мини-урок', duration: itemMin(x), mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: x.id, note: '', skipped: false, visited: false });
+      Plans.save(plan0); close(); toast('Добавлен новый блок в урок'); return;
+    }
+    if (mode === 'new-plan') {
+      const p = Plans.create();
+      p.template = 'standard'; p.blocks = buildBlocks('standard'); p.step = 'prepare';
+      const bl = p.blocks.find(z => z.mode === 'slot' && acceptFilter(z.accept)(x)) || p.blocks.find(z => z.mode === 'slot');
+      bl.itemId = x.id; Plans.save(p); close(); location.hash = '#/builder=' + p.id;
+    }
+  });
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('#libDrawer').classList.remove('open'); $('#drawerBg2').classList.remove('open'); closePicker(); closeNewLessonModal(); } });
+
+/* ---------- Отчёты: таблица + детали ---------- */
+const repF = { q: '', status: 'all', sel: null };
+function renderReportsPage(root){
+  const rerender = () => renderReportsPage(root);
+  const all = Plans.list().filter(p => p.report);
+  const sent = all.filter(p => p.report.sentAt), drafts = all.filter(p => !p.report.sentAt);
+  let shown = repF.status === 'sent' ? sent : (repF.status === 'draft' ? drafts : all);
+  if (repF.q.trim()) shown = shown.filter(p => matches(repF.q, p.student.name));
+  if (!shown.find(p => p.id === repF.sel)) repF.sel = shown[0] ? shown[0].id : null;
+  const cur = shown.find(p => p.id === repF.sel);
+  const fmtD = p => new Date(p.report.sentAt || p.report.savedAt || p.updatedAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+
+  root.innerHTML = `
+    <div class="ws-lib-head">
+      <div><h1>Отчёты</h1><p>Каждый проведённый пробный заканчивается здесь: итоги, заметки и следующий шаг.</p></div>
+      <div class="ws-glass ws-lib-search">${ic('search')}<input id="repQ" placeholder="Поиск по ученику…" value="${esc(repF.q)}"></div>
+    </div>
+    <div class="gl-tl-filters">
+      <button class="gl-tl-pill${repF.status === 'all' ? ' on' : ''}" data-rs="all">Все · ${all.length}</button>
+      <button class="gl-tl-pill${repF.status === 'draft' ? ' on' : ''}" data-rs="draft">Черновики · ${drafts.length}</button>
+      <button class="gl-tl-pill${repF.status === 'sent' ? ' on' : ''}" data-rs="sent">Отправлены · ${sent.length}</button>
+    </div>
+    ${all.length ? `<div class="ws-rep">
+      <div class="ws-rep-l">
+        <div class="ws-rep-cols"><span>Ученик</span><span>Шаблон</span><span>Дата</span><span>Уровень</span><span>Статус</span></div>
+        <div class="ws-rep-tbl">${shown.map(p => `<button class="ws-glass ws-rep-row${p.id === repF.sel ? ' sel' : ''}" data-rrow="${esc(p.id)}">
+          <b>${esc(p.student.name || 'Ученик')}</b><span class="mu">${esc(tplName(p))}</span><span class="mu">${esc(fmtD(p))}</span>
+          <span class="lvl">${esc(p.report.level || p.student.level || '—')}</span>
+          <span class="ws-badge ${p.report.sentAt ? 'sent' : 'draft'}">${p.report.sentAt ? 'Отправлен' : 'Черновик'}</span></button>`).join('') || '<div class="empty">Ничего не нашлось.</div>'}</div>
+      </div>
+      ${cur ? `<aside class="ws-glass ws-rep-d">
+        <div class="hd"><span class="ws-badge ${cur.report.sentAt ? 'sent' : 'draft'}">${cur.report.sentAt ? 'Отправлен' : 'Черновик'}</span><span>${esc(fmtD(cur))}</span></div>
+        <h2>${esc(cur.student.name || 'Ученик')}</h2>
+        <div class="sub">${esc(tplName(cur))} · ${planTotalMin(cur)} мин</div>
+        <div class="sec"><span class="lb">Темы урока</span><div class="v">${esc((cur.report.topics || []).join(', ') || '—')}</div></div>
+        <div class="sec"><span class="lb">Что получилось</span><div class="v">${esc(cur.report.good || '—')}</div></div>
+        <div class="sec"><span class="lb">Что не очень</span><div class="v">${esc(cur.report.bad || '—')}</div></div>
+        <div class="sec"><span class="lb">Рекомендация</span><div class="v">Уровень <b>${esc(cur.report.level || '—')}</b>${cur.report.goal ? ' · цель: ' + esc(cur.report.goal) : ''}</div></div>
+        ${cur.report.notes ? `<div class="sec"><span class="lb">Заметки</span><div class="v">${esc(cur.report.notes)}</div></div>` : ''}
+        <div class="btns"><button class="ws-ghost" id="repEdit">Редактировать</button><button class="ws-cta" id="repSendAgain">${cur.report.sentAt ? 'Отправить снова' : 'Отправить'}</button></div>
+      </aside>` : ''}
+    </div>` : `<div class="empty" style="margin-top:20px">Пока нет отчётов — они появятся здесь после того, как вы проведёте пробный и дойдёте до шага «Отчёт».</div>`}`;
+  root.querySelector('#repQ').oninput = e => { repF.q = e.target.value; rerender(); const n = root.querySelector('#repQ'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
+  root.querySelectorAll('[data-rs]').forEach(b => b.onclick = () => { repF.status = b.dataset.rs; rerender(); });
+  root.querySelectorAll('[data-rrow]').forEach(b => b.onclick = () => { repF.sel = b.dataset.rrow; rerender(); });
+  if (cur) {
+    root.querySelector('#repEdit').onclick = () => { cur.step = 'report'; Plans.save(cur); location.hash = '#/builder=' + cur.id; };
+    root.querySelector('#repSendAgain').onclick = async () => { await sendReportToAdmin(cur, cur.report); rerender(); };
+  }
+}
+Pages.library.render = renderLibraryPage;
+Pages.reports.render = renderReportsPage;
 
 /* ======================= "Сегодня у вас": кто залогинен и что у него сегодня ======================= */
 // Supabase SDK уже встроен в <head> (та же сборка, что в teacher.html/admin.html). Если учитель уже
