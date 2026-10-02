@@ -316,6 +316,12 @@ body.no-ru .ru{display:none !important}
 .ws-li .tx span{font-size:11px;color:#6B6C64}
 .ws-li button.add{width:30px;height:30px;border-radius:999px;border:1px solid #D2E739;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
 .ws-li button.add:hover{background:#D2E739}
+.lp-pager{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
+.lp-pager button{all:unset;cursor:pointer;width:34px;height:34px;border-radius:50%;border:1px solid rgba(17,18,14,.12);display:flex;align-items:center;justify-content:center;background:#fff}
+.lp-pager button:hover:not(:disabled){background:#D2E739;border-color:#D2E739}
+.lp-pager button:disabled{opacity:.35;cursor:default}
+.lp-pager span{font-size:13px;font-weight:700;text-align:center;line-height:1.1}
+.lp-pager small{display:block;font-size:11px;font-weight:400;color:#6B6C64}
 .ws-libpanel .foot{font-size:12px;color:#6B6C64}
 @media (max-width:1000px){ .ws-prep{flex-direction:column} .ws-libpanel{width:100%;position:static} }
 
@@ -3099,7 +3105,8 @@ function renderPrepareStep(body, plan, root){
   const save = () => Plans.save(plan);
   const locked = tplLocked(plan);
   let slotId = (plan.blocks.find(b => b.mode === 'slot' && !blockReady(b)) || plan.blocks.find(b => b.mode === 'slot') || {}).id || null;
-  const panel = { q: '', lvl: !!plan.student.level, fav: false, type: null };
+  const panel = { q: '', lvl: !!plan.student.level, fav: false, type: null, page: 0 };
+  const PAGE = 6;
   let picked = false;   // пользователь выбрал блок кликом — остальные слегка затемняем
 
   const draw = () => {
@@ -3192,14 +3199,14 @@ function renderPrepareStep(body, plan, root){
       </div>${b.key === 'cabinet' ? demoCabinetCard() : ''}`;
     }).join('') || '<div class="empty">Блоков нет — добавьте первый.</div>';
     bindDemoCabinetCard(el, drawBlocks);
-    el.querySelectorAll('[data-open]').forEach(b => b.onclick = e => { e.stopPropagation(); slotId = b.dataset.open; picked = true; panel.type = null; draw(); });
+    el.querySelectorAll('[data-open]').forEach(b => b.onclick = e => { e.stopPropagation(); slotId = b.dataset.open; picked = true; panel.type = null; panel.page = 0; draw(); });
     el.querySelectorAll('[data-eye]').forEach(b => b.onclick = e => { e.stopPropagation(); const blk = plan.blocks.find(x => x.id === b.dataset.eye); openLibDrawer(byId[blk.itemId], { preview: true }); });
     el.querySelectorAll('.ws-blk').forEach(row => row.onclick = () => {
       const b = plan.blocks.find(x => x.id === row.dataset.id);
       if (!b) return;
       if (picked && slotId === b.id) { picked = false; draw(); return; }   // повторный клик снимает выделение
       picked = true;
-      if (b.mode === 'slot') { slotId = b.id; panel.type = null; }
+      if (b.mode === 'slot') { slotId = b.id; panel.type = null; panel.page = 0; }
       else slotId = b.id;
       draw();
     });
@@ -3244,7 +3251,7 @@ function renderPrepareStep(body, plan, root){
       if (panel.fav) items = items.filter(x => Saved.has(x.id));
       items = items.filter(x => matches(panel.q, x.title, x.idea, x.goal, x.outcome, x.kw));
       const use = id => Usage.counts[id] || 0;
-      return items.sort((a, b) => use(b.id) - use(a.id)).slice(0, 60);
+      return items.sort((a, b) => use(b.id) - use(a.id));
     };
     el.innerHTML = `
       <div class="hd"><b>Библиотека</b></div>
@@ -3255,9 +3262,16 @@ function renderPrepareStep(body, plan, root){
         <button class="ws-chip${panel.fav ? ' on' : ''}" id="lpFav">★ Избранное</button>
       </div>
       <div id="lpList"></div>
+      <div class="lp-pager" id="lpPager"></div>
       <div class="foot">Открыто для блока ${idx} · ${esc(slot.title)}</div>`;
     const drawList = () => {
-      const items = list();
+      const all = list();
+      const pages = Math.max(1, Math.ceil(all.length / PAGE));
+      panel.page = Math.max(0, Math.min(panel.page, pages - 1));
+      const items = all.slice(panel.page * PAGE, panel.page * PAGE + PAGE);
+      const pg = el.querySelector('#lpPager');
+      pg.innerHTML = pages > 1 ? `<button type="button" data-pg="-1" ${panel.page === 0 ? 'disabled' : ''} aria-label="Назад">${ic('back', 16)}</button><span>${panel.page + 1} / ${pages}<small>${all.length} тем</small></span><button type="button" data-pg="1" ${panel.page >= pages - 1 ? 'disabled' : ''} aria-label="Дальше">${ic('arrow', 16)}</button>` : '';
+      pg.querySelectorAll('[data-pg]').forEach(b => b.onclick = () => { panel.page += +b.dataset.pg; drawList(); });
       el.querySelector('#lpList').innerHTML = items.map(x => `<div class="ws-li">
           <div class="tx" data-prev="${esc(x.id)}"><b>${esc(x.title)}</b><span>${esc(itemKind(x))} · ${esc(itemLevel(x))} · ${itemMin(x)} мин</span></div>
           <button class="eye" data-prev="${esc(x.id)}" title="Посмотреть, что внутри">${ic('eye', 15)}</button>
@@ -3265,15 +3279,15 @@ function renderPrepareStep(body, plan, root){
         </div>`).join('') || '<div class="foot" style="padding:10px 0">Ничего не нашлось.</div>';
       el.querySelectorAll('[data-add]').forEach(b => b.onclick = () => {
         slot.itemId = b.dataset.add; Usage.bump(b.dataset.add); save();
-        slotId = (plan.blocks.find(x => x.mode === 'slot' && !blockReady(x)) || slot).id; panel.type = null;
+        slotId = (plan.blocks.find(x => x.mode === 'slot' && !blockReady(x)) || slot).id; panel.type = null; panel.page = 0;
         toast('Материал добавлен в блок'); draw();
       });
-      el.querySelectorAll('[data-prev]').forEach(b => b.onclick = () => openLibDrawer(byId[b.dataset.prev], { plan, slot, onAdd: () => { slotId = (plan.blocks.find(x => x.mode === 'slot' && !blockReady(x)) || slot).id; panel.type = null; draw(); } }));
+      el.querySelectorAll('[data-prev]').forEach(b => b.onclick = () => openLibDrawer(byId[b.dataset.prev], { plan, slot, onAdd: () => { slotId = (plan.blocks.find(x => x.mode === 'slot' && !blockReady(x)) || slot).id; panel.type = null; panel.page = 0; draw(); } }));
     };
-    el.querySelector('#lpQ').oninput = e => { panel.q = e.target.value; drawList(); };
-    el.querySelectorAll('[data-lptype]').forEach(b => b.onclick = () => { panel.type = b.dataset.lptype; drawPanel(slot); });
-    const lv = el.querySelector('#lpLvl'); if (lv) lv.onclick = () => { panel.lvl = !panel.lvl; drawPanel(slot); };
-    el.querySelector('#lpFav').onclick = () => { panel.fav = !panel.fav; drawPanel(slot); };
+    el.querySelector('#lpQ').oninput = e => { panel.q = e.target.value; panel.page = 0; drawList(); };
+    el.querySelectorAll('[data-lptype]').forEach(b => b.onclick = () => { panel.type = b.dataset.lptype; panel.page = 0; drawPanel(slot); });
+    const lv = el.querySelector('#lpLvl'); if (lv) lv.onclick = () => { panel.lvl = !panel.lvl; panel.page = 0; drawPanel(slot); };
+    el.querySelector('#lpFav').onclick = () => { panel.fav = !panel.fav; panel.page = 0; drawPanel(slot); };
     drawList();
   };
   draw();
