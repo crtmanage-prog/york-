@@ -3235,6 +3235,56 @@
      "html": "<p><b>Today I can introduce myself with a clear and interesting structure.</b></p><p>talk about my past, present and future<br>show what I am passionate about<br>invite the listener into the conversation</p><p><b>One last question:</b></p><p>What is the most interesting thing about your career path?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can present myself professionally and adapt it to the audience.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Personal brand</b><br>expertise · track record · specialise in · transition · a driving force · bring to the table · pivot · self-driven · niche · value proposition</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Your personal pitch</b></p><p>Поговорим о том, как коротко и убедительно представить себя профессионально.</p><p><b>Questions:</b></p><ul><li>How would you introduce yourself at a conference?</li><li>What sets you apart from others in your field?</li><li>What is the story behind your career choices?</li><li>How do you adapt your introduction to different audiences?</li></ul><p><b>Vocabulary:</b><br>expertise · track record · specialise in · transition · a driving force · bring to the table · pivot</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>A personal pitch</b></p><ul><li>I specialise in helping small businesses grow online.</li><li>I started in finance, then pivoted to product management.</li><li>What I bring to the table is a mix of analytical and creative skills.</li><li>My track record includes leading teams of up to 20 people.</li><li>What drives me is solving real problems for people.</li></ul><p><b>Vocabulary:</b><br>expertise · track record · specialise in · transition · a driving force · bring to the table · pivot · self-driven</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Hook → Expertise → Evidence → Invitation</b></p><p>I help ... to ... / I specialise in ... </p><p>My track record includes ... / I've worked with ... </p><p>I'd love to hear about your work. / What brings you here?</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the more polished option</b></p><ol><li><b>I specialise in / I do things with</b> brand strategy.</li><li>I <b>pivoted to / changed on</b> product management.</li><li>What I <b>bring to the table / bring on the table</b> is a mix of skills.</li><li>My <b>track record / way record</b> includes leading large teams.</li><li>What <b>drives / pushes</b> me is solving real problems.</li></ol><p><b>Vocabulary:</b><br>expertise · track record · pivot · niche · value proposition</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the pitch</b></p><ol><li>I ______ in helping small businesses grow. <i>(specialise)</i></li><li>I ______ to product management in 2019. <i>(pivot)</i></li><li>What I bring to the ______ is a mix of skills. <i>(table)</i></li><li>My track ______ includes leading a team of 20. <i>(record)</i></li><li>What ______ me is solving real problems. <i>(drives)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Deliver your pitch</b></p><p>Give a 60-second pitch for three audiences: a recruiter, a potential client, and a friend at a party. Adapt your tone and content.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My pitch</b></p><p>Tell me:<br>I specialise in ______.<br>What sets me apart is ______.<br>What drives me is ______.</p><p>Then ask: <b>How would you introduce yourself?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can present myself professionally and adapt it to the audience.</b></p><p>structure a short pitch<br>support claims with evidence<br>adapt tone to different audiences</p><p><b>One last question:</b></p><p>What do people usually misunderstand about your work?</p>"
+    }
+   ]
   }
  },
  "bk-s-finding-a-compromise": {
@@ -3335,6 +3385,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can negotiate and reach a compromise.</b></p><p>state my priority clearly<br>offer and accept concessions<br>close a deal politely</p><p><b>One last question:</b></p><p>When is a compromise not a good idea?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can negotiate and reach a mutually beneficial agreement.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Negotiation tactics</b><br>leverage · concession · bottom line · common ground · deadlock · stalemate · reciprocate · give and take · break the impasse · mutually beneficial</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Breaking the deadlock</b></p><p>Поговорим о том, как вести переговоры и находить решение при разных интересах.</p><p><b>Questions:</b></p><ul><li>What do you do when negotiations reach a deadlock?</li><li>What is your bottom line in a negotiation?</li><li>How do you balance firmness and flexibility?</li><li>What makes a deal mutually beneficial?</li></ul><p><b>Vocabulary:</b><br>leverage · concession · bottom line · common ground · deadlock · stalemate · reciprocate</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Negotiating</b></p><ul><li>Let's start by identifying where we agree.</li><li>I'd be prepared to compromise on the timeline if you could extend the budget.</li><li>That's my bottom line, I'm afraid.</li><li>If we can't break the impasse, we'll need a mediator.</li><li>This needs to be mutually beneficial.</li><li>Let's see if we can find some give and take.</li></ul><p><b>Vocabulary:</b><br>leverage · concession · bottom line · common ground · deadlock · stalemate · reciprocate · give and take</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Common ground → Positions → Trade-offs → Close</b></p><p>Let's start with what we agree on. / My main concern is ... </p><p>I'd be prepared to ... provided that ... / If you ... , then we could ... </p><p>So, to summarise, we've agreed to ... </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best negotiating phrase</b></p><ol><li><b>I'd be prepared to compromise provided that ... / I will do it if you do.</b></li><li><b>That's my bottom line. / It is my last word forever.</b></li><li><b>Let's identify common ground. / Let's find where we agree on everything.</b></li><li><b>This needs to be mutually beneficial. / Both win.</b></li></ol><p><b>Vocabulary:</b><br>leverage · bottom line · deadlock · give and take · mutually beneficial</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I'd be ______ to compromise on the timeline. <i>(prepared)</i></li><li>That's my ______ line. <i>(bottom)</i></li><li>We need to break the ______. <i>(impasse)</i></li><li>Let's find some give and ______. <i>(take)</i></li><li>The deal must be ______ beneficial. <i>(mutually)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: a tough negotiation</b></p><p>One of you is a supplier asking for a higher price, the other is a client with a fixed budget. Reach a deal that works for both.</p><ul><li>open and identify common ground</li><li>make and respond to concessions</li><li>summarise the agreement</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Negotiation and me</b></p><p>Tell me:<br>The toughest negotiation I've had was ______.<br>My bottom line is usually ______.<br>The key to a good deal is ______.</p><p>Then ask: <b>What is your negotiation style?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can negotiate and reach a mutually beneficial agreement.</b></p><p>use trade-off language<br>respond to impasse<br>summarise agreements</p><p><b>One last question:</b></p><p>What is your approach to difficult negotiations?</p>"
     }
    ]
   }
@@ -3439,6 +3539,56 @@
      "html": "<p><b>Today I can build and defend an argument.</b></p><p>give reasons and evidence<br>respond to counterarguments<br>sum up my position</p><p><b>One last question:</b></p><p>What opinion have you changed your mind about?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can build and defend an argument in a formal debate.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Formal argumentation</b><br>premise · rebuttal · concede · undermine · sweeping generalisation · stand by · counter · validity · nuanced · tenable</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Argue it out</b></p><p>Поговорим и выстроим аргументированную позицию, отвечая на возражения.</p><p><b>Questions:</b></p><ul><li>Is it ever right to break a rule?</li><li>Does technology make us more isolated?</li><li>Is meritocracy a myth?</li><li>Should economic growth be prioritised over the environment?</li></ul><p><b>Vocabulary:</b><br>premise · rebuttal · concede · undermine · sweeping generalisation · stand by · counter</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Debating with precision</b></p><ul><li>I'd like to challenge the assumption that ...</li><li>While I concede that it's convenient, I'd argue it's short-sighted.</li><li>That's a sweeping generalisation.</li><li>I stand by my view that ...</li><li>It's a more nuanced issue than it appears.</li><li>That position is hardly tenable.</li></ul><p><b>Vocabulary:</b><br>premise · rebuttal · concede · undermine · sweeping generalisation · stand by · counter · validity</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Claim → Evidence → Rebuttal → Concession → Conclusion</b></p><p>I'd argue that ... / The evidence suggests ... </p><p>I'd like to challenge ... / That doesn't follow, because ... </p><p>While I concede that ... , I'd maintain that ... </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best phrase</b></p><ol><li><b>I'd like to challenge that assumption. / You're wrong.</b></li><li><b>While I concede that ... / I give up that ...</b></li><li><b>That's a sweeping generalisation. / That's too big a talk.</b></li><li><b>It's a more nuanced issue. / It's a harder issue to say.</b></li></ol><p><b>Vocabulary:</b><br>premise · rebuttal · concede · nuanced · tenable</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I'd like to ______ that assumption. <i>(challenge)</i></li><li>While I ______ that it's convenient, it's short-sighted. <i>(concede)</i></li><li>That's a sweeping ______. <i>(generalisation)</i></li><li>I ______ by my view. <i>(stand)</i></li><li>It's a more ______ issue. <i>(nuanced)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Formal debate</b></p><p>Take a side on a motion. Prepare a 90-second opening, then respond to a rebuttal and a concession.</p><ul><li>Remote work harms company culture.</li><li>Free university education is a right.</li><li>Social media should be regulated.</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My argument</b></p><p>Tell me:<br>I'd argue that ______ because ______.<br>I'd concede that ______, but ______.<br>The weakest point of the opposite view is ______.</p><p>Then ask: <b>How would you respond?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can build and defend an argument in a formal debate.</b></p><p>challenge assumptions<br>concede and counter<br>summarise a position</p><p><b>One last question:</b></p><p>What position have you changed your mind about?</p>"
+    }
+   ]
   }
  },
  "bk-s-simple-feedback": {
@@ -3539,6 +3689,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can give and accept constructive feedback.</b></p><p>praise specific things<br>suggest improvements tactfully<br>respond to feedback</p><p><b>One last question:</b></p><p>What is the best advice you have received?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can give candid, actionable feedback and receive it well.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Giving and receiving feedback</b><br>candid · blind spot · actionable · defensive · growth mindset · pushback · calibrate · sugar-coat · reframe · follow-through</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Honest feedback</b></p><p>Поговорим о том, как давать честную, полезную обратную связь и принимать её.</p><p><b>Questions:</b></p><ul><li>How do you give difficult feedback?</li><li>How do you react when you feel defensive?</li><li>What was the most useful criticism you received?</li><li>Do you prefer candid or diplomatic feedback?</li></ul><p><b>Vocabulary:</b><br>candid · blind spot · actionable · defensive · growth mindset · pushback · calibrate</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Candid feedback</b></p><ul><li>I'd like to share some candid feedback, if that's OK.</li><li>One potential blind spot is how you handle pushback.</li><li>It would help if the feedback were more actionable.</li><li>I don't want to sugar-coat it, but ... </li><li>Let me reframe that as an opportunity.</li><li>What I'd love to see is more follow-through.</li></ul><p><b>Vocabulary:</b><br>candid · blind spot · actionable · defensive · growth mindset · pushback · calibrate · sugar-coat</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Ask permission → Observation → Impact → Suggestion</b></p><p>May I share some feedback? / When you ... </p><p>The impact was ... / I noticed that ... </p><p>What would help is ... / Would you be open to ... ?</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the more constructive version</b></p><ol><li><b>When you interrupted, I felt unheard. / You always interrupt.</b></li><li><b>It would help to be more concrete. / Your report is vague.</b></li><li><b>Would you be open to a suggestion? / Do as I say.</b></li><li><b>That's useful. Let me think about it. / That's nonsense.</b></li></ol><p><b>Vocabulary:</b><br>candid · blind spot · actionable · defensive · reframe</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I'd like to share some ______ feedback. <i>(candid)</i></li><li>One possible blind ______ is time management. <i>(spot)</i></li><li>The feedback should be more ______. <i>(actionable)</i></li><li>I don't want to ______ it, but ... <i>(sugar-coat)</i></li><li>Let me ______ that as an opportunity. <i>(reframe)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: a performance review</b></p><p>One of you is a manager giving feedback on a missed deadline, the other is an employee who feels defensive. Reach a constructive outcome.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Feedback and me</b></p><p>Tell me:<br>The best feedback I have had was ______.<br>I tend to get defensive when ______.<br>I give feedback by ______.</p><p>Then ask: <b>How do you handle criticism?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can give candid, actionable feedback and receive it well.</b></p><p>ask permission and describe impact<br>make suggestions actionable<br>respond non-defensively</p><p><b>One last question:</b></p><p>What is the hardest feedback you have had to give?</p>"
     }
    ]
   }
@@ -3643,6 +3843,56 @@
      "html": "<p><b>Today I can discuss choices, risks and consequences.</b></p><p>use would rather in different patterns<br>weigh up advantages and disadvantages<br>explain my decision</p><p><b>One last question:</b></p><p>What would you sacrifice for your dream?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can discuss hypothetical choices and trade-offs.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Hypothetical choices</b><br>trade-off · opportunity cost · irreversible · weigh · at stake · gamble · legacy · second-guess · no-brainer · on balance</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Hard choices</b></p><p>Поговорим о трудном выборе, ценах решений и последствиях.</p><p><b>Questions:</b></p><ul><li>Would you rather have a stable job or a risky dream?</li><li>Would you rather be remembered or be happy?</li><li>Would you rather know when you will die or how?</li><li>What is the opportunity cost of your current choices?</li></ul><p><b>Vocabulary:</b><br>trade-off · opportunity cost · irreversible · weigh · at stake · gamble · legacy</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Weighing hypothetical choices</b></p><ul><li>If I had to choose, I'd take the risk.</li><li>It's not a no-brainer — there are real trade-offs.</li><li>What's at stake is my reputation.</li><li>On balance, I'd go for stability.</li><li>I'd hate to second-guess myself later.</li><li>It's an irreversible decision.</li></ul><p><b>Vocabulary:</b><br>trade-off · opportunity cost · irreversible · weigh · at stake · gamble · legacy · second-guess</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>I'd rather + verb · I'd rather + past</b></p><p>I'd rather take the risk. I'd rather he told me directly.</p><p><b>Weighing: what's at stake · opportunity cost · trade-off · on balance</b></p><p><b>Hypotheticals</b></p><p>If I were to ... , I'd ... / Were I to ... , I'd ... </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I'd rather <b>take / to take</b> the risk.</li><li>I'd rather he <b>told / tell</b> me directly.</li><li>It's not a <b>no-brainer / not brainer</b>.</li><li>What's <b>at stake / on stake</b> is my reputation.</li><li><b>Were I to / If I would</b> choose, I'd take the risk.</li></ol><p><b>Vocabulary:</b><br>trade-off · opportunity cost · irreversible · at stake · no-brainer</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>If I ______ to choose, I'd take the risk. <i>(were)</i></li><li>It's not a ______. <i>(no-brainer)</i></li><li>What's at ______ is my reputation. <i>(stake)</i></li><li>On ______, I'd go for stability. <i>(balance)</i></li><li>I'd rather you ______ me earlier. <i>(tell)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Dilemmas</b></p><p>Discuss the dilemmas and justify your decision, taking trade-offs and long-term effects into account:</p><ul><li>a high-paying job you dislike or a low-paying job you love</li><li>live in your dream city with no family or stay near them</li><li>take a gamble on your own business or keep a safe job</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My choices</b></p><p>Tell me:<br>The riskiest decision I made was ______.<br>The opportunity cost was ______.<br>On balance, I'd choose ______ because ______.</p><p>Then ask: <b>What is at stake for you?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can discuss hypothetical choices and trade-offs.</b></p><p>use would rather in several patterns<br>weigh trade-offs and opportunity cost<br>justify a final decision</p><p><b>One last question:</b></p><p>What decision still makes you second-guess yourself?</p>"
+    }
+   ]
   }
  },
  "bk-s-ranking-things": {
@@ -3743,6 +3993,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can rank things and justify my priorities.</b></p><p>use ranking language<br>compare importance<br>explain why something matters</p><p><b>One last question:</b></p><p>What matters most to you right now?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can prioritise using explicit criteria and justify my ranking.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Prioritisation</b><br>criteria · weight · subjective · objective · rank · trade-off · paramount · marginal · indispensable · dispensable</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>What counts most</b></p><p>Поговорим о критериях выбора и о том, как обосновать приоритеты.</p><p><b>Questions:</b></p><ul><li>What criteria do you use to make big decisions?</li><li>What is indispensable in your life?</li><li>What is dispensable but you keep anyway?</li><li>How would you rank the qualities of a good leader?</li></ul><p><b>Vocabulary:</b><br>criteria · weight · subjective · objective · rank · trade-off · paramount</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Prioritising with criteria</b></p><ul><li>My main criterion is long-term impact.</li><li>Honesty is paramount; ambition is secondary.</li><li>It's a subjective call, but I'd rank it first.</li><li>The difference between the two is marginal.</li><li>I could dispense with luxury but not with freedom.</li><li>I'd weigh safety more heavily than speed.</li></ul><p><b>Vocabulary:</b><br>criteria · weight · subjective · objective · rank · trade-off · paramount · marginal</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Criteria → Ranking → Justification</b></p><p>The key criteria are ... / I'd weigh ... most heavily.</p><p>X is paramount / indispensable; Y is marginal / dispensable.</p><p>The difference is slight / considerable. </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best word</b></p><ol><li>Honesty is <b>paramount / marginal</b> to me.</li><li>The difference between the two is <b>marginal / indispensable</b>.</li><li>I'd <b>weigh / count</b> safety most heavily.</li><li>It's a <b>subjective / objective</b> call.</li><li>I could <b>dispense with / dispense of</b> luxury.</li></ol><p><b>Vocabulary:</b><br>criteria · paramount · marginal · indispensable · subjective</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>My main ______ is long-term impact. <i>(criterion)</i></li><li>Honesty is ______; wealth is secondary. <i>(paramount)</i></li><li>The difference is ______. <i>(marginal)</i></li><li>I'd ______ safety most heavily. <i>(weigh)</i></li><li>I could ______ with luxury but not freedom. <i>(dispense)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Rank with criteria</b></p><p>Choose a decision (a job offer, a city to live in, a business idea) and rank three options using explicit criteria. Justify your ranking.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My priorities</b></p><p>Tell me:<br>My main criteria are ______.<br>______ is paramount; ______ is marginal.<br>I could dispense with ______ but not with ______.</p><p>Then ask: <b>What are your criteria?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can prioritise using explicit criteria and justify my ranking.</b></p><p>use criteria language<br>distinguish paramount and marginal<br>justify a ranking</p><p><b>One last question:</b></p><p>What is your single most important criterion for a good life?</p>"
     }
    ]
   }
@@ -3847,6 +4147,56 @@
      "html": "<p><b>Today I can have a deeper conversation and ask meaningful questions.</b></p><p>ask about someone's path and values<br>react with empathy<br>reflect on my own experience</p><p><b>One last question:</b></p><p>What is the most important lesson life has taught you?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can have a meaningful conversation and reflect on values.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Meaningful conversation</b><br>formative · values · worldview · vulnerability · resonate · pivotal · perspective · open up · genuine · insight</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Meaningful conversation</b></p><p>Поговорим глубже: о взглядах, ценностях и значимом опыте.</p><p><b>Questions:</b></p><ul><li>What experience shaped your worldview?</li><li>What do you value in a conversation?</li><li>When do you feel most yourself?</li><li>What are you still figuring out?</li></ul><p><b>Vocabulary:</b><br>formative · values · worldview · vulnerability · resonate · pivotal · perspective</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Deeper conversation</b></p><ul><li>What was a formative experience for you?</li><li>That really resonates with me.</li><li>It takes some vulnerability to say that.</li><li>I'd love to hear your perspective.</li><li>What insight has stayed with you?</li><li>I feel like I can open up to you.</li></ul><p><b>Vocabulary:</b><br>formative · values · worldview · vulnerability · resonate · pivotal · perspective · open up</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Ask → Listen → Reflect → Share</b></p><p>What shaped you? / How did that change you?</p><p>That resonates with me. / It sounds like ... </p><p>For me, ... / Something similar happened to me. </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the more engaging response</b></p><ol><li><b>That really resonates with me. / OK, I understand.</b></li><li><b>I'd love to hear your perspective. / What is your opinion?</b></li><li><b>It sounds like that was pivotal for you. / That was important.</b></li><li><b>What insight has stayed with you? / What did you learn?</b></li></ol><p><b>Vocabulary:</b><br>formative · worldview · resonate · pivotal · insight</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>That really ______ with me. <i>(resonates)</i></li><li>What was a ______ experience for you? <i>(formative)</i></li><li>I'd love to hear your ______. <i>(perspective)</i></li><li>It takes some ______ to say that. <i>(vulnerability)</i></li><li>I feel I can ______ up to you. <i>(open)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Deep interview</b></p><p>Talk for 5 minutes. Ask about formative experiences, values and how your partner's views have changed. Reflect and share.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Reflection</b></p><p>Tell me:<br>A formative experience for me was ______.<br>My worldview changed when ______.<br>Something I'm still figuring out is ______.</p><p>Then ask: <b>What shaped your worldview?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can have a meaningful conversation and reflect on values.</b></p><p>ask deeper questions<br>respond with empathy<br>share my perspective</p><p><b>One last question:</b></p><p>What conversation has changed you the most?</p>"
+    }
+   ]
   }
  },
  "bk-s-everyday-opinions": {
@@ -3947,6 +4297,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can discuss current topics with nuanced opinions.</b></p><p>use opinion phrases<br>show degrees of agreement<br>name benefits and drawbacks</p><p><b>One last question:</b></p><p>What trend do you find most interesting?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can express nuanced opinions on current topics.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Nuanced opinions</b><br>arguably · to a certain extent · by and large · it depends on · on the whole · a double-edged sword · overstated · underestimated · trade-off · case in point</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Nuanced views</b></p><p>Поговорим и выскажем нюансированное мнение о повседневных и общественных темах.</p><p><b>Questions:</b></p><ul><li>Is social media a force for good?</li><li>Is it better to be a specialist or a generalist?</li><li>Is work-life balance realistic?</li><li>Is artificial intelligence a threat or an opportunity?</li></ul><p><b>Vocabulary:</b><br>arguably · to a certain extent · by and large · it depends on · on the whole · a double-edged sword · overstated</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Expressing nuanced opinions</b></p><ul><li>Arguably, remote work is the biggest change in decades.</li><li>To a certain extent, I agree.</li><li>It depends on what you mean by \"success\".</li><li>Social media is a double-edged sword.</li><li>The risks are often overstated.</li><li>A case in point is the gig economy.</li></ul><p><b>Vocabulary:</b><br>arguably · to a certain extent · by and large · it depends on · on the whole · a double-edged sword · overstated · underestimated</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Hedge → Position → Qualification</b></p><p>Arguably ... / To a certain extent ... / It depends on ... </p><p>On the whole, ... / By and large, ... </p><p>That said, ... / A case in point is ... </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best phrase</b></p><ol><li><b>It depends on what you mean by success. / It is different.</b></li><li><b>Social media is a double-edged sword. / Social media has two knives.</b></li><li><b>To a certain extent, I agree. / I agree on some part.</b></li><li><b>A case in point is ... / A case in the point is ...</b></li></ol><p><b>Vocabulary:</b><br>arguably · double-edged sword · overstated · underestimated · case in point</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>______, remote work is the biggest change in decades. <i>(Arguably)</i></li><li>To a certain ______, I agree. <i>(extent)</i></li><li>It ______ on what you mean by success. <i>(depends)</i></li><li>The risks are often ______. <i>(overstated)</i></li><li>A case in ______ is the gig economy. <i>(point)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>State and qualify</b></p><p>Choose a topic and give a nuanced opinion in 60 seconds. Use hedging, qualification and an example.</p><ul><li>AI</li><li>social media</li><li>remote work</li><li>consumerism</li></ul>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My nuanced view</b></p><p>Tell me:<br>Arguably, ______.<br>To a certain extent, ______.<br>A case in point is ______.</p><p>Then ask: <b>Would you qualify that?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can express nuanced opinions on current topics.</b></p><p>use hedging and qualification<br>give examples<br>avoid overgeneralising</p><p><b>One last question:</b></p><p>What opinion do you hold with the most nuance?</p>"
     }
    ]
   }
@@ -4051,6 +4451,56 @@
      "html": "<p><b>Today I can make a good first impression and keep the connection.</b></p><p>use natural small talk<br>find common ground<br>close and follow up</p><p><b>One last question:</b></p><p>What is the best way to start a conversation with a stranger?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can run a first professional meeting and agree on next steps.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Professional first meeting</b><br>rapport · credibility · mutual benefit · agenda · expectations · follow-up · network · relationship · trust · tone</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>A professional first meeting</b></p><p>Поговорим о том, как провести первую деловую встречу: установить контакт и договориться о следующих шагах.</p><p><b>Questions:</b></p><ul><li>How do you build trust at a first meeting?</li><li>How do you open a business conversation?</li><li>What do you do to follow up?</li><li>How do you read the room?</li></ul><p><b>Vocabulary:</b><br>rapport · credibility · mutual benefit · agenda · expectations · follow-up · network</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>A first business meeting</b></p><ul><li>Thanks for making time. I know you're busy.</li><li>Let me give you a bit of context on what we do.</li><li>I'd be interested to hear what you're looking for.</li><li>What would success look like for you?</li><li>Let's agree on next steps.</li><li>I'll follow up with a summary by Friday.</li></ul><p><b>Vocabulary:</b><br>rapport · credibility · mutual benefit · agenda · expectations · follow-up · network · relationship</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Open → Context → Explore needs → Next steps</b></p><p>Thanks for making time. / Let me give you some context. </p><p>What are your priorities? / What would success look like? </p><p>Let's agree on next steps. / I'll follow up by ... </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the most professional phrase</b></p><ol><li><b>Thanks for making time. / You came, good.</b></li><li><b>What would success look like for you? / What do you want?</b></li><li><b>Let's agree on next steps. / What next?</b></li><li><b>I'll follow up by Friday. / I'll write you someday.</b></li></ol><p><b>Vocabulary:</b><br>agenda · expectations · follow-up · credibility · mutual benefit</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>Thanks for making ______. <i>(time)</i></li><li>Let me give you some ______. <i>(context)</i></li><li>What would ______ look like for you? <i>(success)</i></li><li>Let's agree on next ______. <i>(steps)</i></li><li>I'll ______ up with a summary. <i>(follow)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: a first meeting</b></p><p>You meet a potential partner. Open the meeting, explore their needs, present your value and agree on follow-up.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>First meetings</b></p><p>Tell me:<br>To build trust quickly, I ______.<br>I once misread a meeting when ______.<br>The best follow-up is ______.</p><p>Then ask: <b>How do you build trust?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can run a first professional meeting and agree on next steps.</b></p><p>open and set context<br>explore needs<br>agree on follow-up</p><p><b>One last question:</b></p><p>What makes a first meeting memorable?</p>"
+    }
+   ]
   }
  },
  "bk-s-plans-free-time": {
@@ -4151,6 +4601,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can talk about plans and how I spend my free time.</b></p><p>use thinking of, hoping to, planning to<br>talk about arrangements and possibilities<br>agree on a plan</p><p><b>One last question:</b></p><p>How do you recharge after a hard week?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can talk about plans and priorities with advanced future forms.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Life planning</b><br>sabbatical · work-life balance · recharge · pursue · spontaneity · bucket list · commit to · make room for · long-term · unplug</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Plans and priorities</b></p><p>Поговорим о планах, отдыхе и о том, как выстраивать жизнь осознанно.</p><p><b>Questions:</b></p><ul><li>What is on your bucket list?</li><li>How do you make room for rest?</li><li>Would you take a sabbatical?</li><li>How do you balance spontaneity and planning?</li></ul><p><b>Vocabulary:</b><br>sabbatical · work-life balance · recharge · pursue · spontaneity · bucket list · commit to</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Talking about plans and priorities</b></p><ul><li>I'm planning to take a sabbatical next year.</li><li>I'd like to make more room for hobbies.</li><li>I'm committed to unplugging at weekends.</li><li>It's on my bucket list to learn to sail.</li><li>I'm hoping to have finished the course by June.</li><li>By this time next year, I'll have moved.</li></ul><p><b>Vocabulary:</b><br>sabbatical · work-life balance · recharge · pursue · spontaneity · bucket list · commit to · make room for</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Future forms</b></p><p>I'm going to / I'm planning to / I'm hoping to + verb</p><p>Future Perfect: By June I will have finished.</p><p>Future Continuous: This time next year I'll be living abroad.</p><p><b>Commitment: I'm committed to + -ing</b></p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>By June I <b>will have finished / will finish</b> the course.</li><li>This time next year I <b>will be living / will live</b> abroad.</li><li>I'm committed <b>to unplugging / to unplug</b> at weekends.</li><li>I'm hoping <b>to take / taking</b> a sabbatical.</li><li>I'd like to make <b>room / place</b> for hobbies.</li></ol><p><b>Vocabulary:</b><br>sabbatical · bucket list · unplug · make room for · commit to</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>By this time next year I ______ moved. <i>(will have)</i></li><li>This time next month I ______ lying on a beach. <i>(will be)</i></li><li>I'm ______ to unplugging at weekends. <i>(committed)</i></li><li>It's on my ______ list to learn to sail. <i>(bucket)</i></li><li>I'd like to make ______ for rest. <i>(room)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Plan a year</b></p><p>Describe your plans for the next 12 months with at least 3 different future forms. Explain the priorities behind them.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My plans</b></p><p>Tell me:<br>By the end of the year I will have ______.<br>This time next year I'll be ______.<br>On my bucket list is ______.</p><p>Then ask: <b>What is on your bucket list?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can talk about plans and priorities with advanced future forms.</b></p><p>use Future Perfect and Continuous<br>express commitment<br>explain priorities</p><p><b>One last question:</b></p><p>What do you want your life to look like in five years?</p>"
     }
    ]
   }
@@ -4255,6 +4755,56 @@
      "html": "<p><b>Today I can handle a problem or a complaint politely in a hotel.</b></p><p>explain a problem politely<br>ask for a solution<br>negotiate compensation</p><p><b>One last question:</b></p><p>What makes a hotel stay unforgettable?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can handle a service problem in a hotel firmly and politely.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Hospitality and expectations</b><br>amenities · boutique · concierge · overbooked · compensate · handle · escalate · satisfactory · falls short of · go the extra mile</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Hospitality</b></p><p>Поговорим о сервисе в гостиницах: ожидания, жалобы и ожидаемый уровень обслуживания.</p><p><b>Questions:</b></p><ul><li>What do you expect from a good hotel?</li><li>What would make you complain?</li><li>What is the best service you have received?</li><li>How do you leave a review?</li></ul><p><b>Vocabulary:</b><br>amenities · boutique · concierge · overbooked · compensate · handle · escalate</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Handling service issues</b></p><ul><li>The room falls short of what was advertised.</li><li>I'd like to speak to the manager, if possible.</li><li>We were assured the room would be quiet.</li><li>I'd appreciate it if you could compensate for the inconvenience.</li><li>The concierge went the extra mile.</li><li>Could you escalate this to the duty manager?</li></ul><p><b>Vocabulary:</b><br>amenities · boutique · concierge · overbooked · compensate · handle · escalate · satisfactory</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>State the issue → Reference expectation → Request → Escalate</b></p><p>The room doesn't match what was promised. / It falls short of ... </p><p>I was assured / told that ... </p><p>I'd appreciate it if you could ... / If this isn't resolved, I'll have to escalate. </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the more effective phrase</b></p><ol><li><b>The room falls short of what was advertised. / The room is not good.</b></li><li><b>I was assured it would be quiet. / You lied.</b></li><li><b>I'd like to escalate this. / I will tell everyone.</b></li><li><b>I'd appreciate some compensation. / Pay me.</b></li></ol><p><b>Vocabulary:</b><br>amenities · falls short of · compensate · escalate · go the extra mile</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>The room ______ short of what was advertised. <i>(falls)</i></li><li>We were ______ the room would be quiet. <i>(assured)</i></li><li>I'd ______ it if you could compensate. <i>(appreciate)</i></li><li>Could you ______ this to the manager? <i>(escalate)</i></li><li>The staff went the ______ mile. <i>(extra)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: a serious complaint</b></p><p>You arrive late and find your room has been given away. Remain polite but firm and negotiate compensation.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Service stories</b></p><p>Tell me:<br>The best service I received was ______.<br>I once complained about ______.<br>What impresses me is ______.</p><p>Then ask: <b>What do you expect from a hotel?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can handle a service problem in a hotel firmly and politely.</b></p><p>reference expectations<br>ask for compensation<br>escalate politely</p><p><b>One last question:</b></p><p>What turns a good stay into a great one?</p>"
+    }
+   ]
   }
  },
  "bk-s-about-people": {
@@ -4355,6 +4905,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can describe character and relationships in detail.</b></p><p>use personality adjectives<br>explain why I get on with someone<br>describe a person I admire</p><p><b>One last question:</b></p><p>Who has influenced your character the most?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can describe complex character with nuance.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Character analysis</b><br>complex · contradictory · principled · charismatic · abrasive · resilient · empathetic · introspective · trait · temperament</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Describing complex people</b></p><p>Поговорим о сложных характерах: качества, противоречия и влияние на других.</p><p><b>Questions:</b></p><ul><li>Who is the most complex person you know?</li><li>How do you deal with abrasive personalities?</li><li>What traits do you admire in leaders?</li><li>How has your character changed over time?</li></ul><p><b>Vocabulary:</b><br>complex · contradictory · principled · charismatic · abrasive · resilient · empathetic</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Describing character</b></p><ul><li>She's charismatic but can be rather abrasive.</li><li>He's principled, which sometimes makes him inflexible.</li><li>She comes across as confident, but I think she's quite introspective.</li><li>He's remarkably resilient.</li><li>She tends to be empathetic to a fault.</li><li>He's a bundle of contradictions.</li></ul><p><b>Vocabulary:</b><br>complex · contradictory · principled · charismatic · abrasive · resilient · empathetic · introspective</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Trait + contrast + effect</b></p><p>He's ... , yet / although ... </p><p>She comes across as ... , but ... </p><p>That makes him ... / As a result, ... </p><p><b>Intensifiers and hedges</b></p><p>remarkably · rather · to a fault · somewhat · quite</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best word</b></p><ol><li>She's <b>charismatic / charm</b> but abrasive.</li><li>He's <b>resilient / resistent</b> — he recovers quickly.</li><li>She comes <b>across as / out as</b> confident.</li><li>He's empathetic <b>to a fault / in a fault</b>.</li><li>He's a bundle <b>of / with</b> contradictions.</li></ol><p><b>Vocabulary:</b><br>charismatic · abrasive · resilient · empathetic · introspective</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>She comes ______ as confident. <i>(across)</i></li><li>He's principled, ______ it makes him inflexible. <i>(although)</i></li><li>She's generous to a ______. <i>(fault)</i></li><li>He's remarkably ______. <i>(resilient)</i></li><li>She's a bundle of ______. <i>(contradictions)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Portrait</b></p><p>Describe a person who has influenced you in 90 seconds. Cover personality, contradictions, and their impact on you.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>People</b></p><p>Tell me:<br>The most complex person I know is ______ — ______, yet ______.<br>The trait I admire most is ______.<br>I find ______ people difficult.</p><p>Then ask: <b>What traits do you value?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can describe complex character with nuance.</b></p><p>use contrast and hedging<br>describe strengths and flaws<br>explain impact on others</p><p><b>One last question:</b></p><p>Who has shaped your character the most?</p>"
     }
    ]
   }
@@ -4459,6 +5059,56 @@
      "html": "<p><b>Today I can solve travel problems at the airport.</b></p><p>explain a delay or cancellation<br>ask for rebooking or compensation<br>describe lost luggage</p><p><b>One last question:</b></p><p>What is the most stressful thing about travelling?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can handle travel disruption and assert my rights.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Disruption and travel rights</b><br>disruption · entitled to · reimbursement · rebooking · missed connection · stranded · inconvenience · liability · voucher · extraordinary circumstances</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Travel disruption</b></p><p>Поговорим о срыве поездки: права, компенсации и аргументы в разговоре с авиакомпанией.</p><p><b>Questions:</b></p><ul><li>What would you do if you were stranded overnight?</li><li>What are passengers entitled to in your country?</li><li>Have you ever claimed compensation?</li><li>How do you stay calm during travel chaos?</li></ul><p><b>Vocabulary:</b><br>disruption · entitled to · reimbursement · rebooking · missed connection · stranded · inconvenience</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Dealing with disruption</b></p><ul><li>Under the regulations, I'm entitled to a refund or rebooking.</li><li>The delay was caused by the airline, not by extraordinary circumstances.</li><li>I'd like to be rebooked on the earliest available flight.</li><li>Could you confirm in writing that my flight was cancelled?</li><li>I'll be claiming reimbursement for the hotel.</li><li>I'm prepared to wait, but I need to know what to expect.</li></ul><p><b>Vocabulary:</b><br>disruption · entitled to · reimbursement · rebooking · missed connection · stranded · inconvenience · liability</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>State facts → Cite rights → Request → Confirm</b></p><p>My flight was delayed by ... / I missed my connection because ... </p><p>Under the regulations, I'm entitled to ... </p><p>I'd like to be rebooked / reimbursed. / Could you confirm that in writing? </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best phrase</b></p><ol><li><b>I'm entitled to a refund. / Give me my money.</b></li><li><b>Could you confirm that in writing? / Write it.</b></li><li><b>I'd like to be rebooked as soon as possible. / Rebook me now.</b></li><li><b>I'll be claiming reimbursement. / I will take your money.</b></li></ol><p><b>Vocabulary:</b><br>disruption · entitled to · reimbursement · stranded · liability</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I'm ______ to a refund. <i>(entitled)</i></li><li>The delay was ______ by the airline. <i>(caused)</i></li><li>Could you ______ that in writing? <i>(confirm)</i></li><li>I'll be claiming ______ for the hotel. <i>(reimbursement)</i></li><li>I'd like to be ______ on the earliest flight. <i>(rebooked)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: a disrupted trip</b></p><p>Your connection was missed because of the airline's delay. Explain, cite your rights and get a solution at the desk.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Travel chaos</b></p><p>Tell me:<br>The worst disruption I had was ______.<br>I handled it by ______.<br>Passengers should know that ______.</p><p>Then ask: <b>Have you ever claimed compensation?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can handle travel disruption and assert my rights.</b></p><p>state facts and cite rights<br>request solutions<br>follow up in writing</p><p><b>One last question:</b></p><p>What is the most unexpected travel problem you have had?</p>"
+    }
+   ]
   }
  },
  "bk-s-about-me": {
@@ -4559,6 +5209,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can tell my story with reflection and clarity.</b></p><p>describe my background and values<br>talk about achievements and setbacks<br>express long-term goals</p><p><b>One last question:</b></p><p>What is the biggest lesson you have learned so far?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can tell my story reflectively and coherently.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Reflective storytelling</b><br>shaped by · defining moment · in retrospect · trajectory · resilience · values-driven · self-awareness · take stock · path · aspire</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>My story, reflectively</b></p><p>Поговорим о своём пути с размышлением: ключевые моменты, уроки и направление.</p><p><b>Questions:</b></p><ul><li>What defining moment shaped your path?</li><li>What would you tell your younger self?</li><li>How has your sense of success changed?</li><li>What does your life trajectory say about your values?</li></ul><p><b>Vocabulary:</b><br>shaped by · defining moment · in retrospect · trajectory · resilience · values-driven · self-awareness</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Reflective storytelling</b></p><ul><li>In retrospect, that failure was a defining moment.</li><li>My career has been shaped by a series of coincidences.</li><li>I've taken stock of what really matters to me.</li><li>My trajectory hasn't been linear.</li><li>I'd describe myself as values-driven.</li><li>What I've learned is that resilience can be built.</li></ul><p><b>Vocabulary:</b><br>shaped by · defining moment · in retrospect · trajectory · resilience · values-driven · self-awareness · take stock</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Event → Reflection → Lesson → Direction</b></p><p>A defining moment was when ... </p><p>In retrospect, ... / Looking back, ... </p><p>What I've learned is ... / This led me to ... </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best phrase</b></p><ol><li><b>In retrospect, ... / In the backside, ...</b></li><li><b>My career has been shaped by ... / My career has shaped by ...</b></li><li><b>I've taken stock of ... / I've taken a stock of ...</b></li><li><b>My trajectory hasn't been linear. / My way is not a line.</b></li></ol><p><b>Vocabulary:</b><br>defining moment · in retrospect · trajectory · self-awareness · values-driven</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>In ______, it was a defining moment. <i>(retrospect)</i></li><li>My career has been ______ by coincidences. <i>(shaped)</i></li><li>I've taken ______ of what matters. <i>(stock)</i></li><li>My ______ hasn't been linear. <i>(trajectory)</i></li><li>I'd describe myself as values-______. <i>(driven)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Tell your story</b></p><p>Tell your story in 3 minutes: a defining moment, a setback, what it taught you and where it is taking you.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Reflections</b></p><p>Tell me:<br>A defining moment for me was ______.<br>In retrospect, ______.<br>What I would tell my younger self is ______.</p><p>Then ask: <b>What shaped your path?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can tell my story reflectively and coherently.</b></p><p>describe defining moments<br>reflect with in retrospect<br>express values and direction</p><p><b>One last question:</b></p><p>What would you tell your younger self?</p>"
     }
    ]
   }
@@ -4663,6 +5363,56 @@
      "html": "<p><b>Today I can clarify, paraphrase and check understanding.</b></p><p>ask for clarification politely<br>paraphrase what I heard<br>recap and confirm agreements</p><p><b>One last question:</b></p><p>Why is it important to ask questions?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can prevent and repair misunderstanding.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Managing misunderstanding</b><br>ambiguous · paraphrase · misinterpret · probe · signpost · confirm · nuance · lost in translation · clarity · reiterate</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Managing misunderstanding</b></p><p>Поговорим о том, как избегать и исправлять недопонимание в сложных разговорах.</p><p><b>Questions:</b></p><ul><li>How do you handle ambiguity in a conversation?</li><li>What causes most misunderstandings at work?</li><li>How do you check understanding without sounding patronising?</li><li>Has anything got lost in translation for you?</li></ul><p><b>Vocabulary:</b><br>ambiguous · paraphrase · misinterpret · probe · signpost · confirm · nuance</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Handling misunderstanding</b></p><ul><li>I may have misinterpreted that. Could you clarify?</li><li>Just to make sure we're on the same page, ... </li><li>Could you unpack that a bit?</li><li>I'm not sure I follow the logic of that.</li><li>Let me reiterate what I understood.</li><li>Something may have got lost in translation.</li></ul><p><b>Vocabulary:</b><br>ambiguous · paraphrase · misinterpret · probe · signpost · confirm · nuance · lost in translation</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Signal → Probe → Paraphrase → Confirm</b></p><p>I may have misunderstood. / I'm not sure I follow. </p><p>Could you unpack that? / What exactly do you mean by ... ? </p><p>So what you're saying is ... / Just to confirm, ... </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the better phrase</b></p><ol><li><b>I may have misinterpreted that. / You said it badly.</b></li><li><b>Could you unpack that a bit? / Say it again.</b></li><li><b>Just to make sure we're on the same page, ... / You don't understand, ... </b></li><li><b>Let me reiterate what I understood. / I repeat what I know.</b></li></ol><p><b>Vocabulary:</b><br>ambiguous · misinterpret · paraphrase · reiterate · clarity</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I may have ______ that. Could you clarify? <i>(misinterpreted)</i></li><li>Could you ______ that a bit? <i>(unpack)</i></li><li>Just to make sure we're on the same ______. <i>(page)</i></li><li>I'm not sure I ______ the logic. <i>(follow)</i></li><li>Something got lost in ______. <i>(translation)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: a briefing</b></p><p>One person gives an ambiguous briefing. The other probes, paraphrases and confirms until both are aligned.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Understanding</b></p><p>Tell me:<br>A misunderstanding I remember is ______.<br>I probe by ______.<br>To confirm, I usually ______.</p><p>Then ask: <b>How do you check understanding?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can prevent and repair misunderstanding.</b></p><p>probe and paraphrase<br>confirm alignment<br>repair a miscommunication</p><p><b>One last question:</b></p><p>What is the most common cause of misunderstanding?</p>"
+    }
+   ]
   }
  },
  "bk-s-ordering-food": {
@@ -4763,6 +5513,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can manage a restaurant visit and solve a problem politely.</b></p><p>book and order<br>complain politely<br>ask about ingredients and the bill</p><p><b>One last question:</b></p><p>What is the best meal you have ever had?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can discuss restaurants, food and service in detail.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Food culture and critique</b><br>cuisine · ambience · presentation · seasonal · locally sourced · dietary requirements · tasting menu · service · pricey · worth the price</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Restaurants and food culture</b></p><p>Поговорим о ресторанах, о впечатлении от еды и о том, как её оценивать.</p><p><b>Questions:</b></p><ul><li>What makes a restaurant worth its price?</li><li>How do you handle dietary requirements in restaurants?</li><li>Do you prefer tasting menus or à la carte?</li><li>How do you write restaurant reviews?</li></ul><p><b>Vocabulary:</b><br>cuisine · ambience · presentation · seasonal · locally sourced · dietary requirements · tasting menu</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Talking about restaurants</b></p><ul><li>The ambience was lovely, though the service was slow.</li><li>Everything is locally sourced and seasonal.</li><li>I have some dietary requirements — is the sauce dairy-free?</li><li>The presentation was stunning, but the portions were small.</li><li>It's pricey, but worth the price.</li><li>We went for the tasting menu.</li></ul><p><b>Vocabulary:</b><br>cuisine · ambience · presentation · seasonal · locally sourced · dietary requirements · tasting menu · service</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Evaluate: food · service · ambience · price</b></p><p>The food was ... , though ... / It lived up to ... </p><p>It's worth the price. / It's overpriced for what it is. </p><p><b>Special requests</b></p><p>I have an allergy to ... / Could the chef ... ?</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the better phrase</b></p><ol><li><b>The ambience was lovely, though the service was slow. / The ambience was lovely, but the service slowly.</b></li><li><b>It's pricey, but worth the price. / It is expensive, very.</b></li><li><b>I have some dietary requirements. / I eat strange.</b></li><li><b>It lived up to its reputation. / It lived by its reputation.</b></li></ol><p><b>Vocabulary:</b><br>cuisine · ambience · seasonal · pricey · tasting menu</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the review</b></p><ol><li>The ______ was lovely, though the service was slow. <i>(ambience)</i></li><li>Everything is locally ______. <i>(sourced)</i></li><li>It's pricey but ______ the price. <i>(worth)</i></li><li>I have some dietary ______. <i>(requirements)</i></li><li>The ______ was stunning. <i>(presentation)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Restaurant review</b></p><p>Give a 90-second review of a restaurant you know. Cover food, service, ambience and price, and say whether you would recommend it.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Food and me</b></p><p>Tell me:<br>The restaurant that lived up to its reputation was ______.<br>For me, a good meal is about ______.<br>I find ______ overrated.</p><p>Then ask: <b>What is your favourite cuisine?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can discuss restaurants, food and service in detail.</b></p><p>evaluate a restaurant<br>handle dietary requests<br>give a balanced review</p><p><b>One last question:</b></p><p>What makes a meal unforgettable?</p>"
     }
    ]
   }
@@ -4867,6 +5667,56 @@
      "html": "<p><b>Today I can build rapport with someone I have just met.</b></p><p>find common ground<br>show curiosity naturally<br>agree on a follow-up</p><p><b>One last question:</b></p><p>Why is networking important?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can network with substance and build lasting connections.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Networking with substance</b><br>rapport · common ground · genuine · value · reciprocal · warm introduction · follow up · stay on the radar · lasting connection · be remembered</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Networking</b></p><p>Поговорим о том, как знакомиться осмысленно: находить общее, давать ценность и поддерживать связь.</p><p><b>Questions:</b></p><ul><li>How do you network without feeling fake?</li><li>How do you stay in touch after an event?</li><li>What makes a connection lasting?</li><li>How do you ask for an introduction?</li></ul><p><b>Vocabulary:</b><br>rapport · common ground · genuine · value · reciprocal · warm introduction · follow up</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Meaningful networking</b></p><ul><li>I'm genuinely curious about what you do.</li><li>I think we might be able to help each other.</li><li>Would you mind introducing me to ... ?</li><li>I'll follow up with that article I mentioned.</li><li>It would be great to stay on each other's radar.</li><li>I'd love to make it reciprocal.</li></ul><p><b>Vocabulary:</b><br>rapport · common ground · genuine · value · reciprocal · warm introduction · follow up · stay on the radar</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Curiosity → Value → Connection → Follow-up</b></p><p>I'm curious how you ... / What's the most exciting thing about ... </p><p>I might be able to help with ... / We might be able to help each other. </p><p>I'll follow up with ... / Let's stay in touch. </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the better phrase</b></p><ol><li><b>I'm genuinely curious about your work. / Tell me about yourself quickly.</b></li><li><b>I might be able to help with that. / You need me.</b></li><li><b>I'll follow up with that article. / I will write something.</b></li><li><b>It would be great to stay on each other's radar. / Let's watch each other.</b></li></ol><p><b>Vocabulary:</b><br>rapport · genuine · reciprocal · warm introduction · stay on the radar</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I'm ______ curious about what you do. <i>(genuinely)</i></li><li>I might be able to ______ with that. <i>(help)</i></li><li>I'll ______ up with that article. <i>(follow)</i></li><li>Would you mind ______ me to her? <i>(introducing)</i></li><li>I'd love to make it ______. <i>(reciprocal)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Role play: a networking event</b></p><p>You meet a professional you admire. Create a genuine connection, offer value, and agree on a follow-up.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Networking</b></p><p>Tell me:<br>A connection that lasted was ______.<br>I stay in touch by ______.<br>I find networking ______ because ______.</p><p>Then ask: <b>How do you network?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can network with substance and build lasting connections.</b></p><p>show genuine curiosity<br>offer value<br>follow up effectively</p><p><b>One last question:</b></p><p>What is the secret of a lasting professional connection?</p>"
+    }
+   ]
   }
  },
  "bk-s-hobbies-interests": {
@@ -4967,6 +5817,56 @@
      "key": "outcome",
      "title": "Итог",
      "html": "<p><b>Today I can talk about my passions and why they matter.</b></p><p>describe how I started a hobby<br>explain why I love it<br>talk about goals within a hobby</p><p><b>One last question:</b></p><p>What is a hobby you would never give up?</p>"
+    }
+   ]
+  },
+  "B2": {
+   "outcome": "Today I can talk about my deep interests and what they give me.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Deep interests</b><br>obsessed with · dabble in · master · immerse yourself · steep learning curve · community · craftsmanship · flow state · niche · dedicate</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Deep interests</b></p><p>Поговорим об увлечениях глубже: как ты в них погружаешься и что они тебе дают.</p><p><b>Questions:</b></p><ul><li>What are you obsessed with?</li><li>What did you dabble in and abandon?</li><li>How do you get into a flow state?</li><li>What has your hobby taught you about yourself?</li></ul><p><b>Vocabulary:</b><br>obsessed with · dabble in · master · immerse yourself · steep learning curve · community · craftsmanship</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Talking about deep interests</b></p><ul><li>I'm a bit obsessed with film photography.</li><li>I started out dabbling, but I've since immersed myself in it.</li><li>There's a steep learning curve, but that's part of the appeal.</li><li>I lose myself in it — it's my flow state.</li><li>There's a great community around it.</li><li>I appreciate the craftsmanship involved.</li></ul><p><b>Vocabulary:</b><br>obsessed with · dabble in · master · immerse yourself · steep learning curve · community · craftsmanship · flow state</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>Start → Deepen → Meaning</b></p><p>I started by ... / I got into it through ... </p><p>Over time, I've become ... / I've immersed myself in ... </p><p>What it gives me is ... / It has taught me ... </p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best phrase</b></p><ol><li><b>I'm a bit obsessed with ... / I am obsessive for ...</b></li><li><b>I started out dabbling. / I started with dabble.</b></li><li><b>There's a steep learning curve. / There's a steep curve of learn.</b></li><li><b>I lose myself in it. / I lose me in it.</b></li></ol><p><b>Vocabulary:</b><br>obsessed with · dabble · learning curve · flow state · craftsmanship</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I'm a bit ______ with film photography. <i>(obsessed)</i></li><li>I started out ______. <i>(dabbling)</i></li><li>There's a steep learning ______. <i>(curve)</i></li><li>I ______ myself in it completely. <i>(immerse)</i></li><li>I appreciate the ______. <i>(craftsmanship)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Talk about your passion</b></p><p>Talk for two minutes about an interest: how it started, the learning curve and what it gives you.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Passion</b></p><p>Tell me:<br>I got obsessed with ______ after ______.<br>The steepest learning curve was ______.<br>It has taught me ______.</p><p>Then ask: <b>What are you obsessed with?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can talk about my deep interests and what they give me.</b></p><p>describe how an interest develops<br>talk about learning curves<br>explain meaning and value</p><p><b>One last question:</b></p><p>What has a hobby taught you about yourself?</p>"
     }
    ]
   }
