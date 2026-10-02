@@ -940,6 +940,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
     <section class="panel" id="panel-availability">
       <h2 class="panel-title">Моя доступность</h2>
+      <div id="availTzNote" style="margin:0 0 12px; padding:10px 14px; border-radius:12px; background:#F1F8C6; font-size:13.5px; font-weight:600;"></div>
       <p class="section-sub" style="margin-bottom:16px;">
         Отметь часы, когда готов(а) вести занятия в ближайшие две недели. Админ видит это при назначении уроков и пробных.
         Нажми на час — включить или выключить. Можно отметить сразу весь день или скопировать прошлую неделю.
@@ -1054,6 +1055,13 @@ const TEACHER_DUAL_TZ_EXCEPTIONS = new Set([
 function teacherShowsDualTz(){
   return !!(currentUser && TEACHER_DUAL_TZ_EXCEPTIONS.has(currentUser.id));
 }
+// в каком часовом поясе учитель видит и вводит время: по умолчанию МСК,
+// у исключений (Софья, Дарья П) — Уфа. В базе всё хранится по Уфе (SCHOOL_TZ).
+function teacherViewTz(){ return teacherShowsDualTz() ? SCHOOL_TZ : 'Europe/Moscow'; }
+// на сколько часов Уфа впереди часового пояса учителя (для доступности)
+function availOffset(){ return teacherViewTz() === 'Europe/Moscow' ? 2 : 0; }
+// часы, как они лежат в базе (по Уфе)
+function availStored(){ const off = availOffset(); return AVAIL_HOURS.map(h => h + off); }
 
 const TIMEZONES = [
   { tz:'Europe/Kaliningrad', label:'Калининград (МСК-1)' },
@@ -1207,7 +1215,7 @@ async function enterApp(user){
   document.getElementById('appScreen').classList.remove('hidden');
 
   setupTabs();
-  document.getElementById('lsTimezone').innerHTML = timezoneOptionsHtml(SCHOOL_TZ);
+  document.getElementById('lsTimezone').innerHTML = timezoneOptionsHtml(teacherViewTz());
   await loadLessons();
   setupTelegramBlock();
   await setupNotifBell();
@@ -1520,6 +1528,10 @@ function busyHoursMap(){
 function renderAvailabilityGrid(){
   const el = document.getElementById('availabilityGrid');
   if (!el) return;
+  const noteEl = document.getElementById('availTzNote');
+  if (noteEl) noteEl.textContent = availOffset()
+    ? '🕐 Время указывается по Москве (МСК): отмечай часы так, как они у тебя на часах — пересчитывать не нужно.'
+    : '🕐 Время указывается по Уфе (МСК+2).';
   const days = nextTwoWeeks();
   const busy = busyHoursMap();
   const dayNames = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
@@ -1533,15 +1545,16 @@ function renderAvailabilityGrid(){
             const key = fmtDateKey(d);
             const isWeekend = d.getDay() === 0 || d.getDay() === 6;
             const dayBusy = busy[key] || {};
-            const hoursHtml = AVAIL_HOURS.map(h => {
+            const hoursHtml = availStored().map(h => {
+              const shown = h - availOffset();
               const busyLabel = dayBusy[h];
               if (busyLabel){
-                return `<button class="avail-hour busy" title="Уже назначен ${busyLabel}" disabled>${h}:00</button>`;
+                return `<button class="avail-hour busy" title="Уже назначен ${busyLabel}" disabled>${shown}:00</button>`;
               }
               const on = availabilitySet.has(availKey(key, h));
-              return `<button class="avail-hour ${on ? 'on' : ''}" onclick="toggleAvailability('${key}', ${h})">${h}:00</button>`;
+              return `<button class="avail-hour ${on ? 'on' : ''}" onclick="toggleAvailability('${key}', ${h})">${shown}:00</button>`;
             }).join('');
-            const allOn = AVAIL_HOURS.every(h => dayBusy[h] || availabilitySet.has(availKey(key, h)));
+            const allOn = availStored().every(h => dayBusy[h] || availabilitySet.has(availKey(key, h)));
             return `
               <div class="avail-day ${isWeekend ? 'is-weekend' : ''}">
                 <div class="avail-day-label">
@@ -1562,7 +1575,7 @@ function renderAvailabilityGrid(){
 }
 
 function availabilityCountForDay(dateKey, dayBusy){
-  return AVAIL_HOURS.filter(h => !dayBusy[h] && availabilitySet.has(availKey(dateKey, h))).length;
+  return availStored().filter(h => !dayBusy[h] && availabilitySet.has(availKey(dateKey, h))).length;
 }
 
 function flashAvailSaved(){
@@ -1620,7 +1633,7 @@ async function toggleAvailability(dateStr, hour){
 
 async function toggleWholeDay(dateStr, turnOn){
   const busy = busyHoursMap()[dateStr] || {};
-  const target = AVAIL_HOURS.filter(h => !busy[h]);
+  const target = availStored().filter(h => !busy[h]);
 
   if (turnOn){
     const toAdd = target.filter(h => !availabilitySet.has(availKey(dateStr, h)));
@@ -1648,7 +1661,7 @@ async function copyLastWeekAvailability(){
   thisWeek.forEach((d, i) => {
     const srcKey = fmtDateKey(d);
     const dstKey = fmtDateKey(nextWeek[i]);
-    AVAIL_HOURS.forEach(h => {
+    availStored().forEach(h => {
       if (availabilitySet.has(availKey(srcKey, h)) && !availabilitySet.has(availKey(dstKey, h))){
         availabilitySet.add(availKey(dstKey, h));
         rows.push({ teacher_id: currentUser.id, slot_date: dstKey, hour: h });
@@ -1903,8 +1916,8 @@ function pickLessonForEdit(lessonId){
   document.getElementById('lessonEditSection').classList.remove('hidden');
 
   document.getElementById('lsStudent').value = lesson.student_id || '';
-  document.getElementById('lsDate').value = toDatetimeLocalInTz(new Date(lesson.lesson_date), SCHOOL_TZ);
-  document.getElementById('lsTimezone').value = SCHOOL_TZ;
+  document.getElementById('lsDate').value = toDatetimeLocalInTz(new Date(lesson.lesson_date), teacherViewTz());
+  document.getElementById('lsTimezone').value = teacherViewTz();
   document.getElementById('lsTopic').value = lesson.topic || '';
   document.getElementById('lsMaterials').value = lesson.materials_url || '';
   document.getElementById('lsDuration').value = lesson.duration_minutes || 60;
@@ -1927,7 +1940,7 @@ function cancelLessonEdit(){
 async function addLesson(){
   const studentId = document.getElementById('lsStudent').value;
   const dateVal = document.getElementById('lsDate').value;
-  const timezone = document.getElementById('lsTimezone').value || SCHOOL_TZ;
+  const timezone = document.getElementById('lsTimezone').value || teacherViewTz();
   const topic = document.getElementById('lsTopic').value.trim();
   const materials = document.getElementById('lsMaterials').value.trim();
   const duration = document.getElementById('lsDuration').value;
