@@ -45,6 +45,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
    ===================================================================== */
 const CONTENT_FILES = {
   bank: 'trial-hub/content/bank.json',
+  bankTr: 'trial-hub/content/bank-translations.json',   // переводы текстов нового банка (английский → русский)
   variants: 'trial-hub/content/bank-variants.json',   // версии материалов под разные уровни: id → уровень → разделы   // новый банк материалов: grammar / speaking / activities
   meta: 'trial-hub/content/meta.json',
   lessons: 'trial-hub/content/lessons.json',
@@ -77,7 +78,7 @@ a{color:inherit}
 .ru{display:block;font-size:.8em;line-height:1.3;color:var(--ink-3);font-weight:400;font-style:normal;font-family:'Golos Text',sans-serif;margin-top:2px;letter-spacing:0;text-transform:none}
 .ru-i{display:inline;margin:0}
 .ru-prompt{font-size:1em;color:var(--ink-2);font-weight:500}
-.ru-prompt::before{content:"🇷🇺 ";}
+.ru-prompt::before{content:"";}
 body.no-ru .ru{display:none !important}
 .item:not(.ok) .ru-after{display:none}
 .hc-dark .ru,.goal-hero .ru,.sit-card .ru,.tl-time .ru{color:rgba(255,255,255,.62)}
@@ -329,6 +330,8 @@ body.no-ru .ru{display:none !important}
 .live .lv-who{font-size:13px;color:#6B6C64}
 .live .lv-time{font-family:Unbounded,sans-serif;font-size:22px;font-weight:700;color:#5B6B0A}
 .live .lv-total{font-size:13px;color:#6B6C64}
+.live .lv-auto{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#6B6C64;cursor:pointer}
+.live .lv-auto input{accent-color:#5B6B0A}
 .live .lv-end{height:36px;padding:0 14px;border-radius:10px;border:1px solid rgba(17,18,14,.09);background:transparent;color:#0A0A09;font-size:13px;cursor:pointer}
 .live .lv-seg{display:flex;gap:4px}
 .live .lv-seg .s{min-width:0;display:flex;flex-direction:column;gap:6px;cursor:pointer;background:none;border:0;padding:0;text-align:left;font:inherit}
@@ -1016,6 +1019,27 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
 .bk-chip{background:#fff;border:1px solid rgba(17,18,14,.12);border-radius:999px;padding:6px 16px;font-size:clamp(16px,1.9vw,22px);font-weight:600}
 .bk-vocab.big .bk-chip{background:#D2E739;border-color:#D2E739;font-size:clamp(20px,2.6vw,30px);padding:10px 22px}
 
+/* компактный вариант оформления — для панели учителя и превью */
+.bk-deco.compact{gap:8px;max-width:none}
+.bk-deco.compact .bk-title{font-size:16px}
+.bk-deco.compact .bk-text{font-size:13px}
+.bk-deco.compact .bk-sub{font-size:11px;margin-top:2px}
+.bk-deco.compact .bk-cards{gap:6px;grid-template-columns:1fr}
+.bk-deco.compact .bk-card{font-size:13px;padding:8px 12px;border-radius:12px;box-shadow:none;gap:10px}
+.bk-deco.compact .bk-n{width:24px;height:24px;font-size:12px}
+.bk-deco.compact .bk-formula{font-size:14px;padding:10px 14px;border-radius:12px}
+.bk-deco.compact .bk-line{font-size:13px;padding:8px 12px;border-radius:10px}
+.bk-deco.compact .bk-lines.check .bk-line{padding-left:36px}
+.bk-deco.compact .bk-lines.check .bk-line::before{left:12px}
+.bk-deco.compact .bk-remember{font-size:13px;padding:10px 14px;border-radius:12px}
+.bk-deco.compact .bk-vocab{padding:8px 12px;border-radius:12px;gap:6px}
+.bk-deco.compact .bk-chip{font-size:12px;padding:3px 10px}
+.bk-deco.compact .bk-vocab.big .bk-chip{font-size:13px;padding:4px 12px}
+.bk-chip .ru{font-size:.62em;margin:0;text-align:center}
+.bk-card .ru,.bk-line .ru,.bk-text .ru,.bk-formula .ru{font-size:.62em;margin-top:4px}
+.bk-formula .ru{color:rgba(210,231,57,.7);font-family:'Golos Text',sans-serif;font-weight:400}
+.bk-title .ru{font-family:'Golos Text',sans-serif;font-size:.4em;font-weight:400;margin-top:6px}
+
 </style>
 </head>
 <body>
@@ -1084,6 +1108,7 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
       <span style="flex:1"></span>
       <span class="lv-time" id="liveClock">00:00</span>
       <span class="lv-total" id="liveTotal">/ 30:00</span>
+      <label class="lv-auto" title="При переходе к блоку с материалом сразу открывать экран ученика"><input type="checkbox" id="liveAuto"> Сразу экран ученика</label>
       <button class="lv-end" id="liveClose">Завершить урок</button>
     </div>
     <div class="lv-seg" id="liveSeg"></div>
@@ -1183,6 +1208,7 @@ async function loadContent(){
   }));
   const out = Object.fromEntries(entries);
   stripUiEmoji(out);
+  if (out.bankTr) { out.translations = Object.assign({}, out.translations || {}, out.bankTr); }
   return out;
 }
 
@@ -1865,14 +1891,17 @@ let liveOnShowClose = null;   // колбэк: вернуться в Live mode �
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 // шаги показа для материала из нового банка: по одному экрану на раздел
 // оформление раздела материала для экрана ученика: карточки, формулы, чипы слов, выноски
-function bankDecorate(sc){
+const normTxt = t => String(t || '').replace(/\s+/g, ' ').trim();
+const htmlText = h => { const d = document.createElement('div'); d.innerHTML = h; return d.textContent; };
+const ruTx = t => { const r = DB.translations && DB.translations[normTxt(t)]; return r ? `<span class="ru">${esc(r)}</span>` : ''; };
+function bankDecorate(sc, compact){
   const tpl = document.createElement('template');
   tpl.innerHTML = sc.html;
   const kids = [...tpl.content.children];
   const txt = el => el.textContent.trim();
   const onlyBold = el => el.tagName === 'P' && el.children.length === 1 && el.firstElementChild.tagName === 'B' && txt(el) === txt(el.firstElementChild);
   const lines = el => el.innerHTML.split(/<br\s*\/?>/i).map(x => x.trim()).filter(Boolean);
-  const chips = str => str.split('·').map(x => x.trim()).filter(Boolean).map(w => `<span class="bk-chip">${w}</span>`).join('');
+  const chips = str => str.split('·').map(x => x.trim()).filter(Boolean).map(w => `<span class="bk-chip">${w}${ruTx(w)}</span>`).join('');
   const labelOf = el => (el.firstElementChild && el.firstElementChild.tagName === 'B') ? txt(el.firstElementChild) : '';
   let out = '', i = 0;
   while (i < kids.length) {
@@ -1883,7 +1912,7 @@ function bankDecorate(sc){
       const start = ordered ? (parseInt(el.getAttribute('start'), 10) || 1) : 1;
       const items = [...el.children];
       const short = items.every(li => li.textContent.length < 58);
-      out += `<div class="bk-cards${ordered ? ' num' : ''}${(!ordered && short) ? ' two' : ''}">${items.map((li, k) => `<div class="bk-card">${ordered ? `<span class="bk-n">${start + k}</span>` : ''}<span class="bk-ct">${li.innerHTML}</span></div>`).join('')}</div>`;
+      out += `<div class="bk-cards${ordered ? ' num' : ''}${(!ordered && short) ? ' two' : ''}">${items.map((li, k) => `<div class="bk-card">${ordered ? `<span class="bk-n">${start + k}</span>` : ''}<span class="bk-ct">${li.innerHTML}${ruTx(li.textContent)}</span></div>`).join('')}</div>`;
       i++; continue;
     }
     if (el.tagName === 'P') {
@@ -1908,23 +1937,24 @@ function bankDecorate(sc){
           if (txt(kids[j]).length > 120) break;
           parts.push(kids[j].innerHTML); j++;
         }
-        out += `<div class="bk-remember"><span class="bk-lab">Remember</span>${parts.filter(x => x.trim()).map(x => `<p>${x}</p>`).join('')}</div>`;
+        const rlines = parts.flatMap(x => x.split(/<br\s*\/?>/i).map(y => y.trim()).filter(Boolean));
+        out += `<div class="bk-remember"><span class="bk-lab">Remember</span>${rlines.map(x => `<p>${x}</p>`).join('')}</div>`;
         i = j; continue;
       }
       if (onlyBold(el) && /[+\u2192]/.test(txt(el)) && txt(el).length < 70) { out += `<div class="bk-formula">${el.innerHTML}</div>`; i++; continue; }
       if (onlyBold(el) && txt(el).length < 40) { out += `<div class="bk-sub">${el.innerHTML}</div>`; i++; continue; }
       const ls = lines(el);
       if (ls.length > 1 && ls.every(x => x.replace(/<[^>]+>/g, '').length < 90)) {
-        out += `<div class="bk-lines${sc.key === 'outcome' ? ' check' : ''}">${ls.map(x => `<div class="bk-line">${x}</div>`).join('')}</div>`;
+        out += `<div class="bk-lines${sc.key === 'outcome' ? ' check' : ''}">${ls.map(x => `<div class="bk-line">${x}${ruTx(htmlText(x))}</div>`).join('')}</div>`;
         i++; continue;
       }
-      out += `<p class="bk-text">${el.innerHTML}</p>`;
+      out += ls.length > 1 ? ls.map(x => `<p class="bk-text">${x}</p>`).join('') : `<p class="bk-text">${el.innerHTML}</p>`;
       i++; continue;
     }
     out += el.outerHTML;
     i++;
   }
-  return `<div class="bk-deco k-${esc(sc.key)}">${out}</div>`;
+  return `<div class="bk-deco k-${esc(sc.key)}${compact ? ' compact' : ''}">${out}</div>`;
 }
 function bankSteps(t){
   return t.sections.map((sc, i) => ({
@@ -1940,7 +1970,7 @@ function bankLiveHtml(base, lvl){
   return `<div class="lv-it"><h2>${esc(item.title)}</h2>
     <p class="oc">${esc(itemKind(item))} · ${esc(cur.replace('A0-A1', 'A0–A1'))} · ${itemMin(item)} мин${item.outcome ? ' · «' + esc(item.outcome) + '»' : ''}</p>
     ${lvChips(base, cur, 'data-lvsw')}${note}
-    ${item.sections.map(sc => `<div class="bk-sec"><h4>${esc(sc.title)}</h4><div class="bk-html">${sc.html}</div></div>`).join('')}
+    ${item.sections.map(sc => `<div class="bk-sec"><h4>${esc(sc.title)}</h4>${bankDecorate(sc, true)}</div>`).join('')}
     <button class="ws-cta" id="liveOpenShow" style="margin-top:14px">${ic('play', 14)}Открыть экран для ученика</button></div>`;
 }
 
@@ -3330,7 +3360,9 @@ function openLive(plan){
   document.body.style.overflow = 'hidden';
   liveState.timer = setInterval(liveTick, 1000);
   liveTick();
+  const au = $('#liveAuto'); au.checked = autoShowOn(); au.onchange = () => store.set('york-hub-autoshow', au.checked);
   renderLive();
+  liveAutoShow();
 }
 function liveTick(){
   if (!liveState) return;
@@ -3360,12 +3392,27 @@ function endLive(){
 }
 $('#liveClose').onclick = () => { if (confirm('Завершить урок и перейти к отчёту? Заметки уже сохранены.')) endLive(); };
 
+const autoShowOn = () => store.get('york-hub-autoshow', true);
+function liveOpenShow(plan, b, item){
+  Usage.bump(item.id);
+  live.style.visibility = 'hidden';
+  liveOnShowClose = () => { live.style.visibility = ''; };
+  openShow(item.bank ? itemAt(item, b.lvl || plan.student.level) : item);
+}
+// при входе в блок с материалом сразу показываем экран ученика (учительская панель — под ним, по кнопке «К списку»)
+function liveAutoShow(){
+  if (!liveState || !autoShowOn()) return;
+  const b = liveState.plan.blocks[liveState.cur];
+  const item = b && b.mode === 'slot' && b.itemId && byId[b.itemId];
+  if (item) liveOpenShow(liveState.plan, b, item);
+}
 function gotoBlock(i){
   const { plan } = liveState;
   if (i < 0) return;
   if (i >= plan.blocks.length) { endLive(); return; }
   liveState.cur = i; liveState.blockStart = Date.now();
   renderLive();
+  liveAutoShow();
 }
 
 function renderLive(){
@@ -3449,12 +3496,7 @@ function renderLive(){
         ${item.speaking ? `<p><b>Speaking:</b> ${esc(item.speaking)}</p>` : ''}
         <button class="ws-cta" id="liveOpenShow">${ic('play', 14)}Открыть экран для ученика</button>
       </div>`;
-      body.querySelector('#liveOpenShow').onclick = () => {
-        Usage.bump(item.id);
-        live.style.visibility = 'hidden';
-        liveOnShowClose = () => { live.style.visibility = ''; };
-        openShow(item.bank ? itemAt(item, b.lvl || plan.student.level) : item);
-      };
+      body.querySelector('#liveOpenShow').onclick = () => liveOpenShow(plan, b, item);
       body.querySelectorAll('[data-lvsw]').forEach(btn => btn.onclick = () => { b.lvl = btn.dataset.lvsw; Plans.save(plan); renderLive(); });
     }
   }
@@ -3591,7 +3633,7 @@ function openLibDrawer(x, opts){
   const lines = [];
   if (x.bank) {
     if (x.outcome) lines.push(`<i>«${esc(x.outcome)}»</i>`);
-    x.sections.forEach(sc => lines.push(`<span class="bk-h">${esc(sc.title)}</span><div class="bk-html">${sc.html}</div>`));
+    x.sections.forEach(sc => lines.push(`<span class="bk-h">${esc(sc.title)}</span>${bankDecorate(sc, true)}`));
     if (x.adapt && !x.atLevel) lines.push(`<span class="bk-h">Адаптация по уровню</span><div class="bk-html">${x.adapt}</div>`);
   } else if (!isMat) {
     if (x.outcome) lines.push(`<i>«${esc(x.outcome)}»</i>`);

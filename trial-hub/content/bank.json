@@ -1255,14 +1255,14 @@
     {
      "key": "task",
      "title": "Задание 3",
-     "html": "<p><b>Make it more natural</b></p><p><b>Remember:</b></p><p><b>Name → Age → City → Work / Studies → Interests</b></p><p>Соедини предложения в короткое знакомство:</p><p>Hi\\! My name is ______. I’m ______ and I’m from ______. I’m a ______. I like ______.</p><p><b> Extra:</b><br>Add one more thing about yourself.</p><p>I like ______ because ______.</p><p><b>Vocabulary:</b><br>name · age · city · student · work · hobbies · music · movies · English</p>",
-     "text": "Make it more natural Remember: Name → Age → City → Work / Studies → Interests Соедини предложения в короткое знакомство: Hi\\! My name is ______. I’m ______ and I’m from ______. I’m a ______. I like ______. Extra: Add one more thing about yourself. I like ______ because ______. Vocabulary: name · age · city · student · work · hobbies · music · movies · English"
+     "html": "<p><b>Make it more natural</b></p><p><b>Remember:</b></p><p><b>Name → Age → City → Work / Studies → Interests</b></p><p>Соедини предложения в короткое знакомство:</p><p>Hi! My name is ______. I’m ______ and I’m from ______. I’m a ______. I like ______.</p><p><b> Extra:</b><br>Add one more thing about yourself.</p><p>I like ______ because ______.</p><p><b>Vocabulary:</b><br>name · age · city · student · work · hobbies · music · movies · English</p>",
+     "text": "Make it more natural Remember: Name → Age → City → Work / Studies → Interests Соедини предложения в короткое знакомство: Hi! My name is ______. I’m ______ and I’m from ______. I’m a ______. I like ______. Extra: Add one more thing about yourself. I like ______ because ______. Vocabulary: name · age · city · student · work · hobbies · music · movies · English"
     },
     {
      "key": "speak",
      "title": "Говорим",
-     "html": "<p><b>Nice to meet you\\!</b></p><p>Представься человеку, которого ты встретил впервые.</p><p>Расскажи:</p><ul><li>your name</li><li>your age</li><li>where you’re from</li><li>what you do</li><li>what you like</li></ul><p><b>Useful phrases:</b></p><p>Hi\\! I’m ______.<br>Nice to meet you\\!<br>I’m from ______.<br>I’m a ______.<br>I like ______.</p><p><b>Vocabulary:</b><br>name · age · city · student · work · hobbies · music · movies · English</p>",
-     "text": "Nice to meet you\\! Представься человеку, которого ты встретил впервые. Расскажи: your name your age where you’re from what you do what you like Useful phrases: Hi\\! I’m ______. Nice to meet you\\! I’m from ______. I’m a ______. I like ______. Vocabulary: name · age · city · student · work · hobbies · music · movies · English"
+     "html": "<p><b>Nice to meet you!</b></p><p>Представься человеку, которого ты встретил впервые.</p><p>Расскажи:</p><ul><li>your name</li><li>your age</li><li>where you’re from</li><li>what you do</li><li>what you like</li></ul><p><b>Useful phrases:</b></p><p>Hi! I’m ______.<br>Nice to meet you!<br>I’m from ______.<br>I’m a ______.<br>I like ______.</p><p><b>Vocabulary:</b><br>name · age · city · student · work · hobbies · music · movies · English</p>",
+     "text": "Nice to meet you! Представься человеку, которого ты встретил впервые. Расскажи: your name your age where you’re from what you do what you like Useful phrases: Hi! I’m ______. Nice to meet you! I’m from ______. I’m a ______. I like ______. Vocabulary: name · age · city · student · work · hobbies · music · movies · English"
     },
     {
      "key": "outcome",
@@ -1304,26 +1304,26 @@
     {
      "key": "scheme",
      "title": "Схема",
-     "html": "<p><b>Want → Suggest → Compromise → Agree</b></p><p>I want to go today.<br>I want to go tomorrow.<br>How about tomorrow evening?<br>Sounds good\\!</p>",
-     "text": "Want → Suggest → Compromise → Agree I want to go today. I want to go tomorrow. How about tomorrow evening? Sounds good\\!"
+     "html": "<p><b>Want → Suggest → Compromise → Agree</b></p><p>I want to go today.<br>I want to go tomorrow.<br>How about tomorrow evening?<br>Sounds good!</p>",
+     "text": "Want → Suggest → Compromise → Agree I want to go today. I want to go tomorrow. How about tomorrow evening? Sounds good!"
     },
     {
      "key": "task",
      "title": "Задание 1",
-     "html": "<p><b>Choose the best phrase</b></p><ol><li>You want to suggest another option:</li></ol><ul><li>How about tomorrow?</li><li>I want tomorrow.</li><li>Tomorrow. 2.  You agree with the idea:</li><li>Sounds good\\!</li><li>I don't want.</li><li>What tomorrow? 3.  You want to say what you prefer:</li><li>I prefer evening.</li><li>How about?</li><li>Sounds good?</li></ul>",
-     "text": "Choose the best phrase You want to suggest another option: How about tomorrow? I want tomorrow. Tomorrow. 2. You agree with the idea: Sounds good\\! I don't want. What tomorrow? 3. You want to say what you prefer: I prefer evening. How about? Sounds good?"
+     "html": "<p><b>Choose the best phrase</b></p><ol><li>You want to suggest another option:</li></ol><ul><li>How about tomorrow?</li><li>I want tomorrow.</li><li>Tomorrow. 2.  You agree with the idea:</li><li>Sounds good!</li><li>I don't want.</li><li>What tomorrow? 3.  You want to say what you prefer:</li><li>I prefer evening.</li><li>How about?</li><li>Sounds good?</li></ul>",
+     "text": "Choose the best phrase You want to suggest another option: How about tomorrow? I want tomorrow. Tomorrow. 2. You agree with the idea: Sounds good! I don't want. What tomorrow? 3. You want to say what you prefer: I prefer evening. How about? Sounds good?"
     },
     {
      "key": "task",
      "title": "Задание 2",
-     "html": "<p><b>Find a compromise</b></p><p>Complete the mini-dialogues.</p><p><b>1.</b><br>A: I want to go today.<br>B: I want to go tomorrow.<br>A: How about ______?<br>B: Sounds good\\!</p><p><b>2.</b><br>A: I want to go in the morning.<br>B: I prefer evening.<br>A: How about ______?<br>B: Okay\\!</p><p>Use the Vocabulary Bank.</p>",
-     "text": "Find a compromise Complete the mini-dialogues. 1. A: I want to go today. B: I want to go tomorrow. A: How about ______? B: Sounds good\\! 2. A: I want to go in the morning. B: I prefer evening. A: How about ______? B: Okay\\! Use the Vocabulary Bank."
+     "html": "<p><b>Find a compromise</b></p><p>Complete the mini-dialogues.</p><p><b>1.</b><br>A: I want to go today.<br>B: I want to go tomorrow.<br>A: How about ______?<br>B: Sounds good!</p><p><b>2.</b><br>A: I want to go in the morning.<br>B: I prefer evening.<br>A: How about ______?<br>B: Okay!</p><p>Use the Vocabulary Bank.</p>",
+     "text": "Find a compromise Complete the mini-dialogues. 1. A: I want to go today. B: I want to go tomorrow. A: How about ______? B: Sounds good! 2. A: I want to go in the morning. B: I prefer evening. A: How about ______? B: Okay! Use the Vocabulary Bank."
     },
     {
      "key": "task",
      "title": "Задание 3",
-     "html": "<p><b>Different choices</b></p><p>Choose an option and find a compromise.</p><p><b>Situation 1</b><br>You want to watch a movie.<br>Your partner wants to play games.</p><p><b>Situation 2</b><br>You want to meet in the morning.<br>Your partner wants to meet in the evening.</p><p><b>Situation 3</b><br>You want to go today.<br>Your partner wants to go tomorrow.</p><p>Use:</p><p>I want...<br>I prefer...<br>How about...?<br>Sounds good\\!</p>",
-     "text": "Different choices Choose an option and find a compromise. Situation 1 You want to watch a movie. Your partner wants to play games. Situation 2 You want to meet in the morning. Your partner wants to meet in the evening. Situation 3 You want to go today. Your partner wants to go tomorrow. Use: I want... I prefer... How about...? Sounds good\\!"
+     "html": "<p><b>Different choices</b></p><p>Choose an option and find a compromise.</p><p><b>Situation 1</b><br>You want to watch a movie.<br>Your partner wants to play games.</p><p><b>Situation 2</b><br>You want to meet in the morning.<br>Your partner wants to meet in the evening.</p><p><b>Situation 3</b><br>You want to go today.<br>Your partner wants to go tomorrow.</p><p>Use:</p><p>I want...<br>I prefer...<br>How about...?<br>Sounds good!</p>",
+     "text": "Different choices Choose an option and find a compromise. Situation 1 You want to watch a movie. Your partner wants to play games. Situation 2 You want to meet in the morning. Your partner wants to meet in the evening. Situation 3 You want to go today. Your partner wants to go tomorrow. Use: I want... I prefer... How about...? Sounds good!"
     },
     {
      "key": "speak",
@@ -1371,8 +1371,8 @@
     {
      "key": "scheme",
      "title": "Схема",
-     "html": "<p><b>Opinion → Reason → Reaction</b></p><p>I think movies are better.<br>Because they’re more interesting.<br>I agree\\!</p>",
-     "text": "Opinion → Reason → Reaction I think movies are better. Because they’re more interesting. I agree\\!"
+     "html": "<p><b>Opinion → Reason → Reaction</b></p><p>I think movies are better.<br>Because they’re more interesting.<br>I agree!</p>",
+     "text": "Opinion → Reason → Reaction I think movies are better. Because they’re more interesting. I agree!"
     },
     {
      "key": "task",
@@ -1706,20 +1706,20 @@
     {
      "key": "scheme",
      "title": "Схема",
-     "html": "<p><b>Opinion → Reason → Reaction</b></p><p><b>I think movies are interesting.</b><br><b>Because they’re fun.</b><br><b>Really? I agree\\!</b></p>",
-     "text": "Opinion → Reason → Reaction I think movies are interesting. Because they’re fun. Really? I agree\\!"
+     "html": "<p><b>Opinion → Reason → Reaction</b></p><p><b>I think movies are interesting.</b><br><b>Because they’re fun.</b><br><b>Really? I agree!</b></p>",
+     "text": "Opinion → Reason → Reaction I think movies are interesting. Because they’re fun. Really? I agree!"
     },
     {
      "key": "task",
      "title": "Задание 1",
-     "html": "<p><b>I THINK or I DON’T THINK?</b></p><ol><li>\\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ English is interesting.</li><li>\\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ cooking is easy.</li><li>\\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ movies are boring.</li><li>\\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ sport is difficult.</li><li>\\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ weekends are important.</li></ol><p><b>Then compare:</b></p><p><b>I think so.</b><br><b>I don’t think so.</b></p>",
-     "text": "I THINK or I DON’T THINK? \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ English is interesting. \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ cooking is easy. \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ movies are boring. \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ sport is difficult. \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_ weekends are important. Then compare: I think so. I don’t think so."
+     "html": "<p><b>I THINK or I DON’T THINK?</b></p><ol><li>______ English is interesting.</li><li>______ cooking is easy.</li><li>______ movies are boring.</li><li>______ sport is difficult.</li><li>______ weekends are important.</li></ol><p><b>Then compare:</b></p><p><b>I think so.</b><br><b>I don’t think so.</b></p>",
+     "text": "I THINK or I DON’T THINK? ______ English is interesting. ______ cooking is easy. ______ movies are boring. ______ sport is difficult. ______ weekends are important. Then compare: I think so. I don’t think so."
     },
     {
      "key": "task",
      "title": "Задание 2",
-     "html": "<p><b>Complete the opinion</b></p><p><b>Remember:</b></p><p><b>I think + opinion</b><br><b>I don’t think + opinion</b></p><ol><li>I think movies are \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_.</li><li>I think English is \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_.</li><li>I don’t think cooking is \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_.</li><li>I think weekends are \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_.</li><li>I don’t think sport is \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_.</li></ol><p><b>Use the Vocabulary Bank.</b></p>",
-     "text": "Complete the opinion Remember: I think + opinion I don’t think + opinion I think movies are \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_. I think English is \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_. I don’t think cooking is \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_. I think weekends are \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_. I don’t think sport is \\\\_\\\\_\\\\_\\\\_\\\\_\\\\_. Use the Vocabulary Bank."
+     "html": "<p><b>Complete the opinion</b></p><p><b>Remember:</b></p><p><b>I think + opinion</b><br><b>I don’t think + opinion</b></p><ol><li>I think movies are ______.</li><li>I think English is ______.</li><li>I don’t think cooking is ______.</li><li>I think weekends are ______.</li><li>I don’t think sport is ______.</li></ol><p><b>Use the Vocabulary Bank.</b></p>",
+     "text": "Complete the opinion Remember: I think + opinion I don’t think + opinion I think movies are ______. I think English is ______. I don’t think cooking is ______. I think weekends are ______. I don’t think sport is ______. Use the Vocabulary Bank."
     },
     {
      "key": "task",
@@ -1761,26 +1761,26 @@
     {
      "key": "warmup",
      "title": "Разминка",
-     "html": "<p><b>Nice to meet you\\!</b></p><p>Imagine you meet someone for the first time.</p><ul><li>What’s your name?</li><li>Where are you from?</li><li>Where do you live?</li><li>Do you study or work?</li><li>What do you like?</li><li>What do you do at the weekend?</li></ul>",
-     "text": "Nice to meet you\\! Imagine you meet someone for the first time. What’s your name? Where are you from? Where do you live? Do you study or work? What do you like? What do you do at the weekend?"
+     "html": "<p><b>Nice to meet you!</b></p><p>Imagine you meet someone for the first time.</p><ul><li>What’s your name?</li><li>Where are you from?</li><li>Where do you live?</li><li>Do you study or work?</li><li>What do you like?</li><li>What do you do at the weekend?</li></ul>",
+     "text": "Nice to meet you! Imagine you meet someone for the first time. What’s your name? Where are you from? Where do you live? Do you study or work? What do you like? What do you do at the weekend?"
     },
     {
      "key": "topic",
      "title": "Тема",
-     "html": "<p><b>How to meet someone new</b></p><p>Первый разговор не должен превращаться в список вопросов.<br>Сначала представься, задай простой вопрос, отреагируй на ответ и продолжи тему.</p><p>Useful phrases:</p><p>Hi, I’m Alex. Nice to meet you.<br>What’s your name?<br>Where are you from?<br>What do you do?<br>What do you like?<br>Oh, really? Me too\\!</p>",
-     "text": "How to meet someone new Первый разговор не должен превращаться в список вопросов. Сначала представься, задай простой вопрос, отреагируй на ответ и продолжи тему. Useful phrases: Hi, I’m Alex. Nice to meet you. What’s your name? Where are you from? What do you do? What do you like? Oh, really? Me too\\!"
+     "html": "<p><b>How to meet someone new</b></p><p>Первый разговор не должен превращаться в список вопросов.<br>Сначала представься, задай простой вопрос, отреагируй на ответ и продолжи тему.</p><p>Useful phrases:</p><p>Hi, I’m Alex. Nice to meet you.<br>What’s your name?<br>Where are you from?<br>What do you do?<br>What do you like?<br>Oh, really? Me too!</p>",
+     "text": "How to meet someone new Первый разговор не должен превращаться в список вопросов. Сначала представься, задай простой вопрос, отреагируй на ответ и продолжи тему. Useful phrases: Hi, I’m Alex. Nice to meet you. What’s your name? Where are you from? What do you do? What do you like? Oh, really? Me too!"
     },
     {
      "key": "scheme",
      "title": "Схема",
-     "html": "<p><b>Introduce → Ask → React → Continue</b></p><p>Hi, I’m Alex. Nice to meet you.<br>What’s your name?<br>I’m Sam.<br>Oh, nice to meet you\\!<br>Where are you from?</p>",
-     "text": "Introduce → Ask → React → Continue Hi, I’m Alex. Nice to meet you. What’s your name? I’m Sam. Oh, nice to meet you\\! Where are you from?"
+     "html": "<p><b>Introduce → Ask → React → Continue</b></p><p>Hi, I’m Alex. Nice to meet you.<br>What’s your name?<br>I’m Sam.<br>Oh, nice to meet you!<br>Where are you from?</p>",
+     "text": "Introduce → Ask → React → Continue Hi, I’m Alex. Nice to meet you. What’s your name? I’m Sam. Oh, nice to meet you! Where are you from?"
     },
     {
      "key": "task",
      "title": "Задание 1",
-     "html": "<p><b>What should you say?</b></p><ol><li>You meet someone for the first time:</li></ol><ul><li>Nice to meet you\\!</li><li>See you tomorrow\\!</li><li>Good night\\! 2.  You want to know someone's name:</li><li>What’s your name?</li><li>Where are you from?</li><li>What do you like? 3.  Someone says they like music:</li><li>Oh, really?</li><li>What’s your name?</li><li>Good night\\! 4.  You want to continue talking about hobbies:</li><li>What kind of music do you like?</li><li>Where are you from?</li><li>What’s your name?</li></ul>",
-     "text": "What should you say? You meet someone for the first time: Nice to meet you\\! See you tomorrow\\! Good night\\! 2. You want to know someone's name: What’s your name? Where are you from? What do you like? 3. Someone says they like music: Oh, really? What’s your name? Good night\\! 4. You want to continue talking about hobbies: What kind of music do you like? Where are you from? What’s your name?"
+     "html": "<p><b>What should you say?</b></p><ol><li>You meet someone for the first time:</li></ol><ul><li>Nice to meet you!</li><li>See you tomorrow!</li><li>Good night! 2.  You want to know someone's name:</li><li>What’s your name?</li><li>Where are you from?</li><li>What do you like? 3.  Someone says they like music:</li><li>Oh, really?</li><li>What’s your name?</li><li>Good night! 4.  You want to continue talking about hobbies:</li><li>What kind of music do you like?</li><li>Where are you from?</li><li>What’s your name?</li></ul>",
+     "text": "What should you say? You meet someone for the first time: Nice to meet you! See you tomorrow! Good night! 2. You want to know someone's name: What’s your name? Where are you from? What do you like? 3. Someone says they like music: Oh, really? What’s your name? Good night! 4. You want to continue talking about hobbies: What kind of music do you like? Where are you from? What’s your name?"
     },
     {
      "key": "task",
@@ -1791,8 +1791,8 @@
     {
      "key": "task",
      "title": "Задание 3",
-     "html": "<p><b>Keep it going</b></p><p>You meet someone new.</p><p>Start with:</p><p>Hi, I’m ______. Nice to meet you.</p><p>Then find out:</p><p><b>name → city → work/studies → hobbies</b></p><p>After every answer, add a reaction or follow-up:</p><p>Oh, really?<br>Me too\\!<br>What about you?<br>What kind of...?</p>",
-     "text": "Keep it going You meet someone new. Start with: Hi, I’m ______. Nice to meet you. Then find out: name → city → work/studies → hobbies After every answer, add a reaction or follow-up: Oh, really? Me too\\! What about you? What kind of...?"
+     "html": "<p><b>Keep it going</b></p><p>You meet someone new.</p><p>Start with:</p><p>Hi, I’m ______. Nice to meet you.</p><p>Then find out:</p><p><b>name → city → work/studies → hobbies</b></p><p>After every answer, add a reaction or follow-up:</p><p>Oh, really?<br>Me too!<br>What about you?<br>What kind of...?</p>",
+     "text": "Keep it going You meet someone new. Start with: Hi, I’m ______. Nice to meet you. Then find out: name → city → work/studies → hobbies After every answer, add a reaction or follow-up: Oh, really? Me too! What about you? What kind of...?"
     },
     {
      "key": "speak",
@@ -1840,8 +1840,8 @@
     {
      "key": "scheme",
      "title": "Схема",
-     "html": "<p><b>Ask → Answer → Follow-up</b></p><p><b>What are you doing this weekend?</b><br><b>I’m meeting my friends.</b><br><b>Oh, nice\\! What are you doing?</b></p>",
-     "text": "Ask → Answer → Follow-up What are you doing this weekend? I’m meeting my friends. Oh, nice\\! What are you doing?"
+     "html": "<p><b>Ask → Answer → Follow-up</b></p><p><b>What are you doing this weekend?</b><br><b>I’m meeting my friends.</b><br><b>Oh, nice! What are you doing?</b></p>",
+     "text": "Ask → Answer → Follow-up What are you doing this weekend? I’m meeting my friends. Oh, nice! What are you doing?"
     },
     {
      "key": "task",
@@ -1852,8 +1852,8 @@
     {
      "key": "task",
      "title": "Задание 2",
-     "html": "<p><b>Complete the conversation</b></p><p><b>A: What are you doing this ______?</b><br><b>B: I’m meeting my ______.</b><br><b>A: Oh, nice\\! What are you doing?</b><br><b>B: We’re going ______.</b><br><b>A: What about Sunday?</b><br><b>B: I’m staying ______.</b></p><p><b>Words: weekend · friends · out · home</b></p><p><b>Then make one new question.</b></p>",
-     "text": "Complete the conversation A: What are you doing this ______? B: I’m meeting my ______. A: Oh, nice\\! What are you doing? B: We’re going ______. A: What about Sunday? B: I’m staying ______. Words: weekend · friends · out · home Then make one new question."
+     "html": "<p><b>Complete the conversation</b></p><p><b>A: What are you doing this ______?</b><br><b>B: I’m meeting my ______.</b><br><b>A: Oh, nice! What are you doing?</b><br><b>B: We’re going ______.</b><br><b>A: What about Sunday?</b><br><b>B: I’m staying ______.</b></p><p><b>Words: weekend · friends · out · home</b></p><p><b>Then make one new question.</b></p>",
+     "text": "Complete the conversation A: What are you doing this ______? B: I’m meeting my ______. A: Oh, nice! What are you doing? B: We’re going ______. A: What about Sunday? B: I’m staying ______. Words: weekend · friends · out · home Then make one new question."
     },
     {
      "key": "task",
@@ -1919,8 +1919,8 @@
     {
      "key": "task",
      "title": "Задание 2",
-     "html": "<p><b>Complete the conversation</b></p><p><b>Remember:</b><br><b>I have a problem with...</b><br><b>I need...</b><br><b>I can’t find...</b></p><p>A: Hello. Can I help you?</p><p>B: Yes. I have a ______.</p><p>A: What’s the problem?</p><p>B: I have a problem with the ______.</p><p>A: Okay. I can help you.</p><p>B: Thank you\\!</p><p><b>Vocabulary:</b><br>problem · room · Wi-Fi · key · help</p>",
-     "text": "Complete the conversation Remember: I have a problem with... I need... I can’t find... A: Hello. Can I help you? B: Yes. I have a ______. A: What’s the problem? B: I have a problem with the ______. A: Okay. I can help you. B: Thank you\\! Vocabulary: problem · room · Wi-Fi · key · help"
+     "html": "<p><b>Complete the conversation</b></p><p><b>Remember:</b><br><b>I have a problem with...</b><br><b>I need...</b><br><b>I can’t find...</b></p><p>A: Hello. Can I help you?</p><p>B: Yes. I have a ______.</p><p>A: What’s the problem?</p><p>B: I have a problem with the ______.</p><p>A: Okay. I can help you.</p><p>B: Thank you!</p><p><b>Vocabulary:</b><br>problem · room · Wi-Fi · key · help</p>",
+     "text": "Complete the conversation Remember: I have a problem with... I need... I can’t find... A: Hello. Can I help you? B: Yes. I have a ______. A: What’s the problem? B: I have a problem with the ______. A: Okay. I can help you. B: Thank you! Vocabulary: problem · room · Wi-Fi · key · help"
     },
     {
      "key": "task",
@@ -2096,8 +2096,8 @@
     {
      "key": "warmup",
      "title": "Разминка",
-     "html": "<p><b>True or false?</b></p><p>Посмотри на предложения и скажи: <b>True or False?</b></p><ul><li>I like music.</li><li>I have a dog.</li><li>I play sports.</li><li>I like cooking.</li><li>I work on weekends.</li></ul><p><b>Useful:</b></p><p><b>True\\! / False\\! / I think it’s true.</b></p><p><b>Vocabulary:</b><br>family · friends · food · music · sports · hobbies · work</p>",
-     "text": "True or false? Посмотри на предложения и скажи: True or False? I like music. I have a dog. I play sports. I like cooking. I work on weekends. Useful: True\\! / False\\! / I think it’s true. Vocabulary: family · friends · food · music · sports · hobbies · work"
+     "html": "<p><b>True or false?</b></p><p>Посмотри на предложения и скажи: <b>True or False?</b></p><ul><li>I like music.</li><li>I have a dog.</li><li>I play sports.</li><li>I like cooking.</li><li>I work on weekends.</li></ul><p><b>Useful:</b></p><p><b>True! / False! / I think it’s true.</b></p><p><b>Vocabulary:</b><br>family · friends · food · music · sports · hobbies · work</p>",
+     "text": "True or false? Посмотри на предложения и скажи: True or False? I like music. I have a dog. I play sports. I like cooking. I work on weekends. Useful: True! / False! / I think it’s true. Vocabulary: family · friends · food · music · sports · hobbies · work"
     },
     {
      "key": "topic",
@@ -2187,8 +2187,8 @@
     {
      "key": "task",
      "title": "Задание 2",
-     "html": "<p><b>Complete the conversation</b></p><p><b>Remember:</b><br><b>Sorry, can you repeat, please?</b><br><b>Can you speak more slowly, please?</b><br><b>What does ___ mean?</b></p><p>A: Hi\\! How was your weekend?<br>B: Sorry, can you ______, please?</p><p>A: I went to a new restaurant.<br>B: What does “restaurant” ______?</p><p>A: It’s a place where you eat.<br>B: Can you speak more ______, please?</p><p>A: Sure\\!</p><p><b>Vocabulary:</b><br>repeat · mean · slow · please</p>",
-     "text": "Complete the conversation Remember: Sorry, can you repeat, please? Can you speak more slowly, please? What does ___ mean? A: Hi\\! How was your weekend? B: Sorry, can you ______, please? A: I went to a new restaurant. B: What does “restaurant” ______? A: It’s a place where you eat. B: Can you speak more ______, please? A: Sure\\! Vocabulary: repeat · mean · slow · please"
+     "html": "<p><b>Complete the conversation</b></p><p><b>Remember:</b><br><b>Sorry, can you repeat, please?</b><br><b>Can you speak more slowly, please?</b><br><b>What does ___ mean?</b></p><p>A: Hi! How was your weekend?<br>B: Sorry, can you ______, please?</p><p>A: I went to a new restaurant.<br>B: What does “restaurant” ______?</p><p>A: It’s a place where you eat.<br>B: Can you speak more ______, please?</p><p>A: Sure!</p><p><b>Vocabulary:</b><br>repeat · mean · slow · please</p>",
+     "text": "Complete the conversation Remember: Sorry, can you repeat, please? Can you speak more slowly, please? What does ___ mean? A: Hi! How was your weekend? B: Sorry, can you ______, please? A: I went to a new restaurant. B: What does “restaurant” ______? A: It’s a place where you eat. B: Can you speak more ______, please? A: Sure! Vocabulary: repeat · mean · slow · please"
     },
     {
      "key": "task",
@@ -2260,14 +2260,14 @@
     {
      "key": "task",
      "title": "Задание 3",
-     "html": "<p><b>Order two things</b></p><p>Remember:</p><p><b>Can I have...? / I’d like...</b></p><p>Make an order with <b>2 things</b>.</p><p>Example:</p><p><b>I’d like a sandwich and some water, please.</b></p><p>Extra:</p><p>Add a polite ending:</p><p><b>Thank you\\!</b></p>",
-     "text": "Order two things Remember: Can I have...? / I’d like... Make an order with 2 things . Example: I’d like a sandwich and some water, please. Extra: Add a polite ending: Thank you\\!"
+     "html": "<p><b>Order two things</b></p><p>Remember:</p><p><b>Can I have...? / I’d like...</b></p><p>Make an order with <b>2 things</b>.</p><p>Example:</p><p><b>I’d like a sandwich and some water, please.</b></p><p>Extra:</p><p>Add a polite ending:</p><p><b>Thank you!</b></p>",
+     "text": "Order two things Remember: Can I have...? / I’d like... Make an order with 2 things . Example: I’d like a sandwich and some water, please. Extra: Add a polite ending: Thank you!"
     },
     {
      "key": "speak",
      "title": "Говорим",
-     "html": "<p><b>At the café</b></p><p>Imagine you are in a café.</p><p>Choose what you want:</p><ul><li>coffee + sandwich</li><li>tea + salad</li><li>pizza + water</li><li>chicken + coffee</li></ul><p>Make your order.</p><p><b>Useful:</b></p><p>Can I have...?<br>I’d like...<br>..., please.<br>Thank you\\!</p>",
-     "text": "At the café Imagine you are in a café. Choose what you want: coffee + sandwich tea + salad pizza + water chicken + coffee Make your order. Useful: Can I have...? I’d like... ..., please. Thank you\\!"
+     "html": "<p><b>At the café</b></p><p>Imagine you are in a café.</p><p>Choose what you want:</p><ul><li>coffee + sandwich</li><li>tea + salad</li><li>pizza + water</li><li>chicken + coffee</li></ul><p>Make your order.</p><p><b>Useful:</b></p><p>Can I have...?<br>I’d like...<br>..., please.<br>Thank you!</p>",
+     "text": "At the café Imagine you are in a café. Choose what you want: coffee + sandwich tea + salad pizza + water chicken + coffee Make your order. Useful: Can I have...? I’d like... ..., please. Thank you!"
     },
     {
      "key": "outcome",
@@ -2303,8 +2303,8 @@
     {
      "key": "topic",
      "title": "Тема",
-     "html": "<p><b>How to meet someone new</b></p><p>При знакомстве можно не просто ответить на вопрос, но и <b>задать вопрос в ответ</b>.</p><p>Hi\\! I’m Kate. What’s your name?<br>I’m from Ufa. Where are you from?<br>I’m a student. What about you?<br>I like music. Do you like music?</p><p><b>Useful phrases:</b></p><p><b>What’s your name?</b><br><b>Where are you from?</b><br><b>What about you?</b><br><b>Do you like...?</b><br><b>Nice to meet you\\!</b></p>",
-     "text": "How to meet someone new При знакомстве можно не просто ответить на вопрос, но и задать вопрос в ответ . Hi\\! I’m Kate. What’s your name? I’m from Ufa. Where are you from? I’m a student. What about you? I like music. Do you like music? Useful phrases: What’s your name? Where are you from? What about you? Do you like...? Nice to meet you\\!"
+     "html": "<p><b>How to meet someone new</b></p><p>При знакомстве можно не просто ответить на вопрос, но и <b>задать вопрос в ответ</b>.</p><p>Hi! I’m Kate. What’s your name?<br>I’m from Ufa. Where are you from?<br>I’m a student. What about you?<br>I like music. Do you like music?</p><p><b>Useful phrases:</b></p><p><b>What’s your name?</b><br><b>Where are you from?</b><br><b>What about you?</b><br><b>Do you like...?</b><br><b>Nice to meet you!</b></p>",
+     "text": "How to meet someone new При знакомстве можно не просто ответить на вопрос, но и задать вопрос в ответ . Hi! I’m Kate. What’s your name? I’m from Ufa. Where are you from? I’m a student. What about you? I like music. Do you like music? Useful phrases: What’s your name? Where are you from? What about you? Do you like...? Nice to meet you!"
     },
     {
      "key": "scheme",
@@ -2321,20 +2321,20 @@
     {
      "key": "task",
      "title": "Задание 2",
-     "html": "<p><b>Complete the conversation</b></p><p><b>Remember:</b><br><b>What about you?</b> → return the question</p><p><b>A:</b> Hi\\! What’s your ______?<br><b>B:</b> I’m Anna. What about ______?</p><p><b>A:</b> I’m Kate. Where are you ______?<br><b>B:</b> I’m from Ufa. Where are you ______?</p><p><b>A:</b> I’m from Moscow. Are you a ______?<br><b>B:</b> Yes, I am. What about you?</p><p><b>Words:</b><br>name · you · from · student</p>",
-     "text": "Complete the conversation Remember: What about you? → return the question A: Hi\\! What’s your ______? B: I’m Anna. What about ______? A: I’m Kate. Where are you ______? B: I’m from Ufa. Where are you ______? A: I’m from Moscow. Are you a ______? B: Yes, I am. What about you? Words: name · you · from · student"
+     "html": "<p><b>Complete the conversation</b></p><p><b>Remember:</b><br><b>What about you?</b> → return the question</p><p><b>A:</b> Hi! What’s your ______?<br><b>B:</b> I’m Anna. What about ______?</p><p><b>A:</b> I’m Kate. Where are you ______?<br><b>B:</b> I’m from Ufa. Where are you ______?</p><p><b>A:</b> I’m from Moscow. Are you a ______?<br><b>B:</b> Yes, I am. What about you?</p><p><b>Words:</b><br>name · you · from · student</p>",
+     "text": "Complete the conversation Remember: What about you? → return the question A: Hi! What’s your ______? B: I’m Anna. What about ______? A: I’m Kate. Where are you ______? B: I’m from Ufa. Where are you ______? A: I’m from Moscow. Are you a ______? B: Yes, I am. What about you? Words: name · you · from · student"
     },
     {
      "key": "task",
      "title": "Задание 3",
-     "html": "<p><b>Keep the conversation going</b></p><p><b>Remember:</b><br><b>Question → Answer → Question back</b></p><p>Complete the conversation:</p><p><b>A:</b> Hi\\! I’m Anna. Nice to meet you\\!<br><b>B:</b> ____________________</p><p><b>A:</b> Where are you from?<br><b>B:</b> ____________________</p><p><b>A:</b> Do you like music?<br><b>B:</b> ____________________</p><p><b>A:</b> What about you?<br><b>B:</b> ____________________</p><p><b> Extra:</b><br>Ask <b>one more question</b>.</p><p><b>Vocabulary:</b><br>name · from · city · student · work · hobbies · music · movies · English · friends</p>",
-     "text": "Keep the conversation going Remember: Question → Answer → Question back Complete the conversation: A: Hi\\! I’m Anna. Nice to meet you\\! B: ____________________ A: Where are you from? B: ____________________ A: Do you like music? B: ____________________ A: What about you? B: ____________________ Extra: Ask one more question . Vocabulary: name · from · city · student · work · hobbies · music · movies · English · friends"
+     "html": "<p><b>Keep the conversation going</b></p><p><b>Remember:</b><br><b>Question → Answer → Question back</b></p><p>Complete the conversation:</p><p><b>A:</b> Hi! I’m Anna. Nice to meet you!<br><b>B:</b> ____________________</p><p><b>A:</b> Where are you from?<br><b>B:</b> ____________________</p><p><b>A:</b> Do you like music?<br><b>B:</b> ____________________</p><p><b>A:</b> What about you?<br><b>B:</b> ____________________</p><p><b> Extra:</b><br>Ask <b>one more question</b>.</p><p><b>Vocabulary:</b><br>name · from · city · student · work · hobbies · music · movies · English · friends</p>",
+     "text": "Keep the conversation going Remember: Question → Answer → Question back Complete the conversation: A: Hi! I’m Anna. Nice to meet you! B: ____________________ A: Where are you from? B: ____________________ A: Do you like music? B: ____________________ A: What about you? B: ____________________ Extra: Ask one more question . Vocabulary: name · from · city · student · work · hobbies · music · movies · English · friends"
     },
     {
      "key": "speak",
      "title": "Говорим",
-     "html": "<p><b>Nice to meet you\\!</b></p><p>Представь, что вы впервые встретились.</p><p>Поговорите о:</p><ul><li>name</li><li>where you’re from</li><li>studies / work</li><li>hobbies</li></ul><p>Используй:</p><p>Hi\\! I’m ______.<br>Nice to meet you\\!<br>What’s your name?<br>Where are you from?<br>What about you?<br>Do you like ______?</p><p><b>Vocabulary:</b><br>name · from · city · student · work · hobbies · music · movies · English · friends</p>",
-     "text": "Nice to meet you\\! Представь, что вы впервые встретились. Поговорите о: name where you’re from studies / work hobbies Используй: Hi\\! I’m ______. Nice to meet you\\! What’s your name? Where are you from? What about you? Do you like ______? Vocabulary: name · from · city · student · work · hobbies · music · movies · English · friends"
+     "html": "<p><b>Nice to meet you!</b></p><p>Представь, что вы впервые встретились.</p><p>Поговорите о:</p><ul><li>name</li><li>where you’re from</li><li>studies / work</li><li>hobbies</li></ul><p>Используй:</p><p>Hi! I’m ______.<br>Nice to meet you!<br>What’s your name?<br>Where are you from?<br>What about you?<br>Do you like ______?</p><p><b>Vocabulary:</b><br>name · from · city · student · work · hobbies · music · movies · English · friends</p>",
+     "text": "Nice to meet you! Представь, что вы впервые встретились. Поговорите о: name where you’re from studies / work hobbies Используй: Hi! I’m ______. Nice to meet you! What’s your name? Where are you from? What about you? Do you like ______? Vocabulary: name · from · city · student · work · hobbies · music · movies · English · friends"
     },
     {
      "key": "outcome",
