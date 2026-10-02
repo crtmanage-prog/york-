@@ -698,6 +698,17 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     text-align:center; padding:24px; color:var(--ink-soft); font-size:14px;
   }
   .contact-list{display:flex; flex-direction:column; gap:8px;}
+  .my-contacts{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px;}
+  .mc-card{display:flex; align-items:center; gap:14px; padding:16px; border-radius:18px; background:#fff; border:1.5px solid var(--line); text-decoration:none; color:var(--ink); transition:border-color .15s, transform .15s;}
+  .mc-card:hover{border-color:var(--ink); transform:translateY(-2px);}
+  .mc-av{width:46px; height:46px; border-radius:15px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(140deg,var(--accent),#7fa02c); font-family:'Unbounded',sans-serif; font-weight:700; font-size:14px; color:var(--ink);}
+  .mc-text{display:flex; flex-direction:column; gap:2px; min-width:0; flex:1;}
+  .mc-card{flex-wrap:wrap;}
+  .mc-role{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft);}
+  .mc-name{font-family:'Unbounded',sans-serif; font-size:15px; font-weight:700;}
+  .mc-handle{font-size:13px; color:var(--ink-soft);}
+  .mc-go{flex-shrink:0; padding:8px 14px; border-radius:999px; background:var(--accent); color:var(--ink); font-size:12.5px; font-weight:700; white-space:nowrap;}
+  @media (max-width:420px){ .mc-go{display:none;} }
   .contact-row{
     display:flex; align-items:center; gap:12px;
     border:1.5px solid var(--line); border-radius:14px; padding:14px 16px;
@@ -1382,16 +1393,30 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         </div>
       </div>
 
-      <h2 class="panel-title">Мы на связи</h2>
-      <div class="contact-list">
-        <a class="contact-row" id="supportTeacherRow" href="https://t.me/thearbeiter01" target="_blank" rel="noopener" style="display:none;">
-          <span class="contact-ic">👩‍🏫</span>
-          <span class="contact-text">
-            <span class="contact-title">Написать преподавателю</span>
-            <span class="contact-sub" id="supportTeacherSub">Вопросы по урокам и домашке</span>
+      <h2 class="panel-title">Твои контакты</h2>
+      <div class="my-contacts">
+        <a class="mc-card" id="mcManager" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">
+          <span class="mc-av">Е</span>
+          <span class="mc-text">
+            <span class="mc-role">Личный менеджер</span>
+            <span class="mc-name">Екатерина</span>
+            <span class="mc-handle">@thearbeiter01</span>
           </span>
-          <span class="contact-arrow">→</span>
+          <span class="mc-go">Написать</span>
         </a>
+        <a class="mc-card" id="mcTeacher" href="https://t.me/thearbeiter01" target="_blank" rel="noopener" style="display:none;">
+          <span class="mc-av" id="mcTeacherAv">—</span>
+          <span class="mc-text">
+            <span class="mc-role">Преподаватель</span>
+            <span class="mc-name" id="mcTeacherName">—</span>
+            <span class="mc-handle" id="mcTeacherHandle">через менеджера</span>
+          </span>
+          <span class="mc-go" id="mcTeacherGo">Написать</span>
+        </a>
+      </div>
+
+      <h2 class="panel-title" style="margin-top:24px;">Мы на связи</h2>
+      <div class="contact-list">
         <a class="contact-row" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">
           <span class="contact-ic">🎓</span>
           <span class="contact-text">
@@ -1997,16 +2022,18 @@ async function loadTeacherContact(){
   } else if (sideSub){
     sideSub.textContent = 'связь через менеджера';
   }
-  const supRow = document.getElementById('supportTeacherRow');
-  if (supRow){
-    supRow.style.display = '';
-    const first = (teacherFullName || '').trim().split(/\s+/)[0];
-    const supSub = document.getElementById('supportTeacherSub');
+  const mcT = document.getElementById('mcTeacher');
+  if (mcT){
+    mcT.style.display = '';
+    const first = (teacherFullName || '').trim().split(/\s+/)[0] || 'Преподаватель';
+    document.getElementById('mcTeacherName').textContent = first;
+    document.getElementById('mcTeacherAv').textContent = initials(first);
     if (teacherContactTelegram){
-      supRow.href = `https://t.me/${String(teacherContactTelegram).replace('@', '')}`;
-      if (supSub) supSub.textContent = (first ? first + ' · ' : '') + 'вопросы по урокам и домашке';
-    } else if (supSub){
-      supSub.textContent = (first ? first + ' · ' : '') + 'через менеджера';
+      const h = String(teacherContactTelegram).replace('@', '');
+      mcT.href = `https://t.me/${h}`;
+      document.getElementById('mcTeacherHandle').textContent = '@' + h;
+    } else {
+      document.getElementById('mcTeacherHandle').textContent = 'через менеджера';
     }
   }
   const sideNameEl = document.getElementById('sideTeacherName');
