@@ -83,7 +83,7 @@ body.no-ru .ru{display:none !important}
 .ru-toggle[aria-pressed="true"]{background:var(--panel)}
 
 /* ---------- каркас: сайдбар как в кабинете, но с подписями (Notion-стиль) ---------- */
-.shell{min-height:100vh;display:flex;max-width:1500px;margin:0 auto}
+.shell{min-height:100vh;display:flex;max-width:none;margin:0}
 .sidebar{width:248px;flex-shrink:0;margin:20px 0 20px 20px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.9);box-shadow:0 14px 34px rgba(17,18,14,.08);border-radius:22px;
   display:flex;flex-direction:column;gap:2px;padding:18px 12px;position:sticky;top:20px;align-self:flex-start;max-height:calc(100vh - 40px);overflow:auto}
 .sb-logo{font-family:Unbounded,sans-serif;font-weight:900;font-size:15px;padding:0 10px 4px;text-decoration:none}
@@ -214,7 +214,7 @@ body.no-ru .ru{display:none !important}
 /* =====================================================================
    Trial Lesson Workspace — финальные макеты (светлое стекло)
    ===================================================================== */
-.sidebar{width:236px;margin:16px 0 16px 16px;box-shadow:0 14px 34px rgba(17,18,14,.06);border:1px solid rgba(17,18,14,.09);padding:18px 12px 12px;top:16px;max-height:calc(100vh - 32px);min-height:calc(100vh - 32px)}
+.sidebar{width:236px;margin:0;border-radius:0 22px 22px 0;box-shadow:0 14px 34px rgba(17,18,14,.06);border:1px solid rgba(17,18,14,.09);border-left:0;padding:18px 12px 12px;top:0;max-height:100vh;min-height:100vh}
 .sidebar nav#nav{display:flex;flex-direction:column;gap:2px;flex:1}
 .gl-logo{padding:0 10px 16px}
 .gl-brand{font-size:15px}
@@ -281,15 +281,15 @@ body.no-ru .ru{display:none !important}
 .ws-prog .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#8FA21C,#D2E739)}
 .ws-prog small{font-size:13px;color:#6B6C64}
 .ws-blk{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:14px}
-.ws-blk.empty{border:1px dashed rgba(242,184,75,.45)}
+.ws-blk.is-empty{border:1px dashed rgba(242,184,75,.45)}
 .ws-blk .grab{cursor:grab;color:#A8AAA4;display:flex}
 .ws-blk .ck{display:flex;color:#5B6B0A}
-.ws-blk.empty .ck{color:#B7791F}
+.ws-blk.is-empty .ck{color:#B7791F}
 .ws-blk .no{width:22px;font-size:12px;color:#6B6C64}
 .ws-blk .tx{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
 .ws-blk .tx b{font-size:14px;font-weight:600}
 .ws-blk .tx span{font-size:13px;color:#6B6C64;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ws-blk.empty .tx span{color:#B7791F}
+.ws-blk.is-empty .tx span{color:#B7791F}
 .ws-blk .min{font-size:12px;color:#6B6C64;width:46px;text-align:right}
 .ws-blk .addlib{height:32px;padding:0 12px;border-radius:999px;border:1px solid #D2E739;background:transparent;color:#5B6B0A;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
 .ws-blk .x{all:unset;cursor:pointer;color:#A8AAA4;padding:4px;display:flex}
@@ -942,6 +942,32 @@ main.page{padding:26px 28px 70px;max-width:1240px;margin:0 auto}
 .yb-today-item .t{font-family:Unbounded,sans-serif;font-size:13px}
 .yb-today-item .n{font-size:13px;color:var(--yb-ink2)}
 
+/* --- доработки: меню блока, обязательные блоки, превью, звезда --- */
+.ws-menu{position:fixed;z-index:80;min-width:190px;background:rgba(255,255,255,.98);border:1px solid rgba(17,18,14,.09);border-radius:12px;box-shadow:0 18px 40px rgba(17,18,14,.18);padding:6px;display:flex;flex-direction:column}
+.ws-menu button{all:unset;cursor:pointer;padding:9px 12px;border-radius:8px;font-size:13px;font-weight:600}
+.ws-menu button:hover{background:rgba(210,231,57,.38)}
+.ws-menu button.danger{color:#B3261E}
+.ws-menu hr{border:0;height:1px;background:rgba(17,18,14,.09);margin:4px 0}
+.ws-blk .x{font-size:18px;line-height:1;width:28px;height:28px;align-items:center;justify-content:center;border-radius:8px}
+.ws-blk .x:hover{background:rgba(17,18,14,.06)}
+.reqb{font-style:normal;font-size:10.5px;font-weight:600;color:#6B6C64;margin-left:8px;padding:2px 8px;border-radius:999px;background:rgba(17,18,14,.06);white-space:nowrap}
+.ws-blk .eyeb,.ws-li button.eye{all:unset;cursor:pointer;width:30px;height:30px;border-radius:999px;border:1px solid rgba(17,18,14,.09);display:flex;align-items:center;justify-content:center;flex:none;color:#3A3B33}
+.ws-blk .eyeb:hover,.ws-li button.eye:hover{background:rgba(17,18,14,.06)}
+.pv-blk{border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.pv-h{display:flex;align-items:center;gap:10px}
+.pv-h .no{width:22px;height:22px;border-radius:50%;background:#D2E739;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.pv-h b{flex:1;font-size:14px}.pv-m{font-size:12px;color:#6B6C64}
+.pv-ul{margin:0;padding-left:18px;font-size:13px;display:grid;gap:3px}
+.gl-trow-act{gap:8px;align-items:center}
+.gl-trow-x{all:unset;cursor:pointer;width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#A8AAA4}
+.gl-trow-x:hover{background:rgba(179,38,30,.1);color:#B3261E}
+.gl-trow .pr .txt{width:auto}
+button.star{border:0;background:none;width:30px;height:30px;border-radius:50%;display:inline-grid;place-items:center;color:#0A0A09;flex:none;padding:0;cursor:pointer}
+button.star svg{fill:none;transition:fill .12s}
+button.star.on{background:none;border:0}
+button.star.on svg{fill:#0A0A09}
+button.star:hover{border:0;background:rgba(17,18,14,.06)}
+
 </style>
 </head>
 <body>
@@ -1069,7 +1095,7 @@ const Saved = {
   has(id){ return this.ids.has(id); },
   toggle(id){ this.ids.has(id) ? this.ids.delete(id) : this.ids.add(id); store.set('york-hub-saved', [...this.ids]); },
 };
-const starBtn = id => `<button class="star${Saved.has(id) ? ' on' : ''}" data-star="${esc(id)}" title="${Saved.has(id) ? 'Убрать из избранного' : 'В избранное'}" aria-pressed="${Saved.has(id)}">${Saved.has(id) ? '★' : '☆'}</button>`;
+const starBtn = id => `<button class="star${Saved.has(id) ? ' on' : ''}" data-star="${esc(id)}" title="${Saved.has(id) ? 'Убрать из избранного' : 'В избранное'}" aria-pressed="${Saved.has(id)}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.8 6.2.9-4.5 4.4 1 6.3L12 17.5 6.5 20.4l1-6.3L3 9.7l6.2-.9z"></path></svg></button>`;
 
 /* ======================= частота использования («часто используете») ======================= */
 const Usage = {
@@ -2392,37 +2418,24 @@ function moreQuestions(kind, exclude){
   return shuffle(pool.filter(q => !exclude.includes(q))).slice(0, 3);
 }
 
-// шаблоны урока (30 минут). mode: text — вопросы/идеи, slot — материал из библиотеки
+// шаблоны урока (30 минут). Во всех шаблонах 7 обязательных блоков — их нельзя удалить.
+// mode: text — вопросы/идеи, slot — материал из библиотеки. durEdit — можно ли менять длительность в «закрытых» шаблонах.
+const REQ = (title, min, mode, extra) => Object.assign({ title, min, mode, durEdit: false }, extra || {});
+function reqBlocks(mins, kids){
+  return [
+    REQ('👋 Warm-up & Connection', mins[0], 'text', { key: 'warmup', qkind: 'warmup', seed: kids ? ['Hello! What\'s your name?', 'How are you today?'] : ['How are you today?', 'What have you been up to lately?'] }),
+    REQ('🎯 Goal Discovery', mins[1], 'text', { key: 'discovery', qkind: 'discovery', seed: kids ? ['What do you like to play?', 'Do you like English?'] : ['Why do you want to learn English?', 'What do you enjoy doing in your free time?'] }),
+    REQ('📚 Mini Lesson', mins[2], 'slot', { key: 'topic', accept: 'topic', durEdit: true }),
+    REQ('✏️ Practice', mins[3], 'slot', { key: 'practice', accept: 'activity', durEdit: true }),
+    REQ('🗣 Speaking Application', mins[4], 'slot', { key: 'speaking', accept: 'activity', durEdit: true }),
+    REQ('🖥 Cabinet Preview', mins[5], 'text', { key: 'cabinet', seed: ['Покажите личный кабинет: расписание, домашка, прогресс.', 'Покажите, где найти материалы и как написать преподавателю.'] }),
+    REQ('👋 Wrap-up', mins[6], 'text', { key: 'wrapup', qkind: 'wrapup', seed: kids ? ['What did you like most today?'] : ['What’s one new thing you learned today?'] }),
+  ];
+}
 const TEMPLATES = {
-  standard: { name: 'Стандартный пробный', desc: 'Для большинства учеников', blocks: [
-    { key: 'warmup', title: 'Разминка', min: 4, mode: 'text', qkind: 'warmup', seed: ['How are you today?', 'What have you been up to lately?'] },
-    { key: 'discovery', title: 'Цели и интересы', min: 4, mode: 'text', qkind: 'discovery', seed: ['Why do you want to learn English?', 'What do you enjoy doing in your free time?'] },
-    { key: 'topic', title: 'Мини-урок', min: 8, mode: 'slot', accept: 'topic' },
-    { key: 'practice', title: 'Практика', min: 6, mode: 'slot', accept: 'activity' },
-    { key: 'speaking', title: 'Говорим', min: 5, mode: 'slot', accept: 'activity' },
-    { key: 'wrapup', title: 'Итог и следующий шаг', min: 3, mode: 'text', qkind: 'wrapup', seed: ['What’s one new thing you learned today?'] },
-  ] },
-  speaking: { name: 'Разговорный пробный', desc: 'Уверенность в разговоре', blocks: [
-    { key: 'warmup', title: 'Разминка', min: 3, mode: 'text', qkind: 'warmup', seed: ['How are you today?', 'What did you do this week?'] },
-    { key: 'practice', title: 'Разговорное задание', min: 8, mode: 'slot', accept: 'activity' },
-    { key: 'topic', title: 'Прокачка языка', min: 6, mode: 'slot', accept: 'topic' },
-    { key: 'speaking', title: 'Практика речи', min: 8, mode: 'slot', accept: 'activity' },
-    { key: 'wrapup', title: 'Обратная связь', min: 5, mode: 'text', qkind: 'wrapup', seed: ['What was the easiest part? What was the hardest?'] },
-  ] },
-  kids: { name: 'Детский пробный', desc: 'Игры, слова, отзыв для родителей', blocks: [
-    { key: 'warmup', title: 'Игра-разминка', min: 5, mode: 'slot', accept: 'activity' },
-    { key: 'topic', title: 'Слова', min: 7, mode: 'slot', accept: 'topic' },
-    { key: 'practice', title: 'Активность', min: 8, mode: 'slot', accept: 'activity' },
-    { key: 'speaking', title: 'Практика', min: 6, mode: 'slot', accept: 'activity' },
-    { key: 'wrapup', title: 'Отзыв для родителей', min: 4, mode: 'text', qkind: 'wrapup', seed: ['What did you like most today?'] },
-  ] },
-  goal: { name: 'Под цель / экзамен', desc: 'Чёткая цель и следующие шаги', blocks: [
-    { key: 'discovery', title: 'Обсуждение цели', min: 5, mode: 'text', qkind: 'discovery', seed: ['Why do you want to learn English?', 'What\'s a goal you have for this year?'] },
-    { key: 'practice', title: 'Диагностическое задание', min: 8, mode: 'slot', accept: 'activity' },
-    { key: 'topic', title: 'Целевой урок', min: 8, mode: 'slot', accept: 'topic' },
-    { key: 'speaking', title: 'Практика', min: 6, mode: 'slot', accept: 'activity' },
-    { key: 'wrapup', title: 'Следующие шаги', min: 3, mode: 'text', qkind: 'wrapup', seed: ['What would you like to practise next time?'] },
-  ] },
+  standard: { name: 'Standard', desc: 'Для большинства учеников. Порядок блоков зафиксирован.', locked: true, blocks: reqBlocks([4, 3, 7, 6, 5, 2, 3], false) },
+  kids: { name: 'Kids', desc: 'Игры, простые слова, больше активности. Порядок зафиксирован.', locked: true, blocks: reqBlocks([4, 3, 6, 7, 5, 2, 3], true) },
+  custom: { name: 'Custom', desc: 'Те же обязательные блоки, но можно менять порядок и длительность любого.', locked: false, blocks: reqBlocks([4, 3, 7, 6, 5, 2, 3], false) },
 };
 const BLOCK_TIPS = {
   warmup: 'Начни с лёгких вопросов — цель: расслабить ученика и услышать его первые фразы.',
@@ -2430,27 +2443,29 @@ const BLOCK_TIPS = {
   topic: 'Одна маленькая победа за блок: объясни коротко и сразу дай ученику сказать фразу.',
   practice: 'Практика устная: ученик отвечает голосом, ты мягко поправляешь.',
   speaking: 'Минимум вмешательства: пусть говорит, ошибки записывай и разбери в конце.',
+  cabinet: 'Покажи личный кабинет: расписание, домашку, материалы. Этот блок можно пропустить, но он всегда остаётся в плане.',
   wrapup: 'Подведи итог: что ученик теперь умеет, и предложи следующий шаг.',
 };
 const tplBlockMin = t => t.blocks.reduce((n, b) => n + b.min, 0);
+const tplLocked = p => !!(p.template && TEMPLATES[p.template] && TEMPLATES[p.template].locked);
 function suggestTemplate(s){
-  const goal = String((s && s.goal) || '').toLowerCase();
   const age = parseInt(s && s.age, 10);
-  if (age && age <= 12) return 'kids';
-  if (/экзамен|exam|ielts|toefl|егэ|огэ|собес|interview/.test(goal)) return 'goal';
-  if (/говор|разговор|speak|fluen|общени|барьер/.test(goal)) return 'speaking';
-  return 'standard';
+  return (age && age <= 12) ? 'kids' : 'standard';
 }
 function buildBlocks(tplKey){
-  return TEMPLATES[tplKey].blocks.map(b => ({
+  const t = TEMPLATES[tplKey];
+  return t.blocks.map(b => ({
     id: uid('b'), key: b.key, title: b.title, duration: b.min, mode: b.mode, accept: b.accept || null, qkind: b.qkind || null,
     questions: b.seed ? b.seed.slice() : [], itemId: null, note: '', skipped: false, visited: false,
+    req: true, durEdit: t.locked ? !!b.durEdit : true,
   }));
 }
+// можно ли двигать блок: обязательные блоки в «закрытых» шаблонах стоят на месте
+const canMoveBlock = (plan, b) => !(b.req && tplLocked(plan));
 
 /* ---------- планы (localStorage) ---------- */
 function normPlan(p){
-  if (p.v2) return p;
+  if (p.v2) { if (p.template && !TEMPLATES[p.template]) p.template = 'custom'; return p; }
   p.v2 = true;
   const old = p.blocks || [];
   p.template = old.length ? 'standard' : null;
@@ -2557,10 +2572,15 @@ function renderTrialLessonsList(root){
       <div class="lv"><b>${esc(p.student.level || '—')}</b><span>${esc(p.student.goal || '')}</span></div>
       <div class="pr">${progressHtml}</div>
       <span class="gl-badge ${status}">${STATUS_LABEL[status]}</span>
-      <div class="gl-trow-act"><button class="gl-trow-btn${status === 'ready' ? ' on' : ''}" data-tlgo="${esc(p.id)}" data-tlstatus="${status}">${esc(btnLabel)}${status === 'ready' ? ic('play', 12) : ''}</button></div>
+      <div class="gl-trow-act"><button class="gl-trow-btn${status === 'ready' ? ' on' : ''}" data-tlgo="${esc(p.id)}" data-tlstatus="${status}">${esc(btnLabel)}${status === 'ready' ? ic('play', 12) : ''}</button><button class="gl-trow-x" data-tldel="${esc(p.id)}" title="Удалить урок" aria-label="Удалить урок">${ic('x', 15)}</button></div>
     </div>`;
   }).join('') || `<div class="empty">Ничего не нашлось.</div>`;
 
+  root.querySelectorAll('[data-tldel]').forEach(b => b.onclick = () => {
+    const pl = Plans.get(b.dataset.tldel);
+    if (!pl || !confirm(`Удалить урок «${pl.student.name || 'без имени'}»?`)) return;
+    Plans.remove(pl.id); renderNav(); rerender(); toast('Урок удалён');
+  });
   root.querySelectorAll('[data-tlgo]').forEach(b => b.onclick = () => {
     const pl = Plans.get(b.dataset.tlgo);
     if (!pl) return;
@@ -2652,14 +2672,77 @@ function renderTemplateStep(body, plan, root){
 }
 
 /* ----- шаг 2: подготовка ----- */
+// меню «⋯» у блока
+function closeBlockMenu(){ const m = document.getElementById('blkMenu'); if (m) m.remove(); }
+document.addEventListener('click', e => { if (!e.target.closest('#blkMenu') && !e.target.closest('[data-menu]')) closeBlockMenu(); });
+
+function openBlockMenu(btn, items){
+  closeBlockMenu();
+  const m = document.createElement('div');
+  m.id = 'blkMenu'; m.className = 'ws-menu';
+  m.innerHTML = items.map((it, i) => it.sep ? '<hr>' : `<button data-mi="${i}"${it.danger ? ' class="danger"' : ''}>${esc(it.label)}</button>`).join('');
+  document.body.appendChild(m);
+  const r = btn.getBoundingClientRect();
+  m.style.top = Math.min(window.innerHeight - m.offsetHeight - 8, r.bottom + 4) + 'px';
+  m.style.left = Math.max(8, r.right - m.offsetWidth) + 'px';
+  m.querySelectorAll('[data-mi]').forEach(b => b.onclick = () => { closeBlockMenu(); items[+b.dataset.mi].run(); });
+}
+
+// редактирование блока: название, длительность, содержимое (вопросы/идеи)
+function openBlockEditor(plan, b, onDone){
+  const bg = $('#pickerBg'), modal = $('#picker'), box = $('#pickerBox');
+  $('#pickerTitle').textContent = 'Редактировать блок';
+  const durOk = b.durEdit !== false;
+  box.innerHTML = `
+    <div class="ws-fields one">
+      <label>Название<input id="beTitle" value="${esc(b.title)}"></label>
+      <label>Длительность, мин<input id="beDur" type="number" min="1" max="30" value="${b.duration || 5}"${durOk ? '' : ' disabled'}></label>
+      ${durOk ? '' : '<p class="ws-hint" style="margin:0">В этом шаблоне длительность блока зафиксирована. Её можно менять в шаблоне Custom.</p>'}
+      ${b.mode === 'text' ? `<label>Вопросы и идеи (по одному в строке)<textarea id="beQs" rows="6">${esc((b.questions || []).join('\n'))}</textarea></label>` : ''}
+    </div>
+    <div class="ws-mfoot" style="margin-top:14px"><button class="ws-ghost" id="beCancel">Отмена</button><button class="ws-cta" id="beSave">Сохранить</button></div>`;
+  box.querySelector('#beCancel').onclick = closePicker;
+  box.querySelector('#beSave').onclick = () => {
+    b.title = box.querySelector('#beTitle').value.trim() || b.title;
+    if (durOk) b.duration = Math.max(1, Math.min(30, parseInt(box.querySelector('#beDur').value, 10) || b.duration));
+    if (b.mode === 'text') b.questions = box.querySelector('#beQs').value.split('\n').map(x => x.trim()).filter(Boolean);
+    Plans.save(plan); closePicker(); onDone();
+  };
+  bg.classList.add('open'); modal.classList.add('open');
+}
+
+// предпросмотр всего урока (только чтение)
+function openLessonPreview(plan, onStart){
+  const bg = $('#pickerBg'), modal = $('#picker'), box = $('#pickerBox');
+  $('#pickerTitle').textContent = `Предпросмотр · ${plan.student.name || 'урок'}`;
+  box.innerHTML = `
+    <p class="ws-hint">${plan.blocks.length} блоков · ${planTotalMin(plan)} мин. Так урок пройдёт по порядку.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;max-height:56vh;overflow:auto;margin-top:6px">
+    ${plan.blocks.map((b, i) => {
+      const item = b.itemId && byId[b.itemId];
+      let inner;
+      if (b.mode === 'text') inner = (b.questions || []).length ? `<ul class="pv-ul">${b.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>` : '<span class="ws-hint">Без заготовленных вопросов</span>';
+      else if (item) inner = `<b>${esc(item.title)}</b><span class="ws-hint">${esc(itemKind(item))} · ${esc(itemLevel(item))}</span>${item.outcome ? `<i class="ws-hint">«${esc(item.outcome)}»</i>` : ''}${(item.explanation || item.phrases || []).length ? `<ul class="pv-ul">${(item.explanation || item.phrases).slice(0, 3).map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}`;
+      else inner = '<span class="ws-hint" style="color:#B7791F">Материал не выбран</span>';
+      return `<div class="ws-glass pv-blk"><div class="pv-h"><span class="no">${i + 1}</span><b>${esc(b.title)}</b><span class="pv-m">${b.duration || 0} мин</span></div>${inner}</div>`;
+    }).join('')}
+    </div>
+    <div class="ws-mfoot" style="margin-top:14px"><button class="ws-ghost" id="pvClose">Закрыть</button><button class="ws-cta" id="pvStart">Начать урок${ic('play', 14)}</button></div>`;
+  box.querySelector('#pvClose').onclick = closePicker;
+  box.querySelector('#pvStart').onclick = () => { closePicker(); onStart(); };
+  bg.classList.add('open'); modal.classList.add('open');
+}
+
 function renderPrepareStep(body, plan, root){
   const save = () => Plans.save(plan);
+  const locked = tplLocked(plan);
   let slotId = (plan.blocks.find(b => b.mode === 'slot' && !blockReady(b)) || plan.blocks.find(b => b.mode === 'slot') || {}).id || null;
-  const panel = { q: '', lvl: !!plan.student.level, fav: false };
+  const panel = { q: '', lvl: !!plan.student.level, fav: false, type: null };
 
   const draw = () => {
     const ready = plan.blocks.filter(blockReady).length, total = plan.blocks.length;
     const empty = total - ready, pct = total ? Math.round(ready / total * 100) : 0;
+    const emptySlots = plan.blocks.filter(b => b.mode === 'slot' && !blockReady(b)).length;
     const slot = plan.blocks.find(b => b.id === slotId);
     body.innerHTML = `
       <div class="ws-prep">
@@ -2689,6 +2772,7 @@ function renderPrepareStep(body, plan, root){
         <span class="note">Сохраняется автоматически</span>
         <button class="ws-ghost" id="toTpl">${ic('back', 14)}Шаблон</button>
         <button class="ws-ghost" id="delPlan">Удалить урок</button>
+        ${emptySlots <= 1 ? `<button class="ws-ghost" id="prevLesson">${ic('eye', 14)}Предпросмотр</button>` : ''}
         <button class="ws-cta" id="startLive">Начать урок${ic('play', 14)}</button>
       </div>`;
 
@@ -2697,11 +2781,23 @@ function renderPrepareStep(body, plan, root){
     body.querySelector('#toTpl').onclick = () => { plan.step = 'template'; save(); renderBuilder(root); };
     body.querySelector('#delPlan').onclick = () => { if (confirm('Удалить этот урок?')) { Plans.remove(plan.id); location.hash = '#/builder'; } };
     body.querySelector('#startLive').onclick = () => startLiveFromPlan(plan);
+    const pv = body.querySelector('#prevLesson'); if (pv) pv.onclick = () => openLessonPreview(plan, () => startLiveFromPlan(plan));
     body.querySelector('#addBlockBtn').onclick = () => {
-      const nb = { id: uid('b'), key: 'practice', title: 'Дополнительный блок', duration: 5, mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: null, note: '', skipped: false, visited: false };
+      const nb = { id: uid('b'), key: 'practice', title: 'Дополнительный блок', duration: 5, mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: null, note: '', skipped: false, visited: false, req: false, durEdit: true };
       plan.blocks.push(nb); slotId = nb.id; save(); draw();
     };
     drawBlocks(); drawPanel(slot);
+  };
+
+  const moveBlock = (b, dir) => {
+    const i = plan.blocks.indexOf(b), j = i + dir;
+    if (j < 0 || j >= plan.blocks.length) return;
+    // в «закрытом» шаблоне обязательные блоки не переставляются — меняемся только с необязательными или перепрыгиваем их
+    let k = j;
+    while (k >= 0 && k < plan.blocks.length && locked && plan.blocks[k].req) k += dir;
+    if (k < 0 || k >= plan.blocks.length) return;
+    plan.blocks.splice(i, 1); plan.blocks.splice(k, 0, b);
+    save(); draw();
   };
 
   const drawBlocks = () => {
@@ -2709,34 +2805,46 @@ function renderPrepareStep(body, plan, root){
     el.innerHTML = plan.blocks.map((b, i) => {
       const item = b.itemId && byId[b.itemId];
       const isEmpty = !blockReady(b);
+      const movable = canMoveBlock(plan, b);
       const sub = b.mode === 'text' ? ((b.questions || [])[0] || 'Вопросы и идеи — в режиме урока') : (item ? item.title : `Пусто: добавьте ${b.accept === 'topic' ? 'мини-урок' : (b.accept === 'activity' ? 'активность' : 'материал')}`);
-      return `<div class="ws-glass ws-blk${isEmpty ? ' empty' : ''}${b.id === slotId ? ' sel' : ''}" data-id="${esc(b.id)}" draggable="true">
-        <span class="grab">${ic('grab', 16)}</span>
+      return `<div class="ws-glass ws-blk${isEmpty ? ' is-empty' : ''}${b.id === slotId ? ' sel' : ''}" data-id="${esc(b.id)}"${movable ? ' draggable="true"' : ''}>
+        <span class="grab" style="${movable ? '' : 'opacity:.25;cursor:default'}">${ic('grab', 16)}</span>
         <span class="ck">${isEmpty ? ic('circle', 18) : ic('check', 18)}</span>
         <span class="no">${i + 1}</span>
-        <div class="tx"><b>${esc(b.title)}</b><span>${esc(sub)}</span></div>
+        <div class="tx"><b>${esc(b.title)}${b.req ? '<em class="reqb">🔒 Required</em>' : ''}</b><span>${esc(sub)}</span></div>
+        ${item ? `<button class="eyeb" data-eye="${esc(b.id)}" title="Посмотреть материал">${ic('eye', 15)}</button>` : ''}
         ${b.mode === 'slot' ? `<button class="addlib" data-open="${esc(b.id)}">${ic(item ? 'search' : 'plus', 13)}${item ? 'Заменить' : 'Из библиотеки'}</button>` : ''}
         <span class="min">${b.duration || 5} мин</span>
-        <button class="x" data-rm="${esc(b.id)}" title="${item ? 'Убрать материал' : 'Убрать блок'}">${ic('x', 16)}</button>
+        <button class="x" data-menu="${esc(b.id)}" title="Действия">⋯</button>
       </div>`;
     }).join('') || '<div class="empty">Блоков нет — добавьте первый.</div>';
-    el.querySelectorAll('[data-open]').forEach(b => b.onclick = e => { e.stopPropagation(); slotId = b.dataset.open; draw(); });
-    el.querySelectorAll('.ws-blk').forEach(row => row.onclick = () => { const b = plan.blocks.find(x => x.id === row.dataset.id); if (b && b.mode === 'slot') { slotId = b.id; draw(); } });
-    el.querySelectorAll('[data-rm]').forEach(b => b.onclick = e => {
+    el.querySelectorAll('[data-open]').forEach(b => b.onclick = e => { e.stopPropagation(); slotId = b.dataset.open; panel.type = null; draw(); });
+    el.querySelectorAll('[data-eye]').forEach(b => b.onclick = e => { e.stopPropagation(); const blk = plan.blocks.find(x => x.id === b.dataset.eye); openLibDrawer(byId[blk.itemId], { preview: true }); });
+    el.querySelectorAll('.ws-blk').forEach(row => row.onclick = () => { const b = plan.blocks.find(x => x.id === row.dataset.id); if (b && b.mode === 'slot') { slotId = b.id; panel.type = null; draw(); } });
+    el.querySelectorAll('[data-menu]').forEach(btn => btn.onclick = e => {
       e.stopPropagation();
-      const blk = plan.blocks.find(x => x.id === b.dataset.rm);
-      if (blk.itemId) blk.itemId = null; else plan.blocks = plan.blocks.filter(x => x.id !== blk.id);
-      save(); draw();
+      const b = plan.blocks.find(x => x.id === btn.dataset.menu);
+      const items = [{ label: 'Редактировать', run: () => openBlockEditor(plan, b, draw) },
+        { label: 'Дублировать', run: () => { const c = JSON.parse(JSON.stringify(b)); c.id = uid('b'); c.req = false; c.durEdit = true; c.title = b.title + ' (копия)'; plan.blocks.splice(plan.blocks.indexOf(b) + 1, 0, c); save(); draw(); } }];
+      if (canMoveBlock(plan, b)) {
+        items.push({ label: 'Переместить выше', run: () => moveBlock(b, -1) }, { label: 'Переместить ниже', run: () => moveBlock(b, 1) });
+      }
+      if (b.itemId) items.push({ label: 'Убрать материал', run: () => { b.itemId = null; save(); draw(); } });
+      if (!b.req) { items.push({ sep: true }, { label: 'Удалить блок', danger: true, run: () => { plan.blocks = plan.blocks.filter(x => x.id !== b.id); save(); draw(); } }); }
+      openBlockMenu(btn, items);
     });
     let dragId = null;
-    el.querySelectorAll('.ws-blk').forEach(row => {
+    el.querySelectorAll('.ws-blk[draggable="true"]').forEach(row => {
       row.ondragstart = () => { dragId = row.dataset.id; row.classList.add('dragging'); };
       row.ondragend = () => row.classList.remove('dragging');
+    });
+    el.querySelectorAll('.ws-blk').forEach(row => {
       row.ondragover = e => e.preventDefault();
       row.ondrop = e => {
         e.preventDefault();
         if (!dragId || dragId === row.dataset.id) return;
         const from = plan.blocks.findIndex(b => b.id === dragId), to = plan.blocks.findIndex(b => b.id === row.dataset.id);
+        if (locked && plan.blocks[to].req && plan.blocks[from].req) return;
         const [m] = plan.blocks.splice(from, 1); plan.blocks.splice(to, 0, m);
         save(); draw();
       };
@@ -2747,20 +2855,20 @@ function renderPrepareStep(body, plan, root){
     const el = body.querySelector('#libPanel');
     if (!slot) { el.innerHTML = `<div class="hd"><b>Библиотека</b></div><div class="foot">В этом уроке нет блоков, куда нужен материал.</div>`; return; }
     const idx = plan.blocks.indexOf(slot) + 1;
+    const typeNow = panel.type || (slot.accept === 'topic' ? 'topic' : (slot.accept === 'activity' ? 'activity' : 'all'));
     const list = () => {
-      const f = acceptFilter(slot.accept);
-      let items = allItems().filter(f);
+      let items = allItems().filter(acceptFilter(typeNow));
       if (panel.lvl && plan.student.level) items = items.filter(x => itemMatchesLevel(x, plan.student.level));
       if (panel.fav) items = items.filter(x => Saved.has(x.id));
       items = items.filter(x => matches(panel.q, x.title, x.idea, x.goal, x.outcome));
       const use = id => Usage.counts[id] || 0;
-      return items.sort((a, b) => use(b.id) - use(a.id)).slice(0, 40);
+      return items.sort((a, b) => use(b.id) - use(a.id)).slice(0, 60);
     };
     el.innerHTML = `
       <div class="hd"><b>Библиотека</b></div>
       <div class="ws-search">${ic('search', 14)}<input id="lpQ" placeholder="Поиск…" value="${esc(panel.q)}"></div>
       <div class="ws-chips">
-        <span class="ws-chip on">${slot.accept === 'topic' ? 'Мини-уроки' : (slot.accept === 'activity' ? 'Активности' : 'Всё')}</span>
+        ${[['all', 'Все'], ['topic', 'Мини-уроки'], ['activity', 'Активности']].map(([k, l]) => `<button class="ws-chip${typeNow === k ? ' on' : ''}" data-lptype="${k}">${l}</button>`).join('')}
         ${plan.student.level ? `<button class="ws-chip${panel.lvl ? ' on' : ''}" id="lpLvl">${esc(plan.student.level)}</button>` : ''}
         <button class="ws-chip${panel.fav ? ' on' : ''}" id="lpFav">★ Избранное</button>
       </div>
@@ -2770,16 +2878,18 @@ function renderPrepareStep(body, plan, root){
       const items = list();
       el.querySelector('#lpList').innerHTML = items.map(x => `<div class="ws-li">
           <div class="tx" data-prev="${esc(x.id)}"><b>${esc(x.title)}</b><span>${esc(itemKind(x))} · ${esc(itemLevel(x))} · ${itemMin(x)} мин</span></div>
+          <button class="eye" data-prev="${esc(x.id)}" title="Посмотреть, что внутри">${ic('eye', 15)}</button>
           <button class="add" data-add="${esc(x.id)}" title="Добавить в блок">${ic('plus', 14)}</button>
         </div>`).join('') || '<div class="foot" style="padding:10px 0">Ничего не нашлось.</div>';
       el.querySelectorAll('[data-add]').forEach(b => b.onclick = () => {
         slot.itemId = b.dataset.add; Usage.bump(b.dataset.add); save();
-        slotId = (plan.blocks.find(x => x.mode === 'slot' && !blockReady(x)) || slot).id;
+        slotId = (plan.blocks.find(x => x.mode === 'slot' && !blockReady(x)) || slot).id; panel.type = null;
         toast('Материал добавлен в блок'); draw();
       });
-      el.querySelectorAll('[data-prev]').forEach(b => b.onclick = () => openLibDrawer(byId[b.dataset.prev], { plan, slot, onAdd: () => { slotId = (plan.blocks.find(x => x.mode === 'slot' && !blockReady(x)) || slot).id; draw(); } }));
+      el.querySelectorAll('[data-prev]').forEach(b => b.onclick = () => openLibDrawer(byId[b.dataset.prev], { plan, slot, onAdd: () => { slotId = (plan.blocks.find(x => x.mode === 'slot' && !blockReady(x)) || slot).id; panel.type = null; draw(); } }));
     };
     el.querySelector('#lpQ').oninput = e => { panel.q = e.target.value; drawList(); };
+    el.querySelectorAll('[data-lptype]').forEach(b => b.onclick = () => { panel.type = b.dataset.lptype; drawPanel(slot); });
     const lv = el.querySelector('#lpLvl'); if (lv) lv.onclick = () => { panel.lvl = !panel.lvl; drawPanel(slot); };
     el.querySelector('#lpFav').onclick = () => { panel.fav = !panel.fav; drawPanel(slot); };
     drawList();
@@ -2891,16 +3001,16 @@ function openNewLessonModal(){
   const bg = $('#newLessonBg'), modal = $('#newLessonModal'), bodyEl = $('#newLessonBody');
   const usedRequestIds = new Set(Plans.list().map(p => p.trialRequestId).filter(Boolean));
   const requests = ((CurrentTeacher && CurrentTeacher.trialRequests) || []).filter(r => !usedRequestIds.has(r.id));
-  let tab = requests.length ? 'request' : 'manual';
+  let tab = 'manual';
   const form = { name: '', age: '', level: '', goal: '', requestId: null };
   const draw = () => {
     const sug = suggestTemplate(form);
     bodyEl.innerHTML = `
-      <div class="ws-seg"><button data-nl="request" class="${tab === 'request' ? 'on' : ''}">Из заявки</button><button data-nl="manual" class="${tab === 'manual' ? 'on' : ''}">Вручную</button></div>
+      <div class="ws-seg"><button data-nl="manual" class="${tab === 'manual' ? 'on' : ''}">Вручную</button><button data-nl="request" class="${tab === 'request' ? 'on' : ''}">Из заявки</button></div>
       ${tab === 'request' ? (
         !CurrentTeacher ? `<p class="ws-hint">Чтобы видеть заявки на пробный, войдите в кабинет учителя в этом браузере (teacher.html) — страница сама узнает вас здесь.</p>`
         : !requests.length ? `<p class="ws-hint">Нет новых подтверждённых заявок, ещё не оформленных в урок.</p>`
-        : `<p class="ws-hint">Подтверждённые заявки, назначенные вам. Уровень и цель подставятся сами.</p>
+        : `<p class="ws-hint">Только подтверждённые заявки, назначенные именно вам. Уровень и цель подставятся сами.</p>
            ${requests.map(r => `<button class="ws-radio${form.requestId === r.id ? ' on' : ''}" data-req="${esc(r.id)}"><span class="dot"></span><span><b>${esc(r.full_name)}</b><small>${esc(r.current_level || 'уровень не указан')}${r.goal ? ' · ' + esc(r.goal) : ''}${r.age ? ' · ' + esc(r.age) + ' лет' : ''}</small></span></button>`).join('')}`
       ) : ''}
       <div class="ws-fields">
@@ -2908,7 +3018,7 @@ function openNewLessonModal(){
         <label>Уровень<select id="nlLevel">${['', ...LEVELS].map(l => `<option value="${l}" ${form.level === l ? 'selected' : ''}>${l || '—'}</option>`).join('')}</select></label>
         <label>Цель<input id="nlGoal" value="${esc(form.goal)}" placeholder="Например: Travel"></label>
       </div>
-      <div class="ws-suggest">${ic('star', 15)}<span>Предложенный шаблон: <b>${esc(TEMPLATES[sug].name)}</b>. Его можно поменять на следующем шаге.</span></div>
+      <div class="ws-suggest">${ic('star', 15)}<span>Рекомендуемый шаблон: <b>${esc(TEMPLATES[sug].name)}</b>. Его можно поменять на следующем шаге.</span></div>
       <div class="ws-mfoot"><button class="ws-ghost" id="nlCancel">Отмена</button><button class="ws-cta" id="nlGo">Продолжить к шаблону${ic('arrow', 16)}</button></div>`;
     bodyEl.querySelectorAll('[data-nl]').forEach(b => b.onclick = () => { tab = b.dataset.nl; draw(); });
     bodyEl.querySelectorAll('[data-req]').forEach(b => b.onclick = () => {
@@ -3124,7 +3234,7 @@ function renderLibraryPage(root){
       const grad = isMat ? 'linear-gradient(135deg,#FFF1D6,#F8D9A0)' : itemGradient(x);
       const label = isMat ? 'Материал' : itemKind(x);
       return `<article class="ws-glass ws-card" data-lprev="${esc(x.id)}">
-        <div class="top" style="background:${grad}"><span class="ic">${esc(x.icon || (isMat ? '📁' : (x.play ? '🎲' : '📘')))}</span>${isMat ? '' : `<button class="star" data-star="${esc(x.id)}" title="В избранное">${Saved.has(x.id) ? '★' : '☆'}</button>`}</div>
+        <div class="top" style="background:${grad}"><span class="ic">${esc(x.icon || (isMat ? '📁' : (x.play ? '🎲' : '📘')))}</span>${isMat ? '' : starBtn(x.id)}</div>
         <div class="bd"><span class="ty">${esc(label)}</span><span class="nm">${esc(x.title)}</span>
           <div class="mt">${isMat ? '' : `<b>${esc(itemLevel(x))}</b><span>${itemMin(x)} мин</span>`}<span class="sp"></span>${isMat ? '' : `<button class="addb" data-ladd="${esc(x.id)}">${ic('plus', 13)}В урок</button>`}</div>
         </div></article>`;
@@ -3155,7 +3265,7 @@ function openLibDrawer(x, opts){
   const plans = Plans.list().filter(p => p.status !== 'done');
   const plan0 = opts.plan || plans[0];
   let rows = '';
-  if (!isMat) {
+  if (!isMat && !opts.preview) {
     if (opts.onPickOnly) {
       rows = `<button class="addrow first" data-addmode="pick"><span>Добавить в урок</span>${ic('plus', 14)}</button>`;
     } else if (opts.slot) {
@@ -3182,7 +3292,7 @@ function openLibDrawer(x, opts){
     if (x.url) lines.push(`<a href="${esc(x.url)}" target="_blank" rel="noopener">Открыть материал →</a>`);
   }
   el.innerHTML = `
-    <div class="hdr"><span class="pill">${esc(label)}</span><span class="sp"></span>${isMat ? '' : `<button data-star="${esc(x.id)}" title="В избранное">${ic('star', 18)}</button>`}<button id="ldClose" aria-label="Закрыть">${ic('x', 18)}</button></div>
+    <div class="hdr"><span class="pill">${esc(label)}</span><span class="sp"></span>${isMat ? '' : starBtn(x.id)}<button id="ldClose" aria-label="Закрыть">${ic('x', 18)}</button></div>
     <h2>${esc(x.icon || '')} ${esc(x.title)}</h2>
     <div class="muted">${isMat ? '' : `${esc(itemLevel(x))} · ${itemMin(x)} мин`}</div>
     <div class="prev"><span class="lb">Что внутри</span>${lines.join('') || '<span>—</span>'}</div>
