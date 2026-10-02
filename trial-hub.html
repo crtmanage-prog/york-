@@ -1794,7 +1794,7 @@ function renderNav(){
     lessons: DB.lessons.length, activities: DB.activities.items.length, grammar: grammarLessons().length,
     materials: DB.materials.items.length, builder: Plans.list().length || null,
     checklist: DB.checklist.reduce((n, g) => n + g.items.length, 0),
-    library: DB.bank.length + KEEP_OLD_IDS.length + DB.materials.items.length,
+    library: DB.bank.length + KEEP_OLD_IDS.length,
     reports: Plans.list().filter(p => p.status === 'done').length || null,
   };
   const isActive = route => currentRoute === route || (route === 'builder' && currentRoute.indexOf('builder=') === 0);
@@ -3666,14 +3666,13 @@ document.addEventListener('keydown', e => {
 });
 
 /* ---------- Библиотека (фильтры слева + карточки) и превью ---------- */
-const libF = { types: new Set(['lessons', 'activities', 'grammar', 'materials']), levels: new Set(), saved: false, q: '', sort: 'title' };
+const libF = { types: new Set(['lessons', 'activities', 'grammar']), levels: new Set(), saved: false, q: '', sort: 'title' };
 
 function libraryList(){
   const items = [];
   if (libF.types.has('lessons')) DB.bank.filter(x => x.type === 'speaking').forEach(x => items.push({ kind: 'lesson', x }));
   if (libF.types.has('grammar')) DB.bank.filter(x => x.type === 'grammar').forEach(x => items.push({ kind: 'grammar', x }));
   if (libF.types.has('activities')) [...DB.bank.filter(x => x.type === 'activity'), ...oldKept()].forEach(x => items.push({ kind: 'activity', x }));
-  if (libF.types.has('materials')) DB.materials.items.forEach((m, i) => items.push({ kind: 'material', x: Object.assign({ id: 'mat:' + i }, m) }));
   let list = items;
   if (libF.levels.size) list = list.filter(({ kind, x }) => kind === 'material' ? false : [...libF.levels].some(l => itemMatchesLevel(x, l)));
   if (libF.saved) list = list.filter(({ kind, x }) => kind !== 'material' && Saved.has(x.id));
@@ -3686,8 +3685,8 @@ function libraryList(){
 
 function renderLibraryPage(root){
   const rerender = () => renderLibraryPage(root);
-  const typeLabels = [['grammar', 'Грамматика'], ['lessons', 'Speaking'], ['activities', 'Активности'], ['materials', 'Материалы']];
-  const total = DB.bank.length + KEEP_OLD_IDS.length + DB.materials.items.length;
+  const typeLabels = [['grammar', 'Грамматика'], ['lessons', 'Speaking'], ['activities', 'Активности']];
+  const total = DB.bank.length + KEEP_OLD_IDS.length;
   root.innerHTML = `
     <div class="ws-lib-head">
       <div><h1>Библиотека</h1><p>${total} материалов: темы, активности, грамматика. Откройте карточку, чтобы посмотреть, что внутри.</p></div>
@@ -3736,7 +3735,7 @@ function renderLibraryPage(root){
   root.querySelectorAll('[data-ltype]').forEach(b => b.onclick = () => { const k = b.dataset.ltype; libF.types.has(k) ? libF.types.delete(k) : libF.types.add(k); if (!libF.types.size) libF.types.add(k); rerender(); });
   root.querySelectorAll('[data-llvl]').forEach(b => b.onclick = () => { const k = b.dataset.llvl; libF.levels.has(k) ? libF.levels.delete(k) : libF.levels.add(k); rerender(); });
   root.querySelector('[data-lsaved]').onclick = () => { libF.saved = !libF.saved; rerender(); };
-  root.querySelector('#libReset').onclick = () => { libF.types = new Set(['lessons', 'activities', 'grammar', 'materials']); libF.levels = new Set(); libF.saved = false; libF.q = ''; rerender(); };
+  root.querySelector('#libReset').onclick = () => { libF.types = new Set(['lessons', 'activities', 'grammar']); libF.levels = new Set(); libF.saved = false; libF.q = ''; rerender(); };
   root.querySelectorAll('[data-lsort]').forEach(b => b.onclick = () => { libF.sort = b.dataset.lsort; rerender(); });
   drawCards();
 }
