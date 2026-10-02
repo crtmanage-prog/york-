@@ -503,6 +503,106 @@
      "html": "<p><b>Today I can talk about my past and now.</b></p><p>say what I used to do<br>say what I do now<br>compare before and now</p><p><b>One last question:</b></p><p>What did you use to do when you were small?</p>"
     }
    ]
+  },
+  "B2": {
+   "outcome": "Today I can distinguish used to, would, be used to and get used to.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Past habits and change</b><br>used to · would · be used to · get used to · no longer · nowadays · back then · phase · outgrow · habit</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Then and now</b></p><p>Поговорим о том, как менялись твои привычки, и о разнице между used to, would и be used to.</p><p><b>Questions:</b></p><ul><li>What did you use to believe that you no longer do?</li><li>What are you gradually getting used to?</li><li>What would you do every summer as a child?</li><li>What have you outgrown?</li></ul><p><b>Vocabulary:</b><br>used to · would · be used to · get used to · no longer · nowadays · back then</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>used to · would · be used to · get used to</b></p><ul><li>I used to smoke, but I gave up years ago.</li><li>Every summer we would spend weeks at my grandparents' farm.</li><li>I'm not used to working such long hours.</li><li>It took me months to get used to the climate.</li><li>There used to be a cinema here. (state)</li><li>I no longer feel the need to prove myself.</li></ul><p><b>Vocabulary:</b><br>used to · would · be used to · get used to · no longer · nowadays · back then · phase</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>used to + base → past habit or state, not true now</b></p><p>I used to live abroad. There used to be a park here.</p><p><b>would + base → repeated past action only (not states)</b></p><p>We would play for hours. Not: I would live in Paris.</p><p><b>be / get used to + -ing / noun → familiarity</b></p><p>I'm used to the noise. I'm getting used to living alone.</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the correct form</b></p><ol><li>I <b>used to / would</b> live in Paris. (a state)</li><li>Every summer we <b>would / used to be</b> spend weeks at the farm. (habit)</li><li>I'm not <b>used to working / used to work</b> long hours.</li><li>It took me months to <b>get used to / use to</b> the climate.</li><li>There <b>used to be / would be</b> a cinema here.</li></ol><p><b>Vocabulary:</b><br>used to · would · get used to · no longer · outgrow</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>I ______ to smoke, but I gave up. <i>(use)</i></li><li>We ______ spend summers at the farm. <i>(would)</i></li><li>I'm not used ______ so early. <i>(getting up)</i></li><li>It took me months to get used ______ it. <i>(to)</i></li><li>There ______ to be a park here. <i>(use)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Then and now</b></p><p>Describe how your life, beliefs and habits have changed. Use used to, would, be used to and get used to correctly and naturally.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>My changes</b></p><p>Tell me:<br>I used to ______, but now I ______.<br>Every summer we would ______.<br>I'm still getting used to ______.</p><p>Then ask: <b>What have you outgrown?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can distinguish used to, would, be used to and get used to.</b></p><p>talk about past habits and states<br>use would for repeated actions only<br>talk about getting used to change</p><p><b>One last question:</b></p><p>What is something you have completely outgrown?</p>"
+    }
+   ]
+  },
+  "C1": {
+   "outcome": "Today I can discuss habit and change precisely, in different registers.",
+   "sections": [
+    {
+     "key": "vocab",
+     "title": "Vocabulary Bank",
+     "html": "<p><b>Habit, change and register</b><br>erstwhile · once · time was when · no longer · be wont to · accustomed to · acclimatise · lapse · outgrown · habitual</p>"
+    },
+    {
+     "key": "warmup",
+     "title": "Разминка",
+     "html": "<p><b>Habits across time</b></p><p>Поговорим о привычках и их изменении с оттенками регистра: used to, would, be accustomed to, formal and literary alternatives.</p><p><b>Questions:</b></p><ul><li>What were you wont to do that you no longer do?</li><li>What have you become accustomed to?</li><li>What did you once believe that you now find naive?</li><li>How does one acclimatise to a new culture?</li></ul><p><b>Vocabulary:</b><br>erstwhile · once · time was when · no longer · be wont to · accustomed to · acclimatise</p>"
+    },
+    {
+     "key": "topic",
+     "title": "Тема",
+     "html": "<p><b>Habit and change at C1</b></p><ul><li>I used to dismiss such ideas as naive.</li><li>He was wont to take long walks at dusk. (literary)</li><li>Time was when people wrote letters.</li><li>She has become accustomed to the pace of city life.</li><li>It takes a while to acclimatise to a new culture.</li><li>I've grown out of my youthful impatience.</li><li>He would invariably arrive late. (characteristic behaviour)</li></ul><p><b>Vocabulary:</b><br>erstwhile · once · time was when · no longer · be wont to · accustomed to · acclimatise · lapse</p>"
+    },
+    {
+     "key": "scheme",
+     "title": "Схема",
+     "html": "<p><b>used to / would / be wont to</b></p><p>used to (states and habits) · would (repeated, often with time reference) · be wont to (formal / literary)</p><p><b>Characteristic behaviour with would</b></p><p>He would always complain. (typical, often critical)</p><p><b>Becoming familiar</b></p><p>become / grow accustomed to · acclimatise to · adapt to · grow out of</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 1",
+     "html": "<p><b>Choose the best form</b></p><ol><li>He <b>was wont to / was used to</b> take long walks at dusk. (literary)</li><li>She has become <b>accustomed to / accustoming to</b> city life.</li><li>He <b>would invariably / used invariably</b> arrive late.</li><li>It takes time to <b>acclimatise to / acclimatise at</b> a new culture.</li><li>I've <b>grown out of / grown up of</b> my impatience.</li></ol><p><b>Vocabulary:</b><br>wont · accustomed to · acclimatise · invariably · grow out of</p>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 2",
+     "html": "<p><b>Complete the sentences</b></p><ol><li>He was ______ to take long walks. <i>(wont)</i></li><li>She has grown ______ to the pace. <i>(accustomed)</i></li><li>He ______ invariably arrive late. <i>(would)</i></li><li>It takes time to ______ to a new culture. <i>(acclimatise)</i></li><li>I've ______ out of my impatience. <i>(grown)</i></li></ol>"
+    },
+    {
+     "key": "task",
+     "title": "Задание 3",
+     "html": "<p><b>Reflect on change</b></p><p>Reflect on how your habits, tastes and beliefs have evolved. Choose the register deliberately: neutral, formal and literary variants.</p>"
+    },
+    {
+     "key": "speak",
+     "title": "Говорим",
+     "html": "<p><b>Habit and change</b></p><p>Tell me:<br>I was wont to ______, but I've grown out of it.<br>I've become accustomed to ______.<br>People used to ______; nowadays ______.</p><p>Then ask: <b>What have you become accustomed to?</b></p>"
+    },
+    {
+     "key": "outcome",
+     "title": "Итог",
+     "html": "<p><b>Today I can discuss habit and change precisely, in different registers.</b></p><p>use used to, would, wont to<br>express gradual familiarity<br>choose register for effect</p><p><b>One last question:</b></p><p>What did you once take for granted that you now question?</p>"
+    }
+   ]
   }
  },
  "bk-g-modal-verbs": {
