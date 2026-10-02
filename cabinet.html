@@ -1859,7 +1859,10 @@ async function init(){
   }
 
   try {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // режим предпросмотра для Trial Hub (cabinet.html?preview=1): отдельное хранилище сессии,
+    // чтобы вход под тестовым учеником не выкидывал учителя из его кабинета
+    const __preview = new URLSearchParams(location.search).get('preview') === '1';
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, __preview ? { auth: { storageKey: 'york-cabinet-preview' } } : undefined);
 
     const sessionPromise = supabase.auth.getSession();
     const timeoutPromise = sleep(10000).then(() => { throw new Error('timeout'); });
