@@ -1889,6 +1889,13 @@ async function loadAll(){
   await loadStudentReschedules();
 }
 
+// ключ даты для «календарных» дат, собранных из локальных компонентов (new Date(y,m,d), setHours(0,0,0,0)):
+// берём локальные год/месяц/день браузера, а не пересчёт в SCHOOL_TZ — иначе у людей в другом поясе день съезжает
+function fmtLocalKey(d){
+  const dt = new Date(d);
+  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+}
+
 function fmtDateKey(d){
   const dt = new Date(d);
   const parts = new Intl.DateTimeFormat('en-CA', { timeZone:SCHOOL_TZ, year:'numeric', month:'2-digit', day:'2-digit' }).formatToParts(dt);
@@ -2043,7 +2050,7 @@ function renderCalendar(){
   for (let i = 0; i < leadBlanks; i++) cells.push('<div class="cal-day empty"></div>');
   for (let d = 1; d <= daysInMonth; d++){
     const dateObj = new Date(s.year, s.month, d);
-    const key = fmtDateKey(dateObj);
+    const key = fmtLocalKey(dateObj);
     const isSun = dateObj.getDay() === 0;
     const isToday = key === todayKey;
     const isSelected = key === window.__selectedDate;
@@ -3103,7 +3110,7 @@ async function attachSubscription(){
     const remaining = Number(lessonsIncluded) - Number(lessonsUsed);
     autoDates = nextWeekdayDates(startDate, weekdays, Math.max(remaining, 0));
     if (autoDates.length){
-      const lastDateKey = fmtDateKey(autoDates[autoDates.length - 1]);
+      const lastDateKey = fmtLocalKey(autoDates[autoDates.length - 1]);
       paymentPayload.valid_until = lastDateKey;
       document.getElementById('payValidUntil').value = lastDateKey;
     }
@@ -3119,7 +3126,7 @@ async function attachSubscription(){
 
   if (autoSchedule){
     const rows = autoDates.map(d => {
-      const dateStr = fmtDateKey(d);
+      const dateStr = fmtLocalKey(d);
       const dayTime = timeByWeekday[d.getDay()];
       const utcDate = zonedTimeToUtc(dateStr, dayTime, timezone);
       return {
@@ -4968,7 +4975,7 @@ function renderReqCalendar(){
   for (let i = 0; i < leadBlanks; i++) cells.push('<div class="cal-day empty"></div>');
   for (let d = 1; d <= daysInMonth; d++){
     const dateObj = new Date(s.year, s.month, d);
-    const key = fmtDateKey(dateObj);
+    const key = fmtLocalKey(dateObj);
     const classes = ['cal-day'];
     if (daysSet.has(key)) classes.push('has-trial');
     if (dateObj.getDay() === 0 || dateObj.getDay() === 6) classes.push('weekend');
@@ -5020,9 +5027,9 @@ const AVAIL_HOURS = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
 
 async function loadAllAvailability(){
   const today = new Date(); today.setHours(0,0,0,0);
-  const from = fmtDateKey(today);
+  const from = fmtLocalKey(today);
   const toDate = new Date(today); toDate.setDate(toDate.getDate() + 13);
-  const to = fmtDateKey(toDate);
+  const to = fmtLocalKey(toDate);
 
   const { data } = await supabase.from('teacher_availability').select('*')
     .gte('slot_date', from).lte('slot_date', to);
@@ -5075,7 +5082,7 @@ function renderTeachersScheduleInto(targetId){
       .filter(l => l.teacher_id === t.id && l.status !== 'cancelled' && l.status !== 'rescheduled');
 
     const rows = days.map(d => {
-      const key = fmtDateKey(d);
+      const key = fmtLocalKey(d);
       const availHours = myAvail[key] || new Set();
       const lessonsThisDay = {};
       myLessons.filter(l => fmtDateKey(l.lesson_date) === key)

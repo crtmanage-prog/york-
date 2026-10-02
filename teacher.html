@@ -1491,8 +1491,8 @@ async function setupTelegramBlock(){
 
 async function loadAvailability(){
   const days = nextTwoWeeks();
-  const from = fmtDateKey(days[0]);
-  const to = fmtDateKey(days[days.length - 1]);
+  const from = fmtLocalKey(days[0]);
+  const to = fmtLocalKey(days[days.length - 1]);
 
   const { data } = await supabase.from('teacher_availability').select('*')
     .eq('teacher_id', currentUser.id).gte('slot_date', from).lte('slot_date', to);
@@ -1529,7 +1529,7 @@ function renderAvailabilityGrid(){
         <div class="avail-week-title">${title}</div>
         <div class="card">
           ${weekDays.map(d => {
-            const key = fmtDateKey(d);
+            const key = fmtLocalKey(d);
             const isWeekend = d.getDay() === 0 || d.getDay() === 6;
             const dayBusy = busy[key] || {};
             const hoursHtml = availStored().map(h => {
@@ -1646,8 +1646,8 @@ async function copyLastWeekAvailability(){
 
   const rows = [];
   thisWeek.forEach((d, i) => {
-    const srcKey = fmtDateKey(d);
-    const dstKey = fmtDateKey(nextWeek[i]);
+    const srcKey = fmtLocalKey(d);
+    const dstKey = fmtLocalKey(nextWeek[i]);
     availStored().forEach(h => {
       if (availabilitySet.has(availKey(srcKey, h)) && !availabilitySet.has(availKey(dstKey, h))){
         availabilitySet.add(availKey(dstKey, h));
@@ -1668,8 +1668,8 @@ async function copyLastWeekAvailability(){
 async function clearAllAvailability(){
   if (!confirm('Убрать всю отмеченную доступность на две недели?')) return;
   const days = nextTwoWeeks();
-  const from = fmtDateKey(days[0]);
-  const to = fmtDateKey(days[days.length - 1]);
+  const from = fmtLocalKey(days[0]);
+  const to = fmtLocalKey(days[days.length - 1]);
   availabilitySet.clear();
   renderAvailabilityGrid();
   await supabase.from('teacher_availability').delete()
@@ -2089,6 +2089,13 @@ async function loadLessons(){
   renderLessonsList();
 }
 
+// ключ даты для «календарных» дат, собранных из локальных компонентов (new Date(y,m,d), setHours(0,0,0,0)):
+// берём локальные год/месяц/день браузера, а не пересчёт в SCHOOL_TZ — иначе у людей в другом поясе день съезжает
+function fmtLocalKey(d){
+  const dt = new Date(d);
+  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+}
+
 function fmtDateKey(d){
   const dt = new Date(d);
   const parts = new Intl.DateTimeFormat('en-CA', { timeZone:SCHOOL_TZ, year:'numeric', month:'2-digit', day:'2-digit' }).formatToParts(dt);
@@ -2181,7 +2188,7 @@ function renderCalendar(){
   for (let i = 0; i < leadBlanks; i++) cells.push('<div class="cal-day empty"></div>');
   for (let d = 1; d <= daysInMonth; d++){
     const dateObj = new Date(s.year, s.month, d);
-    const key = fmtDateKey(dateObj);
+    const key = fmtLocalKey(dateObj);
     const isSun = dateObj.getDay() === 0;
     const isToday = key === todayKey;
     const isSelected = key === window.__selectedDate;
