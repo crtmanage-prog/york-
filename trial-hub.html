@@ -44,7 +44,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
    код страницы менять не нужно. Схема полей — trial-hub/content/README.md.
    ===================================================================== */
 const CONTENT_FILES = {
-  bank: 'trial-hub/content/bank.json',   // новый банк материалов: grammar / speaking / activities
+  bank: 'trial-hub/content/bank.json',
+  variants: 'trial-hub/content/bank-variants.json',   // версии материалов под разные уровни: id → уровень → разделы   // новый банк материалов: grammar / speaking / activities
   meta: 'trial-hub/content/meta.json',
   lessons: 'trial-hub/content/lessons.json',
   activities: 'trial-hub/content/activities.json',
@@ -1839,9 +1840,14 @@ function bankSteps(t){
     node: node(`<p class="kicker">${esc(t.title)} · ${esc(sc.title)}</p>${i === 0 ? `<h2>${esc(t.title)}</h2>` : ''}<div class="bk-html">${sc.html}</div>`),
   }));
 }
-function bankLiveHtml(item){
+function bankLiveHtml(base, lvl){
+  const item = itemAt(base, lvl);
+  const cur = item.atLevel || baseKeyOf(base);
+  const k = lvlKey(lvl);
+  const note = (k && !item.atLevel && availKeys(base).length > 1 && !availKeys(base).includes(k)) ? `<p class="ws-hint" style="color:#B7791F">Для уровня ${esc(k)} версии пока нет — показан исходный материал (${esc(cur.replace('A0-A1', 'A0–A1'))}).</p>` : '';
   return `<div class="lv-it"><h2>${esc(item.title)}</h2>
-    <p class="oc">${esc(itemKind(item))} · ${esc(itemLevel(item))} · ${itemMin(item)} мин${item.outcome ? ' · «' + esc(item.outcome) + '»' : ''}</p>
+    <p class="oc">${esc(itemKind(item))} · ${esc(cur.replace('A0-A1', 'A0–A1'))} · ${itemMin(item)} мин${item.outcome ? ' · «' + esc(item.outcome) + '»' : ''}</p>
+    ${lvChips(base, cur, 'data-lvsw')}${note}
     ${item.sections.map(sc => `<div class="bk-sec"><h4>${esc(sc.title)}</h4><div class="bk-html">${sc.html}</div></div>`).join('')}
     <button class="ws-cta" id="liveOpenShow" style="margin-top:14px">${ic('play', 14)}Открыть экран для ученика</button></div>`;
 }
@@ -2580,20 +2586,50 @@ function extraBlockFor(x){
   const key = x.play ? 'activity' : (x.category === 'grammar' ? 'grammar' : 'speaking');
   return { id: uid('b'), key, title: x.play ? 'Activity' : (x.category === 'grammar' ? 'Grammar' : 'Speaking'), duration: itemMin(x), mode: 'slot', accept: 'any', qkind: null, questions: [], itemId: x.id, note: '', skipped: false, visited: false, req: false, durEdit: true };
 }
-function itemLevel(x){ return x.bank ? String(x.level || '').replace(/-/g, '–') : (x.play ? (x.levels.length > 1 ? `${x.levels[0].replace('A0-A1', 'A0')}–${x.levels[x.levels.length - 1]}` : x.levels[0]) : x.level); }
+function itemLevel(x){ return x.bank ? bankLevelLabel(x) : (x.play ? (x.levels.length > 1 ? `${x.levels[0].replace('A0-A1', 'A0')}–${x.levels[x.levels.length - 1]}` : x.levels[0]) : x.level); }
+function bankLevelLabel(x){
+  const keys = availKeys(x);
+  if (keys.length > 1) { const f = keys[0].replace('A0-A1', 'A0'), l = keys[keys.length - 1]; return f + '–' + l; }
+  return String(x.level || '').replace(/-/g, '–');
+}
 function itemMin(x){ return x.bank ? (x.min || 8) : (x.play ? 8 : 12); }
 function itemGradient(x){ return x.play ? 'linear-gradient(135deg,#EFE7FB,#DCCBF5)' : (x.category === 'grammar' ? 'linear-gradient(135deg,#DDEFFD,#BFE0F8)' : 'linear-gradient(135deg,#F1FAC8,#D7EF42)'); }
 const LV_ORDER = ['A0', 'A1', 'A2', 'B1', 'B2', 'C1'];
+const LV_KEYS = ['A0-A1', 'A2', 'B1', 'B2', 'C1'];   // уровни, под которые делаем версии материалов
 function lvTokens(str){
   const raw = String(str || '').replace(/[\u2013\u2014]/g, '-');
   const m = raw.match(/[ABC][0-2]/g) || [];
   if (m.length === 2 && raw.includes('-')) { const a = LV_ORDER.indexOf(m[0]), b = LV_ORDER.indexOf(m[1]); if (a >= 0 && b >= a) return LV_ORDER.slice(a, b + 1); }
   return m;
 }
+const tokKey = t => (t === 'A0' || t === 'A1') ? 'A0-A1' : t;
+const lvlKey = lvl => { const t = lvTokens(lvl); return t.length ? tokKey(t[0]) : null; };
+// на каких уровнях доступен материал: исходный уровень из документа + написанные версии
+function availKeys(x){
+  if (!x.bank) return [];
+  const set = new Set(lvTokens(x.level).map(tokKey));
+  Object.keys(x.variants || {}).forEach(k => set.add(k));
+  return LV_KEYS.filter(k => set.has(k));
+}
 function itemMatchesLevel(x, lvl){
   if (!lvl) return true;
-  if (x.bank) { const a = lvTokens(x.level), b = lvTokens(lvl); return a.some(t => b.includes(t)); }
+  if (x.bank) return availKeys(x).includes(lvlKey(lvl));
   return x.play ? x.levels.includes(lvl) : x.level === lvl;
+}
+// версия материала под уровень (если версии нет — исходный текст)
+function itemAt(x, lvl){
+  if (!x || !x.bank) return x;
+  const k = lvlKey(lvl);
+  const v = k && x.variants && x.variants[k];
+  if (!v) return x;
+  return Object.assign({}, x, { sections: v.sections, outcome: v.outcome || x.outcome, atLevel: k });
+}
+function baseKeyOf(x){ const t = lvTokens(x.level); return t.length ? tokKey(t[0]) : 'A0-A1'; }
+// переключатель уровней: attr — data-атрибут кнопок
+function lvChips(x, cur, attr){
+  const keys = availKeys(x);
+  if (keys.length < 2) return '';
+  return `<div class="ws-chips" style="margin:6px 0">${keys.map(k => `<button class="ws-chip${k === cur ? ' on' : ''}" ${attr}="${k}">${k.replace('A0-A1', 'A0–A1')}</button>`).join('')}</div>`;
 }
 // из старого банка оставляем только «Describing pictures» (интерактив с фото) — остальное заменил новый банк
 const KEEP_OLD_IDS = ['act-picture'];
@@ -2928,7 +2964,7 @@ function renderPrepareStep(body, plan, root){
       const item = b.itemId && byId[b.itemId];
       const isEmpty = !blockReady(b);
       const movable = canMoveBlock(plan, b);
-      const sub = b.mode === 'sections' ? (b.sections || []).map(x => x.title).join(' · ') : b.mode === 'recap' ? 'Сводка соберётся из выбранных материалов' : b.mode === 'next' ? NEXT_LINKS.map(l => l.label).join(' · ') : b.mode === 'text' ? ((b.questions || [])[0] || 'Вопросы и идеи — в режиме урока') : (item ? item.title : `Пусто: добавьте ${b.accept === 'grammar' ? 'грамматику' : (b.accept === 'speaking' ? 'speaking' : (b.accept === 'topic' ? 'мини-урок' : (b.accept === 'activity' ? 'активность' : 'материал')))}`);
+      const sub = b.mode === 'sections' ? (b.sections || []).map(x => x.title).join(' · ') : b.mode === 'recap' ? 'Сводка соберётся из выбранных материалов' : b.mode === 'next' ? NEXT_LINKS.map(l => l.label).join(' · ') : b.mode === 'text' ? ((b.questions || [])[0] || 'Вопросы и идеи — в режиме урока') : (item ? (item.title + ((item.bank && item.variants && item.variants[lvlKey(plan.student.level)]) ? ' · ' + lvlKey(plan.student.level).replace('A0-A1', 'A0–A1') : '')) : `Пусто: добавьте ${b.accept === 'grammar' ? 'грамматику' : (b.accept === 'speaking' ? 'speaking' : (b.accept === 'topic' ? 'мини-урок' : (b.accept === 'activity' ? 'активность' : 'материал')))}`);
       return `<div class="ws-glass ws-blk${isEmpty ? ' is-empty' : ''}${picked && b.id === slotId ? ' sel' : ''}" data-id="${esc(b.id)}"${movable ? ' draggable="true"' : ''}>
         <span class="grab" style="${movable ? '' : 'opacity:.25;cursor:default'}">${ic('grab', 16)}</span>
         <span class="ck">${isEmpty ? ic('circle', 18) : ic('check', 18)}</span>
@@ -3310,7 +3346,7 @@ function renderLive(){
       body.innerHTML = `<div class="lv-it"><h2>Материал не выбран</h2><p class="oc">В этом блоке нет материала. Выберите из библиотеки.</p><button class="ws-cta" id="livePickHere">${ic('plus', 14)}Выбрать материал</button></div>`;
       body.querySelector('#livePickHere').onclick = () => openPicker(x => { b.itemId = x.id; Plans.save(plan); renderLive(); }, 'Выбрать материал');
     } else {
-      body.innerHTML = item.bank ? bankLiveHtml(item) : `<div class="lv-it">
+      body.innerHTML = item.bank ? bankLiveHtml(item, b.lvl || plan.student.level) : `<div class="lv-it">
         <h2>${esc(item.title)}</h2>
         ${item.outcome ? `<p class="oc">«${esc(item.outcome)}»</p>` : ''}
         ${item.idea ? `<p>${esc(item.idea)}</p>` : ''}
@@ -3325,15 +3361,16 @@ function renderLive(){
         Usage.bump(item.id);
         live.style.visibility = 'hidden';
         liveOnShowClose = () => { live.style.visibility = ''; };
-        openShow(item);
+        openShow(item.bank ? itemAt(item, b.lvl || plan.student.level) : item);
       };
+      body.querySelectorAll('[data-lvsw]').forEach(btn => btn.onclick = () => { b.lvl = btn.dataset.lvsw; Plans.save(plan); renderLive(); });
     }
   }
 
   // подсказка
   const next = plan.blocks[cur + 1];
   const curItem = b.itemId && byId[b.itemId];
-  const adaptHtml = curItem && curItem.bank && curItem.adapt ? `<span class="k" style="margin-top:6px">Адаптация по уровню</span><div class="bk-html">${curItem.adapt}</div>` : '';
+  const adaptHtml = curItem && curItem.bank && curItem.adapt && !itemAt(curItem, b.lvl || plan.student.level).atLevel ? `<span class="k" style="margin-top:6px">Адаптация по уровню</span><div class="bk-html">${curItem.adapt}</div>` : '';
   $('#liveTip').innerHTML = adaptHtml + `<span class="k">Подсказка</span><p>${esc(BLOCK_TIPS[b.key] || 'Держи темп по плану — ученик должен больше говорить, чем слушать.')}</p>`;
   // план урока
   $('#livePlan').innerHTML = `<h3>План урока</h3>${plan.blocks.map((x, i) => `<button class="r${i === cur ? ' cur' : (x.skipped ? ' skip' : (i < cur ? ' done' : ''))}" data-plan="${i}"><span class="n">${i < cur && !x.skipped ? ic('check', 13) : i + 1}</span><span class="t">${esc(x.title)}</span><small>${x.duration || 0}м</small></button>`).join('')}`;
@@ -3435,6 +3472,12 @@ function renderLibraryPage(root){
 function openLibDrawer(x, opts){
   opts = opts || {};
   if (!x) return;
+  const baseX = x;
+  if (x.bank) {
+    const planForLvl = opts.plan || Plans.list().find(p => p.status !== 'done');
+    const lvSel = opts.level !== undefined ? opts.level : (planForLvl ? planForLvl.student.level : '');
+    x = itemAt(baseX, lvSel);
+  }
   const el = $('#libDrawer');
   const isMat = !byId[x.id];
   const label = isMat ? 'Материал' : itemKind(x);
@@ -3457,7 +3500,7 @@ function openLibDrawer(x, opts){
   if (x.bank) {
     if (x.outcome) lines.push(`<i>«${esc(x.outcome)}»</i>`);
     x.sections.forEach(sc => lines.push(`<span class="bk-h">${esc(sc.title)}</span><div class="bk-html">${sc.html}</div>`));
-    if (x.adapt) lines.push(`<span class="bk-h">Адаптация по уровню</span><div class="bk-html">${x.adapt}</div>`);
+    if (x.adapt && !x.atLevel) lines.push(`<span class="bk-h">Адаптация по уровню</span><div class="bk-html">${x.adapt}</div>`);
   } else if (!isMat) {
     if (x.outcome) lines.push(`<i>«${esc(x.outcome)}»</i>`);
     if (x.leadIn) lines.push(`<span><b>Lead-in:</b> ${esc(x.leadIn)}</span>`);
@@ -3474,7 +3517,8 @@ function openLibDrawer(x, opts){
   el.innerHTML = `
     <div class="hdr"><span class="pill">${esc(label)}</span><span class="sp"></span>${isMat ? '' : starBtn(x.id)}<button id="ldClose" aria-label="Закрыть">${ic('x', 18)}</button></div>
     <h2>${esc(x.title)}</h2>
-    <div class="muted">${isMat ? '' : `${esc(itemLevel(x))} · ${itemMin(x)} мин`}</div>
+    <div class="muted">${isMat ? '' : `${esc(x.bank ? (x.atLevel || baseKeyOf(baseX)).replace('A0-A1', 'A0–A1') : itemLevel(x))} · ${itemMin(x)} мин`}</div>
+    ${x.bank ? lvChips(baseX, x.atLevel || baseKeyOf(baseX), 'data-dlv') : ''}
     <div class="prev"><span class="lb">Что внутри</span>${lines.join('') || '<span>—</span>'}</div>
     ${!isMat ? `<button class="ws-ghost" id="ldShow">${ic('play', 13)}Показать как ученику</button>` : ''}
     ${rows ? `<div class="addbox"><span class="k">Добавить в урок</span>${rows}</div>` : ''}`;
@@ -3482,6 +3526,7 @@ function openLibDrawer(x, opts){
   const close = () => { $('#libDrawer').classList.remove('open'); $('#drawerBg2').classList.remove('open'); };
   el.querySelector('#ldClose').onclick = close;
   $('#drawerBg2').onclick = close;
+  el.querySelectorAll('[data-dlv]').forEach(btn => btn.onclick = () => openLibDrawer(baseX, Object.assign({}, opts, { level: btn.dataset.dlv })));
   const sh = el.querySelector('#ldShow'); if (sh) sh.onclick = () => { close(); Usage.bump(x.id); openShow(x); };
   el.querySelectorAll('[data-addmode]').forEach(b => b.onclick = () => {
     const mode = b.dataset.addmode;
@@ -3620,7 +3665,7 @@ function renderTodayWidget(){
   }
   const problems = validate(DB);
   DB.bank = ((DB.bank && DB.bank.items) || []).map(x => {
-    const it = Object.assign({}, x, { bank: true, category: x.type });
+    const it = Object.assign({}, x, { bank: true, category: x.type, variants: (DB.variants && DB.variants[x.id]) || {} });
     if (x.type === 'activity') it.play = { type: 'bank' };
     return it;
   });
