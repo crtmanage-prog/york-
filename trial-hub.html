@@ -1041,6 +1041,9 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
 .bk-title .ru{font-family:'Golos Text',sans-serif;font-size:.4em;font-weight:400;margin-top:6px}
 
 /* --- сцена Live: слайды для ученика --- */
+.intro-slide .bk-title.big{font-size:clamp(40px,6vw,76px);line-height:1.1}
+.intro-slide .bk-text{font-size:clamp(20px,2.6vw,32px)}
+.live .lv-in{height:34px;border-radius:10px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);padding:0 10px;font:inherit;font-size:13px}
 .live .lv-pnav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;position:sticky;top:-28px;background:#fff;padding:6px 0;z-index:2}
 .live .lv-pslide{max-width:1000px}
 .live .lv-pslide .bk-h2{font-family:Unbounded,sans-serif;font-size:clamp(26px,3.4vw,40px);margin:0 0 16px;line-height:1.15}
@@ -3431,6 +3434,20 @@ function presCards(items){
   return `<div class="bk-cards two">${items.map(([en, ru]) => `<div class="bk-card"><span class="bk-ct">${esc(en)}${ru ? ruSp(ru) : ''}</span></div>`).join('')}</div>`;
 }
 const slideKick = (kicker, extra) => `<p class="bk-kicker"><span class="bk-pill">${esc(kicker)}</span>${extra ? `<span>${esc(extra)}</span>` : ''}</p>`;
+// стартовый слайд перед блоком: «Grammar time!» и т.п.; текст по умолчанию можно поменять в правой панели
+const INTRO_DEFAULTS = {
+  grammar: ['Grammar time!', 'Let’s look at a short topic and then move on to speaking practice.', 'Время грамматики!', 'Разберём короткую тему и перейдём к устной практике.'],
+  speaking: ['Speaking time!', 'Now it’s your turn to talk. Let’s practise what we’ve learned.', 'Время говорить!', 'Теперь твоя очередь говорить. Потренируем то, что мы разобрали.'],
+  activity: ['Activity time!', 'Let’s play and practise English together.', 'Время активности!', 'Давай вместе поиграем и потренируем английский.'],
+};
+function blockIntroHtml(b, it){
+  const d = INTRO_DEFAULTS[it.type] || INTRO_DEFAULTS.activity;
+  const title = b.introTitle || d[0];
+  const text = b.introText || d[1];
+  return slideKick(b.title) + `<div class="bk-deco intro-slide"><h3 class="bk-title big">${esc(title)}${b.introTitle ? '' : ruSp(d[2])}</h3>
+    <p class="bk-text">${esc(text)}${b.introText ? '' : ruSp(d[3])}</p>
+    <div class="bk-vocab"><span class="bk-lab">Today</span><span class="bk-chip">${esc(it.title)}</span></div></div>`;
+}
 function bankSlideHtml(t, sc, i){
   return `${slideKick(sc.title, t.title + (t.atLevel ? ' · ' + t.atLevel.replace('A0-A1', 'A0–A1') : ''))}${i === 0 ? `<h2 class="bk-h2">${esc(t.title)}</h2>` : ''}${bankDecorate(sc)}`;
 }
@@ -3467,7 +3484,7 @@ function liveSlides(plan, b){
     return [{ label: b.title, html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">${esc(b.title)}</h3>${presCards((b.questions || []).map(q => [q, (DB.translations && DB.translations[normTxt(q)]) || '']))}</div>` }];
   }
   const item = b.itemId && byId[b.itemId];
-  if (item && item.bank) { const it = itemAt(item, b.lvl || plan.student.level); return it.sections.map((sc, i) => ({ label: sc.title, html: bankSlideHtml(it, sc, i) })); }
+  if (item && item.bank) { const it = itemAt(item, b.lvl || plan.student.level); return [{ label: 'Start', html: blockIntroHtml(b, it) }, ...it.sections.map((sc, i) => ({ label: sc.title, html: bankSlideHtml(it, sc, i) }))]; }
   return [];
 }
 
@@ -3482,6 +3499,10 @@ function renderLiveAside(plan, b, slides, sub){
   }
   const lvItem = item && item.bank ? itemAt(item, b.lvl || plan.student.level) : null;
   if (lvItem && item.adapt && !lvItem.atLevel) parts.push(`<span class="k">Адаптация по уровню</span><div class="bk-html">${item.adapt}</div>`);
+  if (item && item.bank) {
+    const d = INTRO_DEFAULTS[item.type] || INTRO_DEFAULTS.activity;
+    parts.push(`<span class="k">Стартовый слайд</span><input id="liveIntroT" class="lv-in" placeholder="${esc(d[0])}" value="${esc(b.introTitle || '')}"><textarea id="liveIntroX" rows="2" placeholder="${esc(d[1])}">${esc(b.introText || '')}</textarea>`);
+  }
   let qsOwner = null, qsBank = null;
   if (b.mode === 'sections') { qsOwner = b.sections[Math.min(sub, b.sections.length - 1)]; qsBank = qsOwner.qkind; }
   else if (b.mode === 'text') { qsOwner = b; qsBank = b.qkind; }
@@ -3504,6 +3525,8 @@ function renderLiveAside(plan, b, slides, sub){
     if (!fresh.length) { toast('Больше новых идей в банке нет'); return; }
     qsOwner.questions = [...(qsOwner.questions || []), ...fresh]; Plans.save(plan); renderLive();
   };
+  const it1 = el.querySelector('#liveIntroT'), it2 = el.querySelector('#liveIntroX');
+  if (it1) { it1.onchange = () => { b.introTitle = it1.value.trim(); Plans.save(plan); renderLive(); }; it2.onchange = () => { b.introText = it2.value.trim(); Plans.save(plan); renderLive(); }; }
   const rc = el.querySelector('#liveRecap');
   if (rc) { rc.oninput = e => { b.recap = e.target.value; Plans.save(plan); }; rc.onchange = () => renderLive(); el.querySelector('#liveRecapReset').onclick = () => { b.recap = recapDraft(plan); Plans.save(plan); renderLive(); }; }
   el.querySelectorAll('[data-cp]').forEach(btn => btn.onclick = async () => {
