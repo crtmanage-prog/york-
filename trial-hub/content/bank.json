@@ -817,8 +817,8 @@
     {
      "key": "vocab",
      "title": "Vocabulary Bank",
-     "html": "<p><b>Future Plans</b><br>tomorrow · tonight · weekend · next week · morning · afternoon · evening · meet · go · watch · visit</p><p><b>One vocabulary set for the whole activity.</b></p>",
-     "text": "Future Plans tomorrow · tonight · weekend · next week · morning · afternoon · evening · meet · go · watch · visit One vocabulary set for the whole activity."
+     "html": "<p><b>Future Plans</b><br>tomorrow · tonight · weekend · next week · morning · afternoon · evening · meet · go · watch · visit</p>",
+     "text": "Future Plans tomorrow · tonight · weekend · next week · morning · afternoon · evening · meet · go · watch · visit"
     },
     {
      "key": "warmup",
@@ -884,8 +884,8 @@
     {
      "key": "vocab",
      "title": "Vocabulary Bank",
-     "html": "<p><b>Past Experiences</b><br>yesterday · last weekend · last year · yesterday morning · visited · watched · played · went · ate · saw</p><p><b>One vocabulary set for the whole activity.</b></p>",
-     "text": "Past Experiences yesterday · last weekend · last year · yesterday morning · visited · watched · played · went · ate · saw One vocabulary set for the whole activity."
+     "html": "<p><b>Past Experiences</b><br>yesterday · last weekend · last year · yesterday morning · visited · watched · played · went · ate · saw</p>",
+     "text": "Past Experiences yesterday · last weekend · last year · yesterday morning · visited · watched · played · went · ate · saw"
     },
     {
      "key": "warmup",
@@ -1889,8 +1889,8 @@
     {
      "key": "vocab",
      "title": "Vocabulary Bank",
-     "html": "<p><b>At the Hotel</b><br>hotel · room · key · breakfast · bathroom · Wi-Fi · towel · reception · problem · help</p><p><b>One vocabulary set for the whole activity.</b></p>",
-     "text": "At the Hotel hotel · room · key · breakfast · bathroom · Wi-Fi · towel · reception · problem · help One vocabulary set for the whole activity."
+     "html": "<p><b>At the Hotel</b><br>hotel · room · key · breakfast · bathroom · Wi-Fi · towel · reception · problem · help</p>",
+     "text": "At the Hotel hotel · room · key · breakfast · bathroom · Wi-Fi · towel · reception · problem · help"
     },
     {
      "key": "warmup",
@@ -1956,8 +1956,8 @@
     {
      "key": "vocab",
      "title": "Vocabulary Bank",
-     "html": "<p><b>About People</b><br>music · movies · books · sports · cooking · travel · pets · English · coffee · weekends</p><p><b>One vocabulary set for the whole activity.</b></p>",
-     "text": "About People music · movies · books · sports · cooking · travel · pets · English · coffee · weekends One vocabulary set for the whole activity."
+     "html": "<p><b>About People</b><br>music · movies · books · sports · cooking · travel · pets · English · coffee · weekends</p>",
+     "text": "About People music · movies · books · sports · cooking · travel · pets · English · coffee · weekends"
     },
     {
      "key": "warmup",
@@ -2023,8 +2023,8 @@
     {
      "key": "vocab",
      "title": "Vocabulary Bank",
-     "html": "<p><b>At the Airport</b><br>flight · ticket · passport · gate · bag · luggage · late · lost · help · problem</p><p><b>One vocabulary set for the whole activity.</b></p>",
-     "text": "At the Airport flight · ticket · passport · gate · bag · luggage · late · lost · help · problem One vocabulary set for the whole activity."
+     "html": "<p><b>At the Airport</b><br>flight · ticket · passport · gate · bag · luggage · late · lost · help · problem</p>",
+     "text": "At the Airport flight · ticket · passport · gate · bag · luggage · late · lost · help · problem"
     },
     {
      "key": "warmup",
@@ -2090,8 +2090,8 @@
     {
      "key": "vocab",
      "title": "Vocabulary Bank",
-     "html": "<p><b>About Me</b><br>family · friends · food · music · movies · sports · travel · hobbies · school · work</p><p><b>One vocabulary set for the whole activity.</b></p>",
-     "text": "About Me family · friends · food · music · movies · sports · travel · hobbies · school · work One vocabulary set for the whole activity."
+     "html": "<p><b>About Me</b><br>family · friends · food · music · movies · sports · travel · hobbies · school · work</p>",
+     "text": "About Me family · friends · food · music · movies · sports · travel · hobbies · school · work"
     },
     {
      "key": "warmup",
