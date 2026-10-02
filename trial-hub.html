@@ -1040,6 +1040,17 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
 .bk-formula .ru{color:rgba(210,231,57,.7);font-family:'Golos Text',sans-serif;font-weight:400}
 .bk-title .ru{font-family:'Golos Text',sans-serif;font-size:.4em;font-weight:400;margin-top:6px}
 
+/* --- сцена Live: слайды для ученика --- */
+.live .lv-pnav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;position:sticky;top:-28px;background:#fff;padding:6px 0;z-index:2}
+.live .lv-pslide{max-width:1000px}
+.live .lv-pslide .bk-h2{font-family:Unbounded,sans-serif;font-size:clamp(26px,3.4vw,40px);margin:0 0 16px;line-height:1.15}
+.live .lv-pslide .bk-deco{max-width:none}
+.bk-url{display:block;font-size:.6em;font-weight:400;color:#5B6B0A;margin-top:4px;font-family:'Golos Text',sans-serif}
+.live .lv-sc{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:6px}
+.live .lv-sc li{position:relative;background:#F7F7F2;border-left:3px solid #D2E739;border-radius:8px;padding:8px 28px 8px 10px;font-size:13px}
+.live .lv-sc li button{all:unset;cursor:pointer;position:absolute;right:8px;top:8px;color:#A8AAA4;font-size:12px}
+.live .lv-card textarea{border-radius:10px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);padding:8px 10px;font:inherit;font-size:13px;resize:vertical;color:#0A0A09}
+
 </style>
 </head>
 <body>
@@ -1108,7 +1119,8 @@ button.star:hover{border:0;background:rgba(17,18,14,.06)}
       <span style="flex:1"></span>
       <span class="lv-time" id="liveClock">00:00</span>
       <span class="lv-total" id="liveTotal">/ 30:00</span>
-      <label class="lv-auto" title="При переходе к блоку с материалом сразу открывать экран ученика"><input type="checkbox" id="liveAuto"> Сразу экран ученика</label>
+      <label class="lv-auto" title="Интерактивные активности (например, Describing pictures) сразу открывать на весь экран"><input type="checkbox" id="liveAuto"> Интерактив на весь экран</label>
+      <button class="lv-end ru-toggle" data-ru-toggle><span class="rt">Перевод: вкл</span></button>
       <button class="lv-end" id="liveClose">Завершить урок</button>
     </div>
     <div class="lv-seg" id="liveSeg"></div>
@@ -1957,10 +1969,7 @@ function bankDecorate(sc, compact){
   return `<div class="bk-deco k-${esc(sc.key)}${compact ? ' compact' : ''}">${out}</div>`;
 }
 function bankSteps(t){
-  return t.sections.map((sc, i) => ({
-    label: sc.title,
-    node: node(`<p class="bk-kicker"><span class="bk-pill">${esc(sc.title)}</span><span>${esc(t.title)}${t.atLevel ? ' · ' + esc(t.atLevel.replace('A0-A1', 'A0–A1')) : ''}</span></p>${bankDecorate(sc)}`),
-  }));
+  return t.sections.map((sc, i) => ({ label: sc.title, node: node(bankSlideHtml(t, sc, i)) }));
 }
 function bankLiveHtml(base, lvl){
   const item = itemAt(base, lvl);
@@ -3404,15 +3413,104 @@ function liveAutoShow(){
   if (!liveState || !autoShowOn()) return;
   const b = liveState.plan.blocks[liveState.cur];
   const item = b && b.mode === 'slot' && b.itemId && byId[b.itemId];
-  if (item) liveOpenShow(liveState.plan, b, item);
+  if (item && !item.bank) liveOpenShow(liveState.plan, b, item);
 }
 function gotoBlock(i){
   const { plan } = liveState;
   if (i < 0) return;
   if (i >= plan.blocks.length) { endLive(); return; }
-  liveState.cur = i; liveState.blockStart = Date.now();
+  liveState.cur = i; liveState.sub = 0; liveState.blockStart = Date.now();
   renderLive();
   liveAutoShow();
+}
+
+/* ---------- Сцена урока = то, что видит ученик ---------- */
+const ruSp = t => `<span class="ru">${esc(t)}</span>`;
+const firstWord = n => String(n || '').trim().split(/\s+/)[0] || '';
+function presCards(items){
+  return `<div class="bk-cards two">${items.map(([en, ru]) => `<div class="bk-card"><span class="bk-ct">${esc(en)}${ru ? ruSp(ru) : ''}</span></div>`).join('')}</div>`;
+}
+const slideKick = (kicker, extra) => `<p class="bk-kicker"><span class="bk-pill">${esc(kicker)}</span>${extra ? `<span>${esc(extra)}</span>` : ''}</p>`;
+function bankSlideHtml(t, sc, i){
+  return `${slideKick(sc.title, t.title + (t.atLevel ? ' · ' + t.atLevel.replace('A0-A1', 'A0–A1') : ''))}${i === 0 ? `<h2 class="bk-h2">${esc(t.title)}</h2>` : ''}${bankDecorate(sc)}`;
+}
+function introSlideHtml(plan, b, sc){
+  const t = sc.title;
+  const kick = slideKick(b.title);
+  const tchr = (typeof CurrentTeacher !== 'undefined' && CurrentTeacher && CurrentTeacher.profile) ? firstWord(CurrentTeacher.profile.full_name) : '';
+  if (t === 'Welcome') {
+    return kick + `<div class="bk-deco"><h3 class="bk-title">Hello!${ruSp('Привет!')}</h3>
+      <p class="bk-text">Welcome to your first lesson at YORK!${ruSp('Добро пожаловать на твой первый урок в YORK!')}</p>
+      ${tchr ? `<p class="bk-text">I’m ${esc(tchr)}, your English teacher.${ruSp('Я ' + tchr + ', твой учитель английского.')}</p>` : ''}</div>`;
+  }
+  if (t === 'About the teacher') {
+    return kick + `<div class="bk-deco"><h3 class="bk-title">About your teacher${ruSp('О твоём учителе')}</h3>${presCards([['My name', 'Моё имя'], ['Where I live', 'Где я живу'], ['Why I love English', 'Почему я люблю английский'], ['What I like to do', 'Что я люблю делать']])}</div>`;
+  }
+  const qs = (sc.questions || []).map(q => [q, (DB.translations && DB.translations[normTxt(q)]) || '']);
+  const isKnow = t === 'Getting to know you';
+  return kick + `<div class="bk-deco"><h3 class="bk-title">${esc(isKnow ? 'Let’s get to know you' : t)}${isKnow ? ruSp('Давай познакомимся') : ''}</h3>${presCards(qs)}</div>`;
+}
+// слайды блока: [{ label, html }]. Пустой массив — нет материала или интерактив старого формата
+function liveSlides(plan, b){
+  if (b.mode === 'sections') return (b.sections || []).map(sc => ({ label: sc.title, html: introSlideHtml(plan, b, sc) }));
+  if (b.mode === 'recap') {
+    if (b.recap == null) b.recap = recapDraft(plan);
+    const lines = String(b.recap).split('\n').map(x => x.trim()).filter(Boolean);
+    return [{ label: 'Recap', html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">What we did today${ruSp('Что мы сегодня сделали')}</h3><div class="bk-lines check">${lines.map(x => `<div class="bk-line">${esc(x)}</div>`).join('')}</div></div>` }];
+  }
+  if (b.mode === 'next') {
+    const en = ['Message your manager', 'Our Telegram channel', 'Our website'], ruT = ['Напиши менеджеру', 'Наш Telegram-канал', 'Наш сайт'];
+    return [{ label: 'Next Steps', html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">What’s next?${ruSp('Что дальше?')}</h3><div class="bk-cards">${NEXT_LINKS.map((l, i) => `<div class="bk-card"><span class="bk-ct">${esc(en[i] || l.label)}${ruSp(ruT[i] || l.hint)}<span class="bk-url">${esc(l.url.replace('https://', ''))}</span></span></div>`).join('')}</div></div>` }];
+  }
+  if (b.mode === 'text') {
+    if (b.key === 'cabinet') return [{ label: 'Cabinet', html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">Your personal cabinet${ruSp('Твой личный кабинет')}</h3>${presCards([['Your lessons schedule', 'Расписание твоих занятий'], ['Homework', 'Домашнее задание'], ['Materials', 'Материалы'], ['Your progress', 'Твой прогресс'], ['Chat with your teacher', 'Связь с преподавателем']])}</div>` }];
+    return [{ label: b.title, html: slideKick(b.title) + `<div class="bk-deco"><h3 class="bk-title">${esc(b.title)}</h3>${presCards((b.questions || []).map(q => [q, (DB.translations && DB.translations[normTxt(q)]) || '']))}</div>` }];
+  }
+  const item = b.itemId && byId[b.itemId];
+  if (item && item.bank) { const it = itemAt(item, b.lvl || plan.student.level); return it.sections.map((sc, i) => ({ label: sc.title, html: bankSlideHtml(it, sc, i) })); }
+  return [];
+}
+
+// всё, что нужно только учителю: подсказка, вопросы-сценарий, уровень, сводка
+function renderLiveAside(plan, b, slides, sub){
+  const el = $('#liveTip');
+  const item = b.itemId && byId[b.itemId];
+  const parts = [];
+  if (item && item.bank && availKeys(item).length > 1) {
+    const cur = itemAt(item, b.lvl || plan.student.level).atLevel || baseKeyOf(item);
+    parts.push(`<span class="k">Уровень материала</span>${lvChips(item, cur, 'data-lvsw')}`);
+  }
+  const lvItem = item && item.bank ? itemAt(item, b.lvl || plan.student.level) : null;
+  if (lvItem && item.adapt && !lvItem.atLevel) parts.push(`<span class="k">Адаптация по уровню</span><div class="bk-html">${item.adapt}</div>`);
+  let qsOwner = null, qsBank = null;
+  if (b.mode === 'sections') { qsOwner = b.sections[Math.min(sub, b.sections.length - 1)]; qsBank = qsOwner.qkind; }
+  else if (b.mode === 'text') { qsOwner = b; qsBank = b.qkind; }
+  if (qsOwner) {
+    parts.push(`<span class="k">Что сказать</span><ul class="lv-sc">${(qsOwner.questions || []).map(q => `<li>${esc(q)}<button data-rmq="${esc(q)}" title="Убрать">✕</button></li>`).join('') || '<li style="color:#6B6C64">Пока пусто</li>'}</ul>${QUESTION_BANK[qsBank] ? '<button class="ws-ghost" id="liveMoreQ" style="height:34px">Ещё идеи</button>' : ''}`);
+  }
+  if (b.mode === 'recap') {
+    parts.push(`<span class="k">Текст сводки</span><textarea id="liveRecap" rows="6">${esc(b.recap || '')}</textarea><button class="ws-ghost" id="liveRecapReset" style="height:34px">Собрать заново</button>`);
+  }
+  if (b.mode === 'next') {
+    parts.push(`<span class="k">Ссылки для чата</span>${NEXT_LINKS.map((l, i) => `<button class="ws-ghost" data-cp="${i}" style="height:34px;justify-content:flex-start">Копировать: ${esc(l.label)}</button>`).join('')}`);
+  }
+  parts.push(`<span class="k">Подсказка</span><p>${esc(BLOCK_TIPS[b.key] || 'Держи темп по плану — ученик должен больше говорить, чем слушать.')}</p>`);
+  el.innerHTML = parts.join('');
+  el.querySelectorAll('[data-lvsw]').forEach(btn => btn.onclick = () => { b.lvl = btn.dataset.lvsw; Plans.save(plan); renderLive(); });
+  el.querySelectorAll('[data-rmq]').forEach(btn => btn.onclick = () => { qsOwner.questions = (qsOwner.questions || []).filter(q => q !== btn.dataset.rmq); Plans.save(plan); renderLive(); });
+  const mq = el.querySelector('#liveMoreQ');
+  if (mq) mq.onclick = () => {
+    const fresh = moreQuestions(qsBank, qsOwner.questions || []);
+    if (!fresh.length) { toast('Больше новых идей в банке нет'); return; }
+    qsOwner.questions = [...(qsOwner.questions || []), ...fresh]; Plans.save(plan); renderLive();
+  };
+  const rc = el.querySelector('#liveRecap');
+  if (rc) { rc.oninput = e => { b.recap = e.target.value; Plans.save(plan); }; rc.onchange = () => renderLive(); el.querySelector('#liveRecapReset').onclick = () => { b.recap = recapDraft(plan); Plans.save(plan); renderLive(); }; }
+  el.querySelectorAll('[data-cp]').forEach(btn => btn.onclick = async () => {
+    const url = NEXT_LINKS[+btn.dataset.cp].url; let ok = false;
+    try { await navigator.clipboard.writeText(url); ok = true; } catch(e){ ok = fallbackCopy(url); }
+    toast(ok ? 'Ссылка скопирована' : 'Не получилось скопировать', !ok);
+  });
 }
 
 function renderLive(){
@@ -3434,58 +3532,25 @@ function renderLive(){
     <button class="lv-ab" id="liveAddAct">${ic('plus', 14)}Добавить активность</button>
     <button class="lv-ib" id="liveSkip" title="Пропустить блок">${ic('skip', 16)}</button>`;
 
-  // сцена
+  // сцена: слайды для ученика прямо в центре; материалы для учителя — справа
   const body = $('#liveBody');
-  if (b.mode === 'sections') {
-    liveState.sec = liveState.sec || {};
-    const si = Math.min(liveState.sec[b.id] || 0, b.sections.length - 1);
-    const sc = b.sections[si];
-    const hasBank = !!QUESTION_BANK[sc.qkind];
-    body.innerHTML = `<div class="ws-seg" style="margin-bottom:16px">${b.sections.map((x, i) => `<button data-sec="${i}" class="${i === si ? 'on' : ''}">${esc(x.title)}</button>`).join('')}</div>
-      <ul class="lv-qs">${(sc.questions || []).map(q => `<li>${esc(q)}<button data-rmq="${esc(q)}" title="Убрать вопрос">✕</button></li>`).join('') || '<li style="color:#6B6C64">Пока пусто</li>'}</ul>
-      ${hasBank ? `<button class="ws-ghost" id="liveMoreQ">Ещё идеи и вопросы</button>` : ''}`;
-    body.querySelectorAll('[data-sec]').forEach(x => x.onclick = () => { liveState.sec[b.id] = +x.dataset.sec; renderLive(); });
-    body.querySelectorAll('[data-rmq]').forEach(btn => btn.onclick = () => { sc.questions = sc.questions.filter(q => q !== btn.dataset.rmq); Plans.save(plan); renderLive(); });
-    const mq = body.querySelector('#liveMoreQ');
-    if (mq) mq.onclick = () => {
-      const fresh = moreQuestions(sc.qkind, sc.questions || []);
-      if (!fresh.length) { toast('Больше новых идей в банке нет'); return; }
-      sc.questions = [...sc.questions, ...fresh]; Plans.save(plan); renderLive();
-    };
-  } else if (b.mode === 'recap') {
-    if (b.recap == null) b.recap = recapDraft(plan);
-    body.innerHTML = `<div class="lv-it"><h2>Что мы сегодня сделали</h2>
-      <p class="oc">Сводка собрана из выбранных материалов. Её можно поправить.</p>
-      <textarea id="liveRecap" rows="8" style="width:100%;border-radius:12px;border:1px solid rgba(17,18,14,.09);background:#F7F7F2;padding:12px;font:inherit;font-size:15px;resize:vertical">${esc(b.recap)}</textarea>
-      <button class="ws-ghost" id="liveRecapReset" style="margin-top:10px">Собрать заново</button></div>`;
-    body.querySelector('#liveRecap').oninput = e => { b.recap = e.target.value; Plans.save(plan); };
-    body.querySelector('#liveRecapReset').onclick = () => { b.recap = recapDraft(plan); Plans.save(plan); renderLive(); };
-  } else if (b.mode === 'next') {
-    body.innerHTML = `<div class="lv-it"><h2>Куда писать дальше</h2><p class="oc">Скопируйте ссылку и отправьте ученику в чат.</p>
-      <div style="display:flex;flex-direction:column;gap:10px">${NEXT_LINKS.map((l, i) => `<div class="ws-radio" style="cursor:default"><span><b>${esc(l.label)}</b><small>${esc(l.hint)} · ${esc(l.url.replace('https://', ''))}</small></span><span style="flex:1"></span><button class="ws-ghost" data-cp="${i}" style="height:34px">Копировать</button><a class="ws-ghost" href="${esc(l.url)}" target="_blank" rel="noopener" style="height:34px;text-decoration:none">Открыть</a></div>`).join('')}</div></div>`;
-    body.querySelectorAll('[data-cp]').forEach(btn => btn.onclick = async () => {
-      const url = NEXT_LINKS[+btn.dataset.cp].url; let ok = false;
-      try { await navigator.clipboard.writeText(url); ok = true; } catch(e){ ok = fallbackCopy(url); }
-      toast(ok ? 'Ссылка скопирована' : 'Не получилось скопировать', !ok);
-    });
-  } else if (b.mode === 'text') {
-    const hasBank = !!QUESTION_BANK[b.qkind];
-    body.innerHTML = `<ul class="lv-qs" id="liveQs">${(b.questions || []).map(q => `<li>${esc(q)}<button data-rmq="${esc(q)}" title="Убрать вопрос">✕</button></li>`).join('') || '<li style="color:#6B6C64">Вопросов пока нет</li>'}</ul>
-      ${hasBank ? `<button class="ws-ghost" id="liveMoreQ">Ещё идеи и вопросы</button>` : ''}`;
-    body.querySelectorAll('[data-rmq]').forEach(btn => btn.onclick = () => { b.questions = (b.questions || []).filter(q => q !== btn.dataset.rmq); Plans.save(plan); renderLive(); });
-    const mq = body.querySelector('#liveMoreQ');
-    if (mq) mq.onclick = () => {
-      const fresh = moreQuestions(b.qkind, b.questions || []);
-      if (!fresh.length) { toast('Больше новых идей в банке нет для этого блока'); return; }
-      b.questions = [...(b.questions || []), ...fresh]; Plans.save(plan); renderLive();
-    };
+  const slides = liveSlides(plan, b);
+  liveState.slides = slides;
+  if (liveState.subWanted === 'last') liveState.sub = Math.max(0, slides.length - 1);
+  liveState.subWanted = null;
+  liveState.sub = Math.max(0, Math.min(liveState.sub || 0, Math.max(0, slides.length - 1)));
+  const sub = liveState.sub;
+  if (slides.length) {
+    body.innerHTML = `${slides.length > 1 ? `<div class="lv-pnav">${slides.map((x, i) => `<button class="stp${i === sub ? ' cur' : (i < sub ? ' done' : '')}" data-sub="${i}">${esc(x.label)}</button>`).join('')}</div>` : ''}<div class="lv-pslide">${slides[sub].html}</div>`;
+    body.querySelectorAll('[data-sub]').forEach(x => x.onclick = () => { liveState.sub = +x.dataset.sub; renderLive(); });
+    body.scrollTop = 0;
   } else {
     const item = b.itemId && byId[b.itemId];
     if (!item) {
       body.innerHTML = `<div class="lv-it"><h2>Материал не выбран</h2><p class="oc">В этом блоке нет материала. Выберите из библиотеки.</p><button class="ws-cta" id="livePickHere">${ic('plus', 14)}Выбрать материал</button></div>`;
       body.querySelector('#livePickHere').onclick = () => openPicker(x => { b.itemId = x.id; Plans.save(plan); renderLive(); }, 'Выбрать материал');
     } else {
-      body.innerHTML = item.bank ? bankLiveHtml(item, b.lvl || plan.student.level) : `<div class="lv-it">
+      body.innerHTML = `<div class="lv-it">
         <h2>${esc(item.title)}</h2>
         ${item.outcome ? `<p class="oc">«${esc(item.outcome)}»</p>` : ''}
         ${item.idea ? `<p>${esc(item.idea)}</p>` : ''}
@@ -3497,22 +3562,19 @@ function renderLive(){
         <button class="ws-cta" id="liveOpenShow">${ic('play', 14)}Открыть экран для ученика</button>
       </div>`;
       body.querySelector('#liveOpenShow').onclick = () => liveOpenShow(plan, b, item);
-      body.querySelectorAll('[data-lvsw]').forEach(btn => btn.onclick = () => { b.lvl = btn.dataset.lvsw; Plans.save(plan); renderLive(); });
     }
   }
 
-  // подсказка
+  // правая панель (только для учителя)
   const next = plan.blocks[cur + 1];
-  const curItem = b.itemId && byId[b.itemId];
-  const adaptHtml = curItem && curItem.bank && curItem.adapt && !itemAt(curItem, b.lvl || plan.student.level).atLevel ? `<span class="k" style="margin-top:6px">Адаптация по уровню</span><div class="bk-html">${curItem.adapt}</div>` : '';
-  $('#liveTip').innerHTML = adaptHtml + `<span class="k">Подсказка</span><p>${esc(BLOCK_TIPS[b.key] || 'Держи темп по плану — ученик должен больше говорить, чем слушать.')}</p>`;
+  renderLiveAside(plan, b, slides, sub);
   // план урока
   $('#livePlan').innerHTML = `<h3>План урока</h3>${plan.blocks.map((x, i) => `<button class="r${i === cur ? ' cur' : (x.skipped ? ' skip' : (i < cur ? ' done' : ''))}" data-plan="${i}"><span class="n">${i < cur && !x.skipped ? ic('check', 13) : i + 1}</span><span class="t">${esc(x.title)}</span><small>${x.duration || 0}м</small></button>`).join('')}`;
   $('#livePlan').querySelectorAll('[data-plan]').forEach(r => r.onclick = () => gotoBlock(+r.dataset.plan));
 
-  $('#livePrev').disabled = cur === 0;
-  $('#livePrev').innerHTML = cur === 0 ? `${ic('back', 14)}Назад` : `${ic('back', 14)}Назад: ${esc(plan.blocks[cur - 1].title)}`;
-  $('#liveNext').innerHTML = next ? `Дальше: ${esc(next.title)}${ic('arrow', 16)}` : `К отчёту${ic('check', 16)}`;
+  $('#livePrev').disabled = cur === 0 && sub === 0;
+  $('#livePrev').innerHTML = sub > 0 ? `${ic('back', 14)}Назад: ${esc(slides[sub - 1].label)}` : (cur === 0 ? `${ic('back', 14)}Назад` : `${ic('back', 14)}Назад: ${esc(plan.blocks[cur - 1].title)}`);
+  $('#liveNext').innerHTML = sub < slides.length - 1 ? `Дальше: ${esc(slides[sub + 1].label)}${ic('arrow', 16)}` : (next ? `Дальше: ${esc(next.title)}${ic('arrow', 16)}` : `К отчёту${ic('check', 16)}`);
 
   $('#liveAddAct').onclick = () => openPicker(item => {
     const nb = extraBlockFor(item);
@@ -3523,8 +3585,22 @@ function renderLive(){
   $('#liveSkip').onclick = () => { b.skipped = true; Plans.save(plan); gotoBlock(cur + 1); };
   liveTick();
 }
-$('#livePrev').onclick = () => { if (liveState && liveState.cur > 0) gotoBlock(liveState.cur - 1); };
-$('#liveNext').onclick = () => { if (liveState) gotoBlock(liveState.cur + 1); };
+$('#livePrev').onclick = () => {
+  if (!liveState) return;
+  if (liveState.sub > 0) { liveState.sub--; renderLive(); }
+  else if (liveState.cur > 0) { liveState.subWanted = 'last'; gotoBlock(liveState.cur - 1); }
+};
+$('#liveNext').onclick = () => {
+  if (!liveState) return;
+  if (liveState.sub < (liveState.slides || []).length - 1) { liveState.sub++; renderLive(); }
+  else gotoBlock(liveState.cur + 1);
+};
+document.addEventListener('keydown', e => {
+  if (!liveState || !live.classList.contains('open') || show.classList.contains('open')) return;
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '')) return;
+  if (e.key === 'ArrowRight') $('#liveNext').click();
+  if (e.key === 'ArrowLeft' && !$('#livePrev').disabled) $('#livePrev').click();
+});
 
 /* ---------- Библиотека (фильтры слева + карточки) и превью ---------- */
 const libF = { types: new Set(['lessons', 'activities', 'grammar', 'materials']), levels: new Set(), saved: false, q: '', sort: 'title' };
