@@ -2199,8 +2199,7 @@ function renderTrialLessonsList(root){
         </div>
       </div>`}`;
 
-  const newBtn = root.querySelector('#newPlanBtn') || root.querySelector('#newPlanBtn2');
-  if (newBtn) newBtn.onclick = openNewLessonModal;
+  root.querySelectorAll('#newPlanBtn, #newPlanBtn2').forEach(b => b.onclick = openNewLessonModal);
   if (!all.length) return;
 
   root.querySelectorAll('[data-tlf]').forEach(b => b.onclick = () => { tlFilter.status = b.dataset.tlf; rerender(); });
