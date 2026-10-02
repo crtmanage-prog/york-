@@ -2441,28 +2441,48 @@ function moreQuestions(kind, exclude){
 // шаблоны урока (30 минут). Во всех шаблонах 7 обязательных блоков — их нельзя удалить.
 // mode: text — вопросы/идеи, slot — материал из библиотеки. durEdit — можно ли менять длительность в «закрытых» шаблонах.
 const REQ = (title, min, mode, extra) => Object.assign({ title, min, mode, durEdit: false }, extra || {});
+function introSections(kids){
+  return kids ? [
+    { title: 'Welcome', qkind: 'warmup', seed: ['Hello! Can you hear and see me?', 'How are you today?'] },
+    { title: 'About the teacher', qkind: null, seed: ['My name is … I teach English at YORK!', 'I love English because … (расскажите коротко и просто)', 'Do you want to ask me anything?'] },
+    { title: 'Getting to know you', qkind: null, seed: ['What\'s your name? How old are you?', 'What do you like to play?', 'Do you like English? Why?'] },
+  ] : [
+    { title: 'Welcome', qkind: 'warmup', seed: ['Hello! Can you hear and see me well?', 'How are you today?'] },
+    { title: 'About the teacher', qkind: null, seed: ['My name is … and I teach English at YORK!', 'Why I love English / a little about me', 'Do you have any questions about me or the lesson?'] },
+    { title: 'Getting to know you', qkind: 'discovery', seed: ['What\'s your name? What do you do?', 'Why do you want to learn English?', 'Where do you need English — travel, work, study, movies?', 'How would you describe your level now?'] },
+  ];
+}
 function reqBlocks(mins, kids){
   return [
-    REQ('Warm-up & Connection', mins[0], 'text', { key: 'warmup', qkind: 'warmup', seed: kids ? ['Hello! What\'s your name?', 'How are you today?'] : ['How are you today?', 'What have you been up to lately?'] }),
-    REQ('Goal Discovery', mins[1], 'text', { key: 'discovery', qkind: 'discovery', seed: kids ? ['What do you like to play?', 'Do you like English?'] : ['Why do you want to learn English?', 'What do you enjoy doing in your free time?'] }),
-    REQ('Mini Lesson', mins[2], 'slot', { key: 'topic', accept: 'topic', durEdit: true }),
-    REQ('Practice', mins[3], 'slot', { key: 'practice', accept: 'activity', durEdit: true }),
-    REQ('Speaking Application', mins[4], 'slot', { key: 'speaking', accept: 'activity', durEdit: true }),
-    REQ('Cabinet Preview', mins[5], 'text', { key: 'cabinet', seed: ['Покажите личный кабинет: расписание, домашка, прогресс.', 'Покажите, где найти материалы и как написать преподавателю.'] }),
-    REQ('Wrap-up', mins[6], 'text', { key: 'wrapup', qkind: 'wrapup', seed: kids ? ['What did you like most today?'] : ['What’s one new thing you learned today?'] }),
+    REQ('Introduction', mins[0], 'sections', { key: 'intro', durEdit: true, sections: introSections(kids) }),
+    REQ('Mini Lesson', mins[1], 'slot', { key: 'topic', accept: 'topic', durEdit: true }),
+    REQ('Practice', mins[2], 'slot', { key: 'practice', accept: 'activity', durEdit: true }),
+    REQ('Speaking Application', mins[3], 'slot', { key: 'speaking', accept: 'activity', durEdit: true }),
+    REQ('Cabinet Preview', mins[4], 'text', { key: 'cabinet', seed: ['Покажите личный кабинет: расписание, домашка, прогресс.', 'Покажите, где найти материалы и как написать преподавателю.'] }),
+    REQ('Lesson Recap', mins[5], 'recap', { key: 'recap' }),
+    REQ('Next Steps', mins[6], 'next', { key: 'next' }),
   ];
 }
 const TEMPLATES = {
-  standard: { name: 'Standard', desc: 'Для большинства учеников. Mini Lesson, Practice и Speaking можно переставлять.', locked: true, blocks: reqBlocks([4, 3, 7, 6, 5, 2, 3], false) },
-  kids: { name: 'Kids', desc: 'Игры, простые слова, больше активности. Mini Lesson, Practice и Speaking можно переставлять.', locked: true, blocks: reqBlocks([4, 3, 6, 7, 5, 2, 3], true) },
-  custom: { name: 'Custom', desc: 'Те же обязательные блоки, но можно менять порядок и длительность любого.', locked: false, blocks: reqBlocks([4, 3, 7, 6, 5, 2, 3], false) },
+  standard: { name: 'Standard', desc: 'Для большинства учеников. Mini Lesson, Practice и Speaking можно переставлять.', locked: true, blocks: reqBlocks([8, 7, 6, 5, 2, 1, 1], false) },
+  kids: { name: 'Kids', desc: 'Игры, простые слова, больше активности. Mini Lesson, Practice и Speaking можно переставлять.', locked: true, blocks: reqBlocks([8, 6, 7, 5, 2, 1, 1], true) },
+  custom: { name: 'Custom', desc: 'Те же обязательные блоки, но можно менять порядок и длительность любого.', locked: false, blocks: reqBlocks([8, 7, 6, 5, 2, 1, 1], false) },
 };
+// ссылки для финального блока Next Steps
+const NEXT_LINKS = [
+  { label: 'Менеджер', url: 'https://t.me/thearbeiter01', hint: 'Записаться, вопросы по обучению и оплате' },
+  { label: 'Telegram-канал', url: 'https://t.me/weyorkonline', hint: 'Новости школы и полезные материалы' },
+  { label: 'Сайт', url: 'https://weyork.online', hint: 'О школе, форматы и цены' },
+];
 const BLOCK_TIPS = {
   warmup: 'Начни с лёгких вопросов — цель: расслабить ученика и услышать его первые фразы.',
   discovery: 'Узнай цель, интересы и где нужен английский. Записывай главное в заметки.',
   topic: 'Одна маленькая победа за блок: объясни коротко и сразу дай ученику сказать фразу.',
   practice: 'Практика устная: ученик отвечает голосом, ты мягко поправляешь.',
   speaking: 'Минимум вмешательства: пусть говорит, ошибки записывай и разбери в конце.',
+  intro: 'Начни с приветствия, расскажи о себе и узнай ученика: имя, зачем ему английский, где нужен, какой уровень. Переключайся между подпунктами сверху.',
+  recap: 'Коротко подведи итог: чему научились, с какой темой познакомились. Текст можно поправить.',
+  next: 'Скажи, куда писать дальше: менеджеру, Telegram-каналу, на сайт. Ссылки можно скопировать.',
   cabinet: 'Покажи личный кабинет: расписание, домашку, материалы. Этот блок можно пропустить, но он всегда остаётся в плане.',
   wrapup: 'Подведи итог: что ученик теперь умеет, и предложи следующий шаг.',
 };
@@ -2477,6 +2497,7 @@ function buildBlocks(tplKey){
   return t.blocks.map(b => ({
     id: uid('b'), key: b.key, title: b.title, duration: b.min, mode: b.mode, accept: b.accept || null, qkind: b.qkind || null,
     questions: b.seed ? b.seed.slice() : [], itemId: null, note: '', skipped: false, visited: false,
+    sections: b.sections ? b.sections.map(x => ({ id: uid('s'), title: x.title, qkind: x.qkind || null, questions: x.seed.slice() })) : undefined,
     req: true, durEdit: t.locked ? !!b.durEdit : true,
   }));
 }
@@ -2512,7 +2533,7 @@ const Plans = {
   save(p){ p.updatedAt = Date.now(); const list = this.list().filter(x => x.id !== p.id); list.unshift(p); this.saveAll(list); },
   remove(id){ this.saveAll(this.list().filter(p => p.id !== id)); },
 };
-const blockReady = b => b.mode === 'text' || !!(b.itemId && byId[b.itemId]);
+const blockReady = b => b.mode !== 'slot' || !!(b.itemId && byId[b.itemId]);
 const planProgress = p => { const n = p.blocks.length; return n ? p.blocks.filter(blockReady).length / n : 0; };
 const planTotalMin = p => p.blocks.reduce((n, b) => n + (b.skipped ? 0 : (b.duration || 0)), 0);
 function planStatus(p){
@@ -2727,6 +2748,7 @@ function openBlockEditor(plan, b, onDone){
       <label>Название<input id="beTitle" value="${esc(b.title)}"></label>
       <label>Длительность, мин<input id="beDur" type="number" min="1" max="30" value="${b.duration || 5}"${durOk ? '' : ' disabled'}></label>
       ${durOk ? '' : '<p class="ws-hint" style="margin:0">В этом шаблоне длительность блока зафиксирована. Её можно менять в шаблоне Custom.</p>'}
+      ${b.mode === 'sections' ? (b.sections || []).map((sc, i) => `<label>${esc(sc.title)} — вопросы и идеи (по одному в строке)<textarea data-bes="${i}" rows="4">${esc((sc.questions || []).join('\n'))}</textarea></label>`).join('') : ''}
       ${b.mode === 'text' ? `<label>Вопросы и идеи (по одному в строке)<textarea id="beQs" rows="6">${esc((b.questions || []).join('\n'))}</textarea></label>` : ''}
     </div>
     <div class="ws-mfoot" style="margin-top:14px"><button class="ws-ghost" id="beCancel">Отмена</button><button class="ws-cta" id="beSave">Сохранить</button></div>`;
@@ -2734,6 +2756,7 @@ function openBlockEditor(plan, b, onDone){
   box.querySelector('#beSave').onclick = () => {
     b.title = box.querySelector('#beTitle').value.trim() || b.title;
     if (durOk) b.duration = Math.max(1, Math.min(30, parseInt(box.querySelector('#beDur').value, 10) || b.duration));
+    if (b.mode === 'sections') box.querySelectorAll('[data-bes]').forEach(t => { b.sections[+t.dataset.bes].questions = t.value.split('\n').map(x => x.trim()).filter(Boolean); });
     if (b.mode === 'text') b.questions = box.querySelector('#beQs').value.split('\n').map(x => x.trim()).filter(Boolean);
     Plans.save(plan); closePicker(); onDone();
   };
@@ -2750,7 +2773,10 @@ function openLessonPreview(plan, onStart){
     ${plan.blocks.map((b, i) => {
       const item = b.itemId && byId[b.itemId];
       let inner;
-      if (b.mode === 'text') inner = (b.questions || []).length ? `<ul class="pv-ul">${b.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>` : '<span class="ws-hint">Без заготовленных вопросов</span>';
+      if (b.mode === 'sections') inner = (b.sections || []).map(sc => `<b style="font-size:13px">${esc(sc.title)}</b><ul class="pv-ul">${(sc.questions || []).slice(0, 3).map(q => `<li>${esc(q)}</li>`).join('')}</ul>`).join('');
+      else if (b.mode === 'recap') inner = '<span class="ws-hint">Сводка соберётся из выбранных материалов урока.</span>';
+      else if (b.mode === 'next') inner = `<ul class="pv-ul">${NEXT_LINKS.map(l => `<li>${esc(l.label)}</li>`).join('')}</ul>`;
+      else if (b.mode === 'text') inner = (b.questions || []).length ? `<ul class="pv-ul">${b.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>` : '<span class="ws-hint">Без заготовленных вопросов</span>';
       else if (item) inner = `<b>${esc(item.title)}</b><span class="ws-hint">${esc(itemKind(item))} · ${esc(itemLevel(item))}</span>${item.outcome ? `<i class="ws-hint">«${esc(item.outcome)}»</i>` : ''}${(item.explanation || item.phrases || []).length ? `<ul class="pv-ul">${(item.explanation || item.phrases).slice(0, 3).map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}`;
       else inner = '<span class="ws-hint" style="color:#B7791F">Материал не выбран</span>';
       return `<div class="ws-glass pv-blk"><div class="pv-h"><span class="no">${i + 1}</span><b>${esc(b.title)}</b><span class="pv-m">${b.duration || 0} мин</span></div>${inner}</div>`;
@@ -2846,7 +2872,7 @@ function renderPrepareStep(body, plan, root){
       const item = b.itemId && byId[b.itemId];
       const isEmpty = !blockReady(b);
       const movable = canMoveBlock(plan, b);
-      const sub = b.mode === 'text' ? ((b.questions || [])[0] || 'Вопросы и идеи — в режиме урока') : (item ? item.title : `Пусто: добавьте ${b.accept === 'topic' ? 'мини-урок' : (b.accept === 'activity' ? 'активность' : 'материал')}`);
+      const sub = b.mode === 'sections' ? (b.sections || []).map(x => x.title).join(' · ') : b.mode === 'recap' ? 'Сводка соберётся из выбранных материалов' : b.mode === 'next' ? NEXT_LINKS.map(l => l.label).join(' · ') : b.mode === 'text' ? ((b.questions || [])[0] || 'Вопросы и идеи — в режиме урока') : (item ? item.title : `Пусто: добавьте ${b.accept === 'topic' ? 'мини-урок' : (b.accept === 'activity' ? 'активность' : 'материал')}`);
       return `<div class="ws-glass ws-blk${isEmpty ? ' is-empty' : ''}${picked && b.id === slotId ? ' sel' : ''}" data-id="${esc(b.id)}"${movable ? ' draggable="true"' : ''}>
         <span class="grab" style="${movable ? '' : 'opacity:.25;cursor:default'}">${ic('grab', 16)}</span>
         <span class="ck">${isEmpty ? ic('circle', 18) : ic('check', 18)}</span>
@@ -3092,6 +3118,18 @@ function closeNewLessonModal(){ $('#newLessonBg').classList.remove('open'); $('#
 $('#newLessonClose').onclick = closeNewLessonModal;
 $('#newLessonBg').onclick = closeNewLessonModal;
 
+// черновик итоговой сводки из материалов урока (на английском, чтобы можно было зачитать ученику)
+function recapDraft(plan){
+  const title = k => { const bl = plan.blocks.find(x => x.key === k && x.itemId && byId[x.itemId]); return bl ? byId[bl.itemId].title : ''; };
+  const t = title('topic'), pr = title('practice'), sp = title('speaking');
+  const lines = ['Today we met and talked about your goals.'];
+  if (t) lines.push('We learned: ' + t + '.');
+  if (pr) lines.push('We practised: ' + pr + '.');
+  if (sp) lines.push('In the speaking part we worked on: ' + sp + '.');
+  lines.push('You did a great job!');
+  return lines.join('\n');
+}
+
 /* ---------- Live Lesson Mode ---------- */
 const live = $('#live');
 let liveState = null;   // { plan, cur, started, blockStart, timer }
@@ -3167,7 +3205,39 @@ function renderLive(){
 
   // сцена
   const body = $('#liveBody');
-  if (b.mode === 'text') {
+  if (b.mode === 'sections') {
+    liveState.sec = liveState.sec || {};
+    const si = Math.min(liveState.sec[b.id] || 0, b.sections.length - 1);
+    const sc = b.sections[si];
+    const hasBank = !!QUESTION_BANK[sc.qkind];
+    body.innerHTML = `<div class="ws-seg" style="margin-bottom:16px">${b.sections.map((x, i) => `<button data-sec="${i}" class="${i === si ? 'on' : ''}">${esc(x.title)}</button>`).join('')}</div>
+      <ul class="lv-qs">${(sc.questions || []).map(q => `<li>${esc(q)}<button data-rmq="${esc(q)}" title="Убрать вопрос">✕</button></li>`).join('') || '<li style="color:#6B6C64">Пока пусто</li>'}</ul>
+      ${hasBank ? `<button class="ws-ghost" id="liveMoreQ">Ещё идеи и вопросы</button>` : ''}`;
+    body.querySelectorAll('[data-sec]').forEach(x => x.onclick = () => { liveState.sec[b.id] = +x.dataset.sec; renderLive(); });
+    body.querySelectorAll('[data-rmq]').forEach(btn => btn.onclick = () => { sc.questions = sc.questions.filter(q => q !== btn.dataset.rmq); Plans.save(plan); renderLive(); });
+    const mq = body.querySelector('#liveMoreQ');
+    if (mq) mq.onclick = () => {
+      const fresh = moreQuestions(sc.qkind, sc.questions || []);
+      if (!fresh.length) { toast('Больше новых идей в банке нет'); return; }
+      sc.questions = [...sc.questions, ...fresh]; Plans.save(plan); renderLive();
+    };
+  } else if (b.mode === 'recap') {
+    if (b.recap == null) b.recap = recapDraft(plan);
+    body.innerHTML = `<div class="lv-it"><h2>Что мы сегодня сделали</h2>
+      <p class="oc">Сводка собрана из выбранных материалов. Её можно поправить.</p>
+      <textarea id="liveRecap" rows="8" style="width:100%;border-radius:12px;border:1px solid rgba(17,18,14,.09);background:#F7F7F2;padding:12px;font:inherit;font-size:15px;resize:vertical">${esc(b.recap)}</textarea>
+      <button class="ws-ghost" id="liveRecapReset" style="margin-top:10px">Собрать заново</button></div>`;
+    body.querySelector('#liveRecap').oninput = e => { b.recap = e.target.value; Plans.save(plan); };
+    body.querySelector('#liveRecapReset').onclick = () => { b.recap = recapDraft(plan); Plans.save(plan); renderLive(); };
+  } else if (b.mode === 'next') {
+    body.innerHTML = `<div class="lv-it"><h2>Куда писать дальше</h2><p class="oc">Скопируйте ссылку и отправьте ученику в чат.</p>
+      <div style="display:flex;flex-direction:column;gap:10px">${NEXT_LINKS.map((l, i) => `<div class="ws-radio" style="cursor:default"><span><b>${esc(l.label)}</b><small>${esc(l.hint)} · ${esc(l.url.replace('https://', ''))}</small></span><span style="flex:1"></span><button class="ws-ghost" data-cp="${i}" style="height:34px">Копировать</button><a class="ws-ghost" href="${esc(l.url)}" target="_blank" rel="noopener" style="height:34px;text-decoration:none">Открыть</a></div>`).join('')}</div></div>`;
+    body.querySelectorAll('[data-cp]').forEach(btn => btn.onclick = async () => {
+      const url = NEXT_LINKS[+btn.dataset.cp].url; let ok = false;
+      try { await navigator.clipboard.writeText(url); ok = true; } catch(e){ ok = fallbackCopy(url); }
+      toast(ok ? 'Ссылка скопирована' : 'Не получилось скопировать', !ok);
+    });
+  } else if (b.mode === 'text') {
     const hasBank = !!QUESTION_BANK[b.qkind];
     body.innerHTML = `<ul class="lv-qs" id="liveQs">${(b.questions || []).map(q => `<li>${esc(q)}<button data-rmq="${esc(q)}" title="Убрать вопрос">✕</button></li>`).join('') || '<li style="color:#6B6C64">Вопросов пока нет</li>'}</ul>
       ${hasBank ? `<button class="ws-ghost" id="liveMoreQ">Ещё идеи и вопросы</button>` : ''}`;
