@@ -162,6 +162,53 @@ body.no-ru .ru{display:none !important}
 .gl-row-add{width:34px;height:34px;border-radius:999px;border:1.5px solid #0A0A09;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
 .gl-row-add:hover{background:#D7EF42}
 .gl-empty-row{padding:16px 0;color:#6B6C64;font-size:13.5px}
+
+/* --- Пробные уроки: список (точно по мокапу) --- */
+.gl-tl-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+.gl-tl-head h1{font-family:Unbounded,sans-serif;font-size:26px;font-weight:700;margin:0 0 4px}
+.gl-tl-head p{font-size:14px;color:#6B6C64;margin:0}
+.gl-tl-new{height:44px;padding:0 20px;border-radius:12px;border:none;background:#D2E739;color:#0A0A09;display:inline-flex;align-items:center;gap:8px;font-family:Unbounded,sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.gl-tl-new:hover{transform:translateY(-2px)}
+.gl-tl-toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.gl-tl-filters{display:flex;gap:6px;flex-wrap:wrap}
+.gl-tl-pill{height:32px;padding:0 12px;border-radius:999px;border:1px solid rgba(17,18,14,.09);background:rgba(255,255,255,.85);color:#0A0A09;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.gl-tl-pill.on{background:#D2E739;border-color:#D2E739}
+.gl-tl-search{display:flex;align-items:center;gap:10px;height:44px;flex:1;min-width:180px;max-width:300px;padding:0 16px;border-radius:12px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(17,18,14,.06);border:1px solid rgba(17,18,14,.09);box-sizing:border-box}
+.gl-tl-search input{border:0;background:none;font:inherit;font-size:14px;outline:none;flex:1;min-width:0;color:#0A0A09}
+.gl-tl-cols{display:grid;grid-template-columns:minmax(0,1fr) 150px 170px 90px 150px;gap:14px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#6B6C64;margin-bottom:8px}
+.gl-trow{display:grid;grid-template-columns:minmax(0,1fr) 150px 170px 90px 150px;gap:14px;align-items:center;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(17,18,14,.06);border:1px solid rgba(17,18,14,.09);margin-bottom:10px}
+.gl-trow .nm{display:flex;flex-direction:column;gap:2px;min-width:0}
+.gl-trow .nm b{font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gl-trow .nm span{font-size:12px;color:#6B6C64}
+.gl-trow .lv{display:flex;gap:6px;align-items:center;min-width:0}
+.gl-trow .lv b{padding:2px 8px;border-radius:6px;border:1px solid rgba(17,18,14,.09);font-size:11px;font-weight:700;color:#0A0A09;flex:none}
+.gl-trow .lv span{font-size:12px;color:#6B6C64;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gl-trow .pr{display:flex;align-items:center;gap:8px}
+.gl-trow .pr .bar{flex:1;height:6px;border-radius:999px;background:rgba(17,18,14,.09);overflow:hidden}
+.gl-trow .pr .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#8FA21C,#D2E739);font-style:normal}
+.gl-trow .pr span{font-size:12px;color:#6B6C64;width:34px;flex:none}
+.gl-trow .pr .txt{font-size:12px;color:#6B6C64}
+.gl-badge{padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap;justify-self:start}
+.gl-badge.draft{background:rgba(242,184,75,.22);color:#B7791F}
+.gl-badge.ready{background:rgba(210,231,57,.38);color:#0A0A09}
+.gl-badge.done{background:rgba(17,18,14,.09);color:#6B6C64}
+.gl-trow-act{display:flex;justify-content:flex-end}
+.gl-trow-btn{height:40px;padding:0 16px;border-radius:12px;border:1px solid rgba(17,18,14,.09);background:transparent;color:#0A0A09;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.gl-trow-btn.on{border:none;background:#D2E739;font-family:Unbounded,sans-serif;font-size:12px;font-weight:700}
+.gl-tl-hint{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:14px;border:1px dashed rgba(210,231,57,.6);font-size:13px;color:#6B6C64;margin-top:4px}
+.gl-tl-hint b{color:#0A0A09}
+.gl-tl-empty{background:rgba(255,255,255,.72);backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(17,18,14,.06);border:1px solid rgba(17,18,14,.09);border-radius:20px;padding:20px 22px;display:flex;flex-direction:column;gap:18px}
+.gl-tl-empty-hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:30px 20px}
+.gl-tl-empty-ic{width:64px;height:64px;border-radius:20px;background:rgba(210,231,57,.38);display:flex;align-items:center;justify-content:center}
+.gl-tl-empty-hero h2{font-family:Unbounded,sans-serif;font-size:20px;font-weight:700;margin:0}
+.gl-tl-empty-hero p{font-size:14px;color:#6B6C64;max-width:460px;line-height:1.5;margin:0}
+.gl-tl-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:700px){ .gl-tl-steps{grid-template-columns:1fr} }
+.gl-tl-step{padding:16px;border-radius:16px;background:#F7F7F2;border:1px solid rgba(17,18,14,.09);display:flex;flex-direction:column;gap:6px}
+.gl-tl-step b.num{width:26px;height:26px;border-radius:999px;background:#D2E739;color:#0A0A09;display:flex;align-items:center;justify-content:center;font-family:Unbounded,sans-serif;font-size:11px;font-weight:700}
+.gl-tl-step .ttl{font-size:14px;font-weight:600}
+.gl-tl-step .dsc{font-size:12px;color:#6B6C64;line-height:1.45}
+@media (max-width:860px){ .gl-tl-cols{display:none} .gl-trow{grid-template-columns:1fr;gap:8px} .gl-trow .gl-trow-act{justify-content:flex-start} }
 .gl-today{border-radius:20px;padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .gl-today-lbl{font-family:Unbounded,sans-serif;font-size:11px;color:#6B6C64;text-transform:uppercase;letter-spacing:.04em;flex:none}
 .gl-today-list{display:flex;flex-wrap:wrap;gap:10px;flex:1}
@@ -2103,35 +2150,99 @@ function moreQuestions(kind, exclude){
   return fresh.slice(0, 3);
 }
 
+function planStatus(p){
+  if (p.status === 'done') return 'done';
+  const started = p.blocks.some(b => b.visited);
+  const hasItems = p.blocks.some(b => b.type === 'item');
+  return (started || !hasItems) ? 'draft' : 'ready';
+}
+const STATUS_LABEL = { draft: 'Черновик', ready: 'Готов', done: 'Проведён' };
+const tlFilter = { status: 'all', q: '' };
+
+function renderTrialLessonsList(root){
+  const all = Plans.list();
+  const withStatus = all.map(p => ({ p, status: planStatus(p) }));
+  const counts = { all: all.length, draft: withStatus.filter(x => x.status === 'draft').length, ready: withStatus.filter(x => x.status === 'ready').length, done: withStatus.filter(x => x.status === 'done').length };
+  const rerender = () => renderTrialLessonsList(root);
+  let shown = tlFilter.status === 'all' ? withStatus : withStatus.filter(x => x.status === tlFilter.status);
+  if (tlFilter.q.trim()) shown = shown.filter(x => matches(tlFilter.q, x.p.student.name));
+
+  root.innerHTML = `
+    <div class="gl-tl-head">
+      <div><h1>Пробные уроки</h1><p>Собери урок под ученика и веди пробный с одного экрана — без Miro, без лишних вкладок.</p></div>
+      <button class="gl-tl-new" id="newPlanBtn">${svgIcon('<path d="M12 5v14M5 12h14"></path>')}Создать урок</button>
+    </div>
+    ${all.length ? `<div class="gl-tl-toolbar">
+      <div class="gl-tl-filters">
+        <button class="gl-tl-pill${tlFilter.status === 'all' ? ' on' : ''}" data-tlf="all">Все · ${counts.all}</button>
+        <button class="gl-tl-pill${tlFilter.status === 'draft' ? ' on' : ''}" data-tlf="draft">Черновики · ${counts.draft}</button>
+        <button class="gl-tl-pill${tlFilter.status === 'ready' ? ' on' : ''}" data-tlf="ready">Готовы · ${counts.ready}</button>
+        <button class="gl-tl-pill${tlFilter.status === 'done' ? ' on' : ''}" data-tlf="done">Проведены · ${counts.done}</button>
+      </div>
+      <span style="flex:1"></span>
+      <div class="gl-tl-search">${svgIcon('<circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path>')}<input id="tlSearch" placeholder="Искать по ученику…" value="${esc(tlFilter.q)}"></div>
+    </div>
+    <div class="gl-tl-cols"><span>Ученик</span><span>Уровень · цель</span><span>Прогресс</span><span>Статус</span><span></span></div>
+    <div id="tlRows"></div>
+    <div class="gl-tl-hint">${svgIcon('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"></path>')}Черновики сохраняются автоматически. Урок становится <b>Готов</b>, когда в таймлайн добавлена хотя бы одна тема или активность.</div>`
+    : `<div class="gl-tl-empty">
+        <div class="gl-tl-empty-hero">
+          <span class="gl-tl-empty-ic">${svgIcon('<circle cx="12" cy="12" r="9"></circle><path d="M10 8.5v7l6-3.5z"></path>', undefined)}</span>
+          <h2>Пока нет пробных уроков</h2>
+          <p>Создайте первый — из подтверждённой заявки (данные ученика подставятся сами) или вручную.</p>
+          <button class="gl-tl-new" id="newPlanBtn2">Создать первый урок</button>
+        </div>
+        <div class="gl-tl-steps">
+          <div class="gl-tl-step"><b class="num">1</b><span class="ttl">Выберите ученика</span><span class="dsc">Из подтверждённой заявки — уровень и цель подставятся сами.</span></div>
+          <div class="gl-tl-step"><b class="num">2</b><span class="ttl">Соберите таймлайн</span><span class="dsc">Разминка, темы и активности из библиотеки — любой блок можно поменять.</span></div>
+          <div class="gl-tl-step"><b class="num">3</b><span class="ttl">Проведите и отправьте отчёт</span><span class="dsc">Ведите урок прямо здесь, в конце — короткий отчёт администратору.</span></div>
+        </div>
+      </div>`}`;
+
+  const newBtn = root.querySelector('#newPlanBtn') || root.querySelector('#newPlanBtn2');
+  if (newBtn) newBtn.onclick = openNewLessonModal;
+  if (!all.length) return;
+
+  root.querySelectorAll('[data-tlf]').forEach(b => b.onclick = () => { tlFilter.status = b.dataset.tlf; rerender(); });
+  root.querySelector('#tlSearch').oninput = e => { tlFilter.q = e.target.value; rerender(); };
+
+  root.querySelector('#tlRows').innerHTML = shown.map(({ p, status }) => {
+    const total = p.blocks.length || 1;
+    const doneBlocks = p.blocks.filter(b => b.visited).length;
+    const pct = Math.round(doneBlocks / total * 100);
+    const progressHtml = status === 'draft'
+      ? `<div class="bar"><i style="width:${pct}%"></i></div><span>${pct}%</span>`
+      : `<span class="txt">${status === 'ready' ? 'Готов к уроку' : 'Отчёт отправлен'}</span>`;
+    const btnLabel = status === 'done' ? 'Открыть отчёт' : (status === 'ready' ? 'Начать урок' : (doneBlocks ? 'Продолжить' : 'Открыть'));
+    const btnOn = status === 'ready';
+    return `<div class="gl-trow">
+      <div class="nm"><b>${esc(p.student.name || 'Без имени')}</b><span>${new Date(p.updatedAt).toLocaleDateString('ru-RU')}</span></div>
+      <div class="lv"><b>${esc(p.student.level || '—')}</b><span>${esc(p.student.goal || '')}</span></div>
+      <div class="pr">${progressHtml}</div>
+      <span class="gl-badge ${status}">${STATUS_LABEL[status]}</span>
+      <div class="gl-trow-act"><button class="gl-trow-btn${btnOn ? ' on' : ''}" data-tlgo="${esc(p.id)}" data-tlstatus="${status}">${esc(btnLabel)}</button></div>
+    </div>`;
+  }).join('') || `<div class="empty">Ничего не нашлось.</div>`;
+
+  root.querySelectorAll('[data-tlgo]').forEach(b => b.onclick = () => {
+    const pl = Plans.get(b.dataset.tlgo);
+    if (!pl) return;
+    if (b.dataset.tlstatus === 'ready' || (b.dataset.tlstatus === 'draft' && pl.blocks.some(x => x.visited))) {
+      location.hash = '#/builder=' + pl.id;
+      openLive(pl);
+    } else if (b.dataset.tlstatus === 'done') {
+      location.hash = '#/reports';
+    } else {
+      location.hash = '#/builder=' + pl.id;
+    }
+  });
+}
+
 function renderBuilder(root){
   const id = (currentRoute.split('=')[1]) || '';
   const plan = id && Plans.get(id);
 
-  if (!plan) {
-    const plans = Plans.list();
-    root.innerHTML = `<h1 class="page-title">Пробные уроки</h1>
-      <p class="page-sub">Собери урок под ученика и веди пробный с одного экрана — без Miro, без лишних вкладок.</p>
-      <div class="actions" style="margin-bottom:18px"><button class="btn primary" id="newPlanBtn">✨ Создать урок</button></div>
-      ${plans.length ? `<div class="yb yb-recent" id="planList"></div>` : `<div class="empty">Пока нет сохранённых уроков — нажмите «Создать урок».</div>`}`;
-    root.querySelector('#newPlanBtn').onclick = openNewLessonModal;
-    if (plans.length) {
-      root.querySelector('#planList').innerHTML = plans.map(p => {
-        const total = p.blocks.length || 1;
-        const doneBlocks = p.blocks.filter(b => b.visited).length;
-        const pct = Math.round(doneBlocks / total * 100);
-        const started = p.blocks.some(b => b.visited);
-        const label = p.status === 'done' ? 'Проведён' : (started ? 'Продолжить' : 'Черновик');
-        const cls = p.status === 'done' ? 'done' : 'draft';
-        return `<button class="yb-card yb-rc" data-plan="${esc(p.id)}">
-          <span class="st ${cls}">${label}</span>
-          <span class="nm">${esc(p.student.name || 'Без имени')}</span>
-          <span class="meta">${esc(p.student.level || '—')} · ${p.blocks.length} блок(ов) · ${new Date(p.updatedAt).toLocaleDateString('ru-RU')}${p.status !== 'done' && started ? ` · ${pct}%` : ''}</span>
-        </button>`;
-      }).join('');
-      root.querySelectorAll('[data-plan]').forEach(b => b.onclick = () => { location.hash = '#/builder=' + b.dataset.plan; });
-    }
-    return;
-  }
+  if (!plan) { renderTrialLessonsList(root); return; }
 
   const save = () => Plans.save(plan);
 
