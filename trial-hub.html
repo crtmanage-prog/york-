@@ -336,11 +336,11 @@ body.no-ru .ru{display:none !important}
 .live .lv-seg{display:flex;gap:4px}
 .live .lv-seg .s{min-width:0;display:flex;flex-direction:column;gap:6px;cursor:pointer;background:none;border:0;padding:0;text-align:left;font:inherit}
 .live .lv-seg .s i{display:block;height:8px;border-radius:999px;background:rgba(17,18,14,.09)}
-.live .lv-seg .s.done i{background:rgba(210,231,57,.35)}
-.live .lv-seg .s.cur i{background:#D2E739}
+.live .lv-seg .s.done i{background:var(--c,#D2E739)}
+.live .lv-seg .s.cur i{background:var(--c,#D2E739);box-shadow:0 0 0 2px rgba(17,18,14,.12)}
 .live .lv-seg .s.skip i{opacity:.4}
 .live .lv-seg .s span{font-size:11px;color:#6B6C64;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.live .lv-seg .s.cur span{color:#5B6B0A}
+.live .lv-seg .s.cur span{color:#0A0A09;font-weight:600}
 .live .lv-body{flex:1;min-height:0;display:flex;gap:16px;padding:18px 24px}
 .live .lv-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:14px}
 .live .lv-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
@@ -3549,8 +3549,14 @@ function renderLive(){
   b.visited = true; Plans.save(plan);
   const total = plan.blocks.length;
 
-  // сегменты прогресса
-  $('#liveSeg').innerHTML = plan.blocks.map((x, i) => `<button class="s${i === cur ? ' cur' : (x.skipped ? ' skip' : (i < cur || x.visited ? ' done' : ''))}" style="flex:${Math.max(1, x.duration || 1)}" data-seg="${i}"><i></i><span>${esc(x.title)}</span></button>`).join('');
+  // сегменты прогресса: цвет каждого — по градиенту от лаймового к тёмно-зелёному вдоль всей полосы
+  const SEG_STOPS = [[210, 231, 57], [127, 160, 44], [30, 84, 28]];
+  const segColor = t => {
+    const k = t * (SEG_STOPS.length - 1), i = Math.min(SEG_STOPS.length - 2, Math.floor(k)), f = k - i;
+    const a = SEG_STOPS[i], c = SEG_STOPS[i + 1];
+    return `rgb(${a.map((v, j) => Math.round(v + (c[j] - v) * f)).join(',')})`;
+  };
+  $('#liveSeg').innerHTML = plan.blocks.map((x, i) => `<button class="s${i === cur ? ' cur' : (x.skipped ? ' skip' : (i < cur || x.visited ? ' done' : ''))}" style="flex:${Math.max(1, x.duration || 1)};--c:${segColor(plan.blocks.length > 1 ? i / (plan.blocks.length - 1) : 0)}" data-seg="${i}"><i></i><span>${esc(x.title)}</span></button>`).join('');
   $('#liveSeg').querySelectorAll('[data-seg]').forEach(s => s.onclick = () => gotoBlock(+s.dataset.seg));
 
   // панель над сценой
