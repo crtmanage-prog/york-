@@ -1846,7 +1846,9 @@ async function loadAll(){
     .order('lesson_date', { ascending:true });
   const { data: hw } = await supabase.from('homework').select('id', { count: 'exact' }).eq('status', 'submitted');
 
-  window.__lessonsList = lessons || [];
+  // демо-ученик «Екатерина Тест» и тестовый учитель — служебные, их занятия в админке не показываем
+  const HIDDEN_DEMO_STUDENT_ID = '8cf3140a-7922-43db-9cc7-f5b2e99e2262';
+  window.__lessonsList = (lessons || []).filter(l => l.student_id !== HIDDEN_DEMO_STUDENT_ID && l.teacher_id !== 'd492122c-5d5b-41ad-aae9-e01c044fd77f');
 
   if (!window.__notedStudentIds){
     const { data: notes } = await supabase.from('internal_notes').select('student_id');
