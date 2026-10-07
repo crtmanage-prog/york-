@@ -4161,6 +4161,23 @@ function renderTodayWidget(){
   return `<div class="gl-glass gl-today" id="todayWidget"><span class="gl-today-lbl">Сегодня у вас</span><div class="gl-today-list">${items}</div></div>`;
 }
 
+
+/* ссылка из кабинета учителя: #prepare=<урок>&req=<заявка>&name=<имя> — создаём (или находим) план и открываем конструктор */
+function handlePrepareLink(){
+  const m = location.hash.match(/^#prepare=([\w-]+)((?:&[^&]*)*)$/);
+  if (!m) return;
+  const q = new URLSearchParams(m[2].replace(/^&/, ''));
+  const lessonId = m[1], reqId = q.get('req') || '', name = q.get('name') || '';
+  let p = Plans.list().find(x => x.lessonId === lessonId || (reqId && x.trialRequestId === reqId));
+  if (!p) {
+    const r = reqId && CurrentTeacher && (CurrentTeacher.trialRequests || []).find(x => x.id === reqId);
+    p = Plans.create({ name: r ? r.full_name : name, age: r && r.age ? String(r.age) : '', level: r ? (r.current_level || '') : '', goal: r ? (r.goal || '') : '', trialRequestId: reqId || null });
+    p.lessonId = lessonId;
+    Plans.save(p);
+  }
+  location.hash = '#/builder=' + p.id;
+}
+
 /* ======================= старт ======================= */
 (async () => {
   try {
@@ -4179,7 +4196,7 @@ function renderTodayWidget(){
   if (byId['act-picture']) byId['act-picture'].title = 'Describing pictures';
   window.addEventListener('hashchange', route);
   route();
-  loadTodayWidget();
+  loadTodayWidget().then(handlePrepareLink);
   if (problems.length) {
     $('#page').insertAdjacentHTML('afterbegin', `<div class="notice"><b>Часть записей пропущена — проверьте JSON:</b><br>${problems.map(esc).join('<br>')}</div>`);
   }
