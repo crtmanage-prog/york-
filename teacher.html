@@ -1529,7 +1529,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         <a class="ov-promo" href="trial-hub.html">
           <span class="oc-ic"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 17v4M17 19h4"/></svg></span>
           <h4>Конструктор пробных</h4>
-          <p>Соберите пробный урок под ученика за пару минут и ведите его с одного экрана. Поможет быстрее привлекать новых учеников.</p>
+          <p>Соберите пробный урок под ученика за пару минут и ведите его с одного экрана.</p>
           <span class="go">Открыть конструктор <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
       </div>
@@ -1748,7 +1748,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         <div>
           <span class="eb">Демо</span>
           <h2>Конструктор пробного урока</h2>
-          <p>Соберите пробный урок под ученика за пару минут и ведите его с одного экрана. Поможет быстрее привлекать новых учеников.</p>
+          <p>Соберите пробный урок под ученика за пару минут и ведите его с одного экрана.</p>
           <a class="btn btn-accent" href="trial-hub.html">Открыть конструктор</a>
         </div>
         <div class="bd-next" id="bdNext"></div>
@@ -2589,7 +2589,6 @@ function stTrialCards(q){
       return `<div class="st-card trial">
         <div class="st-top2"><span class="t-av t">${attrEsc(ovInitials(name))}</span>
           <div class="who"><b>${attrEsc(name)}</b><small>пробный · ${ovDayWord(new Date(l.lesson_date)).toLowerCase()} ${fmtTimeOnly(l.lesson_date)}</small></div><span class="t-pill trial">Пробный</span></div>
-        <div class="t-hint">После пробного админ решает, переходит ли ученик к вам. Уровень можно отметить в отчёте конструктора.</div>
         <div class="st-acts"><a class="btn btn-dark btn-sm" href="${prep}">${plan ? 'Открыть подготовку' : 'Подготовить'}</a>${lessonContactButtons(l)}</div>
       </div>`;
     }).join('');
