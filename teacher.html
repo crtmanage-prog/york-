@@ -1322,6 +1322,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     /* на мобильной версии конструктор пробных не показываем */
     .ms-item.hub, .ms-item[data-go="builder"]{display:none !important;}
   }
+
+  /* цвета учеников */
+  .sdot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:1px;}
+  .cal-legend{display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:14px; font-size:12px; color:var(--t-ink2);}
+  .cal-legend:empty{display:none;}
+  .cal-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .cal-legend i{width:11px; height:11px; border-radius:50%;}
   /* @@TZ-CSS-END@@ */
   .ov-legacy{display:none !important;}
   .ov-sec-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:17px; margin:12px 0 0;}
@@ -1644,6 +1651,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
             <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
           </div>
           <div class="cal-grid" id="calGrid"></div>
+          <div class="cal-legend" id="calLegend"></div>
         </div>
 
         <div class="sc-side">
@@ -3388,6 +3396,21 @@ function fmtHourMin(dateStr){
   return new Intl.DateTimeFormat('ru-RU', { timeZone:tz, hour:'2-digit', minute:'2-digit' }).format(new Date(dateStr));
 }
 
+// цвет ученика: у каждого свой, чтобы уроки в календаре не сливались (пробные остаются фиолетовыми)
+const ST_PALETTE = [
+  ['#DDEE5C', '#141412'], ['#BFE3F7', '#0E4A6B'], ['#FFD9B8', '#7A3A0C'], ['#FBCFE0', '#8E1F52'],
+  ['#BDEBD3', '#17623F'], ['#FFE9A0', '#6B4F00'], ['#FFC9C0', '#8F2A1F'], ['#B5E8E8', '#0F5F63']
+];
+function studentColor(id){
+  if (!id) return null;
+  let i = (myStudents || []).findIndex(s => s.id === id);
+  if (i < 0){ i = 0; for (const c of String(id)) i = (i * 31 + c.charCodeAt(0)) >>> 0; }
+  return ST_PALETTE[i % ST_PALETTE.length];
+}
+function studentPillStyle(l){ const c = l.is_trial ? null : studentColor(l.student_id); return c ? ` style="background:${c[0]}; color:${c[1]};"` : ''; }
+function studentBarStyle(l){ const c = l.is_trial ? null : studentColor(l.student_id); return c ? ` style="background:${c[0]};"` : ''; }
+function studentDot(l){ const c = l.is_trial ? null : studentColor(l.student_id); return c ? `<i class="sdot" style="background:${c[0]};"></i>` : ''; }
+
 function renderCalChips(){
   const wrap = document.getElementById('calChips');
   if (!wrap) return;
@@ -3463,7 +3486,7 @@ function renderCalendar(){
 
     const pillsHtml = shown.map(l => {
       const name = l.is_trial ? (l.guest_name || 'Пробный') : ((l.profiles && l.profiles.full_name) || 'Ученик');
-      return `<div class="cal-pill${l.is_trial ? ' cal-pill-trial' : ''}">
+      return `<div class="cal-pill${l.is_trial ? ' cal-pill-trial' : ''}"${studentPillStyle(l)}>
         <span class="cal-pill-time">${fmtHourMin(l.lesson_date)}</span><span class="cal-pill-name">${name}</span>
       </div>`;
     }).join('');
@@ -3489,6 +3512,17 @@ function renderCalendar(){
   }
   while (cells.length % 7) cells.push('<div class="cal-day empty"></div>');
   document.getElementById('calGrid').innerHTML = cells.join('');
+  const lg = document.getElementById('calLegend');
+  if (lg){
+    const seen = new Map();
+    all.forEach(l => {
+      if (l.status === 'cancelled' || l.is_trial || !l.student_id) return;
+      const d = new Date(l.lesson_date);
+      if (d.getFullYear() !== s.year || d.getMonth() !== s.month) return;
+      if (!seen.has(l.student_id)) seen.set(l.student_id, (l.profiles && l.profiles.full_name) || 'Ученик');
+    });
+    lg.innerHTML = [...seen].map(([id, nm]) => { const c = studentColor(id); return `<span><i style="background:${c[0]};"></i>${attrEsc(nm)}</span>`; }).join('');
+  }
 
   document.querySelectorAll('.cal-day:not(.empty)').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -3690,7 +3724,7 @@ function renderLessonsList(){
       <div class="ls-card ${l.is_trial ? 'trial' : ''}">
         <div class="ls-h">
           <div class="ls-time"><b>${fmtTimeOnly(l.lesson_date)}</b><small>${l.duration_minutes || 60} мин</small></div>
-          <div class="ls-m"><b>${l.is_trial ? '🎓 ' : ''}${name}</b><small>${l.topic || (l.is_trial ? 'Пробный урок' : 'Занятие')}</small></div>
+          <div class="ls-m"><b>${l.is_trial ? '🎓 ' : ''}${studentDot(l)}${name}</b><small>${l.topic || (l.is_trial ? 'Пробный урок' : 'Занятие')}</small></div>
           ${lessonBadge(l)}
           <div class="ls-more"><button type="button" class="ls-dots" aria-label="Ещё" onclick="toggleLsMenu(this, event)">⋯</button><div class="ls-menu hidden" onclick="this.classList.add('hidden')">${menu}</div></div>
         </div>
@@ -3801,7 +3835,7 @@ function renderSalary(){
     const dmon = dd.toLocaleDateString('ru-RU', { month:'short', timeZone:SCHOOL_TZ }).replace('.', '');
     return `<div class="t-r">
       <div class="d"><b>${dday}</b><small>${dmon}</small></div>
-      <div class="bar ${l.is_trial ? 'trial' : ''}"></div>
+      <div class="bar ${l.is_trial ? 'trial' : ''}"${studentBarStyle(l)}></div>
       <div class="m"><b>${name}</b><small>${fmtTimeOnly(l.lesson_date)} · ${formatLabel} · ${hours.toFixed(1)} ч${l.topic ? ' · ' + l.topic : ''}</small></div>
       <span class="pay-amt">${pay.toLocaleString('ru-RU')} ₽</span>
     </div>`;
@@ -3871,7 +3905,7 @@ function renderTeacherHistoryList(){
     else if (l.status === 'rescheduled') pill = '<span class="t-pill">Перенесён</span>';
     return `<div class="t-r hs-row">
       <div class="d"><b>${day}</b><small>${mon}</small></div>
-      <div class="bar ${l.is_trial ? 'trial' : ''}"></div>
+      <div class="bar ${l.is_trial ? 'trial' : ''}"${studentBarStyle(l)}></div>
       <div class="m"><b>${l.is_trial ? '🎓 ' : ''}${name}</b><small>${fmtTimeOnly(l.lesson_date)} · ${l.duration_minutes || 60} мин${l.topic ? ' · ' + l.topic : ''}</small></div>
       ${pill}
     </div>`;
@@ -4237,11 +4271,11 @@ async function markReviewed(id){
           var join = l.needs_reschedule ? '' : (url ? '<a class="m-btn lime" href="' + esc(url) + '" target="_blank" rel="noopener">Войти</a>' : '<button class="m-btn lime" type="button" onclick="openSettings()">Добавить ссылку</button>');
           var ph = c.phone ? '<a class="m-btn ghost" href="tel:' + esc(c.phone.tel) + '">Телефон</a>' : '';
           return '<div class="m-lesson' + (l.is_trial ? ' t' : '') + (l.needs_reschedule ? ' off' : '') + '"><div class="m-lt"><div>' + (l.is_trial ? '<span class="m-pill trial">Пробный</span>' : '') + wait
-            + '<b>' + esc(name) + '</b><small>' + fmtTimeOnly(start) + ' — ' + fmtTimeOnly(end) + ' (МСК)</small></div>' + kebab + '</div>'
+            + '<b>' + studentDot(l) + esc(name) + '</b><small>' + fmtTimeOnly(start) + ' — ' + fmtTimeOnly(end) + ' (МСК)</small></div>' + kebab + '</div>'
             + ((join || ph) ? '<div class="m-la">' + join + ph + '</div>' : '') + '</div>';
         }
         var hh = fmtTimeOnly(start).split(':');
-        return '<div class="m-li' + (l.needs_reschedule ? ' off' : '') + '"><div class="m-dt"><b>' + hh[0] + '</b><small>:' + hh[1] + '</small></div><span class="m-stripe' + (l.is_trial ? ' t' : '') + '"></span>'
+        return '<div class="m-li' + (l.needs_reschedule ? ' off' : '') + '"><div class="m-dt"><b>' + hh[0] + '</b><small>:' + hh[1] + '</small></div><span class="m-stripe' + (l.is_trial ? ' t' : '') + '"' + studentBarStyle(l) + '></span>'
           + '<div class="m-m"><b>' + esc(name) + '</b><small>' + esc(sub) + '</small></div>' + wait + kebab + '</div>';
       }).join('');
       return head + (isToday ? cards : '<div class="m-list">' + cards + '</div>');
@@ -4287,7 +4321,7 @@ async function markReviewed(id){
       var crew = st && st.format === 'CREW', hours = (l.duration_minutes || 60) / 60, pay = hours * (crew ? rateCrew : rateSolo);
       var d = new Date(l.lesson_date), name = studentName(l);
       var dd = d.toLocaleDateString('ru-RU', { day:'numeric', timeZone:SCHOOL_TZ }), wd = d.toLocaleDateString('ru-RU', { weekday:'short', timeZone:SCHOOL_TZ }).replace('.', '');
-      return '<div class="m-li' + (wait ? ' off' : '') + '"><div class="m-dt"><b>' + dd + '</b><small>' + wd + '</small></div><span class="m-stripe' + (l.is_trial ? ' t' : '') + '"></span>'
+      return '<div class="m-li' + (wait ? ' off' : '') + '"><div class="m-dt"><b>' + dd + '</b><small>' + wd + '</small></div><span class="m-stripe' + (l.is_trial ? ' t' : '') + '"' + studentBarStyle(l) + '></span>'
         + '<div class="m-m"><b>' + esc(name) + (l.is_trial ? ' · пробный' : '') + '</b><small>' + (wait ? 'после проведения' : fmtTimeOnly(d) + ' · ' + (l.is_trial ? 'пробный' : crew ? 'CREW' : 'SOLO') + ' · ' + hours.toFixed(1).replace('.0', '') + ' ч') + '</small></div>'
         + (wait ? '<span class="m-pill">ждёт</span>' : '<span class="m-money">' + pay.toLocaleString('ru-RU') + ' ₽</span>') + '</div>';
     };
