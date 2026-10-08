@@ -2301,7 +2301,6 @@ function renderOvHero(){
   const join = url
     ? `<a class="ov-open" href="${attrEsc(url)}" target="_blank" rel="noopener">Присоединиться</a>`
     : `<button class="ov-open" id="ovAddLink" type="button">Добавить ссылку на созвон</button>`;
-  const phoneBtn = c.phone ? `<button class="ov-ghost" id="ovPhone" type="button" data-phone="${attrEsc(c.phone)}">${OV_PHONE}Телефон</button>` : '';
   const tgBtn = c.tg ? `<a class="ov-ghost" href="https://t.me/${attrEsc(c.tg)}" target="_blank" rel="noopener">Telegram</a>` : '';
   const dayWord = ovDayWord(start);
   const dateLabel = start.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:SCHOOL_TZ });
@@ -2317,7 +2316,7 @@ function renderOvHero(){
     left = `<div class="ov-eyebrow-row"><span class="ov-eyebrow">Ближайший урок</span><span class="ov-badge-trial">${OV_CAP}Пробный</span></div>
       <h3>${attrEsc(name)} · пробный урок ${when} в ${fmtTimeOnly(start)}</h3>
       <p class="ov-sub">${dateLabel}, ${fmtTimeOnly(start)} — ${fmtTimeOnly(end)} (МСК) · первое занятие, ${level}</p>
-      <div class="ov-actions">${join}<a class="ov-ghost" href="${prep}">${OV_SPARK}${plan ? 'Открыть подготовку' : 'Подготовить в конструкторе'}</a>${phoneBtn}${tgBtn}</div>`;
+      <div class="ov-actions">${join}<a class="ov-ghost" href="${prep}">${OV_SPARK}${plan ? 'Открыть подготовку' : 'Подготовить в конструкторе'}</a>${tgBtn}</div>`;
   } else {
     const name = (l.profiles && l.profiles.full_name) || (st && st.full_name) || 'Ученик';
     const sub = [st && st.level, l.topic && l.topic !== 'Регулярное занятие' ? l.topic : ''].filter(Boolean).join(' · ') || 'Занятие';
@@ -2327,7 +2326,7 @@ function renderOvHero(){
         <div class="ov-hero-who"><span class="av">${attrEsc(ovInitials(name))}</span><span><b>${attrEsc(name)}</b><small>${attrEsc(sub)}</small></span></div>
         <div class="ov-hero-meta"><span>${OV_CLOCK}${fmtTimeOnly(start)} – ${fmtTimeOnly(end)}</span><span>${OV_CAM}Онлайн</span>${st ? `<button class="ov-hwbtn" type="button" title="Что было задано" aria-label="Посмотреть, что было задано" onclick="openStudentHomework('${st.id}')">${OV_HW}</button>` : ''}</div>
       </div>
-      <div class="ov-actions">${join}${phoneBtn}${tgBtn}</div>`;
+      <div class="ov-actions">${join}${tgBtn}</div>`;
   }
   hero.innerHTML = `<div class="ov-hero-in"><div class="ov-h-left">${left}</div><div class="ov-glass" id="ovGlass"></div></div>`;
   const add = document.getElementById('ovAddLink');
@@ -2522,10 +2521,10 @@ function phoneOf(v){
 function contactOf(l){
   if (l.is_trial) {
     const raw = l.guest_contact || '';
-    return { tg: tgHandle(l.contact_telegram) || tgHandle(raw), phone: phoneOf(l.contact_phone) || phoneOf(raw) };
+    return { tg: tgHandle(l.contact_telegram) || tgHandle(raw), phone: null };
   }
   const p = l.profiles || {};
-  return { tg: tgHandle(p.contact_telegram), phone: phoneOf(p.contact_phone) };
+  return { tg: tgHandle(p.contact_telegram), phone: null };
 }
 function phoneWrapHtml(phone, shown){
   if (!phone) return '';
@@ -2552,7 +2551,7 @@ function contactButtonsHtml(c){
 function lessonContactButtons(l){ return contactButtonsHtml(contactOf(l)); }
 
 function studentContactButtons(s){
-  return contactButtonsHtml({ tg: tgHandle(s.contact_telegram), phone: phoneOf(s.contact_phone) });
+  return contactButtonsHtml({ tg: tgHandle(s.contact_telegram), phone: null });
 }
 
 const ST_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
@@ -3304,7 +3303,7 @@ async function addLesson(){
 /* ---------- EDIT STUDENT PROFILE ---------- */
 /* ---------- LESSONS ---------- */
 async function loadLessons(){
-  const { data: lessons } = await supabase.from('lessons').select('*, profiles!lessons_student_id_fkey(full_name, contact_telegram, contact_phone)')
+  const { data: lessons } = await supabase.from('lessons').select('*, profiles!lessons_student_id_fkey(full_name, contact_telegram)')
     .eq('teacher_id', currentUser.id).order('lesson_date', { ascending:true });
 
   const list = lessons || [];
@@ -3710,7 +3709,7 @@ function renderLessonsList(){
       const hasTrialReq = l.is_trial && window.__myTrialRequestsByLesson && window.__myTrialRequestsByLesson[l.id];
       const calUrl = googleCalendarUrl(
         (l.is_trial ? `Пробный: ${l.guest_name || ''}` : (l.profiles && l.profiles.full_name) || 'Урок') + (l.topic ? ' — ' + l.topic : ''),
-        l.lesson_date, l.duration_minutes, l.is_trial && l.guest_contact ? 'Контакт: ' + l.guest_contact : '');
+        l.lesson_date, l.duration_minutes, l.is_trial && contactOf(l).tg ? 'Telegram: @' + contactOf(l).tg : '');
       const canResched = !isLessonPast(l) && !l.needs_reschedule;
       const menu = [
         `<a href="${calUrl}" target="_blank" rel="noopener">Добавить в календарь</a>`,
@@ -4447,7 +4446,7 @@ async function markReviewed(id){
     lessonMenu: function(id){
       var l = (window.__lessonsList || []).find(function(x){ return x.id === id; }); if (!l) return;
       var name = studentName(l), c = contactOf(l), st = ovStudentOf(l);
-      var calUrl = googleCalendarUrl((l.is_trial ? 'Пробный: ' + (l.guest_name || '') : name) + (l.topic ? ' — ' + l.topic : ''), l.lesson_date, l.duration_minutes, l.is_trial && l.guest_contact ? 'Контакт: ' + l.guest_contact : '');
+      var calUrl = googleCalendarUrl((l.is_trial ? 'Пробный: ' + (l.guest_name || '') : name) + (l.topic ? ' — ' + l.topic : ''), l.lesson_date, l.duration_minutes, l.is_trial && contactOf(l).tg ? 'Telegram: @' + contactOf(l).tg : '');
       var write = c.tg ? '<a class="m-mi" href="https://t.me/' + esc(c.tg) + '" target="_blank" rel="noopener">Написать ученику' + I.chev + '</a>' : (c.phone ? '<a class="m-mi" href="tel:' + esc(c.phone.tel) + '">Позвонить ученику' + I.chev + '</a>' : '');
       var req = l.is_trial && (window.__myTrialRequestsByLesson || {})[l.id];
       var canRes = !isLessonPast(l) && !l.needs_reschedule && l.status !== 'cancelled';
