@@ -483,6 +483,31 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .chip-group label:has(input:checked){background:var(--accent);}
   .field label input[type=checkbox]{margin-right:6px;}
 </style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script>
+/* Cloudflare Turnstile: токен для входа (Supabase Auth проверяет его, когда капча включена) */
+const TURNSTILE_SITEKEY = '0x4AAAAAAFS9YWfpfkbW7laY';
+function getCaptchaToken(box){
+  return new Promise(resolve => {
+    let done = false, wid = null, tries = 0;
+    const finish = (t) => { if (done) return; done = true; try { if (wid !== null) window.turnstile.remove(wid); } catch (e){} resolve(t || null); };
+    const host = box || (() => { const d = document.createElement('div'); d.style.cssText = 'position:fixed;bottom:8px;right:8px;z-index:9999'; document.body.appendChild(d); return d; })();
+    const tick = () => {
+      if (done) return;
+      if (window.turnstile){
+        try {
+          wid = window.turnstile.render(host, { sitekey: TURNSTILE_SITEKEY, appearance: 'interaction-only', callback: finish, 'error-callback': () => finish(null), 'expired-callback': () => finish(null) });
+        } catch (e){ finish(null); }
+        return;
+      }
+      if (++tries > 40) return finish(null);
+      setTimeout(tick, 200);
+    };
+    tick();
+    setTimeout(() => finish(null), 12000);
+  });
+}
+</script>
 </head>
 <body>
 <!-- Yandex.Metrika counter -->
@@ -523,6 +548,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <label for="passInput">Пароль</label>
       <input id="passInput" type="password" autocomplete="current-password" placeholder="••••••••">
     </div>
+    <div id="captchaBox" style="min-height:0; margin:0 0 10px; display:flex; justify-content:center;"></div>
     <button class="btn btn-accent" id="loginBtn">Войти</button>
   </div>
 </div>
@@ -1756,7 +1782,8 @@ async function doLogin(){
   }
   const btn = document.getElementById('loginBtn');
   btn.disabled = true; btn.textContent = 'Входим…';
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  const captchaToken = await getCaptchaToken(document.getElementById('captchaBox'));
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password, options: captchaToken ? { captchaToken } : undefined });
   btn.disabled = false; btn.textContent = 'Войти';
   if (error){
     errEl.textContent = 'Неверный email или пароль.';
