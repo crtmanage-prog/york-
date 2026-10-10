@@ -2145,6 +2145,8 @@ function setupTabs(){
 
 /* ---------- SCHEDULE ---------- */
 let teacherMeetingUrl = null;
+let studentMeetingUrl = null; // личная ссылка ученика или его группы
+function lessonMeetingUrl(l){ return (l && l.is_trial) ? teacherMeetingUrl : (studentMeetingUrl || teacherMeetingUrl); }
 let teacherContactTelegram = null;
 
 let teacherFullName = null;
@@ -2155,6 +2157,8 @@ async function loadTeacherContact(){
     .select('meeting_url, contact_telegram, full_name').eq('id', currentProfile.teacher_id);
   const row = teacherRows && teacherRows[0];
   teacherMeetingUrl = (row && row.meeting_url) || false;
+  try { const r = await supabase.rpc('my_meeting_url'); studentMeetingUrl = (r && !r.error && r.data) || null; } catch (e){ console.error('my_meeting_url', e); }
+  if (typeof renderOvHero === 'function' && window.__ovUpcoming) renderOvHero();
   teacherContactTelegram = (row && row.contact_telegram) || false;
   teacherFullName = (row && row.full_name) || null;
 
@@ -2193,7 +2197,7 @@ async function loadTeacherContact(){
 }
 
 function meetingWindowStatus(lesson){
-  if (!teacherMeetingUrl) return { state:'none' };
+  if (!lessonMeetingUrl(lesson)) return { state:'none' };
   const start = new Date(lesson.lesson_date).getTime();
   const duration = lesson.duration_minutes || 60;
   const opensAt = start - 10 * 60 * 1000; // за 10 минут до начала
@@ -2210,7 +2214,7 @@ function renderJoinButton(lesson, variant){
   const win = meetingWindowStatus(lesson);
   if (win.state === 'none' || win.state === 'after') return '';
   if (win.state === 'active'){
-    return `<a class="btn lime${variant === 'card' ? ' sm' : ''}" href="${esc2(teacherMeetingUrl)}" target="_blank" rel="noopener">${sv(ICO.vid)}Присоединиться</a>`;
+    return `<a class="btn lime${variant === 'card' ? ' sm' : ''}" href="${esc2(lessonMeetingUrl(lesson))}" target="_blank" rel="noopener">${sv(ICO.vid)}Присоединиться</a>`;
   }
   const cls = variant === 'card' ? 'btn lockl sm' : 'btn lock';
   return `<button class="${cls}" type="button" disabled>${sv(ICO.lock)}Откроется за 10 мин до урока</button>`;
@@ -4382,7 +4386,7 @@ document.getElementById('referralCopyCode')?.addEventListener('click', async () 
       }
       var win = meetingWindowStatus(up), fmt = currentProfile.format || 'SOLO';
       var join = win.state === 'active'
-        ? '<a class="btn dark lk2" href="' + esc2(teacherMeetingUrl) + '" target="_blank" rel="noopener">' + S(ICO.vid, 15) + 'Присоединиться</a>'
+        ? '<a class="btn dark lk2" href="' + esc2(lessonMeetingUrl(up)) + '" target="_blank" rel="noopener">' + S(ICO.vid, 15) + 'Присоединиться</a>'
         : (win.state === 'before' ? '<button class="btn dark lk2" type="button" disabled>' + S(ICO.lock, 15) + 'Откроется за 10 мин</button>' : '<span class="m-cd" style="flex:1">Ссылка на урок появится позже</span>');
       var mat = up.materials_url
         ? '<a class="ibtn2" href="' + esc2(up.materials_url) + '" target="_blank" rel="noopener" title="Материалы урока" aria-label="Материалы урока">' + S(ICO.doc, 17) + '</a>'

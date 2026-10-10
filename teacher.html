@@ -2279,6 +2279,15 @@ function ovNextLesson(){
     .filter(l => l.status !== 'cancelled' && l.status !== 'rescheduled' && ovLessonEnd(l).getTime() > now)
     .sort((a, b) => new Date(a.lesson_date) - new Date(b.lesson_date))[0] || null;
 }
+/* ссылка на созвон для урока: группа → ученик → моя общая (пробные — всегда общая) */
+function lessonLink(l){
+  const mine = (currentProfile && currentProfile.meeting_url) || '';
+  if (!l || l.is_trial) return mine;
+  const st = (myStudents || []).find(x => x.id === l.student_id);
+  if (!st) return mine;
+  const g = st.group_id ? (window.__myGroups || []).find(x => x.id === st.group_id) : null;
+  return (g && g.meeting_url) || st.meeting_url || mine;
+}
 function ovStudentOf(l){ return l && !l.is_trial ? (myStudents || []).find(s => s.id === l.student_id) : null; }
 
 const OV_PHONE = '<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>';
@@ -2349,7 +2358,7 @@ function renderOvHero(){
     return;
   }
   const st = ovStudentOf(l), start = new Date(l.lesson_date), end = ovLessonEnd(l), c = contactOf(l);
-  const url = currentProfile && currentProfile.meeting_url;
+  const url = lessonLink(l);
   const join = url
     ? `<a class="ov-open" href="${attrEsc(url)}" target="_blank" rel="noopener">Присоединиться</a>`
     : `<button class="ov-open" id="ovAddLink" type="button">Добавить ссылку на созвон</button>`;
@@ -3612,8 +3621,9 @@ function lessonBadge(l){
 
 function teacherJoinButton(l){
   if (isLessonPast(l)) return '';
-  if (!currentProfile || !currentProfile.meeting_url) return '';
-  return `<a class="btn btn-accent btn-sm" href="${currentProfile.meeting_url}" target="_blank" rel="noopener">Присоединиться</a>`;
+  const jl = lessonLink(l);
+  if (!jl) return '';
+  return `<a class="btn btn-accent btn-sm" href="${jl}" target="_blank" rel="noopener">Присоединиться</a>`;
 }
 
 function fmtTimeOnly(d){
@@ -3703,8 +3713,8 @@ function checkFloatingReminder(){
   document.getElementById('floatingReminderText').innerHTML = `<b>${name}</b> — ${whenText}`;
 
   const joinBtn = document.getElementById('floatingReminderJoin');
-  if (currentProfile && currentProfile.meeting_url){
-    joinBtn.href = currentProfile.meeting_url;
+  if (lessonLink(candidate)){
+    joinBtn.href = lessonLink(candidate);
     joinBtn.classList.remove('hidden');
   } else {
     joinBtn.classList.add('hidden');
@@ -4352,7 +4362,7 @@ async function gzSave(id){
       if (ms <= 0) left = '<b>урок идёт</b>';
       else if (ms < 86400000){ var h = Math.floor(ms / 3600000), m = Math.floor((ms % 3600000) / 60000); left = 'через <b>' + (h ? h + ' ч ' : '') + m + ' мин</b>'; }
       else left = '<b>' + esc(ovDayWord(start).toLowerCase()) + '</b>';
-      var url = currentProfile && currentProfile.meeting_url;
+      var url = lessonLink(l);
       var join = url
         ? '<a class="m-btn dark" href="' + esc(url) + '" target="_blank" rel="noopener">Присоединиться</a>'
         : '<button class="m-btn dark" type="button" onclick="openSettings()">Добавить ссылку</button>';
@@ -4417,7 +4427,7 @@ async function gzSave(id){
       var ls = byDay[key], isToday = key === today;
       var head = '<div class="m-sec" id="mday-' + key + '">' + esc(dayLabel(key, isToday)) + '</div>';
       var cards = ls.map(function(l){
-        var name = studentName(l), c = contactOf(l), url = currentProfile && currentProfile.meeting_url, start = new Date(l.lesson_date), end = ovLessonEnd(l);
+        var name = studentName(l), c = contactOf(l), url = lessonLink(l), start = new Date(l.lesson_date), end = ovLessonEnd(l);
         var st = ovStudentOf(l), sub = l.topic || (l.is_trial ? 'пробный урок' : 'регулярное · ' + ((st && st.format) || 'SOLO'));
         var kebab = '<button type="button" class="m-kebab" aria-label="Меню урока" onclick="M.lessonMenu(\'' + l.id + '\')">' + I.dots + '</button>';
         var wait = l.needs_reschedule ? '<span class="m-pill amber">ждёт переноса</span>' : '';

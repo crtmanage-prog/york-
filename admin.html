@@ -979,6 +979,11 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <select id="editTeacher"></select>
         </div>
         <div class="field">
+          <label for="editMeetingUrl">Личная ссылка на созвон</label>
+          <input id="editMeetingUrl" type="text" placeholder="https://telemost.yandex.ru/j/...">
+          <p class="row-sub" style="margin:6px 0 0; font-size:12px;">Остаётся у ученика при смене учителя. Если пусто — используется ссылка учителя. У учеников в группе работает ссылка группы (задаётся в разделе «Группы»).</p>
+        </div>
+        <div class="field">
           <label for="editStudentStatus">Статус</label>
           <select id="editStudentStatus">
             <option value="active">🟢 Активный</option>
@@ -1088,7 +1093,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <div class="table-wrap" style="margin-bottom:20px;">
         <table class="admin-table" id="groupsTable">
           <thead>
-            <tr><th>Название</th><th>Учитель</th><th>Учеников</th><th></th></tr>
+            <tr><th>Название</th><th>Учитель</th><th>Учеников</th><th>Ссылка на созвон группы</th><th></th></tr>
           </thead>
           <tbody id="groupsTableBody"></tbody>
         </table>
@@ -2735,6 +2740,7 @@ function fillEditForm(studentId){
   document.getElementById('editFormat').value = s.format || 'SOLO';
   document.getElementById('editLevel').value = s.level || 'A1';
   document.getElementById('editTimezone').value = s.timezone || SCHOOL_TZ;
+  document.getElementById('editMeetingUrl').value = s.meeting_url || '';
   document.getElementById('editTeacher').value = s.teacher_id || '';
   document.getElementById('editStudentStatus').value = s.student_status || 'active';
   document.getElementById('editError').textContent = '';
@@ -2929,6 +2935,7 @@ async function saveStudent(){
   const format = document.getElementById('editFormat').value;
   const level = document.getElementById('editLevel').value;
   const timezone = document.getElementById('editTimezone').value;
+  const meetingUrl = document.getElementById('editMeetingUrl').value.trim();
   const teacherId = document.getElementById('editTeacher').value;
   const studentStatus = document.getElementById('editStudentStatus').value;
   const errEl = document.getElementById('editError');
@@ -2950,6 +2957,7 @@ async function saveStudent(){
     contact_email: contactEmail || null,
     contact_avito: contactAvito || null,
     format, level, timezone, teacher_id: teacherId || null,
+    meeting_url: meetingUrl || null,
     student_status: studentStatus
   }).eq('id', studentId);
 
@@ -3926,6 +3934,14 @@ async function loadReferralStats(){
   }).join('');
 }
 
+async function saveGroupMeetingUrl(groupId, input){
+  const url = input.value.trim();
+  const { error } = await supabase.from('groups').update({ meeting_url: url || null }).eq('id', groupId);
+  if (error){ alert('Не получилось сохранить ссылку группы. Попробуй ещё раз.'); return; }
+  const g = (window.__groupsList || []).find(x => x.id === groupId); if (g) g.meeting_url = url || null;
+  input.style.boxShadow = '0 0 0 2px #B2D320'; setTimeout(() => { input.style.boxShadow = ''; }, 1200);
+}
+
 async function loadGroups(){
   const { data } = await supabase.from('groups').select('*').order('created_at', { ascending:false });
   window.__groupsList = data || [];
@@ -3937,7 +3953,7 @@ function renderGroupsTable(){
   const body = document.getElementById('groupsTableBody');
   const groups = window.__groupsList || [];
   if (!groups.length){
-    body.innerHTML = '<tr><td colspan="4" class="empty-state">Пока нет групп.</td></tr>';
+    body.innerHTML = '<tr><td colspan="5" class="empty-state">Пока нет групп.</td></tr>';
     return;
   }
   body.innerHTML = groups.map(g => {
@@ -3948,6 +3964,7 @@ function renderGroupsTable(){
         <td>${g.name}</td>
         <td>${t ? t.full_name : '—'}</td>
         <td>${count}</td>
+        <td><input type="text" value="${(g.meeting_url || '').replace(/"/g, '&quot;')}" placeholder="https://telemost.yandex.ru/j/..." style="min-width:220px;" onchange="saveGroupMeetingUrl('${g.id}', this)"></td>
         <td><button class="btn btn-ghost btn-sm" onclick="deleteGroup('${g.id}', '${g.name.replace(/'/g, "\\'")}')">Удалить</button></td>
       </tr>
     `;
