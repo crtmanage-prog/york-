@@ -836,6 +836,216 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   #appScreen .rf-code b{font-size:20px}
 }
 
+#appScreen .m-wrap,#appScreen #mHead,#appScreen #mBar{display:none}
+@media (max-width:760px){
+  #appScreen .mh{display:flex;align-items:center;gap:10px;padding:6px 2px 2px}
+  #appScreen .mh .l{flex:1;min-width:0}
+  #appScreen .mh small{display:block;font-size:11.5px;color:var(--ink-soft)}
+  #appScreen .mh h2{font-family:Unbounded;font-weight:800;font-size:19px;margin:2px 0 0;line-height:1.15}
+  #appScreen .mh .bell{width:42px;height:42px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(20,21,18,.06);display:flex;align-items:center;justify-content:center;position:relative;flex:none}
+  #appScreen .mh .bell svg{width:19px;height:19px}
+  #appScreen .mh .bell i{position:absolute;top:10px;right:11px;width:8px;height:8px;border-radius:50%;background:#C8463A;box-shadow:0 0 0 2px #fff}
+  #appScreen .mh .av{width:42px;height:42px;font-size:14px}
+  #appScreen .m{background:#fff;border-radius:22px;padding:16px;box-shadow:0 1px 3px rgba(20,21,18,.05);display:flex;flex-direction:column}
+  #appScreen .m .oh{margin-bottom:12px}
+  #appScreen .m .oi{width:36px;height:36px;border-radius:12px}
+  #appScreen .m .oi svg{width:18px;height:18px}
+  #appScreen .m .ot{font-size:14px}
+  #appScreen .m.hwg .oi{width:38px;height:38px;border-radius:13px}
+  #appScreen .m .big{font-size:36px}
+  #appScreen .m .note{font-size:12px}
+  #appScreen .m .btn{padding:12px 18px;font-size:12.5px}
+  #appScreen .m .btn svg{width:16px;height:16px}
+  #appScreen .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  #appScreen .two .m{padding:14px}
+  #appScreen .two .big{font-size:30px}
+  #appScreen .mli{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+  #appScreen .mli:first-child{border-top:none;padding-top:0}
+  #appScreen .mli .dt{width:42px;height:42px;border-radius:13px}
+  #appScreen .mli .dt b{font-size:13px}
+  #appScreen .mli .tt{flex:1;min-width:0}
+  #appScreen .mli .tt b{display:block;font-size:13.5px}
+  #appScreen .mli .tt span{font-size:12px;color:var(--ink-soft)}
+  #appScreen .mli .chip{font-size:11px;padding:4px 9px}
+  #appScreen .vt{display:flex;flex-direction:column;gap:8px}
+  #appScreen .vt .tr-c{padding:10px 12px}
+  #appScreen .mwk{border-radius:24px;padding:12px 10px 10px}
+  #appScreen .mwk .top{display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px}
+  #appScreen .mwk .top b{font-family:Unbounded;font-size:13px}
+  #appScreen .mwk .top .nv{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700}
+  #appScreen .mwk .top .nv button{width:30px;height:30px;border-radius:50%;border:none;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(20,21,18,.06)}
+  #appScreen .mwk .top .nv svg{width:14px;height:14px}
+  #appScreen .mlc{position:relative;overflow:hidden;background:#fff;border-radius:22px;padding:16px 16px 16px 22px;box-shadow:0 1px 3px rgba(20,21,18,.05);display:flex;flex-direction:column;gap:12px}
+  #appScreen .mlc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--lime-g)}
+  #appScreen .mlc .r1{display:flex;align-items:center;gap:14px}
+  #appScreen .mlc .t{font-family:Unbounded;font-size:26px;font-weight:800;line-height:1}
+  #appScreen .mlc .t small{display:block;font-family:'Golos Text';font-size:11.5px;color:#5C7408;font-weight:700;margin-top:6px}
+  #appScreen .mlc h4{font-family:Unbounded;font-size:14.5px;margin:0 0 4px}
+  #appScreen .mlc .mm{font-size:12px;color:var(--ink-soft)}
+  #appScreen .mlc .acts{display:grid;grid-template-columns:1fr auto;gap:8px}
+  #appScreen .mlc .btn{padding:12px 14px;font-size:12px}
+  #appScreen .mlc .ibtn{width:44px;height:44px}
+  #appScreen .mseg{display:flex;gap:6px;overflow:auto;scrollbar-width:none}
+  #appScreen .mseg button{flex:none;border:none;background:#fff;border-radius:99px;padding:8px 14px;font-family:inherit;font-size:12.5px;font-weight:600;color:var(--ink-soft);display:flex;gap:6px;align-items:center;box-shadow:0 1px 3px rgba(20,21,18,.05)}
+  #appScreen .mseg button em{font-style:normal;font-size:10.5px;background:#F2F3EC;border-radius:99px;padding:1px 6px}
+  #appScreen .mseg button.on{background:#EAF3C8;color:#3F5A06;box-shadow:inset 0 0 0 1px #DCEAA6}
+  #appScreen .mseg button.on em{background:#fff}
+  #appScreen .mhw{padding:16px 16px 16px 22px}
+  #appScreen .mhw h4{font-size:15px}
+  #appScreen .mhw .hwc-d{font-size:12.5px}
+  #appScreen .mhw .hwc-sub2 textarea{min-height:56px;font-size:13px}
+  #appScreen .mhw .fbk .av{width:30px;height:30px;font-size:11px}
+  #appScreen .mhw .fbk p{font-size:12.5px}
+  #appScreen .res-row{display:flex;align-items:center;gap:14px}
+  #appScreen .res-row .big{font-size:32px}
+  #appScreen .res-row .gr-row{margin:0;margin-left:auto}
+  #appScreen .zsum{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(20,21,18,.05);cursor:pointer}
+  #appScreen .zsum .oi{width:36px;height:36px;border-radius:12px;flex:none}
+  #appScreen .zsum .oi svg{width:18px;height:18px}
+  #appScreen .zsum .tt{flex:1}
+  #appScreen .zsum .tt b{display:block;font-size:14px}
+  #appScreen .zsum .tt span{font-size:12px;color:var(--ink-soft)}
+  #appScreen .zsum>svg{width:16px;height:16px;color:var(--ink3)}
+  #appScreen .m-dim{position:absolute;inset:0;background:rgba(20,21,18,.35);z-index:5}
+  #appScreen .m-sheet{position:absolute;left:0;right:0;bottom:0;z-index:6;background:#fff;border-radius:26px 26px 0 0;padding:10px 16px 20px;max-height:86%;overflow:auto;display:flex;flex-direction:column;gap:12px}
+  #appScreen .m-sheet .grab{width:40px;height:5px;border-radius:9px;background:#DAD9D0;align-self:center;margin-bottom:4px}
+  #appScreen .m-sheet h3{font-family:Unbounded;font-size:16px;margin:0}
+  #appScreen .ms-it{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:#F7F8EF;font-size:14px;font-weight:600}
+  #appScreen .ms-it i{width:36px;height:36px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;font-style:normal}
+  #appScreen .ms-it i svg{width:18px;height:18px}
+  #appScreen .ms-it>svg{margin-left:auto;width:16px;height:16px;color:var(--ink3)}
+  #appScreen .ms-it.red{background:#FBEDEB;color:#C8463A}
+  #appScreen .ms-it.red i{color:#C8463A}
+  #appScreen .ms-tch{display:flex;align-items:center;gap:12px;padding:14px;border-radius:20px;color:var(--ink);background:radial-gradient(240px 120px at 100% 100%,rgba(215,239,66,.85),rgba(215,239,66,0) 70%),radial-gradient(180px 100px at 0% 0%,#fff,rgba(255,255,255,0) 70%),linear-gradient(150deg,#FFFFFF 0%,#F8FBEE 100%);border:1.5px solid rgba(255,255,255,.95);box-shadow:0 10px 26px rgba(70,85,20,.12)}
+  #appScreen .ms-tch .av{width:42px;height:42px;flex:none;font-size:14px}
+  #appScreen .ms-tch .tx{flex:1;min-width:0}
+  #appScreen .ms-tch small{display:block;font-size:11px;color:var(--ink-soft)}
+  #appScreen .ms-tch b{font-size:14px}
+  #appScreen .ms-tch .rbtn{background:rgba(255,255,255,.6);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,255,255,.95),0 4px 14px rgba(70,85,20,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  #appScreen .nt-i{display:flex;gap:12px;padding:12px;border-radius:16px;background:#F7F8EF}
+  #appScreen .nt-i i{width:34px;height:34px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center;flex:none}
+  #appScreen .nt-i i svg{width:17px;height:17px}
+  #appScreen .nt-i b{display:block;font-size:13px}
+  #appScreen .nt-i span{font-size:12px;color:var(--ink-soft)}
+  #appScreen .nt-i.new{background:#F4F8D6}
+  #appScreen .mgw .gw-w span{width:44px;height:50px}
+  #appScreen .mgw .gw-a{grid-template-columns:1fr 1fr}
+  #appScreen .m .lvt-cmp{grid-template-columns:1fr auto 1fr;gap:8px;margin:0 0 12px}
+  #appScreen .m .lvt-c{padding:12px}
+  #appScreen .m .lvt-c b{font-size:22px}
+  #appScreen .m .lvt-c small{font-size:10.5px}
+  #appScreen .sp-ts.m1{grid-template-columns:1fr;gap:8px}
+  #appScreen .sp-ts.m1 .sp-t{flex-direction:row;align-items:center;padding:12px 14px}
+  #appScreen .sp-ts.m1 .sp-t-ic{margin:0;width:36px;height:36px}
+  #appScreen .sp-ts.m1 .sp-t .tx{flex:1;display:flex;flex-direction:column}
+  #appScreen .sp-ts.m1 .sp-t .tx b{font-size:13.5px;color:var(--ink)}
+  #appScreen .sp-ts.m1 .sp-t .tx span{font-size:12px;color:var(--ink-soft)}
+  #appScreen .sp-ts.m1 .sp-t>svg{width:16px;height:16px}
+  #appScreen .m .sp-cr{padding:12px 0}
+  #appScreen .m .sp-cr .av{width:40px;height:40px}
+  #appScreen .m .rf-r{padding:14px}
+  #appScreen .m .rf-code b{font-size:20px}
+  #appScreen .hello{font-family:Unbounded;font-weight:800;font-size:22px;line-height:1.18;margin:2px 2px 0}
+  #appScreen .blobs{position:relative;border-radius:26px;overflow:hidden;padding:2px}
+  #appScreen .blobs::before{content:"";position:absolute;width:200px;height:200px;right:-50px;top:-60px;border-radius:50%;background:radial-gradient(circle,#D7EF42,rgba(215,239,66,0) 70%)}
+  #appScreen .blobs::after{content:"";position:absolute;width:160px;height:160px;left:-40px;bottom:-60px;border-radius:50%;background:radial-gradient(circle,#B2D320,rgba(178,211,32,0) 70%)}
+  #appScreen .glassc{position:relative;z-index:1;border-radius:24px;padding:16px;background:rgba(255,255,255,.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.9);display:flex;flex-direction:column;gap:12px}
+  #appScreen .m-row{display:flex;align-items:center;gap:12px}
+  #appScreen .m-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#E6F663,#B2D320);display:flex;align-items:center;justify-content:center;font-family:Unbounded;font-weight:700;font-size:14px;flex:none}
+  #appScreen .m-row .t{flex:1;min-width:0}
+  #appScreen .m-row .t b{display:block;font-size:14.5px}
+  #appScreen .m-row .t small{font-size:12px;color:var(--ink3)}
+  #appScreen .m-time{font-family:Unbounded;font-weight:800;font-size:16px}
+  #appScreen .m-cd{font-size:12.5px;color:var(--ink-soft)}
+  #appScreen .m-cd b{color:var(--ink)}
+  #appScreen .m-acts{display:flex;gap:8px}
+  #appScreen .m-acts .btn{flex:1;padding:12px 14px;font-size:12px}
+  #appScreen .m-acts .btn svg{width:15px;height:15px}
+  #appScreen .btn.lk2{background:rgba(255,255,255,.78);color:var(--ink-soft);box-shadow:inset 0 0 0 1px #fff,0 4px 14px rgba(70,85,20,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  #appScreen .m-acts a.btn.lk2{color:var(--ink)}
+  #appScreen .ibtn2{width:44px;height:44px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 1px 3px rgba(20,21,18,.08)}
+  #appScreen .launch4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  #appScreen .launch4 a{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;font-weight:600;text-decoration:none;color:var(--ink)}
+  #appScreen .launch4 i{width:58px;height:58px;border-radius:19px;background:#fff;box-shadow:0 1px 3px rgba(20,21,18,.06);display:flex;align-items:center;justify-content:center;font-style:normal;position:relative}
+  #appScreen .launch4 i em{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;border-radius:99px;background:var(--accent);font-style:normal;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 4px}
+  #appScreen .trmini{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;text-decoration:none;color:var(--ink);background:radial-gradient(220px 100px at 100% 100%,rgba(215,239,66,.55),rgba(215,239,66,0) 70%),linear-gradient(150deg,#FFFFFF 0%,#F8FBEE 100%);border:1.5px solid rgba(255,255,255,.95);box-shadow:0 8px 20px rgba(70,85,20,.08)}
+  #appScreen .trmini .ic{width:34px;height:34px;border-radius:11px;background:#EAF3C8;color:#3F5A06;display:flex;align-items:center;justify-content:center;flex:none}
+  #appScreen .trmini .tt{flex:1}
+  #appScreen .trmini .tt b{display:block;font-size:13.5px}
+  #appScreen .trmini .tt span{font-size:12px;color:var(--ink-soft)}
+  #appScreen .trmini>svg{width:16px;height:16px;color:var(--ink3)}
+  #appScreen .mwk .dd{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+  #appScreen .mwk .d{display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;cursor:pointer}
+  #appScreen .mwk .d small{font-size:10.5px;color:var(--ink3)}
+  #appScreen .mwk .d b{font-family:Unbounded;font-size:15px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+  #appScreen .mwk .d i{font-style:normal;font-size:10px;font-weight:700;color:var(--ink-soft);height:13px}
+  #appScreen .mwk .d .dot{width:5px;height:5px;border-radius:50%}
+  #appScreen .mwk .d.l .dot{background:#9DBA1A}
+  #appScreen .mwk .d.td small{color:#5C7408;font-weight:700}
+  #appScreen .mwk .d.on b{background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 1px rgba(255,255,255,.95),0 4px 14px rgba(70,85,20,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  #appScreen .sl-m{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
+  #appScreen .sl-m span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;font-weight:600;color:#BDBCB3}
+  #appScreen .sl-m span i{width:5px;height:5px;border-radius:50%}
+  #appScreen .sl-m span.on{color:var(--ink);font-weight:800}
+  #appScreen .sl-m span.on i{background:#9DBA1A}
+  #appScreen .acc2{padding:14px 16px}
+  #appScreen .acc2-h{display:flex;align-items:center;gap:12px;cursor:pointer}
+  #appScreen .acc2-h .oi{width:36px;height:36px;border-radius:12px;flex:none}
+  #appScreen .acc2-h .oi svg{width:18px;height:18px}
+  #appScreen .acc2-h .tt{flex:1;min-width:0}
+  #appScreen .acc2-h .tt b{display:block;font-size:14px}
+  #appScreen .acc2-h .tt span{font-size:12px;color:var(--ink-soft)}
+  #appScreen .acc2-h .chv{width:30px;height:30px;border-radius:50%;background:#F2F3EC;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s}
+  #appScreen .acc2-b{display:none;margin-top:14px}
+  #appScreen .acc2.open .acc2-b{display:block}
+  #appScreen .acc2.open .chv{transform:rotate(180deg)}
+  #appScreen .zsum.zg{background:radial-gradient(240px 120px at 100% 100%,rgba(215,239,66,.8),rgba(215,239,66,0) 70%),radial-gradient(180px 100px at 0% 0%,#fff,rgba(255,255,255,0) 70%),linear-gradient(150deg,#FFFFFF 0%,#F8FBEE 100%);border:1.5px solid rgba(255,255,255,.95);box-shadow:0 10px 26px rgba(70,85,20,.12)}
+  #appScreen .zsum.zg .oi{background:linear-gradient(135deg,#E6F663,#C6DF27);color:#101109;box-shadow:0 6px 14px rgba(150,180,20,.3)}
+  #appScreen .m.hwg,#appScreen .m.fmg{background:radial-gradient(260px 180px at 100% 100%,rgba(215,239,66,.8),rgba(215,239,66,0) 70%),radial-gradient(200px 140px at 0% 0%,#fff,rgba(255,255,255,0) 70%),linear-gradient(150deg,#FFFFFF 0%,#F8FBEE 100%);border:1.5px solid rgba(255,255,255,.95);box-shadow:0 14px 32px rgba(70,85,20,.12)}
+  #appScreen .m.hwg .oi{background:linear-gradient(135deg,#E6F663,#C6DF27);color:#101109;box-shadow:0 6px 14px rgba(150,180,20,.3)}
+  #appScreen .m.fmg .tr-c{background:rgba(255,255,255,.75);box-shadow:inset 0 0 0 1px rgba(255,255,255,.95),0 4px 14px rgba(70,85,20,.06)}
+  #appScreen .hwc.acc2{padding:14px 16px 14px 22px}
+  #appScreen .hx-h{display:flex;align-items:center;gap:10px;cursor:pointer}
+  #appScreen .hx-t{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+  #appScreen .hx-t b{font-family:Unbounded;font-size:13.5px;line-height:1.3}
+  #appScreen .hx-t small{font-size:11.5px;color:var(--ink3)}
+  #appScreen .hx-h .grd{margin-left:0}
+  #appScreen .hx-h .chv{width:30px;height:30px;border-radius:50%;background:#F2F3EC;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s}
+  #appScreen .hwc.acc2 .acc2-b{margin-top:12px}
+  #appScreen .hwc.acc2 .acc2-b>*+*{margin-top:10px}
+
+  /* --- каркас мобильной версии --- */
+  #appScreen .sb,#appScreen .tb{display:none !important}
+  #appScreen .app{display:block}
+  #appScreen main{padding:12px 16px calc(96px + env(safe-area-inset-bottom));max-width:none}
+  #appScreen .wrap{padding:0;max-width:none}
+  #appScreen .m-wrap{display:flex;flex-direction:column;gap:12px}
+  #appScreen #mHead{display:block;margin-bottom:12px}
+  #appScreen .panel>*:not(.m-wrap):not(#testRunner){display:none !important}
+  #appScreen #panel-practice:has(#testRunner:not(.hidden)) #mPr{display:none}
+  #appScreen .m-wrap>*{flex-shrink:0}
+  #appScreen .mh .bell{border:none;padding:0;cursor:pointer}
+  #appScreen .mh .av{width:42px;height:42px;font-size:14px;flex:none}
+  #appScreen .mh{display:flex;align-items:center;gap:10px}
+  #appScreen .mli .tt{min-width:0}
+  #appScreen .mwk .wk-top{display:flex}
+  /* нижняя капсула */
+  #appScreen #mBar{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;height:60px;padding:0 8px;align-items:center;justify-content:space-around;border-radius:99px;background:radial-gradient(220px 70px at 100% 100%,rgba(215,239,66,.45),rgba(215,239,66,0) 70%),linear-gradient(150deg,rgba(255,255,255,.62) 0%,rgba(248,251,238,.55) 100%);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);border:1px solid rgba(255,255,255,.85);box-shadow:0 14px 36px rgba(20,21,18,.22),0 4px 12px rgba(20,21,18,.12)}
+  #appScreen #mBar button{position:relative;width:46px;height:46px;border-radius:50%;border:none;background:none;color:#6E6F67;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer}
+  #appScreen #mBar button svg{width:22px;height:22px}
+  #appScreen #mBar button.on{color:#141412;background:rgba(255,255,255,.8);box-shadow:inset 0 0 0 1px #fff,0 4px 14px rgba(70,85,20,.16)}
+  #appScreen #mBar em{position:absolute;top:2px;right:2px;min-width:17px;height:17px;border-radius:99px;background:var(--accent);color:#101109;font-style:normal;font-size:9.5px;font-weight:800;display:none;align-items:center;justify-content:center;padding:0 4px;box-shadow:0 0 0 2px #fff}
+  /* листы поверх панели */
+  #appScreen .m-dim{position:fixed;inset:0;background:rgba(20,21,18,.35);z-index:70}
+  #appScreen .m-sheet{position:fixed;left:0;right:0;bottom:0;z-index:71;background:#fff;border-radius:26px 26px 0 0;padding:10px 16px calc(20px + env(safe-area-inset-bottom));max-height:86vh;overflow:auto;display:flex;flex-direction:column;gap:12px}
+  #appScreen .m-sheet .grab{width:40px;height:5px;border-radius:9px;background:#DAD9D0;align-self:center;margin-bottom:4px;flex:none}
+  #appScreen .m-sheet>*{flex-shrink:0}
+  body.m-lock{overflow:hidden}
+  #appScreen .mhw .mts{display:flex;flex-wrap:wrap;gap:6px}
+  #appScreen .sdv{display:flex}
+  #appScreen .mlc .acts{grid-template-columns:minmax(0,1fr) auto}
+  #appScreen .mlc .acts .btn,#appScreen .m-acts .btn{min-width:0;white-space:normal;line-height:1.2;text-align:center}
+}
 </style>
 <script>
 const QR_RS_BLOCK_TABLE = [[1, 26, 19], [1, 26, 16], [1, 26, 13], [1, 26, 9], [1, 44, 34], [1, 44, 28], [1, 44, 22], [1, 44, 16], [1, 70, 55], [1, 70, 44], [2, 35, 17], [2, 35, 13], [1, 100, 80], [2, 50, 32], [2, 50, 24], [4, 25, 9], [1, 134, 108], [2, 67, 43], [2, 33, 15, 2, 34, 16], [2, 33, 11, 2, 34, 12], [2, 86, 68], [4, 43, 27], [4, 43, 19], [4, 43, 15], [2, 98, 78], [4, 49, 31], [2, 32, 14, 4, 33, 15], [4, 39, 13, 1, 40, 14], [2, 121, 97], [2, 60, 38, 2, 61, 39], [4, 40, 18, 2, 41, 19], [4, 40, 14, 2, 41, 15], [2, 146, 116], [3, 58, 36, 2, 59, 37], [4, 36, 16, 4, 37, 17], [4, 36, 12, 4, 37, 13], [2, 86, 68, 2, 87, 69], [4, 69, 43, 1, 70, 44], [6, 43, 19, 2, 44, 20], [6, 43, 15, 2, 44, 16], [4, 101, 81], [1, 80, 50, 4, 81, 51], [4, 50, 22, 4, 51, 23], [3, 36, 12, 8, 37, 13], [2, 116, 92, 2, 117, 93], [6, 58, 36, 2, 59, 37], [4, 46, 20, 6, 47, 21], [7, 42, 14, 4, 43, 15], [4, 133, 107], [8, 59, 37, 1, 60, 38], [8, 44, 20, 4, 45, 21], [12, 33, 11, 4, 34, 12], [3, 145, 115, 1, 146, 116], [4, 64, 40, 5, 65, 41], [11, 36, 16, 5, 37, 17], [11, 36, 12, 5, 37, 13], [5, 109, 87, 1, 110, 88], [5, 65, 41, 5, 66, 42], [5, 54, 24, 7, 55, 25], [11, 36, 12], [5, 122, 98, 1, 123, 99], [7, 73, 45, 3, 74, 46], [15, 43, 19, 2, 44, 20], [3, 45, 15, 13, 46, 16], [1, 135, 107, 5, 136, 108], [10, 74, 46, 1, 75, 47], [1, 50, 22, 15, 51, 23], [2, 42, 14, 17, 43, 15], [5, 150, 120, 1, 151, 121], [9, 69, 43, 4, 70, 44], [17, 50, 22, 1, 51, 23], [2, 42, 14, 19, 43, 15], [3, 141, 113, 4, 142, 114], [3, 70, 44, 11, 71, 45], [17, 47, 21, 4, 48, 22], [9, 39, 13, 16, 40, 14], [3, 135, 107, 5, 136, 108], [3, 67, 41, 13, 68, 42], [15, 54, 24, 5, 55, 25], [15, 43, 15, 10, 44, 16], [4, 144, 116, 4, 145, 117], [17, 68, 42], [17, 50, 22, 6, 51, 23], [19, 46, 16, 6, 47, 17], [2, 139, 111, 7, 140, 112], [17, 74, 46], [7, 54, 24, 16, 55, 25], [34, 37, 13], [4, 151, 121, 5, 152, 122], [4, 75, 47, 14, 76, 48], [11, 54, 24, 14, 55, 25], [16, 45, 15, 14, 46, 16], [6, 147, 117, 4, 148, 118], [6, 73, 45, 14, 74, 46], [11, 54, 24, 16, 55, 25], [30, 46, 16, 2, 47, 17], [8, 132, 106, 4, 133, 107], [8, 75, 47, 13, 76, 48], [7, 54, 24, 22, 55, 25], [22, 45, 15, 13, 46, 16], [10, 142, 114, 2, 143, 115], [19, 74, 46, 4, 75, 47], [28, 50, 22, 6, 51, 23], [33, 46, 16, 4, 47, 17], [8, 152, 122, 4, 153, 123], [22, 73, 45, 3, 74, 46], [8, 53, 23, 26, 54, 24], [12, 45, 15, 28, 46, 16], [3, 147, 117, 10, 148, 118], [3, 73, 45, 23, 74, 46], [4, 54, 24, 31, 55, 25], [11, 45, 15, 31, 46, 16], [7, 146, 116, 7, 147, 117], [21, 73, 45, 7, 74, 46], [1, 53, 23, 37, 54, 24], [19, 45, 15, 26, 46, 16], [5, 145, 115, 10, 146, 116], [19, 75, 47, 10, 76, 48], [15, 54, 24, 25, 55, 25], [23, 45, 15, 25, 46, 16], [13, 145, 115, 3, 146, 116], [2, 74, 46, 29, 75, 47], [42, 54, 24, 1, 55, 25], [23, 45, 15, 28, 46, 16], [17, 145, 115], [10, 74, 46, 23, 75, 47], [10, 54, 24, 35, 55, 25], [19, 45, 15, 35, 46, 16], [17, 145, 115, 1, 146, 116], [14, 74, 46, 21, 75, 47], [29, 54, 24, 19, 55, 25], [11, 45, 15, 46, 46, 16], [13, 145, 115, 6, 146, 116], [14, 74, 46, 23, 75, 47], [44, 54, 24, 7, 55, 25], [59, 46, 16, 1, 47, 17], [12, 151, 121, 7, 152, 122], [12, 75, 47, 26, 76, 48], [39, 54, 24, 14, 55, 25], [22, 45, 15, 41, 46, 16], [6, 151, 121, 14, 152, 122], [6, 75, 47, 34, 76, 48], [46, 54, 24, 10, 55, 25], [2, 45, 15, 64, 46, 16], [17, 152, 122, 4, 153, 123], [29, 74, 46, 14, 75, 47], [49, 54, 24, 10, 55, 25], [24, 45, 15, 46, 46, 16], [4, 152, 122, 18, 153, 123], [13, 74, 46, 32, 75, 47], [48, 54, 24, 14, 55, 25], [42, 45, 15, 32, 46, 16], [20, 147, 117, 4, 148, 118], [40, 75, 47, 7, 76, 48], [43, 54, 24, 22, 55, 25], [10, 45, 15, 67, 46, 16], [19, 148, 118, 6, 149, 119], [18, 75, 47, 31, 76, 48], [34, 54, 24, 34, 55, 25], [20, 45, 15, 61, 46, 16]];
@@ -1301,6 +1511,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
 <main><div class="wrap">
 
+  <div id="mHead"></div>
+
   <div class="tb">
     <div class="tb-l">
       <div class="tb-date"><span id="tbDate">—</span><span class="tb-tz"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Время в кабинете: МСК</span></div>
@@ -1322,6 +1534,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
   <!-- ===== ОБЗОР ===== -->
   <section class="pg panel active" id="panel-overview">
+    <div class="m-wrap" id="mOv"></div>
     <div class="tg hidden" id="tgBanner">
       <span class="ic"><svg viewBox="0 0 24 24"><path d="M21.5 4.5 2.8 11.7c-.9.3-.9 1.6 0 1.9l4.6 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.5 4.6 3.4c.6.4 1.4.1 1.6-.6L22.9 5.9c.2-.9-.6-1.7-1.4-1.4z"/><path d="m7.4 15.1 10.4-7.6"/></svg></span>
       <div class="t"><b>Подключи Telegram-бота YORK!</b><span>Напоминания о занятиях, статус абонемента, уведомления о новой домашке и комментариях преподавателя. Связь с преподавателем и менеджером — во вкладке «Поддержка».</span></div>
@@ -1392,6 +1605,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
   <!-- ===== РАСПИСАНИЕ ===== -->
   <section class="pg panel" id="panel-schedule">
+    <div class="m-wrap" id="mSchTop"></div>
+    <div class="m-wrap" id="mSchRest"></div>
     <div class="sch" id="sch"></div>
     <div class="sdv"><span id="calMonthLabel">—</span></div>
 
@@ -1437,6 +1652,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
   <!-- ===== ДОМАШКА ===== -->
   <section class="pg panel" id="panel-homework">
+    <div class="m-wrap" id="mHw"></div>
     <div class="hw-bar">
       <div class="hseg" id="hwf">
         <button class="on" data-hw-filter="all" type="button" onclick="setHwFilter('all')">Все<em id="hwc-all">0</em></button>
@@ -1462,6 +1678,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
   <!-- ===== АБОНЕМЕНТ ===== -->
   <section class="pg panel" id="panel-payment">
+    <div class="m-wrap" id="mPay"></div>
     <div class="sb-grid">
       <div class="oc hwg sb-main">
         <div class="oh"><span class="oi"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6.5 15h4"/></svg></span><h4 class="ot">Мой абонемент<small id="pay-kicker">—</small></h4><span class="chip ok" id="pay-status-label" style="margin-left:auto">—</span></div>
@@ -1517,6 +1734,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
   <!-- ===== ПРАКТИКА ===== -->
   <section class="pg panel" id="panel-practice">
+    <div class="m-wrap" id="mPr"></div>
     <p class="pr-lead">Занимайся сам в любой день — всё проверяется автоматически, ждать преподавателя не нужно.</p>
     <div id="practiceHome">
       <div class="pr-grid">
@@ -1559,6 +1777,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
   <!-- ===== ПОДДЕРЖКА ===== -->
   <section class="pg panel" id="panel-support">
+    <div class="m-wrap" id="mSup"></div>
     <div class="oc hwg sp-hero">
       <div class="oh"><span class="oi"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5.1A8 8 0 1 1 21 12z"/></svg></span><h4 class="ot">Чем помочь?<small>выбери тему — ответим в Telegram</small></h4></div>
       <div class="sp-ts">
@@ -1603,6 +1822,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
   </section>
 
 </div></main>
+<nav id="mBar" aria-label="Разделы"><button type="button" data-mtab="overview" aria-label="Обзор"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg></button><button type="button" data-mtab="schedule" aria-label="Расписание"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><button type="button" data-mtab="homework" aria-label="Домашка"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><em id="mBarHw"></em></button><button type="button" data-mtab="practice" aria-label="Практика"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></button><button type="button" data-mtab="more" aria-label="Ещё"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></nav>
 </div>
 
 <div class="zd-back hidden" id="zdBack"></div>
@@ -1855,6 +2075,16 @@ async function setupNotifBell(){
   const notifications = data || [];
   const readAt = currentProfile.notifications_read_at ? new Date(currentProfile.notifications_read_at) : null;
   const hasUnread = notifications.some(n => !readAt || new Date(n.created_at) > readAt);
+  window.__sNotifs = notifications; window.__sReadAt = readAt; window.__sHasUnread = hasUnread;
+  window.__sNotifMarkRead = async () => {
+    if (!window.__sHasUnread) return;
+    window.__sHasUnread = false; dot.style.display = 'none';
+    const now = new Date().toISOString();
+    currentProfile.notifications_read_at = now;
+    await supabase.from('profiles').update({ notifications_read_at: now }).eq('id', currentUser.id);
+    if (window.__mRefresh) window.__mRefresh();
+  };
+  if (window.__mRefresh) window.__mRefresh();
   dot.style.display = hasUnread ? 'block' : 'none';
 
   list.innerHTML = '';
@@ -4092,6 +4322,453 @@ document.getElementById('referralCopyCode')?.addEventListener('click', async () 
   try { await navigator.clipboard.writeText(code); okEl.textContent = 'Код скопирован'; }
   catch (e) { okEl.textContent = 'Твой код: ' + code; }
 });
+
+/* ===== Кабинет ученика · мобильная версия (≤760px) ===== */
+(function(){
+  var MQ = window.matchMedia('(max-width:760px)');
+  function mob(){ return MQ.matches; }
+  var P = { grid:'<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>',
+    star:'<path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/>',
+    dots:'<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>',
+    card:'<rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6.5 15h4"/>',
+    chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5.1A8 8 0 1 1 21 12z"/>',
+    bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/>',
+    gift:'<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/>',
+    out:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
+    wallet:'<path d="M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"/><path d="M21 11h-5a2 2 0 0 0 0 4h5z"/>',
+    hist:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l4 2"/>',
+    copy:'<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>',
+    chart:'<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',
+    test:'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h15"/>',
+    wr:'<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+    users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a5.5 5.5 0 0 1 3.5 6"/>',
+    cap:'<path d="M22 10 12 5 2 10l10 5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/>',
+    sprout:'<path d="M12 21v-9"/><path d="M12 12C12 7 8 4 3 4c0 5 4 8 9 8z"/><path d="M12 14c0-4 3-7 9-7 0 4-3 7-9 7z"/>',
+    chv:'<path d="m6 9 6 6 6-6"/>' };
+  var $ = function(id){ return document.getElementById(id); };
+  var S = function(p, w){ return sv(p, w || 18); };
+  function fmtTimeOnly(d){ return new Date(d).toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:myTimezone() }); }
+
+  /* ---------- вспомогательные ---------- */
+  function hwOpenCount(){ return (window.__hwList || []).filter(function(h){ return h.status === 'assigned'; }).length; }
+  function levelFits(){ return typeof materialFits === 'function'; }
+  function acc(ic, t, sub, body, o){
+    o = o || {};
+    return '<div class="m acc2 ' + (o.cls || '') + '"><div class="acc2-h" data-macc><span class="oi ' + (o.g ? 'oi-g' : '') + '">' + S(P[ic] || ICO[ic], 18) + '</span><span class="tt"><b>' + t + '</b><span>' + sub + '</span></span>' + (o.extra || '') + '<span class="chv">' + S(P.chv, 15) + '</span></div><div class="acc2-b">' + body + '</div></div>';
+  }
+  function card(ic, t, body, o){
+    o = o || {};
+    return '<div class="m ' + (o.glass ? 'hwg' : '') + '"><div class="oh"><span class="oi ' + (o.g ? 'oi-g' : '') + '">' + S(P[ic] || ICO[ic], 18) + '</span><h4 class="ot">' + t + '</h4>' + (o.link || '') + '</div>' + body + '</div>';
+  }
+  function segHtml(total, used){ return '<div class="segbar" style="margin:12px 0 8px">' + segBar(total, used) + '</div>'; }
+  function teacherName(){ return teacherFullName ? firstName(teacherFullName) : 'Преподаватель'; }
+
+  /* ---------- Обзор ---------- */
+  function renderOv(){
+    var box = $('mOv'); if (!box) return;
+    var up = window.__ovUpcoming, tz = myTimezone();
+    var hero;
+    if (!up){
+      hero = '<div class="blobs"><div class="glassc"><div class="m-row"><span class="m-av">' + S(ICO.cal, 18) + '</span><div class="t"><b>Уроков пока нет</b><small>Новые занятия появятся здесь</small></div></div></div></div>';
+    } else {
+      var d = new Date(up.lesson_date), now = Date.now(), ms = d.getTime() - now;
+      var wd = cap(d.toLocaleDateString('ru-RU', { weekday:'short', timeZone:tz }).replace('.', ''));
+      var dm = d.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:tz });
+      var left;
+      if (ms <= 0) left = 'идёт сейчас';
+      else {
+        var mins = Math.floor(ms / 60000), dd = Math.floor(mins / 1440), hh = Math.floor((mins % 1440) / 60), mm = mins % 60;
+        left = 'через <b>' + (dd ? dd + ' ' + pluralDays(dd) + ' ' + hh + ' ч' : (hh ? hh + ' ч ' : '') + mm + ' мин') + '</b>';
+      }
+      var win = meetingWindowStatus(up), fmt = currentProfile.format || 'SOLO';
+      var join = win.state === 'active'
+        ? '<a class="btn dark lk2" href="' + esc2(teacherMeetingUrl) + '" target="_blank" rel="noopener">' + S(ICO.vid, 15) + 'Присоединиться</a>'
+        : (win.state === 'before' ? '<button class="btn dark lk2" type="button" disabled>' + S(ICO.lock, 15) + 'Откроется за 10 мин</button>' : '<span class="m-cd" style="flex:1">Ссылка на урок появится позже</span>');
+      var mat = up.materials_url
+        ? '<a class="ibtn2" href="' + esc2(up.materials_url) + '" target="_blank" rel="noopener" title="Материалы урока" aria-label="Материалы урока">' + S(ICO.doc, 17) + '</a>'
+        : '<button class="ibtn2" type="button" title="Материалы урока" aria-label="Материалы урока" onclick="alert(\'Материалы урока пока не добавлены — скоро появятся прямо здесь. Если нужно что-то сейчас — напиши преподавателю.\')">' + S(ICO.doc, 17) + '</button>';
+      hero = '<div class="blobs"><div class="glassc"><div class="m-row"><span class="m-av">' + esc2(teacherName().charAt(0).toUpperCase()) + '</span><div class="t"><b>' + esc2(up.is_trial ? 'Пробный урок' : (up.topic || 'Регулярное занятие')) + '</b><small>' + esc2(teacherName()) + ' · онлайн · ' + esc2(fmt) + '</small></div><span class="m-time">' + fmtTimeOnly(d) + '</span></div>'
+        + '<div class="m-cd">' + esc2(wd + ', ' + dm) + ' · ' + left + '</div><div class="m-acts">' + join + mat + '</div></div></div>';
+    }
+    var n = hwOpenCount();
+    var l4 = [['cal', 'Расписание', 'schedule', ''], ['docl', 'Домашка', 'homework', n], ['card', 'Абонемент', 'payment', ''], ['chat', 'Поддержка', 'support', '']];
+    var launch = '<div class="launch4">' + l4.map(function(x){ return '<a href="#" data-mgo="' + x[2] + '"><i>' + S(P[x[0]] || ICO[x[0]], 22) + (x[3] ? '<em>' + x[3] + '</em>' : '') + '</i>' + x[1] + '</a>'; }).join('') + '</div>';
+    var tasks = '<a class="trmini" href="#" data-mgo="practice"><span class="ic">' + S(ICO.check, 17) + '</span><span class="tt"><b>Тренировки на сегодня</b><span>3 задания · 5 минут в день</span></span>' + S(ICO.arr, 16) + '</a>';
+    var list = (window.__scheduleList || []).filter(function(l){ return l.status !== 'cancelled' && new Date(l.lesson_date).getTime() > Date.now() - 86400000; })
+      .sort(function(a, b){ return new Date(a.lesson_date) - new Date(b.lesson_date); }).slice(0, 3);
+    var week = card('cal', 'Эта неделя', list.length ? '<div>' + list.map(function(l){
+      var dt = new Date(l.lesson_date);
+      return '<div class="mli"><div class="dt"><b>' + dt.toLocaleDateString('ru-RU', { day:'numeric', timeZone:tz }) + '</b><small>' + cap(dt.toLocaleDateString('ru-RU', { weekday:'short', timeZone:tz }).replace('.', '')) + '</small></div><div class="tt"><b>' + esc2(l.topic || (l.is_trial ? 'Пробный урок' : 'Регулярное занятие')) + '</b><span>' + fmtTimeOnly(dt) + ' · ' + esc2(teacherName()) + '</span></div></div>';
+    }).join('') + '</div>' : '<p class="note" style="margin:0">Уроков пока нет</p>', { link:'<button class="ol" type="button" data-mgo="schedule">Все' + S(ICO.arr, 14) + '</button>' });
+    box.innerHTML = hero + launch + tasks + week;
+  }
+
+  /* ---------- Расписание ---------- */
+  function renderSchTop(){
+    var box = $('mSchTop'); if (!box) return;
+    var list = window.__scheduleList || [], tz = myTimezone(), todayKey = fmtDateKey(new Date());
+    var monday = currentWeekMonday();
+    var days = Array.from({ length:7 }, function(_, i){ var d = new Date(monday); d.setDate(monday.getDate() + i); return d; });
+    var by = {};
+    list.forEach(function(l){ if (l.status === 'cancelled') return; var k = fmtDateKey(l.lesson_date); (by[k] = by[k] || []).push(l); });
+    Object.keys(by).forEach(function(k){ by[k].sort(function(a, b){ return new Date(a.lesson_date) - new Date(b.lesson_date); }); });
+    var keys = days.map(fmtLocalKey);
+    if (!keys.includes(window.__selectedDate)) window.__selectedDate = keys.includes(todayKey) ? todayKey : (keys.find(function(k){ return by[k]; }) || keys[0]);
+    var sel = window.__selectedDate, off = window.__weekOffset || 0;
+    var range = days[0].getDate() + ' — ' + days[6].getDate() + ' ' + MONTH_NAMES_GEN[days[6].getMonth()].slice(0, 3);
+    var strip = '<div class="wg mwk"><div class="top"><b>' + (off === 0 ? 'Эта неделя' : off === 1 ? 'Следующая неделя' : off === -1 ? 'Прошлая неделя' : 'Неделя') + '</b><div class="nv"><button type="button" data-mwk="-1" aria-label="Предыдущая неделя">' + S(ICO.l, 14) + '</button>' + range + '<button type="button" data-mwk="1" aria-label="Следующая неделя">' + S(ICO.r, 14) + '</button></div></div><div class="dd">'
+      + days.map(function(d){
+          var k = fmtLocalKey(d), ls = by[k] || [];
+          var t = ls.length ? fmtTimeOnly(ls[0].lesson_date) : '';
+          return '<div class="d ' + (ls.length ? 'l ' : '') + (k === todayKey ? 'td ' : '') + (k === sel ? 'on' : '') + '" data-mday="' + k + '"><small>' + (k === todayKey ? 'Сег.' : cap(WEEKDAY_SHORT_RU[i7(d)])) + '</small><b>' + d.getDate() + '</b><span class="dot"></span><i>' + t + '</i></div>';
+        }).join('') + '</div></div>';
+    var sl = by[sel] || [], detail;
+    if (sl.length){
+      detail = sl.map(function(l){
+        var d = new Date(l.lesson_date), isToday = fmtDateKey(d) === todayKey, past = isLessonPast(l);
+        var join = (l.status === 'upcoming' && !past) ? renderJoinButton(l, 'card') : '';
+        var cal = (l.status === 'upcoming' && !past) ? '<a class="ibtn" href="' + esc2(calLink(l)) + '" target="_blank" rel="noopener" aria-label="Добавить в календарь">' + S(ICO.calp, 18) + '</a>' : '';
+        var chip = l.status === 'cancelled' ? '<span class="chip">Отменён</span>' : (past ? '<span class="chip ok">Прошёл</span>' : '');
+        return '<div class="mlc"><div class="r1"><div class="t">' + fmtTimeOnly(d) + '<small>' + (isToday ? 'Сегодня' : cap(d.toLocaleDateString('ru-RU', { weekday:'short', timeZone:tz }).replace('.', '')) + ', ' + d.toLocaleDateString('ru-RU', { day:'numeric', month:'short', timeZone:tz }).replace('.', '')) + '</small></div><div><h4>' + esc2(l.topic || (l.is_trial ? 'Пробный урок' : 'Регулярное занятие')) + '</h4><div class="mm">' + esc2(teacherName()) + ' · Онлайн · ' + (l.duration_minutes || 60) + ' мин</div></div></div>'
+          + ((join || cal || chip) ? '<div class="acts">' + (join || chip || '<span></span>') + cal + '</div>' : '') + '</div>';
+      }).join('');
+    } else {
+      var sd = new Date(sel + 'T12:00:00');
+      var nk = Object.keys(by).filter(function(k){ return k > sel; }).sort()[0];
+      detail = '<div class="mlc emp"><div class="r1"><div><h4>' + sd.getDate() + ' ' + MONTH_NAMES_GEN[sd.getMonth()] + ' — занятий нет</h4><div class="mm">' + (nk ? 'Ближайшее: ' + new Date(by[nk][0].lesson_date).toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:tz }) + ' в ' + fmtTimeOnly(by[nk][0].lesson_date) : 'Ближайших уроков пока нет') + '</div></div></div>'
+        + (nk ? '<div class="acts"><button class="btn soft" type="button" data-mgoday="' + nk + '">Показать' + S(ICO.r, 15) + '</button></div>' : '') + '</div>';
+    }
+    box.innerHTML = strip + detail;
+  }
+
+  function renderSchRest(){
+    var box = $('mSchRest'); if (!box) return;
+    var list = window.__scheduleList || [], tz = myTimezone(), now = new Date();
+    var month = list.filter(function(l){ var d = new Date(l.lesson_date); return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear() && l.status !== 'cancelled'; });
+    var done = month.filter(function(l){ return isLessonPast(l) || l.status === 'completed'; }).length;
+    var n = Math.min(month.length, 12);
+    var seg = '<div class="segbar" style="margin:8px 0 6px;gap:3px">' + Array.from({ length:n }, function(_, i){ return '<i' + (i < Math.round(done * n / (month.length || 1)) ? ' style="background:#101109;box-shadow:none"' : '') + '></i>'; }).join('') + '</div>';
+    var up = list.filter(function(l){ return l.status === 'upcoming' && !isLessonPast(l); });
+    var cnt = {};
+    up.forEach(function(l){ var w = cap(new Date(l.lesson_date).toLocaleDateString('ru-RU', { weekday:'short', timeZone:tz }).replace('.', '')); cnt[w] = (cnt[w] || 0) + 1; });
+    var slotDays = Object.keys(cnt).filter(function(k){ return cnt[k] >= 2; });
+    var letters = [['Пн', 'П'], ['Вт', 'В'], ['Ср', 'С'], ['Чт', 'Ч'], ['Пт', 'П'], ['Сб', 'С'], ['Вс', 'В']];
+    var two = '<div class="two"><div class="m"><span class="note" style="margin:0">В этом месяце</span><div class="bigrow"><span class="big">' + month.length + '</span><span>уроков</span></div>' + seg + '<span class="note">' + (month.length ? 'Проведено ' + done + ' из ' + month.length : 'Пока не запланировано') + '</span></div>'
+      + '<div class="m"><span class="note" style="margin:0">Постоянные слоты</span><div class="big" style="font-size:24px;margin:4px 0 10px">' + (slotDays.length ? slotDays.join(' и ') : '—') + '</div><div class="sl-m">' + letters.map(function(x){ return '<span class="' + (slotDays.indexOf(x[0]) >= 0 ? 'on' : '') + '">' + x[1] + '<i></i></span>'; }).join('') + '</div></div></div>';
+    var rules = (currentProfile && currentProfile.reschedule_rules) || 'Если не получается быть на уроке — предупреди не позднее чем за 24 часа до начала, и мы перенесём занятие на удобное время.';
+    var past = list.filter(isLessonPast).sort(function(a, b){ return new Date(b.lesson_date) - new Date(a.lesson_date); });
+    var hist = past.length ? '<div>' + past.map(function(l){
+      var d = new Date(l.lesson_date);
+      return '<div class="mli"><div class="dt"><b>' + d.toLocaleDateString('ru-RU', { day:'numeric', timeZone:tz }) + '</b><small>' + cap(d.toLocaleDateString('ru-RU', { weekday:'short', timeZone:tz }).replace('.', '')) + '</small></div><div class="tt"><b>' + esc2(l.topic || 'Регулярное занятие') + '</b><span>' + esc2(fmtDateTime(l.lesson_date)) + '</span></div><span class="chip ok">Прошёл</span></div>';
+    }).join('') + '</div>' : '<p class="note" style="margin:0">Пока не было ни одного урока.</p>';
+    box.innerHTML = '<div class="sdv" style="margin:2px 0"><span>' + cap(MONTH_NAMES[now.getMonth()]) + '</span></div>' + two
+      + acc('clock', 'Переносы', 'Предупреди за 24 часа — перенесём', '<p class="note" style="margin:0 0 12px">' + esc2(rules) + '</p><a class="btn glassb w" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">' + S(ICO.send, 15) + 'Написать менеджеру</a>', { cls:'hwg' })
+      + acc('chat', 'Разговорный клуб · Talk Club', 'Ещё больше устной практики', '<p class="note" style="margin:0 0 12px">Разговорная практика с другими учениками. Подробности и запись — у менеджера.</p><div class="two" style="gap:8px"><a class="btn soft" href="talk-club.html" target="_blank" rel="noopener">Подробнее</a><a class="btn line" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">' + S(ICO.send, 15) + 'Менеджеру</a></div>', { g:true })
+      + acc('hist', 'История занятий', past.length ? 'Последнее: ' + fmtDateTime(past[0].lesson_date) : 'Пока пусто', hist);
+  }
+
+  /* ---------- Домашка ---------- */
+  function growthSummary(){
+    var zs = (growthState.zones || []).filter(function(z){ return growthState.topics[z.topic_key] && z.status !== 'mastered'; });
+    return { n:zs.length, names:zs.slice(0, 2).map(function(z){ return growthState.topics[z.topic_key].title; }).join(' · ') };
+  }
+  function zonesRow(cls){
+    var g = growthSummary();
+    return '<div class="zsum ' + (cls || '') + '" data-msheet="zones"><span class="oi">' + S(P.sprout, 18) + '</span><span class="tt"><b>Зоны роста' + (g.n ? ' · ' + g.n : '') + '</b><span>' + esc2(g.n ? g.names : 'Мы пока собираем информацию') + '</span></span>' + S(ICO.r, 16) + '</div>';
+  }
+  function renderHw(){
+    var box = $('mHw'); if (!box) return;
+    var all = window.__hwList || [], f = window.__hwFilter || 'all';
+    var cnt = { all:all.length, open:all.filter(function(h){ return h.status === 'assigned'; }).length };
+    cnt.done = all.length - cnt.open;
+    var seg = '<div class="mseg">' + [['all', 'Все'], ['open', 'К сдаче'], ['done', 'Проверено']].map(function(x){ return '<button type="button" class="' + (f === x[0] ? 'on' : '') + '" data-mhf="' + x[0] + '">' + x[1] + '<em>' + cnt[x[0]] + '</em></button>'; }).join('') + '</div>';
+    var now = new Date();
+    var items = all.filter(function(h){ if (h.status !== 'reviewed') return false; var d = new Date(h.due_date ? h.due_date + 'T12:00:00' : h.created_at); return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear(); })
+      .map(function(h){ return { h:h, p:parseGradePct(h.grade) }; }).filter(function(x){ return x.p !== null; });
+    var avg = items.length ? Math.round(items.reduce(function(s, x){ return s + x.p; }, 0) / items.length) : null;
+    var res = '<div class="m hwg"><div class="res-row"><div><span class="note" style="margin:0">Мой результат · ' + new Date().toLocaleDateString('ru-RU', { month:'long' }) + '</span>' + (avg !== null ? '<div class="big">' + avg + '%</div>' : '<p class="note" style="margin:6px 0 0">Пока нет проверенных заданий</p>') + '</div>' + (avg !== null ? '<div class="gr-row avg" style="display:flex;gap:6px">' + items.slice(0, 4).map(function(x){ return '<span class="' + gradeClass(x.p) + '" style="min-width:34px;padding:0 8px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:Unbounded;font-size:11px;font-weight:700">' + x.p + '%</span>'; }).join('') + '</div>' : '') + '</div></div>';
+    var list = f === 'all' ? all : f === 'open' ? all.filter(function(h){ return h.status === 'assigned'; }) : all.filter(function(h){ return h.status !== 'assigned'; });
+    var cards = list.length ? list.map(hwCardM).join('') : '<div class="m"><div class="empty"><span class="e">' + S(ICO.doc, 22) + '</span><b>' + (f === 'all' ? 'Домашних заданий пока нет' : 'Ничего не найдено') + '</b><span>Новое задание появится здесь после урока</span></div></div>';
+    box.innerHTML = seg + res + zonesRow() + cards;
+  }
+  function hwMats(h){
+    var out = [];
+    if (h.attachment_file_url){ var ls = h.attachment_file_url.split('\n').map(function(s){ return s.trim(); }).filter(Boolean); ls.forEach(function(u, i){ out.push('<a class="mt" href="' + esc2(u) + '" target="_blank" rel="noopener">' + S(ICO.clip, 13) + 'Материал' + (ls.length > 1 ? ' ' + (i + 1) : '') + '</a>'); }); }
+    if (h.submission_file_url) out.push('<a class="mt my" href="#" data-mdl="' + esc2(h.submission_file_url) + '">' + S(ICO.clip, 13) + 'Твой файл</a>');
+    if (h.submission_links) h.submission_links.split('\n').filter(Boolean).forEach(function(l, i){ out.push('<a class="mt my" href="' + esc2(l) + '" target="_blank" rel="noopener">' + S(ICO.link, 13) + 'Твоя ссылка ' + (i + 1) + '</a>'); });
+    return out.length ? '<div class="mts">' + out.join('') + '</div>' : '';
+  }
+  function hwCardM(h){
+    var dl = hwDueLabel(h);
+    if (h.status === 'assigned'){
+      return '<article class="hwc due mhw"><div class="hwc-top"><span class="st-due">К сдаче</span><span class="st-dl">' + S(ICO.clock, 14) + esc2(dl.text) + '</span></div><h4>' + esc2(h.title) + '</h4>' + (h.description ? '<p class="hwc-d">' + esc2(h.description) + '</p>' : '') + hwMats(h)
+        + '<div class="hwc-sub2"><textarea id="mtext-' + h.id + '" rows="2" placeholder="Ответ текстом или ссылка на работу"></textarea><div class="hwc-sub2-a"><label class="btn soft sm" style="cursor:pointer">' + S(ICO.clip, 14) + '<span id="mfname-' + h.id + '">Файл</span><input type="file" id="mfile-' + h.id + '" hidden onchange="mHwFile(\'' + h.id + '\')"></label><button class="btn glassb sm" id="msubmit-' + h.id + '" type="button" data-msubmit="' + h.id + '">' + S(ICO.up, 14) + 'Сдать</button></div></div></article>';
+    }
+    var chip = h.status === 'submitted' ? '<span class="chip due">На проверке</span>' : '<span class="chip ok">Проверено</span>';
+    var grd = h.status === 'reviewed' && h.grade ? '<span class="grd">' + gradeHtml(h.grade) + '</span>' : '';
+    var body = (h.description ? '<p class="hwc-d">' + esc2(h.description) + '</p>' : '') + hwMats(h);
+    if (h.status === 'reviewed'){
+      var fb = h.teacher_feedback || 'Проверено.', long = fb.length > 140;
+      body += '<div class="fbk" id="mfbk-' + h.id + '"><span class="av">' + esc2(teacherName().charAt(0).toUpperCase()) + '</span><div><small>' + esc2(teacherName()) + '</small><p class="fb-t">' + esc2(fb) + '</p>' + (long ? '<button class="fb-more" type="button" data-mfb="' + h.id + '">Показать полностью</button>' : '') + '</div></div>';
+    } else body += '<p class="hwc-d" style="margin:0">Сдано — ожидает проверки преподавателем.</p>';
+    return '<article class="hwc mhw acc2"><div class="hx-h" data-macc>' + '<div class="hx-t">' + chip + '<b>' + esc2(h.title) + '</b><small>' + esc2(dl.short) + '</small></div>' + grd + '<span class="chv">' + S(P.chv, 15) + '</span></div><div class="acc2-b">' + body + '</div></article>';
+  }
+
+  /* ---------- Практика ---------- */
+  function renderPr(){
+    var box = $('mPr'); if (!box) return;
+    var tasks = dailyTasksData().map(function(t){ return '<div class="tr-c' + (t.done ? ' done' : '') + '" data-mtask="' + t.key + '" role="button" tabindex="0"><span class="ab">' + S(t.done ? ICO.check : t.icon, 19) + '</span><span class="tt"><b>' + t.title + '</b><span>' + t.sub + '</span></span>' + S(ICO.arr, 16) + '</div>'; }).join('');
+    var level = (currentProfile && currentProfile.level) || '';
+    var game = '<div class="gw mgw" style="padding-top:4px"><div class="gw-w" id="mGameScr"></div><input class="gw-in" id="mGameIn" placeholder="Впиши слово" autocomplete="off" autocapitalize="off" style="width:100%"><p class="gw-m" id="mGameFb" style="margin:8px 0;min-height:16px"></p><div class="gw-a"><button class="btn glassb" id="mGameCheck" type="button">' + S(ICO.check, 15) + 'Проверить</button><button class="btn line" id="mGameSkip" type="button">' + S(ICO.re, 15) + 'Другое</button></div></div>';
+    var lt = window.__levelTests || [], last = lt[0], prev = lt[1], lvSub, lvBody;
+    var note = '<p class="lvt-n" style="margin-top:10px">Тест показывает примерный уровень. Официальный ставит преподаватель.</p>';
+    if (!last){
+      lvSub = 'Ещё не проходил';
+      lvBody = '<div class="lvt"><p class="note" style="margin:0 0 12px">Узнай, на каком уровне ты сейчас. Пройди тест в начале занятий — потом сможешь сравнить, как вырос уровень.</p><a class="btn glassb w" href="level-test.html" target="_blank" rel="noopener">' + S(ICO.play, 15) + 'Пройти тест</a>' + note + '</div>';
+    } else if (!prev){
+      lvSub = 'Твой результат ' + esc2(last.level || '—');
+      lvBody = '<div class="lvt"><div class="lvt-cmp" style="grid-template-columns:1fr"><div class="lvt-c"><small>' + esc2(fmtDate(last.created_at)) + '</small><b>' + esc2(last.level || '—') + '</b><span>' + last.score + ' из ' + last.max_score + '</span></div></div><a class="btn line w" href="level-test.html" target="_blank" rel="noopener">' + S(ICO.play, 15) + 'Пройти ещё раз</a>' + note + '</div>';
+    } else {
+      lvSub = 'В прошлый раз ' + esc2(prev.level || '—') + ' · сейчас ' + esc2(last.level || '—');
+      var df = function(d){ return new Date(d).toLocaleDateString('ru-RU', { day:'numeric', month:'long' }); };
+      lvBody = '<div class="lvt"><div class="lvt-cmp"><div class="lvt-c"><small>' + df(prev.created_at) + '</small><b>' + esc2(prev.level || '—') + '</b><span>' + prev.score + ' из ' + prev.max_score + '</span></div><span class="lvt-ar">' + S(ICO.arr, 15) + '</span><div class="lvt-c now"><small>' + df(last.created_at) + '</small><b>' + esc2(last.level || '—') + '</b><span>' + last.score + ' из ' + last.max_score + '</span></div></div><a class="btn line w" href="level-test.html" target="_blank" rel="noopener">' + S(ICO.play, 15) + 'Пройти ещё раз</a>' + note + '</div>';
+    }
+    var tl = (topicTestsAll ? TOPIC_TESTS : TOPIC_TESTS.slice(0, 6)).map(function(t, i){ return '<a class="pt" href="#" data-mtest="' + t.key + '"><span class="pt-n">' + (i + 1) + '</span><span class="tt"><b>' + esc2(t.title) + '</b><span>' + t.questions.length + ' вопросов</span></span>' + S(ICO.r, 16) + '</a>'; }).join('')
+      + (TOPIC_TESTS.length > 6 ? '<button class="zn-more" type="button" data-mtestmore>' + (topicTestsAll ? 'Свернуть' : 'Показать все тесты · ' + TOPIC_TESTS.length) + S(ICO.down, 14) + '</button>' : '');
+    var allM = (window.__practiceMaterials && window.__practiceMaterials.length) ? window.__practiceMaterials : MATERIALS_FALLBACK;
+    var fit = allM.filter(function(m){ return materialFits(m, level); });
+    var mats = (fit.length ? fit : allM).map(function(m){
+      var range = m.level_from && m.level_to ? (m.level_from === m.level_to ? m.level_from : m.level_from + '–' + m.level_to) : '';
+      return '<a class="pm" href="' + esc2(m.url) + '" target="_blank" rel="noopener"><span class="pm-ic">' + S(MAT_ICONS[m.icon] || ICO.link, 16) + '</span><span class="tt"><b>' + esc2(m.title) + '</b></span>' + (range ? '<span class="lvc">' + esc2(range) + '</span>' : '') + S(ICO.ext, 15) + '</a>';
+    }).join('');
+    var rs = window.__myTestResults || [];
+    var results = rs.length ? '<div class="ls">' + rs.map(function(r){
+      var pct = r.total ? Math.round(r.score / r.total * 100) : 0;
+      return '<div class="li"><div class="tt"><b>' + esc2(r.test_title || r.test_key) + '</b><span>' + esc2(fmtDate(r.created_at)) + '</span></div><span class="' + (pct >= 80 ? 'chip ok' : pct >= 50 ? 'chip due' : 'chip') + '">' + r.score + ' / ' + r.total + '</span></div>';
+    }).join('') + '</div>' : '<p class="note" style="margin:0">Пока нет пройденных тестов.</p>';
+    box.innerHTML = zonesRow('zg')
+      + '<div class="m fmg"><div class="oh"><span class="oi oi-g">' + S(ICO.check, 18) + '</span><h4 class="ot">Задания на сегодня</h4></div><div class="vt">' + tasks + '</div></div>'
+      + acc('word', 'Собери слово', (typeof gameWord === 'string' && gameWord ? gameWord.length + ' букв · уровень ' + (level || 'A1') : '5 минут'), game, { extra:'<span class="gw-sc" style="margin:0 6px 0 0" id="mGameScore">' + (gameScoreVal || 0) + '</span>' })
+      + acc('lvl', 'Проверь свой уровень', lvSub, lvBody, { g:true })
+      + acc('test', 'Тесты по темам', TOPIC_TESTS.length + ' тестов · результат сразу', '<div class="pt-list">' + tl + '</div>')
+      + card('link', 'Материалы для уровня ' + esc2(level || ''), '<div class="pt-list">' + mats + '</div>', { g:true })
+      + card('chart', 'Мои результаты', results, { g:true });
+    mGameSync();
+  }
+  function mGameSync(){
+    var scr = $('mGameScr'); if (!scr || typeof gameWord !== 'string' || !gameWord) return;
+    var d = $('gameScrambled2');
+    scr.innerHTML = d ? d.innerHTML : '';
+    var sc = $('mGameScore'); if (sc) sc.textContent = gameScoreVal || 0;
+  }
+
+  /* ---------- Абонемент ---------- */
+  function renderPay(){
+    var box = $('mPay'); if (!box) return;
+    var list = window.__myPayments || [], active = window.__activePayment;
+    var rem = active ? computeRemaining(active, window.__scheduleList || []) : null;
+    var total = active ? (active.lessons_included || 0) : 0, used = Math.max(0, total - (rem || 0));
+    var fmt = currentProfile.format || 'SOLO';
+    var main = '<div class="m hwg"><div class="oh"><span class="oi">' + S(P.card, 18) + '</span><h4 class="ot">Абонемент' + (active ? '<small>' + esc2(fmt) + ' · ' + total + ' в месяц</small>' : '') + '</h4><span class="chip ' + (active ? 'ok' : '') + '" style="margin-left:auto">' + (active ? 'Активен' : 'Нет абонемента') + '</span></div>'
+      + (active ? '<div class="bigrow"><span class="big" style="font-size:44px">' + (rem !== null ? rem : '—') + '</span><span>уроков осталось из ' + total + '</span></div>' + segHtml(total, used) + '<div class="sb-leg" style="margin-bottom:14px"><span><i class="u"></i>Использовано · ' + used + '</span><span><i class="f"></i>Осталось · ' + (rem || 0) + '</span></div>'
+        : '<p class="note" style="margin:0 0 14px">Абонемент не оформлен. Напиши менеджеру — подберём формат.</p>')
+      + '<a class="btn glassb w" href="' + esc2(($('mainPayBtn') && $('mainPayBtn').href) || '#') + '" target="_blank" rel="noopener">' + S(P.wallet, 16) + 'Оплатить абонемент</a></div>';
+    var price = active && active.amount ? '<div class="m acc2"><div class="acc2-h" data-macc><span class="tt"><span>Стоимость абонемента</span><b style="font-family:Unbounded;font-size:22px;margin-top:2px">' + Number(active.amount).toLocaleString('ru-RU') + ' ₽</b><span>' + esc2(fmt) + ' · ' + total + ' ' + pluralLessonsN(total) + ' в месяц</span></span><span class="chv">' + S(P.chv, 15) + '</span></div><div class="acc2-b"><div class="oh" style="margin-bottom:6px"><span class="oi">' + S(P.card, 18) + '</span><h4 class="ot">Способ оплаты</h4></div><p class="note" style="margin:0">Мы не храним карты в кабинете — оплата проходит по ссылке. Вопросы по оплате, чек, смена способа — напиши менеджеру.</p></div><a class="btn line w" href="https://t.me/thearbeiter01" target="_blank" rel="noopener" style="margin-top:12px">' + S(ICO.send, 15) + 'Написать менеджеру</a></div>'
+      : '<div class="m"><div class="oh" style="margin-bottom:6px"><span class="oi">' + S(P.card, 18) + '</span><h4 class="ot">Способ оплаты</h4></div><p class="note" style="margin:0 0 12px">Мы не храним карты в кабинете — оплата проходит по ссылке. Вопросы по оплате, чек, смена способа — напиши менеджеру.</p><a class="btn line w" href="https://t.me/thearbeiter01" target="_blank" rel="noopener">' + S(ICO.send, 15) + 'Написать менеджеру</a></div>';
+    var tg = !currentProfile.telegram_chat_id ? acc('bell', 'Уведомления в Telegram', 'Напомним об уроках, абонементе и домашке', '<div class="sp-tg-l" style="margin-bottom:12px"><span>' + S(ICO.cal, 15) + 'Абонемент заканчивается</span><span>' + S(ICO.cal, 15) + 'Скоро начнётся занятие</span><span>' + S(ICO.doc, 15) + 'Преподаватель проверил домашку</span></div><a class="btn glassb w" href="' + esc2(($('payTgnBtn') && $('payTgnBtn').href) || '#') + '" target="_blank" rel="noopener" style="background:#F7F8EF">' + S(ICO.send, 15) + 'Подключить бота</a>', { g:true }) : '';
+    var tz = myTimezone();
+    var hist = list.length ? '<div>' + list.map(function(p){
+      var dref = new Date(p.paid_at || p.created_at);
+      var chip = p.status === 'active' ? '<span class="chip ok">Активен</span>' : p.status === 'pending' ? '<span class="chip due">Ожидает</span>' : '<span class="chip">' + esc2(STATUS_LABEL[p.status] || p.status) + '</span>';
+      return '<div class="mli"><div class="dt"><b>' + dref.toLocaleDateString('ru-RU', { day:'numeric', timeZone:tz }) + '</b><small>' + dref.toLocaleDateString('ru-RU', { month:'short', timeZone:tz }).replace('.', '') + '</small></div><div class="tt"><b>' + (p.lessons_included || '—') + ' ' + pluralLessonsN(p.lessons_included || 0) + (p.amount ? ' · ' + Number(p.amount).toLocaleString('ru-RU') + ' ₽' : '') + '</b><span>' + (p.status === 'pending' ? 'Ожидает оплаты' : 'Оплачено ' + esc2(fmtDate(p.paid_at))) + '</span></div>' + chip + '</div>';
+    }).join('') + '</div>' : '<p class="note" style="margin:0">Данных об оплате пока нет.</p>';
+    var lastP = list[0];
+    var history = acc('hist', 'История платежей', lastP ? 'Последний: ' + esc2(fmtDate(lastP.paid_at || lastP.created_at)) + (lastP.amount ? ' · ' + Number(lastP.amount).toLocaleString('ru-RU') + ' ₽' : '') : 'Пока пусто', hist, { g:true });
+    var code = currentProfile.referral_code || '—', pct = ($('rfPct') && $('rfPct').textContent) || 'скидку 15%';
+    var ref = '<div class="m" id="mReferral"><div class="oh"><span class="oi">' + S(P.gift, 18) + '</span><h4 class="ot">Пригласи друга</h4></div><p class="note" style="margin:0 0 12px">Как только друг начнёт заниматься, <b style="color:var(--ink)">' + esc2(pct) + '</b> на следующий месяц получаете оба.</p><div class="rf-r"><small>Твой код приглашения</small><div class="rf-code"><b>' + esc2(code) + '</b><button class="rf-cp" type="button" data-mcopycode aria-label="Скопировать код">' + S(P.copy, 16) + '</button></div><button class="btn glassb w" type="button" data-mshare style="background:#fff">' + S(P.copy, 15) + 'Скопировать приглашение</button><p id="mRefMsg" style="color:#3F5A06;font-size:12.5px;font-weight:600;min-height:16px;margin:0;text-align:center"></p></div></div>';
+    box.innerHTML = main + price + tg + history + ref;
+  }
+
+  /* ---------- Поддержка ---------- */
+  function renderSup(){
+    var box = $('mSup'); if (!box) return;
+    var tiles = [['cap', 'Учебные вопросы', 'Расписание, домашка, программа'], ['card', 'Оплата и абонементы', 'Счета, продление, оплата'], ['wr', 'Техподдержка', 'Не работает кабинет или сайт']];
+    var help = '<div class="m hwg"><div class="oh"><span class="oi">' + S(P.chat, 18) + '</span><h4 class="ot">Чем помочь?</h4></div><div class="sp-ts m1">' + tiles.map(function(t){ return '<a class="sp-t" href="https://t.me/thearbeiter01" target="_blank" rel="noopener"><span class="sp-t-ic">' + S(P[t[0]], 18) + '</span><span class="tx"><b>' + t[1] + '</b><span>' + t[2] + '</span></span>' + S(ICO.arr, 16) + '</a>'; }).join('') + '</div></div>';
+    var th = (teacherContactTelegram ? String(teacherContactTelegram).replace('@', '') : '');
+    var contacts = acc('users', 'Твои контакты', 'Менеджер Екатерина' + (teacherFullName ? ' · преподаватель ' + esc2(teacherName()) : ''),
+      '<div class="sp-cr"><div class="av">Е</div><div class="sp-c-t"><small>Личный менеджер</small><b>Екатерина</b><span>@thearbeiter01</span></div><a class="btn line sm" href="https://t.me/thearbeiter01" target="_blank" rel="noopener" style="padding:10px 12px" aria-label="Написать менеджеру">' + S(ICO.send, 15) + '</a></div>'
+      + (teacherFullName ? '<div class="sp-cr last"><div class="av">' + esc2(teacherName().charAt(0).toUpperCase()) + '</div><div class="sp-c-t"><small>Преподаватель</small><b>' + esc2(teacherName()) + '</b><span>' + (th ? '@' + esc2(th) : 'через менеджера') + '</span></div><a class="btn line sm" href="https://t.me/' + (th || 'thearbeiter01') + '" target="_blank" rel="noopener" style="padding:10px 12px" aria-label="Написать преподавателю">' + S(ICO.send, 15) + '</a></div>' : ''));
+    var linked = !!currentProfile.telegram_chat_id;
+    var tg = linked
+      ? '<div class="m"><div class="oh" style="margin:0"><span class="oi oi-g">' + S(ICO.check, 18) + '</span><h4 class="ot">Telegram-бот подключён</h4><span class="chip ok" style="margin-left:auto">Подключено</span></div></div>'
+      : acc('bell', 'Telegram-уведомления', 'Уроки, абонемент и домашка в Telegram', '<div class="sp-tg-l" style="margin-bottom:12px"><span>' + S(ICO.cal, 15) + 'Напоминания о занятиях</span><span>' + S(P.card, 15) + 'Статус абонемента</span><span>' + S(ICO.doc, 15) + 'Новая домашка</span><span>' + S(ICO.check, 15) + 'Комментарий к домашке</span></div><a class="btn glassb w" href="' + esc2(($('tgConnectBtn') && $('tgConnectBtn').href) || '#') + '" target="_blank" rel="noopener" style="background:#F7F8EF">' + S(ICO.send, 15) + 'Подключить Telegram</a><p class="note" style="margin:8px 0 0;text-align:center;color:var(--ink3)">Откроется @weyorkonlinebot — нажми «Start»</p>', { g:true });
+    box.innerHTML = help + contacts + tg;
+  }
+
+  /* ---------- шапка ---------- */
+  function refreshHeader(){
+    if (!mob()) return;
+    var b = document.querySelector('.tab-btn.active'), tab = (b && b.dataset.tab) || 'overview';
+    var bar = $('mBar'); if (!bar) return;
+    bar.querySelectorAll('[data-mtab]').forEach(function(x){
+      var k = x.dataset.mtab;
+      x.classList.toggle('on', k === tab || (k === 'more' && (tab === 'payment' || tab === 'support')));
+    });
+    var n = hwOpenCount(), em = $('mBarHw');
+    if (em){ em.textContent = n; em.style.display = n ? 'flex' : 'none'; }
+    var hd = $('mHead'); if (!hd) return;
+    var dateTxt = new Date().toLocaleDateString('ru-RU', { weekday:'long', day:'numeric', month:'long', timeZone:myTimezone() });
+    var unread = !!window.__sHasUnread;
+    var bell = '<button class="bell" type="button" data-msheet="notif" aria-label="Уведомления">' + S(P.bell, 19) + (unread ? '<i></i>' : '') + '</button>';
+    if (tab === 'overview'){
+      hd.innerHTML = '<div class="mh"><div class="l"><small>' + esc2(cap(dateTxt)) + ' · МСК</small></div>' + bell + '<span class="av">' + esc2(initials(currentProfile.full_name || '').charAt(0) || '—') + '</span></div><div class="hello">' + esc2(window.__greeting || 'Привет!') + '</div>';
+    } else {
+      var more = tab === 'payment' || tab === 'support';
+      hd.innerHTML = '<div class="mh"><div class="l"><small>' + (more ? 'Через «Ещё»' : esc2(cap(dateTxt)) + ' · МСК') + '</small><h2>' + esc2(TAB_TITLES[tab] || '') + '</h2></div>' + bell + '</div>';
+    }
+  }
+
+  /* ---------- нижние листы ---------- */
+  var host = document.createElement('div'); host.id = 'mHost'; $('appScreen').appendChild(host);
+  function sheet(html){ host.innerHTML = '<div class="m-dim" data-mclose></div><div class="m-sheet"><span class="grab"></span>' + html + '</div>'; document.body.classList.add('m-lock'); }
+  function closeSheet(){ host.innerHTML = ''; document.body.classList.remove('m-lock'); }
+  function moreSheet(){
+    var th = (teacherContactTelegram ? String(teacherContactTelegram).replace('@', '') : '');
+    sheet('<h3>Ещё</h3>'
+      + '<div class="ms-it" data-mgo="payment"><i>' + S(P.card, 18) + '</i>Абонемент' + S(ICO.r, 16) + '</div>'
+      + '<div class="ms-it" data-mgo="support"><i>' + S(P.chat, 18) + '</i>Поддержка' + S(ICO.r, 16) + '</div>'
+      + '<div class="ms-it" data-mgo="payment" data-mref><i>' + S(P.gift, 18) + '</i>Приведи друга · ' + esc2(($('sideInviteSub') && $('sideInviteSub').textContent) || '−15% обоим') + S(ICO.r, 16) + '</div>'
+      + '<div class="ms-tch"><div class="av">' + esc2((teacherFullName ? teacherName() : '—').charAt(0).toUpperCase()) + '</div><div class="tx"><small>Твой преподаватель</small><b>' + esc2(teacherFullName ? teacherName() : 'через менеджера') + '</b></div><a class="rbtn" href="https://t.me/' + (th || 'thearbeiter01') + '" target="_blank" rel="noopener" aria-label="Написать в Telegram">' + S(ICO.send, 16) + '</a></div>'
+      + '<div class="ms-it red" data-mlogout><i>' + S(P.out, 18) + '</i>Выйти</div>');
+  }
+  function notifSheet(){
+    var list = window.__sNotifs || [], readAt = window.__sReadAt || null;
+    var isNew = function(n){ return !readAt || new Date(n.created_at) > readAt; };
+    var items = list.length ? list.map(function(n){ return '<div class="nt-i' + (isNew(n) ? ' new' : '') + '"><i>' + S(P.bell, 17) + '</i><div><b>' + esc2(n.message) + '</b><span>' + esc2(fmtDate(n.created_at)) + '</span></div></div>'; }).join('') : '<p class="note" style="text-align:center;margin:8px 0">Пока новостей нет.</p>';
+    sheet('<h3>Уведомления</h3>' + items);
+    if (window.__sNotifMarkRead) window.__sNotifMarkRead();
+  }
+  function zonesSheet(){
+    var zs = (growthState.zones || []).filter(function(z){ return growthState.topics[z.topic_key]; })
+      .sort(function(a, b){ return (GZ_ORDER[a.status] - GZ_ORDER[b.status]) || (new Date(b.last_seen || 0) - new Date(a.last_seen || 0)); });
+    var open = zs.filter(function(z){ return z.status !== 'mastered'; }), closed = zs.filter(function(z){ return z.status === 'mastered'; });
+    var body = zs.length
+      ? (open.length ? open.map(gzRow).join('') : '<div class="zn-empty"><b>Сейчас всё в порядке</b><p>Тем, над которыми нужно поработать, пока нет.</p></div>')
+        + (closed.length ? '<button class="zn-more" type="button" data-gz-more>Закреплённые · ' + closed.length + S(ICO.down, 14) + '</button><div class="hidden gz-closed" style="margin-top:8px">' + closed.map(gzRow).join('') + '</div>' : '')
+      : '<div class="zn-empty"><b>Мы пока собираем информацию</b><p>о том, что получается лучше всего и над чем стоит поработать. По мере выполнения заданий и получения обратной связи здесь будут появляться персональные рекомендации.</p></div>';
+    sheet('<h3>Зоны роста</h3><p class="note" style="margin:-6px 0 0">По комментариям преподавателя и результатам тестов</p><div class="zn" style="display:flex;flex-direction:column">' + body + '</div>');
+  }
+
+  /* ---------- события ---------- */
+  document.addEventListener('click', function(e){
+    var t = e.target; if (!t.closest || !t.closest('#appScreen')) return;
+    var c;
+    if ((c = t.closest('[data-mclose]'))){ closeSheet(); return; }
+    if ((c = t.closest('[data-macc]'))){ c.parentElement.classList.toggle('open'); return; }
+    if ((c = t.closest('[data-mtab]'))){
+      e.preventDefault();
+      closeSheet();
+      if (c.dataset.mtab === 'more'){ moreSheet(); return; }
+      goTab(c.dataset.mtab); return;
+    }
+    if ((c = t.closest('[data-mgo]'))){
+      e.preventDefault(); var ref = !!c.closest('[data-mref]') || c.hasAttribute('data-mref');
+      closeSheet(); goTab(c.dataset.mgo);
+      if (ref) setTimeout(function(){ var r = $('mReferral'); if (r) r.scrollIntoView({ behavior:'smooth', block:'center' }); }, 120);
+      return;
+    }
+    if (t.closest('[data-mlogout]')){ signOut(); return; }
+    if ((c = t.closest('[data-msheet]'))){ if (c.dataset.msheet === 'zones') zonesSheet(); else if (c.dataset.msheet === 'notif') notifSheet(); return; }
+    if ((c = t.closest('[data-mwk]'))){ window.__weekOffset = (window.__weekOffset || 0) + Number(c.dataset.mwk); renderSchTop(); return; }
+    if ((c = t.closest('[data-mday]'))){ window.__selectedDate = c.dataset.mday; renderSchTop(); return; }
+    if ((c = t.closest('[data-mgoday]'))){
+      var key = c.dataset.mgoday; window.__selectedDate = key;
+      window.__weekOffset = Math.round((mondayOf(key + 'T12:00:00') - mondayOf(new Date())) / (7 * 86400000));
+      renderSchTop(); return;
+    }
+    if ((c = t.closest('[data-mhf]'))){ setHwFilter(c.dataset.mhf); return; }
+    if ((c = t.closest('[data-msubmit]'))){ mSubmit(c.dataset.msubmit); return; }
+    if ((c = t.closest('[data-mfb]'))){ var f = $('mfbk-' + c.dataset.mfb); if (f){ var o = f.classList.toggle('open'); c.textContent = o ? 'Свернуть' : 'Показать полностью'; } return; }
+    if ((c = t.closest('[data-mdl]'))){ e.preventDefault(); downloadHomeworkFile(c.dataset.mdl); return; }
+    if ((c = t.closest('[data-mtask]'))){ drillTaskClick(c.dataset.mtask); return; }
+    if ((c = t.closest('[data-mtest]'))){ e.preventDefault(); startTest('topic_' + c.dataset.mtest); return; }
+    if (t.closest('[data-mtestmore]')){ topicTestsAll = !topicTestsAll; renderPr(); return; }
+    if (t.closest('#mGameCheck')){ mGameCheck(); return; }
+    if (t.closest('#mGameSkip')){ pickGameWord(); mGameSync(); return; }
+    if (t.closest('[data-mcopycode]')){
+      var code = currentProfile.referral_code, m = $('mRefMsg'); if (!code) return;
+      (navigator.clipboard ? navigator.clipboard.writeText(code) : Promise.reject()).then(function(){ m.textContent = 'Код скопирован'; }, function(){ m.textContent = 'Твой код: ' + code; });
+      return;
+    }
+    if (t.closest('[data-mshare]')){
+      var btn = $('loyaltyShareBtn'), m2 = $('mRefMsg'); if (btn) btn.click();
+      setTimeout(function(){ if (m2) m2.textContent = ($('loyaltyCopied') || {}).textContent || ''; }, 400);
+      return;
+    }
+    if (t.closest('[data-gz-practice]') || t.closest('[data-z]')){ closeSheet(); }
+  }, true);
+
+  window.mHwFile = function(id){ var f = $('mfile-' + id), n = $('mfname-' + id); if (n) n.textContent = f && f.files[0] ? f.files[0].name : 'Файл'; };
+  function mSubmit(id){
+    /* ответ копируем в скрытую десктопную форму и вызываем ту же submitHomework — логика одна */
+    var mt = $('mtext-' + id), mf = $('mfile-' + id), dt = $('text-' + id), df = $('file-' + id);
+    if (!dt){ alert('Не получилось отправить. Обнови страницу и попробуй ещё раз.'); return; }
+    dt.value = mt ? mt.value : '';
+    if (df && mf && mf.files[0]){ try { var tr = new DataTransfer(); tr.items.add(mf.files[0]); df.files = tr.files; } catch (e){ alert('Не получилось прикрепить файл. Попробуй ещё раз.'); return; } }
+    submitHomework(id);
+  }
+  function mGameCheck(){
+    var inp = $('mGameIn'), g = $('gameInput2'); if (!inp || !g) return;
+    g.value = inp.value; checkGameWord();
+    var fb = $('mGameFb'), df = $('gameFeedback2');
+    if (fb && df){ fb.textContent = df.textContent; fb.style.color = df.style.color; }
+    inp.value = '';
+    var sc = $('mGameScore'); if (sc) sc.textContent = gameScoreVal || 0;
+  }
+  window.__mRefresh = function(){ queue('all'); };
+
+  /* ---------- сборка и подключение к существующим отрисовкам ---------- */
+  var pending = {}, timer = null;
+  function queue(part){
+    pending[part || 'all'] = 1;
+    if (timer) return;
+    timer = setTimeout(function(){
+      timer = null; var p = pending; pending = {};
+      if (!mob()) return;
+      var all = !!p.all;
+      var run = function(fn){ try { fn(); } catch (err){ console.error('mobile', err); } };
+      if (all || p.ov) run(renderOv);
+      if (all || p.top) run(renderSchTop);
+      if (all || p.rest) run(renderSchRest);
+      if (all || p.hw) run(renderHw);
+      if (all || p.pr) run(renderPr);
+      if (all || p.pay) run(renderPay);
+      if (all || p.sup) run(renderSup);
+      run(refreshHeader);
+    }, 0);
+  }
+  function wrap(name, part){
+    var f = window[name]; if (typeof f !== 'function') return;
+    window[name] = function(){ var r = f.apply(this, arguments); if (r && typeof r.then === 'function') r.then(function(){ queue(part); }); else queue(part); return r; };
+  }
+  ['renderOvHero', 'renderOvGlass', 'renderWeekPreview'].forEach(function(n){ wrap(n, 'ov'); });
+  wrap('renderWeekGrid', 'top');
+  ['renderHistoryList', 'renderScheduleStats'].forEach(function(n){ wrap(n, 'rest'); });
+  ['renderHomeworkList', 'renderHwCounts', 'renderHwAvg'].forEach(function(n){ wrap(n, 'hw'); });
+  ['renderDailyTasks', 'renderTopicTests', 'renderMaterials', 'renderLevelTest', 'loadMyTestResults', 'renderGrowth'].forEach(function(n){ wrap(n, 'pr'); });
+  wrap('renderGrowth', 'hw');
+  wrap('loadPayments', 'pay'); wrap('loadPayments', 'ov');
+  wrap('setupTelegramBlock', 'pay'); wrap('setupTelegramBlock', 'sup');
+  wrap('loadTeacherContact', 'sup'); wrap('loadTeacherContact', 'ov');
+  wrap('ensureReferralCode', 'pay'); wrap('loadReferralPct', 'pay');
+  wrap('pickGameWord', 'pr');
+  var ut = window.updateTitle;
+  window.updateTitle = function(tab){ var r = ut.apply(this, arguments); refreshHeader(); return r; };
+  document.addEventListener('DOMContentLoaded', function(){ queue('all'); });
+  MQ.addEventListener && MQ.addEventListener('change', function(){ queue('all'); });
+  setTimeout(function(){ queue('all'); }, 0);
+})();
+
 </script>
 
 </body>

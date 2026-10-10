@@ -1375,6 +1375,40 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     .oc-title{min-width:0; overflow:hidden; text-overflow:ellipsis;}
     .oc-link{min-width:0; max-width:46%; overflow:hidden; text-overflow:ellipsis;}
   }
+
+  /* ---------- мобильная: обновление макета (капсула, лаймовое стекло) ---------- */
+  @media (max-width:760px){
+    nav.tabs-mobile{left:12px; right:12px; bottom:calc(12px + env(safe-area-inset-bottom)); height:60px; padding:0 8px; gap:0; border-radius:99px; align-items:center; justify-content:space-around; border:1px solid rgba(255,255,255,.85);
+      background:radial-gradient(220px 70px at 100% 100%, rgba(215,239,66,.45), rgba(215,239,66,0) 70%), linear-gradient(150deg, rgba(255,255,255,.62) 0%, rgba(248,251,238,.55) 100%);
+      backdrop-filter:blur(22px) saturate(140%); -webkit-backdrop-filter:blur(22px) saturate(140%); box-shadow:0 14px 36px rgba(20,21,18,.22), 0 4px 12px rgba(20,21,18,.12);}
+    nav.tabs-mobile button{flex:none; width:46px; height:46px; border-radius:50%; color:#6E6F67;}
+    nav.tabs-mobile button .tm-icon svg{stroke:#6E6F67;}
+    nav.tabs-mobile button.active{background:rgba(255,255,255,.8); box-shadow:inset 0 0 0 1px #fff, 0 4px 14px rgba(70,85,20,.16);}
+    nav.tabs-mobile button.active .tm-icon svg{stroke:#141412;}
+    nav.tabs-mobile button.active::before{display:none;}
+    nav.tabs-mobile button .tm-badge{top:2px; right:2px; box-shadow:0 0 0 2px #fff;}
+    main{padding-bottom:calc(100px + env(safe-area-inset-bottom));}
+    #floatingReminder{bottom:calc(88px + env(safe-area-inset-bottom));}
+    .av-approve{bottom:calc(88px + env(safe-area-inset-bottom));}
+    /* «Присоединиться» в стеклянной карточке урока */
+    .mo-glass .mo-acts .m-btn.dark{background:rgba(255,255,255,.78); color:#141412; box-shadow:inset 0 0 0 1px #fff, 0 4px 14px rgba(70,85,20,.16); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);}
+    /* «Мой созвон» в «Ещё» */
+    .ms-call{color:#141412; background:radial-gradient(240px 120px at 100% 100%, rgba(215,239,66,.85), rgba(215,239,66,0) 70%), radial-gradient(180px 100px at 0% 0%, #fff, rgba(255,255,255,0) 70%), linear-gradient(150deg,#FFFFFF 0%,#F8FBEE 100%); border:1.5px solid rgba(255,255,255,.95); box-shadow:0 10px 26px rgba(70,85,20,.12);}
+    .ms-call small{color:#5E5F58;}
+    .ms-call .tg{color:#3F5A06;}
+    .ms-call .tg i{background:#9DBA1A; box-shadow:0 0 0 3px rgba(157,186,26,.2);}
+    .ms-call .tg.on i{background:#9DBA1A;}
+    .ms-call .cp{background:rgba(255,255,255,.7); color:#141412; box-shadow:inset 0 0 0 1px rgba(255,255,255,.95), 0 4px 14px rgba(70,85,20,.12); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);}
+    /* «+ Задать» и «Отметить проверенным»: лаймовое стекло */
+    .m-fab, #mAddBtn, #mRvBtn{background:linear-gradient(100deg,rgba(241,244,110,.82) 0%,rgba(217,239,69,.78) 50%,rgba(178,211,32,.72) 100%); color:#101109; border:none; box-shadow:inset 0 0 0 1px rgba(255,255,255,.7), 0 8px 22px rgba(150,180,20,.3); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+    .m-fab{bottom:calc(88px + env(safe-area-inset-bottom));}
+    /* «К выплате» */
+    .m-paycard{color:#141412; background:radial-gradient(300px 200px at 100% 100%, rgba(215,239,66,.95), rgba(215,239,66,0) 70%), radial-gradient(220px 140px at 0% 0%, #fff, rgba(255,255,255,0) 70%), linear-gradient(150deg,#FFFFFF 0%,#F4F9D8 55%,#E6F38E 100%); border:1.5px solid rgba(255,255,255,.95); box-shadow:0 16px 36px rgba(70,85,20,.16);}
+    .m-paycard .m-tag{border-color:#6E8A0A; color:#3F5A06; background:rgba(255,255,255,.6);}
+    .m-paycard .m-big{color:#141412;}
+    .m-paycard .m-kv{color:#5E5F58; border-top-color:rgba(20,21,18,.1);}
+    .m-paycard .m-kv b{color:#141412;}
+  }
 </style>
 </head>
 <body>
