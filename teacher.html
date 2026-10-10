@@ -2286,7 +2286,8 @@ function lessonLink(l){
   const st = (myStudents || []).find(x => x.id === l.student_id);
   if (!st) return mine;
   const g = st.group_id ? (window.__myGroups || []).find(x => x.id === st.group_id) : null;
-  return (g && g.meeting_url) || st.meeting_url || mine;
+  const ok = (from) => !from || new Date(from) <= new Date();
+  return (g && ok(g.meeting_url_from) && g.meeting_url) || (ok(st.meeting_url_from) && st.meeting_url) || mine;
 }
 function ovStudentOf(l){ return l && !l.is_trial ? (myStudents || []).find(s => s.id === l.student_id) : null; }
 

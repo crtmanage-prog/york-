@@ -2586,7 +2586,7 @@ function meetingUrlCell(s){
 
 async function saveStudentMeetingUrl(studentId, input){
   const url = input.value.trim();
-  const { error } = await supabase.from('profiles').update({ meeting_url: url || null }).eq('id', studentId);
+  const { error } = await supabase.from('profiles').update({ meeting_url: url || null, meeting_url_from: null }).eq('id', studentId);
   if (error){ alert('Не получилось сохранить ссылку. Попробуй ещё раз.'); return; }
   const s = allStudents.find(x => x.id === studentId); if (s) s.meeting_url = url || null;
   input.style.boxShadow = '0 0 0 2px #B2D320'; setTimeout(() => { input.style.boxShadow = ''; }, 1200);
@@ -2967,6 +2967,8 @@ async function saveStudent(){
   const btn = document.getElementById('editSaveBtn');
   btn.disabled = true; btn.textContent = 'Сохраняем…';
 
+  const prevStudent = allStudents.find(x => x.id === studentId);
+  const urlChanged = !prevStudent || (prevStudent.meeting_url || '') !== meetingUrl;
   const { error } = await supabase.from('profiles').update({
     full_name: fullName,
     contact_telegram: contactTelegram || null,
@@ -2974,7 +2976,7 @@ async function saveStudent(){
     contact_email: contactEmail || null,
     contact_avito: contactAvito || null,
     format, level, timezone, teacher_id: teacherId || null,
-    meeting_url: meetingUrl || null,
+    meeting_url: meetingUrl || null, ...(urlChanged ? { meeting_url_from: null } : {}),
     student_status: studentStatus
   }).eq('id', studentId);
 
@@ -3953,7 +3955,7 @@ async function loadReferralStats(){
 
 async function saveGroupMeetingUrl(groupId, input){
   const url = input.value.trim();
-  const { error } = await supabase.from('groups').update({ meeting_url: url || null }).eq('id', groupId);
+  const { error } = await supabase.from('groups').update({ meeting_url: url || null, meeting_url_from: null }).eq('id', groupId);
   if (error){ alert('Не получилось сохранить ссылку группы. Попробуй ещё раз.'); return; }
   const g = (window.__groupsList || []).find(x => x.id === groupId); if (g) g.meeting_url = url || null;
   input.style.boxShadow = '0 0 0 2px #B2D320'; setTimeout(() => { input.style.boxShadow = ''; }, 1200);
