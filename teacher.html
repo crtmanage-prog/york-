@@ -1633,7 +1633,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         <p class="row-sub" style="margin-bottom:12px;">Одна постоянная ссылка на Телемост — она подставится ученикам во всех уроках. Кнопка «Присоединиться» появится у них только во время самого урока.</p>
         <div class="field">
           <label for="myMeetingUrl">Ссылка на созвон</label>
-          <input id="myMeetingUrl" type="text" placeholder="https://telemost.yandex.ru/j/...">
+          <input id="myMeetingUrl" type="text" readonly placeholder="Ссылка не задана" style="background:#F3F2ED; cursor:default;">
+          <p class="row-sub" style="margin:6px 0 0; font-size:12px;">Ссылку на созвон меняет администратор. Чтобы её обновить, напиши менеджеру.</p>
         </div>
         <div class="field" style="margin-top:14px;">
           <label for="myContactTelegram">Мой Telegram (для связи по домашке)</label>
@@ -2164,7 +2165,6 @@ async function setupNotifBell(){
 document.getElementById('saveMeetingUrlBtn').addEventListener('click', saveMeetingUrl);
 
 async function saveMeetingUrl(){
-  const url = document.getElementById('myMeetingUrl').value.trim();
   const telegram = document.getElementById('myContactTelegram').value.trim();
   const okEl = document.getElementById('meetingUrlSaved');
   okEl.textContent = '';
@@ -2173,7 +2173,7 @@ async function saveMeetingUrl(){
   btn.disabled = true; btn.textContent = 'Сохраняем…';
 
   const { error } = await supabase.from('profiles')
-    .update({ meeting_url: url || null, contact_telegram: telegram || null }).eq('id', currentUser.id);
+    .update({ contact_telegram: telegram || null }).eq('id', currentUser.id);
 
   btn.disabled = false; btn.textContent = 'Сохранить';
 
@@ -2184,7 +2184,6 @@ async function saveMeetingUrl(){
   }
   okEl.style.color = '#3B7A1E';
   okEl.textContent = 'Сохранено!';
-  currentProfile.meeting_url = url;
   currentProfile.contact_telegram = telegram;
   renderSbCall();
 }
@@ -2362,7 +2361,7 @@ function renderOvHero(){
   const url = lessonLink(l);
   const join = url
     ? `<a class="ov-open" href="${attrEsc(url)}" target="_blank" rel="noopener">Присоединиться</a>`
-    : `<button class="ov-open" id="ovAddLink" type="button">Добавить ссылку на созвон</button>`;
+    : `<button class="ov-open" id="ovAddLink" type="button">Ссылка не задана — напиши менеджеру</button>`;
   const tgBtn = c.tg ? `<a class="ov-ghost" href="https://t.me/${attrEsc(c.tg)}" target="_blank" rel="noopener">Telegram</a>` : '';
   const dayWord = ovDayWord(start);
   const dateLabel = start.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:SCHOOL_TZ });
@@ -2509,14 +2508,14 @@ function renderSbCall(){
   const url = (currentProfile && currentProfile.meeting_url) || '';
   const u = document.getElementById('sbCallUrl'), copy = document.getElementById('sbCallCopy'), tg = document.getElementById('sbTg'), tgt = document.getElementById('sbTgText');
   if (!u) return;
-  u.textContent = url ? url.replace(/^https?:\/\//, '') : 'Добавить ссылку';
+  u.textContent = url ? url.replace(/^https?:\/\//, '') : 'Ссылка не задана';
   u.style.opacity = url ? '1' : '.6';
   copy.style.display = url ? 'flex' : 'none';
   const linked = !!(currentProfile && currentProfile.telegram_chat_id);
   tg.classList.toggle('on', linked);
   tgt.textContent = linked ? 'Telegram-бот подключён' : 'Подключить Telegram-бота';
   const mu = document.getElementById('msCallUrl'), mt = document.getElementById('msTg'), mtt = document.getElementById('msTgText');
-  if (mu){ mu.textContent = url ? url.replace(/^https?:\/\//, '') : 'Добавить ссылку'; mt.classList.toggle('on', linked); mtt.textContent = linked ? 'Telegram-бот подключён' : 'Подключить Telegram-бота'; }
+  if (mu){ mu.textContent = url ? url.replace(/^https?:\/\//, '') : 'Ссылка не задана'; mt.classList.toggle('on', linked); mtt.textContent = linked ? 'Telegram-бот подключён' : 'Подключить Telegram-бота'; }
 }
 function openSettings(){ const m = document.getElementById('settingsModal'); if (m) m.hidden = false; }
 function closeSettings(){ const m = document.getElementById('settingsModal'); if (m) m.hidden = true; }
@@ -4366,7 +4365,7 @@ async function gzSave(id){
       var url = lessonLink(l);
       var join = url
         ? '<a class="m-btn dark" href="' + esc(url) + '" target="_blank" rel="noopener">Присоединиться</a>'
-        : '<button class="m-btn dark" type="button" onclick="openSettings()">Добавить ссылку</button>';
+        : '<button class="m-btn dark" type="button" onclick="openSettings()">Ссылка не задана</button>';
       var ph = c.phone ? '<a class="m-round" href="tel:' + esc(c.phone.tel) + '" aria-label="Позвонить">' + I.phone + '</a>' : '';
       var tg = c.tg ? '<a class="m-round" href="https://t.me/' + esc(c.tg) + '" target="_blank" rel="noopener" aria-label="Telegram">' + I.send + '</a>' : '';
       card = '<div class="mo-glass"><div class="mo-top"><span class="m-av' + (l.is_trial ? ' t' : '') + '">' + esc(ovInitials(name)) + '</span>'
@@ -4433,7 +4432,7 @@ async function gzSave(id){
         var kebab = '<button type="button" class="m-kebab" aria-label="Меню урока" onclick="M.lessonMenu(\'' + l.id + '\')">' + I.dots + '</button>';
         var wait = l.needs_reschedule ? '<span class="m-pill amber">ждёт переноса</span>' : '';
         if (isToday){
-          var join = l.needs_reschedule ? '' : (url ? '<a class="m-btn lime" href="' + esc(url) + '" target="_blank" rel="noopener">Войти</a>' : '<button class="m-btn lime" type="button" onclick="openSettings()">Добавить ссылку</button>');
+          var join = l.needs_reschedule ? '' : (url ? '<a class="m-btn lime" href="' + esc(url) + '" target="_blank" rel="noopener">Войти</a>' : '<button class="m-btn lime" type="button" onclick="openSettings()">Ссылка не задана</button>');
           var ph = c.phone ? '<a class="m-btn ghost" href="tel:' + esc(c.phone.tel) + '">Телефон</a>' : '';
           return '<div class="m-lesson' + (l.is_trial ? ' t' : '') + (l.needs_reschedule ? ' off' : '') + '"><div class="m-lt"><div>' + (l.is_trial ? '<span class="m-pill trial">Пробный</span>' : '') + wait
             + '<b>' + studentDot(l) + esc(name) + '</b><small>' + fmtTimeOnly(start) + ' — ' + fmtTimeOnly(end) + ' (МСК)</small></div>' + kebab + '</div>'
