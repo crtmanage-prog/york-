@@ -583,6 +583,10 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <span class="sb-label">Тест на уровень</span>
       <span id="newLevelTestBadge" class="sb-badge hidden"></span>
     </button>
+    <button class="tab-btn" data-tab="growth" title="Зоны роста и материалы" aria-label="Зоны роста и материалы">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9"/><path d="M12 12C12 7 8 4 3 4c0 5 4 8 9 8z"/><path d="M12 14c0-4 3-7 9-7 0 4-3 7-9 7z"/></svg>
+      <span class="sb-label">Зоны роста</span>
+    </button>
     <button class="tab-btn" data-tab="referrals" title="Рефералы" aria-label="Рефералы">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
       <span class="sb-label">Рефералы</span>
@@ -653,6 +657,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         font-size:10px; font-weight:800; line-height:16px; text-align:center;
       "></span>
     </button>
+    <button class="tab-btn" data-tab="growth">Зоны роста</button>
     <button class="tab-btn" data-tab="referrals">Рефералы</button>
     <button class="tab-btn" data-tab="link">Добавить человека</button>
   </nav>
@@ -1442,6 +1447,31 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           Показать обработанные
         </label>
       </div>
+    </section>
+
+    <section class="panel" id="panel-growth">
+      <h2 class="panel-title">Зоны роста и материалы</h2>
+      <p class="section-sub" style="margin-bottom:18px;">
+        Каталог тем для отметки «Над чем поработать» у учителей и блока «Зоны роста» в кабинете ученика, пороги расчёта
+        и материалы практики с диапазонами уровней. Сохранение каждого блока — своей кнопкой.
+      </p>
+
+      <h2 class="panel-title" style="font-size:16px;">Пороги расчёта</h2>
+      <div class="card" style="margin-bottom:22px;" id="gaSettings"></div>
+
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:10px;">
+        <h2 class="panel-title" style="font-size:16px; margin:0;">Каталог тем</h2>
+        <button class="btn btn-ghost btn-sm" type="button" onclick="gaToggleNewTopic()">+ Добавить тему</button>
+      </div>
+      <div class="card hidden" id="gaNewTopic" style="margin-bottom:12px;"></div>
+      <div id="gaTopics"></div>
+
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin:28px 0 10px;">
+        <h2 class="panel-title" style="font-size:16px; margin:0;">Материалы для практики</h2>
+        <button class="btn btn-ghost btn-sm" type="button" onclick="gaToggleNewMat()">+ Добавить материал</button>
+      </div>
+      <div class="card hidden" id="gaNewMat" style="margin-bottom:12px;"></div>
+      <div id="gaMats"></div>
     </section>
 
     <section class="panel" id="panel-referrals">
@@ -5659,5 +5689,154 @@ async function linkNewProfile(){
 }
 </script>
 
+
+<script>
+/* ===== Зоны роста: каталог тем, пороги, материалы практики ===== */
+(function(){
+  const $ = id => document.getElementById(id);
+  const e = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+  const TEST_KEYS = [['', 'без теста'], ['present_perfect', 'Present Perfect'], ['articles', 'Артикли'], ['conditionals', 'Условные'], ['prepositions', 'Предлоги'], ['phrasal_verbs', 'Фразовые глаголы']];
+  const ICONS = [['video', 'видео'], ['book', 'книга'], ['audio', 'аудио'], ['cards', 'карточки'], ['guide', 'гайд'], ['link', 'ссылка']];
+  const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+  const inp = 'width:100%; padding:10px 12px; border:1.5px solid var(--line); border-radius:10px; font:inherit; font-size:14px; background:#fff;';
+  const lab = 'display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft); margin:10px 0 4px;';
+  const opts = (arr, cur) => arr.map(a => { const v = Array.isArray(a) ? a[0] : a, t = Array.isArray(a) ? a[1] : a; return `<option value="${e(v)}"${v === cur ? ' selected' : ''}>${e(t)}</option>`; }).join('');
+  let topics = [], mats = [], loaded = false;
+
+  async function load(){
+    try {
+      const [st, tp, mt] = await Promise.all([
+        supabase.from('growth_settings').select('*').eq('id', 1).single(),
+        supabase.from('skill_topics').select('*').order('sort_order', { ascending:true }),
+        supabase.from('practice_materials').select('*').order('sort_order', { ascending:true })
+      ]);
+      if (st.error || tp.error || mt.error) throw (st.error || tp.error || mt.error);
+      topics = tp.data || []; mats = mt.data || []; loaded = true;
+      renderSettings(st.data || {}); renderTopics(); renderMats(); renderNew();
+    } catch (err){
+      console.error('growth admin', err);
+      $('gaTopics').innerHTML = '<div class="empty-state">Не получилось загрузить данные. Обновите страницу и попробуйте ещё раз.</div>';
+    }
+  }
+  window.loadGrowthAdmin = function(){ if (!loaded) load(); };
+
+  function renderSettings(s){
+    const f = (id, label, v) => `<div style="min-width:150px; flex:1;"><label style="${lab}margin-top:0;">${label}</label><input id="${id}" type="number" min="1" style="${inp}" value="${e(v)}"></div>`;
+    $('gaSettings').innerHTML = `<div style="display:flex; gap:12px; flex-wrap:wrap;">
+      ${f('gs_min_sources', 'Нужно разных заданий/тестов', s.min_sources)}
+      ${f('gs_min_days', 'В разные дни', s.min_days)}
+      ${f('gs_mastered', 'Подтверждений для «Закреплено»', s.mastered_positives)}
+      ${f('gs_good', 'Хороший результат теста, %', s.test_good_pct)}
+      ${f('gs_bad', 'Трудность в тесте, % и ниже', s.test_bad_pct)}
+    </div><div style="margin-top:14px; display:flex; align-items:center; gap:12px;"><button class="btn btn-dark btn-sm" type="button" onclick="gaSaveSettings()">Сохранить пороги</button><span id="gaSetMsg" style="font-size:13px; font-weight:600;"></span></div>
+    <p style="margin:12px 0 0; font-size:12.5px; color:var(--ink-soft);">Новые пороги применяются при следующем пересчёте темы (когда появится новая отметка, результат теста или откроется упражнение).</p>`;
+  }
+  window.gaSaveSettings = async function(){
+    const v = id => parseInt($(id).value, 10);
+    const row = { min_sources:v('gs_min_sources'), min_days:v('gs_min_days'), mastered_positives:v('gs_mastered'), test_good_pct:v('gs_good'), test_bad_pct:v('gs_bad'), updated_at:new Date().toISOString() };
+    const msg = $('gaSetMsg');
+    if (Object.values(row).some(x => typeof x === 'number' && (isNaN(x) || x < 1))){ msg.style.color = '#B3261E'; msg.textContent = 'Во всех полях нужны числа от 1.'; return; }
+    const { error } = await supabase.from('growth_settings').update(row).eq('id', 1);
+    msg.style.color = error ? '#B3261E' : '#3B7A1E';
+    msg.textContent = error ? 'Не получилось сохранить.' : 'Сохранено ✓';
+  };
+
+  function topicForm(t, isNew){
+    const p = isNew ? 'nt_' : 't_' + t.key + '_';
+    return `<div style="display:grid; grid-template-columns:1fr 1fr; gap:0 14px;">
+      ${isNew ? `<div><label style="${lab}">Ключ (латиницей, без пробелов)</label><input id="${p}key" style="${inp}" placeholder="present_simple_s"></div>` : ''}
+      <div${isNew ? '' : ' style="grid-column:1/-1;"'}><label style="${lab}">Название</label><input id="${p}title" style="${inp}" value="${e(t.title)}"></div>
+      <div style="grid-column:1/-1;"><label style="${lab}">Что стоит улучшить (коротко, видно ученику)</label><input id="${p}expl" style="${inp}" value="${e(t.explanation)}"></div>
+      <div style="grid-column:1/-1;"><label style="${lab}">Правило простыми словами (*слово* — выделение)</label><textarea id="${p}rule" rows="3" style="${inp}">${e(t.rule)}</textarea></div>
+      <div style="grid-column:1/-1;"><label style="${lab}">Ключевые слова для подсказки учителю (через запятую)</label><input id="${p}kw" style="${inp}" value="${e((t.keywords || []).join(', '))}"></div>
+      <div><label style="${lab}">Тест по теме в «Практике»</label><select id="${p}test" style="${inp}">${opts(TEST_KEYS, t.practice_test_key || '')}</select></div>
+      <div style="display:flex; gap:14px; align-items:flex-end;"><div style="width:110px;"><label style="${lab}">Порядок</label><input id="${p}sort" type="number" style="${inp}" value="${e(t.sort_order)}"></div>
+        <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; padding-bottom:10px;"><input id="${p}active" type="checkbox" style="width:auto;"${t.active === false ? '' : ' checked'}> Показывать</label></div>
+    </div>`;
+  }
+  function readTopic(p){
+    return {
+      title: $(p + 'title').value.trim(), explanation: $(p + 'expl').value.trim(), rule: $(p + 'rule').value.trim() || null,
+      keywords: $(p + 'kw').value.split(',').map(x => x.trim().toLowerCase()).filter(Boolean),
+      practice_test_key: $(p + 'test').value || null, sort_order: parseInt($(p + 'sort').value, 10) || 0, active: $(p + 'active').checked, updated_at: new Date().toISOString()
+    };
+  }
+  function renderTopics(){
+    $('gaTopics').innerHTML = topics.map(t => `<details class="card" style="margin-bottom:8px; padding:0;">
+      <summary style="padding:14px 18px; cursor:pointer; display:flex; gap:10px; align-items:center; font-weight:600; font-size:14.5px;">${e(t.title)}${t.active === false ? '<span class="badge badge-expired" style="margin-left:6px;">скрыта</span>' : ''}${t.practice_test_key ? '<span style="font-size:12px; color:var(--ink-soft); font-weight:500;">· есть тест</span>' : ''}</summary>
+      <div style="padding:0 18px 16px;">${topicForm(t, false)}
+        <div style="margin-top:14px; display:flex; align-items:center; gap:12px;"><button class="btn btn-dark btn-sm" type="button" onclick="gaSaveTopic('${e(t.key)}')">Сохранить тему</button><span id="gaTMsg_${e(t.key)}" style="font-size:13px; font-weight:600;"></span></div></div>
+    </details>`).join('') || '<div class="empty-state">Тем пока нет.</div>';
+  }
+  window.gaSaveTopic = async function(key){
+    const row = readTopic('t_' + key + '_'), msg = $('gaTMsg_' + key);
+    if (!row.title || !row.explanation){ msg.style.color = '#B3261E'; msg.textContent = 'Название и «что улучшить» обязательны.'; return; }
+    const { error } = await supabase.from('skill_topics').update(row).eq('key', key);
+    msg.style.color = error ? '#B3261E' : '#3B7A1E';
+    msg.textContent = error ? 'Не получилось сохранить.' : 'Сохранено ✓';
+    if (!error){ const i = topics.findIndex(t => t.key === key); if (i >= 0) topics[i] = Object.assign(topics[i], row); }
+  };
+  window.gaToggleNewTopic = function(){ $('gaNewTopic').classList.toggle('hidden'); };
+
+  function renderMats(){
+    $('gaMats').innerHTML = mats.map(m => `<div class="card" style="margin-bottom:8px;">${matForm(m, 'm_' + m.id + '_')}
+      <div style="margin-top:12px; display:flex; align-items:center; gap:12px;"><button class="btn btn-dark btn-sm" type="button" onclick="gaSaveMat('${e(m.id)}')">Сохранить</button><span id="gaMMsg_${e(m.id)}" style="font-size:13px; font-weight:600;"></span></div></div>`).join('') || '<div class="empty-state">Материалов пока нет.</div>';
+  }
+  function matForm(m, p){
+    return `<div style="display:grid; grid-template-columns:1fr 1fr; gap:0 14px;">
+      <div><label style="${lab}margin-top:0;">Название</label><input id="${p}title" style="${inp}" value="${e(m.title)}"></div>
+      <div><label style="${lab}margin-top:0;">Ссылка</label><input id="${p}url" style="${inp}" value="${e(m.url)}"></div>
+      <div style="grid-column:1/-1;"><label style="${lab}">Описание</label><input id="${p}desc" style="${inp}" value="${e(m.description)}"></div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end; grid-column:1/-1;">
+        <div style="width:130px;"><label style="${lab}">Значок</label><select id="${p}icon" style="${inp}">${opts(ICONS, m.icon || 'link')}</select></div>
+        <div style="width:90px;"><label style="${lab}">Уровень от</label><select id="${p}from" style="${inp}">${opts(LEVELS, m.level_from || 'A1')}</select></div>
+        <div style="width:90px;"><label style="${lab}">до</label><select id="${p}to" style="${inp}">${opts(LEVELS, m.level_to || 'C2')}</select></div>
+        <div style="width:100px;"><label style="${lab}">Порядок</label><input id="${p}sort" type="number" style="${inp}" value="${e(m.sort_order)}"></div>
+        <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; padding-bottom:10px;"><input id="${p}active" type="checkbox" style="width:auto;"${m.active === false ? '' : ' checked'}> Показывать</label>
+      </div></div>`;
+  }
+  function readMat(p){
+    return { title:$(p + 'title').value.trim(), url:$(p + 'url').value.trim(), description:$(p + 'desc').value.trim() || null, icon:$(p + 'icon').value,
+      level_from:$(p + 'from').value, level_to:$(p + 'to').value, sort_order:parseInt($(p + 'sort').value, 10) || 0, active:$(p + 'active').checked };
+  }
+  window.gaSaveMat = async function(id){
+    const row = readMat('m_' + id + '_'), msg = $('gaMMsg_' + id);
+    if (!row.title || !/^https?:\/\//.test(row.url)){ msg.style.color = '#B3261E'; msg.textContent = 'Нужны название и ссылка (https://…).'; return; }
+    if (LEVELS.indexOf(row.level_from) > LEVELS.indexOf(row.level_to)){ msg.style.color = '#B3261E'; msg.textContent = 'Уровень «от» выше уровня «до».'; return; }
+    const { error } = await supabase.from('practice_materials').update(row).eq('id', id);
+    msg.style.color = error ? '#B3261E' : '#3B7A1E';
+    msg.textContent = error ? 'Не получилось сохранить.' : 'Сохранено ✓';
+  };
+  window.gaToggleNewMat = function(){ $('gaNewMat').classList.toggle('hidden'); };
+
+  function renderNew(){
+    $('gaNewTopic').innerHTML = topicForm({ title:'', explanation:'', rule:'', keywords:[], sort_order:(topics.length ? Math.max.apply(null, topics.map(t => t.sort_order || 0)) + 1 : 1) }, true)
+      + '<div style="margin-top:14px; display:flex; align-items:center; gap:12px;"><button class="btn btn-accent btn-sm" type="button" onclick="gaAddTopic()">Добавить тему</button><span id="gaNTMsg" style="font-size:13px; font-weight:600;"></span></div>';
+    $('gaNewMat').innerHTML = matForm({ title:'', url:'', description:'', icon:'link', level_from:'A1', level_to:'C2', sort_order:(mats.length ? Math.max.apply(null, mats.map(m => m.sort_order || 0)) + 1 : 1) }, 'nm_')
+      + '<div style="margin-top:12px; display:flex; align-items:center; gap:12px;"><button class="btn btn-accent btn-sm" type="button" onclick="gaAddMat()">Добавить материал</button><span id="gaNMMsg" style="font-size:13px; font-weight:600;"></span></div>';
+  }
+  window.gaAddTopic = async function(){
+    const msg = $('gaNTMsg'), key = $('nt_key').value.trim();
+    const row = readTopic('nt_'); row.key = key;
+    if (!/^[a-z0-9_]{2,40}$/.test(key)){ msg.style.color = '#B3261E'; msg.textContent = 'Ключ: латиница, цифры и «_», 2–40 символов.'; return; }
+    if (!row.title || !row.explanation){ msg.style.color = '#B3261E'; msg.textContent = 'Название и «что улучшить» обязательны.'; return; }
+    const { error } = await supabase.from('skill_topics').insert(row);
+    if (error){ msg.style.color = '#B3261E'; msg.textContent = error.code === '23505' ? 'Тема с таким ключом уже есть.' : 'Не получилось добавить.'; return; }
+    loaded = false; await load(); $('gaNewTopic').classList.add('hidden');
+  };
+  window.gaAddMat = async function(){
+    const msg = $('gaNMMsg'), row = readMat('nm_');
+    if (!row.title || !/^https?:\/\//.test(row.url)){ msg.style.color = '#B3261E'; msg.textContent = 'Нужны название и ссылка (https://…).'; return; }
+    if (LEVELS.indexOf(row.level_from) > LEVELS.indexOf(row.level_to)){ msg.style.color = '#B3261E'; msg.textContent = 'Уровень «от» выше уровня «до».'; return; }
+    const { error } = await supabase.from('practice_materials').insert(row);
+    if (error){ msg.style.color = '#B3261E'; msg.textContent = 'Не получилось добавить.'; return; }
+    loaded = false; await load(); $('gaNewMat').classList.add('hidden');
+  };
+
+  document.addEventListener('click', (ev) => {
+    if (ev.target.closest && ev.target.closest('.tab-btn[data-tab="growth"]')) window.loadGrowthAdmin();
+  });
+})();
+</script>
 </body>
 </html>

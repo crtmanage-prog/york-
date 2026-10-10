@@ -378,23 +378,39 @@ function finishQuiz(){
 }
 
 /* ---------- сохранение результата для статистики (без блокирующей формы контактов) ---------- */
+// если тест проходит вошедший в кабинет ученик — привязываем результат к нему («было → стало» в кабинете)
+function cabinetSession(){
+  try {
+    const raw = localStorage.getItem('sb-uuwtarchkltdmaddndgm-auth-token');
+    if (!raw) return null;
+    let s = JSON.parse(raw);
+    if (s && s.currentSession) s = s.currentSession;
+    if (!s || !s.access_token || !s.user || !s.user.id) return null;
+    if ((s.expires_at || 0) * 1000 < Date.now() + 30000) return null;
+    return { token: s.access_token, uid: s.user.id };
+  } catch (e){ return null; }
+}
+
 async function saveResultQuietly(){
   try {
+    const sess = cabinetSession();
+    const body = {
+      test_type: selectedFormat,
+      score: pendingResult.score,
+      max_score: pendingResult.maxScore,
+      level: pendingResult.info.letters,
+      level_name: pendingResult.info.name
+    };
+    if (sess) body.student_id = sess.uid;
     await fetch(`${SUPABASE_URL}/rest/v1/level_test_results`, {
       method: 'POST',
       headers: {
         'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + (sess ? sess.token : SUPABASE_ANON_KEY),
         'Content-Type': 'application/json',
         'Prefer': 'return=minimal'
       },
-      body: JSON.stringify({
-        test_type: selectedFormat,
-        score: pendingResult.score,
-        max_score: pendingResult.maxScore,
-        level: pendingResult.info.letters,
-        level_name: pendingResult.info.name
-      })
+      body: JSON.stringify(body)
     });
   } catch(e){
     // статистика необязательна — результат уже показан, ошибку сохранения не показываем

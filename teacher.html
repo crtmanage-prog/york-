@@ -1329,6 +1329,24 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .cal-legend:empty{display:none;}
   .cal-legend span{display:inline-flex; align-items:center; gap:6px;}
   .cal-legend i{width:11px; height:11px; border-radius:50%;}
+
+  /* ===== «Над чем поработать» при проверке ===== */
+  .gz{margin-top:14px; padding:14px 16px; border-radius:18px; background:#FAFAF6; display:flex; flex-direction:column; gap:10px;}
+  .gz-h b{font-size:13.5px;} .gz-h span{display:block; font-size:11.5px; color:var(--t-ink3); margin-top:2px;}
+  .gz-chips, .gz-sug{display:flex; flex-wrap:wrap; gap:6px;}
+  .gz-chips:empty, .gz-sug:empty{display:none;}
+  .gz-chip{display:inline-flex; align-items:center; gap:6px; min-height:30px; padding:5px 6px 5px 12px; border-radius:99px; background:#141412; color:#fff; font-size:12px; font-weight:600;}
+  .gz-chip button{width:20px; height:20px; border-radius:50%; border:none; background:rgba(255,255,255,.18); color:#fff; font-size:12px; line-height:1; padding:0; cursor:pointer;}
+  .gz-sugchip{display:inline-flex; align-items:center; gap:6px; min-height:30px; padding:5px 12px; border-radius:99px; border:1.5px dashed rgba(124,77,219,.45); background:var(--t-trial-soft); color:var(--t-trial); font-size:12px; font-weight:700; cursor:pointer;}
+  .gz-sug-l{font-size:11.5px; color:var(--t-ink3); width:100%;}
+  .gz-add{align-self:flex-start;}
+  .gz-pick{display:flex; flex-direction:column; gap:8px;}
+  .gz-pick.hidden{display:none;}
+  .gz-list{max-height:200px; overflow:auto; display:flex; flex-direction:column; border-radius:12px; background:#fff;}
+  .gz-list button{text-align:left; padding:10px 12px; border:none; border-top:1px solid #EEF0E4; background:none; font:inherit; font-size:13px; color:var(--ink); cursor:pointer; display:flex; justify-content:space-between; gap:8px;}
+  .gz-list button:first-child{border-top:none;}
+  .gz-list button.on{background:#F4F8D6; font-weight:600;}
+  .gz-list button:hover{background:#F3F2ED;}
   /* @@TZ-CSS-END@@ */
   .ov-legacy{display:none !important;}
   .ov-sec-title{font-family:'Unbounded',sans-serif; font-weight:700; font-size:17px; margin:12px 0 0;}
@@ -2046,7 +2064,7 @@ async function enterApp(user){
   renderOverview();
   setupTelegramBlock();
   await setupNotifBell();
-  await Promise.allSettled([loadStudents(), loadToCheck(), loadMyGroups(), loadAvailability(), loadAllMyHomework()]);
+  await Promise.allSettled([loadStudents(), loadToCheck(), loadMyGroups(), loadAvailability(), loadAllMyHomework(), loadSkillTopics()]);
   renderOverview();
 }
 
@@ -4027,6 +4045,7 @@ function renderHomework(){
         <div class="t-f" style="margin:0"><label>Оценка</label><input class="t-in" type="text" id="grade-${h.id}" placeholder="например 9/10"></div>
         <div class="t-f" style="margin:0"><label>Комментарий ученику</label><textarea class="t-in" id="fb-${h.id}" style="min-height:44px" placeholder="Комментарий ученику"></textarea></div>
       </div>
+      <div class="gz" data-gz="${h.id}" data-fb="fb-${h.id}"></div>
       <div class="hw-acts"><button class="btn btn-dark btn-sm" onclick="markReviewed('${h.id}')">Отметить проверенным</button></div></div>`;
   }).join('') : hwEmpty(HW_ICO_OK, 'Нечего проверять', 'Все сданные работы разобраны. Новые появятся здесь, и придёт уведомление в Telegram.');
 
@@ -4047,6 +4066,7 @@ function renderHomework(){
   wl.classList.toggle('hidden', hwTab !== 'waiting');
   dl.classList.toggle('hidden', hwTab !== 'done');
   document.querySelectorAll('#hwSeg button').forEach(b => b.classList.toggle('on', b.dataset.t === hwTab));
+  gzMountAll();
 }
 function setupHomeworkUi(){
   document.querySelectorAll('#hwSeg button').forEach(b => b.addEventListener('click', () => { hwTab = b.dataset.t; renderHomework(); }));
@@ -4084,8 +4104,110 @@ async function markReviewed(id){
     alert('Не получилось сохранить. Попробуй ещё раз.');
     return;
   }
+  await gzSave(id);
   await loadAllMyHomework();
   await loadToCheck();
+}
+
+/* ---------- «Над чем поработать»: темы из каталога + заметка, которую ученик не видит ---------- */
+let skillTopics = null;
+window.__gz = {};
+async function loadSkillTopics(){
+  try {
+    const { data, error } = await supabase.from('skill_topics').select('*').eq('active', true).order('sort_order', { ascending:true });
+    if (!error && data) skillTopics = data;
+  } catch (e){ console.error('skill_topics', e); }
+}
+function gzState(hid){ return window.__gz[hid] || (window.__gz[hid] = { topics:[], kw:{}, note:'' }); }
+function gzNorm(t){ return String(t || '').toLowerCase().replace(/ё/g, 'е'); }
+function gzComment(root){
+  const el = document.getElementById(root.dataset.fb || '');
+  return el ? el.value : '';
+}
+function gzMount(root){
+  if (!skillTopics || !skillTopics.length){ root.style.display = 'none'; return; }
+  const st = gzState(root.dataset.gz);
+  root.innerHTML = `<div class="gz-h"><b>Над чем поработать</b><span>необязательно · попадёт в «Зоны роста» ученика</span></div>
+    <div class="gz-chips" data-gz-chips></div>
+    <div class="gz-sug" data-gz-sug></div>
+    <button class="btn btn-ghost btn-sm gz-add" type="button" data-gz-toggle>+ Выбрать темы</button>
+    <div class="gz-pick hidden" data-gz-pick><input class="t-in" type="search" data-gz-q placeholder="Найти тему"><div class="gz-list" data-gz-list></div></div>
+    <div class="t-f" style="margin:0"><label>Заметка для себя</label><textarea class="t-in" data-gz-note style="min-height:44px" placeholder="Ученик её не видит">${attrEsc(st.note)}</textarea></div>`;
+  gzParts(root);
+}
+function gzMountAll(){ document.querySelectorAll('.gz[data-gz]').forEach(gzMount); }
+function gzParts(root){
+  const st = gzState(root.dataset.gz);
+  const byKey = {}; (skillTopics || []).forEach(t => { byKey[t.key] = t; });
+  root.querySelector('[data-gz-chips]').innerHTML = st.topics.map(k => byKey[k] ? `<span class="gz-chip">${attrEsc(byKey[k].title)}<button type="button" data-gz-rm="${attrEsc(k)}" aria-label="Убрать тему">×</button></span>` : '').join('');
+  const q = gzNorm((root.querySelector('[data-gz-q]') || {}).value);
+  root.querySelector('[data-gz-list]').innerHTML = (skillTopics || []).filter(t => !q || gzNorm(t.title).includes(q)).map(t =>
+    `<button type="button" data-gz-t="${attrEsc(t.key)}" class="${st.topics.includes(t.key) ? 'on' : ''}"><span>${attrEsc(t.title)}</span><span>${st.topics.includes(t.key) ? '✓' : ''}</span></button>`).join('')
+    || '<div class="t-hint" style="padding:10px 12px">Ничего не найдено</div>';
+  gzSuggest(root);
+}
+// подсказка темы по ключевым словам из комментария и заметки; в данные попадает только после нажатия
+function gzSuggest(root){
+  const box = root.querySelector('[data-gz-sug]'); if (!box) return;
+  const st = gzState(root.dataset.gz);
+  const comment = gzComment(root), note = st.note || '';
+  const text = gzNorm(comment + ' ' + note);
+  const found = [];
+  (skillTopics || []).forEach(t => {
+    if (st.topics.includes(t.key)) return;
+    const kw = (t.keywords || []).find(k => k && text.includes(gzNorm(k)));
+    if (kw) found.push({ t, kw });
+  });
+  box.innerHTML = found.length ? '<span class="gz-sug-l">Похоже на тему — добавить?</span>' + found.slice(0, 4).map(f =>
+    `<button type="button" class="gz-sugchip" data-gz-sug-add="${attrEsc(f.t.key)}" data-kw="${attrEsc(f.kw)}">+ ${attrEsc(f.t.title)}</button>`).join('') : '';
+}
+function gzSentence(comment, kw){
+  const parts = String(comment || '').split(/(?<=[.!?\n])\s+/);
+  const k = gzNorm(kw);
+  const hit = parts.find(p => gzNorm(p).includes(k));
+  return hit ? hit.trim().slice(0, 240) : '';
+}
+document.addEventListener('click', (e) => {
+  const t = e.target; if (!t.closest) return;
+  const root = t.closest('.gz'); if (!root) return;
+  const st = gzState(root.dataset.gz);
+  if (t.closest('[data-gz-toggle]')){ root.querySelector('[data-gz-pick]').classList.toggle('hidden'); return; }
+  const tb = t.closest('[data-gz-t]');
+  if (tb){ const k = tb.dataset.gzT; st.topics = st.topics.includes(k) ? st.topics.filter(x => x !== k) : st.topics.concat(k); if (!st.topics.includes(k)) delete st.kw[k]; gzParts(root); return; }
+  const rm = t.closest('[data-gz-rm]');
+  if (rm){ const k = rm.dataset.gzRm; st.topics = st.topics.filter(x => x !== k); delete st.kw[k]; gzParts(root); return; }
+  const sg = t.closest('[data-gz-sug-add]');
+  if (sg){
+    const k = sg.dataset.gzSugAdd, kw = sg.dataset.kw;
+    if (!st.topics.includes(k)) st.topics = st.topics.concat(k);
+    st.kw[k] = gzSentence(gzComment(root), kw);   // цитата — только из комментария, который видит ученик
+    gzParts(root);
+  }
+});
+document.addEventListener('input', (e) => {
+  const t = e.target; if (!t.closest) return;
+  const root = t.closest('.gz');
+  if (root){
+    const st = gzState(root.dataset.gz);
+    if (t.matches('[data-gz-q]')) gzParts(root);
+    if (t.matches('[data-gz-note]')){ st.note = t.value; gzSuggest(root); }
+    return;
+  }
+  if (t.id && (t.id.startsWith('fb-') || t.id === 'mRvFb')) document.querySelectorAll('.gz[data-gz]').forEach(gzSuggest);
+});
+async function gzSave(id){
+  const st = window.__gz[id];
+  if (!st) return;
+  const topics = st.topics.slice(), note = (st.note || '').trim();
+  delete window.__gz[id];
+  if (!topics.length && !note) return;
+  const quotes = {};
+  topics.forEach(k => { if (k in st.kw) quotes[k] = st.kw[k] || ''; });
+  const { error } = await supabase.rpc('growth_save_homework', { p_homework:id, p_topics:topics, p_note:note, p_quotes:quotes });
+  if (error){
+    console.error('growth_save_homework', error);
+    alert('Работа отмечена проверенной, но отметки «Над чем поработать» не сохранились. Напишите в поддержку, если это повторяется.');
+  }
 }
 </script>
 
@@ -4422,7 +4544,9 @@ async function markReviewed(id){
         + (files ? '<div class="m-files">' + files + '</div>' : '')
         + '<div class="m-f"><label>Оценка</label><div class="m-grade">' + [2, 3, 4, 5].map(function(g){ return '<span onclick="M.pickGrade(' + g + ',this)">' + g + '</span>'; }).join('') + '</div></div>'
         + '<div class="m-f"><label>Комментарий</label><textarea class="m-in ta" id="mRvFb" placeholder="Комментарий ученику"></textarea></div>'
+        + '<div class="gz" data-gz="' + id + '" data-fb="mRvFb"></div>'
         + '<div class="m-sticky"><button class="m-btn dark full" id="mRvBtn" type="button" onclick="M.reviewDone(\'' + id + '\')">Отметить проверенным</button></div>');
+      if (typeof gzMountAll === 'function') gzMountAll();
     },
     closeFull: closeFull,
     pickGrade: function(g, el){
