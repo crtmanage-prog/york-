@@ -920,7 +920,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <div class="table-wrap">
         <table class="admin-table" id="studentsTable">
           <thead>
-            <tr><th>Имя</th><th>Уровень</th><th>Формат</th><th>Учитель</th><th>Абонемент</th><th></th><th></th><th></th></tr>
+            <tr><th>Имя</th><th>Уровень</th><th>Формат</th><th>Учитель</th><th>Абонемент</th><th>Ссылка на созвон</th><th></th><th></th><th></th></tr>
           </thead>
           <tbody id="studentsTableBody"></tbody>
         </table>
@@ -2576,6 +2576,22 @@ function toggleZeroBalanceStudents(){
   renderStudentsTable(document.getElementById('studentsSearch').value);
 }
 
+function meetingUrlCell(s){
+  const g = s.group_id ? (window.__groupsList || []).find(x => x.id === s.group_id) : null;
+  const groupUrl = g && g.meeting_url;
+  const val = (s.meeting_url || '').replace(/"/g, '&quot;');
+  const note = groupUrl ? `<div style="font-size:11px; color:var(--ink-soft); margin-top:3px;">Действует ссылка группы «${g.name}»</div>` : (!s.meeting_url ? '<div style="font-size:11px; color:var(--ink-soft); margin-top:3px;">Ссылка учителя</div>' : '');
+  return `<input type="text" value="${val}" placeholder="Личная ссылка" style="min-width:180px;" onchange="saveStudentMeetingUrl('${s.id}', this)">${note}`;
+}
+
+async function saveStudentMeetingUrl(studentId, input){
+  const url = input.value.trim();
+  const { error } = await supabase.from('profiles').update({ meeting_url: url || null }).eq('id', studentId);
+  if (error){ alert('Не получилось сохранить ссылку. Попробуй ещё раз.'); return; }
+  const s = allStudents.find(x => x.id === studentId); if (s) s.meeting_url = url || null;
+  input.style.boxShadow = '0 0 0 2px #B2D320'; setTimeout(() => { input.style.boxShadow = ''; }, 1200);
+}
+
 function renderStudentsTable(filterText){
   const body = document.getElementById('studentsTableBody');
   const showZero = !!window.__showZeroBalanceStudents;
@@ -2587,7 +2603,7 @@ function renderStudentsTable(filterText){
   if (hint) hint.classList.toggle('hidden', !showZero);
 
   if (!allStudents.length){
-    body.innerHTML = '<tr><td colspan="8" class="empty-state">Пока нет учеников.</td></tr>';
+    body.innerHTML = '<tr><td colspan="9" class="empty-state">Пока нет учеников.</td></tr>';
     return;
   }
   const base = allStudents.filter(s => isZeroBalanceStudent(s.id) === showZero);
@@ -2597,8 +2613,8 @@ function renderStudentsTable(filterText){
     : base;
   if (!filtered.length){
     body.innerHTML = q
-      ? `<tr><td colspan="8" class="empty-state">Никого не нашлось по запросу «${filterText}».</td></tr>`
-      : `<tr><td colspan="8" class="empty-state">${showZero ? 'Таких пока нет.' : 'Пока нет учеников.'}</td></tr>`;
+      ? `<tr><td colspan="9" class="empty-state">Никого не нашлось по запросу «${filterText}».</td></tr>`
+      : `<tr><td colspan="9" class="empty-state">${showZero ? 'Таких пока нет.' : 'Пока нет учеников.'}</td></tr>`;
     return;
   }
   body.innerHTML = filtered.map(s => {
@@ -2609,6 +2625,7 @@ function renderStudentsTable(filterText){
       <td>${s.format === 'CREW' ? 'Группа' : 'Индивидуально'}</td>
       <td>${teacherName(s.teacher_id)}</td>
       <td>${remainingPill(s.id)}</td>
+      <td>${meetingUrlCell(s)}</td>
       <td style="white-space:nowrap;">${contactButtons(s)}</td>
       <td><button class="btn btn-ghost btn-sm" onclick="pickStudentForEdit('${s.id}')">Изменить</button></td>
       <td><button class="btn btn-ghost btn-sm" onclick="deletePerson('${s.id}', '${(s.full_name || '').replace(/'/g, "\\'")}')">Удалить</button></td>
