@@ -3014,8 +3014,8 @@ async function approveAvailability(){
 
   const teacherName = (currentProfile && currentProfile.full_name) || 'Учитель';
   const parts = [d.add.length ? '+' + d.add.length + ' ч' : '', d.del.length ? '−' + d.del.length + ' ч' : ''].filter(Boolean).join(' / ');
-  const { error: tgErr } = await supabase.rpc('tg_send', {
-    msg: `🗓 <b>${teacherName}</b> утвердил(а) график на две недели: всего ${availSaved.size} ч (${parts}).`
+  const { error: tgErr } = await supabase.rpc('teacher_notify_availability', {
+    p_total: availSaved.size, p_added: d.add.length, p_removed: d.del.length
   });
   __avFlash = tgErr ? 'nonotify' : 'ok';
   clearTimeout(__avFlashTimer);

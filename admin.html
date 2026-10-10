@@ -4406,7 +4406,7 @@ async function confirmSubscriptionSetup(id){
       // человек уже подписан на бота — шлём логин/пароль сразу
       await supabase.from('profiles').update({ telegram_chat_id: r.telegram_chat_id, telegram_linked_at: new Date().toISOString() }).eq('id', studentId);
       if (generatedPassword && generatedEmail){
-        await supabase.rpc('tg_send', {
+        await supabase.rpc('admin_tg_send', {
           msg: `🎉 <b>Абонемент оформлен!</b>\n\nЛогин и пароль от личного кабинета:\n👤 ${generatedEmail}\n🔑 ${generatedPassword}\n\nВойти: https://weyork.online/login.html`,
           target_chat_id: r.telegram_chat_id
         });
@@ -5312,7 +5312,7 @@ async function deleteLessonFromSchedule(lessonId){
 
   const teacherChat = l.teacher && l.teacher.telegram_chat_id;
   if (teacherChat){
-    await supabase.rpc('tg_send', {
+    await supabase.rpc('admin_tg_send', {
       msg: `❌ <b>Занятие удалено из расписания</b>\n\n${who}\n🕐 ${when}\n\nОно больше не в твоём календаре.`,
       target_chat_id: teacherChat
     });
@@ -5523,7 +5523,7 @@ async function assignTrialLesson(){
         const teacherName = teacherObj ? teacherObj.full_name : '-';
         const teacherLink = teacherObj && teacherObj.meeting_url ? `\n🔗 Ссылка на урок: ${teacherObj.meeting_url}` : '';
         const mskTime = new Intl.DateTimeFormat('ru-RU', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit', timeZone:'Europe/Moscow' }).format(utcDate);
-        await supabase.rpc('tg_send', {
+        await supabase.rpc('admin_tg_send', {
           msg: `📅 <b>У вас новый пробный урок в YORK!</b>\n\n🕐 Время: <b>${mskTime} (МСК)</b>\n🧑‍🏫 Преподаватель: ${teacherName}${teacherLink}\n\nЖдём вас!`,
           target_chat_id: matched.telegram_chat_id
         });
@@ -5705,11 +5705,11 @@ async function linkNewProfile(){
           telegram_chat_id: matched.telegram_chat_id,
           telegram_linked_at: new Date().toISOString()
         }).eq('id', newUserId);
-        await supabase.rpc('tg_send', {
+        await supabase.rpc('admin_tg_send', {
           msg: `🎉 <b>Добро пожаловать в YORK!</b>\n\nЛогин и пароль от личного кабинета:\n👤 ${email}\n🔑 ${password}\n\nВойти: https://weyork.online/login.html`,
           target_chat_id: matched.telegram_chat_id
         });
-        await supabase.rpc('tg_send', {
+        await supabase.rpc('admin_tg_send', {
           msg: `✅ <b>Логин и пароль отправлены</b>\n\n👤 ${fullName}\n📧 ${email}`
         });
         okEl.textContent += ' Логин и пароль отправлены в Telegram.';
