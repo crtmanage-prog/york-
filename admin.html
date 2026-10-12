@@ -1064,7 +1064,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <div class="table-wrap">
         <table class="admin-table" id="teachersTable">
           <thead>
-            <tr><th>Имя</th><th>Учеников</th><th>Ссылка на созвон</th><th></th><th></th></tr>
+            <tr><th>Имя</th><th>Учеников</th><th>Ссылка на созвон</th><th>Запасная (VK)</th><th></th><th></th></tr>
           </thead>
           <tbody id="teachersTableBody"></tbody>
         </table>
@@ -2613,7 +2613,9 @@ function meetingUrlCell(s){
   const groupUrl = g && g.meeting_url;
   const val = (s.meeting_url || '').replace(/"/g, '&quot;');
   const note = groupUrl ? `<div style="font-size:11px; color:var(--ink-soft); margin-top:3px;">Действует ссылка группы «${g.name}»</div>` : (!s.meeting_url ? '<div style="font-size:11px; color:var(--ink-soft); margin-top:3px;">Ссылка учителя</div>' : '');
-  return `<input type="text" value="${val}" placeholder="Личная ссылка" style="min-width:180px;" onchange="saveStudentMeetingUrl('${s.id}', this)">${note}`;
+  const tch = allTeachers.find(x => x.id === s.teacher_id);
+  const bk = tch && tch.backup_meeting_url ? `<div style="font-size:11px; margin-top:3px;">Запасная: <a href="${tch.backup_meeting_url}" target="_blank" rel="noopener" style="text-decoration:underline;">VK Звонки</a></div>` : '';
+  return `<input type="text" value="${val}" placeholder="Личная ссылка" style="min-width:180px;" onchange="saveStudentMeetingUrl('${s.id}', this)">${note}${bk}`;
 }
 
 async function saveStudentMeetingUrl(studentId, input){
@@ -2679,6 +2681,7 @@ function renderTeachersTable(){
         <td>${t.full_name || '—'}</td>
         <td>${count}</td>
         <td>${t.meeting_url ? `<a href="${t.meeting_url}" target="_blank" rel="noopener" style="font-weight:600; text-decoration:underline;">ссылка</a>` : '—'}</td>
+        <td>${t.backup_meeting_url ? `<a href="${t.backup_meeting_url}" target="_blank" rel="noopener" style="font-weight:600; text-decoration:underline;">запасная</a>` : '<span style="color:var(--red); font-size:12px;">не задана</span>'}</td>
         <td><button class="btn btn-ghost btn-sm" onclick="pickTeacherForEdit('${t.id}')">Изменить</button></td>
         <td><button class="btn btn-ghost btn-sm" onclick="deletePerson('${t.id}', '${(t.full_name || '').replace(/'/g, "\\'")}', ${count})">Удалить</button></td>
       </tr>
@@ -5556,7 +5559,9 @@ async function assignTrialLesson(){
       if (matched && matched.telegram_chat_id){
         const teacherObj = (allTeachers || []).find(t => t.id === teacherId);
         const teacherName = teacherObj ? teacherObj.full_name : '-';
-        const teacherLink = teacherObj && teacherObj.meeting_url ? `\n🔗 Ссылка на урок: ${teacherObj.meeting_url}` : '';
+        const teacherLink = (teacherObj && teacherObj.meeting_url ? `\n🔗 Ссылка на урок: ${teacherObj.meeting_url}` : '')
+          + (teacherObj && teacherObj.backup_meeting_url ? `
+🛟 Если не открывается — запасная (VK Звонки): ${teacherObj.backup_meeting_url}` : '');
         const mskTime = new Intl.DateTimeFormat('ru-RU', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit', timeZone:'Europe/Moscow' }).format(utcDate);
         await supabase.rpc('admin_tg_send', {
           msg: `📅 <b>У вас новый пробный урок в YORK!</b>\n\n🕐 Время: <b>${mskTime} (МСК)</b>\n🧑‍🏫 Преподаватель: ${teacherName}${teacherLink}\n\nЖдём вас!`,

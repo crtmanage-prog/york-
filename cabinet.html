@@ -837,6 +837,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 }
 
 #appScreen .m-wrap,#appScreen #mHead,#appScreen #mBar{display:none}
+#appScreen .lc-backup{margin:6px 0 0;font-size:12px;color:var(--ink-soft)}
+#appScreen .lc-backup a{color:#3F5A06;font-weight:700;text-decoration:underline;text-underline-offset:2px}
 #appScreen .ov-backup{margin:12px 0 0;font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.72)}
 #appScreen .ov-backup a{color:#D7EF42;text-decoration:underline;text-underline-offset:2px;font-weight:600}
 @media (max-width:760px){
@@ -3872,7 +3874,7 @@ function renderLessonCard(l){
   return `<div class="lc ${isToday ? 'td' : ''}"><div class="tmx">${t}<small>${isToday ? 'Сегодня' : wd + ', ' + dm}</small></div>
     <div class="tt"><h4>${esc2(l.topic || (l.is_trial ? 'Пробный урок' : 'Регулярное занятие'))}</h4>
       <div class="meta2">${tname ? `<span>${sv(ICO.user)}${esc2(tname)}</span>` : ''}<span>${sv(ICO.vid)}Онлайн · ${l.duration_minutes || 60} мин</span>${chip}${pend}</div>
-      ${l.rescheduled_from_date ? `<div class="note" style="margin-top:6px">Перенос с ${esc2(fmtDate(l.rescheduled_from_date))}</div>` : ''}</div>
+      ${l.rescheduled_from_date ? `<div class="note" style="margin-top:6px">Перенос с ${esc2(fmtDate(l.rescheduled_from_date))}</div>` : ''}${(l.status === 'upcoming' && !past) ? backupNote('lc-backup') : ''}</div>
     <div class="acts">${join}${mat}${cal}</div></div>`;
 }
 
@@ -4471,7 +4473,7 @@ document.getElementById('referralCopyCode')?.addEventListener('click', async () 
         var cal = (l.status === 'upcoming' && !past) ? '<a class="ibtn" href="' + esc2(calLink(l)) + '" target="_blank" rel="noopener" aria-label="Добавить в календарь">' + S(ICO.calp, 18) + '</a>' : '';
         var chip = l.status === 'cancelled' ? '<span class="chip">Отменён</span>' : (past ? '<span class="chip ok">Прошёл</span>' : '');
         return '<div class="mlc"><div class="r1"><div class="t">' + fmtTimeOnly(d) + '<small>' + (isToday ? 'Сегодня' : cap(d.toLocaleDateString('ru-RU', { weekday:'short', timeZone:tz }).replace('.', '')) + ', ' + d.toLocaleDateString('ru-RU', { day:'numeric', month:'short', timeZone:tz }).replace('.', '')) + '</small></div><div><h4>' + esc2(l.topic || (l.is_trial ? 'Пробный урок' : 'Регулярное занятие')) + '</h4><div class="mm">' + esc2(teacherName()) + ' · Онлайн · ' + (l.duration_minutes || 60) + ' мин</div></div></div>'
-          + ((join || cal || chip) ? '<div class="acts">' + (join || chip || '<span></span>') + cal + '</div>' : '') + '</div>';
+          + ((join || cal || chip) ? '<div class="acts">' + (join || chip || '<span></span>') + cal + '</div>' : '') + ((l.status === 'upcoming' && !past) ? backupNote('m-backup') : '') + '</div>';
       }).join('');
     } else {
       var sd = new Date(sel + 'T12:00:00');

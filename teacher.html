@@ -225,6 +225,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     main{padding-bottom:90px;}
   }
 
+  .sb-backup{display:block; margin:6px 0 4px; font-size:11.5px; font-weight:600; color:#D7EF42; text-decoration:underline; text-underline-offset:2px; text-align:left; padding:0 2px;}
+  .sb-backup[hidden], .ms-backup[hidden]{display:none;}
+  .ms-backup{font-size:12.5px; font-weight:700; color:#3F5A06; text-decoration:underline; text-underline-offset:2px;}
   .ov-backup{margin:12px 0 0; font-size:12.5px; line-height:1.4; color:rgba(255,255,255,.7);}
   .ov-backup a{color:#D7EF42; text-decoration:underline; text-underline-offset:2px; font-weight:600;}
   .mo-backup{margin:10px 0 0; font-size:12px; line-height:1.4; color:#5E5F58;}
@@ -1508,6 +1511,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <span class="sb-call-url" id="sbCallUrl">—</span>
           <button class="sb-call-copy" id="sbCallCopy" type="button" title="Скопировать ссылку" aria-label="Скопировать ссылку"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></button>
         </div>
+        <a class="sb-backup" id="sbBackup" href="#" target="_blank" rel="noopener" hidden>Запасная ссылка · VK Звонки</a>
         <button class="sb-tg" id="sbTg" type="button"><span class="dot"></span><span id="sbTgText">Telegram-бот</span></button>
       </div>
       <button class="sb-logout" id="logoutBtn" aria-label="Выйти"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg><span>Выйти</span></button>
@@ -1581,6 +1585,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
     <div class="ms-call">
       <small>Мой созвон · Телемост</small>
       <div class="r"><span class="u" id="msCallUrl">—</span><button class="cp" id="msCallCopy" type="button" aria-label="Скопировать ссылку"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></button></div>
+      <a class="ms-backup" id="msBackup" href="#" target="_blank" rel="noopener" hidden>Запасная ссылка · VK Звонки</a>
       <button class="tg" id="msTg" type="button"><i></i><span id="msTgText">Telegram-бот</span></button>
     </div>
     <button class="ms-item ms-out" id="msLogout" type="button"><span class="ic"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></span>Выйти</button>
@@ -2549,6 +2554,8 @@ function renderSbCall(){
   u.textContent = url ? url.replace(/^https?:\/\//, '') : 'Ссылка не задана';
   u.style.opacity = url ? '1' : '.6';
   copy.style.display = url ? 'flex' : 'none';
+  const bkUrl = (currentProfile && currentProfile.backup_meeting_url) || '';
+  ['sbBackup', 'msBackup'].forEach(id => { const a = document.getElementById(id); if (a){ a.hidden = !bkUrl; if (bkUrl) a.href = bkUrl; } });
   const linked = !!(currentProfile && currentProfile.telegram_chat_id);
   tg.classList.toggle('on', linked);
   tgt.textContent = linked ? 'Telegram-бот подключён' : 'Подключить Telegram-бота';
@@ -3661,7 +3668,9 @@ function teacherJoinButton(l){
   if (isLessonPast(l)) return '';
   const jl = lessonLink(l);
   if (!jl) return '';
-  return `<a class="btn btn-accent btn-sm" href="${jl}" target="_blank" rel="noopener">Присоединиться</a>`;
+  const bk = currentProfile && currentProfile.backup_meeting_url;
+  return `<a class="btn btn-accent btn-sm" href="${jl}" target="_blank" rel="noopener">Присоединиться</a>`
+    + (bk ? ` <a class="btn btn-ghost btn-sm" href="${attrEsc(bk)}" target="_blank" rel="noopener" title="Если основная ссылка не работает">Запасная (VK)</a>` : '');
 }
 
 function fmtTimeOnly(d){
