@@ -265,10 +265,79 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
 </div>
 
-<footer>
-  <div class="wrap" style="display:flex;justify-content:space-between;gap:30px;font-size:12px;flex-wrap:wrap;align-items:center;width:min(1180px,calc(100% - 48px))">
-    <a href="/" style="font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.06em;color:#fff">YORK<span style="color:#D7EF42">!</span></a>
-    <span>© YORK! English</span>
+<footer class="yf">
+<style>
+footer.yf{position:relative;overflow:hidden;color:#fff;padding:52px 0 28px;border:0;font-family:inherit;
+  background:radial-gradient(520px 260px at 100% 100%,rgba(178,211,32,.38),rgba(178,211,32,0) 70%),linear-gradient(100deg,#101109 0%,#14160C 52%,#3E4A12 100%)}
+footer.yf *{box-sizing:border-box}
+footer.yf .yf-in{max-width:1120px;margin:0 auto;padding:0 24px;display:block}
+footer.yf svg{display:block;max-width:100%}
+footer.yf .yf-head{text-align:center;padding-bottom:30px;margin-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
+footer.yf .yf-logo{display:inline-block;margin-bottom:10px;font-family:Unbounded,sans-serif;font-weight:900;font-size:26px;letter-spacing:0;color:#fff;text-decoration:none}
+footer.yf .yf-logo span{color:#1C1C1C;background:#D7EF42;padding:0 4px;border-radius:6px}
+footer.yf .yf-tag{font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.55;margin:0 0 20px}
+footer.yf .yf-social{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+footer.yf .yf-social a{display:inline-flex;align-items:center;gap:9px;padding:11px 18px 11px 14px;border-radius:100px;color:#fff;font-size:13.5px;font-weight:600;text-decoration:none;
+  background:linear-gradient(150deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  transition:background .15s ease,color .15s ease,transform .15s ease}
+footer.yf .yf-social a:hover{background:#D7EF42;color:#1C1C1C;transform:translateY(-2px)}
+footer.yf .yf-social svg{width:18px;height:18px}
+footer.yf .yf-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:34px;text-align:center}
+footer.yf .yf-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.45);margin:0 0 14px}
+footer.yf .yf-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+footer.yf .yf-col a{font-size:14px;text-decoration:none;color:rgba(255,255,255,.8);transition:color .15s ease}
+footer.yf .yf-col a:hover{color:#D7EF42}
+footer.yf .yf-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12.5px;color:rgba(255,255,255,.45)}
+@media (max-width:760px){footer.yf .yf-cols{grid-template-columns:1fr}}
+@media (max-width:560px){footer.yf{padding-bottom:88px}footer.yf .yf-bottom{justify-content:center;text-align:center}}
+</style>
+  <div class="yf-in">
+    <div class="yf-head">
+      <a class="yf-logo" href="/" aria-label="YORK! — на главную">YORK<span>!</span></a>
+      <p class="yf-tag">Онлайн-школа английского. Учим говорить, а не только сдавать тесты.</p>
+      <div class="yf-social">
+        <a href="https://www.youtube.com/@weyorkonline" target="_blank" rel="noopener" aria-label="YouTube-канал YORK!">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.75 15.02V8.98L15.5 12z"/></svg>
+          YouTube
+        </a>
+        <a href="https://t.me/weyorkonline" target="_blank" rel="noopener" aria-label="Telegram-канал YORK!">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.6 19.8c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.4 1.3z"/></svg>
+          Telegram
+        </a>
+      </div>
+    </div>
+    <div class="yf-cols">
+      <div class="yf-col">
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="/#why">Почему мы</a></li>
+          <li><a href="/#formats">Абонементы</a></li>
+          <li><a href="/#reviews">Отзывы</a></li>
+          <li><a href="/#faq">Вопросы</a></li>
+          <li><a href="/login.html">Личный кабинет</a></li>
+        </ul>
+      </div>
+      <div class="yf-col">
+        <h4>Бесплатно</h4>
+        <ul>
+          <li><a href="/level-test.html">Тест на уровень</a></li>
+          <li><a href="/watch_and_speak_final.html">Гайд Watch &amp; Speak</a></li>
+          <li><a href="/trial-form.html">Пробный урок</a></li>
+        </ul>
+      </div>
+      <div class="yf-col">
+        <h4>Мы на связи</h4>
+        <ul>
+          <li><a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Менеджер</a></li>
+          <li><a href="https://www.youtube.com/@weyorkonline" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="https://t.me/weyorkonline" target="_blank" rel="noopener">Telegram-канал</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="yf-bottom">
+      <span>© 2026 YORK! english school</span>
+      <span>Онлайн-уроки · SOLO и CREW · Дети и взрослые</span>
+    </div>
   </div>
 </footer>
 
