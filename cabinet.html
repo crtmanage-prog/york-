@@ -837,6 +837,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 }
 
 #appScreen .m-wrap,#appScreen #mHead,#appScreen #mBar{display:none}
+#appScreen .hw-hint{margin:8px 0 0;font-size:11.5px;line-height:1.4;color:var(--ink-soft)}
 #appScreen .lc-backup{margin:6px 0 0;font-size:12px;color:var(--ink-soft)}
 #appScreen .lc-backup a{color:#3F5A06;font-weight:700;text-decoration:underline;text-underline-offset:2px}
 #appScreen .ov-backup{margin:12px 0 0;font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.72)}
@@ -2851,6 +2852,7 @@ function renderHomeworkItem(h){
         <label class="btn soft sm" style="cursor:pointer">${sv(ICO.clip)}<span id="fname-${h.id}">Прикрепить файл</span><input type="file" id="file-${h.id}" hidden onchange="hwFileChosen('${h.id}')"></label>
         <button class="btn glassb" id="submit-${h.id}" type="button">${sv(ICO.up)}Сдать</button>
       </div>
+      <p class="hw-hint">${HW_FILE_HINT}</p>
     </div>`;
   } else if (h.status === 'submitted'){
     extra = '<p class="hwc-d" style="margin:0">Сдано — ожидает проверки преподавателем.</p>';
@@ -2896,20 +2898,27 @@ async function submitHomework(id){
   const textEl = $id('text-' + id), fileEl = $id('file-' + id), btn = $id('submit-' + id);
   const text = (textEl.value || '').trim();
   const file = fileEl && fileEl.files[0];
+  const fileProblem = hwFileProblem(file);
+  if (fileProblem){ alert(fileProblem); return; }
   if (!text && !file){
     if (confirm('Отметить задание выполненным без текста, файла и ссылки?')) markHomeworkDone(id);
     return;
   }
   btn.disabled = true;
+  const btnLabel = btn.innerHTML;
+  if (file) btn.textContent = 'Загружаем файл…';
 
   let fileUrl = null;
   if (file){
-    const path = `${currentUser.id}/${Date.now()}_${file.name}`;
+    const path = `${currentUser.id}/${Date.now()}_${hwSafeName(file.name)}`;
     const { error: upErr } = await supabase.storage.from('homework').upload(path, file);
     if (upErr){
       // раньше ошибка тихо проглатывалась — теперь останавливаем отправку и честно сообщаем
-      btn.disabled = false;
-      alert('Не получилось прикрепить файл. Попробуй ещё раз — домашка пока не отправлена.');
+      btn.disabled = false; btn.innerHTML = btnLabel;
+      const big = /exceed|too large|maximum|size|413/i.test((upErr.message || '') + (upErr.statusCode || ''));
+      alert(big
+        ? 'Файл слишком большой для загрузки. Загрузите его на Яндекс Диск или Google Drive и вставьте ссылку в поле ответа. Домашка пока не отправлена.'
+        : 'Не получилось прикрепить файл (' + (upErr.message || 'ошибка сети') + '). Проверьте интернет и попробуйте ещё раз. Домашка пока не отправлена.');
       return;
     }
     fileUrl = path;
@@ -4017,9 +4026,27 @@ function checkFbClamp(){
   });
 }
 
+const HW_MAX_MB = 50;
+const HW_FILE_HINT = 'Файл до ' + HW_MAX_MB + ' МБ. Если файл больше (например, видео), загрузите его на Яндекс Диск или Google Drive и вставьте ссылку в поле ответа.';
+function hwFileProblem(file){
+  if (!file) return '';
+  if (file.size > HW_MAX_MB * 1024 * 1024){
+    return 'Файл «' + file.name + '» слишком большой (' + (file.size / 1048576).toFixed(0) + ' МБ, максимум ' + HW_MAX_MB + ' МБ). Загрузите его на Яндекс Диск или Google Drive и вставьте ссылку в поле ответа.';
+  }
+  if (file.size === 0) return 'Файл «' + file.name + '» пустой. Выберите другой файл.';
+  return '';
+}
+function hwSafeName(name){
+  const m = String(name || 'file').match(/^(.*?)(\.[A-Za-z0-9]{1,8})?$/);
+  const base = (m[1] || 'file').replace(/[^A-Za-z0-9_-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 60) || 'file';
+  return base + (m[2] || '');
+}
 function hwFileChosen(id){
   const f = $id('file-' + id), n = $id('fname-' + id);
-  if (n) n.textContent = f && f.files[0] ? f.files[0].name : 'Прикрепить файл';
+  const file = f && f.files[0];
+  const problem = hwFileProblem(file);
+  if (problem){ alert(problem); f.value = ''; if (n) n.textContent = 'Прикрепить файл'; return; }
+  if (n) n.textContent = file ? file.name : 'Прикрепить файл';
 }
 
 /* ---------- ЗОНЫ РОСТА (заглушка до подключения данных) ---------- */
@@ -4545,7 +4572,7 @@ document.getElementById('referralCopyCode')?.addEventListener('click', async () 
     var dl = hwDueLabel(h);
     if (h.status === 'assigned'){
       return '<article class="hwc due mhw"><div class="hwc-top"><span class="st-due">К сдаче</span><span class="st-dl">' + S(ICO.clock, 14) + esc2(dl.text) + '</span></div><h4>' + esc2(h.title) + '</h4>' + (h.description ? '<p class="hwc-d">' + esc2(h.description) + '</p>' : '') + hwMats(h)
-        + '<div class="hwc-sub2"><textarea id="mtext-' + h.id + '" rows="2" placeholder="Ответ текстом или ссылка на работу"></textarea><div class="hwc-sub2-a"><label class="btn soft sm" style="cursor:pointer">' + S(ICO.clip, 14) + '<span id="mfname-' + h.id + '">Файл</span><input type="file" id="mfile-' + h.id + '" hidden onchange="mHwFile(\'' + h.id + '\')"></label><button class="btn glassb sm" id="msubmit-' + h.id + '" type="button" data-msubmit="' + h.id + '">' + S(ICO.up, 14) + 'Сдать</button></div></div></article>';
+        + '<div class="hwc-sub2"><textarea id="mtext-' + h.id + '" rows="2" placeholder="Ответ текстом или ссылка на работу"></textarea><div class="hwc-sub2-a"><label class="btn soft sm" style="cursor:pointer">' + S(ICO.clip, 14) + '<span id="mfname-' + h.id + '">Файл</span><input type="file" id="mfile-' + h.id + '" hidden onchange="mHwFile(\'' + h.id + '\')"></label><button class="btn glassb sm" id="msubmit-' + h.id + '" type="button" data-msubmit="' + h.id + '">' + S(ICO.up, 14) + 'Сдать</button></div><p class="hw-hint">' + HW_FILE_HINT + '</p></div></article>';
     }
     var chip = h.status === 'submitted' ? '<span class="chip due">На проверке</span>' : '<span class="chip ok">Проверено</span>';
     var grd = h.status === 'reviewed' && h.grade ? '<span class="grd">' + gradeHtml(h.grade) + '</span>' : '';
@@ -4751,7 +4778,11 @@ document.getElementById('referralCopyCode')?.addEventListener('click', async () 
     if (t.closest('[data-gz-practice]') || t.closest('[data-z]')){ closeSheet(); }
   }, true);
 
-  window.mHwFile = function(id){ var f = $('mfile-' + id), n = $('mfname-' + id); if (n) n.textContent = f && f.files[0] ? f.files[0].name : 'Файл'; };
+  window.mHwFile = function(id){
+    var f = $('mfile-' + id), n = $('mfname-' + id), file = f && f.files[0], pr = hwFileProblem(file);
+    if (pr){ alert(pr); f.value = ''; if (n) n.textContent = 'Файл'; return; }
+    if (n) n.textContent = file ? file.name : 'Файл';
+  };
   function mSubmit(id){
     /* ответ копируем в скрытую десктопную форму и вызываем ту же submitHomework — логика одна */
     var mt = $('mtext-' + id), mf = $('mfile-' + id), dt = $('text-' + id), df = $('file-' + id);
@@ -4777,7 +4808,7 @@ document.getElementById('referralCopyCode')?.addEventListener('click', async () 
     if (timer) return;
     timer = setTimeout(function(){
       timer = null; var p = pending; pending = {};
-      if (!mob()) return;
+      if (!mob() || !currentProfile) return;
       var all = !!p.all;
       var run = function(fn){ try { fn(); } catch (err){ console.error('mobile', err); } };
       if (all || p.ov) run(renderOv);

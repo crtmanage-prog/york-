@@ -4127,7 +4127,7 @@ function renderHomework(){
   box.innerHTML = review.length ? review.map(h => {
     const hasAns = h.submission_text || h.submission_file_url || h.submission_links;
     const links = h.submission_links ? h.submission_links.split('\n').filter(Boolean) : [];
-    const files = (h.submission_file_url ? `<a class="hw-file" href="#" onclick="downloadSubmission('${attrEsc(h.submission_file_url)}'); return false;">${HW_ICO_DOC.replace('<svg', '<svg width="16" height="16" fill="none" stroke="currentColor"')}Скачать файл</a>` : '')
+    const files = (h.submission_file_url ? `<a class="hw-file" href="#" data-dl="${attrEsc(h.submission_file_url)}">${HW_ICO_DOC.replace('<svg', '<svg width="16" height="16" fill="none" stroke="currentColor"')}Скачать файл</a>` : '')
       + links.map((l, i) => `<a class="hw-file" href="${attrEsc(l)}" target="_blank" rel="noopener">Ссылка ${i + 1}</a>`).join('');
     return `<div class="hw-card">${hwHead(h, '<span class="t-pill amber">на проверке</span>')}
       <div class="hw-answer${hasAns ? '' : ' none'}">${hasAns ? attrEsc(h.submission_text || 'Ответ прикреплён файлом или ссылкой') : 'Ответ пуст: ни текста, ни файла, ни ссылки'}</div>
@@ -4172,10 +4172,17 @@ function fillHomeworkFilter(){
   f.value = cur;
 }
 
+document.addEventListener('click', (e) => {
+  const b = e.target.closest && e.target.closest('[data-dl]');
+  if (!b) return;
+  e.preventDefault();
+  downloadSubmission(b.getAttribute('data-dl'));
+});
+
 async function downloadSubmission(path){
   const { data, error } = await supabase.storage.from('homework').createSignedUrl(path, 60);
   if (error || !data){
-    alert('Не получилось открыть файл. Попробуйте ещё раз или напишите в поддержку.');
+    alert('Не получилось открыть файл' + (error && error.message ? ' (' + error.message + ')' : '') + '. Попробуйте ещё раз или напишите менеджеру.');
     return;
   }
   window.open(data.signedUrl, '_blank');
@@ -4626,7 +4633,7 @@ async function gzSave(id){
       var h = hwList().find(function(x){ return x.id === id; }); if (!h) return;
       var nm = hwStudentName(h), links = h.submission_links ? h.submission_links.split('\n').filter(Boolean) : [];
       var hasAns = h.submission_text || h.submission_file_url || links.length;
-      var files = (h.submission_file_url ? '<button type="button" class="m-file" onclick="downloadSubmission(\'' + esc(h.submission_file_url) + '\')">' + I.clip + '<span>Скачать файл</span></button>' : '')
+      var files = (h.submission_file_url ? '<button type="button" class="m-file" data-dl="' + esc(h.submission_file_url) + '">' + I.clip + '<span>Скачать файл</span></button>' : '')
         + links.map(function(l, i){ return '<a class="m-file" href="' + esc(l) + '" target="_blank" rel="noopener">' + I.clip + '<span>Ссылка ' + (i + 1) + '</span></a>'; }).join('');
       M._grade = '';
       openFull('<div class="m-fh"><button class="m-back-btn" type="button" onclick="M.closeFull()" aria-label="Назад">' + I.back + '</button><div><small>' + (h.submitted_at ? 'сдано ' + esc(fmtDateTime(h.submitted_at)) : 'сдано') + '</small><h2>' + esc(h.title) + '</h2></div></div>'
