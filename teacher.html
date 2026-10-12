@@ -4127,7 +4127,8 @@ function renderHomework(){
   box.innerHTML = review.length ? review.map(h => {
     const hasAns = h.submission_text || h.submission_file_url || h.submission_links;
     const links = h.submission_links ? h.submission_links.split('\n').filter(Boolean) : [];
-    const files = (h.submission_file_url ? `<a class="hw-file" href="#" data-dl="${attrEsc(h.submission_file_url)}">${HW_ICO_DOC.replace('<svg', '<svg width="16" height="16" fill="none" stroke="currentColor"')}Скачать файл</a>` : '')
+    const subFiles = h.submission_file_url ? h.submission_file_url.split('\n').filter(Boolean) : [];
+    const files = subFiles.map((pth, i) => `<a class="hw-file" href="#" data-dl="${attrEsc(pth)}">${HW_ICO_DOC.replace('<svg', '<svg width="16" height="16" fill="none" stroke="currentColor"')}Скачать файл${subFiles.length > 1 ? ' ' + (i + 1) : ''}</a>`).join('')
       + links.map((l, i) => `<a class="hw-file" href="${attrEsc(l)}" target="_blank" rel="noopener">Ссылка ${i + 1}</a>`).join('');
     return `<div class="hw-card">${hwHead(h, '<span class="t-pill amber">на проверке</span>')}
       <div class="hw-answer${hasAns ? '' : ' none'}">${hasAns ? attrEsc(h.submission_text || 'Ответ прикреплён файлом или ссылкой') : 'Ответ пуст: ни текста, ни файла, ни ссылки'}</div>
@@ -4633,7 +4634,8 @@ async function gzSave(id){
       var h = hwList().find(function(x){ return x.id === id; }); if (!h) return;
       var nm = hwStudentName(h), links = h.submission_links ? h.submission_links.split('\n').filter(Boolean) : [];
       var hasAns = h.submission_text || h.submission_file_url || links.length;
-      var files = (h.submission_file_url ? '<button type="button" class="m-file" data-dl="' + esc(h.submission_file_url) + '">' + I.clip + '<span>Скачать файл</span></button>' : '')
+      var subFiles = h.submission_file_url ? h.submission_file_url.split('\n').filter(Boolean) : [];
+      var files = subFiles.map(function(pth, i){ return '<button type="button" class="m-file" data-dl="' + esc(pth) + '">' + I.clip + '<span>Скачать файл' + (subFiles.length > 1 ? ' ' + (i + 1) : '') + '</span></button>'; }).join('')
         + links.map(function(l, i){ return '<a class="m-file" href="' + esc(l) + '" target="_blank" rel="noopener">' + I.clip + '<span>Ссылка ' + (i + 1) + '</span></a>'; }).join('');
       M._grade = '';
       openFull('<div class="m-fh"><button class="m-back-btn" type="button" onclick="M.closeFull()" aria-label="Назад">' + I.back + '</button><div><small>' + (h.submitted_at ? 'сдано ' + esc(fmtDateTime(h.submitted_at)) : 'сдано') + '</small><h2>' + esc(h.title) + '</h2></div></div>'
