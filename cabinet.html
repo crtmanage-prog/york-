@@ -837,6 +837,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 }
 
 #appScreen .m-wrap,#appScreen #mHead,#appScreen #mBar{display:none}
+#appScreen .ov-backup{margin:12px 0 0;font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.72)}
+#appScreen .ov-backup a{color:#D7EF42;text-decoration:underline;text-underline-offset:2px;font-weight:600}
 @media (max-width:760px){
   #appScreen .mh{display:flex;align-items:center;gap:10px;padding:6px 2px 2px}
   #appScreen .mh .l{flex:1;min-width:0}
@@ -1014,6 +1016,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   #appScreen .hwc.acc2 .acc2-b{margin-top:12px}
   #appScreen .hwc.acc2 .acc2-b>*+*{margin-top:10px}
 
+  #appScreen .m-backup{margin:0;font-size:12px;line-height:1.4;color:var(--ink-soft)}
+  #appScreen .m-backup a{color:#3F5A06;font-weight:700;text-decoration:underline;text-underline-offset:2px}
   /* --- каркас мобильной версии --- */
   #appScreen .sb,#appScreen .tb{display:none !important}
   #appScreen .app{display:block}
@@ -2174,6 +2178,10 @@ function setupTabs(){
 /* ---------- SCHEDULE ---------- */
 let teacherMeetingUrl = null;
 let studentMeetingUrl = null; // личная ссылка ученика или его группы
+let teacherBackupUrl = null;  // запасная ссылка преподавателя (VK Звонки)
+function backupNote(cls){
+  return teacherBackupUrl ? `<p class="${cls || 'ov-backup'}">Если ссылка не работает — <a href="${esc2(teacherBackupUrl)}" target="_blank" rel="noopener">запасная на VK Звонках</a></p>` : '';
+}
 function lessonMeetingUrl(l){ return (l && l.is_trial) ? teacherMeetingUrl : (studentMeetingUrl || teacherMeetingUrl); }
 let teacherContactTelegram = null;
 
@@ -2182,9 +2190,10 @@ let teacherFullName = null;
 async function loadTeacherContact(){
   if (!currentProfile.teacher_id || teacherMeetingUrl !== null) return;
   const { data: teacherRows } = await supabase.from('profiles')
-    .select('meeting_url, contact_telegram, full_name').eq('id', currentProfile.teacher_id);
+    .select('meeting_url, backup_meeting_url, contact_telegram, full_name').eq('id', currentProfile.teacher_id);
   const row = teacherRows && teacherRows[0];
   teacherMeetingUrl = (row && row.meeting_url) || false;
+  teacherBackupUrl = (row && row.backup_meeting_url) || null;
   try { const r = await supabase.rpc('my_meeting_url'); studentMeetingUrl = (r && !r.error && r.data) || null; } catch (e){ console.error('my_meeting_url', e); }
   if (typeof renderOvHero === 'function' && window.__ovUpcoming) renderOvHero();
   teacherContactTelegram = (row && row.contact_telegram) || false;
@@ -3832,7 +3841,7 @@ function renderOvHero(){
         <span>${sv(ICO.vid)}Онлайн</span>
       </div>
     </div>
-    <div class="hf">${renderJoinButton(up, 'hero')}${mat}</div>`;
+    <div class="hf">${renderJoinButton(up, 'hero')}${mat}</div>${backupNote()}`;
 }
 
 function calLink(l){
@@ -4420,7 +4429,7 @@ document.getElementById('referralCopyCode')?.addEventListener('click', async () 
         ? '<a class="ibtn2" href="' + esc2(up.materials_url) + '" target="_blank" rel="noopener" title="Материалы урока" aria-label="Материалы урока">' + S(ICO.doc, 17) + '</a>'
         : '<button class="ibtn2" type="button" title="Материалы урока" aria-label="Материалы урока" onclick="alert(\'Материалы урока пока не добавлены — скоро появятся прямо здесь. Если нужно что-то сейчас — напиши преподавателю.\')">' + S(ICO.doc, 17) + '</button>';
       hero = '<div class="blobs"><div class="glassc"><div class="m-row"><span class="m-av">' + esc2(teacherName().charAt(0).toUpperCase()) + '</span><div class="t"><b>' + esc2(up.is_trial ? 'Пробный урок' : (up.topic || 'Регулярное занятие')) + '</b><small>' + esc2(teacherName()) + ' · онлайн · ' + esc2(fmt) + '</small></div><span class="m-time">' + fmtTimeOnly(d) + '</span></div>'
-        + '<div class="m-cd">' + esc2(wd + ', ' + dm) + ' · ' + left + '</div><div class="m-acts">' + join + mat + '</div></div></div>';
+        + '<div class="m-cd">' + esc2(wd + ', ' + dm) + ' · ' + left + '</div><div class="m-acts">' + join + mat + '</div>' + backupNote('m-backup') + '</div></div>';
     }
     var n = hwOpenCount();
     var l4 = [['cal', 'Расписание', 'schedule', ''], ['docl', 'Домашка', 'homework', n], ['card', 'Абонемент', 'payment', ''], ['chat', 'Поддержка', 'support', '']];

@@ -1,0 +1,8 @@
+
+# секреты
+.env
+.env.*
+*.session
+*.session-journal
+tools/materials/manifest.json
+tools/materials/upload_log.jsonl

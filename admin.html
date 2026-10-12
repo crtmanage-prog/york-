@@ -1085,6 +1085,11 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <input id="editTeacherMeetingUrl" type="text" placeholder="https://telemost.yandex.ru/j/...">
         </div>
         <div class="field">
+          <label for="editTeacherBackupUrl">Запасная ссылка (VK Звонки)</label>
+          <input id="editTeacherBackupUrl" type="text" placeholder="https://vk.com/call/join/...">
+          <p class="row-sub" style="margin:6px 0 0; font-size:12px;">Показывается преподавателю и его ученикам с подписью «если ссылка не работает», а также добавляется в напоминания за час.</p>
+        </div>
+        <div class="field">
           <label for="editTeacherRateSolo">Ставка SOLO, ₽/час</label>
           <input id="editTeacherRateSolo" type="number" min="0" placeholder="Например: 500">
         </div>
@@ -2729,6 +2734,7 @@ function fillTeacherEditForm(teacherId){
   if (!t) return;
   document.getElementById('editTeacherName').value = t.full_name || '';
   document.getElementById('editTeacherMeetingUrl').value = t.meeting_url || '';
+  document.getElementById('editTeacherBackupUrl').value = t.backup_meeting_url || '';
   document.getElementById('editTeacherRateSolo').value = t.rate_solo || '';
   document.getElementById('editTeacherRateCrew').value = t.rate_crew || '';
   document.getElementById('editTeacherError').textContent = '';
@@ -2741,6 +2747,7 @@ async function saveTeacher(){
   const teacherId = document.getElementById('editTeacherSelect').value;
   const fullName = document.getElementById('editTeacherName').value.trim();
   const meetingUrl = document.getElementById('editTeacherMeetingUrl').value.trim();
+  const backupUrl = document.getElementById('editTeacherBackupUrl').value.trim();
   const rateSolo = document.getElementById('editTeacherRateSolo').value;
   const rateCrew = document.getElementById('editTeacherRateCrew').value;
   const errEl = document.getElementById('editTeacherError');
@@ -2758,6 +2765,7 @@ async function saveTeacher(){
   const { error } = await supabase.from('profiles').update({
     full_name: fullName,
     meeting_url: meetingUrl || null,
+    backup_meeting_url: backupUrl || null,
     rate_solo: rateSolo ? Number(rateSolo) : null,
     rate_crew: rateCrew ? Number(rateCrew) : null
   }).eq('id', teacherId);
