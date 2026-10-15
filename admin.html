@@ -1046,7 +1046,12 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <input id="docName" type="text" placeholder="Например: Договор от 14.08.2026">
         </div>
         <div class="field">
-          <label for="docUrl">Ссылка на файл (Google Drive)</label>
+          <label for="docFile">Файл (до 50 МБ)</label>
+          <input id="docFile" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip">
+          <p class="row-sub" style="margin:6px 0 0; font-size:12px;">PDF, Word, фото или архив. Файл хранится закрытым: открыть его можно только из админки (и ученику в его кабинете).</p>
+        </div>
+        <div class="field">
+          <label for="docUrl">Или ссылка на файл (Google Drive)</label>
           <input id="docUrl" type="text" placeholder="https://drive.google.com/...">
         </div>
         <div class="field">
@@ -2915,7 +2920,7 @@ function renderDocumentsList(){
       ${groups[type].map(d => `
         <div class="row-card" style="margin-bottom:8px;">
           <div class="row-main">
-            <div class="row-title"><a href="${d.file_url}" target="_blank" rel="noopener" style="text-decoration:underline;">${d.file_name}</a></div>
+            <div class="row-title">${d.storage_path ? `<a href="#" data-docdl="${String(d.storage_path).replace(/"/g, '&quot;')}" style="text-decoration:underline;">${d.file_name}</a> <span style="font-size:11px; color:var(--ink-soft);">файл</span>` : ''}${d.storage_path && d.file_url ? ' · ' : ''}${d.file_url ? `<a href="${d.file_url}" target="_blank" rel="noopener" style="text-decoration:underline;">${d.storage_path ? 'ссылка' : d.file_name}</a>` : ''}</div>
             <div class="row-sub">${fmtDate(d.created_at)}${d.comment ? ' · ' + d.comment : ''}</div>
           </div>
           <button class="btn btn-ghost btn-sm" onclick="deleteDocument('${d.id}')">Удалить</button>
@@ -2925,11 +2930,29 @@ function renderDocumentsList(){
   `).join('');
 }
 
+const DOC_MAX_MB = 50;
+function docSafeName(name){
+  const m = String(name || 'file').match(/^(.*?)(\.[A-Za-z0-9]{1,8})?$/);
+  const base = (m[1] || 'file').replace(/[^A-Za-z0-9_-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 60) || 'file';
+  return base + (m[2] || '');
+}
+
+document.addEventListener('click', async (e) => {
+  const a = e.target.closest && e.target.closest('[data-docdl]');
+  if (!a) return;
+  e.preventDefault();
+  const { data, error } = await supabase.storage.from('documents').createSignedUrl(a.getAttribute('data-docdl'), 60);
+  if (error || !data){ alert('Не получилось открыть файл' + (error && error.message ? ' (' + error.message + ')' : '') + '. Попробуй ещё раз.'); return; }
+  window.open(data.signedUrl, '_blank');
+});
+
 document.getElementById('docAddBtn').addEventListener('click', async () => {
   const studentId = document.getElementById('editStudent').value;
   const type = document.getElementById('docType').value;
   const name = document.getElementById('docName').value.trim();
   const url = document.getElementById('docUrl').value.trim();
+  const fileEl = document.getElementById('docFile');
+  const file = fileEl && fileEl.files[0];
   const comment = document.getElementById('docComment').value.trim();
   const errEl = document.getElementById('docError');
   errEl.textContent = '';
@@ -2938,19 +2961,39 @@ document.getElementById('docAddBtn').addEventListener('click', async () => {
     errEl.textContent = 'Сначала выбери ученика в разделе выше.';
     return;
   }
-  if (!name || !url){
-    errEl.textContent = 'Укажи название и ссылку на файл.';
+  if (!name || (!url && !file)){
+    errEl.textContent = 'Укажи название и прикрепи файл или вставь ссылку.';
+    return;
+  }
+  if (file && file.size > DOC_MAX_MB * 1024 * 1024){
+    errEl.textContent = 'Файл больше ' + DOC_MAX_MB + ' МБ (' + (file.size / 1048576).toFixed(0) + ' МБ). Загрузи его на Google Drive и вставь ссылку.';
+    return;
+  }
+  if (file && file.size === 0){
+    errEl.textContent = 'Файл пустой. Выбери другой.';
     return;
   }
 
   const btn = document.getElementById('docAddBtn');
-  btn.disabled = true; btn.textContent = 'Добавляем…';
+  btn.disabled = true; btn.textContent = file ? 'Загружаем файл…' : 'Добавляем…';
+
+  let storagePath = null;
+  if (file){
+    storagePath = `${studentId}/${Date.now()}_${docSafeName(file.name)}`;
+    const { error: upErr } = await supabase.storage.from('documents').upload(storagePath, file);
+    if (upErr){
+      btn.disabled = false; btn.textContent = '+ Добавить документ';
+      errEl.textContent = 'Не получилось загрузить файл (' + (upErr.message || 'ошибка сети') + '). Попробуй ещё раз.';
+      return;
+    }
+  }
 
   const { error } = await supabase.from('documents').insert({
     student_id: studentId,
     document_type: type,
     file_name: name,
-    file_url: url,
+    file_url: url || null,
+    storage_path: storagePath,
     comment: comment || null,
     uploaded_by: currentUser.id
   });
@@ -2958,22 +3001,27 @@ document.getElementById('docAddBtn').addEventListener('click', async () => {
   btn.disabled = false; btn.textContent = '+ Добавить документ';
 
   if (error){
+    if (storagePath){ try { await supabase.storage.from('documents').remove([storagePath]); } catch (e2){} }
     errEl.textContent = 'Не получилось сохранить. Попробуй ещё раз.';
     return;
   }
   document.getElementById('docName').value = '';
   document.getElementById('docUrl').value = '';
+  if (fileEl) fileEl.value = '';
   document.getElementById('docComment').value = '';
   await loadDocumentsForStudent(studentId);
 });
 
 async function deleteDocument(id){
-  if (!confirmDestructive('Удалить этот документ из списка? Сам файл в Google Drive не удалится.')) return;
+  const doc = (window.__currentStudentDocuments || []).find(d => d.id === id);
+  const hasFile = !!(doc && doc.storage_path);
+  if (!confirmDestructive(hasFile ? 'Удалить этот документ и загруженный файл? Это нельзя отменить.' : 'Удалить этот документ из списка? Сам файл в Google Drive не удалится.')) return;
   const { error } = await supabase.from('documents').delete().eq('id', id);
   if (error){
     alert('Не получилось удалить.');
     return;
   }
+  if (hasFile){ try { await supabase.storage.from('documents').remove([doc.storage_path]); } catch (e2){} }
   const studentId = document.getElementById('editStudent').value;
   await loadDocumentsForStudent(studentId);
 }
