@@ -58,8 +58,9 @@ style = grab(r'<style>.*?</style>', src)
 
 # ---------- 3. тело ----------
 body = src.split('<body>', 1)[1].rsplit('</body>', 1)[0]
-# старый адрес гайда даёт 404, файл лежит в корне сайта
-body = body.replace('https://crtmanage-prog.github.io/york-/guide/watch_and_speak_final.html', 'https://weyork.online/watch_and_speak_final.html')
+# гайд «Watch & Speak» убран с сайта по решению владельца
+body = re.sub(r'[ \t]*<li><a href="https://crtmanage-prog\.github\.io/york-/guide/watch_and_speak_final\.html"[^>]*>[^<]*</a></li>\n', '', body)
+assert 'watch_and_speak' not in body
 
 def build(page_inner, faq_ld):
     return ('<!DOCTYPE html>\n<html lang="ru">\n<head>\n<meta charset="utf-8">\n'
