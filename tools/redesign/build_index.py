@@ -55,6 +55,10 @@ org_ld = grab(r'<script type="application/ld\+json">\s*\{\s*"@context": "https:/
 metrika = grab(r'<!-- Yandex\.Metrika counter -->.*?</noscript>', old)
 fonts = grab(r'<link href="https://fonts\.googleapis\.com/css2[^>]*>', src)
 style = grab(r'<style>.*?</style>', src)
+# меню «Направления» закрывалось при движении мыши вниз: между кнопкой и меню был зазор 8px без hover.
+# Невидимый мостик над меню и открытие по фокусу с клавиатуры.
+style = style.replace('</style>', '.nav .menu::before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}\n'
+                      '.nav .dd:focus-within .menu{display:block}\n</style>')
 
 # ---------- 3. тело ----------
 body = src.split('<body>', 1)[1].rsplit('</body>', 1)[0]
