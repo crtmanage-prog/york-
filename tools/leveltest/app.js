@@ -33,7 +33,7 @@ const PROMOS = {
         p:'Правила оживают в разговоре. В нашем Talk Club небольшие группы встречаются каждую неделю и болтают на живые темы: от кино до путешествий. Без экзаменов и страха ошибиться.',
         cta:{ t:'Узнать про Talk Club', u:'talk-club.html' } },
   F2: { tag:'Отличная работа', h:'Слова запоминаются в контексте',
-        p:'Мы разбираем необычные слова и идиомы с озвучкой в Telegram-канале YORK!. Откройте его в соседней вкладке, а мы подождём: тест не ограничен по времени.',
+        p:'Мы разбираем необычные слова и идиомы с озвучкой в Telegram-канале YORK!. Нажмите кнопку ниже, загляните в канал и возвращайтесь: тест вас подождёт.',
         cta:{ t:'Открыть Telegram-канал', u:TG_URL } },
   F3: { tag:'Дальше аудирование', h:'Включите звук или наденьте наушники',
         p:'Каждую запись можно прослушать два раза. А если хочется слушать английский больше, заходите на наш YouTube: живая речь, разборы и советы по обучению.',
@@ -59,6 +59,7 @@ let totalQ = 0, doneQ = 0;
 let startedAt = 0;
 let pendingResult = null;
 let audioEl = null, audioPlays = 0, audioStarted = false;
+let inTest = false, leaveOk = false, leaveTimer = null;
 
 function pickFormat(type, el){
   selectedFormat = type;
@@ -118,6 +119,8 @@ function startQuiz(fmt){
   totalQ = selectedFormat === 'express' ? 15 : 50;
   stepIdx = 0; queue = []; answers = []; used = {}; cur = null; doneQ = 0;
   startedAt = Date.now();
+  inTest = true; leaveOk = false;
+  document.getElementById('resetNote').style.display = 'none';
   showScreen('quiz');
   advance();
 }
@@ -181,6 +184,7 @@ function renderPromo(id){
   a.href = p.cta.u;
   const ext = /^https?:/.test(p.cta.u);
   a.target = '_blank'; a.rel = 'noopener';
+  a.onclick = () => { leaveOk = true; clearTimeout(leaveTimer); leaveTimer = setTimeout(() => { leaveOk = false; }, 120000); };
   showScreen('promo');
 }
 function promoContinue(){ showScreen('quiz'); advance(); }
@@ -271,6 +275,7 @@ function nextQuestion(){
 
 /* ---------- результат ---------- */
 function finishQuiz(){
+  inTest = false;
   stopAudio();
   document.getElementById('pfill').style.width = '100%';
   const th = estimate(answers);
@@ -347,4 +352,21 @@ function revealResult(){
   showScreen('result');
 }
 
-function restart(){ stopAudio(); showScreen('start'); document.getElementById('pfill').style.width = '0%'; }
+function restart(){ inTest = false; stopAudio(); showScreen('start'); document.getElementById('pfill').style.width = '0%'; }
+
+/* ---------- защита: уход со страницы во время теста сбрасывает тест ---------- */
+function testActive(){
+  return inTest && (document.getElementById('quiz').classList.contains('active') || document.getElementById('promo').classList.contains('active'));
+}
+function abortTest(){
+  if (!testActive() || leaveOk) return;
+  inTest = false; stopAudio();
+  plan = []; queue = []; answers = []; used = {}; cur = null; picked = null; doneQ = 0; pendingResult = null;
+  document.getElementById('pfill').style.width = '0%';
+  document.getElementById('resetNote').style.display = 'block';
+  showScreen('start');
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden) abortTest(); else leaveOk = false; });
+window.addEventListener('blur', () => setTimeout(() => { if (!document.hasFocus()) abortTest(); }, 150));
+window.addEventListener('focus', () => { leaveOk = false; });
+window.addEventListener('beforeunload', e => { if (testActive()){ e.preventDefault(); e.returnValue = ''; } });

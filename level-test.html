@@ -157,6 +157,13 @@ footer{border-top:1px solid rgba(255,255,255,.13);padding:38px 0 48px;color:#999
 .follow-row a{flex:1;text-decoration:none;font-size:13px;padding:13px 10px}
 @media(max-width:380px){.skill-row{grid-template-columns:96px 1fr 30px}}
 
+
+/* защита от переключения вкладок */
+.rules-card{display:flex;gap:12px;align-items:flex-start;background:rgba(255,196,60,.08);border:1.5px solid rgba(255,196,60,.5);border-radius:16px;padding:14px 16px;margin:0 0 18px;font-size:13.5px;line-height:1.55;color:#e7dcc0}
+.rules-card b{color:#ffd36b}
+.rules-ic{flex:none;width:22px;height:22px;border-radius:50%;background:#ffd36b;color:#0a0a09;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.reset-note{display:none;background:rgba(255,92,92,.1);border:1.5px solid rgba(255,92,92,.55);border-radius:16px;padding:14px 16px;margin:0 0 18px;font-size:14px;line-height:1.55;color:#ffd0d0}
+.stay-note{font-size:12px;color:#8a8b82;margin:-8px 0 14px}
 @media (prefers-reduced-motion: reduce){ .btn-lime{transition:none} .pbar i{transition:none} .audio-btn.playing{animation:none} }
 </style>
 
@@ -196,6 +203,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
     <h1 class="display" style="margin-top:14px">Какой у вас уровень английского?</h1>
     <p class="lead">От A1 до C2: грамматика, словарь, чтение и аудирование. Тест подстраивается под ваши ответы: чем увереннее отвечаете, тем сложнее становятся задания. Результат покажем в конце, бесплатно.</p>
 
+    <div class="reset-note" id="resetNote"><b>Тест сброшен.</b> Вы покинули страницу во время прохождения, поэтому ответы удалены. Начните заново, это займёт всего несколько минут.</div>
+
     <div class="format-options" id="formatOptions">
       <button type="button" class="format-card picked" data-type="express" onclick="pickFormat('express', this)">
         <h3>⚡ Экспресс-тест</h3>
@@ -206,6 +215,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         <p>50 заданий, около 25 минут. Пять блоков: Grammar, Vocabulary, Reading, Listening, Use of English. Точный уровень и оценка по каждому навыку.</p>
       </button>
     </div>
+    <div class="rules-card"><span class="rules-ic">!</span><div><b>Важно: не покидайте страницу.</b> Если во время теста вы переключитесь на другую вкладку или приложение, тест и все ответы сбросятся, придётся начать заново. Так результат получится честным и покажет ваш настоящий уровень. Время на тест не ограничено.</div></div>
     <p class="lead" style="font-size:13px;margin:-6px 0 18px">Для аудирования нужны наушники или звук на устройстве. Можно отвечать «Не знаю»: так результат точнее, чем угадывание.</p>
 
     <div class="spacer"></div>
@@ -214,6 +224,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
   <!-- QUIZ SCREEN -->
   <div class="screen" id="quiz">
+    <div class="stay-note">Не переключайтесь на другие вкладки: тест сбросится.</div>
     <div class="qcount" id="qcount"></div>
     <div class="passage" id="passage" style="display:none"></div>
     <div class="audio-box" id="audioBox">
@@ -232,6 +243,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
   <!-- PROMO SCREEN (маркетинговые вставки между заданиями) -->
   <div class="screen" id="promo">
+    <div class="stay-note">Ссылка из карточки откроется в новой вкладке, это можно. Остальные переходы сбросят тест.</div>
     <div class="promo-card">
       <span class="promo-tag" id="promoTag"></span>
       <h2 id="promoH"></h2>
@@ -417,7 +429,7 @@ const PROMOS = {
         p:'Правила оживают в разговоре. В нашем Talk Club небольшие группы встречаются каждую неделю и болтают на живые темы: от кино до путешествий. Без экзаменов и страха ошибиться.',
         cta:{ t:'Узнать про Talk Club', u:'talk-club.html' } },
   F2: { tag:'Отличная работа', h:'Слова запоминаются в контексте',
-        p:'Мы разбираем необычные слова и идиомы с озвучкой в Telegram-канале YORK!. Откройте его в соседней вкладке, а мы подождём: тест не ограничен по времени.',
+        p:'Мы разбираем необычные слова и идиомы с озвучкой в Telegram-канале YORK!. Нажмите кнопку ниже, загляните в канал и возвращайтесь: тест вас подождёт.',
         cta:{ t:'Открыть Telegram-канал', u:TG_URL } },
   F3: { tag:'Дальше аудирование', h:'Включите звук или наденьте наушники',
         p:'Каждую запись можно прослушать два раза. А если хочется слушать английский больше, заходите на наш YouTube: живая речь, разборы и советы по обучению.',
@@ -443,6 +455,7 @@ let totalQ = 0, doneQ = 0;
 let startedAt = 0;
 let pendingResult = null;
 let audioEl = null, audioPlays = 0, audioStarted = false;
+let inTest = false, leaveOk = false, leaveTimer = null;
 
 function pickFormat(type, el){
   selectedFormat = type;
@@ -502,6 +515,8 @@ function startQuiz(fmt){
   totalQ = selectedFormat === 'express' ? 15 : 50;
   stepIdx = 0; queue = []; answers = []; used = {}; cur = null; doneQ = 0;
   startedAt = Date.now();
+  inTest = true; leaveOk = false;
+  document.getElementById('resetNote').style.display = 'none';
   showScreen('quiz');
   advance();
 }
@@ -565,6 +580,7 @@ function renderPromo(id){
   a.href = p.cta.u;
   const ext = /^https?:/.test(p.cta.u);
   a.target = '_blank'; a.rel = 'noopener';
+  a.onclick = () => { leaveOk = true; clearTimeout(leaveTimer); leaveTimer = setTimeout(() => { leaveOk = false; }, 120000); };
   showScreen('promo');
 }
 function promoContinue(){ showScreen('quiz'); advance(); }
@@ -655,6 +671,7 @@ function nextQuestion(){
 
 /* ---------- результат ---------- */
 function finishQuiz(){
+  inTest = false;
   stopAudio();
   document.getElementById('pfill').style.width = '100%';
   const th = estimate(answers);
@@ -731,7 +748,24 @@ function revealResult(){
   showScreen('result');
 }
 
-function restart(){ stopAudio(); showScreen('start'); document.getElementById('pfill').style.width = '0%'; }
+function restart(){ inTest = false; stopAudio(); showScreen('start'); document.getElementById('pfill').style.width = '0%'; }
+
+/* ---------- защита: уход со страницы во время теста сбрасывает тест ---------- */
+function testActive(){
+  return inTest && (document.getElementById('quiz').classList.contains('active') || document.getElementById('promo').classList.contains('active'));
+}
+function abortTest(){
+  if (!testActive() || leaveOk) return;
+  inTest = false; stopAudio();
+  plan = []; queue = []; answers = []; used = {}; cur = null; picked = null; doneQ = 0; pendingResult = null;
+  document.getElementById('pfill').style.width = '0%';
+  document.getElementById('resetNote').style.display = 'block';
+  showScreen('start');
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden) abortTest(); else leaveOk = false; });
+window.addEventListener('blur', () => setTimeout(() => { if (!document.hasFocus()) abortTest(); }, 150));
+window.addEventListener('focus', () => { leaveOk = false; });
+window.addEventListener('beforeunload', e => { if (testActive()){ e.preventDefault(); e.returnValue = ''; } });
 
 /*APP-END*/
 </script>
