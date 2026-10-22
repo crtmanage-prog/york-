@@ -165,6 +165,89 @@ footer{border-top:1px solid rgba(255,255,255,.13);padding:38px 0 48px;color:#999
 .reset-note{display:none;background:rgba(255,92,92,.1);border:1.5px solid rgba(255,92,92,.55);border-radius:16px;padding:14px 16px;margin:0 0 18px;font-size:14px;line-height:1.55;color:#ffd0d0}
 .stay-note{font-size:12px;color:#8a8b82;margin:-8px 0 14px}
 @media (prefers-reduced-motion: reduce){ .btn-lime{transition:none} .pbar i{transition:none} .audio-btn.playing{animation:none} }
+/*YKH-CSS-START*/
+:root{
+  --bg:#F3F2ED;--ink:#141412;--ink-soft:#5E5F58;--ink3:#8E8F87;--line:#E8E7DF;
+  --lime:#D7EF42;--lime-g:linear-gradient(100deg,#F1F46E,#D9EF45 46%,#B2D320);
+  --dark-g:linear-gradient(100deg,#101109,#14160C 52%,#3E4A12);
+  --gr-bg:#EAF3C8;--gr-ink:#3F5A06;--gr-bd:#DCEAA6;
+}
+.ykh .ic,#mnav .ic{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ykh .logo,#mnav .logo{font-family:Unbounded;font-weight:800;font-size:20px;letter-spacing:-.01em}
+.ykh .logo span,#mnav .logo span{background:var(--lime);padding:0 4px;border-radius:6px;color:var(--ink)}
+.ykh .btn,#mnav .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:99px;font-family:Unbounded;font-weight:700;font-size:13.5px;padding:15px 22px;white-space:nowrap;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s}
+.ykh .btn:hover,#mnav .btn:hover{transform:translateY(-2px)}
+.ykh .btn.lime,#mnav .btn.lime{background:var(--lime-g);color:#101109;box-shadow:0 8px 22px rgba(178,211,32,.3)}
+.ykh .btn.dark,#mnav .btn.dark{background:var(--dark-g);color:#fff}
+.ykh .btn.dark .ic,#mnav .btn.dark .ic{color:var(--lime)}
+.ykh .btn.glassb,#mnav .btn.glassb{background:rgba(255,255,255,.8);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 4px 14px rgba(70,85,20,.1);backdrop-filter:blur(12px)}
+.ykh .btn.line,#mnav .btn.line{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px #E3E2DA}
+.ykh .btn.wglass,#mnav .btn.wglass{background:rgba(255,255,255,.1);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);backdrop-filter:blur(12px)}
+.ykh .btn.sm,#mnav .btn.sm{padding:11px 16px;font-size:12px}
+.ykh .hdr-cap{margin:0 auto 0;max-width:1160px;padding:0 24px}
+.ykh .hdr-cap .in{display:flex;align-items:center;gap:18px;padding:10px 10px 10px 22px;border-radius:99px;background:linear-gradient(150deg,rgba(255,255,255,.75),rgba(248,251,238,.65));backdrop-filter:blur(20px) saturate(140%);border:1px solid rgba(255,255,255,.9);box-shadow:0 10px 30px rgba(20,21,18,.08)}
+.ykh .nav{display:flex;gap:4px;flex:1;justify-content:center;font-size:14px;font-weight:500}
+.ykh .nav>a,.ykh .nav .dd>span{padding:9px 14px;border-radius:99px;color:var(--ink-soft);display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:background .15s,color .15s}
+.ykh .nav>a:hover,.ykh .nav .dd:hover>span{background:rgba(255,255,255,.85);color:var(--ink)}
+.ykh .nav .dd{position:relative}
+.ykh .nav .dd .ic{width:14px;height:14px}
+.ykh .nav .menu{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);min-width:260px;padding:8px;border-radius:20px;background:#fff;box-shadow:0 16px 40px rgba(20,21,18,.14);display:none;z-index:5}
+.ykh .nav .dd:hover .menu{display:block}
+.ykh .nav .menu a{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;font-size:14px;color:var(--ink)}
+.ykh .nav .menu a:hover{background:#F7F8EF}
+.ykh .nav .menu a i{width:34px;height:34px;border-radius:11px;background:var(--gr-bg);color:var(--gr-ink);display:flex;align-items:center;justify-content:center;flex:none}
+.ykh .nav .menu a i .ic{width:16px;height:16px}
+.ykh .hright{display:flex;gap:8px;align-items:center}
+.ykh .login{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:99px;font-size:13.5px;font-weight:600;background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 1px #fff}
+.ykh .login .ic{width:16px;height:16px}
+.ykh .burger{display:none;width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--lime);align-items:center;justify-content:center}
+.ykh .hdr-dk .burger{background:var(--lime);color:#101109}
+.ykh .hdr-dk .in{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);box-shadow:none;backdrop-filter:blur(20px)}
+.ykh .hdr-dk .logo{color:#fff}
+.ykh .hdr-dk .nav>a,.ykh .hdr-dk .nav .dd>span{color:rgba(255,255,255,.7)}
+.ykh .hdr-dk .nav>a:hover,.ykh .hdr-dk .nav .dd:hover>span{background:rgba(255,255,255,.1);color:#fff}
+.ykh .hdr-dk .login{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);color:#fff}
+@media (max-width:980px){.ykh .nav{display:none}.ykh .burger{display:flex}.ykh .hdr-cap .in{justify-content:space-between}}
+@media (max-width:560px){.ykh .hright .btn{display:none}}
+.ykh .hdr-cap.fixed{position:fixed;top:14px;left:0;right:0;z-index:200;margin:0 auto}
+.ykh .hdr-cap.fixed.hdr-dk .in{background:linear-gradient(150deg,rgba(18,19,13,.62),rgba(28,30,20,.5));backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);border:1px solid rgba(255,255,255,.14);box-shadow:0 12px 34px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08)}
+#mnav{position:fixed;inset:0;z-index:500;display:flex;flex-direction:column;padding:18px 16px calc(20px + env(safe-area-inset-bottom));background:linear-gradient(170deg,rgba(18,19,13,.97),rgba(10,11,7,.98));backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);color:#fff;font-family:"Golos Text",sans-serif;opacity:0;pointer-events:none;transform:translateY(-12px);transition:opacity .25s,transform .3s}
+#mnav.on{opacity:1;pointer-events:auto;transform:none}
+#mnav::before{content:'';position:absolute;left:-20%;right:-20%;bottom:-200px;height:400px;border-radius:50%;background:radial-gradient(closest-side,rgba(178,211,32,.35),rgba(178,211,32,0));pointer-events:none}
+#mnav .mh{display:flex;align-items:center;justify-content:space-between;padding:8px 8px 8px 14px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+#mnav .mh .logo{font-family:Unbounded;font-weight:900;font-size:19px;color:#fff;text-decoration:none}
+#mnav .mh .logo span{background:var(--lime);color:#101109;padding:0 4px;border-radius:6px}
+#mnav .x{all:unset;cursor:pointer;width:44px;height:44px;border-radius:50%;background:var(--lime);color:#101109;display:flex;align-items:center;justify-content:center}
+#mnav .x svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+#mnav .ml{display:flex;flex-direction:column;gap:2px;margin-top:22px;position:relative;overflow:auto}
+#mnav .ml a{display:flex;align-items:center;justify-content:space-between;padding:15px 6px;border-bottom:1px solid rgba(255,255,255,.08);color:#fff;text-decoration:none;font-family:Unbounded;font-weight:700;font-size:20px;letter-spacing:-.02em;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
+#mnav.on .ml a{opacity:1;transform:none}
+#mnav .ml a small{font-family:"Golos Text";font-weight:600;font-size:12px;color:rgba(255,255,255,.45);letter-spacing:0}
+#mnav .ml a:active{color:var(--lime)}
+#mnav .ml .sub{display:flex;flex-wrap:wrap;gap:8px;padding:14px 0 4px}
+#mnav .ml .sub a{all:unset;cursor:pointer;padding:9px 14px;border-radius:99px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);font-size:13.5px;font-weight:700}
+#mnav .mf{margin-top:auto;display:flex;flex-direction:column;gap:10px;position:relative;padding-top:18px}
+#mnav .mf .btn{width:100%;box-sizing:border-box;justify-content:center}
+#mnav .mf .row{display:flex;gap:10px}
+#mnav .mf .row a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border-radius:99px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;font-weight:700;font-size:14px}
+#mnav .mf .row svg{width:17px;height:17px}
+#mcta{position:fixed;left:16px;right:84px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:290;display:none;align-items:center;justify-content:space-between;gap:10px;padding:7px 7px 7px 18px;border-radius:99px;background:linear-gradient(150deg,rgba(14,15,9,.9),rgba(38,44,16,.82));border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 14px 30px rgba(10,11,7,.3);color:#fff;text-decoration:none;font-family:"Golos Text";font-weight:700;font-size:13.5px;transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.1)}
+#mcta.on{transform:none}
+#mcta small{display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,.55)}
+#mcta .go{width:40px;height:40px;border-radius:50%;background:var(--lime-g);color:#101109;display:flex;align-items:center;justify-content:center;flex:none}
+#mcta .go svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.ykh .burger{cursor:pointer;border:none}
+@media (max-width:700px){#mcta{display:flex}body.mopen{overflow:hidden}.ykh .hdr-cap.fixed{top:10px!important}.ykh .hdr-cap .login{padding:10px 14px!important}}
+@media (prefers-reduced-motion:reduce){#mnav,#mnav .ml a,#mcta{transition:none}}
+@media (max-width:700px){#mnav .mf .btn{white-space:normal!important;text-align:center;line-height:1.25;font-size:13px!important}.ykh .btn,#mnav .btn{max-width:100%;box-sizing:border-box}}
+.ykh .hdr-cap .in{padding-top:7px;padding-bottom:7px;padding-right:7px;min-height:54px;box-sizing:border-box}
+.ykh .hdr-cap .burger,.ykh .hdr-cap.hdr-dk .burger{width:40px;height:40px;flex:0 0 40px;box-sizing:border-box;background:linear-gradient(150deg,rgba(14,15,10,.82),rgba(26,28,19,.72));-webkit-backdrop-filter:blur(16px) saturate(140%);backdrop-filter:blur(16px) saturate(140%);border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 12px rgba(0,0,0,.22);color:#fff}
+.ykh .hdr-cap .burger svg{width:18px;height:18px}
+.ykh .hdr-cap .login{height:40px;box-sizing:border-box}
+@media (max-width:980px){.ykh .hdr-cap .login{width:40px;height:40px;padding:0!important;gap:0!important;justify-content:center;border-radius:50%;box-sizing:border-box}.ykh .hdr-cap .login .ltx{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.ykh .hdr-cap .login .ic{width:18px;height:18px}.ykh .hdr-cap .burger,.ykh .hdr-cap.hdr-dk .burger{background:linear-gradient(150deg,rgba(14,15,10,.82),rgba(26,28,19,.72))!important;color:#fff!important;width:40px!important;height:40px!important}}
+.ykh .nav .menu::before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}
+.ykh .nav .dd:focus-within .menu{display:block}
+/*YKH-CSS-END*/
 </style>
 
 <!-- Yandex.Metrika counter -->
@@ -176,22 +259,17 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 </head>
 <body>
 
-<header class="site-header">
-  <div class="wrap" style="padding:18px 0;display:flex;align-items:center;gap:20px">
-    <a href="/" style="font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.06em">YORK<span style="color:#D7EF42">!</span></a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
-    <nav class="navlinks">
-      <a href="/#how">Как это работает</a>
-      <a href="/#formats">Цены</a>
-      <a href="/#faq">FAQ</a>
-    </nav>
-    <div class="header-actions">
-      <a href="login.html" class="header-icon-btn" aria-label="Войти"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg></a>
-      <a href="login.html" class="header-cta-text" style="font-size:13px;font-weight:700;padding:13px 19px;border-radius:999px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.03)">Войти</a>
-      <label for="nav-toggle" class="nav-toggle-btn" aria-label="Меню"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></label>
-    </div>
-  </div>
-</header>
+<!--YKH-HTML-START-->
+<div class="ykh"><div class="hdr-cap hdr-dk fixed"><div class="in"><a class="logo" href="/">YORK<span>!</span></a><nav class="nav"><a href="/#how">Как это работает</a><div class="dd"><span>Направления <svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></svg></span><div class="menu">
+  <a href="https://weyork.online/english-for-kids.html"><i><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"></circle><path d="M8 21v-5l-2-3 3-2h6l3 2-2 3v5"></path></svg></i>Детям</a>
+  <a href="https://weyork.online/english-for-adults.html"><i><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></i>Взрослым</a>
+  <a href="https://weyork.online/school-english.html"><i><svg class="ic" viewBox="0 0 24 24"><path d="M2 9 12 4l10 5-10 5z"></path><path d="M6 11v5c3 2 9 2 12 0v-5"></path></svg></i>Школьная программа и ВПР</a>
+  <a href="/talk-club.html"><i><svg class="ic" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg></i>Talk Club</a></div></div><a href="/#formats">Цены</a><a href="/#faq">FAQ</a></nav><div class="hright"><a class="login" href="https://weyork.online/login.html" aria-label="Войти" title="Войти"><svg class="ic" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"></path></svg><span class="ltx">Войти</span></a><a class="btn lime sm" href="/trial-form.html">Записаться на пробное <svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a><span class="burger"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"></path></svg></span></div></div></div></div>
+<div id="mnav" role="dialog" aria-modal="true" aria-label="Меню"><div class="mh"><a class="logo" href="/">YORK<span>!</span></a><button class="x" aria-label="Закрыть меню"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+<nav class="ml"><a href="/#how">Как это работает<small>3 шага</small></a><a href="/#teachers">Преподаватели<small>4 человека</small></a><a href="/#formats">Цены<small>SOLO и CREW</small></a><a href="/talk-club.html">Talk Club<small>разговорный клуб</small></a><a href="/#faq">Вопросы<small>FAQ</small></a>
+<div class="sub"><a href="https://weyork.online/english-for-kids.html">Детям</a><a href="https://weyork.online/english-for-adults.html">Взрослым</a><a href="https://weyork.online/school-english.html">Школа и ВПР</a></div></nav>
+<div class="mf"><a class="btn lime" href="/trial-form.html">Записаться на бесплатный урок <svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><div class="row"><a href="https://weyork.online/login.html"><svg class="ic" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>Войти</a><a href="https://t.me/weyorkonline" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 19.8c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.4 1.3z"/></svg>Канал</a></div></div></div>
+<!--YKH-HTML-END-->
 
 <div class="app">
 
@@ -769,5 +847,14 @@ window.addEventListener('beforeunload', e => { if (testActive()){ e.preventDefau
 
 /*APP-END*/
 </script>
+<script>/*YKH-JS-START*/
+(function(){var M=document.getElementById('mnav');if(!M)return;
+function open(v){M.classList.toggle('on',v);document.body.classList.toggle('mopen',v);if(v)M.querySelectorAll('.ml a').forEach(function(a,i){a.style.transitionDelay=(.04*i+.05)+'s'})}
+document.addEventListener('click',function(e){if(e.target.closest('.ykh .burger')){e.preventDefault();open(true)}});
+M.querySelector('.x').onclick=function(){open(false)};
+M.addEventListener('click',function(e){if(e.target.closest('a'))open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')open(false)});
+})();
+/*YKH-JS-END*/</script>
 </body>
 </html>
