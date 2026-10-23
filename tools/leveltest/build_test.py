@@ -9,7 +9,7 @@ import bank as B
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 HTML = os.path.join(REPO, 'level-test.html')
 AUDIO = os.path.join(REPO, 'assets', 'leveltest')
-VOICES = {'F': 'en-GB-SoniaNeural', 'M': 'en-GB-RyanNeural'}
+VOICES = {'F': 'en-GB-SoniaNeural', 'M': 'en-GB-RyanNeural', 'A': 'en-GB-LibbyNeural'}
 errors = []
 
 
@@ -34,10 +34,13 @@ def build():
         o, a = shuf(c, w, rnd, c); out['U'].append([l, 'Which sentence is correct?', o, a])
     for l, p, q, c, w in B.R:
         o, a = shuf(c, w, rnd, q); out['R'].append([l, p, q, o, a])
-    for l, title, text, qs in B.P:
+    for l, title, text, qs, tf in B.P:
         items = []
-        for q, c, w in qs:
-            o, a = shuf(c, w, rnd, q); items.append([q, o, a])
+        for k in range(2):
+            q, c, w = qs[k]
+            o, a = shuf(c, w, rnd, q); items.append([q, o, a, 0])
+            st, ans = tf[k]
+            items.append([st, ['True', 'False', 'Not stated'], ans, 1])
         out['P'].append([l, title, text, items])
     for l, f, lines, q, c, w in B.L:
         o, a = shuf(c, w, rnd, q); out['L'].append([l, f, q, o, a])
@@ -82,6 +85,7 @@ async def audio():
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'lavfi', '-i', 'anullsrc=r=24000:cl=mono', '-t', '0.6', '-q:a', '9', sil], check=True)
     for l, f, lines, q, c, w in B.L:
         parts = []
+        lines = [('A', B.L_INTRO[f] + ' ' + B.L_TASK)] + list(lines)
         for i, (v, text) in enumerate(lines):
             p = os.path.join(tmp, f'{f}_{i}.mp3')
             await edge_tts.Communicate(text, VOICES[v], rate='-10%' if l <= 1 else '+0%').save(p)

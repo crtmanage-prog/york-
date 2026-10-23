@@ -164,6 +164,56 @@ footer{border-top:1px solid rgba(255,255,255,.13);padding:38px 0 48px;color:#999
 .rules-ic{flex:none;width:22px;height:22px;border-radius:50%;background:#ffd36b;color:#0a0a09;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;margin-top:1px}
 .reset-note{display:none;background:rgba(255,92,92,.1);border:1.5px solid rgba(255,92,92,.55);border-radius:16px;padding:14px 16px;margin:0 0 18px;font-size:14px;line-height:1.55;color:#ffd0d0}
 .stay-note{font-size:12px;color:#8a8b82;margin:-8px 0 14px}
+
+/* блоки теста: полоса из сегментов */
+.pbar{display:flex;gap:5px;height:auto;background:none;overflow:visible;border-radius:0}
+.pseg{height:6px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden;position:relative}
+.pseg i{display:block;height:100%;width:0;background:#D7EF42;border-radius:4px;transition:width .3s ease}
+.pseg.cur{box-shadow:0 0 0 1.5px rgba(215,239,66,.55)}
+.passage-info{font-size:12.5px;font-weight:600;color:#D7EF42;margin:0 0 10px;line-height:1.5}
+.qhint{font-size:13.5px;line-height:1.55;color:#aaa;margin:-10px 0 18px}
+
+/* навигация по заданиям */
+.nav-row{display:flex;gap:10px;align-items:center}
+.nav-arrow{flex:none;width:52px;height:52px;border-radius:50%;border:1.5px solid rgba(255,255,255,.28);background:rgba(255,255,255,.03);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.nav-arrow:hover:not(:disabled){border-color:#D7EF42;color:#D7EF42}
+.nav-arrow:disabled{opacity:.3;cursor:default}
+.nav-row .btn-lime{flex:1}
+.btn-lime.skip{background:rgba(255,255,255,.08);color:#fff;border:1.5px solid rgba(255,255,255,.28)}
+.btn-lime.skip:hover{background:rgba(255,255,255,.14)}
+
+/* введение в блок */
+.intro-card{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.14);border-radius:24px;padding:26px 22px;margin:8px 0 22px}
+.intro-tag{display:inline-block;font-family:Unbounded,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#0a0a09;background:#D7EF42;border-radius:999px;padding:6px 12px;margin-bottom:14px}
+.intro-card h2{font-family:Unbounded,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;margin:0 0 6px}
+.intro-meta{font-size:13px;color:#8a8b82;margin:0 0 18px}
+.intro-h{font-family:Unbounded,sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#D7EF42;margin:0 0 6px}
+.intro-card p.intro-p{font-size:15px;line-height:1.65;color:#d8d9d2;margin:0 0 16px}
+
+/* итоги по заданиям */
+.rv-summary{font-size:15px;line-height:1.6;color:#d8d9d2;margin:0 0 20px}
+.rv-summary b{color:#fff}
+.rv-block{font-family:Unbounded,sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#8a8b82;margin:14px 0 8px}
+.rv-row{display:flex;flex-wrap:wrap;gap:8px}
+.rv-tile{width:44px;height:44px;border-radius:12px;font-family:Unbounded,sans-serif;font-weight:600;font-size:13px;cursor:pointer;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.03);color:#fff}
+.rv-tile.ok{background:rgba(215,239,66,.18);border-color:rgba(215,239,66,.6)}
+.rv-tile.dk{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35);color:#c9cac5}
+.rv-tile.un{background:rgba(255,196,60,.12);border-color:#ffd36b;color:#ffd36b}
+.rv-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#8a8b82;margin:16px 0 22px}
+.rv-legend i{display:inline-block;width:11px;height:11px;border-radius:4px;margin-right:6px;vertical-align:-1px;border:1.5px solid}
+.rv-legend .ok i{background:rgba(215,239,66,.3);border-color:#D7EF42}.rv-legend .dk i{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4)}.rv-legend .un i{background:rgba(255,196,60,.2);border-color:#ffd36b}
+.rv-actions{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+
+/* как рассчитан результат и «поделиться» */
+.how-calc{border-radius:20px;padding:6px 20px;margin-bottom:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1)}
+.how-calc summary{cursor:pointer;font-family:Unbounded,sans-serif;font-size:14px;font-weight:600;padding:14px 0;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.how-calc summary::-webkit-details-marker{display:none}
+.how-calc summary::after{content:'+';font-size:20px;color:#D7EF42}
+.how-calc[open] summary::after{content:'−'}
+.how-calc .how-body{font-size:13.5px;line-height:1.6;color:#b9bab3;padding:0 0 12px}
+.how-calc .how-body p{margin:0 0 10px}
+.how-calc .how-body b{color:#fff}
+.share-msg{font-size:12.5px;color:#8a8b82;text-align:center;margin:-6px 0 14px;min-height:0}
 @media (prefers-reduced-motion: reduce){ .btn-lime{transition:none} .pbar i{transition:none} .audio-btn.playing{animation:none} }
 /*YKH-CSS-START*/
 :root{
@@ -273,13 +323,13 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 
 <div class="app">
 
-  <div class="pbar"><i id="pfill"></i></div>
+  <div class="pbar" id="pbar"></div>
 
   <!-- START SCREEN -->
   <div class="screen active" id="start">
     <div class="kicker">Тест на уровень</div>
     <h1 class="display" style="margin-top:14px">Какой у вас уровень английского?</h1>
-    <p class="lead">От A1 до C2: грамматика, словарь, чтение и аудирование. Тест подстраивается под ваши ответы: чем увереннее отвечаете, тем сложнее становятся задания. Результат покажем в конце, бесплатно.</p>
+    <p class="lead">От A1 до C2: грамматика, словарь, чтение и аудирование. Тест разбит на блоки и подстраивается под ваши ответы. Можно возвращаться к заданиям и пропускать их. Результат покажем в конце, бесплатно.</p>
 
     <div class="reset-note" id="resetNote"><b>Тест сброшен.</b> Вы покинули страницу во время прохождения, поэтому ответы удалены. Начните заново, это займёт всего несколько минут.</div>
 
@@ -304,6 +354,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
   <div class="screen" id="quiz">
     <div class="stay-note">Не переключайтесь на другие вкладки: тест сбросится.</div>
     <div class="qcount" id="qcount"></div>
+    <div class="passage-info" id="passageInfo" style="display:none"></div>
     <div class="passage" id="passage" style="display:none"></div>
     <div class="audio-box" id="audioBox">
       <button class="audio-btn" id="audioBtn" type="button" onclick="playAudio()" aria-label="Прослушать запись">
@@ -312,10 +363,17 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <div class="audio-label" id="audioLabel"></div>
     </div>
     <div class="qtext" id="qtext"></div>
+    <div class="qhint" id="qhint" style="display:none"></div>
     <div class="options" id="options"></div>
     <button class="dk-btn" id="dkBtn" type="button">Не знаю</button>
-    <div class="quiz-foot">
-      <button class="btn-lime" id="nextBtn" onclick="nextQuestion()" disabled>Далее</button>
+    <div class="quiz-foot nav-row">
+      <button class="nav-arrow" id="backBtn" type="button" onclick="goBack()" aria-label="Предыдущее задание">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </button>
+      <button class="btn-lime" id="nextBtn" type="button" onclick="nextQuestion()">Далее</button>
+      <button class="nav-arrow" id="fwdBtn" type="button" onclick="goForward()" aria-label="Следующее задание">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
     </div>
   </div>
 
@@ -330,6 +388,38 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
     </div>
     <div class="quiz-foot">
       <button class="btn-lime" type="button" onclick="promoContinue()">Продолжить тест</button>
+    </div>
+  </div>
+
+  <!-- BLOCK INTRO SCREEN -->
+  <div class="screen" id="intro">
+    <div class="stay-note">Не переключайтесь на другие вкладки: тест сбросится.</div>
+    <div class="intro-card">
+      <span class="intro-tag" id="introTag"></span>
+      <h2 id="introH"></h2>
+      <p class="intro-meta" id="introMeta"></p>
+      <div class="intro-h">Что вас ждёт</div>
+      <p class="intro-p" id="introDo"></p>
+      <div id="introTipWrap">
+        <div class="intro-h">Как подготовиться</div>
+        <p class="intro-p" id="introTip"></p>
+      </div>
+    </div>
+    <div class="quiz-foot">
+      <button class="btn-lime" id="introNext" type="button" onclick="introStart()">Начать блок</button>
+    </div>
+  </div>
+
+  <!-- REVIEW SCREEN -->
+  <div class="screen" id="review">
+    <div class="kicker">Проверка перед результатом</div>
+    <h1 class="display" style="margin-top:14px;font-size:clamp(22px,4.4vw,28px)">Все ли задания пройдены?</h1>
+    <p class="rv-summary" id="rvSummary"></p>
+    <div id="rvGrid"></div>
+    <div class="rv-legend"><span class="ok"><i></i>есть ответ</span><span class="dk"><i></i>«Не знаю»</span><span class="un"><i></i>нет ответа</span></div>
+    <div class="rv-actions">
+      <button class="btn-ghost" id="rvBack" type="button" onclick="reviewFirstUnanswered()" style="display:none">Вернуться к заданиям без ответа</button>
+      <button class="btn-lime" type="button" onclick="finishQuiz()">Завершить тест и узнать уровень</button>
     </div>
   </div>
 
@@ -354,11 +444,25 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
       <button class="btn-ghost" type="button" onclick="startQuiz('full')">Пройти полный тест</button>
     </div>
 
+    <details class="how-calc" id="howCalc">
+      <summary>Как мы определили ваш уровень</summary>
+      <div class="how-body">
+        <p><b>Тест адаптивный.</b> Каждое задание привязано к уровню от A1 до C2, а следующее подбирается по вашим предыдущим ответам: уверенные ответы ведут к более сложным заданиям, ошибки к более простым.</p>
+        <p><b>Мы не считаем баллы.</b> Количество «правильных ответов» само по себе уровня не показывает, потому что задания разной сложности. Мы находим уровень, который лучше всего объясняет все ваши ответы сразу: верный ответ на сложное задание повышает оценку, ошибка на простом понижает.</p>
+        <p><b>Угадывание учтено.</b> В заданиях с выбором ответа можно попасть наугад (шанс 1 из 4, в True / False / Not stated 1 из 3), поэтому один случайный успех уровень не поднимет. Ответ «Не знаю» считается как честное «не знаю», а не как угадывание. Задания без ответа тоже считаются как «Не знаю».</p>
+        <p><b>Уровень по навыкам</b> считается так же, но отдельно по каждому блоку. Заданий в блоке меньше, поэтому такая оценка менее точная.</p>
+        <p><b>Шкала CEFR:</b> A1 и A2 базовый уровень, B1 и B2 средний, C1 и C2 продвинутый. Результат ориентировочный: точный уровень преподаватель определит на пробном уроке.</p>
+      </div>
+    </details>
+
     <div class="discount-card">
       <h3>Ваша награда: скидка 10%</h3>
       <p>На первый месяц обучения в YORK!. Запишитесь на бесплатный пробный урок, и преподаватель подскажет, с чего начать при вашем уровне.</p>
       <a class="btn-dark" href="trial-form.html" target="_blank" rel="noopener">Записаться на бесплатный урок</a>
     </div>
+
+    <button class="btn-ghost" type="button" id="shareBtn" onclick="shareResult()" style="margin-bottom:14px">Поделиться результатом</button>
+    <div class="share-msg" id="shareMsg"></div>
 
     <div class="follow-row">
       <a class="btn-ghost" href="https://t.me/weyorkonline" target="_blank" rel="noopener">Telegram-канал</a>
@@ -476,8 +580,11 @@ footer.yf .yf-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;
    ТЕСТ НА УРОВЕНЬ: адаптивный подбор заданий, оценка по шкале CEFR.
    Банк заданий вставляется между маркерами BANK-START / BANK-END (tools/leveltest/build_test.py).
    Уровни: 0=A1 ... 5=C2. Оценка уровня: байесовская (MAP) по модели с угадыванием.
+   Тест состоит из блоков (Grammar, Vocabulary, Reading, Listening, Use of English); перед блоком идёт введение,
+   между блоками бывают маркетинговые вставки. Можно ходить назад и вперёд по уже показанным заданиям,
+   пропускать задания и в конце проверить, на что ещё нет ответа.
    ============================================================ */
-/*BANK-START*/const BANK={"G":[[0,"I ___ a student.",["are","be","is","am"],3],[0,"She ___ coffee every morning.",["drinks","is drink","drinking","drink"],0],[0,"There ___ two books on the table.",["are","is","am","be"],0],[0,"___ you like pizza?",["Is","Are","Do","Does"],2],[0,"This is ___ apple.",["some","any","a","an"],3],[0,"My brother and I ___ at home now.",["am","is","are","be"],2],[0,"He ___ a car.",["is got","have got","has got","haves"],2],[0,"Where ___ you from?",["are","does","is","do"],0],[1,"We ___ dinner when the phone rang.",["had","were having","have","has"],1],[1,"I'm taller ___ my brother.",["as","that","than","then"],2],[1,"She ___ to London last year.",["going","went","goes","has gone"],1],[1,"You ___ wear a seat belt in the car. It's the law.",["would","can","must","might"],2],[1,"How ___ water do you drink every day?",["much","often","many","long"],0],[1,"I haven't seen him ___ Monday.",["during","from","for","since"],3],[1,"If you ___ hungry, there is some soup in the fridge.",["were being","would be","will be","are"],3],[1,"Tom is ___ person in our class.",["the funniest","funnier","more funny","the most funny"],0],[2,"I ___ sushi before I moved to Japan.",["had never eaten","have never eaten","never ate","was never eating"],0],[2,"If it rains tomorrow, we ___ the picnic.",["would cancel","cancel","cancelled","will cancel"],3],[2,"She asked me where ___.",["I do live","do I live","I lived","did I live"],2],[2,"This is the house ___ I grew up.",["what","where","which","who"],1],[2,"He is used to ___ up early.",["get","got","getting","be getting"],2],[2,"By the time we arrived, the film ___.",["had started","has started","started","was starting"],0],[2,"I wish I ___ more free time.",["had","have","has","would have"],0],[2,"You ___ smoke here. It's forbidden.",["mustn't","don't have to","wouldn't","needn't"],0],[3,"The new bridge ___ by next summer.",["is completing","will be completed","will complete","completed"],1],[3,"I'd rather you ___ smoke here.",["doesn't","didn't","not","won't"],1],[3,"She suggested ___ a taxi.",["take","to take","that we to take","taking"],3],[3,"Hardly ___ the house when it started to rain.",["did we leave","had we left","we had left","we left"],1],[3,"If I ___ you, I'd accept the offer.",["were","am","would be","will be"],0],[3,"The manager, ___ I spoke yesterday, is on holiday.",["to whom","who","which","whose"],0],[3,"He denied ___ the window.",["to break","breaking","break","having to break"],1],[3,"No sooner had she sat down ___ the phone rang.",["than","that","when","then"],0],[4,"Had I known about the traffic, I ___ earlier.",["left","will leave","would leave","would have left"],3],[4,"Not only ___ late, but she also forgot the documents.",["she did arrive","she arrived","did she arrive","arrived she"],2],[4,"It's high time we ___ a decision.",["will make","make","made","are making"],2],[4,"The proposal, ___ was widely criticised, was eventually withdrawn.",["that","which","what","who"],1],[4,"She is said ___ the best lawyer in the city.",["to be","to being","she is","be"],0],[4,"Had it not been for your help, I ___ the deadline.",["missed","would have missed","am missing","will miss"],1],[4,"By this time next year, she ___ her degree.",["has completed","will complete","completes","will have completed"],3],[4,"He insisted that she ___ present at the meeting.",["is","would be","was","be"],3],[5,"Seldom ___ such a remarkable performance.",["I witnessed","did I witnessed","have I witnessed","I have witnessed"],2],[5,"Little ___ that the decision would change his life.",["did he know","he knew","he did know","knew he"],0],[5,"The suspect is believed ___ the country before the police arrived.",["leaving","to be leaving","to have left","to leave"],2],[5,"She spoke as though she ___ the director herself.",["is","were","will be","was being"],1],[5,"I would sooner die ___ apologise to him.",["that","than","rather","to"],1],[5,"___ the circumstances, the committee's decision was entirely justified.",["To give","Giving","Given","Having given"],2],[5,"It is imperative that every candidate ___ the instructions carefully.",["will read","is reading","read","reads"],2],[5,"So absorbed ___ in the book that she missed her stop.",["did she","was she","she was","had she"],1]],"V":[[0,"Choose the opposite of 'big'.",["long","small","old","tall"],1],[0,"I drink ___ in the morning.",["window","pencil","chair","coffee"],3],[0,"Today is Monday. Tomorrow is ___.",["Saturday","Friday","Sunday","Tuesday"],3],[0,"A person who teaches students is a ___.",["driver","doctor","cook","teacher"],3],[0,"I wear a ___ on my head when it is cold.",["hat","shoe","belt","sock"],0],[1,"Can you ___ up the meaning of this word in a dictionary?",["get","look","take","put"],1],[1,"I need to ___ the bus at the next stop.",["take off","get off","get out","go off"],1],[1,"She is very ___: she never forgets to say 'thank you'.",["angry","polite","lazy","rude"],1],[1,"The opposite of 'borrow' is ___.",["lend","buy","keep","pay"],0],[1,"It's a ___ day today: no clouds and the sun is shining.",["foggy","sunny","rainy","snowy"],1],[2,"The meeting has been ___ until next week because the manager is ill.",["refused","invented","prevented","postponed"],3],[2,"I'm really looking ___ to seeing you.",["ahead","after","up","forward"],3],[2,"He is very ___: he can't make up his mind about anything.",["generous","honest","confident","indecisive"],3],[2,"I can't ___ the noise from the street any longer.",["give up with","put up with","make up with","go on with"],1],[2,"The film was so boring that I nearly fell ___.",["sleeping","asleep","sleepy","slept"],1],[3,"The company decided to ___ 200 employees because of falling profits.",["turn down","lay off","put off","lay down"],1],[3,"His behaviour was completely ___: I had never seen him so rude.",["out of reach","out of order","out of character","out of date"],2],[3,"We need to come up ___ a solution before Friday.",["with","to","for","by"],0],[3,"The new policy will have a ___ impact on small businesses.",["signify","significantly","significant","significance"],2],[3,"Her argument was so ___ that nobody could disagree.",["complacent","compulsory","compelling","competent"],2],[4,"Her explanation was so ___ that nobody in the room understood it.",["convoluted","candid","mundane","succinct"],0],[4,"The politician's speech was full of ___ promises that nobody believed.",["empty","vacant","blank","void"],0],[4,"The new CEO's first priority was to ___ the company's fragile finances.",["substitute","stagnate","stabilise","scrutinise"],2],[4,"He was ___ by the news and could not speak for a moment.",["taken in","taken aback","taken over","taken up"],1],[4,"The two proposals are so different that it is not a ___ comparison.",["hand-to-mouth","all-in-all","like-for-like","face-to-face"],2],[5,"In a formal business report, the most appropriate way to say 'get rid of' is:",["throw away","dump","eliminate","chuck out"],2],[5,"Her ___ remarks about the project offended several colleagues.",["disparaging","dispassionate","disinterested","disarming"],0],[5,"The new regulations are so ___ that even experts struggle to interpret them.",["abrupt","abstruse","abundant","adjacent"],1],[5,"He is a ___ supporter of the old system and rejects any reform.",["sturdy","stark","stunted","staunch"],3],[5,"Her success was largely ___ to good luck rather than talent.",["attributive","attributable","attribution","attributing"],1]],"U":[[0,"Which sentence is correct?",["She doesn't likes tea.","She don't like tea.","She not like tea.","She doesn't like tea."],3],[0,"Which sentence is correct?",["They are playing football now.","They plays football now.","They is playing football now.","They playing football now."],0],[0,"Which sentence is correct?",["I has two brothers and a sister.","I have two brothers and a sister.","I am have two brothers and a sister.","I have two brother and a sister."],1],[1,"Which sentence is correct?",["I've lived here since five years.","I am living here for five years.","I live here since five years.","I've lived here for five years."],3],[1,"Which sentence is correct?",["He didn't went to work yesterday.","He doesn't go to work yesterday.","He didn't go to work yesterday.","He not went to work yesterday."],2],[1,"Which sentence is correct?",["There aren't any milk in the fridge.","There isn't no milk in the fridge.","There isn't some milk in the fridge.","There isn't any milk in the fridge."],3],[2,"Which sentence is correct?",["If I had more time, I will learn Spanish.","If I would have more time, I would learn Spanish.","If I have more time, I would learn Spanish.","If I had more time, I would learn Spanish."],3],[2,"Which sentence is correct?",["She told that she was tired.","She told me that she was tired.","She told me that she is being tired.","She said me that she was tired."],1],[2,"Which sentence is correct?",["He is the man that his car was stolen.","He is the man whose car was stolen.","He is the man who's car was stolen.","He is the man which car was stolen."],1],[3,"Which sentence is correct?",["I wish I haven't said that.","I wish I hadn't said that.","I wish I didn't say that.","I wish I wouldn't have said that."],1],[3,"Which sentence is correct?",["Despite the rain, we were enjoyed the trip.","Despite it rained, we enjoyed the trip.","Despite of the rain, we enjoyed the trip.","Despite the rain, we enjoyed the trip."],3],[3,"Which sentence is correct?",["She is working here since 2019.","She has worked here for 2019.","She has been working here since 2019.","She worked here since 2019."],2],[4,"Which sentence is correct?",["Rarely he complains about anything.","Rarely does he complains about anything.","Rarely he does complain about anything.","Rarely does he complain about anything."],3],[4,"Which sentence is correct?",["Not until I read the report I understood the problem.","Not until I did read the report understood I the problem.","Not until I read the report did I understand the problem.","Not until did I read the report I understood the problem."],2],[4,"Which sentence is correct?",["The more you practise, the better you become.","The more you practise, the best you become.","The more you practise, the more better you become.","More you practise, better you become."],0],[5,"Which sentence is correct?",["Scarcely had the lecture begun that the fire alarm go off.","Scarcely did the lecture begin when had the fire alarm gone off.","Scarcely the lecture had begun when the fire alarm went off.","Scarcely had the lecture begun when the fire alarm went off."],3],[5,"Which sentence is correct?",["Were he to resign, the company would struggle to find a replacement.","Were he resigns, the company would struggle to find a replacement.","Was he to resign, the company would struggle to find a replacement.","If he would resign, the company would struggle to find a replacement."],0],[5,"Which sentence is correct?",["It was not until much later when I realised my mistake.","It was not until much later that I realised my mistake.","It was not until much later that did I realise my mistake.","Not until much later it was that I realised my mistake."],1]],"R":[[0,"SALE! Everything 50% off. Today only. Open 9:00-18:00.","When is the sale?",["Today only","Every day","Only on Sunday","All week"],0],[0,"Hi Anna, I'm at the cafe. I'm in the corner near the window. See you soon! Mark","Where is Mark?",["In a cafe","At work","At home","In the park"],0],[0,"Please do not feed the animals.","What does the sign say?",["Buy food for the animals.","Feed the animals here.","Animals are not allowed.","Don't give food to the animals."],3],[1,"Dear Tom, thanks for your invitation to your party on Saturday. I'd love to come, but I'm visiting my grandmother that weekend. Maybe we can meet next week? Best, Lisa","Why can't Lisa come to the party?",["She doesn't like parties.","She has to work.","She is ill.","She is visiting her grandmother."],3],[1,"Library opening hours: Mon-Fri 9 am-8 pm; Saturday 10 am-4 pm; closed on Sundays and public holidays.","When can you visit the library?",["On Sunday afternoon","On Saturday at noon","On a public holiday","On Monday at 9 pm"],1],[1,"Our flight was delayed for three hours, so we arrived at the hotel very late. The next morning, the weather was beautiful and we had breakfast on the terrace.","Why did they arrive late?",["Their flight was delayed.","The weather was bad.","They got lost.","The hotel was closed."],0],[2,"Hi Sam, I'm writing about the flat you advertised. Is it still available? I'd like to see it this week, preferably after 6 pm because I work until then. Also, are pets allowed? I have a small cat. Thanks, Jo","What does Jo ask about, apart from the viewing?",["The neighbours","The price of the rent","The size of the flat","Whether pets are allowed"],3],[2,"Many people think that learning a language is mostly about memorising words. In fact, regular short practice is more effective than studying for hours once a week.","According to the text, what works best?",["Studying only grammar","Short regular practice","Memorising word lists","Long weekly sessions"],1],[2,"Although the restaurant was crowded, the staff were friendly and our food arrived quickly. The only problem was the noise, which made conversation difficult.","What was wrong with the restaurant?",["The service was slow.","The food was cold.","The staff were rude.","It was too loud."],3],[3,"The city council has announced plans to ban cars from the town centre by 2030. Supporters argue the move will reduce pollution, while shopkeepers fear that fewer customers will be able to reach their shops.","What worries the shopkeepers?",["Higher rent","More pollution","Council taxes","Losing customers"],3],[3,"Despite initial scepticism, the experiment showed that a four-day working week did not reduce productivity. Employees reported lower stress, and several companies decided to make the change permanent.","What did the experiment show?",["A shorter week did not harm productivity.","Employees were less happy.","Stress levels increased.","Companies lost money."],0],[3,"The author claims that social media has made us more connected but less communicative: we exchange more messages than ever, yet rarely have meaningful conversations.","What is the author's main point?",["People talk more than before.","Conversations are getting longer.","Social media is useless.","More messages do not mean better communication."],3],[4,"Far from being a mere technical hurdle, the shortage of skilled workers has become a structural problem that no short-term policy can resolve, since it reflects decades of underinvestment in vocational training.","What does the writer suggest about the shortage?",["It needs long-term solutions.","It only affects training centres.","It will disappear soon.","It is caused by new technology."],0],[4,"The film's ambiguity, which some critics have dismissed as pretentious, is precisely what gives it lasting power: it refuses to tell the audience what to think.","The writer thinks the film's ambiguity is ___.",["accidental","a serious flaw","its main strength","unpopular with audiences"],2],[4,"While the findings are suggestive, the authors are careful to stress that correlation should not be mistaken for causation, and that larger studies are needed.","What do the authors caution?",["More money is needed.","The findings are false.","The results do not prove cause and effect.","The studies are too large."],2],[5,"That the committee should have overlooked such glaring irregularities beggars belief, and one cannot help suspecting that expediency, rather than oversight, was at work.","What does the writer imply?",["No one noticed the problems.","The committee was careless but honest.","The irregularities were minor.","The omission may have been deliberate."],3],[5,"Her prose, at once spare and sumptuous, rewards re-reading: each return uncovers some nuance that earlier passes had left tantalisingly out of reach.","What does the reviewer say about the prose?",["It is difficult to finish.","It is too simple.","It reveals more on each reading.","It is overly decorated."],2],[5,"The minister's assurances, delivered with studied nonchalance, did little to allay fears that the reforms would prove more disruptive than advertised.","How did people react to the assurances?",["They were angry about delays.","Their fears disappeared.","The reforms were cancelled.","Their concerns remained."],3]],"P":[[1,"Maria's weekend","On Saturday, Maria usually gets up late. She has a big breakfast with her sister, and then they go to the market to buy fruit and vegetables. In the afternoon, Maria plays tennis with her friend Olga. On Sunday, she visits her grandparents, who live in a small village near the city. They always cook a special lunch for the family. Maria likes Sundays more than Saturdays because she loves her grandmother's apple cake.",[["Who does Maria go to the market with?",["Her sister","Her grandmother","Olga","A friend from work"],0],["Where do Maria's grandparents live?",["In the city centre","Next to the market","In a village near the city","In another country"],2],["Why does Maria prefer Sundays?",["She goes shopping.","She loves her grandmother's cake.","She sleeps late.","She plays tennis."],1]]],[2,"Moving to a new city","When Daniel moved to Manchester for work, he didn't know anyone. The first weeks were difficult: he spent most evenings alone in his flat, watching films. Then a colleague invited him to join a local running club. At first Daniel hesitated, as he hadn't run since school, but he decided to try it. Six months later, he has made several close friends and has even signed up for a half-marathon. 'Running wasn't the point,' he says. 'It was a way to meet people.'",[["Why were the first weeks difficult for Daniel?",["He didn't know anyone in the city.","He was ill.","He had too much work.","He didn't like Manchester."],0],["How did Daniel meet new people?",["At work parties","By going to the cinema","Through his neighbours","By joining a running club"],3],["What does Daniel mean by 'Running wasn't the point'?",["He wants to win races.","Making friends mattered more than the sport.","He only runs for his health.","He doesn't enjoy running."],1]]],[2,"A weekend in Lisbon","We arrived in Lisbon on Friday evening and, after checking in, went straight to a small restaurant recommended by the hotel receptionist. The seafood was excellent and surprisingly cheap. On Saturday we took the famous tram up the hills, but it was so crowded that we decided to walk back. That turned out to be the best part of the day, because we found a little cafe with a view over the river. By Sunday, our feet were sore, but we agreed that we would definitely come back.",[["Where did they have dinner on Friday?",["At a friend's house","At a restaurant the receptionist suggested","At a cafe by the river","At the hotel"],1],["Why did they walk back on Saturday?",["The tram was too crowded.","The tram was too expensive.","It was raining.","They were lost."],0],["How did they feel at the end of the weekend?",["Tired but happy","Bored","Angry about the prices","Disappointed"],0]]],[3,"Sleep and memory","Scientists have long known that sleep is essential, but recent research suggests that its role in memory is even greater than previously thought. During deep sleep, the brain appears to replay the day's events, strengthening important connections while discarding trivial details. This may explain why students who sleep after studying perform better in tests than those who stay up revising all night. However, researchers warn against drawing simple conclusions: the amount of sleep people need varies considerably, and for some individuals, six hours may be perfectly adequate.",[["What does recent research suggest about sleep?",["Deep sleep is unnecessary.","Memory is unaffected by sleep.","It plays a bigger role in memory than assumed.","Everyone needs eight hours."],2],["According to the text, students who sleep after studying ___.",["tend to do better in tests","need more revision","forget the details","study less effectively"],0],["What do the researchers warn?",["Sleep needs differ between people.","Six hours is never enough.","Revising at night is best.","Conclusions are always simple."],0]]],[4,"The attention problem","It is tempting to blame our shrinking attention spans on smartphones, but the argument is less straightforward than it appears. Attention has always been a limited resource, and every era has had its distractions; what has changed is the sheer efficiency with which modern technology competes for it. Apps are engineered by teams of specialists whose express aim is to keep users engaged, and against such sophisticated persuasion, individual willpower is a poor defence. This suggests that the burden of responsibility should not rest solely on the user, but also on the designers who profit from our distraction.",[["What is the writer's attitude to blaming smartphones?",["It is outdated.","It is hypocritical.","It oversimplifies the issue.","It is entirely justified."],2],["What is new about modern distractions?",["People have less willpower by nature","How effectively technology captures attention","They are cheaper","There are more books"],1],["What does the writer conclude?",["Designers share the responsibility.","Users should simply try harder.","Willpower is the best defence.","Technology should be banned."],0]]]],"L":[[0,"l01","Where does Kate work?",["In a school","In a hospital","In a cafe","In a shop"],3],[0,"l02","How much is the bag?",["50 pounds","22 pounds","12 pounds","20 pounds"],3],[1,"l03","When will they meet?",["At half past seven","At six","At seven","At eight"],2],[1,"l04","Why can't Ben come to the gym?",["He is ill.","He forgot.","He is on holiday.","He has to work late."],3],[1,"l05","How long is the delay?",["14 minutes","20 minutes","30 minutes","40 minutes"],1],[2,"l06","What did the man think of the trip?",["It was boring.","It was great despite the weather.","It was spoiled by the rain.","It was too expensive."],1],[2,"l07","What will the weather be like in the afternoon?",["Rainy","Colder","Windy","Warmer and clearer"],3],[2,"l08","Why does the woman want a new job?",["The working day is too long.","She dislikes her colleagues.","The pay is low.","The work is boring."],0],[3,"l09","What surprised the speaker most?",["The language","The food prices","Everyday customs","The climate"],2],[3,"l10","Why are morning exercisers more consistent?",["Fewer things interrupt them.","They like mornings.","Gyms are cheaper then.","They have more energy."],0],[3,"l11","What is the woman's main concern about the proposal?",["The team is too small.","The budget looks unrealistic.","The idea is too risky.","The deadline is too short."],1],[4,"l12","What is the speaker's point?",["Choice always increases happiness.","Regret is unavoidable.","Too many options can cause anxiety.","People dislike making decisions."],2],[4,"l13","What is the man's criticism?",["He ignored the main objection.","He was badly prepared.","His argument was too long.","He made factual errors."],0],[5,"l14","What does the speaker think of the policy?",["It helps the wrong people.","It may defeat its own purpose.","It will be popular.","It is badly explained."],1]]};/*BANK-END*/
+/*BANK-START*/const BANK={"G":[[0,"I ___ a student.",["are","be","is","am"],3],[0,"She ___ coffee every morning.",["drinks","is drink","drinking","drink"],0],[0,"There ___ two books on the table.",["are","is","am","be"],0],[0,"___ you like pizza?",["Is","Are","Do","Does"],2],[0,"This is ___ apple.",["some","any","a","an"],3],[0,"My brother and I ___ at home now.",["am","is","are","be"],2],[0,"He ___ a car.",["is got","have got","has got","haves"],2],[0,"Where ___ you from?",["are","does","is","do"],0],[1,"We ___ dinner when the phone rang.",["had","were having","have","has"],1],[1,"I'm taller ___ my brother.",["as","that","than","then"],2],[1,"She ___ to London last year.",["going","went","goes","has gone"],1],[1,"You ___ wear a seat belt in the car. It's the law.",["would","can","must","might"],2],[1,"How ___ water do you drink every day?",["much","often","many","long"],0],[1,"I haven't seen him ___ Monday.",["during","from","for","since"],3],[1,"If you ___ hungry, there is some soup in the fridge.",["were being","would be","will be","are"],3],[1,"Tom is ___ person in our class.",["the funniest","funnier","more funny","the most funny"],0],[2,"I ___ sushi before I moved to Japan.",["had never eaten","have never eaten","never ate","was never eating"],0],[2,"If it rains tomorrow, we ___ the picnic.",["would cancel","cancel","cancelled","will cancel"],3],[2,"She asked me where ___.",["I do live","do I live","I lived","did I live"],2],[2,"This is the house ___ I grew up.",["what","where","which","who"],1],[2,"He is used to ___ up early.",["get","got","getting","be getting"],2],[2,"By the time we arrived, the film ___.",["had started","has started","started","was starting"],0],[2,"I wish I ___ more free time.",["had","have","has","would have"],0],[2,"You ___ smoke here. It's forbidden.",["mustn't","don't have to","wouldn't","needn't"],0],[3,"The new bridge ___ by next summer.",["is completing","will be completed","will complete","completed"],1],[3,"I'd rather you ___ smoke here.",["doesn't","didn't","not","won't"],1],[3,"She suggested ___ a taxi.",["take","to take","that we to take","taking"],3],[3,"Hardly ___ the house when it started to rain.",["did we leave","had we left","we had left","we left"],1],[3,"If I ___ you, I'd accept the offer.",["were","am","would be","will be"],0],[3,"The manager, ___ I spoke yesterday, is on holiday.",["to whom","who","which","whose"],0],[3,"He denied ___ the window.",["to break","breaking","break","having to break"],1],[3,"No sooner had she sat down ___ the phone rang.",["than","that","when","then"],0],[4,"Had I known about the traffic, I ___ earlier.",["left","will leave","would leave","would have left"],3],[4,"Not only ___ late, but she also forgot the documents.",["she did arrive","she arrived","did she arrive","arrived she"],2],[4,"It's high time we ___ a decision.",["will make","make","made","are making"],2],[4,"The proposal, ___ was widely criticised, was eventually withdrawn.",["that","which","what","who"],1],[4,"She is said ___ the best lawyer in the city.",["to be","to being","she is","be"],0],[4,"Had it not been for your help, I ___ the deadline.",["missed","would have missed","am missing","will miss"],1],[4,"By this time next year, she ___ her degree.",["has completed","will complete","completes","will have completed"],3],[4,"He insisted that she ___ present at the meeting.",["is","would be","was","be"],3],[5,"Seldom ___ such a remarkable performance.",["I witnessed","did I witnessed","have I witnessed","I have witnessed"],2],[5,"Little ___ that the decision would change his life.",["did he know","he knew","he did know","knew he"],0],[5,"The suspect is believed ___ the country before the police arrived.",["leaving","to be leaving","to have left","to leave"],2],[5,"She spoke as though she ___ the director herself.",["is","were","will be","was being"],1],[5,"I would sooner die ___ apologise to him.",["that","than","rather","to"],1],[5,"___ the circumstances, the committee's decision was entirely justified.",["To give","Giving","Given","Having given"],2],[5,"It is imperative that every candidate ___ the instructions carefully.",["will read","is reading","read","reads"],2],[5,"So absorbed ___ in the book that she missed her stop.",["did she","was she","she was","had she"],1]],"V":[[0,"Choose the opposite of 'big'.",["long","small","old","tall"],1],[0,"I drink ___ in the morning.",["window","pencil","chair","coffee"],3],[0,"Today is Monday. Tomorrow is ___.",["Saturday","Friday","Sunday","Tuesday"],3],[0,"A person who teaches students is a ___.",["driver","doctor","cook","teacher"],3],[0,"I wear a ___ on my head when it is cold.",["hat","shoe","belt","sock"],0],[1,"Can you ___ up the meaning of this word in a dictionary?",["get","look","take","put"],1],[1,"I need to ___ the bus at the next stop.",["take off","get off","get out","go off"],1],[1,"She is very ___: she never forgets to say 'thank you'.",["angry","polite","lazy","rude"],1],[1,"The opposite of 'borrow' is ___.",["lend","buy","keep","pay"],0],[1,"It's a ___ day today: no clouds and the sun is shining.",["foggy","sunny","rainy","snowy"],1],[2,"The meeting has been ___ until next week because the manager is ill.",["refused","invented","prevented","postponed"],3],[2,"I'm really looking ___ to seeing you.",["ahead","after","up","forward"],3],[2,"He is very ___: he can't make up his mind about anything.",["generous","honest","confident","indecisive"],3],[2,"I can't ___ the noise from the street any longer.",["give up with","put up with","make up with","go on with"],1],[2,"The film was so boring that I nearly fell ___.",["sleeping","asleep","sleepy","slept"],1],[3,"The company decided to ___ 200 employees because of falling profits.",["turn down","lay off","put off","lay down"],1],[3,"His behaviour was completely ___: I had never seen him so rude.",["out of reach","out of order","out of character","out of date"],2],[3,"We need to come up ___ a solution before Friday.",["with","to","for","by"],0],[3,"The new policy will have a ___ impact on small businesses.",["signify","significantly","significant","significance"],2],[3,"Her argument was so ___ that nobody could disagree.",["complacent","compulsory","compelling","competent"],2],[4,"Her explanation was so ___ that nobody in the room understood it.",["convoluted","candid","mundane","succinct"],0],[4,"The politician's speech was full of ___ promises that nobody believed.",["empty","vacant","blank","void"],0],[4,"The new CEO's first priority was to ___ the company's fragile finances.",["substitute","stagnate","stabilise","scrutinise"],2],[4,"He was ___ by the news and could not speak for a moment.",["taken in","taken aback","taken over","taken up"],1],[4,"The two proposals are so different that it is not a ___ comparison.",["hand-to-mouth","all-in-all","like-for-like","face-to-face"],2],[5,"In a formal business report, the most appropriate way to say 'get rid of' is:",["throw away","dump","eliminate","chuck out"],2],[5,"Her ___ remarks about the project offended several colleagues.",["disparaging","dispassionate","disinterested","disarming"],0],[5,"The new regulations are so ___ that even experts struggle to interpret them.",["abrupt","abstruse","abundant","adjacent"],1],[5,"He is a ___ supporter of the old system and rejects any reform.",["sturdy","stark","stunted","staunch"],3],[5,"Her success was largely ___ to good luck rather than talent.",["attributive","attributable","attribution","attributing"],1]],"U":[[0,"Which sentence is correct?",["She doesn't likes tea.","She don't like tea.","She not like tea.","She doesn't like tea."],3],[0,"Which sentence is correct?",["They are playing football now.","They plays football now.","They is playing football now.","They playing football now."],0],[0,"Which sentence is correct?",["I has two brothers and a sister.","I have two brothers and a sister.","I am have two brothers and a sister.","I have two brother and a sister."],1],[1,"Which sentence is correct?",["I've lived here since five years.","I am living here for five years.","I live here since five years.","I've lived here for five years."],3],[1,"Which sentence is correct?",["He didn't went to work yesterday.","He doesn't go to work yesterday.","He didn't go to work yesterday.","He not went to work yesterday."],2],[1,"Which sentence is correct?",["There aren't any milk in the fridge.","There isn't no milk in the fridge.","There isn't some milk in the fridge.","There isn't any milk in the fridge."],3],[2,"Which sentence is correct?",["If I had more time, I will learn Spanish.","If I would have more time, I would learn Spanish.","If I have more time, I would learn Spanish.","If I had more time, I would learn Spanish."],3],[2,"Which sentence is correct?",["She told that she was tired.","She told me that she was tired.","She told me that she is being tired.","She said me that she was tired."],1],[2,"Which sentence is correct?",["He is the man that his car was stolen.","He is the man whose car was stolen.","He is the man who's car was stolen.","He is the man which car was stolen."],1],[3,"Which sentence is correct?",["I wish I haven't said that.","I wish I hadn't said that.","I wish I didn't say that.","I wish I wouldn't have said that."],1],[3,"Which sentence is correct?",["Despite the rain, we were enjoyed the trip.","Despite it rained, we enjoyed the trip.","Despite of the rain, we enjoyed the trip.","Despite the rain, we enjoyed the trip."],3],[3,"Which sentence is correct?",["She is working here since 2019.","She has worked here for 2019.","She has been working here since 2019.","She worked here since 2019."],2],[4,"Which sentence is correct?",["Rarely he complains about anything.","Rarely does he complains about anything.","Rarely he does complain about anything.","Rarely does he complain about anything."],3],[4,"Which sentence is correct?",["Not until I read the report I understood the problem.","Not until I did read the report understood I the problem.","Not until I read the report did I understand the problem.","Not until did I read the report I understood the problem."],2],[4,"Which sentence is correct?",["The more you practise, the better you become.","The more you practise, the best you become.","The more you practise, the more better you become.","More you practise, better you become."],0],[5,"Which sentence is correct?",["Scarcely had the lecture begun that the fire alarm go off.","Scarcely did the lecture begin when had the fire alarm gone off.","Scarcely the lecture had begun when the fire alarm went off.","Scarcely had the lecture begun when the fire alarm went off."],3],[5,"Which sentence is correct?",["Were he to resign, the company would struggle to find a replacement.","Were he resigns, the company would struggle to find a replacement.","Was he to resign, the company would struggle to find a replacement.","If he would resign, the company would struggle to find a replacement."],0],[5,"Which sentence is correct?",["It was not until much later when I realised my mistake.","It was not until much later that I realised my mistake.","It was not until much later that did I realise my mistake.","Not until much later it was that I realised my mistake."],1]],"R":[[0,"SALE! Everything 50% off. Today only. Open 9:00-18:00.","When is the sale?",["Today only","Every day","Only on Sunday","All week"],0],[0,"Hi Anna, I'm at the cafe. I'm in the corner near the window. See you soon! Mark","Where is Mark?",["In a cafe","At work","At home","In the park"],0],[0,"Please do not feed the animals.","What does the sign say?",["Buy food for the animals.","Feed the animals here.","Animals are not allowed.","Don't give food to the animals."],3],[1,"Dear Tom, thanks for your invitation to your party on Saturday. I'd love to come, but I'm visiting my grandmother that weekend. Maybe we can meet next week? Best, Lisa","Why can't Lisa come to the party?",["She doesn't like parties.","She has to work.","She is ill.","She is visiting her grandmother."],3],[1,"Library opening hours: Mon-Fri 9 am-8 pm; Saturday 10 am-4 pm; closed on Sundays and public holidays.","When can you visit the library?",["On Sunday afternoon","On Saturday at noon","On a public holiday","On Monday at 9 pm"],1],[1,"Our flight was delayed for three hours, so we arrived at the hotel very late. The next morning, the weather was beautiful and we had breakfast on the terrace.","Why did they arrive late?",["Their flight was delayed.","The weather was bad.","They got lost.","The hotel was closed."],0],[2,"Hi Sam, I'm writing about the flat you advertised. Is it still available? I'd like to see it this week, preferably after 6 pm because I work until then. Also, are pets allowed? I have a small cat. Thanks, Jo","What does Jo ask about, apart from the viewing?",["The neighbours","The price of the rent","The size of the flat","Whether pets are allowed"],3],[2,"Many people think that learning a language is mostly about memorising words. In fact, regular short practice is more effective than studying for hours once a week.","According to the text, what works best?",["Studying only grammar","Short regular practice","Memorising word lists","Long weekly sessions"],1],[2,"Although the restaurant was crowded, the staff were friendly and our food arrived quickly. The only problem was the noise, which made conversation difficult.","What was wrong with the restaurant?",["The service was slow.","The food was cold.","The staff were rude.","It was too loud."],3],[3,"The city council has announced plans to ban cars from the town centre by 2030. Supporters argue the move will reduce pollution, while shopkeepers fear that fewer customers will be able to reach their shops.","What worries the shopkeepers?",["Higher rent","More pollution","Council taxes","Losing customers"],3],[3,"Despite initial scepticism, the experiment showed that a four-day working week did not reduce productivity. Employees reported lower stress, and several companies decided to make the change permanent.","What did the experiment show?",["A shorter week did not harm productivity.","Employees were less happy.","Stress levels increased.","Companies lost money."],0],[3,"The author claims that social media has made us more connected but less communicative: we exchange more messages than ever, yet rarely have meaningful conversations.","What is the author's main point?",["People talk more than before.","Conversations are getting longer.","Social media is useless.","More messages do not mean better communication."],3],[4,"Far from being a mere technical hurdle, the shortage of skilled workers has become a structural problem that no short-term policy can resolve, since it reflects decades of underinvestment in vocational training.","What does the writer suggest about the shortage?",["It needs long-term solutions.","It only affects training centres.","It will disappear soon.","It is caused by new technology."],0],[4,"The film's ambiguity, which some critics have dismissed as pretentious, is precisely what gives it lasting power: it refuses to tell the audience what to think.","The writer thinks the film's ambiguity is ___.",["accidental","a serious flaw","its main strength","unpopular with audiences"],2],[4,"While the findings are suggestive, the authors are careful to stress that correlation should not be mistaken for causation, and that larger studies are needed.","What do the authors caution?",["More money is needed.","The findings are false.","The results do not prove cause and effect.","The studies are too large."],2],[5,"That the committee should have overlooked such glaring irregularities beggars belief, and one cannot help suspecting that expediency, rather than oversight, was at work.","What does the writer imply?",["No one noticed the problems.","The committee was careless but honest.","The irregularities were minor.","The omission may have been deliberate."],3],[5,"Her prose, at once spare and sumptuous, rewards re-reading: each return uncovers some nuance that earlier passes had left tantalisingly out of reach.","What does the reviewer say about the prose?",["It is difficult to finish.","It is too simple.","It reveals more on each reading.","It is overly decorated."],2],[5,"The minister's assurances, delivered with studied nonchalance, did little to allay fears that the reforms would prove more disruptive than advertised.","How did people react to the assurances?",["They were angry about delays.","Their fears disappeared.","The reforms were cancelled.","Their concerns remained."],3]],"P":[[1,"Maria's weekend","On Saturday, Maria usually gets up late. She has a big breakfast with her sister, and then they go to the market to buy fruit and vegetables. In the afternoon, Maria plays tennis with her friend Olga. On Sunday, she visits her grandparents, who live in a small village near the city. They always cook a special lunch for the family. Maria likes Sundays more than Saturdays because she loves her grandmother's apple cake.",[["Who does Maria go to the market with?",["Her sister","Her grandmother","Olga","A friend from work"],0,0],["Maria plays tennis on Sunday.",["True","False","Not stated"],1,1],["Why does Maria prefer Sundays?",["She plays tennis.","She goes shopping.","She loves her grandmother's cake.","She sleeps late."],2,0],["Maria's sister plays tennis too.",["True","False","Not stated"],2,1]]],[2,"Moving to a new city","When Daniel moved to Manchester for work, he didn't know anyone. The first weeks were difficult: he spent most evenings alone in his flat, watching films. Then a colleague invited him to join a local running club. At first Daniel hesitated, as he hadn't run since school, but he decided to try it. Six months later, he has made several close friends and has even signed up for a half-marathon. 'Running wasn't the point,' he says. 'It was a way to meet people.'",[["Why were the first weeks difficult for Daniel?",["He was ill.","He didn't know anyone in the city.","He didn't like Manchester.","He had too much work."],1,0],["Daniel ran regularly before he moved to Manchester.",["True","False","Not stated"],1,1],["What does Daniel mean by 'Running wasn't the point'?",["Making friends mattered more than the sport.","He only runs for his health.","He doesn't enjoy running.","He wants to win races."],0,0],["Daniel's colleague is also training for the half-marathon.",["True","False","Not stated"],2,1]]],[2,"A weekend in Lisbon","We arrived in Lisbon on Friday evening and, after checking in, went straight to a small restaurant recommended by the hotel receptionist. The seafood was excellent and surprisingly cheap. On Saturday we took the famous tram up the hills, but it was so crowded that we decided to walk back. That turned out to be the best part of the day, because we found a little cafe with a view over the river. By Sunday, our feet were sore, but we agreed that we would definitely come back.",[["Where did they have dinner on Friday?",["At the hotel","At a friend's house","At a cafe by the river","At a restaurant the receptionist suggested"],3,0],["They found a cafe while they were walking back.",["True","False","Not stated"],0,1],["Why did they walk back on Saturday?",["It was raining.","The tram was too crowded.","They were lost.","The tram was too expensive."],1,0],["They visited a museum on Sunday.",["True","False","Not stated"],2,1]]],[3,"Sleep and memory","Scientists have long known that sleep is essential, but recent research suggests that its role in memory is even greater than previously thought. During deep sleep, the brain appears to replay the day's events, strengthening important connections while discarding trivial details. This may explain why students who sleep after studying perform better in tests than those who stay up revising all night. However, researchers warn against drawing simple conclusions: the amount of sleep people need varies considerably, and for some individuals, six hours may be perfectly adequate.",[["What does recent research suggest about sleep?",["Deep sleep is unnecessary.","It plays a bigger role in memory than assumed.","Everyone needs eight hours.","Memory is unaffected by sleep."],1,0],["The brain seems to replay the day's events during deep sleep.",["True","False","Not stated"],0,1],["What do the researchers warn?",["Sleep needs differ between people.","Six hours is never enough.","Revising at night is best.","Conclusions are always simple."],0,0],["Most adults sleep for less than six hours a night.",["True","False","Not stated"],2,1]]],[4,"The attention problem","It is tempting to blame our shrinking attention spans on smartphones, but the argument is less straightforward than it appears. Attention has always been a limited resource, and every era has had its distractions; what has changed is the sheer efficiency with which modern technology competes for it. Apps are engineered by teams of specialists whose express aim is to keep users engaged, and against such sophisticated persuasion, individual willpower is a poor defence. This suggests that the burden of responsibility should not rest solely on the user, but also on the designers who profit from our distraction.",[["What is the writer's attitude to blaming smartphones?",["It oversimplifies the issue.","It is hypocritical.","It is outdated.","It is entirely justified."],0,0],["The writer claims that attention has become a limited resource only recently.",["True","False","Not stated"],1,1],["What does the writer conclude?",["Willpower is the best defence.","Users should simply try harder.","Designers share the responsibility.","Technology should be banned."],2,0],["Apps are deliberately designed to keep people engaged.",["True","False","Not stated"],0,1]]]],"L":[[0,"l01","Where does Kate work?",["In a shop","In a hospital","In a school","In a cafe"],0],[0,"l02","How much is the bag?",["20 pounds","12 pounds","22 pounds","50 pounds"],0],[1,"l03","When will they meet?",["At eight","At six","At seven","At half past seven"],2],[1,"l04","Why can't Ben come to the gym?",["He is on holiday.","He has to work late.","He forgot.","He is ill."],1],[1,"l05","How long is the delay?",["20 minutes","14 minutes","30 minutes","40 minutes"],0],[2,"l06","What did the man think of the trip?",["It was spoiled by the rain.","It was too expensive.","It was boring.","It was great despite the weather."],3],[2,"l07","What will the weather be like in the afternoon?",["Windy","Colder","Rainy","Warmer and clearer"],3],[2,"l08","Why does the woman want a new job?",["The pay is low.","The work is boring.","The working day is too long.","She dislikes her colleagues."],2],[3,"l09","What surprised the speaker most?",["The language","The food prices","The climate","Everyday customs"],3],[3,"l10","Why are morning exercisers more consistent?",["They have more energy.","Fewer things interrupt them.","Gyms are cheaper then.","They like mornings."],1],[3,"l11","What is the woman's main concern about the proposal?",["The deadline is too short.","The budget looks unrealistic.","The idea is too risky.","The team is too small."],1],[4,"l12","What is the speaker's point?",["Choice always increases happiness.","Regret is unavoidable.","People dislike making decisions.","Too many options can cause anxiety."],3],[4,"l13","What is the man's criticism?",["He ignored the main objection.","He was badly prepared.","His argument was too long.","He made factual errors."],0],[5,"l14","What does the speaker think of the policy?",["It is badly explained.","It helps the wrong people.","It may defeat its own purpose.","It will be popular."],2]]};/*BANK-END*/
 
 const LV = ['A1','A2','B1','B2','C1','C2'];
 const LNAME = ['Beginner','Elementary','Intermediate','Upper-Intermediate','Advanced','Proficiency'];
@@ -492,9 +599,37 @@ const LCOPY = [
 const DIFF = [-2.4, -1.4, -0.4, 0.6, 1.6, 2.6];   // трудность задания по уровню
 const SLOPE = 1.3;
 const SKILL_NAME = { G:'Грамматика', V:'Словарь', R:'Чтение', L:'Аудирование', U:'Use of English' };
-const SKILL_TITLE = { G:'Грамматика', V:'Словарь', R:'Чтение', L:'Аудирование', U:'Use of English' };
+const BLK = {
+  G:{ ru:'Грамматика', en:'Grammar' }, V:{ ru:'Словарь', en:'Vocabulary' }, R:{ ru:'Чтение', en:'Reading' },
+  L:{ ru:'Аудирование', en:'Listening' }, U:{ ru:'Use of English', en:'Use of English' }
+};
 
-/* ---------- маркетинговые вставки между заданиями ---------- */
+/* блоки теста: s=навык, n=число заданий, min=ориентировочные минуты */
+const BLOCK_DEF = {
+  express: [ {s:'G',n:6,min:2}, {s:'V',n:3,min:1}, {s:'R',n:2,min:1,short:true}, {s:'L',n:2,min:1}, {s:'U',n:2,min:1} ],
+  full:    [ {s:'G',n:13,min:5}, {s:'V',n:9,min:3}, {s:'R',n:12,min:8,texts:3}, {s:'L',n:8,min:5}, {s:'U',n:8,min:3} ]
+};
+
+/* введение перед блоком */
+const BLOCK_INTRO = {
+  G: { full:'В каждом задании в предложении пропущено слово или часть предложения. Выберите вариант, который подходит грамматически. Задания подстраиваются под ваши ответы: чем увереннее вы отвечаете, тем сложнее становятся вопросы.',
+       short:'Выберите вариант, который подходит грамматически. Вопросы подстраиваются под ваши ответы.',
+       tip:'Готовиться не нужно. Не пользуйтесь переводчиком и подсказками: так мы точнее определим ваш уровень. Не уверены? Нажмите «Не знаю», это лучше, чем угадывать.' },
+  V: { full:'Выберите слово или выражение, которое подходит по смыслу: слова в контексте, фразовые глаголы, устойчивые сочетания.',
+       short:'Выберите слово или выражение, которое подходит по смыслу.',
+       tip:'Если слова вы не знаете, это нормально. Нажмите «Не знаю» или выберите самый вероятный вариант.' },
+  R: { full:'Три текста разной сложности, к каждому по 4 вопроса: 2 на понимание и 2 в формате True / False / Not stated. True: в тексте так и сказано. False: в тексте сказано обратное. Not stated: в тексте об этом ничего нет, даже если в жизни это так.',
+       short:'Два коротких текста (сообщения и объявления), к каждому по одному вопросу. Ответ всегда есть в тексте.',
+       tip:'Читайте внимательно и опирайтесь только на текст, а не на свои знания. Текст остаётся на экране, пока вы отвечаете на вопросы к нему.' },
+  L: { full:'{n} записей, к каждой один вопрос. Перед записью диктор объявит, что вы услышите и что нужно сделать. Каждую запись можно прослушать два раза.',
+       short:'{n} записи, каждую можно прослушать два раза. Перед записью диктор объявит, что нужно сделать.',
+       tip:'Включите звук или наденьте наушники и найдите тихое место. Варианты ответов откроются, когда вы запустите запись.' },
+  U: { full:'В каждом задании четыре предложения, и только одно из них без ошибок. Выберите его.',
+       short:'Выберите предложение без ошибок. Это последний блок, дальше результат.',
+       tip:'Читайте предложения целиком: ошибка может быть в любом слове, например в форме глагола, артикле или порядке слов. Это последний блок, дальше результат.' }
+};
+
+/* ---------- маркетинговые вставки между блоками ---------- */
 const TG_URL = 'https://t.me/weyorkonline', YT_URL = 'https://www.youtube.com/@weyorkonline';
 const PROMOS = {
   E1: { tag:'Пока вы проходите тест', h:'Английский лучше учится каждый день понемногу',
@@ -516,23 +651,27 @@ const PROMOS = {
         p:'Пройдите тест до конца и заберите 10% скидку на первый месяц обучения. Мы покажем ваш уровень отдельно по грамматике, словарю, чтению и аудированию.',
         cta:{ t:'Посмотреть цены', u:'index.html#formats' } }
 };
+const PROMO_BEFORE = { express:{ 1:'E1', 3:'E2' }, full:{ 1:'F1', 2:'F2', 3:'F3', 4:'F4' } };
 
 /* ---------- состояние ---------- */
 const SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_jlcvNafksQ0WhrYCY08anw_ju194-I9';
 
 let selectedFormat = 'express';
-let plan = [];            // шаги: {k:'Q', s:'G'} | {k:'P'} | {k:'promo', id}
-let stepIdx = 0;
-let queue = [];           // подготовленные вопросы (например, 3 вопроса одного текста)
-let answers = [];         // {skill, level, correct, dk, n}
-let used = {};            // {G:Set, ...}
-let cur = null;           // текущий вопрос
-let picked = null;        // индекс варианта, -1 = «не знаю»
-let totalQ = 0, doneQ = 0;
+let blocks = [];          // {s,n,min,start,short,texts}
+let total = 0;
+let hist = [];            // показанные задания (с ответами): {skill,level,text,options,answer,picked,...}
+let pos = -1;             // текущее задание в hist
+let queue = [];           // вопросы текущего текста (блок Reading в полном тесте)
+let used = {};            // использованные задания по навыкам
+let textNo = 0;
+let pending = [];         // экраны перед блоком: вставка, введение
+let introDone = {};
+let curBlock = 0;
+let retReview = false;    // задание открыто из экрана итогов
 let startedAt = 0;
 let pendingResult = null;
-let audioEl = null, audioPlays = 0, audioStarted = false;
+let audioEl = null;
 let inTest = false, leaveOk = false, leaveTimer = null;
 
 function pickFormat(type, el){
@@ -565,89 +704,118 @@ function estimate(rs, mu, sd){
   return bt;
 }
 function levelOf(th){ return th < -1.9 ? 0 : th < -0.9 ? 1 : th < 0.1 ? 2 : th < 1.1 ? 3 : th < 2.1 ? 4 : 5; }
+function answeredList(){
+  return hist.filter(h => h.picked !== null).map(h => ({ skill:h.skill, level:h.level, correct:h.picked === h.answer, dk:h.picked === -1, n:h.options.length }));
+}
 function targetLevel(){
-  const th = answers.length ? estimate(answers) : -0.4;
+  const a = answeredList();
+  const th = a.length ? estimate(a) : -0.4;
   return Math.max(0, Math.min(5, Math.round(th + 2.4)));
 }
 
 /* ---------- построение теста ---------- */
-function buildPlan(fmt){
-  const rep = (k, n) => Array.from({ length: n }, () => ({ k:'Q', s:k }));
-  if (fmt === 'express'){
-    const seq = 'G G V G R G L V G U G R L V G'.split(' ');
-    const steps = [];
-    seq.forEach((s, i) => {
-      steps.push({ k:'Q', s });
-      if (i === 4) steps.push({ k:'promo', id:'E1' });
-      if (i === 9) steps.push({ k:'promo', id:'E2' });
-    });
-    return steps;
-  }
-  return [].concat(rep('G', 15), [{ k:'promo', id:'F1' }], rep('V', 10), [{ k:'promo', id:'F2' }],
-    [{ k:'P' }, { k:'P' }, { k:'P' }], [{ k:'promo', id:'F3' }], rep('L', 8), [{ k:'promo', id:'F4' }], rep('U', 8));
-}
+function blockIndexOf(i){ for (let b = blocks.length - 1; b >= 0; b--) if (i >= blocks[b].start) return b; return 0; }
 
 function startQuiz(fmt){
   if (fmt) selectedFormat = fmt;
-  plan = buildPlan(selectedFormat);
-  totalQ = selectedFormat === 'express' ? 15 : 50;
-  stepIdx = 0; queue = []; answers = []; used = {}; cur = null; doneQ = 0;
+  let st = 0;
+  blocks = BLOCK_DEF[selectedFormat].map(b => { const o = Object.assign({}, b, { start: st }); st += b.n; return o; });
+  total = st;
+  hist = []; pos = -1; queue = []; used = {}; textNo = 0; pending = []; introDone = {}; curBlock = 0; retReview = false;
   startedAt = Date.now();
   inTest = true; leaveOk = false;
   document.getElementById('resetNote').style.display = 'none';
-  showScreen('quiz');
-  advance();
+  buildBar();
+  advanceNew();
 }
 
 function takeFrom(skill, target){
   const pool = BANK[skill];
   used[skill] = used[skill] || new Set();
-  let cands = [];
+  const cands = [];
   pool.forEach((it, i) => { if (!used[skill].has(i)) cands.push({ i, d: Math.abs(it[0] - target) + Math.random() * 0.5 }); });
   if (!cands.length) return null;
   cands.sort((a, b) => a.d - b.d);
   used[skill].add(cands[0].i);
-  return { it: pool[cands[0].i], i: cands[0].i };
+  return pool[cands[0].i];
 }
 
 function makeQuestion(skill, tgt){
-  const t = takeFrom(skill, tgt);
-  if (!t) return null;
-  const it = t.it;
-  if (skill === 'G' || skill === 'V' || skill === 'U') return { skill, level:it[0], text:it[1], options:it[2], answer:it[3] };
-  if (skill === 'R') return { skill, level:it[0], passage:it[1], text:it[2], options:it[3], answer:it[4] };
-  if (skill === 'L') return { skill, level:it[0], audio:'assets/leveltest/' + it[1] + '.mp3', text:it[2], options:it[3], answer:it[4] };
+  const it = takeFrom(skill, tgt);
+  if (!it) return null;
+  const base = { skill, level: it[0], picked: null, plays: 0, started: false };
+  if (skill === 'G' || skill === 'V' || skill === 'U') return Object.assign(base, { text:it[1], options:it[2], answer:it[3] });
+  if (skill === 'R') return Object.assign(base, { passage:it[1], text:it[2], options:it[3], answer:it[4] });
+  if (skill === 'L') return Object.assign(base, { audio:'assets/leveltest/' + it[1] + '.mp3', text:it[2], options:it[3], answer:it[4] });
 }
 
-function nextFromPlan(){
-  while (stepIdx < plan.length){
-    const st = plan[stepIdx++];
-    if (st.k === 'promo') return { promo: st.id };
-    if (st.k === 'Q'){ const q = makeQuestion(st.s, targetLevel()); if (q) return { q }; continue; }
-    if (st.k === 'P'){
-      const tgt = targetLevel();
+function makeNext(bi){
+  const b = blocks[bi], tgt = targetLevel();
+  if (b.texts){                                    // Reading в полном тесте: текст и 4 вопроса к нему
+    if (!queue.length){
       used.P = used.P || new Set();
-      const c = BANK.P.map((p, i) => ({ i, d: Math.abs(p[0] - tgt) + Math.random() * 0.4 })).filter(x => !used.P.has(x.i)).sort((a, b) => a.d - b.d);
-      if (!c.length) continue;
+      const c = BANK.P.map((p, i) => ({ i, d: Math.abs(p[0] - tgt) + Math.random() * 0.4 })).filter(x => !used.P.has(x.i)).sort((a, z) => a.d - z.d);
+      if (!c.length) return null;
       used.P.add(c[0].i);
       const p = BANK.P[c[0].i];
-      p[3].forEach(qq => queue.push({ skill:'R', level:p[0], passage:p[2], passageTitle:p[1], text:qq[0], options:qq[1], answer:qq[2] }));
-      return { q: queue.shift() };
+      textNo++;
+      p[3].forEach((qq, k) => queue.push({ skill:'R', level:p[0], picked:null, plays:0, started:false, passage:p[2], passageTitle:p[1],
+        text:qq[0], options:qq[1], answer:qq[2], fmt: qq[3] ? 'tfns' : 'mcq', textNo, textTotal:b.texts, qNo:k + 1, qTotal:p[3].length }));
     }
+    return queue.shift();
   }
-  return null;
+  const q = makeQuestion(b.s, tgt);
+  if (q && b.short){ q.textNo = (hist.length - b.start) + 1; q.textTotal = b.n; q.qNo = 1; q.qTotal = 1; q.short = true; }
+  return q;
 }
 
-function advance(){
-  let nx = null;
-  if (queue.length) nx = { q: queue.shift() };
-  else nx = nextFromPlan();
-  if (!nx){ finishQuiz(); return; }
-  if (nx.promo){ renderPromo(nx.promo); return; }
-  renderQuestion(nx.q);
+/* новое задание: на границе блока сначала вставка и введение */
+function advanceNew(){
+  stopAudio();
+  const idx = hist.length, bi = blockIndexOf(idx);
+  curBlock = bi;
+  if (idx === blocks[bi].start && !introDone[bi]){
+    pending = [];
+    const pid = PROMO_BEFORE[selectedFormat][bi];
+    if (pid) pending.push({ promo: pid });
+    pending.push({ intro: bi });
+    nextInterlude();
+    return;
+  }
+  produceAndShow();
+}
+function nextInterlude(){
+  const s = pending.shift();
+  if (!s){ introDone[curBlock] = true; produceAndShow(); return; }
+  if (s.promo) renderPromo(s.promo); else renderIntro(s.intro);
+}
+function produceAndShow(){
+  const q = makeNext(curBlock);
+  if (!q){ showReview(); return; }
+  q.block = curBlock;
+  hist.push(q); pos = hist.length - 1;
+  renderQuestion();
 }
 
-/* ---------- экраны ---------- */
+/* ---------- экраны: введение, вставка ---------- */
+function plural(n, a, b, c){ const m = n % 10, h = n % 100; return (m === 1 && h !== 11) ? a : (m >= 2 && m <= 4 && (h < 10 || h >= 20)) ? b : c; }
+
+function renderIntro(bi){
+  const b = blocks[bi], info = BLOCK_INTRO[b.s], k = BLK[b.s];
+  document.getElementById('introTag').textContent = `Блок ${bi + 1} из ${blocks.length}`;
+  document.getElementById('introH').textContent = k.ru === k.en ? k.en : `${k.en}: ${k.ru.toLowerCase()}`;
+  const nTxt = b.texts ? `${b.texts} текста, ${b.n} ${plural(b.n, 'вопрос', 'вопроса', 'вопросов')}` : `${b.n} ${plural(b.n, 'задание', 'задания', 'заданий')}`;
+  document.getElementById('introMeta').textContent = `${nTxt} · около ${b.min} ${plural(b.min, 'минуты', 'минут', 'минут')}`;
+  const doTxt = (selectedFormat === 'express' ? info.short : info.full).replace('{n}', b.n);
+  document.getElementById('introDo').textContent = doTxt;
+  const tipWrap = document.getElementById('introTipWrap');
+  if (selectedFormat === 'express'){ tipWrap.style.display = 'none'; }
+  else { tipWrap.style.display = 'block'; document.getElementById('introTip').textContent = info.tip; }
+  document.getElementById('introNext').textContent = (bi === blocks.length - 1) ? 'Начать последний блок' : 'Начать блок';
+  buildBar(bi);
+  showScreen('intro');
+}
+
 function renderPromo(id){
   const p = PROMOS[id];
   document.getElementById('promoTag').textContent = p.tag;
@@ -656,113 +824,198 @@ function renderPromo(id){
   const a = document.getElementById('promoCta');
   a.textContent = p.cta.t + ' →';
   a.href = p.cta.u;
-  const ext = /^https?:/.test(p.cta.u);
   a.target = '_blank'; a.rel = 'noopener';
   a.onclick = () => { leaveOk = true; clearTimeout(leaveTimer); leaveTimer = setTimeout(() => { leaveOk = false; }, 120000); };
+  buildBar(curBlock);
   showScreen('promo');
 }
-function promoContinue(){ showScreen('quiz'); advance(); }
+function promoContinue(){ nextInterlude(); }
+function introStart(){ nextInterlude(); }
 
+/* ---------- полоса блоков ---------- */
+function buildBar(curIdx){
+  const bar = document.getElementById('pbar');
+  bar.innerHTML = '';
+  blocks.forEach((b, i) => {
+    const seg = document.createElement('div');
+    seg.className = 'pseg'; seg.style.flex = String(b.n); seg.title = BLK[b.s].ru;
+    seg.innerHTML = '<i></i>';
+    bar.appendChild(seg);
+  });
+  updateBar(curIdx === undefined ? curBlock : curIdx);
+}
+function updateBar(curIdx){
+  const segs = document.querySelectorAll('#pbar .pseg');
+  blocks.forEach((b, i) => {
+    const done = hist.filter(h => h.block === i && h.picked !== null).length;
+    if (segs[i]){ segs[i].firstChild.style.width = Math.round(done / b.n * 100) + '%'; segs[i].classList.toggle('cur', i === curIdx); }
+  });
+}
+
+/* ---------- задание ---------- */
 function stopAudio(){ if (audioEl){ try { audioEl.pause(); } catch(e){} audioEl = null; } }
 
-function renderQuestion(q){
+function renderQuestion(){
   stopAudio();
-  cur = q; picked = null; audioPlays = 0; audioStarted = !q.audio;
-  document.getElementById('qcount').textContent = `ЗАДАНИЕ ${doneQ + 1} ИЗ ${totalQ} · ${SKILL_TITLE[q.skill].toUpperCase()}`;
-  document.getElementById('pfill').style.width = Math.round(doneQ / totalQ * 100) + '%';
+  const q = hist[pos], b = blocks[q.block];
+  curBlock = q.block;
+  const inBlock = pos - b.start + 1;
+  document.getElementById('qcount').textContent = `БЛОК ${q.block + 1} ИЗ ${blocks.length} · ${BLK[b.s].ru.toUpperCase()} · ЗАДАНИЕ ${inBlock} ИЗ ${b.n}`;
+  updateBar(q.block);
 
-  const pass = document.getElementById('passage');
+  const pass = document.getElementById('passage'), pinfo = document.getElementById('passageInfo');
   if (q.passage){
     pass.style.display = 'block';
     pass.innerHTML = (q.passageTitle ? '<div class="passage-title"></div>' : '') + '<div class="passage-text"></div>';
     if (q.passageTitle) pass.querySelector('.passage-title').textContent = q.passageTitle;
     pass.querySelector('.passage-text').textContent = q.passage;
-  } else { pass.style.display = 'none'; pass.innerHTML = ''; }
+    pinfo.style.display = 'block';
+    pinfo.textContent = q.short
+      ? `Короткий текст ${q.textNo} из ${q.textTotal} · один вопрос к тексту`
+      : `Текст ${q.textNo} из ${q.textTotal} · к нему ${q.qTotal} ${plural(q.qTotal, 'вопрос', 'вопроса', 'вопросов')} · сейчас вопрос ${q.qNo} из ${q.qTotal}`;
+  } else { pass.style.display = 'none'; pass.innerHTML = ''; pinfo.style.display = 'none'; }
 
   const au = document.getElementById('audioBox');
   if (q.audio){
     au.style.display = 'flex';
     const btn = document.getElementById('audioBtn');
-    btn.disabled = false;
-    btn.classList.remove('playing');
-    document.getElementById('audioLabel').textContent = 'Нажмите, чтобы прослушать (можно 2 раза)';
+    btn.disabled = q.plays >= 2; btn.classList.remove('playing');
+    document.getElementById('audioLabel').textContent = q.plays === 0
+      ? 'Нажмите ▶. Диктор объявит, что вы услышите и что нужно сделать. Запись можно прослушать 2 раза.'
+      : (q.plays >= 2 ? 'Запись прослушана 2 раза' : 'Можно прослушать ещё раз (осталась 1 попытка)');
   } else au.style.display = 'none';
 
-  document.getElementById('qtext').textContent = q.text;
+  const hint = document.getElementById('qhint');
+  if (q.fmt === 'tfns'){
+    document.getElementById('qtext').textContent = '«' + q.text + '»';
+    hint.style.display = 'block';
+    hint.textContent = 'Согласно тексту это утверждение верно (True), неверно (False) или в тексте об этом не сказано (Not stated)?';
+  } else { document.getElementById('qtext').textContent = q.text; hint.style.display = 'none'; }
+
+  const locked = !!q.audio && !q.started;
   const wrap = document.getElementById('options');
   wrap.innerHTML = '';
-  wrap.classList.toggle('locked', !audioStarted);
+  wrap.classList.toggle('locked', locked);
   q.options.forEach((o, i) => {
-    const b = document.createElement('button');
-    b.className = 'opt'; b.textContent = o;
-    b.onclick = () => selectOption(i, b);
-    wrap.appendChild(b);
+    const bt = document.createElement('button');
+    bt.className = 'opt' + (q.picked === i ? ' picked' : ''); bt.textContent = o;
+    bt.onclick = () => selectOption(i);
+    wrap.appendChild(bt);
   });
-  document.getElementById('dkBtn').onclick = () => selectOption(-1, document.getElementById('dkBtn'));
-  document.getElementById('dkBtn').classList.remove('picked');
-  document.getElementById('nextBtn').disabled = true;
-  document.getElementById('nextBtn').textContent = (doneQ === totalQ - 1) ? 'Показать результат' : 'Далее';
+  const dk = document.getElementById('dkBtn');
+  dk.classList.toggle('picked', q.picked === -1);
+  dk.onclick = () => selectOption(-1);
+  updateNav();
+  showScreen('quiz');
+}
+
+function updateNav(){
+  const q = hist[pos];
+  document.getElementById('backBtn').disabled = pos <= 0;
+  document.getElementById('fwdBtn').disabled = pos >= hist.length - 1;
+  const nb = document.getElementById('nextBtn');
+  if (retReview) nb.textContent = 'К итогам';
+  else if (pos === hist.length - 1 && hist.length >= total) nb.textContent = 'К итогам';
+  else nb.textContent = q.picked !== null ? 'Далее' : 'Пропустить';
+  nb.classList.toggle('skip', !retReview && q.picked === null);
 }
 
 function playAudio(){
-  if (!cur || !cur.audio || audioPlays >= 2) return;
+  const q = hist[pos];
+  if (!q || !q.audio || q.plays >= 2) return;
   stopAudio();
-  audioEl = new Audio(cur.audio);
+  audioEl = new Audio(q.audio);
   const btn = document.getElementById('audioBtn'), lab = document.getElementById('audioLabel');
-  audioPlays++;
+  q.plays++;
   btn.classList.add('playing'); btn.disabled = true;
   lab.textContent = 'Звучит запись…';
-  const unlock = () => { audioStarted = true; document.getElementById('options').classList.remove('locked'); };
+  const unlock = () => { q.started = true; if (hist[pos] === q) document.getElementById('options').classList.remove('locked'); };
   audioEl.addEventListener('playing', unlock);
   audioEl.addEventListener('ended', () => {
+    if (hist[pos] !== q) return;
     btn.classList.remove('playing');
-    if (audioPlays < 2){ btn.disabled = false; lab.textContent = 'Прослушать ещё раз (осталась 1 попытка)'; }
+    if (q.plays < 2){ btn.disabled = false; lab.textContent = 'Можно прослушать ещё раз (осталась 1 попытка)'; }
     else lab.textContent = 'Запись прослушана 2 раза';
   });
   audioEl.addEventListener('error', () => {
-    unlock(); btn.classList.remove('playing'); btn.disabled = false; audioPlays--;
+    unlock(); btn.classList.remove('playing'); btn.disabled = false; q.plays--;
     lab.textContent = 'Не удалось загрузить запись. Проверьте звук и интернет, нажмите ещё раз.';
   });
   audioEl.play().catch(() => {
-    unlock(); btn.classList.remove('playing'); btn.disabled = false; audioPlays--;
+    unlock(); btn.classList.remove('playing'); btn.disabled = false; q.plays--;
     lab.textContent = 'Браузер не дал включить звук. Нажмите ещё раз.';
   });
 }
 
-function selectOption(i, el){
+function selectOption(i){
+  const q = hist[pos];
   if (document.getElementById('options').classList.contains('locked')) return;
-  picked = i;
-  document.querySelectorAll('#options .opt').forEach(o => o.classList.remove('picked'));
-  document.getElementById('dkBtn').classList.remove('picked');
-  el.classList.add('picked');
-  document.getElementById('nextBtn').disabled = false;
+  q.picked = i;
+  document.querySelectorAll('#options .opt').forEach((o, k) => o.classList.toggle('picked', k === i));
+  document.getElementById('dkBtn').classList.toggle('picked', i === -1);
+  updateBar(q.block);
+  updateNav();
 }
 
+/* ---------- навигация: назад, вперёд, дальше ---------- */
+function goBack(){ if (pos <= 0) return; retReview = false; pos--; renderQuestion(); }
+function goForward(){ if (pos >= hist.length - 1) return; retReview = false; pos++; renderQuestion(); }
 function nextQuestion(){
-  if (picked === null || !cur) return;
-  const dk = picked === -1;
-  answers.push({ skill:cur.skill, level:cur.level, correct: !dk && picked === cur.answer, dk, n:cur.options.length });
-  doneQ++;
   stopAudio();
-  advance();
+  if (retReview){ showReview(); return; }
+  if (pos < hist.length - 1){ pos++; renderQuestion(); return; }
+  if (hist.length >= total){ showReview(); return; }
+  advanceNew();
 }
+
+/* ---------- итоги: что отвечено, что пропущено ---------- */
+function showReview(){
+  stopAudio(); retReview = false;
+  const un = hist.filter(h => h.picked === null).length;
+  const dk = hist.filter(h => h.picked === -1).length;
+  document.getElementById('rvSummary').innerHTML = un
+    ? `Отвечено на <b>${hist.length - un}</b> из ${total}. Без ответа: <b>${un}</b>. Вернитесь к ним сейчас или завершите тест: задания без ответа будут считаться как «Не знаю».`
+    : `Вы ответили на все ${total} ${plural(total, 'задание', 'задания', 'заданий')}. ${dk ? `Ответов «Не знаю»: ${dk}.` : ''} Можно вернуться к любому заданию или завершить тест.`;
+  const grid = document.getElementById('rvGrid');
+  grid.innerHTML = '';
+  blocks.forEach((b, bi) => {
+    const h = document.createElement('div'); h.className = 'rv-block'; h.textContent = BLK[b.s].ru; grid.appendChild(h);
+    const row = document.createElement('div'); row.className = 'rv-row';
+    hist.forEach((q, i) => {
+      if (q.block !== bi) return;
+      const t = document.createElement('button');
+      t.type = 'button';
+      t.className = 'rv-tile ' + (q.picked === null ? 'un' : q.picked === -1 ? 'dk' : 'ok');
+      t.textContent = String(i + 1);
+      t.setAttribute('aria-label', `Задание ${i + 1}: ` + (q.picked === null ? 'нет ответа' : q.picked === -1 ? 'не знаю' : 'есть ответ'));
+      t.onclick = () => openFromReview(i);
+      row.appendChild(t);
+    });
+    grid.appendChild(row);
+  });
+  document.getElementById('rvBack').style.display = un ? 'flex' : 'none';
+  buildBar(-1);
+  showScreen('review');
+}
+function openFromReview(i){ retReview = true; pos = i; renderQuestion(); }
+function reviewFirstUnanswered(){ const i = hist.findIndex(h => h.picked === null); if (i >= 0) openFromReview(i); }
 
 /* ---------- результат ---------- */
 function finishQuiz(){
   inTest = false;
   stopAudio();
-  document.getElementById('pfill').style.width = '100%';
-  const th = estimate(answers);
+  const all = hist.map(h => ({ skill:h.skill, level:h.level, correct:h.picked !== null && h.picked === h.answer, dk:h.picked === null || h.picked === -1, n:h.options.length }));
+  const th = estimate(all);
   const lvl = levelOf(th);
   const skills = {};
   if (selectedFormat === 'full'){
     Object.keys(SKILL_NAME).forEach(k => {
-      const rs = answers.filter(a => a.skill === k);
+      const rs = all.filter(a => a.skill === k);
       if (rs.length >= 2) skills[k] = levelOf(estimate(rs, th, 0.9));
     });
   }
-  const right = answers.filter(a => a.correct).length;
-  pendingResult = { right, total: answers.length, lvl, skills, sec: Math.round((Date.now() - startedAt) / 1000) };
+  const answered = hist.filter(h => h.picked !== null).length;
+  pendingResult = { right: all.filter(a => a.correct).length, total: hist.length, answered, lvl, skills, sec: Math.round((Date.now() - startedAt) / 1000) };
   saveResultQuietly();
   revealResult();
 }
@@ -822,21 +1075,43 @@ function revealResult(){
   } else sk.style.display = 'none';
 
   document.getElementById('expressNote').style.display = selectedFormat === 'express' ? 'block' : 'none';
-  document.getElementById('resultMeta').textContent = `Правильных ответов: ${r.right} из ${r.total}. Время: ${Math.max(1, Math.round(r.sec / 60))} мин.`;
+  document.getElementById('resultMeta').textContent = `Заданий в тесте: ${r.total}. Ответов дано: ${r.answered}. Время: ${Math.max(1, Math.round(r.sec / 60))} мин.`;
+  document.getElementById('howCalc').open = false;
+  document.getElementById('shareMsg').textContent = '';
+  buildBar(-1);
   showScreen('result');
 }
 
-function restart(){ inTest = false; stopAudio(); showScreen('start'); document.getElementById('pfill').style.width = '0%'; }
+/* Поделиться результатом: системное меню «Поделиться», запасной вариант: копирование текста.
+   Дизайн карточки для публикации подключается здесь. */
+function shareText(){
+  const r = pendingResult;
+  return `Мой уровень английского: ${LV[r.lvl]} (${LNAME[r.lvl]}). Пройдите тест от YORK! и узнайте свой: https://weyork.online/level-test.html`;
+}
+async function shareResult(){
+  if (!pendingResult) return;
+  const msg = document.getElementById('shareMsg');
+  const data = { title: 'Мой уровень английского', text: shareText(), url: 'https://weyork.online/level-test.html' };
+  try {
+    if (navigator.share){ await navigator.share(data); msg.textContent = ''; return; }
+    await navigator.clipboard.writeText(data.text);
+    msg.textContent = 'Текст скопирован, вставьте его в сообщение.';
+  } catch (e){
+    if (e && e.name === 'AbortError') return;
+    msg.textContent = 'Не удалось поделиться. Скопируйте результат вручную: ' + data.text;
+  }
+}
+
+function restart(){ inTest = false; stopAudio(); showScreen('start'); }
 
 /* ---------- защита: уход со страницы во время теста сбрасывает тест ---------- */
 function testActive(){
-  return inTest && (document.getElementById('quiz').classList.contains('active') || document.getElementById('promo').classList.contains('active'));
+  return inTest && ['quiz', 'promo', 'intro', 'review'].some(id => document.getElementById(id).classList.contains('active'));
 }
 function abortTest(){
   if (!testActive() || leaveOk) return;
   inTest = false; stopAudio();
-  plan = []; queue = []; answers = []; used = {}; cur = null; picked = null; doneQ = 0; pendingResult = null;
-  document.getElementById('pfill').style.width = '0%';
+  hist = []; pos = -1; queue = []; used = {}; pending = []; introDone = {}; pendingResult = null; retReview = false;
   document.getElementById('resetNote').style.display = 'block';
   showScreen('start');
 }
