@@ -4225,10 +4225,52 @@ async function loadTrialRequests(){
     .order('created_at', { ascending:false });
 
   window.__trialRequests = data || [];
+  await loadLevelReportsForRequests();
   renderTrialRequests();
   renderReqCalendar();
   renderTeachersScheduleView();
   updateNewRequestsBadge();
+}
+
+/* ---------- результаты теста на уровень у заявок ---------- */
+const LR_ARCH = { RG:'Конструктор', RV:'Словотворец', LG:'Интерпретатор', LV:'Резонатор', U:'Полиморф' };
+const LR_SK = { grammar:'Грамматика', vocabulary:'Лексика', reading:'Чтение', listening:'Аудирование', use:'Практика языка' };
+const LR_FMT = { express:'быстрый старт', balance:'комплексная проверка', deep:'глубокая диагностика' };
+const LR_LV = ['A1','A2','B1','B2','C1'];
+async function loadLevelReportsForRequests(){
+  window.__levelReports = {};
+  const ids = (window.__trialRequests || []).map(r => r.level_report_id).filter(Boolean);
+  if (!ids.length) return;
+  const { data } = await supabase.from('level_test_reports')
+    .select('id, public_code, format, overall, level, skills, archetype, student_id, created_at').in('id', ids);
+  (data || []).forEach(x => { window.__levelReports[x.id] = x; });
+}
+function levelReportHtml(r){
+  const rep = r.level_report_id && (window.__levelReports || {})[r.level_report_id];
+  if (!rep) return '';
+  const sk = rep.skills || {};
+  const skills = Object.keys(LR_SK).filter(k => typeof sk[k] === 'number')
+    .map(k => `${LR_SK[k]} ${LR_LV[Math.min(4, Math.max(0, Math.floor(sk[k] + 1e-9) - 1))]}`).join(' · ');
+  const arch = rep.archetype ? ` · ${rep.archetype} ${LR_ARCH[rep.archetype] || ''}` : '';
+  const linked = rep.student_id
+    ? `<div style="margin-top:4px;">✅ Привязан к ученику: <b>${(allStudents.find(s => s.id === rep.student_id) || {}).full_name || 'ученик'}</b></div>`
+    : `<div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+         <select id="lrSel-${rep.id}" style="max-width:220px; padding:6px 8px; border-radius:8px; border:1px solid var(--line, #ddd); font:inherit; font-size:12.5px;">
+           <option value="">Привязать к ученику…</option>${allStudents.map(s => `<option value="${s.id}">${s.full_name}</option>`).join('')}
+         </select>
+         <button class="btn btn-ghost btn-sm" type="button" onclick="linkLevelReport('${rep.id}')">Привязать</button>
+       </div>`;
+  return `<div style="margin-top:6px; background:#EEF6D0; border-radius:10px; padding:8px 10px; font-size:13px;">
+    🧭 <b>Тест на уровень: ${rep.level}${arch}</b> (${LR_FMT[rep.format] || rep.format}, ${Number(rep.overall).toFixed(2)})
+    ${skills ? `<div style="color:var(--ink-soft); margin-top:2px;">${skills}</div>` : ''}
+    <div style="margin-top:2px;"><a href="result.html?id=${rep.public_code}" target="_blank" rel="noopener">Открыть отчёт</a></div>${linked}</div>`;
+}
+async function linkLevelReport(reportId){
+  const sel = document.getElementById('lrSel-' + reportId);
+  if (!sel || !sel.value){ alert('Выбери ученика.'); return; }
+  const { error } = await supabase.rpc('admin_link_level_report', { p_report_id: reportId, p_student_id: sel.value });
+  if (error){ alert('Не получилось привязать: ' + error.message); return; }
+  await loadTrialRequests();
 }
 
 function updateNewRequestsBadge(){
@@ -4712,6 +4754,7 @@ function requestCardHtml(r, mode){
       </div>
 
       <div style="font-size:13.5px; margin-bottom:10px;">
+        ${levelReportHtml(r)}
         ${r.source ? `<div>📌 Узнали: ${r.source}${referrerDisplay(r)}</div>` : ''}
         <div>👩‍🏫 Преподаватель: ${teacherLabel}</div>
         ${(mode === 'new' || mode === 'pending') ? preferredSlotsHtml(r) : ''}

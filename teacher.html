@@ -2411,7 +2411,9 @@ function renderOvHero(){
   let left;
   if (l.is_trial){
     const req = (window.__myTrialRequestsByLesson || {})[l.id];
-    const level = req && req.current_level ? `уровень ${req.current_level}` : 'уровень не определён';
+    const lrep = req && req.level_report_id && (window.__myLevelReports || {})[req.level_report_id];
+    const level = lrep ? `по тесту ${lrep.level}` : (req && req.current_level ? `уровень ${req.current_level}` : 'уровень не определён');
+    const lrLine = lrep ? levelReportLine(lrep) : '';
     const name = l.guest_name || (req && req.full_name) || 'Пробный';
     const when = dayWord === 'Сегодня' ? 'сегодня' : dayWord === 'Завтра' ? 'завтра' : dayWord;
     const plan = ovPlanFor(l);
@@ -2419,7 +2421,7 @@ function renderOvHero(){
       : 'trial-hub.html#prepare=' + encodeURIComponent(l.id) + (req ? '&req=' + encodeURIComponent(req.id) : '') + '&name=' + encodeURIComponent(name);
     left = `<div class="ov-eyebrow-row"><span class="ov-eyebrow">Ближайший урок</span><span class="ov-badge-trial">${OV_CAP}Пробный</span></div>
       <h3>${attrEsc(name)} · пробный урок ${when} в ${fmtTimeOnly(start)}</h3>
-      <p class="ov-sub">${dateLabel}, ${fmtTimeOnly(start)} — ${fmtTimeOnly(end)} (МСК) · первое занятие, ${level}</p>
+      <p class="ov-sub">${dateLabel}, ${fmtTimeOnly(start)} — ${fmtTimeOnly(end)} (МСК) · первое занятие, ${level}</p>${lrLine}
       <div class="ov-actions">${join}<a class="ov-ghost" href="${prep}">${OV_SPARK}${plan ? 'Открыть подготовку' : 'Подготовить в конструкторе'}</a>${tgBtn}</div>${backupNote()}`;
   } else {
     const name = (l.profiles && l.profiles.full_name) || (st && st.full_name) || 'Ученик';
@@ -2436,6 +2438,16 @@ function renderOvHero(){
   const add = document.getElementById('ovAddLink');
   if (add) add.onclick = openSettings;
   renderOvCount();
+}
+/* результат теста на уровень, если ученик прошёл его до пробного */
+function levelReportLine(rep){
+  const SK = { grammar:'Грамматика', vocabulary:'Лексика', reading:'Чтение', listening:'Аудирование', use:'Практика языка' };
+  const AR = { RG:'Конструктор', RV:'Словотворец', LG:'Интерпретатор', LV:'Резонатор', U:'Полиморф' };
+  const LV = ['A1','A2','B1','B2','C1'];
+  const sk = rep.skills || {};
+  const parts = Object.keys(SK).filter(k => typeof sk[k] === 'number').map(k => SK[k] + ' ' + LV[Math.min(4, Math.max(0, Math.floor(sk[k] + 1e-9) - 1))]);
+  const arch = rep.archetype ? ' · ' + rep.archetype + ' ' + (AR[rep.archetype] || '') : '';
+  return `<p class="ov-sub" style="margin-top:6px">Тест на уровень: <b>${rep.level}${arch}</b>${parts.length ? ' · ' + parts.join(' · ') : ''} · <a href="result.html?id=${attrEsc(rep.public_code)}" target="_blank" rel="noopener" style="text-decoration:underline">отчёт</a></p>`;
 }
 function renderOvCount(){
   const g = document.getElementById('ovGlass'), l = ovNextLesson();
@@ -3423,6 +3435,13 @@ async function loadLessons(){
   }
 
   const { data: myTrialRequests } = await supabase.from('trial_requests').select('*').eq('assigned_teacher_id', currentUser.id);
+  window.__myLevelReports = {};
+  const lrIds = (myTrialRequests || []).map(r => r.level_report_id).filter(Boolean);
+  if (lrIds.length){
+    const { data: lrs } = await supabase.from('level_test_reports')
+      .select('id, public_code, format, overall, level, skills, archetype, created_at').in('id', lrIds);
+    (lrs || []).forEach(x => { window.__myLevelReports[x.id] = x; });
+  }
   window.__myTrialRequestsByLesson = {};
   (myTrialRequests || []).forEach(r => {
     if (r.converted_lesson_id) window.__myTrialRequestsByLesson[r.converted_lesson_id] = r;

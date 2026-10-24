@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мой тест — YORK!</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/yk-test/test.css?v=1">
+<link rel="stylesheet" href="assets/yk-test/extras.css?v=1">
+<style>
+html.embed,html.embed body{background:transparent}
+html.embed .pg{padding-top:6px;min-height:0;background:transparent}
+html.embed .pg .blob{display:none}
+html.embed .hdr{display:none}
+.mt-empty{margin:40px 0}
+</style>
+</head>
+<body>
+<div class="pg rpage"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><div class="wrap" id="w"></div></div>
+<script src="assets/yk-test/sprite.js?v=1"></script>
+<script src="assets/yk-test/engine.js?v=1"></script>
+<script src="assets/yk-test/texts.js?v=1"></script>
+<script src="assets/yk-test/emblems.js?v=1"></script>
+<script src="assets/yk-test/report.js?v=1"></script>
+<script>
+(function(){
+var SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
+var KEY = 'sb_publishable_jlcvNafksQ0WhrYCY08anw_ju194-I9';
+var embed = false;
+try { embed = new URLSearchParams(location.search).get('embed') === '1'; } catch (e){}
+if (embed) document.documentElement.classList.add('embed');
+document.body.insertAdjacentHTML('afterbegin', window.YKT_SPRITE || '');
+var w = document.getElementById('w');
+function u(id){ return '<svg class="ic"><use href="#i-' + id + '"/></svg>'; }
+function hdr(){
+  return '<div class="hdr"><a class="logo" href="index.html">YORK<span>!</span></a><div class="hr"><a class="hback" href="cabinet.html">' + u('left') + '<span>В кабинет</span></a></div></div>';
+}
+function session(){
+  try {
+    var raw = localStorage.getItem('sb-uuwtarchkltdmaddndgm-auth-token');
+    if (!raw) return null;
+    var s = JSON.parse(raw);
+    if (s && s.currentSession) s = s.currentSession;
+    if (!s || !s.access_token || !s.user || !s.user.id) return null;
+    if ((s.expires_at || 0) * 1000 < Date.now() + 15000) return null;
+    return { token: s.access_token, uid: s.user.id };
+  } catch (e){ return null; }
+}
+function sendHeight(){
+  if (!embed || !window.parent || window.parent === window) return;
+  try { window.parent.postMessage({ yktHeight: document.documentElement.scrollHeight }, location.origin); } catch (e){}
+}
+function msg(title, text, btn){
+  w.innerHTML = hdr() + '<div class="box mt-empty"><div class="card gcard"><span class="tag">Мой тест</span><h2 class="ch2">' + title + '</h2><p class="cp">' + text + '</p>' +
+    (btn ? '<div class="btns"><a class="btn lm" href="' + btn[1] + '" target="_top">' + btn[0] + ' ' + u('arrow') + '</a></div>' : '') + '</div></div>';
+  sendHeight();
+}
+var ses = session();
+if (!ses){ msg('Нужно войти в кабинет', 'Результаты теста доступны ученикам YORK! в личном кабинете. Войдите и откройте вкладку ещё раз.', ['Войти', 'cabinet.html']); }
+else {
+  Promise.all([
+    fetch(SUPABASE_URL + '/rest/v1/level_test_reports?select=*&student_id=eq.' + ses.uid + '&order=created_at.desc', { headers: { apikey: KEY, Authorization: 'Bearer ' + ses.token } }).then(function(r){ return r.ok ? r.json() : Promise.reject(); }),
+    fetch('assets/yk-test/questions.json?v=1').then(function(r){ return r.json(); })
+  ]).then(function(res){
+    var list = res[0], qb = res[1], qmap = {};
+    qb.questions.forEach(function(q){ qmap[q.id] = q; });
+    if (!list.length){
+      msg('Результатов пока нет', 'Пройдите тест на уровень, и полный отчёт появится здесь. Результат привяжется к вашему профилю, когда вы станете учеником YORK!.', ['Пройти тест', 'level-test.html?format=deep']);
+      return;
+    }
+    var cur = list[0];
+    function draw(){
+      w.innerHTML = hdr() + '<div id="rep"></div><div id="hist"></div>' +
+        '<div class="btns" style="margin:22px 0 10px"><a class="btn gl" href="level-test.html?format=deep" target="_top">Пройти тест заново ' + u('arrow') + '</a></div>';
+      window.YKTReport.render(document.getElementById('rep'), cur, { full: true, qmap: qmap });
+      document.getElementById('hist').innerHTML = list.length > 1 ? window.YKTReport.history(list) : '';
+      sendHeight();
+    }
+    document.addEventListener('click', function(e){
+      var h = e.target.closest('[data-hid]');
+      if (!h) return;
+      var f = list.filter(function(x){ return x.id === h.dataset.hid; })[0];
+      if (f){ cur = f; draw(); window.scrollTo(0, 0); }
+    });
+    draw();
+  }).catch(function(){ msg('Не удалось загрузить результаты', 'Проверьте интернет и обновите страницу.'); });
+}
+if (window.ResizeObserver) new ResizeObserver(sendHeight).observe(document.body);
+window.addEventListener('load', sendHeight);
+})();
+</script>
+</body>
+</html>

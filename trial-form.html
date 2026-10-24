@@ -255,6 +255,10 @@ document.addEventListener('focusin', (e) => {
 });
 const urlParams = new URLSearchParams(window.location.search);
 const refCode = urlParams.get('ref');
+// результат теста на уровень: ?result=<код> (или последний пройденный в этом браузере)
+let levelReportCode = urlParams.get('result');
+if (!levelReportCode){ try { levelReportCode = localStorage.getItem('ykt_last_code'); } catch (e){} }
+if (!/^[A-Za-z0-9]{10,12}$/.test(levelReportCode || '')) levelReportCode = null;
 if (refCode){
   document.getElementById('sourceQuestionField').classList.add('hidden');
   const banner = document.getElementById('referralBanner');
@@ -851,6 +855,7 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
       body: JSON.stringify({
         full_name: data.fullName,
         link_token: linkToken,
+        level_report_code: levelReportCode,
         contact: data.contactPhone,
         contact_phone: data.contactPhone,
         age: data.age ? Number(data.age) : null,

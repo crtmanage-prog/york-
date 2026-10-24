@@ -185,3 +185,16 @@ schema.org упоминание отдельно допустимо, на сай
 - Шумную работу отдавай отдельному помощнику, субагенту.
 - Напомни очистить контекст `/clear`.
 - На простой задаче отвечай коротко.
+
+## Тест на уровень (новая версия, октябрь 2026)
+
+- `level-test.html` — сам тест (3 формата: Быстрый старт 15 / Комплексная проверка 30 / Глубокая диагностика 50 заданий, шкала A1–C1, C2 не присваивается).
+  Код и данные лежат в `assets/yk-test/`: `engine.js` (настройки `CONFIG`, оценка, архетип), `test.js` (экраны), `report.js` (отчёт), `texts.js` (тексты отчёта),
+  `emblems.js`, `sprite.js`, `test.css` (слитый CSS макетов), `extras.css` (то, чего нет в макетах), `questions.json` (банк заданий; сейчас временный, из старого теста).
+  `texts.js`, `emblems.js`, `sprite.js`, `test.css` генерируются скриптами `tools/leveltest2/build_*.py` из пакета handoff (macety в D:\york\handoff2). Руками их не править.
+- `result.html?id=<код>` — открытая часть отчёта (noindex). `my-test.html` — полный отчёт ученика, встроен iframe-ом во вкладку «Мой тест» в `cabinet.html`.
+- Supabase: таблица `level_test_reports` (НЕ `test_results`: это имя уже занято практикой в кабинете). Аноним может только вставлять; открытая часть — RPC `get_public_level_report(code)`,
+  согласие на Telegram — `record_level_report_consent(code)`, привязка к ученику — `admin_link_level_report`. У заявок `trial_requests.level_report_code/level_report_id`.
+- Старая таблица `level_test_results` по-прежнему получает сводку каждого результата (статистика, блок «было → стало» в кабинете).
+- Бот @weyorkonlinebot получает человека по `https://t.me/weyorkonlinebot?start=res_<код>` (бриф: BOT-BRIEF в пакете handoff). Картинки `result-cards/*.png` ещё не сделаны.
+- Метрика: цели `test_start`, `test_format_<express|balance|deep>`, `test_block_done_<1..5>`, `test_finish`, `result_view`, `result_tg_click`, `result_share`, `result_trial_click`, `result_full_test_click` — в Метрике их нужно создать как JS-события.

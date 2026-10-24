@@ -6,3 +6,6 @@
 *.session-journal
 tools/materials/manifest.json
 tools/materials/upload_log.jsonl
+
+# содержит токен вебхука
+tools/sheets-sync/Code.gs

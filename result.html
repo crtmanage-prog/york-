@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Результат теста на уровень — YORK!</title>
+<meta name="description" content="Результат теста на уровень английского от школы YORK!">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#F3F2ED">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/yk-test/test.css?v=1">
+<link rel="stylesheet" href="assets/yk-test/extras.css?v=1">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=111997160','ym');
+ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111997160" style="position:absolute;left:-9999px" alt=""></div></noscript>
+</head>
+<body>
+<div class="pg rpage"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><div class="wrap" id="w"></div></div>
+<noscript><p class="lead" style="margin:40px 24px">Для просмотра результата нужен включённый JavaScript.</p></noscript>
+<script src="assets/yk-test/sprite.js?v=1"></script>
+<script src="assets/yk-test/engine.js?v=1"></script>
+<script src="assets/yk-test/texts.js?v=1"></script>
+<script src="assets/yk-test/emblems.js?v=1"></script>
+<script src="assets/yk-test/report.js?v=1"></script>
+<script>
+(function(){
+var SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
+var KEY = 'sb_publishable_jlcvNafksQ0WhrYCY08anw_ju194-I9';
+var w = document.getElementById('w');
+document.body.insertAdjacentHTML('afterbegin', window.YKT_SPRITE || '');
+function u(id){ return '<svg class="ic"><use href="#i-' + id + '"/></svg>'; }
+function hdr(){
+  return '<div class="hdr"><a class="logo" href="index.html">YORK<span>!</span></a><div class="hr"><a class="hback" href="index.html">' + u('left') + '<span>На главную</span></a>' +
+    '<a class="cir" href="login.html" aria-label="Войти">' + u('login') + '</a><button class="cir" type="button" id="menuBtn" aria-label="Меню">' + u('menu') + '</button></div></div>';
+}
+function toggleMenu(){
+  var ex = document.querySelector('[data-menu-box]');
+  if (ex){ ex.parentNode.removeChild(ex); document.body.classList.remove('ytm-open'); return; }
+  var d = document.createElement('div');
+  d.innerHTML = '<div class="ytmenu" data-menu-box><div class="ytm-bg" data-close></div><div class="ytm-card"><button class="cir" type="button" data-close aria-label="Закрыть"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+    '<a href="index.html">Главная</a><a href="index.html#how">Как это работает</a><a href="index.html#formats">Цены</a><a href="talk-club.html">Talk Club</a><a href="index.html#faq">Вопросы</a><a href="login.html">Войти в кабинет</a>' +
+    '<a class="btn lm" href="trial-form.html">Записаться на пробный урок ' + u('arrow') + '</a></div></div>';
+  document.body.appendChild(d.firstChild); document.body.classList.add('ytm-open');
+}
+document.addEventListener('click', function(e){
+  if (e.target.closest('#menuBtn') || e.target.closest('[data-close]')) toggleMenu();
+});
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && document.querySelector('[data-menu-box]')) toggleMenu(); });
+
+function notFound(){
+  w.innerHTML = hdr() + '<div class="box" style="margin-top:30px"><div class="card gcard"><span class="tag">Результат не найден</span><h2 class="ch2">Такой <em class="hl">результат</em> не найден</h2>' +
+    '<p class="cp">Возможно, ссылка скопирована не полностью. Пройдите тест заново, это займёт несколько минут.</p><div class="btns"><a class="btn lm" href="level-test.html">Пройти тест ' + u('arrow') + '</a></div></div></div>';
+}
+var code = null;
+try { code = new URLSearchParams(location.search).get('id'); } catch (e){}
+if (!code || !/^[A-Za-z0-9]{10,12}$/.test(code)){ notFound(); }
+else {
+  w.innerHTML = hdr() + '<p class="lead" style="margin:40px 0">Загружаем результат…</p>';
+  fetch(SUPABASE_URL + '/rest/v1/rpc/get_public_level_report', {
+    method: 'POST',
+    headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ p_code: code })
+  }).then(function(r){ return r.ok ? r.json() : null; }).then(function(rep){
+    if (!rep || !rep.level){ notFound(); return; }
+    var holder = document.createElement('div');
+    w.innerHTML = hdr();
+    w.appendChild(holder);
+    window.YKTReport.render(holder, rep, {
+      onConsent: function(c){
+        fetch(SUPABASE_URL + '/rest/v1/rpc/record_level_report_consent', {
+          method: 'POST', keepalive: true,
+          headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ p_code: c })
+        }).catch(function(){});
+      }
+    });
+    try { if (window.ym) window.ym(111997160, 'reachGoal', 'result_view'); } catch (e){}
+  }).catch(function(){ notFound(); });
+}
+})();
+</script>
+</body>
+</html>
