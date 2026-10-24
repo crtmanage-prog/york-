@@ -33,6 +33,12 @@ for const, mp in FILES.items():
         out.append('%s:"images/%s"' % (k, fname))
     src = src.replace(m.group(0), '<script>const %s={%s};</script>' % (const, ','.join(out)))
 
+# блок цен: крупно стоимость урока в абонементе, ниже стоимость самого абонемента
+OLD_PRICE = '<div class="price"><b>${p[1]} ₽</b><span>${p[0]} ₽ за урок</span></div><div class="tot">${PN[n]} · потом <s>${p[2]} ₽</s></div>'
+NEW_PRICE = '<div class="price"><b>${p[0]} ₽</b><span>за урок в абонементе</span></div><div class="tot">Абонемент, ${PN[n]}: <b>${p[1]} ₽</b> · потом <s>${p[2]} ₽</s></div>'
+assert OLD_PRICE in src
+src = src.replace(OLD_PRICE, NEW_PRICE, 1)
+
 # a11y/SEO картинок
 src = src.replace('<img class="cimg" alt=', '<img class="cimg" loading="lazy" decoding="async" alt=')
 src = src.replace("const IMGD=g=>g.img?`<div class=\"img\" style=",
@@ -58,7 +64,8 @@ style = grab(r'<style>.*?</style>', src)
 # меню «Направления» закрывалось при движении мыши вниз: между кнопкой и меню был зазор 8px без hover.
 # Невидимый мостик над меню и открытие по фокусу с клавиатуры.
 style = style.replace('</style>', '.nav .menu::before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}\n'
-                      '.nav .dd:focus-within .menu{display:block}\n</style>')
+                      '.nav .dd:focus-within .menu{display:block}\n'
+                      '.blk5 .tot b{color:#fff;font-weight:600}\n</style>')
 
 # ---------- 3. тело ----------
 body = src.split('<body>', 1)[1].rsplit('</body>', 1)[0]
