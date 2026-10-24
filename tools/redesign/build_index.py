@@ -41,7 +41,7 @@ src = src.replace(OLD_PRICE, NEW_PRICE, 1)
 
 # Talk Club на главной: крупно цена встречи, ниже стоимость абонемента
 OLD_TC = r'<div class="price gw"><div><b>1 990 ₽<\/b><\/div><span>первые<br>4 встречи<\/span><span class="sep"><\/span><div><b>2 490 ₽<\/b><\/div><span>в месяц<br>дальше<\/span><\/div>'
-NEW_TC = r'<div class="price gw"><div><b>497,5 ₽<\/b><\/div><span>за встречу<br>первые 4 встречи<\/span><span class="sep"><\/span><div><b>622,5 ₽<\/b><\/div><span>за встречу<br>дальше<\/span><\/div><p class="pnote2">Абонемент: <b>1 990 ₽<\/b> за 4 встречи, затем <b>2 490 ₽<\/b> в месяц<\/p>'
+NEW_TC = r'<div class="price gw"><div><b>498 ₽<\/b><\/div><span>за встречу<br>первые 4 встречи<\/span><span class="sep"><\/span><div><b>623 ₽<\/b><\/div><span>за встречу<br>дальше<\/span><\/div><p class="pnote2">Абонемент: <b>1 990 ₽<\/b> за 4 встречи, затем <b>2 490 ₽<\/b> в месяц<\/p>'
 assert OLD_TC in src, 'Talk Club price strip not found'
 src = src.replace(OLD_TC, NEW_TC, 1)
 
