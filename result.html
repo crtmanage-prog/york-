@@ -30,7 +30,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 <script src="assets/yk-test/engine.js?v=1"></script>
 <script src="assets/yk-test/texts.js?v=1"></script>
 <script src="assets/yk-test/emblems.js?v=1"></script>
-<script src="assets/yk-test/report.js?v=1"></script>
+<script src="assets/yk-test/report.js?v=2"></script>
 <script>
 (function(){
 var SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
@@ -75,6 +75,13 @@ else {
     w.innerHTML = hdr();
     w.appendChild(holder);
     window.YKTReport.render(holder, rep, {
+      onEvent: function(name, c){
+        fetch(SUPABASE_URL + '/rest/v1/rpc/record_level_report_event', {
+          method: 'POST', keepalive: true,
+          headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ p_code: c, p_event: name })
+        }).catch(function(){});
+      },
       onConsent: function(c){
         fetch(SUPABASE_URL + '/rest/v1/rpc/record_level_report_consent', {
           method: 'POST', keepalive: true,

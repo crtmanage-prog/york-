@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;width:1080px;height:1350px;overflow:hidden;font-family:"Golos Text",sans-serif;color:#141412}
+.card{position:relative;width:1080px;height:1350px;overflow:hidden;display:flex;flex-direction:column;padding:70px 76px 64px}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
+.logo{font-family:Unbounded;font-weight:800;font-size:54px;letter-spacing:-.02em}
+.logo span{background:#D7EF42;padding:0 10px;border-radius:14px;color:#141412}
+.pill{font-family:Unbounded;font-weight:700;font-size:21px;letter-spacing:.1em;text-transform:uppercase;padding:16px 28px;border-radius:99px;background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 2px #fff}
+.art{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;min-height:0}
+.art svg{height:100%;width:auto;max-height:640px;display:block;filter:drop-shadow(0 30px 40px rgba(20,21,18,.18))}
+.big{font-family:Unbounded;font-weight:900;font-size:560px;line-height:.9;letter-spacing:-.06em;background:linear-gradient(160deg,#141412 30%,#5C7A0A 110%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.info{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.lv small,.ar small{display:block;font-family:Unbounded;font-weight:700;font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:#6B6C64;margin-bottom:10px}
+.lv b{display:block;font-family:Unbounded;font-weight:900;font-size:168px;line-height:.9;letter-spacing:-.05em}
+.lv span{display:block;font-family:Unbounded;font-weight:600;font-size:30px;margin-top:10px}
+.ar{text-align:right}
+.ar .code{font-family:Unbounded;font-weight:900;font-size:96px;line-height:.9;letter-spacing:-.04em}
+.ar .nm{font-family:Unbounded;font-weight:700;font-size:44px;margin-top:8px}
+.ar .en{font-family:Unbounded;font-weight:600;font-size:19px;letter-spacing:.14em;color:#6B6C64;margin-top:8px}
+.foot{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:34px;padding-top:26px;border-top:2px solid rgba(20,20,18,.1);font-size:26px;font-weight:600;color:#3a3b35}
+.foot b{font-family:Unbounded;font-weight:700}
+.short .info{align-items:flex-end}
+.short .lv b{font-size:130px}
+.apx{display:inline-block;font-family:Unbounded;font-weight:700;font-size:22px;letter-spacing:.08em;text-transform:uppercase;padding:14px 26px;border-radius:99px;background:#FFF4D6;box-shadow:inset 0 0 0 2px #E2A72E;color:#946200}
+</style></head>
+<body>
+<div id="c"></div>
+<script src="../../assets/yk-test/emblems.js"></script>
+<script>
+var A = {
+  RG: { bg:'linear-gradient(155deg,#F7F6F2,#D9D9D6)', n:'Конструктор', en:'THE BUILDER', b:'rgba(120,120,115,.35)' },
+  RV: { bg:'linear-gradient(155deg,#FAFCE9,#DDEB86)', n:'Словотворец', en:'THE WORDSMITH', b:'rgba(178,211,32,.45)' },
+  LG: { bg:'linear-gradient(155deg,#F5F9FF,#C6DEFB)', n:'Интерпретатор', en:'THE DECODER', b:'rgba(127,174,234,.45)' },
+  LV: { bg:'linear-gradient(155deg,#F8F4FF,#D8C9EF)', n:'Резонатор', en:'THE CONNECTOR', b:'rgba(155,127,209,.45)' },
+  U:  { bg:'linear-gradient(155deg,#FCF9F5,#F1E6DC 55%,#E3DAF2)', n:'Полиморф', en:'THE ALL-ROUNDER', b:'rgba(201,182,230,.5)' }
+};
+var NAMES = { A1:'Beginner', A2:'Elementary', B1:'Intermediate', B2:'Upper-Intermediate', C1:'Advanced' };
+var q = new URLSearchParams(location.search), lv = q.get('level') || 'B2', ar = q.get('arch');
+var c = document.getElementById('c');
+if (ar && A[ar]) {
+  var a = A[ar];
+  c.innerHTML = '<div class="card" style="background:' + a.bg + '"><span class="blob" style="width:700px;height:700px;right:-220px;top:-200px;background:' + a.b + '"></span><span class="blob" style="width:560px;height:560px;left:-220px;bottom:-200px;background:rgba(255,255,255,.7)"></span>' +
+    '<div class="top"><div class="logo">YORK<span>!</span></div><div class="pill">Тест на уровень</div></div>' +
+    '<div class="art">' + (window.YKT_EMBLEMS[ar] || '') + '</div>' +
+    '<div class="info"><div class="lv"><small>Ваш уровень</small><b>' + lv + '</b><span>' + NAMES[lv] + '</span></div>' +
+    '<div class="ar"><small>Архетип</small><div class="code">' + ar + '</div><div class="nm">' + a.n + '</div><div class="en">' + a.en + '</div></div></div>' +
+    '<div class="foot"><span>Результат по шкале CEFR</span><b>weyork.online</b></div></div>';
+} else {
+  c.innerHTML = '<div class="card short" style="background:linear-gradient(155deg,#F6F8E4,#E3F08E 70%,#CFE35A)"><span class="blob" style="width:760px;height:760px;right:-260px;top:-220px;background:rgba(255,255,255,.8)"></span><span class="blob" style="width:600px;height:600px;left:-240px;bottom:-220px;background:rgba(178,211,32,.5)"></span>' +
+    '<div class="top"><div class="logo">YORK<span>!</span></div><div class="pill">Тест на уровень</div></div>' +
+    '<div class="art" style="flex-direction:column;gap:30px"><div class="apx">Результат приблизительный</div><div class="big">' + lv + '</div></div>' +
+    '<div class="info"><div class="lv"><small>Ваш уровень</small><span style="font-size:52px;margin-top:0">' + NAMES[lv] + '</span></div></div>' +
+    '<div class="foot"><span>Глубокая диагностика покажет навыки</span><b>weyork.online</b></div></div>';
+}
+</script></body></html>

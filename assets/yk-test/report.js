@@ -193,6 +193,7 @@ function shortBlock(rep){
   var txt = X.short.text[rep.format] || X.short.text.express;
   return '<div class="short"><div class="sres gcard"><div class="apx">' + u('clock') + 'Результат приблизительный</div><br><div class="big">' + lv + '</div><div class="nm">' + T.levelName(rep.overall) + '</div>' +
     '<p class="lvl-line">' + esc(X.short.lines[li]) + '</p><p>' + esc(txt) + '</p>' +
+    '<a class="btn lm sres-trial" href="' + trialHref(rep) + '" data-trial>Записаться на пробный урок ' + u('arrow') + '</a>' +
     '<div class="srow"><a class="btn dk" href="#tg" data-tgjump>' + u('tg') + 'Сохранить в Telegram</a><button class="btn gl" type="button" data-share>' + u('share') + 'Поделиться</button></div></div>' +
     '<div class="full-inv gcard"><div class="mini3">' + ['RG', 'RV', 'LG', 'LV', 'U'].map(function(k){ return '<span style="background:' + AST[k].bg + '">' + (EMB[k] || '') + '</span>'; }).join('') + '</div>' +
     '<div class="mini-inv"><h4>Ваш английский —<br>больше, чем одна буква и&nbsp;цифра</h4><p>Глубокая диагностика за 25 минут покажет, как устроен ваш английский.</p>' +
@@ -272,7 +273,7 @@ function render(el, rep, opts){
     });
   }
   el.querySelectorAll('[data-tgjump]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); var t = el.querySelector('#tg'); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' }); }); });
-  el.querySelectorAll('[data-share]').forEach(function(b){ b.addEventListener('click', function(){ share(rep, b); }); });
+  el.querySelectorAll('[data-share]').forEach(function(b){ b.addEventListener('click', function(){ share(rep, b, opts); }); });
   el.querySelectorAll('[data-trial]').forEach(function(a){ a.addEventListener('click', function(){ goal('result_trial_click'); }); });
   el.querySelectorAll('[data-fulltest]').forEach(function(a){ a.addEventListener('click', function(){ goal('result_full_test_click'); }); });
   return { deep: deep };
@@ -283,13 +284,14 @@ function shareText(rep){
   if (rep.archetype && X.archetypes[rep.archetype]) base += ', языковой архетип «' + X.archetypes[rep.archetype].ru + '»';
   return base + '. Пройдите тест от YORK!';
 }
-function share(rep, btn){
+function share(rep, btn, opts){
   goal('result_share');
   var data = { title: 'Мой уровень английского', text: shareText(rep), url: pageUrl(rep) };
+  var shared = function(){ try { if (opts && opts.onEvent) opts.onEvent('share', rep.public_code); } catch (e){} };
   var done = function(msg){ if (btn){ var old = btn.innerHTML; btn.textContent = msg; setTimeout(function(){ btn.innerHTML = old; }, 2200); } };
-  if (navigator.share){ navigator.share(data).catch(function(){}); return; }
+  if (navigator.share){ navigator.share(data).then(shared, function(){}); return; }
   var txt = data.text + ' ' + data.url;
-  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function(){ done('Ссылка скопирована'); }, function(){ window.prompt('Скопируйте ссылку:', txt); });
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function(){ done('Ссылка скопирована'); shared(); }, function(){ window.prompt('Скопируйте ссылку:', txt); });
   else window.prompt('Скопируйте ссылку:', txt);
 }
 

@@ -25,7 +25,7 @@ html.embed .hdr{display:none}
 <script src="assets/yk-test/engine.js?v=1"></script>
 <script src="assets/yk-test/texts.js?v=1"></script>
 <script src="assets/yk-test/emblems.js?v=1"></script>
-<script src="assets/yk-test/report.js?v=1"></script>
+<script src="assets/yk-test/report.js?v=2"></script>
 <script>
 (function(){
 var SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
@@ -76,7 +76,10 @@ else {
     function draw(){
       w.innerHTML = hdr() + '<div id="rep"></div><div id="hist"></div>' +
         '<div class="btns" style="margin:22px 0 10px"><a class="btn gl" href="level-test.html?format=deep" target="_top">Пройти тест заново ' + u('arrow') + '</a></div>';
-      window.YKTReport.render(document.getElementById('rep'), cur, { full: true, qmap: qmap });
+      window.YKTReport.render(document.getElementById('rep'), cur, { full: true, qmap: qmap, onEvent: function(name, c){
+        fetch(SUPABASE_URL + '/rest/v1/rpc/record_level_report_event', { method: 'POST', keepalive: true,
+          headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_code: c, p_event: name }) }).catch(function(){});
+      } });
       document.getElementById('hist').innerHTML = list.length > 1 ? window.YKTReport.history(list) : '';
       sendHeight();
     }
