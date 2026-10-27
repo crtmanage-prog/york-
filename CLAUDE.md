@@ -206,5 +206,5 @@ schema.org упоминание отдельно допустимо, на сай
 - Supabase: таблица `level_test_reports` (НЕ `test_results`: это имя уже занято практикой в кабинете). Аноним может только вставлять; открытая часть — RPC `get_public_level_report(code)`,
   согласие на Telegram — `record_level_report_consent(code)`, привязка к ученику — `admin_link_level_report`. У заявок `trial_requests.level_report_code/level_report_id`.
 - Старая таблица `level_test_results` по-прежнему получает сводку каждого результата (статистика, блок «было → стало» в кабинете).
-- Бот @weyorkonlinebot получает человека по `https://t.me/weyorkonlinebot?start=res_<код>` (бриф: BOT-BRIEF в пакете handoff). Картинки `result-cards/*.png` ещё не сделаны.
+- Бот @weyorkonlinebot получает человека по `https://t.me/weyorkonlinebot?start=res_<код>` (бриф: BOT-BRIEF в пакете handoff). Картинки `assets/result-cards/*.png` сделаны (30 штук: `tools/leveltest2/build_cards.py`), бот шлёт их с подписью.
 - Метрика: цели `test_start`, `test_format_<express|balance|deep>`, `test_block_done_<1..5>`, `test_finish`, `result_view`, `result_tg_click`, `result_share`, `result_trial_click`, `result_full_test_click` — в Метрике их нужно создать как JS-события.
