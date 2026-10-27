@@ -1500,6 +1500,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
     <button class="tab-btn" data-tab="availability" aria-label="График"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 3.2"/></svg><span>График</span></button>
     <button class="tab-btn" data-tab="students" aria-label="Ученики"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 8.2a3 3 0 1 1 0 5.8"/><path d="M22 20c0-2.6-1.7-4.8-4-5.6"/></svg><span>Ученики</span></button>
     <button class="tab-btn" data-tab="salary" aria-label="Оплата"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="3"/><path d="M3 10h18M16 15h2"/></svg><span>Оплата</span></button>
+    <button class="tab-btn" data-tab="materials" aria-label="Материалы"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg><span>Материалы</span></button>
     <div class="nav-sep"></div>
     <button class="tab-btn nav-hub" data-tab="builder" aria-label="Конструктор пробных"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 17v4M17 19h4"/></svg><span>Конструктор пробных</span><em class="sb-new hidden" id="hubBadge"></em></button>
     <a class="nav-link" href="https://t.me/thearbeiter01" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4"/></svg><span>Поддержка</span></a>
@@ -1581,6 +1582,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
     <div class="ms-list">
       <button class="ms-item" type="button" data-go="availability"><span class="ic"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 3.2"/></svg></span>График<small id="msAvailInfo"></small></button>
       <button class="ms-item" type="button" data-go="salary"><span class="ic"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="3"/><path d="M3 10h18M16 15h2"/></svg></span>Оплата<small id="msPayInfo"></small></button>
+      <button class="ms-item" type="button" data-go="materials"><span class="ic"><svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span>Материалы</button>
     </div>
     <div class="ms-call">
       <small>Мой созвон · SaluteJazz</small>
@@ -1829,6 +1831,27 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <option value="all">За всё время</option>
         </select>
         <div class="t-rows" id="salaryLessonsList"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-materials">
+      <div class="bd-hero">
+        <div>
+          <span class="eb">Банк материалов</span>
+          <h2>Учебники и аудио</h2>
+          <p>Все учебники, рабочие тетради, книги учителя и аудио лежат в закрытой группе в Telegram, по темам: English File, Solutions и Macmillan. В каждой теме есть закреплённое сообщение с навигацией.</p>
+          <a class="btn btn-accent" href="https://t.me/c/4381657124/1" target="_blank" rel="noopener">Открыть группу в Telegram</a>
+        </div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-hd"><h3>Сразу в нужную тему</h3></div>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:6px;">
+          <a class="btn btn-dark" href="https://t.me/c/4381657124/3" target="_blank" rel="noopener">English File</a>
+          <a class="btn btn-dark" href="https://t.me/c/4381657124/7" target="_blank" rel="noopener">Solutions</a>
+          <a class="btn btn-dark" href="https://t.me/c/4381657124/8" target="_blank" rel="noopener">Macmillan</a>
+        </div>
+        <p style="margin:16px 0 0; font-size:13px; color:var(--ink-soft, #6b6b66);">Ссылки откроются в Telegram. Если не открываются, вы ещё не в группе: <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener" style="text-decoration:underline;">напишите менеджеру</a>, вас добавят.</p>
       </div>
     </section>
 
@@ -2256,14 +2279,14 @@ function setupTabs(){
       document.getElementById('panel-' + tab).classList.add('active');
       updateTopbarTitle(tab);
       const mb = document.getElementById('moreBtn');
-      if (mb) mb.classList.toggle('active', ['availability', 'salary', 'builder'].includes(tab));
+      if (mb) mb.classList.toggle('active', ['availability', 'salary', 'materials', 'builder'].includes(tab));
     });
   });
   setupMoreSheet();
 }
 
 /* ================= ОБЗОР (редизайн) ================= */
-const TAB_TITLES = { lessons:'Расписание', students:'Ученики', check:'Домашка', availability:'График', salary:'Оплата', builder:'Конструктор пробных' };
+const TAB_TITLES = { lessons:'Расписание', students:'Ученики', check:'Домашка', availability:'График', salary:'Оплата', materials:'Материалы', builder:'Конструктор пробных' };
 function ovInitials(name){
   const p = String(name || '').trim().split(/\s+/).filter(Boolean);
   if (!p.length) return 'Y';
@@ -4798,7 +4821,7 @@ async function gzSave(id){
     window.updateTopbarTitle = function(tab){
       var r = ut.apply(this, arguments);
       if (mob()){
-        var t = $('tbTitle'); if (t && tab && tab !== 'overview') t.textContent = ({ lessons:'Расписание', students:'Ученики', check:'Домашка', availability:'График', salary:'Оплата' })[tab] || t.textContent;
+        var t = $('tbTitle'); if (t && tab && tab !== 'overview') t.textContent = ({ lessons:'Расписание', students:'Ученики', check:'Домашка', availability:'График', salary:'Оплата', materials:'Материалы' })[tab] || t.textContent;
         refreshHeader();
       }
       return r;
