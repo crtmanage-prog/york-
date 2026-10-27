@@ -1006,7 +1006,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
         </div>
         <div class="field">
           <label for="editMeetingUrl">Личная ссылка на созвон</label>
-          <input id="editMeetingUrl" type="text" placeholder="https://telemost.yandex.ru/j/...">
+          <input id="editMeetingUrl" type="text" placeholder="https://salutejazz.ru/calls/...">
           <p class="row-sub" style="margin:6px 0 0; font-size:12px;">Остаётся у ученика при смене учителя. Если пусто — используется ссылка учителя. У учеников в группе работает ссылка группы (задаётся в разделе «Группы»).</p>
         </div>
         <div class="field">
@@ -1086,8 +1086,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <input id="editTeacherName" type="text">
         </div>
         <div class="field">
-          <label for="editTeacherMeetingUrl">Ссылка на созвон (Телемост)</label>
-          <input id="editTeacherMeetingUrl" type="text" placeholder="https://telemost.yandex.ru/j/...">
+          <label for="editTeacherMeetingUrl">Ссылка на созвон (SaluteJazz)</label>
+          <input id="editTeacherMeetingUrl" type="text" placeholder="https://salutejazz.ru/calls/...">
         </div>
         <div class="field">
           <label for="editTeacherBackupUrl">Запасная ссылка (VK Звонки)</label>
@@ -1626,8 +1626,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <select id="linkTimezone"></select>
         </div>
         <div class="field hidden" id="linkMeetingUrlField">
-          <label for="linkMeetingUrl">Ссылка на созвон (Телемост)</label>
-          <input id="linkMeetingUrl" type="text" placeholder="https://telemost.yandex.ru/j/...">
+          <label for="linkMeetingUrl">Ссылка на созвон (SaluteJazz)</label>
+          <input id="linkMeetingUrl" type="text" placeholder="https://salutejazz.ru/calls/...">
         </div>
         <p id="linkError" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
         <p id="linkSuccess" style="color:#3B7A1E; font-size:13px; font-weight:600; min-height:18px;"></p>
@@ -4069,7 +4069,7 @@ function renderGroupsTable(){
         <td>${g.name}</td>
         <td>${t ? t.full_name : '—'}</td>
         <td>${count}</td>
-        <td><input type="text" value="${(g.meeting_url || '').replace(/"/g, '&quot;')}" placeholder="https://telemost.yandex.ru/j/..." style="min-width:220px;" onchange="saveGroupMeetingUrl('${g.id}', this)"></td>
+        <td><input type="text" value="${(g.meeting_url || '').replace(/"/g, '&quot;')}" placeholder="https://salutejazz.ru/calls/..." style="min-width:220px;" onchange="saveGroupMeetingUrl('${g.id}', this)"></td>
         <td><button class="btn btn-ghost btn-sm" onclick="deleteGroup('${g.id}', '${g.name.replace(/'/g, "\\'")}')">Удалить</button></td>
       </tr>
     `;
