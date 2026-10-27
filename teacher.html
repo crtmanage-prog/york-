@@ -1840,7 +1840,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <span class="eb">Банк материалов</span>
           <h2>Учебники и аудио</h2>
           <p>Все учебники, рабочие тетради, книги учителя и аудио лежат в закрытой группе в Telegram, по темам: English File, Solutions и Macmillan. В каждой теме есть закреплённое сообщение с навигацией.</p>
-          <a class="btn btn-accent" href="https://t.me/c/4381657124/1" target="_blank" rel="noopener">Открыть группу в Telegram</a>
+          <a class="btn btn-accent" href="https://t.me/+h3alwimEerQ4NTgy" target="_blank" rel="noopener">Открыть группу в Telegram</a>
         </div>
       </div>
 
@@ -2171,7 +2171,7 @@ async function setupNotifBell(){
   if (!btn || !panel) return;
 
   const { data } = await supabase.from('cabinet_notifications').select('message, created_at')
-    .in('audience', ['teachers','all']).order('created_at', { ascending:false }).limit(20);
+    .or('and(recipient_id.is.null,audience.in.(teachers,all)),recipient_id.eq.' + currentUser.id).order('created_at', { ascending:false }).limit(20);
   const notifications = data || [];
   const readAt = currentProfile.notifications_read_at ? new Date(currentProfile.notifications_read_at) : null;
   let hasUnread = notifications.some(n => !readAt || new Date(n.created_at) > readAt);
