@@ -2108,6 +2108,12 @@ async function enterApp(user){
   await Promise.allSettled([loadHomework(), loadPayments()]);
 }
 
+/* текст уведомления → безопасный HTML: экранируем всё, ссылки http(s) делаем кликабельными */
+window.ykLinkify = function(t){
+  return String(t == null ? '' : t)
+    .replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' })[c])
+    .replace(/(https?:\/\/[^\s<]*[^\s<.,;:!?)\]])/g, '<a href="$1" target="_blank" rel="noopener" style="text-decoration:underline; word-break:break-all;">$1</a>');
+};
 async function setupNotifBell(){
   const btn = document.getElementById('notifBellBtn');
   const panel = document.getElementById('notifPanel');
@@ -2142,7 +2148,7 @@ async function setupNotifBell(){
       const item = document.createElement('div');
       item.className = 'notif-item';
       const msg = document.createElement('div');
-      msg.textContent = n.message;
+      msg.innerHTML = window.ykLinkify(n.message);
       const date = document.createElement('div');
       date.className = 'notif-item-date';
       date.textContent = fmtDate(n.created_at);
@@ -4769,7 +4775,7 @@ document.getElementById('referralCopyCode')?.addEventListener('click', async () 
   function notifSheet(){
     var list = window.__sNotifs || [], readAt = window.__sReadAt || null;
     var isNew = function(n){ return !readAt || new Date(n.created_at) > readAt; };
-    var items = list.length ? list.map(function(n){ return '<div class="nt-i' + (isNew(n) ? ' new' : '') + '"><i>' + S(P.bell, 17) + '</i><div><b>' + esc2(n.message) + '</b><span>' + esc2(fmtDate(n.created_at)) + '</span></div></div>'; }).join('') : '<p class="note" style="text-align:center;margin:8px 0">Пока новостей нет.</p>';
+    var items = list.length ? list.map(function(n){ return '<div class="nt-i' + (isNew(n) ? ' new' : '') + '"><i>' + S(P.bell, 17) + '</i><div><b>' + window.ykLinkify(n.message) + '</b><span>' + esc2(fmtDate(n.created_at)) + '</span></div></div>'; }).join('') : '<p class="note" style="text-align:center;margin:8px 0">Пока новостей нет.</p>';
     sheet('<h3>Уведомления</h3>' + items);
     if (window.__sNotifMarkRead) window.__sNotifMarkRead();
   }

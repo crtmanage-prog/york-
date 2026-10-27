@@ -2163,6 +2163,12 @@ async function enterApp(user){
   renderOverview();
 }
 
+/* текст уведомления → безопасный HTML: экранируем всё, ссылки http(s) делаем кликабельными */
+window.ykLinkify = function(t){
+  return String(t == null ? '' : t)
+    .replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' })[c])
+    .replace(/(https?:\/\/[^\s<]*[^\s<.,;:!?)\]])/g, '<a href="$1" target="_blank" rel="noopener" style="text-decoration:underline; word-break:break-all;">$1</a>');
+};
 async function setupNotifBell(){
   const btn = document.getElementById('notifBellBtn');
   const panel = document.getElementById('notifPanel');
@@ -2199,7 +2205,7 @@ async function setupNotifBell(){
       const item = document.createElement('div');
       item.className = 'notif-item';
       const msg = document.createElement('div');
-      msg.textContent = n.message;
+      msg.innerHTML = window.ykLinkify(n.message);
       const date = document.createElement('div');
       date.className = 'notif-item-date';
       date.textContent = fmtDate(n.created_at);
@@ -4786,7 +4792,7 @@ async function gzSave(id){
       var isNew = function(n){ return !readAt || new Date(n.created_at) > readAt; };
       var cnt = list.filter(isNew).length;
       var items = list.length ? list.map(function(n){
-        return '<div class="m-nf"><span class="m-nf-i">' + I.bell + '</span><div class="m-m"><b>' + esc(n.message) + (isNew(n) ? '<i class="m-dot"></i>' : '') + '</b><small>' + esc(fmtDate(n.created_at)) + '</small></div></div>';
+        return '<div class="m-nf"><span class="m-nf-i">' + I.bell + '</span><div class="m-m"><b>' + window.ykLinkify(n.message) + (isNew(n) ? '<i class="m-dot"></i>' : '') + '</b><small>' + esc(fmtDate(n.created_at)) + '</small></div></div>';
       }).join('') : '<div class="m-empty"><b>Пока новостей нет</b></div>';
       sheet(sh('Уведомления', cnt ? cnt + ' ' + ovPlural(cnt, 'новое', 'новых', 'новых') : 'всё прочитано') + '<div class="m-nfs">' + items + '</div>'
         + (cnt ? '<button class="m-btn ghost full" type="button" onclick="M.markRead()">Отметить всё прочитанным</button>' : ''));
