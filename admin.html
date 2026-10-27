@@ -1010,6 +1010,11 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <p class="row-sub" style="margin:6px 0 0; font-size:12px;">Остаётся у ученика при смене учителя. Если пусто — используется ссылка учителя. У учеников в группе работает ссылка группы (задаётся в разделе «Группы»).</p>
         </div>
         <div class="field">
+          <label for="editBackupUrl">Личная запасная ссылка (VK Звонки)</label>
+          <input id="editBackupUrl" type="text" placeholder="https://vk.ru/call/join/...">
+          <p class="row-sub" style="margin:6px 0 0; font-size:12px;">Показывается ученику и учителю под кнопкой «Присоединиться». Если пусто — запасная ссылка учителя.</p>
+        </div>
+        <div class="field">
           <label for="editStudentStatus">Статус</label>
           <select id="editStudentStatus">
             <option value="active">🟢 Активный</option>
@@ -2619,8 +2624,18 @@ function meetingUrlCell(s){
   const val = (s.meeting_url || '').replace(/"/g, '&quot;');
   const note = groupUrl ? `<div style="font-size:11px; color:var(--ink-soft); margin-top:3px;">Действует ссылка группы «${g.name}»</div>` : (!s.meeting_url ? '<div style="font-size:11px; color:var(--ink-soft); margin-top:3px;">Ссылка учителя</div>' : '');
   const tch = allTeachers.find(x => x.id === s.teacher_id);
-  const bk = tch && tch.backup_meeting_url ? `<div style="font-size:11px; margin-top:3px;">Запасная: <a href="${tch.backup_meeting_url}" target="_blank" rel="noopener" style="text-decoration:underline;">VK Звонки</a></div>` : '';
-  return `<input type="text" value="${val}" placeholder="Личная ссылка" style="min-width:180px;" onchange="saveStudentMeetingUrl('${s.id}', this)">${note}${bk}`;
+  const bkVal = (s.backup_meeting_url || '').replace(/"/g, '&quot;');
+  const bkNote = !s.backup_meeting_url && tch && tch.backup_meeting_url ? `<div style="font-size:11px; margin-top:3px;">Запасная учителя: <a href="${tch.backup_meeting_url}" target="_blank" rel="noopener" style="text-decoration:underline;">VK Звонки</a></div>` : '';
+  return `<input type="text" value="${val}" placeholder="Личная ссылка" style="min-width:180px;" onchange="saveStudentMeetingUrl('${s.id}', this)">${note}`
+    + `<input type="text" value="${bkVal}" placeholder="Запасная (VK)" style="min-width:180px; margin-top:6px;" onchange="saveStudentBackupUrl('${s.id}', this)">${bkNote}`;
+}
+
+async function saveStudentBackupUrl(studentId, input){
+  const url = input.value.trim();
+  const { error } = await supabase.from('profiles').update({ backup_meeting_url: url || null }).eq('id', studentId);
+  if (error){ alert('Не получилось сохранить запасную ссылку. Попробуй ещё раз.'); return; }
+  const s = allStudents.find(x => x.id === studentId); if (s) s.backup_meeting_url = url || null;
+  input.style.boxShadow = '0 0 0 2px #B2D320'; setTimeout(() => { input.style.boxShadow = ''; }, 1200);
 }
 
 async function saveStudentMeetingUrl(studentId, input){
@@ -2801,6 +2816,7 @@ function fillEditForm(studentId){
   document.getElementById('editLevel').value = s.level || 'A1';
   document.getElementById('editTimezone').value = s.timezone || SCHOOL_TZ;
   document.getElementById('editMeetingUrl').value = s.meeting_url || '';
+  document.getElementById('editBackupUrl').value = s.backup_meeting_url || '';
   document.getElementById('editTeacher').value = s.teacher_id || '';
   document.getElementById('editStudentStatus').value = s.student_status || 'active';
   document.getElementById('editError').textContent = '';
@@ -3039,6 +3055,7 @@ async function saveStudent(){
   const level = document.getElementById('editLevel').value;
   const timezone = document.getElementById('editTimezone').value;
   const meetingUrl = document.getElementById('editMeetingUrl').value.trim();
+  const backupUrl = document.getElementById('editBackupUrl').value.trim();
   const teacherId = document.getElementById('editTeacher').value;
   const studentStatus = document.getElementById('editStudentStatus').value;
   const errEl = document.getElementById('editError');
@@ -3063,6 +3080,7 @@ async function saveStudent(){
     contact_avito: contactAvito || null,
     format, level, timezone, teacher_id: teacherId || null,
     meeting_url: meetingUrl || null, ...(urlChanged ? { meeting_url_from: null } : {}),
+    backup_meeting_url: backupUrl || null,
     student_status: studentStatus
   }).eq('id', studentId);
 

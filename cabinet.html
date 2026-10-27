@@ -2214,6 +2214,7 @@ async function loadTeacherContact(){
   teacherMeetingUrl = (row && row.meeting_url) || false;
   teacherBackupUrl = (row && row.backup_meeting_url) || null;
   try { const r = await supabase.rpc('my_meeting_url'); studentMeetingUrl = (r && !r.error && r.data) || null; } catch (e){ console.error('my_meeting_url', e); }
+  try { const b = await supabase.rpc('my_backup_meeting_url'); if (b && !b.error && b.data) teacherBackupUrl = b.data; } catch (e){ console.error('my_backup_meeting_url', e); }
   if (typeof renderOvHero === 'function' && window.__ovUpcoming) renderOvHero();
   teacherContactTelegram = (row && row.contact_telegram) || false;
   teacherFullName = (row && row.full_name) || null;

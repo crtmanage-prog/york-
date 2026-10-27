@@ -2355,8 +2355,15 @@ function lessonLink(l){
   return (g && ok(g.meeting_url_from) && g.meeting_url) || (ok(st.meeting_url_from) && st.meeting_url) || mine;
 }
 /* запасная ссылка (VK Звонки): подпись под кнопкой «Присоединиться», если задана админом */
-function backupNote(cls){
-  const u = currentProfile && currentProfile.backup_meeting_url;
+/* запасная ссылка для урока: личная ученика → моя общая (пробные — всегда общая) */
+function lessonBackup(l){
+  const mine = (currentProfile && currentProfile.backup_meeting_url) || '';
+  if (!l || l.is_trial) return mine;
+  const st = (myStudents || []).find(x => x.id === l.student_id);
+  return (st && st.backup_meeting_url) || mine;
+}
+function backupNote(cls, l){
+  const u = lessonBackup(l);
   if (!u) return '';
   return `<p class="${cls || 'ov-backup'}">Если ссылка не работает — <a href="${attrEsc(u)}" target="_blank" rel="noopener">запасная на VK Звонках</a></p>`;
 }
@@ -2451,7 +2458,7 @@ function renderOvHero(){
     left = `<div class="ov-eyebrow-row"><span class="ov-eyebrow">Ближайший урок</span><span class="ov-badge-trial">${OV_CAP}Пробный</span></div>
       <h3>${attrEsc(name)} · пробный урок ${when} в ${fmtTimeOnly(start)}</h3>
       <p class="ov-sub">${dateLabel}, ${fmtTimeOnly(start)} — ${fmtTimeOnly(end)} (МСК) · первое занятие, ${level}</p>${lrLine}
-      <div class="ov-actions">${join}<a class="ov-ghost" href="${prep}">${OV_SPARK}${plan ? 'Открыть подготовку' : 'Подготовить в конструкторе'}</a>${tgBtn}</div>${backupNote()}`;
+      <div class="ov-actions">${join}<a class="ov-ghost" href="${prep}">${OV_SPARK}${plan ? 'Открыть подготовку' : 'Подготовить в конструкторе'}</a>${tgBtn}</div>${backupNote('', l)}`;
   } else {
     const name = (l.profiles && l.profiles.full_name) || (st && st.full_name) || 'Ученик';
     const sub = [st && st.level, l.topic && l.topic !== 'Регулярное занятие' ? l.topic : ''].filter(Boolean).join(' · ') || 'Занятие';
@@ -2461,7 +2468,7 @@ function renderOvHero(){
         <div class="ov-hero-who"><span class="av">${attrEsc(ovInitials(name))}</span><span><b>${attrEsc(name)}</b><small>${attrEsc(sub)}</small></span></div>
         <div class="ov-hero-meta"><span>${OV_CLOCK}${fmtTimeOnly(start)} – ${fmtTimeOnly(end)}</span><span>${OV_CAM}Онлайн</span>${st ? `<button class="ov-hwbtn" type="button" title="Что было задано" aria-label="Посмотреть, что было задано" onclick="openStudentHomework('${st.id}')">${OV_HW}</button>` : ''}</div>
       </div>
-      <div class="ov-actions">${join}${tgBtn}</div>${backupNote()}`;
+      <div class="ov-actions">${join}${tgBtn}</div>${backupNote('', l)}`;
   }
   hero.innerHTML = `<div class="ov-hero-in"><div class="ov-h-left">${left}</div><div class="ov-glass" id="ovGlass"></div></div>`;
   const add = document.getElementById('ovAddLink');
@@ -3716,7 +3723,7 @@ function teacherJoinButton(l){
   if (isLessonPast(l)) return '';
   const jl = lessonLink(l);
   if (!jl) return '';
-  const bk = currentProfile && currentProfile.backup_meeting_url;
+  const bk = lessonBackup(l);
   return `<a class="btn btn-accent btn-sm" href="${jl}" target="_blank" rel="noopener">Присоединиться</a>`
     + (bk ? ` <a class="btn btn-ghost btn-sm" href="${attrEsc(bk)}" target="_blank" rel="noopener" title="Если основная ссылка не работает">Запасная (VK)</a>` : '');
 }
@@ -4474,7 +4481,7 @@ async function gzSave(id){
       card = '<div class="mo-glass"><div class="mo-top"><span class="m-av' + (l.is_trial ? ' t' : '') + '">' + esc(ovInitials(name)) + '</span>'
         + '<div class="mo-who"><b>' + esc(name) + esc(lvl) + '</b><small>' + (l.is_trial ? 'пробный · ' : '') + 'онлайн · ' + fmt + '</small></div>'
         + '<div class="mo-time">' + fmtTimeOnly(start) + '</div></div>'
-        + '<div class="mo-left">' + left + '</div><div class="mo-acts">' + join + ph + tg + '</div>' + backupNote('mo-backup') + '</div>';
+        + '<div class="mo-left">' + left + '</div><div class="mo-acts">' + join + ph + tg + '</div>' + backupNote('mo-backup', l) + '</div>';
     }
     var n = hwBadgeCount();
     var q = function(ico, label, act, cls, badge){ return '<button type="button" class="mo-q ' + (cls || '') + '" onclick="' + act + '"><i>' + ico + (badge ? '<em>' + badge + '</em>' : '') + '</i><span>' + label + '</span></button>'; };
