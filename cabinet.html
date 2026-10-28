@@ -843,9 +843,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 #appScreen .hw-fc>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px}
 #appScreen .hw-fc button{width:20px;height:20px;border-radius:50%;border:none;background:rgba(63,90,6,.14);color:#3F5A06;font-size:15px;line-height:1;cursor:pointer;padding:0}
 #appScreen .hw-hint{margin:8px 0 0;font-size:11.5px;line-height:1.4;color:var(--ink-soft)}
-#appScreen .lc-backup{margin:6px 0 0;font-size:12px;color:var(--ink-soft)}
+#appScreen .lc-backup{margin:8px 0 0;font-size:12px;line-height:1.4;color:var(--ink-soft);padding:7px 10px;border-left:3px solid #B2D320;background:rgba(178,211,32,.10);border-radius:0 8px 8px 0}
 #appScreen .lc-backup a{color:#3F5A06;font-weight:700;text-decoration:underline;text-underline-offset:2px}
-#appScreen .ov-backup{margin:12px 0 0;font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.72)}
+#appScreen .ov-backup{margin:12px 0 0;font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.72);padding:8px 12px;border-left:3px solid #D7EF42;background:rgba(255,255,255,.07);border-radius:0 8px 8px 0}
 #appScreen .ov-backup a{color:#D7EF42;text-decoration:underline;text-underline-offset:2px;font-weight:600}
 @media (max-width:760px){
   #appScreen .mh{display:flex;align-items:center;gap:10px;padding:6px 2px 2px}
@@ -1024,7 +1024,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   #appScreen .hwc.acc2 .acc2-b{margin-top:12px}
   #appScreen .hwc.acc2 .acc2-b>*+*{margin-top:10px}
 
-  #appScreen .m-backup{margin:0;font-size:12px;line-height:1.4;color:var(--ink-soft)}
+  #appScreen .m-backup{margin:8px 0 0;font-size:12px;line-height:1.4;color:var(--ink-soft);padding:7px 10px;border-left:3px solid #B2D320;background:rgba(178,211,32,.10);border-radius:0 8px 8px 0}
   #appScreen .m-backup a{color:#3F5A06;font-weight:700;text-decoration:underline;text-underline-offset:2px}
   /* --- каркас мобильной версии --- */
   #appScreen .sb,#appScreen .tb{display:none !important}
@@ -2199,7 +2199,7 @@ let teacherMeetingUrl = null;
 let studentMeetingUrl = null; // личная ссылка ученика или его группы
 let teacherBackupUrl = null;  // запасная ссылка преподавателя (VK Звонки)
 function backupNote(cls){
-  return teacherBackupUrl ? `<p class="${cls || 'ov-backup'}">Если ссылка не работает — <a href="${esc2(teacherBackupUrl)}" target="_blank" rel="noopener">запасная на VK Звонках</a></p>` : '';
+  return teacherBackupUrl ? `<p class="${cls || 'ov-backup'}">🛟 Если основная ссылка не работает, заходите по <a href="${esc2(teacherBackupUrl)}" target="_blank" rel="noopener">запасной (VK Звонки)</a></p>` : '';
 }
 function lessonMeetingUrl(l){ return (l && l.is_trial) ? teacherMeetingUrl : (studentMeetingUrl || teacherMeetingUrl); }
 let teacherContactTelegram = null;
@@ -2560,25 +2560,12 @@ function cancelBlock(l, pendingReq){
   if (l.status === 'cancelled'){
     return `<div class="row-sub" style="color:var(--ink-soft);">Занятие отменено и возвращено в абонемент</div>`;
   }
-  if (l.status !== 'upcoming' || isLessonPast(l) || pendingReq) return '';
+  if (l.status !== 'upcoming' || isLessonPast(l)) return '';
 
-  if (canCancel(l)){
-    const dl = cancelDeadline(l);
-    const tz = myTimezone();
-    const dlStr = dl.toLocaleDateString('ru-RU', { day:'numeric', month:'long', timeZone:tz })
-      + ', ' + dl.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', timeZone:tz });
-    return `
-      <div style="margin-top:8px;">
-        <button class="btn btn-ghost btn-sm" onclick="openCancelForm('${l.id}')">Отменить или перенести</button>
-        <div style="font-size:11.5px; color:var(--ink-soft); margin-top:4px;">Можно до ${dlStr}</div>
-      </div>
-      <div id="cancelForm-${l.id}" class="hidden" style="margin-top:12px;"></div>`;
-  }
-
+  // Самостоятельные отмена и перенос отключены (28.10.2026): все изменения согласует менеджер.
   return `
     <div class="note-box" style="margin-top:8px; font-size:13px;">
-      Отменить или перенести занятие можно не позднее чем за 24 часа.
-      Сейчас до начала меньше суток — напишите менеджеру, решим индивидуально.
+      Нужно отменить или перенести занятие? Напишите менеджеру — подберём удобное время.
       <div style="margin-top:8px;">
         <a class="btn btn-ghost btn-sm" href="${MANAGER_TG}" target="_blank" rel="noopener">Написать менеджеру</a>
       </div>
