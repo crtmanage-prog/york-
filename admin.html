@@ -5669,7 +5669,7 @@ async function assignTrialLesson(){
         const teacherObj = (allTeachers || []).find(t => t.id === teacherId);
         const teacherName = teacherObj ? teacherObj.full_name : '-';
         const teacherLink = (teacherObj && teacherObj.meeting_url ? `\n🔗 Ссылка на урок: ${teacherObj.meeting_url}` : '')
-          + (teacherObj && teacherObj.backup_meeting_url ? `\n<blockquote>🛟 Если основная ссылка не работает, заходите по запасной (VK Звонки): ${teacherObj.backup_meeting_url}</blockquote>` : '');
+          + (teacherObj && teacherObj.backup_meeting_url ? `\n<blockquote>→ Если основная ссылка не работает, заходите по запасной (VK Звонки): ${teacherObj.backup_meeting_url}</blockquote>` : '');
         const mskTime = new Intl.DateTimeFormat('ru-RU', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit', timeZone:'Europe/Moscow' }).format(utcDate);
         await supabase.rpc('admin_tg_send', {
           msg: `📅 <b>У вас новый пробный урок в YORK!</b>\n\n🕐 Время: <b>${mskTime} (МСК)</b>\n🧑‍🏫 Преподаватель: ${teacherName}${teacherLink}\n\nЖдём вас!`,

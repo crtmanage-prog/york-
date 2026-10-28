@@ -2199,7 +2199,7 @@ let teacherMeetingUrl = null;
 let studentMeetingUrl = null; // личная ссылка ученика или его группы
 let teacherBackupUrl = null;  // запасная ссылка преподавателя (VK Звонки)
 function backupNote(cls){
-  return teacherBackupUrl ? `<p class="${cls || 'ov-backup'}">🛟 Если основная ссылка не работает, заходите по <a href="${esc2(teacherBackupUrl)}" target="_blank" rel="noopener">запасной (VK Звонки)</a></p>` : '';
+  return teacherBackupUrl ? `<p class="${cls || 'ov-backup'}">→ Если основная ссылка не работает, заходите по <a href="${esc2(teacherBackupUrl)}" target="_blank" rel="noopener">запасной (VK Звонки)</a></p>` : '';
 }
 function lessonMeetingUrl(l){ return (l && l.is_trial) ? teacherMeetingUrl : (studentMeetingUrl || teacherMeetingUrl); }
 let teacherContactTelegram = null;

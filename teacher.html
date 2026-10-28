@@ -2365,7 +2365,7 @@ function lessonBackup(l){
 function backupNote(cls, l){
   const u = lessonBackup(l);
   if (!u) return '';
-  return `<p class="${cls || 'ov-backup'}">🛟 Если основная ссылка не работает, заходите по <a href="${attrEsc(u)}" target="_blank" rel="noopener">запасной (VK Звонки)</a></p>`;
+  return `<p class="${cls || 'ov-backup'}">→ Если основная ссылка не работает, заходите по <a href="${attrEsc(u)}" target="_blank" rel="noopener">запасной (VK Звонки)</a></p>`;
 }
 function ovStudentOf(l){ return l && !l.is_trial ? (myStudents || []).find(s => s.id === l.student_id) : null; }
 
