@@ -4886,14 +4886,15 @@ function populateLinkFromTrial(requestId){
 
   const tzSelect = document.getElementById('linkTimezone');
   if (r.preferred_timezone && tzSelect){
-    const hasOption = Array.from(tzSelect.options).some(o => o.value === r.preferred_timezone);
-    if (!hasOption){
-      const opt = document.createElement('option');
-      opt.value = r.preferred_timezone;
-      opt.textContent = r.preferred_timezone;
-      tzSelect.appendChild(opt);
-    }
-    tzSelect.value = r.preferred_timezone;
+    // на форме записи пояс хранится подписью («Москва (МСК)»), а в профиль нужно писать IANA-имя (Europe/Moscow)
+    const byValue = Array.from(tzSelect.options).find(o => o.value === r.preferred_timezone);
+    const off = parseMskOffset(r.preferred_timezone);
+    const byOffset = off === null ? null : TIMEZONES.find(t => {
+      const m = t.label.match(/МСК([+-]\d+)?\)/);
+      return m && (m[1] ? parseInt(m[1], 10) : 0) === off;
+    });
+    const tz = byValue ? byValue.value : (byOffset ? byOffset.tz : null);
+    if (tz) tzSelect.value = tz;
   }
 }
 
