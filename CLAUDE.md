@@ -202,7 +202,7 @@ schema.org упоминание отдельно допустимо, на сай
 - `level-test.html` — сам тест (3 формата: Быстрый старт 15 / Комплексная проверка 30 / Глубокая диагностика 50 заданий, шкала A1–C1, C2 не присваивается).
   Код и данные лежат в `assets/yk-test/`: `engine.js` (настройки `CONFIG`, оценка, архетип), `test.js` (экраны), `report.js` (отчёт), `texts.js` (тексты отчёта),
   `emblems.js`, `sprite.js`, `test.css` (слитый CSS макетов), `extras.css` (то, чего нет в макетах), `questions.json` (банк заданий; сейчас временный, из старого теста).
-  `texts.js`, `emblems.js`, `sprite.js`, `test.css` генерируются скриптами `tools/leveltest2/build_*.py` из пакета handoff (macety в D:\york\handoff2). Руками их не править.
+  `texts.js`, `emblems.js`, `sprite.js`, `test.css` генерируются скриптами `tools/leveltest2/build_*.py` из пакета handoff (макеты v2 от 28.10.2026 в D:\york\handoff3\york-test-handoff-v2). Руками их не править.
 - `result.html?id=<код>` — открытая часть отчёта (noindex). `my-test.html` — полный отчёт ученика, встроен iframe-ом во вкладку «Мой тест» в `cabinet.html`.
 - Supabase: таблица `level_test_reports` (НЕ `test_results`: это имя уже занято практикой в кабинете). Аноним может только вставлять; открытая часть — RPC `get_public_level_report(code)`,
   согласие на Telegram — `record_level_report_consent(code)`, привязка к ученику — `admin_link_level_report`. У заявок `trial_requests.level_report_code/level_report_id`.

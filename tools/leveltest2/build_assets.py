@@ -2,7 +2,7 @@
 """Собирает assets/yk-test/: emblems.js (SVG «Абстракции») и test.css (слитый CSS экранов дизайна без дублей)."""
 import collections, json, os, re, sys
 
-SRC = r'D:\york\handoff2\york-test-handoff\screens'
+SRC = r'D:\york\handoff3\york-test-handoff-v2\screens'
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 OUT = os.path.join(REPO, 'assets', 'yk-test')
 os.makedirs(OUT, exist_ok=True)

@@ -46,7 +46,7 @@ if (ar && A[ar]) {
   var a = A[ar];
   c.innerHTML = '<div class="card" style="background:' + a.bg + '"><span class="blob" style="width:700px;height:700px;right:-220px;top:-200px;background:' + a.b + '"></span><span class="blob" style="width:560px;height:560px;left:-220px;bottom:-200px;background:rgba(255,255,255,.7)"></span>' +
     '<div class="top"><div class="logo">YORK<span>!</span></div><div class="pill">Тест на уровень</div></div>' +
-    '<div class="art">' + (window.YKT_EMBLEMS[ar] || '') + '</div>' +
+    '<div class="art">' + '<img alt="" src="../../assets/yk-test/emblems/' + ar + '.png" style="height:100%;width:auto;max-height:640px;display:block;filter:drop-shadow(0 30px 40px rgba(20,21,18,.18))">' + '</div>' +
     '<div class="info"><div class="lv"><small>Ваш уровень</small><b>' + lv + '</b><span>' + NAMES[lv] + '</span></div>' +
     '<div class="ar"><small>Архетип</small><div class="code">' + ar + '</div><div class="nm">' + a.n + '</div><div class="en">' + a.en + '</div></div></div>' +
     '<div class="foot"><span>Результат по шкале CEFR</span><b>weyork.online</b></div></div>';

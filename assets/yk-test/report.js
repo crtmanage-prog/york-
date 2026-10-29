@@ -255,6 +255,12 @@ function render(el, rep, opts){
   if (deep) html += archetypeCard(rep) + deepReport(rep, opts);
   else html += shortBlock(rep) + tgCard(rep);
   el.innerHTML = html;
+  /* prefers-reduced-motion: CSS-анимации выключены стилями, SMIL у эмблемы Полиморф останавливаем вручную (кадр октаэдра) */
+  try {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      el.querySelectorAll('svg').forEach(function(sv){ if (sv.pauseAnimations){ sv.pauseAnimations(); sv.setCurrentTime(0); } });
+    }
+  } catch (e){}
   if (deep){
     var ax = axisItems(rep), axr = el.querySelector('[data-axr]');
     var draw = function(i){ var a = ax[i]; axr.innerHTML = '<small>' + a.k + '</small><h4>' + a.p + '% ' + a.t + '</h4><p>' + a.d + '</p>'; el.querySelectorAll('[data-ax]').forEach(function(x){ x.classList.toggle('on', +x.dataset.ax === i); }); };
