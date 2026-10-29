@@ -173,7 +173,7 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
     <div class="section">
       <div class="field"><label for="fullName">Как вас зовут?</label><input id="fullName" type="text" placeholder="Имя и фамилия" required></div>
 
-      <div class="field"><label for="timezone">Ваш часовой пояс</label><select id="timezone" required><option value="" selected disabled>— выберите —</option><option value="Калининград (МСК-1)">Калининград (МСК-1)</option><option value="Москва (МСК)">Москва (МСК)</option><option value="Самара (МСК+1)">Самара (МСК+1)</option><option value="Екатеринбург (МСК+2)">Екатеринбург (МСК+2)</option><option value="Омск (МСК+3)">Омск (МСК+3)</option><option value="Красноярск (МСК+4)">Красноярск (МСК+4)</option><option value="Иркутск (МСК+5)">Иркутск (МСК+5)</option><option value="Якутск (МСК+6)">Якутск (МСК+6)</option><option value="Владивосток (МСК+7)">Владивосток (МСК+7)</option><option value="Другой / за рубежом">Другой / за рубежом (укажу вручную)</option></select><input type="text" id="timezoneOther" class="hidden" placeholder="Например: Ташкент, UTC+5" style="margin-top:8px"></div>
+      <div class="field"><input type="hidden" id="timezone" value="Москва (МСК)"><input type="hidden" id="timezoneOther" value=""><div style="background:#F3F8DC;border:1.5px solid var(--accent);border-radius:12px;padding:10px 14px;font-size:13.5px;line-height:1.45">🕐 Всё время указано <b>по Москве (МСК)</b>.</div></div>
 
       <div class="field">
         <label>Формат занятий</label>
@@ -499,10 +499,7 @@ const TZ_DATIVE = {
 function studentTz(){ const label = document.getElementById('timezone').value; return TZ_MAP[label] || Intl.DateTimeFormat().resolvedOptions().timeZone; }
 function studentTzLabel(){ const label = document.getElementById('timezone').value; return TZ_DATIVE[label] || ''; }
 function slotsTzHint(){
-  const label = studentTzLabel();
-  return label
-    ? `🕐 Время указано по вашему часовому поясу (${label}). Точное время подтвердим после записи.`
-    : '🕐 Время указано по часовому поясу, который вы укажете выше. Точное время подтвердим после записи.';
+  return '🕐 Время указано по Москве (МСК). Точное время подтвердим после записи.';
 }
 
 function tzOffsetMinutes(date, timeZone){

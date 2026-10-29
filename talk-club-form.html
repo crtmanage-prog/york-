@@ -115,19 +115,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
   </div>
 
   <div class="field">
-    <label for="timezoneSelect">Ваш часовой пояс</label>
-    <select id="timezoneSelect">
-      <option value="Europe/Kaliningrad">Калининград (МСК-1)</option>
-      <option value="Europe/Moscow">Москва (МСК)</option>
-      <option value="Europe/Samara">Самара (МСК+1)</option>
-      <option value="Asia/Yekaterinburg">Екатеринбург / Уфа (МСК+2)</option>
-      <option value="Asia/Omsk">Омск (МСК+3)</option>
-      <option value="Asia/Krasnoyarsk">Красноярск (МСК+4)</option>
-      <option value="Asia/Irkutsk">Иркутск (МСК+5)</option>
-      <option value="Asia/Yakutsk">Якутск (МСК+6)</option>
-      <option value="Asia/Vladivostok">Владивосток (МСК+7)</option>
-    </select>
-    <div class="tz-fallback" id="tzFallbackNote">⚠️ Не удалось точно определить ваш часовой пояс, выбрали по умолчанию Москву (МСК). Если это не так, поправьте вручную.</div>
+    <select id="timezoneSelect" style="display:none"><option value="Europe/Moscow" selected>Москва (МСК)</option></select>
+    <div class="tz-fallback show" id="tzFallbackNote" style="background:#F3F8DC;border:1.5px solid var(--accent);color:inherit">🕐 Всё время указано по Москве (МСК).</div>
   </div>
 
   <div class="field">
@@ -232,27 +221,13 @@ document.querySelectorAll('#isStudentGroup input').forEach(el => {
   });
 });
 
-/* ---------- часовой пояс: пробуем определить автоматически ---------- */
+/* ---------- часовой пояс: у школы один — МСК ---------- */
 const SCHOOL_TZ = 'Europe/Moscow';
 const tzSelect = document.getElementById('timezoneSelect');
 const tzFallbackNote = document.getElementById('tzFallbackNote');
 
-(function detectTimezone(){
-  let browserTz = '';
-  try { browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch(e){}
-  const known = Array.from(tzSelect.options).some(o => o.value === browserTz);
-  if (known){
-    tzSelect.value = browserTz;
-    tzFallbackNote.classList.remove('show');
-  } else {
-    tzSelect.value = SCHOOL_TZ;
-    tzFallbackNote.classList.add('show');
-  }
-})();
+tzSelect.value = SCHOOL_TZ;
 
-tzSelect.addEventListener('change', () => {
-  tzFallbackNote.classList.remove('show'); // человек выбрал сам — это больше не догадка
-});
 
 /* ---------- сбор и отправка ---------- */
 document.getElementById('clubForm').addEventListener('submit', async (e) => {

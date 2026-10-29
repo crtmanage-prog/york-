@@ -508,6 +508,7 @@ function getCaptchaToken(box){
   });
 }
 </script>
+<style>.msk-note{background:#F3F8DC;border:1.5px solid #D2E739;border-radius:10px;padding:8px 12px;font-size:13px;line-height:1.4;color:#1C1C1C}</style>
 </head>
 <body>
 <!-- Yandex.Metrika counter -->
@@ -997,8 +998,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           </select>
         </div>
         <div class="field">
-          <label for="editTimezone">Часовой пояс ученика</label>
-          <select id="editTimezone"></select>
+          <div class="msk-note">🕐 Всё время указывается по Москве (МСК)</div>
+          <select id="editTimezone" style="display:none"></select>
         </div>
         <div class="field">
           <label for="editTeacher">Учитель</label>
@@ -1171,8 +1172,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <input id="groupLessonDate" type="datetime-local">
         </div>
         <div class="field">
-          <label for="groupLessonTimezone">Часовой пояс</label>
-          <select id="groupLessonTimezone"></select>
+          <div class="msk-note">🕐 Всё время указывается по Москве (МСК)</div>
+          <select id="groupLessonTimezone" style="display:none"></select>
         </div>
         <div class="field">
           <label for="groupLessonDuration">Длительность, мин</label>
@@ -1229,8 +1230,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           <input id="trialDate" type="datetime-local">
         </div>
         <div class="field">
-          <label for="trialTimezone">Часовой пояс (в котором указано время)</label>
-          <select id="trialTimezone"></select>
+          <div class="msk-note">🕐 Всё время указывается по Москве (МСК)</div>
+          <select id="trialTimezone" style="display:none"></select>
         </div>
         <div class="field">
           <label for="trialDuration">Длительность, мин</label>
@@ -1374,8 +1375,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
             </div>
           </div>
           <div class="field">
-            <label for="autoTimezone">Часовой пояс (в котором указано время)</label>
-            <select id="autoTimezone"></select>
+            <div class="msk-note">🕐 Всё время указывается по Москве (МСК)</div>
+            <select id="autoTimezone" style="display:none"></select>
           </div>
           <div class="field">
             <label for="autoStartDate">Начиная с</label>
@@ -1627,8 +1628,8 @@ ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
           </select>
         </div>
         <div class="field" id="linkTimezoneField">
-          <label for="linkTimezone">Часовой пояс ученика</label>
-          <select id="linkTimezone"></select>
+          <div class="msk-note">🕐 Всё время указывается по Москве (МСК)</div>
+          <select id="linkTimezone" style="display:none"></select>
         </div>
         <div class="field hidden" id="linkMeetingUrlField">
           <label for="linkMeetingUrl">Ссылка на созвон (SaluteJazz)</label>
@@ -1678,22 +1679,11 @@ function timeGreetingWord(name){
 const SCHOOL_TZ = 'Europe/Moscow'; // школа целиком работает по Москве (МСК)
 
 const TIMEZONES = [
-  { tz:'Europe/Kaliningrad', label:'Калининград (МСК-1)' },
   { tz:'Europe/Moscow', label:'Москва (МСК)' },
-  { tz:'Europe/Samara', label:'Самара (МСК+1)' },
-  { tz:'Asia/Yekaterinburg', label:'Екатеринбург / Уфа (МСК+2)' },
-  { tz:'Asia/Omsk', label:'Омск (МСК+3)' },
-  { tz:'Asia/Krasnoyarsk', label:'Красноярск (МСК+4)' },
-  { tz:'Asia/Irkutsk', label:'Иркутск (МСК+5)' },
-  { tz:'Asia/Yakutsk', label:'Якутск (МСК+6)' },
-  { tz:'Asia/Vladivostok', label:'Владивосток (МСК+7)' },
-  { tz:'UTC', label:'UTC / Гринвич' },
-  { tz:'Europe/London', label:'Лондон' },
-  { tz:'America/New_York', label:'Нью-Йорк' },
 ];
 
 function timezoneOptionsHtml(defaultTz){
-  return TIMEZONES.map(t => `<option value="${t.tz}" ${t.tz === defaultTz ? 'selected' : ''}>${t.label}</option>`).join('');
+  return TIMEZONES.map(t => `<option value="${t.tz}" selected>${t.label}</option>`).join('');
 }
 
 function zonedTimeToUtc(dateStr, timeStr, timeZone){
@@ -2303,8 +2293,8 @@ function toggleApproveReschedule(reqId){
         <input type="datetime-local" id="reschedDate-${reqId}">
       </div>
       <div class="field">
-        <label>Часовой пояс</label>
-        <select id="reschedTz-${reqId}">${timezoneOptionsHtml(SCHOOL_TZ)}</select>
+        <div class="msk-note">🕐 Всё время указывается по Москве (МСК)</div>
+        <select id="reschedTz-${reqId}" style="display:none">${timezoneOptionsHtml(SCHOOL_TZ)}</select>
       </div>
       <p id="reschedErr-${reqId}" style="color:var(--red); font-size:13px; font-weight:600; min-height:18px;"></p>
       <button class="btn btn-dark btn-sm" onclick="approveReschedule('${reqId}')">Подтвердить перенос</button>
@@ -2434,8 +2424,8 @@ function toggleAdminReschedule(lessonId){
         <input type="datetime-local" id="adminRescheduleDate-${lessonId}">
       </div>
       <div class="field">
-        <label>Часовой пояс</label>
-        <select id="adminRescheduleTz-${lessonId}">${timezoneOptionsHtml(SCHOOL_TZ)}</select>
+        <div class="msk-note">🕐 Всё время указывается по Москве (МСК)</div>
+        <select id="adminRescheduleTz-${lessonId}" style="display:none">${timezoneOptionsHtml(SCHOOL_TZ)}</select>
       </div>
       <button class="btn btn-dark btn-sm" onclick="submitAdminReschedule('${lessonId}')">Сохранить новое время</button>
     </div>
@@ -4952,8 +4942,8 @@ function toggleConfirmForm(requestId){
         <input type="datetime-local" id="confDate-${requestId}">
       </div>
       <div class="field">
-        <label>Часовой пояс</label>
-        <select id="confTz-${requestId}">${timezoneOptionsHtml(SCHOOL_TZ)}</select>
+        <div class="msk-note">🕐 Всё время указывается по Москве (МСК)</div>
+        <select id="confTz-${requestId}" style="display:none">${timezoneOptionsHtml(SCHOOL_TZ)}</select>
       </div>
       <div class="field">
         <label>Длительность, мин</label>
@@ -5492,8 +5482,8 @@ function toggleRegularLessonEdit(lessonId){
         <input type="datetime-local" id="lessonEditDate-${lessonId}" value="${toDatetimeLocalInTz(new Date(lesson.lesson_date), SCHOOL_TZ)}">
       </div>
       <div class="field">
-        <label>Часовой пояс</label>
-        <select id="lessonEditTz-${lessonId}">${timezoneOptionsHtml(SCHOOL_TZ)}</select>
+        <div class="msk-note">🕐 Всё время указывается по Москве (МСК)</div>
+        <select id="lessonEditTz-${lessonId}" style="display:none">${timezoneOptionsHtml(SCHOOL_TZ)}</select>
       </div>
       <div class="field">
         <label>Длительность, мин</label>
