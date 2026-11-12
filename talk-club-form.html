@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Записаться в TALK CLUB YORK!</title>
-<meta name="description" content="Заявка на разговорный клуб английского YORK! TALK CLUB. Укажите удобное время и уровень, подберём группу.">
+<meta name="description" content="Заявка в разговорный клуб английского YORK! TALK CLUB. Укажите уровень и удобное время — подберём группу.">
 <link rel="canonical" href="https://weyork.online/talk-club-form.html">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -12,310 +13,416 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fff;--accent:#D2E739;--ink:#1C1C1C;--ink-soft:rgba(28,28,28,.62);--line:rgba(28,28,28,.12);--panel:#F7F8EF}
-*{box-sizing:border-box} html,body{margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
-.wrap{max-width:560px;margin:0 auto;padding:32px 20px 64px}
-.logo{font-family:'Unbounded',sans-serif;font-weight:900;font-size:22px;text-align:center;margin-bottom:8px}.logo span{background:var(--accent);padding:0 5px;border-radius:7px}
-h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:24px;line-height:1.22;margin:0 0 8px;text-align:center}
-.sub{color:var(--ink-soft);font-size:14.5px;line-height:1.5;margin:0 0 26px;text-align:center}
-.section-label{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;margin:0 0 14px}
-.field{margin-bottom:18px}.field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);margin-bottom:6px}
-.field input,.field select,.field textarea{width:100%;font-family:'Inter',sans-serif;font-size:15px;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease}
-.field textarea{min-height:72px;resize:vertical}
-.field input:hover,.field select:hover,.field textarea:hover{border-color:rgba(28,28,28,.28)}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(210,231,57,.45)}
-.hint-line{font-size:12.5px;color:var(--ink-soft);margin:8px 0 0}.hint-line a{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
-.chip-group{display:flex;flex-wrap:wrap;gap:7px}
-.chip-group label{position:relative;display:inline-flex;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:100px;padding:9px 15px;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--ink-soft);transition:.15s;user-select:none}
-.chip-group input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
-.chip-group label:hover{border-color:var(--ink);color:var(--ink)}
-.chip-group label:has(input:checked){background:var(--accent);border-color:var(--accent);color:var(--ink);box-shadow:0 2px 8px rgba(210,231,57,.5)}
-.price-hint{background:var(--panel);border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.5;margin-top:10px;display:none}
-.price-hint.show{display:block}
-.tz-fallback{display:none;background:#FFF6D9;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.5;margin-top:10px}
-.tz-fallback.show{display:block}
-.referral-banner{background:#F3F8DC;border:1.5px solid var(--accent);border-radius:14px;padding:16px 18px;margin-bottom:18px;font-size:14px;line-height:1.5}
-.referral-banner b{font-family:'Unbounded',sans-serif;font-size:13px}
-.consent-field{margin-top:22px}
-.consent-label{display:flex;align-items:flex-start;gap:10px;font-size:13px!important;color:var(--ink-soft)!important;cursor:pointer;text-transform:none!important;letter-spacing:0!important}
-.consent-label input{width:auto;margin-top:2px;flex-shrink:0}
-.submit{width:100%;font-family:'Unbounded',sans-serif;font-weight:700;font-size:15px;color:var(--ink);background:var(--accent);border:none;border-radius:100px;padding:17px 24px;cursor:pointer;margin-top:10px;transition:transform .15s ease}
-.submit:hover{transform:translateY(-2px)}.submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
-#errorMsg{color:#B3261E;font-size:13.5px;font-weight:600;min-height:18px;margin:10px 0 0;text-align:center}
-.hidden{display:none!important}
-.success-box{text-align:center;padding:28px 4px}.success-box .big{font-size:48px;margin-bottom:14px}
-.success-box h2{font-family:'Unbounded',sans-serif;font-size:21px;margin:0 0 10px}
-.success-box p{color:var(--ink-soft);font-size:14.5px;line-height:1.6;max-width:390px;margin:0 auto}
-.cta-footer{background:var(--panel);border-radius:16px;padding:20px 18px;margin-top:24px}
-.cta-footer p{font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin:0 0 14px}
-.cta-footer p b{color:var(--ink);font-family:'Unbounded',sans-serif;font-size:14px}
-.cta-footer .hint-line{margin:0}
-.cta-footer .hint-line a{color:var(--ink)}
-.club-cta-card{background:linear-gradient(155deg,#F3F8DC 0%,var(--panel) 100%);border:1.5px solid rgba(210,231,57,.6);border-radius:20px;padding:22px;text-align:center;margin-top:24px}
-.club-cta-card .cc-emoji{font-size:26px;margin-bottom:8px}
-.club-cta-card .cc-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px;line-height:1.35}
-.club-cta-card .cc-text{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin:0 0 16px}
-.club-cta-card .cc-btn{display:inline-flex;align-items:center;gap:8px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:14.5px;color:#fff;background:var(--ink);border-radius:100px;padding:14px 22px;text-decoration:none}
+:root{--bg:#090A09;--lime:#D7EF42;--ink:#141412;--muted:#B9BAB4;--glass:rgba(255,255,255,.055);--line:rgba(255,255,255,.13)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 15% 35%,rgba(119,139,23,.19),transparent 42%),radial-gradient(ellipse at 90% 10%,rgba(215,239,66,.09),transparent 34%),#090A09;color:#fff;font-family:"Golos Text",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.nav{width:min(1160px,calc(100% - 40px));margin:16px auto 0;padding:9px 10px 9px 23px;border:1px solid var(--line);border-radius:999px;background:rgba(17,18,14,.78);backdrop-filter:blur(18px);display:flex;align-items:center;gap:16px}
+.logo{font:800 20px Unbounded,sans-serif;letter-spacing:-.06em;text-decoration:none;color:#fff}.logo b{background:var(--lime);color:#101109;padding:1px 5px;border-radius:5px}
+.back{margin-left:auto;text-decoration:none;color:#d4d5cf;font-size:13px}
+.shell{width:min(1160px,calc(100% - 40px));margin:clamp(28px,5vw,58px) auto 70px;display:grid;grid-template-columns:.82fr 1.18fr;gap:28px;align-items:start}
+.intro{position:sticky;top:32px;padding:clamp(22px,4vw,46px) 4px}
+.label{display:inline-flex;align-items:center;gap:8px;color:var(--lime);font:600 11px Unbounded,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.label:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}
+h1{font:800 clamp(38px,6vw,70px)/1.02 Unbounded,sans-serif;letter-spacing:-.07em;text-transform:uppercase;margin:22px 0}
+h1 span{color:var(--lime)}
+.intro p{font-size:17px;line-height:1.65;color:rgba(255,255,255,.7);max-width:430px}
+.details{display:grid;gap:10px;margin-top:28px}
+.detail{display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:rgba(255,255,255,.045);backdrop-filter:blur(12px);color:#e8e9e3;font-size:14px}
+.detail b{color:var(--lime);font:600 11px Unbounded,sans-serif;min-width:46px}
+.trust{margin-top:22px;padding:16px;border:1px solid rgba(215,239,66,.18);border-radius:18px;background:linear-gradient(120deg,rgba(215,239,66,.09),rgba(255,255,255,.03));color:#d1d2cc;font-size:13px;line-height:1.55}
+.form-card{border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:clamp(22px,4vw,38px);background:linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.045));backdrop-filter:blur(24px);box-shadow:0 30px 90px rgba(0,0,0,.3)}
+.card-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:26px}
+.card-head h2{font:700 clamp(23px,3vw,32px)/1.12 Unbounded,sans-serif;letter-spacing:-.045em;margin:0}
+.card-head p{margin:8px 0 0;color:#b9bab4;font-size:14px;line-height:1.5}
+.counter{white-space:nowrap;padding:8px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.14);font:600 10px Unbounded,sans-serif;color:var(--lime)}
+.group{padding:20px 0;border-top:1px solid rgba(255,255,255,.1)}
+.group-title{display:flex;align-items:center;gap:10px;margin-bottom:14px;font:600 14px Unbounded,sans-serif}
+.group-title span{color:var(--lime);font-size:10px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+label{display:block;margin-bottom:7px;color:#e6e7e1;font-size:13px;font-weight:600}
+input[type=text],textarea{width:100%;border:1px solid rgba(255,255,255,.16);border-radius:13px;background:rgba(8,9,8,.36);padding:13px 14px;color:#fff;font:15px "Golos Text",sans-serif;outline:none;transition:border-color .15s,box-shadow .15s}
+input::placeholder,textarea::placeholder{color:#85877f}
+input:focus,textarea:focus{border-color:var(--lime);box-shadow:0 0 0 3px rgba(215,239,66,.13)}
+textarea{min-height:78px;resize:vertical}
+.choices{display:flex;gap:8px;flex-wrap:wrap}
+.choice{position:relative;display:inline-flex;cursor:pointer}
+.choice input{position:absolute;opacity:0}
+.choice span{display:inline-flex;align-items:center;min-height:40px;padding:9px 14px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.035);color:#d3d4ce;font-size:13px;transition:.16s}
+.choice:hover span{border-color:rgba(215,239,66,.55);color:#fff}
+.choice:has(input:checked) span{background:var(--lime);border-color:var(--lime);color:#101109;box-shadow:0 4px 18px rgba(215,239,66,.2);font-weight:700}
+.hint{margin:10px 0 0;color:#a6a8a0;font-size:12px;line-height:1.5}
+.hint a{color:var(--lime);text-underline-offset:3px}
+.tz{margin-top:13px;padding:11px 13px;border-radius:12px;background:rgba(215,239,66,.08);border:1px solid rgba(215,239,66,.2);font-size:12px;color:#dfe2cb}
+.consent{display:flex;align-items:flex-start;gap:10px;color:#c6c7c1;font-size:12px;line-height:1.5}
+.consent input{accent-color:var(--lime);margin-top:3px}
+.consent a{color:#fff;text-underline-offset:2px}
+.submit{width:100%;min-height:54px;border:0;border-radius:999px;background:linear-gradient(100deg,#F1F46E,#D9EF45 46%,#B2D320);color:#101109;font:700 14px Unbounded,sans-serif;cursor:pointer;box-shadow:0 10px 28px rgba(185,213,39,.2);transition:transform .18s}
+.submit:hover{transform:translateY(-2px)}
+.submit-note{text-align:center;color:#a8aaa2;font-size:12px;line-height:1.5;margin:12px 0 0}
+.referral{margin-top:14px}
+.referral summary{cursor:pointer;color:#d9dad3;font-size:13px}
+.referral summary::marker{color:var(--lime)}
+.preview-tag{position:fixed;left:12px;bottom:12px;z-index:99;background:#090A09;color:var(--lime);border:1px solid rgba(215,239,66,.5);border-radius:999px;padding:9px 14px;font-size:12px;box-shadow:0 5px 18px rgba(0,0,0,.3)}
+#previewMessage{display:none;margin-top:14px;padding:12px 14px;border-radius:14px;border:1px solid rgba(215,239,66,.35);background:rgba(215,239,66,.09);color:#ecf3c2;font-size:13px}
+@media(max-width:850px){.shell{grid-template-columns:1fr;margin-top:20px}.intro{position:static;padding:18px 0}.details{grid-template-columns:repeat(3,1fr)}.detail{align-items:flex-start;flex-direction:column;gap:7px}}
+@media(max-width:580px){.nav{width:calc(100% - 24px);margin-top:8px;padding:9px 14px}.shell{width:calc(100% - 24px)}.back{font-size:12px}.intro h1{font-size:clamp(36px,11vw,54px)}.details{grid-template-columns:1fr 1fr}.form-card{border-radius:22px;padding:20px 16px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.counter{font-size:9px;padding:7px 9px}.group{padding:17px 0}}
+/* Guided form redesign */
+.form-progress{margin:-8px 0 22px}
+.progress-track{height:4px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden}
+.progress-track span{display:block;width:25%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#F1F46E,#D7EF42,#B2D320);box-shadow:0 0 14px rgba(215,239,66,.45);transition:width .28s ease}
+.progress-labels{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:9px;color:#8e9087;font-size:11px}
+.progress-labels button:not(:first-child){text-align:center}.progress-labels button:last-child{text-align:right}.progress-labels .is-current,.progress-labels .is-done{color:#e5edac;font-weight:600}
+.form-step{display:none}.form-step.active{display:block;animation:stepIn .22s ease both}
+@keyframes stepIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.choice input:focus-visible+span{outline:2px solid var(--lime);outline-offset:3px}
+.wizard-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
+.step-next,.step-back{min-height:50px;padding:0 20px;border-radius:999px;font:700 13px "Golos Text",sans-serif;cursor:pointer;transition:transform .16s,background .16s,border-color .16s}
+.step-next{margin-left:auto;border:0;background:linear-gradient(100deg,#F1F46E,#D9EF45 46%,#B2D320);color:#101109;box-shadow:0 10px 28px rgba(185,213,39,.2)}
+.step-next span{margin-left:8px}.step-back{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.055);color:#e6e7e1}
+.step-next:hover,.step-back:hover{transform:translateY(-1px)}.wizard-controls [hidden]{display:none!important}.wizard-controls .submit{width:auto;min-width:220px;margin-left:auto;padding:0 24px}
+#previewMessage{scroll-margin:32px}
+.home-footer#site-footer{position:relative;overflow:hidden;margin-top:0;padding:52px 0 28px;color:#fff;background:linear-gradient(180deg,#090a09 0%,rgba(9,10,9,.92) 16%,rgba(9,10,9,.62) 36%,rgba(9,10,9,0) 68%),radial-gradient(520px 280px at 100% 100%,rgba(178,211,32,.4),rgba(178,211,32,0) 70%),linear-gradient(100deg,#101109 0%,#191d0c 48%,#3e4a12 100%)}
+#site-footer>.wrap{display:block;width:min(1120px,calc(100% - 48px));margin:0 auto}
+#site-footer .foot-head{text-align:center;padding-bottom:30px;margin-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
+#site-footer .foot-head .logo{display:inline-block;margin:0 0 10px;font:900 26px Unbounded,sans-serif;color:#fff;letter-spacing:-.06em;text-decoration:none}
+#site-footer .foot-head .logo span{color:#141412;background:var(--lime);padding:0 4px;border-radius:6px}
+#site-footer .foot-tag{margin:0 0 20px;color:rgba(255,255,255,.55);font-size:13.5px;line-height:1.55}
+#site-footer .foot-social{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+#site-footer .foot-social a{display:inline-flex;align-items:center;gap:9px;padding:11px 18px 11px 14px;border-radius:100px;color:#fff;font-size:13.5px;font-weight:600;text-decoration:none;background:linear-gradient(150deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(14px)}
+#site-footer .foot-social svg{width:18px;height:18px;display:block}
+#site-footer .foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-bottom:34px;text-align:left}
+#site-footer .foot-col h4{margin:0 0 14px;color:rgba(255,255,255,.45);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+#site-footer .foot-col ul{display:flex;flex-direction:column;align-items:flex-start;gap:10px;list-style:none;margin:0;padding:0}
+#site-footer .foot-col a{color:rgba(255,255,255,.8);font-size:14px;text-decoration:none}
+#site-footer .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:20px;color:rgba(255,255,255,.45);font-size:12.5px}
+@media(max-width:760px){#site-footer .foot-cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 18px}#site-footer .foot-col:last-child{grid-column:1/-1}}
+@media(max-width:580px){.nav{position:relative}.shell{margin-bottom:44px}.intro{padding:12px 0}.intro h1{margin:15px 0;font-size:clamp(34px,10vw,46px)}.intro p{font-size:15px;line-height:1.5}.details{gap:8px}.detail{min-height:76px;padding:10px 11px;font-size:12px}.detail b{font-size:9px;min-width:0}.trust{margin-top:14px;padding:13px;font-size:12px}.card-head{gap:8px;align-items:center;margin-bottom:20px}.card-head h2{font-size:21px}.card-head p{font-size:13px}.counter{font-size:8px;padding:7px 8px}.form-progress{margin:-4px 0 12px}.progress-labels{font-size:9px;gap:3px}.form-card{padding:19px 15px}.group{padding:16px 0}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.choices{gap:7px}.choice span{min-height:38px;padding:8px 11px;font-size:12px}.wizard-controls{position:sticky;bottom:10px;z-index:4;padding:8px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(14,15,12,.88);backdrop-filter:blur(14px)}.step-next,.step-back{min-height:46px;padding:0 16px}.wizard-controls .submit{width:100%;min-width:0;margin:0}.wizard-controls:has(.submit:not([hidden])){justify-content:stretch}.wizard-controls:has(.submit:not([hidden])) .step-back{flex:0 0 auto}.wizard-controls:has(.submit:not([hidden])) .submit{flex:1}.home-footer#site-footer{padding:42px 0 30px}#site-footer>.wrap{width:calc(100% - 30px)}#site-footer .foot-cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}#site-footer .foot-col:last-child{grid-column:1/-1}#site-footer .foot-bottom{justify-content:center;text-align:center;line-height:1.6}#site-footer .foot-col a{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.form-step.active{animation:none}.progress-track span{transition:none}}
+/* Light test-inspired theme */
+:root{--bg:#F3F2ED;--lime:#D7EF42;--ink:#1C1C1C;--muted:#5E5F58;--glass:rgba(255,255,255,.78);--line:rgba(28,28,28,.12)}
+body{background:radial-gradient(ellipse at 92% 4%,rgba(215,239,66,.16),transparent 34%),#F3F2ED;color:#1C1C1C}
+.nav{border-color:rgba(28,28,28,.1);background:rgba(255,255,255,.82);box-shadow:0 8px 30px rgba(28,28,28,.06)}
+.logo{color:#1C1C1C}.back{color:#5E5F58}.back:hover{color:#1C1C1C}
+.label{color:#57671a}.label:before{background:#B2D320;box-shadow:0 0 10px rgba(178,211,32,.35)}
+h1{color:#1C1C1C}h1 span{color:#74890d}
+.intro p{color:rgba(28,28,28,.68)}
+.detail{border-color:rgba(28,28,28,.09);background:rgba(255,255,255,.7);backdrop-filter:blur(14px);color:#32332f;box-shadow:0 4px 16px rgba(28,28,28,.025)}
+.detail b{color:#687b0d}
+.trust{border-color:rgba(113,137,13,.16);background:linear-gradient(120deg,rgba(215,239,66,.18),rgba(255,255,255,.72));color:#4e5140}
+.form-card{border-color:rgba(28,28,28,.08);background:rgba(255,255,255,.9);backdrop-filter:blur(24px);box-shadow:0 24px 70px rgba(28,28,28,.09);color:#1C1C1C}
+.card-head p{color:#696a63}.counter{border-color:rgba(104,123,13,.22);background:rgba(215,239,66,.12);color:#63750b}
+.group{border-color:rgba(28,28,28,.1)}.group-title{color:#22231f}
+label{color:#33342f}
+input[type=text],textarea{border-color:rgba(28,28,28,.16);background:#FBFBF8;color:#1C1C1C;box-shadow:inset 0 1px 2px rgba(28,28,28,.025)}
+input::placeholder,textarea::placeholder{color:#85867e}
+input:focus,textarea:focus{border-color:#9AB51C;box-shadow:0 0 0 3px rgba(154,181,28,.14)}
+.choice span{border-color:rgba(28,28,28,.14);background:rgba(255,255,255,.78);color:#4b4c46}
+.choice:hover span{border-color:rgba(122,148,13,.5);color:#22231f}
+.choice:has(input:checked) span{background:linear-gradient(100deg,#EFF57B,#D7EF42 55%,#C4DE31);border-color:#B9D42B;color:#20220f;box-shadow:0 4px 14px rgba(154,181,28,.16)}
+.hint{color:#696a63}.hint a{color:#63750b}.tz{background:rgba(215,239,66,.14);border-color:rgba(122,148,13,.2);color:#4e5d11}
+.consent{color:#55564f}.consent a{color:#3e5010}.submit-note{color:#6d6e66}
+.referral summary{color:#4b4d43}.referral summary::marker{color:#758a0d}
+.step-back{border-color:rgba(28,28,28,.15);background:rgba(255,255,255,.78);color:#33342f}
+#previewMessage{border-color:rgba(104,123,13,.24);background:rgba(215,239,66,.18);color:#47530f}
+@media(max-width:580px){.wizard-controls{border-color:rgba(28,28,28,.11);background:rgba(243,242,237,.93);box-shadow:0 6px 22px rgba(28,28,28,.1)}.step-back{background:#fff}}
+.progress-labels{color:#6d6e66}.progress-labels .is-current,.progress-labels .is-done{color:#4f6010}.group-title span{color:#71870f}.counter{color:#56670b}
+.progress-labels button{padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer}.progress-labels button:disabled{cursor:default}.progress-labels button.is-done{cursor:pointer;text-decoration:underline;text-decoration-color:rgba(79,96,16,.35);text-underline-offset:3px}.progress-labels button.is-done:hover{color:#36450b}.progress-labels button:focus-visible{outline:2px solid #91a91a;outline-offset:3px;border-radius:3px}
+@media(max-width:580px){
+  .intro h1{text-align:center}
+  .details{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:20px}
+  .detail{min-width:0;min-height:76px;padding:9px 8px;align-items:flex-start;gap:5px;border-radius:15px;background:linear-gradient(150deg,rgba(255,255,255,.96),rgba(247,248,237,.9));box-shadow:0 5px 16px rgba(28,28,28,.045)}
+  .detail b{font-size:8px;line-height:1.2;white-space:nowrap;border-left:2px solid #D7EF42;padding-left:5px}
+  .detail span{font-size:10px;line-height:1.22}
+  .trust{padding:0;overflow:hidden}
+  .trust summary{position:relative;list-style:none;padding:12px 38px 12px 13px;font-weight:650;cursor:pointer}
+  .trust summary::-webkit-details-marker{display:none}
+  .trust summary:after{content:'+';position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:20px;color:#65780d}
+  .trust[open] summary:after{content:'−'}
+  .trust-copy{padding:0 13px 13px}
+}
+/* Selected glass capsule form treatment */
+.form-card{position:relative;margin-top:20px;padding-top:36px;overflow:visible;border-color:rgba(255,255,255,.96);background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(255,255,255,.66));box-shadow:0 24px 60px rgba(73,81,33,.14),inset 0 1px 0 #fff}
+.step-token{position:absolute;z-index:3;top:-19px;right:20px;display:flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.98);box-shadow:0 10px 27px rgba(70,81,25,.16);font:600 8px Unbounded,sans-serif;color:#66780e;letter-spacing:.01em}
+.step-token strong{font-size:13px;color:#22231f}.step-token em{font-style:normal;color:#96998d;margin:0 -5px}.step-token .token-dot{width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 9px rgba(193,221,30,.7)}
+.card-head{margin-bottom:20px}.card-head p{max-width:360px}
+.form-progress{display:none}
+.wizard-controls{display:flex;align-items:center;gap:9px;margin-top:18px;padding:7px;border-radius:19px;background:rgba(255,255,255,.58);border:1px solid rgba(113,135,14,.14);box-shadow:0 8px 22px rgba(50,54,30,.08)}
+.capsule-segments{display:flex;align-items:center;gap:4px;flex:1;padding:0 4px}
+.capsule-segments i{display:block;flex:1;height:5px;border-radius:99px;background:#e6e8dc;transition:background .2s,box-shadow .2s}
+.capsule-segments i.is-done{background:linear-gradient(90deg,#eff75f,#c5e51d)}.capsule-segments i.is-current{background:linear-gradient(90deg,#eff75f,#c5e51d);box-shadow:0 0 10px rgba(209,233,56,.48)}
+.step-next,.step-back,.wizard-controls .submit{min-height:42px;padding:0 17px;border-radius:999px;font:700 12px "Golos Text",sans-serif}
+.step-next{flex:none;margin:0}.step-next span{margin-left:6px}.step-back{flex:none;border-color:rgba(28,28,28,.13);background:rgba(255,255,255,.62);color:#54564e}.wizard-controls .submit{flex:none;width:auto;min-width:0;margin:0}
+.wizard-controls [hidden]{display:none!important}
+@media(max-width:580px){.form-card{margin-top:20px;padding:35px 15px 19px}.step-token{right:14px;padding:8px 11px;gap:7px}.card-head{margin-bottom:16px}.card-head h2{font-size:21px}.card-head p{font-size:13px}.wizard-controls{position:static;display:flex;gap:6px;margin-top:16px;padding:6px;border-radius:18px}.capsule-segments{gap:3px;padding:0 2px}.capsule-segments i{height:4px}.step-next,.step-back,.wizard-controls .submit{min-height:42px;padding:0 12px;font-size:11px}.wizard-controls .submit{font-size:10px}.wizard-controls:has(.submit:not([hidden])) .step-back{flex:0 0 auto}.wizard-controls:has(.submit:not([hidden])) .capsule-segments{flex:1;min-width:20px}}
+/* Richer gradients and crisp vector accents for the intro details */
+.intro{isolation:isolate}
+.intro:before{content:"";position:absolute;z-index:-1;inset:4% -5% 0 -7%;pointer-events:none;border-radius:42px;background:radial-gradient(ellipse at 78% 78%,rgba(190,218,32,.25),transparent 43%),radial-gradient(ellipse at 18% 8%,rgba(255,255,255,.9),transparent 58%),linear-gradient(145deg,rgba(255,255,255,.28),rgba(231,239,171,.12));filter:blur(2px)}
+.detail{position:relative;overflow:hidden;background:radial-gradient(220px 110px at 100% 100%,rgba(215,239,66,.82),rgba(215,239,66,0) 70%),radial-gradient(180px 100px at 0% 0%,#fff,rgba(255,255,255,0) 70%),linear-gradient(150deg,#fff 0%,#F8FBEE 100%);border:1.5px solid rgba(255,255,255,.95);box-shadow:0 14px 32px rgba(70,85,20,.12),0 2px 6px rgba(70,85,20,.05)}
+.detail>*{position:relative;z-index:1}
+.detail-icon{width:31px;height:31px;display:grid;place-items:center;flex:none;border-radius:11px;color:#fff;background:linear-gradient(135deg,#E6F663,#C6DF27);box-shadow:0 8px 16px rgba(150,180,20,.35),inset 0 1px 0 rgba(255,255,255,.75)}
+.detail-icon svg{display:block;width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.trust{position:relative;overflow:hidden;background:radial-gradient(260px 120px at 100% 100%,rgba(215,239,66,.74),rgba(215,239,66,0) 70%),radial-gradient(200px 110px at 0% 0%,#fff,rgba(255,255,255,0) 70%),linear-gradient(150deg,#fff 0%,#F8FBEE 100%);border:1.5px solid rgba(255,255,255,.96);box-shadow:0 12px 30px rgba(70,85,20,.1),inset 0 1px 0 rgba(255,255,255,.9)}
+.trust summary{display:flex;align-items:center;gap:9px;list-style:none;font-weight:600}
+.trust summary::-webkit-details-marker{display:none}
+.trust-icon{display:grid;place-items:center;width:27px;height:27px;flex:none;border-radius:9px;background:linear-gradient(135deg,#E6F663,#C6DF27);color:#fff;box-shadow:0 7px 15px rgba(150,180,20,.32),inset 0 1px 0 rgba(255,255,255,.7)}
+.trust-icon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.trust summary:after{content:'+';margin-left:auto;color:#fff!important;background:linear-gradient(135deg,#E6F663,#C6DF27);box-shadow:0 6px 14px rgba(150,180,20,.32);border-radius:8px;width:23px;height:23px;display:grid;place-items:center;font-size:17px!important;line-height:1}
+.trust[open] summary:after{content:'−'}
+.trust-copy{position:relative;z-index:1}
+@media(min-width:581px){.trust{padding:12px 14px}.trust summary{cursor:pointer}}
+@media(max-width:580px){.intro:before{inset:-2% -4% 0;border-radius:28px;background:radial-gradient(ellipse at 87% 82%,rgba(190,218,32,.29),transparent 48%),radial-gradient(ellipse at 15% 7%,rgba(255,255,255,.95),transparent 54%),linear-gradient(150deg,rgba(255,255,255,.24),rgba(232,240,174,.14))}.detail{min-height:86px}.detail-icon{width:24px;height:24px;border-radius:8px}.detail-icon svg{width:14px;height:14px}.trust{padding:0}.trust summary{padding:12px 38px 12px 13px}.trust-icon{width:24px;height:24px;border-radius:8px}.trust-icon svg{width:14px;height:14px}.trust-copy{padding:0 13px 13px}}
+/* Match the reference: neutral white info tiles, lime-glass expandable helper */
+.detail{background:#fff;border:1px solid rgba(28,28,28,.08);box-shadow:0 5px 18px rgba(28,28,28,.055),inset 0 1px 0 rgba(255,255,255,.95);color:#20211f}
+.detail b{color:#20211f}
+.detail span:not(.detail-icon){color:#33342f}
+.detail-icon{background:#141512;color:#fff;box-shadow:0 4px 11px rgba(20,21,18,.13),inset 0 1px 0 rgba(255,255,255,.14)}
+.detail-icon svg{stroke:#fff}
+.trust{background:radial-gradient(300px 150px at 100% 100%,rgba(215,239,66,.92),rgba(215,239,66,0) 70%),radial-gradient(220px 120px at 0% 0%,#fff,rgba(255,255,255,0) 70%),linear-gradient(150deg,#fff 0%,#F8FBEE 100%);border:1.5px solid rgba(255,255,255,.96);box-shadow:0 14px 34px rgba(70,85,20,.13),0 0 24px rgba(215,239,66,.12),inset 0 1px 0 rgba(255,255,255,.95)}
+@media(max-width:580px){.detail{background:#fff}.trust{background:radial-gradient(300px 150px at 100% 100%,rgba(215,239,66,.92),rgba(215,239,66,0) 70%),radial-gradient(220px 120px at 0% 0%,#fff,rgba(255,255,255,0) 70%),linear-gradient(150deg,#fff 0%,#F8FBEE 100%)}}
+/* Page-wide white-to-lime background */
+body{background:radial-gradient(ellipse at 91% 7%,rgba(215,239,66,.36),rgba(215,239,66,0) 35%),radial-gradient(ellipse at 8% 52%,rgba(215,239,66,.17),rgba(215,239,66,0) 43%),linear-gradient(150deg,#fff 0%,#FBFCF5 47%,#F2F5DA 100%);background-attachment:fixed}
+.intro{isolation:auto;border:0;border-radius:0;padding:clamp(22px,4vw,46px) 4px;background:transparent;box-shadow:none}
+.intro:before{display:none}
+@media(max-width:850px){.intro{padding:18px 0}}
+@media(max-width:580px){.intro{margin:0;padding:12px 0}.intro h1{margin-top:15px}}
+/* Talk Club application footer: solid black */
+.home-footer#site-footer{background:#090A09!important;background-image:none!important;margin-top:0;padding-top:52px;overflow:hidden}
+.home-footer#site-footer:before{display:none!important}
+@media(max-width:580px){.home-footer#site-footer{padding-top:42px}}
+/* Legacy overlap rules retained below but overridden above */
+.home-footer#site-footer{overflow:visible;margin-top:-30px;padding-top:82px}
+.home-footer#site-footer:before{content:"";position:absolute;z-index:0;left:0;right:0;top:0;height:60px;border-radius:0 0 30px 30px;background:#F8FBEE;pointer-events:none}
+.home-footer#site-footer>.wrap{position:relative;z-index:1}
+@media(max-width:580px){.home-footer#site-footer{margin-top:-22px;padding-top:66px}.home-footer#site-footer:before{height:44px;border-radius:0 0 22px 22px}}
+/* Post-submission confirmation state */
+.confirmation[hidden]{display:none!important}
+.card-head[hidden],.step-token[hidden]{display:none!important}
+.confirmation{animation:stepIn .28s ease both}
+.confirm-heading{display:flex;gap:17px;align-items:flex-start;margin:0 0 22px}
+.confirm-check{width:48px;height:48px;display:grid;place-items:center;flex:none;border-radius:16px;background:linear-gradient(135deg,#E6F663,#C6DF27);box-shadow:0 10px 22px rgba(150,180,20,.28),inset 0 1px rgba(255,255,255,.7);color:#fff}
+.confirm-check svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.confirm-label{margin:1px 0 8px;color:#65790b;font:600 9px Unbounded,sans-serif;letter-spacing:.12em}
+.confirm-heading h2{margin:0;font:700 clamp(22px,3vw,30px)/1.15 Unbounded,sans-serif;letter-spacing:-.05em;color:#1c1c1a}
+.confirm-heading p{margin:9px 0 0;max-width:440px;color:#686a62;font-size:14px;line-height:1.55}
+.confirm-links{display:grid;gap:10px}
+.confirm-link{display:flex;align-items:center;gap:13px;min-width:0;padding:12px 14px;border-radius:17px;text-decoration:none;color:#20211f;background:radial-gradient(220px 100px at 100% 100%,rgba(215,239,66,.2),rgba(215,239,66,0) 70%),rgba(255,255,255,.76);border:1px solid rgba(255,255,255,.96);box-shadow:0 5px 18px rgba(40,45,25,.055),inset 0 1px rgba(255,255,255,.95);transition:transform .16s,box-shadow .16s}
+.confirm-link:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(70,85,20,.12),inset 0 1px rgba(255,255,255,.95)}
+.confirm-icon{display:grid;place-items:center;width:38px;height:38px;flex:none;border-radius:12px;background:#141512;color:#fff}
+.confirm-icon svg,.confirm-arrow{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.confirm-copy{display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}.confirm-copy b{font-size:13px}.confirm-copy small{font-size:11px;line-height:1.35;color:#73756c}.confirm-arrow{width:16px;height:16px;color:#687d0c;flex:none}
+/* The same animated manager link used in the homepage FAQ. */
+.confirm-manager{display:inline-flex;align-items:center;gap:10px;margin-top:19px;text-decoration:none;color:inherit}
+.manager-mark{width:36px;height:36px;border-radius:12px;font-size:11px;background:linear-gradient(135deg,#E7F65C,#C3E11D);color:#101109;font-family:Unbounded,sans-serif;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;position:relative}
+.manager-mark i{position:absolute;right:-2px;bottom:-2px;width:9px;height:9px;border-radius:50%;background:#3FD06B;box-shadow:0 0 0 2.5px #fff}
+.manager-pill{display:inline-flex;align-items:center;gap:10px;padding:4px 5px 4px 15px;border-radius:20px 20px 20px 6px;font-weight:600;font-size:14px;min-height:36px;background:linear-gradient(150deg,rgba(10,11,6,.9),rgba(28,34,10,.82));border:1px solid rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);box-shadow:0 16px 34px rgba(20,21,18,.16),inset 0 1px 0 rgba(255,255,255,.14)}
+.manager-pill .tx2{white-space:nowrap}
+.manager-arrow{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#E7F65C,#C3E11D);color:#101109;display:flex;align-items:center;justify-content:center;flex:none;opacity:0;transition:opacity .3s,transform .25s}
+.manager-arrow.vis{opacity:1}.confirm-manager:hover .manager-arrow{transform:rotate(-45deg)}
+.manager-arrow svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.manager-pill .ty{display:inline-flex;gap:4px}.manager-pill .ty i{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:faqDots 1s infinite}.manager-pill .ty i:nth-child(2){animation-delay:.15s}.manager-pill .ty i:nth-child(3){animation-delay:.3s}
+.manager-pill .cur{display:inline-block;width:1.5px;height:16px;background:var(--lime);vertical-align:-3px;margin-left:1px;animation:faqBlink 1s steps(1) infinite}
+@keyframes faqDots{50%{opacity:.25}}@keyframes faqBlink{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.manager-pill .ty i,.manager-pill .cur{animation:none}.manager-arrow{transition:none}}
+@media(max-width:580px){.confirm-heading{gap:12px;margin-bottom:17px}.confirm-check{width:40px;height:40px;border-radius:13px}.confirm-check svg{width:21px;height:21px}.confirm-heading h2{font-size:21px}.confirm-heading p{font-size:13px}.confirm-links{gap:8px}.confirm-link{gap:10px;padding:10px;border-radius:15px}.confirm-icon{width:34px;height:34px;border-radius:10px}.confirm-copy b{font-size:12px}.confirm-copy small{font-size:10px}.confirm-manager{margin-top:14px;font-size:11px}.manager-pill{gap:7px;padding:3px 4px 3px 11px;min-height:32px;font-size:12px}.manager-pill .tx2{white-space:normal}.manager-arrow{width:24px;height:24px}.manager-mark{width:34px;height:34px}}
+.honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.home-footer#site-footer{background:#090A09!important;background-image:none!important;margin-top:0!important;padding-top:52px!important;overflow:hidden!important}
+.home-footer#site-footer:before{display:none!important}
+@media(max-width:580px){.home-footer#site-footer{margin-top:0!important;padding-top:42px!important}}
 </style>
-
-<!-- Yandex.Metrika counter -->
 <script type="text/javascript">
 (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=111997160','ym');
 ym(111997160,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/111997160" style="position:absolute;left:-9999px" alt=""></div></noscript>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "YORK!", "item": "https://weyork.online/" },
-    { "@type": "ListItem", "position": 2, "name": "TALK CLUB", "item": "https://weyork.online/talk-club.html" },
-    { "@type": "ListItem", "position": 3, "name": "Заявка в TALK CLUB", "item": "https://weyork.online/talk-club-form.html" }
-  ]
-}
-</script>
 </head>
 <body>
-<div class="wrap">
-<div class="logo">YORK<span>!</span></div>
-<h1>Записаться в TALK CLUB</h1>
-<p class="sub">Разговорный клуб английского. Расскажите о себе, подберём группу и время.</p>
 
-<form id="clubForm">
-
-  <!-- honeypot — невидимая ловушка для ботов -->
-  <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
-    <label for="website">Оставьте это поле пустым</label>
-    <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
-  </div>
-
-  <div class="field">
-    <label for="fullName">Как вас зовут?</label>
-    <input id="fullName" type="text" placeholder="Имя и фамилия" required>
-  </div>
-
-  <div class="field">
-    <label for="contact">Телефон или Telegram</label>
-    <input id="contact" type="text" placeholder="+7 999 123-45-67 или @username" required>
-  </div>
-
-  <div class="field">
-    <label>Вы уже ученик YORK!?</label>
-    <div class="chip-group" id="isStudentGroup">
-      <label><input type="radio" name="isStudent" value="yes"><span>Да</span></label>
-      <label><input type="radio" name="isStudent" value="no"><span>Нет</span></label>
+<header class="nav"><a class="logo" href="talk-club.html">YORK<b>!</b></a><a class="back" href="talk-club.html">← Вернуться к TALK CLUB</a></header>
+<main class="shell">
+  <aside class="intro">
+    <div class="label">YORK! · TALK CLUB</div>
+    <h1>ЗАЯВКА<br><span>В КЛУБ</span></h1>
+    <p>Оставьте контакты и выберите удобное время. Мы свяжемся с вами, уточним детали и подберём группу A1–A2 или B1.</p>
+    <div class="details">
+      <div class="detail"><span class="detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M7.5 3v4M16.5 3v4M4 9.5h16M8 13h3M8 16.5h5"/></svg></span><b>4× / месяц</b><span>1 встреча в неделю</span></div>
+      <div class="detail"><span class="detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.3 2M8 2.8h8"/></svg></span><b>60 минут</b><span>живого общения</span></div>
+      <div class="detail"><span class="detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3zM7 22h10"/></svg></span><b>ОНЛАЙН</b><span>в SaluteJazz</span></div>
     </div>
-    <div class="price-hint" id="priceHint"></div>
-  </div>
+    <details class="trust" id="trustBlock" open><summary><span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.8 8.5a3.3 3.3 0 1 1 5.7 2.3c-1.4 1.3-2.5 1.8-2.5 3.7M12 18.2h.01"/></svg></span>Как подобрать группу?</summary><div class="trust-copy">Если уровень пока неясен, выберите «Пока не знаю» — поможем определить подходящую группу. Встречи проходят по московскому времени.</div></details>
+  </aside>
 
-  <div class="field">
-    <select id="timezoneSelect" style="display:none"><option value="Europe/Moscow" selected>Москва (МСК)</option></select>
-    <div class="tz-fallback show" id="tzFallbackNote" style="background:#F3F8DC;border:1.5px solid var(--accent);color:inherit">🕐 Всё время указано по Москве (МСК).</div>
-  </div>
-
-  <div class="field">
-    <label>Уровень английского</label>
-    <div class="chip-group" id="levelGroup">
-      <label><input type="radio" name="level" value="A1-A2"><span>A1–A2</span></label>
-      <label><input type="radio" name="level" value="B1"><span>B1</span></label>
-      <label><input type="radio" name="level" value="B2+"><span>B2+</span></label>
-      <label><input type="radio" name="level" value="Не уверен(а)"><span>Не уверен(а)</span></label>
+  <section class="form-card">
+    <div class="step-token" aria-live="polite"><span class="token-dot"></span><strong id="stepNumber">01</strong><em>/</em><span id="stepName">КОНТАКТ</span></div>
+    <div class="card-head">
+      <div><h2>Расскажите о себе</h2><p>Поля со звёздочкой обязательны. Заявка ни к чему не обязывает.</p></div>
     </div>
-    <p class="hint-line">Не уверены в уровне? <a href="level-test.html" target="_blank" rel="noopener">Пройдите бесплатный тест</a>, 5 минут.</p>
-  </div>
+    <form id="clubForm" novalidate>
+      <div class="honeypot" aria-hidden="true"><label for="website">Оставьте поле пустым</label><input id="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <div class="group form-step" data-step="1">
+        <div class="group-title"><span>01</span> Контакт</div>
+        <div class="fields">
+          <div class="field"><label for="fullName">Как вас зовут? *</label><input id="fullName" type="text" placeholder="Имя и фамилия" required></div>
+          <div class="field"><label for="contact">Телефон или Telegram *</label><input id="contact" type="text" placeholder="+7 999 123-45-67 или @username" required></div>
+          <div class="field full"><label>Вы уже занимаетесь в YORK!? *</label><div class="choices">
+            <label class="choice"><input type="radio" name="isStudent" value="yes" required><span>Да</span></label>
+            <label class="choice"><input type="radio" name="isStudent" value="no"><span>Нет</span></label>
+          </div><p class="hint">Для действующих учеников YORK! участие бесплатно.</p></div>
+        </div>
+      </div>
 
-  <div class="field">
-    <label>Удобные дни недели <span style="font-weight:400;text-transform:none;letter-spacing:0">(можно несколько)</span></label>
-    <div class="chip-group" id="daysGroup">
-      <label><input type="checkbox" name="days" value="Пн"><span>Пн</span></label>
-      <label><input type="checkbox" name="days" value="Вт"><span>Вт</span></label>
-      <label><input type="checkbox" name="days" value="Ср"><span>Ср</span></label>
-      <label><input type="checkbox" name="days" value="Чт"><span>Чт</span></label>
-      <label><input type="checkbox" name="days" value="Пт"><span>Пт</span></label>
-      <label><input type="checkbox" name="days" value="Сб"><span>Сб</span></label>
-      <label><input type="checkbox" name="days" value="Вс"><span>Вс</span></label>
+      <div class="group form-step" data-step="2">
+        <div class="group-title"><span>02</span> Группа и уровень</div>
+        <label>Какой уровень вам ближе? *</label>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="level" value="A1-A2" required><span>A1–A2</span></label>
+          <label class="choice"><input type="radio" name="level" value="B1"><span>B1</span></label>
+          <label class="choice"><input type="radio" name="level" value="Не уверен(а)"><span>Пока не знаю</span></label>
+        </div>
+          <p class="hint">Не знаете уровень? <a href="https://weyork.online/level-test.html" target="_blank" rel="noopener">Пройдите тест</a> или выберите «Пока не знаю».</p>
+      </div>
+
+      <div class="group form-step" data-step="3">
+        <div class="group-title"><span>03</span> Удобное время</div>
+        <div class="fields">
+          <div class="field full"><label>В какие дни вам удобно? Можно выбрать несколько.</label><div class="choices">
+            <label class="choice"><input type="checkbox" name="days" value="Пн"><span>Пн</span></label>
+            <label class="choice"><input type="checkbox" name="days" value="Вт"><span>Вт</span></label>
+            <label class="choice"><input type="checkbox" name="days" value="Ср"><span>Ср</span></label>
+            <label class="choice"><input type="checkbox" name="days" value="Чт"><span>Чт</span></label>
+            <label class="choice"><input type="checkbox" name="days" value="Пт"><span>Пт</span></label>
+            <label class="choice"><input type="checkbox" name="days" value="Сб"><span>Сб</span></label>
+            <label class="choice"><input type="checkbox" name="days" value="Вс"><span>Вс</span></label>
+          </div></div>
+          <div class="field full"><label>В какое время суток?</label><div class="choices">
+            <label class="choice"><input type="radio" name="timeOfDay" value="Утро"><span>Утро</span></label>
+            <label class="choice"><input type="radio" name="timeOfDay" value="День"><span>День</span></label>
+            <label class="choice"><input type="radio" name="timeOfDay" value="Вечер"><span>Вечер</span></label>
+          </div><div class="tz">Время указано по Москве (МСК).</div></div>
+          <div class="field full"><label for="preferredTime">Предпочтительное точное время · по желанию</label><textarea id="preferredTime" name="preferredTime" maxlength="250" placeholder="Например, по средам после 19:00 по Москве"></textarea><p class="hint">Можно указать конкретный день или время — постараемся учесть пожелание при подборе группы.</p></div>
+        </div>
+      </div>
+
+
+      <div class="group form-step" data-step="4">
+        <div class="group-title"><span>04</span> Дополнительно</div>
+        <div class="field"><label for="comment">Комментарий · необязательно</label><textarea id="comment" placeholder="Например, какие темы вам интересны"></textarea></div>
+        <label class="consent"><input type="checkbox" id="consent" required><span>Согласен(на) на <a href="https://weyork.online/privacy-policy.html" target="_blank" rel="noopener">обработку персональных данных</a> *</span></label>
+      </div>
+      <p id="errorMsg" role="alert" aria-live="polite"></p>
+      <div class="wizard-controls"><button class="step-back" type="button" id="stepBack" hidden>← Назад</button><div class="capsule-segments" aria-hidden="true"><i class="is-current"></i><i></i><i></i><i></i></div><button class="step-next" type="button" id="stepNext">Продолжить <span aria-hidden="true">→</span></button><button class="submit" id="submitApplication" type="submit" hidden>Отправить <span aria-hidden="true">→</span></button></div>
+      <p class="submit-note">После заявки мы свяжемся с вами, чтобы подобрать группу и время первой встречи.</p>
+    </form>
+    <div class="confirmation" id="confirmationState" aria-live="polite" hidden>
+      <div class="confirm-heading">
+        <span class="confirm-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+        <div><div class="confirm-label">ЗАЯВКА ПРИНЯТА</div><h2>Спасибо! Мы скоро с вами свяжемся</h2><p>Уточним детали, поможем выбрать формат и подберём удобное время первой встречи.</p></div>
+      </div>
+      <div class="confirm-links">
+        <a class="confirm-link" href="https://weyork.online/#why" target="_blank" rel="noopener noreferrer">
+          <span class="confirm-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5M5.5 9v11h13V9M9 20v-6h6v6"/></svg></span>
+          <span class="confirm-copy"><b>Больше о школе YORK!</b><small>Как мы учим говорить и строим занятия</small></span>
+          <svg class="confirm-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="confirm-link" href="https://weyork.online/#formats" target="_blank" rel="noopener noreferrer">
+          <span class="confirm-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a7 7 0 0 1 4 6"/></svg></span>
+          <span class="confirm-copy"><b>Индивидуальные и групповые уроки</b><small>Форматы SOLO и CREW — под ваши цели и график</small></span>
+          <svg class="confirm-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="confirm-link" href="https://t.me/weyorkonline" target="_blank" rel="noopener noreferrer">
+          <span class="confirm-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m21 3-7.2 18-3.7-7.1L3 10.2 21 3Z"/><path d="m10.1 13.9 4.8-5"/></svg></span>
+          <span class="confirm-copy"><b>Задания и полезные посты</b><small>Подписывайтесь на Telegram-канал YORK!</small></span>
+          <svg class="confirm-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <a class="confirm-manager" href="https://t.me/thearbeiter01" target="_blank" rel="noopener noreferrer" aria-label="Не нашли ответ? Напишите нам в Telegram" data-manager-link>
+        <span class="manager-mark" aria-hidden="true">Y!<i></i></span>
+        <span class="manager-pill"><span class="tx2" aria-live="polite"></span><span class="manager-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></span>
+      </a>
     </div>
-  </div>
-
-  <div class="field">
-    <label>Удобное время</label>
-    <div class="chip-group" id="timeGroup">
-      <label><input type="radio" name="timeOfDay" value="Утро"><span>Утро</span></label>
-      <label><input type="radio" name="timeOfDay" value="День"><span>День</span></label>
-      <label><input type="radio" name="timeOfDay" value="Вечер"><span>Вечер</span></label>
-    </div>
-  </div>
-
-  <div class="referral-banner">
-    <b>🎁 Реферальная программа</b><br>
-    Приведите друга, получите скидку на следующий месяц оба.
-  </div>
-  <div class="field">
-    <label for="referrerName">ФИО того, кто вас пригласил <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label>
-    <input id="referrerName" type="text" placeholder="Если пришёл(ла) по приглашению друга">
-  </div>
-
-  <div class="field">
-    <label for="comment">Комментарий <span style="font-weight:400;text-transform:none;letter-spacing:0">(необязательно)</span></label>
-    <textarea id="comment" placeholder="Можете написать здесь что-то ещё"></textarea>
-  </div>
-
-  <div class="field consent-field">
-    <label class="consent-label">
-      <input type="checkbox" id="consent" required>
-      <span>Согласны на <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">обработку персональных данных</a></span>
-    </label>
-  </div>
-
-  <p id="errorMsg"></p>
-  <button class="submit" type="submit" id="submitBtn">Отправить заявку →</button>
-</form>
-
-<div class="success-box hidden" id="successBox">
-  <div class="big">🎉</div>
-  <h2>Заявка принята!</h2>
-  <p>Спасибо! Мы свяжемся с вами, подберём группу и подтвердим время первой встречи.</p>
-
-  <div class="club-cta-card">
-    <div class="cc-emoji">💬</div>
-    <div class="cc-title">Хотите узнать о старте клуба первым?</div>
-    <p class="cc-text">Кто уже в нашем Telegram-боте, получит доступ к группе раньше остальных. Первая группа TALK CLUB уже набирается, мест немного.</p>
-    <a class="cc-btn" href="https://t.me/weyorkonlinebot" target="_blank" rel="noopener">📲 Перейти в бот →</a>
-  </div>
-</div>
-
-<div class="cta-footer">
-  <p><b>Разговорный клуб скоро. Но практиковаться можно уже сейчас.</b><br>Занятия в YORK! помогут выстроить базу: улучшить говорение, грамматику, понимание, чтение и письмо, чтобы уверенно использовать английский в жизни.</p>
-  <a class="submit" href="trial-form.html" target="_blank" rel="noopener" style="display:block;text-decoration:none;text-align:center;margin-bottom:10px;">Записаться на бесплатный урок →</a>
-  <p class="hint-line" style="text-align:center;">
-    <a href="/" target="_blank" rel="noopener">На сайт YORK!</a> · <a href="https://t.me/thearbeiter01" target="_blank" rel="noopener">Написать менеджеру</a>
-  </p>
-</div>
-
-</div>
-
+  </section>
+</main>
+<footer class="home-footer" id="site-footer"><div class="wrap">
+  <div class="foot-head"><div class="logo">YORK<span>!</span></div><p class="foot-tag">Онлайн-школа английского. Учим говорить, а не только сдавать тесты.</p><div class="foot-social"><a href="https://www.youtube.com/@weyorkonline" target="_blank" rel="noopener noreferrer" aria-label="YouTube-канал YORK!"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.75 15.02V8.98L15.5 12z"/></svg>YouTube</a><a href="https://t.me/weyorkonline" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал YORK!"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M21.9 4.3 18.6 19.8c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.4 1.3z"/></svg>Telegram</a></div></div>
+  <nav class="foot-cols" aria-label="Ссылки в подвале">
+    <div class="foot-col"><h4>Разделы</h4><ul><li><a href="https://weyork.online/#why">Почему мы</a></li><li><a href="https://weyork.online/#lesson">Как проходит урок</a></li><li><a href="https://weyork.online/#teachers">Преподаватели</a></li><li><a href="https://weyork.online/#reviews">Отзывы</a></li><li><a href="https://weyork.online/#formats">Цены и абонементы</a></li><li><a href="talk-club.html">Talk Club</a></li><li><a href="https://weyork.online/#how">Как начать</a></li><li><a href="https://weyork.online/#faq">Вопросы</a></li></ul></div>
+    <div class="foot-col"><h4>Направления</h4><ul><li><a href="https://weyork.online/english-for-adults.html">Взрослым</a></li><li><a href="https://weyork.online/english-for-kids.html">Детям</a></li><li><a href="https://weyork.online/school-english.html">Школа и ВПР</a></li><li><a href="https://weyork.online/#goals">Для себя</a></li><li><a href="https://weyork.online/#goals">Для путешествий</a></li><li><a href="https://weyork.online/#goals">Для учёбы</a></li><li><a href="talk-club.html">Разговорный клуб</a></li></ul></div>
+    <div class="foot-col"><h4>Бесплатно</h4><ul><li><a href="https://weyork.online/trial-form.html">Пробный урок</a></li><li><a href="https://weyork.online/level-test.html">Тест на уровень</a></li><li><a href="https://weyork.online/login.html">Личный кабинет</a></li></ul></div>
+    <div class="foot-col"><h4>Мы на связи</h4><ul><li><a href="https://t.me/thearbeiter01" target="_blank" rel="noopener noreferrer">Менеджер</a></li><li><a href="https://www.youtube.com/@weyorkonline" target="_blank" rel="noopener noreferrer">YouTube</a></li><li><a href="https://t.me/weyorkonline" target="_blank" rel="noopener noreferrer">Telegram-канал</a></li></ul></div>
+  </nav><div class="foot-bottom"><span>© 2026 YORK! english school</span><span>Онлайн-уроки · SOLO и CREW · Дети и взрослые</span></div>
+</div></footer>
 <script>
 const SUPABASE_URL = 'https://uuwtarchkltdmaddndgm.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_jlcvNafksQ0WhrYCY08anw_ju194-I9';
 const PAGE_LOADED_AT = Date.now();
-
-function reachGoal(name){ if (window.ym) ym(111997160, 'reachGoal', name); }
+function reachGoal(name){if(window.ym)ym(111997160,'reachGoal',name)}
 reachGoal('talk_club_form_view');
-
-/* ---------- "уже ученик?" -> подсказка цены ---------- */
-const priceHint = document.getElementById('priceHint');
-document.querySelectorAll('#isStudentGroup input').forEach(el => {
-  el.addEventListener('change', () => {
-    if (el.value === 'yes'){
-      priceHint.textContent = '✅ Для вас участие в TALK CLUB бесплатно: это бонус активного абонемента SOLO/CREW.';
-    } else {
-      priceHint.textContent = '💳 Стартовый абонемент: 1 990 ₽ за 4 встречи в первый месяц.';
-    }
-    priceHint.classList.add('show');
+(()=>{
+  const form=document.getElementById('clubForm');
+  const steps=[...form.querySelectorAll('.form-step')];
+  const stepNumber=document.getElementById('stepNumber');
+  const stepName=document.getElementById('stepName');
+  const progressSegments=[...document.querySelectorAll('.capsule-segments i')];
+  const stepNames=['КОНТАКТ','УРОВЕНЬ','ВРЕМЯ','ГОТОВО'];
+  const labels=[...document.querySelectorAll('.progress-labels [data-step-target]')];
+  const back=document.getElementById('stepBack');
+  const next=document.getElementById('stepNext');
+  const submit=document.getElementById('submitApplication');
+  const confirmation=document.getElementById('confirmationState');
+  const trust=document.getElementById('trustBlock');
+  const errorMsg=document.getElementById('errorMsg');
+  if(trust&&window.matchMedia('(max-width:580px)').matches)trust.open=false;
+  let current=0;
+  function showStep(index){
+    current=index;
+    steps.forEach((step,i)=>{step.classList.toggle('active',i===current);step.setAttribute('aria-hidden',String(i!==current))});
+    stepNumber.textContent=String(current+1).padStart(2,'0');
+    stepName.textContent=stepNames[current]||'';
+    progressSegments.forEach((segment,i)=>{segment.classList.toggle('is-current',i===current);segment.classList.toggle('is-done',i<current)});
+    labels.forEach((label,i)=>{label.classList.toggle('is-current',i===current);label.classList.toggle('is-done',i<current);if(i===current)label.setAttribute('aria-current','step');else label.removeAttribute('aria-current')});
+    back.hidden=current===0;next.hidden=current===steps.length-1;submit.hidden=current!==steps.length-1;
+    errorMsg.textContent='';
+  }
+  function validateCurrent(){const invalid=steps[current].querySelector(':invalid');if(invalid){invalid.reportValidity();return false}return true}
+  next.addEventListener('click',()=>{if(validateCurrent())showStep(Math.min(current+1,steps.length-1))});
+  back.addEventListener('click',()=>showStep(Math.max(current-1,0)));
+  labels.forEach(label=>label.addEventListener('click',()=>{const target=Number(label.dataset.stepTarget);if(target<current){showStep(target);return}if(target>current){for(let i=current;i<target;i++){const invalid=steps[i].querySelector(':invalid');if(invalid){showStep(i);invalid.reportValidity();return}}showStep(target)}}));
+  form.addEventListener('submit',async event=>{
+    event.preventDefault();
+    if(!validateCurrent())return;
+    const honeypot=document.getElementById('website');
+    if(honeypot.value.trim()){form.hidden=true;document.querySelector('.card-head').hidden=true;document.querySelector('.step-token').hidden=true;confirmation.hidden=false;return}
+    if(Date.now()-PAGE_LOADED_AT<3000){errorMsg.textContent='Подождите пару секунд и отправьте заявку ещё раз.';return}
+    const fullName=document.getElementById('fullName').value.trim();
+    const contact=document.getElementById('contact').value.trim();
+    const student=document.querySelector('input[name="isStudent"]:checked');
+    const level=document.querySelector('input[name="level"]:checked');
+    const timeOfDay=document.querySelector('input[name="timeOfDay"]:checked');
+    const days=[...document.querySelectorAll('input[name="days"]:checked')].map(item=>item.value);
+    const preferredTime=document.getElementById('preferredTime').value.trim();
+    const comment=document.getElementById('comment').value.trim();
+    const combinedComment=[preferredTime?'Предпочтительное время: '+preferredTime:'',comment?'Комментарий: '+comment:''].filter(Boolean).join('\n');
+    const button=submit;button.disabled=true;button.textContent='Отправляем…';errorMsg.textContent='';
+    try{
+      const response=await fetch(`${SUPABASE_URL}/rest/v1/talk_club_leads`,{method:'POST',headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({full_name:fullName,contact,is_existing_student:student.value==='yes',timezone:'Europe/Moscow',level:level?level.value:null,preferred_days:days.length?days:null,preferred_time_of_day:timeOfDay?timeOfDay.value:null,referrer_name:null,comment:combinedComment||null})});
+      if(!response.ok){let detail='';try{const body=await response.json();detail=body.message||body.hint||body.details||''}catch(_){}throw new Error(detail||'Ошибка '+response.status)}
+      form.hidden=true;document.querySelector('.card-head').hidden=true;document.querySelector('.step-token').hidden=true;confirmation.hidden=false;reachGoal('talk_club_submitted');confirmation.scrollIntoView({behavior:'smooth',block:'center'});
+    }catch(error){button.disabled=false;button.innerHTML='Отправить <span aria-hidden="true">→</span>';errorMsg.textContent=error.message?'Не получилось отправить: '+error.message:'Не получилось отправить. Проверьте подключение и попробуйте ещё раз.'}
   });
-});
-
-/* ---------- часовой пояс: у школы один — МСК ---------- */
-const SCHOOL_TZ = 'Europe/Moscow';
-const tzSelect = document.getElementById('timezoneSelect');
-const tzFallbackNote = document.getElementById('tzFallbackNote');
-
-tzSelect.value = SCHOOL_TZ;
-
-
-/* ---------- сбор и отправка ---------- */
-document.getElementById('clubForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const errorMsg = document.getElementById('errorMsg');
-  errorMsg.textContent = '';
-
-  const fullName = document.getElementById('fullName').value.trim();
-  const contact = document.getElementById('contact').value.trim();
-  const isStudentEl = document.querySelector('input[name="isStudent"]:checked');
-  const levelEl = document.querySelector('input[name="level"]:checked');
-  const timeOfDayEl = document.querySelector('input[name="timeOfDay"]:checked');
-  const days = Array.from(document.querySelectorAll('input[name="days"]:checked')).map(el => el.value);
-  const referrerName = document.getElementById('referrerName').value.trim();
-  const comment = document.getElementById('comment').value.trim();
-  const consent = document.getElementById('consent').checked;
-
-  if (!fullName || !contact){
-    errorMsg.textContent = 'Заполните имя и контакт для связи.';
-    return;
-  }
-  if (!isStudentEl){
-    errorMsg.textContent = 'Отметьте, учитесь ли вы уже в YORK!.';
-    return;
-  }
-  if (!consent){
-    errorMsg.textContent = 'Нужно согласие на обработку персональных данных.';
-    return;
-  }
-
-  // ---------- защита от ботов ----------
-  const honeypot = document.getElementById('website');
-  if (honeypot && honeypot.value.trim()){
-    document.getElementById('clubForm').classList.add('hidden');
-    document.getElementById('successBox').classList.remove('hidden');
-    return;
-  }
-  if (Date.now() - PAGE_LOADED_AT < 3000){
-    errorMsg.textContent = 'Не получилось отправить. Попробуйте ещё раз через пару секунд.';
-    return;
-  }
-
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true; btn.textContent = 'Отправляем…';
-
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/talk_club_leads`, {
-      method: 'POST',
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({
-        full_name: fullName,
-        contact: contact,
-        is_existing_student: isStudentEl.value === 'yes',
-        timezone: tzSelect.value,
-        level: levelEl ? levelEl.value : null,
-        preferred_days: days.length ? days : null,
-        preferred_time_of_day: timeOfDayEl ? timeOfDayEl.value : null,
-        referrer_name: referrerName || null,
-        comment: comment || null
-      })
-    });
-
-    if (!res.ok){
-      let detail = '';
-      try {
-        const errBody = await res.json();
-        detail = errBody.message || errBody.hint || errBody.details || '';
-      } catch (e){ /* тело не JSON */ }
-      throw new Error(detail || ('Ошибка ' + res.status));
-    }
-
-    document.getElementById('clubForm').classList.add('hidden');
-    document.getElementById('successBox').classList.remove('hidden');
-    reachGoal('talk_club_submitted');
-  } catch (err){
-    btn.disabled = false; btn.textContent = 'Отправить заявку →';
-    const detail = (err && err.message) ? err.message : '';
-    errorMsg.textContent = detail
-      ? 'Не получилось отправить: ' + detail
-      : 'Не получилось отправить. Проверьте интернет-соединение и попробуйте ещё раз.';
-  }
-});
+  showStep(0);
+})();
+(()=>{
+  const link=document.querySelector('[data-manager-link]');if(!link)return;
+  const text=link.querySelector('.tx2'),arrow=link.querySelector('.manager-arrow'),label='Не нашли ответ? Напишите нам';
+  const typing='<span class="ty" aria-label="Печатает"><i></i><i></i><i></i></span>';
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){text.textContent=label;arrow.classList.add('vis');return}
+  function cycle(){arrow.classList.remove('vis');text.innerHTML=typing;window.setTimeout(()=>{let i=0;const timer=window.setInterval(()=>{i++;text.innerHTML=label.slice(0,i)+'<i class="cur" aria-hidden="true"></i>';if(i>=label.length){window.clearInterval(timer);text.textContent=label;arrow.classList.add('vis');window.setTimeout(cycle,5000)}},45)},1500)}
+  cycle();
+})();
 </script>
 </body>
 </html>
